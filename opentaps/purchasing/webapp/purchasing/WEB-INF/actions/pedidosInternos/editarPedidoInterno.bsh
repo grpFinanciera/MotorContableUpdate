@@ -1,0 +1,82 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+pedidoInterno = delegator.findByPrimaryKey("PedidoInterno", UtilMisc.toMap("pedidoInternoId", pedidoInternoId));
+context.put("pedidoInterno",pedidoInterno);
+
+status = delegator.findByPrimaryKey("Estatus", UtilMisc.toMap("statusId", pedidoInterno.getString("statusId")));
+context.put("estatus",status);
+
+detallePedidoInterno = delegator.findByAnd("DetallePedidoInterno", UtilMisc.toMap("pedidoInternoId", pedidoInternoId));
+context.put("detallePedidoInterno",detallePedidoInterno);
+
+ listAlmacenes = delegator.findAll("Facility");
+ context.put("listAlmacenes",listAlmacenes);
+ 
+ conditionsRequisicion = UtilMisc.toList(
+    new EntityExpr("personaSolicitanteId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("statusId", EntityOperator.EQUALS, "APROBADA"),
+    new EntityExpr("statusPedidoId", EntityOperator.EQUALS, "REQ_ALM_INICIADA") 
+ );
+ listRequisiciones = delegator.findByCondition("Requisicion", new EntityConditionList(conditionsRequisicion, EntityOperator.AND), null, null);
+ context.put("listRequisiciones",listRequisiciones);
+ 
+ conditionsOrden = UtilMisc.toList(
+    new EntityExpr("createdBy", EntityOperator.EQUALS, userLogin.get("userLoginId")),
+    new EntityExpr("statusId", EntityOperator.EQUALS, "ORDER_COMPLETED"),
+    new EntityExpr("statusPedidoId", EntityOperator.EQUALS, "REQ_ALM_INICIADA") 
+ );
+ listOrdenes = delegator.findByCondition("OrderHeader", new EntityConditionList(conditionsOrden, EntityOperator.AND), null, null);
+ context.put("listOrdenes",listOrdenes);
+   
+conditionsSolicitante = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "SOLICITANTE")    
+ );
+ rolesSolicitante = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsSolicitante, EntityOperator.AND), null, null);
+ context.put("rolesSolicitante", rolesSolicitante);
+
+conditionsAlmacenista = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "ALMACENISTA")    
+ );
+
+rolesAlmacenista = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsAlmacenista, EntityOperator.AND), null, null);
+context.put("rolesAlmacenista", rolesAlmacenista);
+
+conditionsAutorizador = UtilMisc.toList(
+    new EntityExpr("autorizadorId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "PEDIDO_INTERNO")    
+ );
+ rolesAutorizador = delegator.findByCondition("Autorizador", new EntityConditionList(conditionsAutorizador, EntityOperator.AND), null, null);
+ context.put("rolesAutorizador", rolesAutorizador);
+
+pedidoInternoId = parameters.get("pedidoInternoId");
+comentarios = delegator.findByAnd("ObtenerComentariosPedidoInterno", UtilMisc.toMap("pedidoInternoId", pedidoInternoId), UtilMisc.toList("comentarioId"));
+context.put("comentarios", comentarios);
+
+conditionsStatusAutorizacion = UtilMisc.toList(
+    new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("origenId", EntityOperator.EQUALS, pedidoInternoId),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "PEDIDO_INTERNO")
+ );
+
+ statusAutorizacion = delegator.findByCondition("StatusAutorizacionWorkFlow", new EntityConditionList(conditionsStatusAutorizacion, EntityOperator.AND), null, null);
+ context.put("statusAutorizacion", statusAutorizacion);

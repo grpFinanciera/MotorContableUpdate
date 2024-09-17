@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+    
+    <ReportGroup reportGroupId="DATAIMP_FORM" showInSelect="N" description="Data Import Reports" application="dataimport" sequenceNum="1"/>    
+    
+    <ReportRegistry reportId="CUST_IMP" shortName="Customers Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/CustomersImportReport.jrxml"/>
+    <ReportRegistry reportId="SUPPL_IMP" shortName="Suppliers Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/SuppliersImportReport.jrxml"/>
+    <ReportRegistry reportId="PROD_IMP" shortName="Products Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/ProductsImportReport.jrxml"/>
+    <ReportRegistry reportId="INVENT_IMP" shortName="Inventory Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/InventorysImportReport.jrxml"/>
+    <ReportRegistry reportId="GL_ACCTS_IMP" shortName="GL Accounts Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/GlAccountsImportReport.jrxml"/>
+    <ReportRegistry reportId="ORDER_H_IMP" shortName="Order Header Lines Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OrderHeaderLinesImportReport.jrxml"/>
+    <ReportRegistry reportId="ORDER_I_IMP" shortName="Order Item Lines Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OrderItemLinesImportReport.jrxml"/>    
+    <ReportRegistry reportId="TAG_IMP" shortName="Clasificaciones Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/TagImportReport.jrxml"/>
+    <ReportRegistry reportId="CLAS_ADMON_IMP" shortName="Clasificacion Administrativa Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/AdministrativeClassificationImportReport.jrxml"/>
+    <ReportRegistry reportId="MATRIZ_EGRESO" shortName="Matriz egreso Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/MatrizConversionEgresosImportReport.jrxml"/>
+    <ReportRegistry reportId="MATRIZ_INGRESO" shortName="Matriz ingreso Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/MatrizConversionIngresosImportReport.jrxml"/>
+    <ReportRegistry reportId="CONCEPTO" shortName="Concepto Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/ConceptoImportReport.jrxml"/>
+    <ReportRegistry reportId="GUIA_CONTABLE" shortName="Guia Contable Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/GuiaContableImportReport.jrxml"/>
+    <ReportRegistry reportId="PRESUPUESTO_INICIAL" shortName="Presupuesto Inicial Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/PresupuestoInicialImportReport.jrxml"/>
+    <ReportRegistry reportId="INGRESO_EGRESO" shortName="Operacion de Ingreso y Egresos Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OperacionIEImportReport.jrxml"/>
+    <ReportRegistry reportId="OPERACION_DIARIA" shortName="Operacion Diaria Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OperacionDiariaImportReport.jrxml"/>
+    <ReportRegistry reportId="ORDENES_PAGO" shortName="Reporte de Importación de Ordenes de Pago" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OrdenesPagoImportReport.jrxml"/>
+    <ReportRegistry reportId="ORDENES_COBRO" shortName="Reporte de Importación de Ordenes de Cobro" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OrdenesCobroImportReport.jrxml"/>
+    <ReportRegistry reportId="AFECTACION_EGRESO" shortName="Reporte de Importación de Afectacion Egreso" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/AfectacionEgresoImportReport.jrxml"/>
+    <ReportRegistry reportId="SALDO_INICIAL_AUX" shortName="Reporte de Importación de Saldo Inicial Auxiliar" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/SaldoInicialAuxImportReport.jrxml"/>
+    <ReportRegistry reportId="PAGO_IMP" shortName="Aplicacion Pagos Import Report" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/PagoImportReport.jrxml"/>
+    <ReportRegistry reportId="USUARIOS" shortName="Reporte de Importación de Usuarios" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/UserImportReport.jrxml"/>
+    <ReportRegistry reportId="ACTIVOFIJO" shortName="Reporte de Importación de Activo Fijo" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/FixedAssetImportReport.jrxml"/>
+    
+    <ReportRegistry reportId="COMP_DEV_NOMINA" shortName="Reporte de Importación del Comp y/o Dev Nomina Presupuestal" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/CompDevNomImportReport.jrxml"/>
+    <ReportRegistry reportId="COMP_DEV_NOMINA_CONT" shortName="Reporte de Importación del Comp y/o Dev Nomina Contable" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/CompDevContNomImportReport.jrxml"/>
+    <ReportRegistry reportId="EJER_NOMINA" shortName="Reporte de Importación del Ejercido Nomina Presupuestal" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/EjerNomImportReport.jrxml"/>
+    <ReportRegistry reportId="EJER_NOMINA_CONT" shortName="Reporte de Importación del Ejercido Nomina Contable" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/EjerNomContImportReport.jrxml"/>
+    <ReportRegistry reportId="OPER_PATRIMONIAL" shortName="Reporte de Importación de Operaciones Patrimoniales" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/OperacionPatrimonialImportReport.jrxml"/>
+    <ReportRegistry reportId="VALPRES" shortName="Reporte de Suficiencia Presupuestal" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/ValidacionPresupuestalImportReport.jrxml"/>
+    <ReportRegistry reportId="REQUISICION" shortName="Reporte de Importación de Requisiciones" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/RequisicionImportReport.jrxml"/>
+	<ReportRegistry reportId="COMPENSADA" shortName="Reporte de Importación de A. Compensada" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/CompensadaImportReport.jrxml"/>
+    <ReportRegistry reportId="HISTORIALBIENES" shortName="Reporte de Historial de bienes de control pàtrimonial" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/HistorialBienesImportReport.jrxml"/>
+    <ReportRegistry reportId="INGRESO" shortName="Reporte de importación de datos de ingresos" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/Ingresos.jrxml"/>
+    <ReportRegistry reportId="DEV_ING" shortName="Reporte de importación de datos del devengado de ingresos" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/DevengadoIngresos.jrxml"/>
+    <ReportRegistry reportId="REC_ING" shortName="Reporte de importación de datos del recaudado de ingresos" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/RecaudadoIngresos.jrxml"/>
+    <ReportRegistry reportId="PAGO_EXTERNO" shortName="Reporte de importación de datos de pago a externos" description="" reportLocation="component://dataimport/webapp/dataimport/reports/repository/PagoExternos.jrxml"/>
+    
+    
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="CUST_IMP" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="SUPPL_IMP" sequenceNum="2"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="PROD_IMP" sequenceNum="3"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="INVENT_IMP" sequenceNum="4"/>    
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="GL_ACCTS_IMP" sequenceNum="5"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="ORDER_H_IMP" sequenceNum="6"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="ORDER_I_IMP" sequenceNum="7"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="TAG_IMP" sequenceNum="8"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="CLAS_ADMON_IMP" sequenceNum="9"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="MATRIZ_EGRESO" sequenceNum="10"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="MATRIZ_INGRESO" sequenceNum="11"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="CONCEPTO" sequenceNum="12"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="GUIA_CONTABLE" sequenceNum="13"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="PRESUPUESTO_INICIAL" sequenceNum="14"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="INGRESO_EGRESO" sequenceNum="15"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="OPERACION_DIARIA" sequenceNum="16"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="USUARIOS" sequenceNum="21"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="ACTIVOFIJO" sequenceNum="22"/>
+    
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="COMP_DEV_NOMINA" sequenceNum="23"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="COMP_DEV_NOMINA_CONT" sequenceNum="24"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="EJER_NOMINA" sequenceNum="25"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="EJER_NOMINA_CONT" sequenceNum="26"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="OPER_PATRIMONIAL" sequenceNum="27"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="VALPRES" sequenceNum="28"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="REQUISICION" sequenceNum="29"/>
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="COMPENSADA" sequenceNum="31"/>
+    
+    <ReportGroupMember reportGroupId="DATAIMP_FORM" reportId="INGRESO" sequenceNum="32"/>
+    
+</entity-engine-xml>

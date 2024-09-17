@@ -1,0 +1,63 @@
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import java.util.List;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+fixedAssetId = parameters.get("fixedAssetId");
+
+acumHist = BigDecimal.ZERO;
+valorAdq = BigDecimal.ZERO;
+acumSist = BigDecimal.ZERO;
+
+acumuladaTotal = BigDecimal.ZERO;
+contableTotal = BigDecimal.ZERO;
+
+fixedAssetList = delegator.findByAnd("ConsultarHistorialBienesActivo", UtilMisc.toMap("fixedAssetId", fixedAssetId)); 
+context.put("fixedAssetList",	fixedAssetList);
+resumenList = delegator.findByAnd("DepreciacionResumen", UtilMisc.toMap("fixedAssetId", fixedAssetId)); 
+context.put("resumenList",	resumenList);
+
+
+if(!fixedAssetList.isEmpty()) 
+{   sumaHis = fixedAssetList.iterator();
+    while( sumaHis.hasNext() ) {
+        sumaItemHis = sumaHis.next() ;        
+        acumHist = sumaItemHis.getBigDecimal("depreciacionAcumulada");
+        valorAdq = sumaItemHis.getBigDecimal("valorAdquisicion");        
+    }
+}
+
+if(!resumenList.isEmpty()) 
+{   suma = resumenList.iterator();
+    while( suma.hasNext() ) {
+        sumaItem = suma.next() ;        
+        acumSist = acumSist.add(sumaItem.getBigDecimal("monto"));
+    }
+}
+
+acumuladaTotal = acumSist.add(acumHist);
+contableTotal = valorAdq.subtract(acumSist);
+contableTotal = contableTotal.subtract(acumHist);
+
+context.put("acumuladaTotal",	acumuladaTotal);
+context.put("contableTotal",	contableTotal);
+
+
+  
+
+

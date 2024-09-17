@@ -1,0 +1,4 @@
+import org.ofbiz.base.util.*;
+
+ObjetoGastoProyecto = delegator.findAll("ObjetoGastoProyecto", UtilMisc.toList("nombreObjetoGasto"));
+context.put("ObjetoGastoProyecto",ObjetoGastoProyecto);

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+-->
+
+<entity-engine-xml>
+    
+    <!-- Financials application security by functional area -->
+    <SecurityPermission description="All operations in Financials application." permissionId="FINANCIALS_ADMIN"/>
+    <SecurityPermission description="View operations in the Financials Manager." permissionId="FINANCIALS_VIEW"/>
+    <SecurityPermission description="Configuration operations in Financials." permissionId="FINANCIALS_CONFIG"/>
+    <SecurityPermission description="View operations in the [Transactions] tab and all of the screens inside it." permissionId="FINANCIALS_TX_VIEW"/>
+    <SecurityPermission description="Manage operations in the [Transactions] tab and all of the screens inside it." permissionId="FINANCIALS_TX_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Pólizas en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_POLIZASTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Pólizas en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_POLIZASTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consultar Suficiencia Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSSUFTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consultar Suficiencia Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSSUFTX_ADMIN"/>
+<!--     <SecurityPermission description="Ver el tab de Traspasos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRASPASOSTX_VIEW"/> -->
+<!--     <SecurityPermission description="Administrar el tab de Traspasos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRASPASOSTX_ADMIN"/> -->
+    <SecurityPermission description="Ver el tab de Operación Patrimonial en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_OPERPATRTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Operación Patrimonial en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_OPERPATRTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Modificación Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_MODIFPRESUPTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Modificación Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_MODIFPRESUPTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Afectación Egresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_AFECEGRETX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Afectación Egresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_AFECEGRETX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta Momento en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSMOMENTOTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta Momento en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSMOMENTOTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Adecuaciones Compensadas de Ingresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACINGRETX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Adecuaciones Compensadas de Ingresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACINGRETX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Adecuaciones Compensadas de Egresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACEGRETX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Adecuaciones Compensadas de Egresos en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACEGRETX_ADMIN"/>
+<!--     <SecurityPermission description="Ver el tab de Tipos de Cambio en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TIPOCAMBIOTX_VIEW"/> -->
+<!--     <SecurityPermission description="Administrar el tab de Tipos de Cambio en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TIPOCAMBIOTX_ADMIN"/> -->
+    <SecurityPermission description="Ver el tab de Transacción Sin Evento en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRANSEVENTTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Transacción Sin Evento en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRANSEVENTTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Suficiencia Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_SUFPRESUPTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Suficiencia Presupuestal en Libro Mayor" permissionId="FINANCIALS_TX_OPCIONESGRPTX_SUFPRESUPTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Bancos" permissionId="FINANCIALS_BANK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Bancos" permissionId="FINANCIALS_BANK_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_VIEW"/>
+    <SecurityPermission description="Ver el tab de Gestión en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Gestión en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Traspasos en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Traspasos en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta Traspasos en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta Traspasos en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta Cuentas en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta Cuentas en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Traspasos Patrimoniales en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Traspasos Patrimoniales en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Editar Cuenta Bancaria en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Editar Cuenta Bancaria en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Asignar Cuenta Bancaria a Usuario en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Asignar Cuenta Bancaria a Usuario en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Asignar Cuenta Bancaria a Usuario en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TIPOCAMBIOBNK_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Asignar Cuenta Bancaria a Usuario en Bancos" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TIPOCAMBIOBNK_ADMIN"/>    
+    <SecurityPermission description="View operations in the [Receivables] tab and all screens inside it." permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityPermission description="Manage operations in the [Receivables] tab and all screens inside it." permissionId="FINANCIALS_AR_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Facturas en Cuentas por Cobrar" permissionId="FINANCIALS_AR_FACTURASGRPCPC_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Órdenes de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Órdenes de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear una Orden de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear una Orden de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Orden de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_OCOBROGRPCPC_VIEW"/>
+    <SecurityPermission description="Ver el tab de Cobrar Orden de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Cobrar Orden de Cobro en Cuentas por Cobrar" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_ADMIN"/>
+    <SecurityPermission description="View operations in the [Payables] tab and all screens inside it." permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityPermission description="Manage operations in the [Payables] tab and all screens inside it." permissionId="FINANCIALS_AP_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Facturas en el tab de Cuentas por Pagar." permissionId="FINANCIALS_AP_FACTURASGRPCPP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Órdenes de Pagos en Cuentas por Pagar" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Órdenes de Pagos en Cuentas por Pagar" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear una Orden de Pago en Cuentas por Pagar" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear una Orden de Pago en Cuentas por Pagar" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Orden de Pago en el tab de Cuentas por Pagar." permissionId="FINANCIALS_AP_OPAGOGRPCPP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Pagar Orden de Pago en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Pagar Orden de Pago en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Orden de Pago Patrimonial en el tab de Cuentas por Pagar." permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Crear Orden de Pago Patrimonial en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Orden de Pago Patrimonial en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Orden de Pago Patrimonial en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Orden de Pago Patrimonial en Cuentas por Pagar" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_ADMIN"/>
+    <SecurityPermission description="View operations in the  [Reports] tab and all of the reports inside it." permissionId="FINANCIALS_RPT_VIEW"/>
+    <SecurityPermission description="Manage operations in the  [Reports] tab and all of the reports inside it." permissionId="FINANCIALS_RPT_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Opciones en el tab de Informes." permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes Contables en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONTRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes Contables en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONTRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes del ejercicio del presupuesto de egresos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESPEGRERPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes del ejercicio del presupuesto de egresos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESPEGRERPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes de la Ley de Disciplina Financiera" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLDF_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes de la Ley de Disciplina Financiera" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLDF_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes de la ejecución de la ley de ingreso en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLINGRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes de la ejecución de la ley de ingreso en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLINGRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Analíticos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESANALITRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Analíticos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESANALITRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Catálogos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCATRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Catálogos en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCATRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Cuentas Auxiliares en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCAUXRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Cuentas Auxiliares en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCAUXRPT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes CONAC en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONACRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes CONAC en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONACRPT_ADMIN"/>
+    <SecurityPermission description="Ver la pestaña de Configuración." permissionId="FINANCIALS_CONFIG_VIEW"/>
+    <SecurityPermission description="Administrar la pestaña de Configuración." permissionId="FINANCIALS_CONFIG_ADMIN"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_VIEW"/>
+    <SecurityPermission description="Ver el tab de Periodo de Tiempo en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PERIODOTIEMPOCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Periodo de Tiempo en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PERIODOTIEMPOCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Estructura de Clave en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Estructura de Clave en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Clasificaciones en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLASIFSCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Clasificaciones en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLASIFSCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Lista de Cuentas en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_LISTACUENTASCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Lista de Cuentas en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_LISTACUENTASCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Evento en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_BEVENTOCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Evento en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_BEVENTOCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Evento en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Evento en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Editar Evento en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_EEVENTOCFG_VIEW"/>
+    <SecurityPermission description="Ver el tab de Crear Tipos de Auxiliares en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CTIPOAUXCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Tipos de Auxiliares en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CTIPOAUXCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Clave Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CCLAVEPRESCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Clave Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CCLAVEPRESCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consultar Clave Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CONSCLAVEPRESCFG_VIEW"/>
+    <SecurityPermission description="Ver el tab de Guardar Clave Presupuestal para Penalizaciones en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PENALIZACIONCLAVEPRES_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consultar Clave Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CONSCLAVEPRESCFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Cierre Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CIERREPRESTX_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Cierre Presupuestal en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CIERREPRESTX_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Configurar Clave Presupuestal de tipo de cambio en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLAPRESTIPCAMBCFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Configurar Clave Presupuestal de tipo de cambio en Configuración" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLAPRESTIPCAMBCFG_ADMIN"/>
+    <SecurityPermission description="Reverse transactions." permissionId="FINANCIALS_REVERSE"/>
+    <SecurityPermission description="Control invoice recurrence" permissionId="FINANCIALS_RECUR_INV"/>
+    <SecurityPermission description="View invoices in the [Payables] tab and screens" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityPermission description="Create invoices in the [Payables] tab and screens" permissionId="FINANCIALS_AP_INCRTE"/>
+    <SecurityPermission description="Update invoices in the [Payables] tab and screens" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityPermission description="View payments in the [Payables] tab and screens" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityPermission description="Create payments in the [Payables] tab and screens" permissionId="FINANCIALS_AP_PCRTE"/>
+    <SecurityPermission description="Update payments in the [Payables] tab and screens" permissionId="FINANCIALS_AP_PUPDT"/>
+    <SecurityPermission description="Apply payments in the [Payables] tab and screens" permissionId="FINANCIALS_AP_PAPPL"/>
+    <SecurityPermission description="Write off invoices in the [Payables] tab and screens" permissionId="FINANCIALS_AP_INWRTOF"/>
+    <SecurityPermission description="View invoices in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_INVIEW"/>
+    <SecurityPermission description="Create invoices in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_INCRTE"/>
+    <SecurityPermission description="Update invoices in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_INUPDT"/>
+    <SecurityPermission description="View payments in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_PVIEW"/>
+    <SecurityPermission description="Create payments in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_PCRTE"/>
+    <SecurityPermission description="Update payments in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_PUPDT"/>
+    <SecurityPermission description="Apply payments in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_PAPPL"/>
+    <SecurityPermission description="Write off invoices in the [Receivables] tab and screens" permissionId="FINANCIALS_AR_INWRTOF"/>
+    <SecurityPermission description="View commission agreements" permissionId="FINANCIALS_COMM_VIEW"/>
+    <SecurityPermission description="Create and update commission agreements" permissionId="FINANCIALS_COMM_UPDT"/>
+    <SecurityPermission description="View sales agreements" permissionId="FINANCIALS_SAGR_VIEW"/>
+    <SecurityPermission description="Create and update sales agreements" permissionId="FINANCIALS_SAGR_UPDT"/>
+    <SecurityPermission description="View [Employee] tab and screens" permissionId="FINANCIALS_EMP_VIEW"/>
+    <SecurityPermission description="Create employee paychecks" permissionId="FINANCIALS_EMP_PCCRTE"/>
+    <SecurityPermission description="Update employee paychecks" permissionId="FINANCIALS_EMP_PCUPDT"/>
+    <SecurityPermission description="View [Partners] tab and screens" permissionId="FINANCIALS_PARTNER_VIEW"/>
+    <SecurityPermission description="View partner invioces" permissionId="FINANCIALS_PARTNER_INVOICE_VIEW"/>
+    <SecurityPermission description="Create partner invioces" permissionId="FINANCIALS_PARTNER_INVOICE_CREATE"/>
+    <SecurityPermission description="Update partner invoices" permissionId="FINANCIALS_PARTNER_INVOICE_UPDATE"/>
+    <SecurityPermission description="View partner agreements" permissionId="FINANCIALS_PARTNER_AGREEMENT_VIEW"/>
+    <SecurityPermission description="Create partner agreements" permissionId="FINANCIALS_PARTNER_AGREEMENT_CREATE"/>
+    <SecurityPermission description="Update partner agreements" permissionId="FINANCIALS_PARTNER_AGREEMENT_UPDATE"/>
+    <SecurityPermission description="Ver pantalla para administrar etiquetas presupuestales" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ADMETIQUETA_VIEW"/>
+    <SecurityPermission description="Ver pantalla para asociar etiquetas presupuestales" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ASOCETIQUETA_VIEW"/>
+    
+    <SecurityGroup groupId="FINANCIALS_ADMIN" description="Administrador de Finanzas y Contabilidad con permisos para todas las operaciones."/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ACCTG_FX_UPDATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="PAY_INFO_ADMIN"/> <!-- required to create and update payments in OFBIZ -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_PAPPL"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_INWRTOF"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_PAPPL"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_INWRTOF"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="PERIOD_MAINT"/> <!-- for updating time periods -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="OPENTAPS_CSHDRWR"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_COMM_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_COMM_UPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_SAGR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_SAGR_UPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_EMP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_EMP_PCCRTE"/>    
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_EMP_PCUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_INVOICE_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_INVOICE_CREATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_INVOICE_UPDATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_AGREEMENT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_AGREEMENT_CREATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_PARTNER_AGREEMENT_UPDATE"/> 
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FACILITY_UPDATE"/>     <!-- Needed for revaluing inventory -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ORDERMGR_UPDATE"/>     <!-- Needed for invoicing performed services -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="PRCH_ORD_APPRV"/>     <!-- Needed for invoicing performed services -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ACCTG_ATX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ACCTG_PREF_ADMIN"/>
+    <!-- amazing but true: to store an email into WorkEffort you now need WORKEFFORTMGR_ROLE and an ASSETMAINT permission -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="ASSETMAINT_UPDATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_POLIZASTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_POLIZASTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSSUFTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSSUFTX_ADMIN"/>
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRASPASOSTX_VIEW"/> -->
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRASPASOSTX_ADMIN"/> -->
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CIERREPRESTX_VIEW"/> -->
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CIERREPRESTX_ADMIN"/> -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_OPERPATRTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_OPERPATRTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_MODIFPRESUPTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_MODIFPRESUPTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_AFECEGRETX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_AFECEGRETX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSMOMENTOTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_CONSMOMENTOTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACINGRETX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACINGRETX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACEGRETX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_ACEGRETX_ADMIN"/>
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TIPOCAMBIOTX_VIEW"/> -->
+<!--     <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TIPOCAMBIOTX_ADMIN"/> -->
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TIPOCAMBIOBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TIPOCAMBIOBNK_ADMIN"/>    
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_FACTURASGRPCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_OCOBROGRPCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_FACTURASGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONTRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONTRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESPEGRERPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESPEGRERPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLDF_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLDF_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLINGRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESLINGRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESANALITRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESANALITRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCATRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCATRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCAUXRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCAUXRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONACRPT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_INFORMESCONACRPT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_LISTACUENTASCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_LISTACUENTASCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PERIODOTIEMPOCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PERIODOTIEMPOCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLASIFSCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLASIFSCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_BEVENTOCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_BEVENTOCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_EEVENTOCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CTIPOAUXCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CTIPOAUXCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CCLAVEPRESCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CCLAVEPRESCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CONSCLAVEPRESCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CONSCLAVEPRESCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PENALIZACIONCLAVEPRES_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_PENALIZACIONCLAVEPRES_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CIERREPRESTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CIERREPRESTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLAPRESTIPCAMBCFG_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLAPRESTIPCAMBCFG_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRANSEVENTTX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_TX_OPCIONESGRPTX_TRANSEVENTTX_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ADMETIQUETA_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_ADMIN" permissionId="FINANCIALS_CONFIG_OPCIONESGRPCFG_ASOCETIQUETA_VIEW"/>
+    <!-- Special AR, AP, Transactions roles.  ACCOUNTING_ADMIN is required for now due to coarse nature OFBIZ permissions but will be removed once we have financials screens for invoices, etc.
+    OFBTOOLS_VIEW is required to access any OFBIZ backend app including ACCOUNTING.  Not sure if we want to require this for Financials as well or not but including for now to work with Accounting -->
+    <SecurityGroup groupId="FINANCIALS_AR" description="Permisos de Finanzas para Cuentas por Cobrar."/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="FINANCIALS_REVERSE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="PAY_INFO_CREATE"/> <!-- required to create payments in OFBIZ -->
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="PAY_INFO_UPDATE"/> <!-- required to update payments in OFBIZ --> 
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="ORDERMGR_UPDATE"/>     <!-- Needed for invoicing performed services -->   
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR" permissionId="ASSETMAINT_UPDATE"/>
+
+    <SecurityGroup groupId="FINANCIALS_AP" description="Permisos de Finanzas para Cuentas por Pagar."/> 
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="FINANCIALS_REVERSE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="PAY_INFO_CREATE"/> <!-- required to create payments in OFBIZ -->
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="PAY_INFO_UPDATE"/> <!-- required to update payments in OFBIZ -->    
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP" permissionId="ASSETMAINT_UPDATE"/>
+
+    <SecurityGroup groupId="FINANCIALS_TRANS" description="Permisos de Finanzas para creación, ejecución y conciliación de Transacciones."/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="FINANCIALS_TX_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="FINANCIALS_REVERSE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_TRANS" permissionId="ASSETMAINT_UPDATE"/>
+
+    <SecurityGroup groupId="FINANCIALS_AR_INV" description="Ver pagos, ver/crear/actualizar facturas en Cuentas por Cobrar de Finanzas."/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_AR_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_AR_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_AR_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="FINANCIALS_AR_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="ORDERMGR_UPDATE"/>     <!-- Needed for invoicing performed services -->
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_INV" permissionId="ASSETMAINT_UPDATE"/>
+
+    <SecurityGroup groupId="FINANCIALS_AP_INV" description="Ver pagos, ver/crear/actualizar facturas en Cuentas por Pagar de Finanzas."/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_AP_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_INV" permissionId="ASSETMAINT_UPDATE"/>
+    
+    <SecurityGroup groupId="FINANCIALS_AR_PMNT" description="Ver facturas, ver/crear/actualizar/aplicar pagos en Cuentas por Cobrar de Finanzas."/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AR_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AR_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AR_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AR_PAPPL"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="PAY_INFO_CREATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AR_PMNT" permissionId="ASSETMAINT_UPDATE"/>
+
+    <SecurityGroup groupId="FINANCIALS_AP_PMNT" description="Ver facturas, ver/crear/actualizar/aplicar pagos en Cuentas por Pagar de Finanzas."/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_PAPPL"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="PAY_INFO_CREATE"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANCIALS_AP_PMNT" permissionId="ASSETMAINT_UPDATE"/>
+    
+    <SecurityGroup groupId="FINANZAS_TESORERO" description="Tesorero para el módulo de Finanzas."/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_EDITARCUENTABNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_BANK_OPCIONESGRPBNK_ASIGNACBUSUARIOBNK_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_FACTURASGRPCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_FACTURASGRPCPC_BORDSCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_FACTURASGRPCPC_CORDSCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_OCOBROGRPCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_OCOBROGRPCPC_CORDENCOBROCPC_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_FACTURASGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOGRPCPP_PORDENPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_CORDENPAGOPAT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_OPAGOPATGRPCPP_BORDENPAGOPAT_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_REVERSE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="PAY_INFO_CREATE"/> <!-- required to create payments in OFBIZ -->
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="PAY_INFO_UPDATE"/> <!-- required to update payments in OFBIZ --> 
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="ORDERMGR_UPDATE"/>     <!-- Needed for invoicing performed services -->   
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="ASSETMAINT_UPDATE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AR_PAPPL"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_INCRTE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_PCRTE"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_PUPDT"/>
+    <SecurityGroupPermission groupId="FINANZAS_TESORERO" permissionId="FINANCIALS_AP_PAPPL"/>
+    
+    <!-- system must be financials admin for automated ledger postings to work -->
+    <UserLoginSecurityGroup userLoginId="system" groupId="FINANCIALS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+
+    <!-- let admin do anything in financials -->
+    <UserLoginSecurityGroup userLoginId="admin" groupId="FINANCIALS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+</entity-engine-xml>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Viaticos Services</description>
+    <version>1.0</version>
+    
+    <service name="guardarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="guardarViatico">
+    	<attribute name="viaticoId" type="String" mode="IN" optional="true"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false" description="Destino"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false" description="Motivo"/>
+        <attribute name="areaPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="recurso" type="String" mode="IN" optional="false"/>
+    	<attribute name="tipoTransporte" type="String" mode="IN" optional="false"/>
+        <attribute name="montoTransporte" type="BigDecimal" mode="IN" optional="false" description="Monto de transporte"/>
+        <attribute name="montoDiario" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="montoTrabCampo" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="geoOrigen" type="String" mode="IN" optional="false"/>
+        <attribute name="geoDestino" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false" description="Fecha inicial"/>
+        <attribute name="fechaFin" type="Timestamp" mode="IN" optional="false" description="Fecha final"/>
+        <attribute name="programa2" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="viaticoId" type="String" mode="OUT" optional="false"/>   
+        <attribute name="fuenteFinanciamientoId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+
+    <service name="editarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="editarViatico">
+    	<attribute name="viaticoId" type="String" mode="IN" optional="true"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false"/>
+        <attribute name="areaPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="recurso" type="String" mode="IN" optional="false"/>
+    	<attribute name="tipoTransporte" type="String" mode="IN" optional="false"/>
+        <attribute name="montoTransporte" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="montoDiario" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="montoTrabCampo" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="geoOrigen" type="String" mode="IN" optional="false"/>
+        <attribute name="geoDestino" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="fechaFin" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="programa" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="viaticoId" type="String" mode="OUT" optional="false"/>
+        <attribute name="fuenteFinanciamientoId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="cancelarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="cancelarViatico">
+    	<attribute name="viaticoId" type="String" mode="IN" optional="true"/>    	        
+    </service>
+    
+    <service name="actualizaInfoViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="actualizaInfoViatico">
+    	<attribute name="viaticoId" type="String" mode="IN" optional="false"/>
+    	<attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+    	<attribute name="tipoTransporte" type="String" mode="IN" optional="false"/>
+        <attribute name="montoTransporte" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="geoOrigen" type="String" mode="IN" optional="false"/>
+        <attribute name="geoDestino" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="fechaFin" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="viaticoId" type="String" mode="OUT" optional="false"/>        
+    </service>
+    
+    <service name="enviarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="enviarSolicitud">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="cambiaStatusViatico" engine="java" auth="true"
+    		location="com.absoluciones.viaticos.ViaticosServices" invoke="cambiaStatusViatico">
+    		<attribute name="viaticoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="estatus" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="autorizarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="autorizarSolicitud">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAutorizado" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>        		        
+    </service>
+    
+    <service name="rechazarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="rechazarSolicitud">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioRechazo" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="comentarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="comentarSolicitud">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioComentar" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="agregaItemViatico" engine="java" auth="true"
+    		location="com.absoluciones.viaticos.ViaticosServices" invoke="agregaItemViatico">
+    		<implements service="clasificacionesPresup"/>
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="viaticoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaComprobanteViatico" engine="java" auth="true"
+    		location="com.absoluciones.viaticos.ViaticosServices" invoke="agregaComprobanteViatico">
+    		<attribute name="viaticoId" type="String" mode="INOUT" optional="false"/>
+			<attribute name="fecha" type="Timestamp" mode="IN" optional="false"/>
+			<attribute name="conceptoViatico" type="String" mode="IN" optional="false"/>
+			<attribute name="referencia" type="String" mode="IN" optional="false"/>
+			<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="comprometerViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="comprometerViatico">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="tipoDocumento" type="String" mode="IN" optional="true"/>
+    	<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	
+    	<attribute name="tipoMoneda" type="String" mode="IN" optional="true"/>       
+    </service>
+    
+    <service name="cancelarViaticoPresupuesto" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="cancelarViaticoPresupuesto">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	    
+    </service>
+    
+    <service name="comprobarViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="comprobarViatico">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="tipoDocumento" type="String" mode="IN" optional="true"/>
+    	<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="detallesViaticoId" type="Map" string-map-prefix="detalleViaticoId" mode="IN" optional="false"/>
+    	<attribute name="montosDetalle" type="Map" string-map-prefix="montoDetalle" mode="IN" optional="false"/>
+    	<attribute name="conceptosViatico" type="Map" string-map-prefix="concepto" mode="IN" optional="false"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	
+    	<attribute name="devolucion" type="Boolean" mode="IN" optional="true"/>       
+    </service>
+    
+    <service name="comprobarViaticoSolicitante" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="comprobarViaticoSolicitante">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>    	
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	       
+    </service>
+    
+    <service name="crearSaldoViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="crearSaldoViatico">
+    	<attribute name="catalogoId" type="String" mode="IN" optional="false" description="Solicitante"/>
+    	<attribute name="saldo" type="BigDecimal" mode="IN" optional="false" description="Saldo"/>
+    	<attribute name="enumCode" type="String" mode="IN" optional="false" description="Periodo"/>
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>        
+    </service>
+    
+    <service name="traspasoSaldoViatico" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="traspasoSaldoViatico">
+    	<attribute name="catalogoIdViene" type="String" mode="IN" optional="true" />
+    	<attribute name="catalogoIdVa" type="String" mode="IN" optional="false" description="Solicitante"/>
+    	<attribute name="saldo" type="BigDecimal" mode="IN" optional="false" description="Saldo"/>
+    	<attribute name="enumCode" type="String" mode="IN" optional="false" description="Periodo"/>
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>        
+    </service>
+    
+    <service name="enviaObservacion" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="enviaObservacion">
+    	<attribute name="viaticoId" type="String" mode="INOUT" optional="true"/>  
+    	<attribute name="observacionComprobante" type="String" mode="IN" optional="false"/>        
+    </service>
+    
+    <service name="guardaPrograma" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="guardaPrograma">
+    	<attribute name="programaId" type="String" mode="OUT" optional="false" />
+        <attribute name="nombrePrograma" type="String" mode="IN" optional="false"/>   	        
+    </service>
+    
+    <service name="cargarPaginaPrograma" engine="java" location="com.absoluciones.viaticos.ViaticosServices" auth="true" invoke="cargarPaginaPrograma">
+             
+    </service>  
+       
+</services>

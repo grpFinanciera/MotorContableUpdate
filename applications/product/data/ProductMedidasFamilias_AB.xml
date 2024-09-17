@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<Familia familiaId="MATERIALES_ADMON" descripcion="Materiales de administración, emisión de documentos y artículos oficiales"/>
+	<Familia familiaId="ALIMENTOS_UTENSILIOS" descripcion="Alimentos y utensilios"/>
+	<Familia familiaId="MATERIALES_PRODUCCIO" descripcion="Materias primas y materiales de producción y comercialización"/>
+	<Familia familiaId="MATERIALES_CONSTRUCC" descripcion="Materiales y artículos de construcción y de reparación"/>
+	<Familia familiaId="PRODUCTOS_QUIMICOS" descripcion="Productos químicos, farmacéuticos y de laboratorio"/>
+	<Familia familiaId="COMBUSTIBLES" descripcion="Combustibles, lubricantes y aditivos"/>
+	<Familia familiaId="VESTUARIO" descripcion="Vestuario, blancos, prendas de protección y artículos deportivos"/>
+	<Familia familiaId="MATERIALES_SEGURIDAD" descripcion="Materiales y suministros para seguridad"/>
+	<Familia familiaId="HERRAMIENTAS_MENORES" descripcion="Herramientas, refacciones y accesorios menores"/>
+	<Familia familiaId="SERVICIOS_BASICOS" descripcion="Servicios básicos"/>
+	<Familia familiaId="ARRENDAMIENTO" descripcion="Servicios de arrendamiento"/>
+	<Familia familiaId="SERV_PROFESIONALES" descripcion="Servicios profesionales, científicos, técnicos y otros servicios"/>
+	<Familia familiaId="SERV_FINANCIEROS" descripcion="Servicios financieros, bancarios y comerciales"/>
+	<Familia familiaId="INSTALACION_MANTTO" descripcion="Servicios de instalación, reparación, mantenimiento y conservación"/>
+	<Familia familiaId="COMUNICACIÓN_SOCIAL" descripcion="Servicios de comunicación social y publicidad"/>
+	<Familia familiaId="TRASLADO_VIATICOS" descripcion="Servicios de traslado y viáticos"/>
+	<Familia familiaId="SERVICIOS_OFICIALES" descripcion="Servicios oficiales"/>
+	<Familia familiaId="OTROS_SERV_GENERALES" descripcion="Otros servicios generales"/>
+	<Familia familiaId="MOB_EQUIPO_ADMON" descripcion="Mobiliario y equipo de administración"/>
+	<Familia familiaId="MOB_Y_EQ_EDUCACIONAL" descripcion="Mobiliario y equipo educacional y recreativo"/>
+	<Familia familiaId="EQ_INSTRUMENTAL_MED" descripcion="Equipo e instrumental medico y de laboratorio"/>
+	<Familia familiaId="EQUIPO_DE_TRANSPORTE" descripcion="Vehículos y equipo de transporte"/>
+	<Familia familiaId="MAQ_Y_HERRAMIENTAS" descripcion="Maquinaria, otros equipos y herramientas"/>
+	<Familia familiaId="ACTIVOS_BIOLOGICOS" descripcion="Activos biológicos"/>
+	<Familia familiaId="BIENES_INMUEBLES" descripcion="Bienes inmuebles"/>
+	<Familia familiaId="ACTIVOS_INTANGIBLES" descripcion="Activos intangibles"/>
+	<Familia familiaId="OBRA_BIENES_DPUBLICO" descripcion="Obra publica en bienes de dominio publico"/>
+	<Familia familiaId="OBRA_BIENES_PROPIOS" descripcion="Obra publica en bienes propios"/>
+	<Familia familiaId="PROYECTO_PRODUCTIVOS" descripcion="Proyectos productivos y acciones de fomento"/>
+	
+	<Uom uomId="BOLSA" uomTypeId= "OTHER_MEASURE" abbreviation= "Bls" description="Bolsa"/>
+	<Uom uomId="BOTELLA" uomTypeId= "OTHER_MEASURE" abbreviation= "Bta" description="Botella"/>
+	<Uom uomId="BOTELLON" uomTypeId= "OTHER_MEASURE" abbreviation= "btn" description="Botellon"/>
+	<Uom uomId="BOTE" uomTypeId= "OTHER_MEASURE" abbreviation= "Bte" description="Bote"/>
+	<Uom uomId="CUBETA" uomTypeId= "VOLUME_LIQ_MEASURE" abbreviation= "Cta" description="Cubeta"/>
+	<Uom uomId="FRASCO" uomTypeId= "OTHER_MEASURE" abbreviation= "Fco" description="Frasco"/>
+	<Uom uomId="GALON" uomTypeId= "VOLUME_LIQ_MEASURE" abbreviation= "Gal" description="Galon"/>
+	<Uom uomId="JUEGO" uomTypeId= "OTHER_MEASURE" abbreviation= "Jgo" description="Juego"/>
+	<Uom uomId="KIT" uomTypeId= "OTHER_MEASURE" abbreviation= "Kit" description="Kit"/>
+	<Uom uomId="LOTE" uomTypeId= "AREA_MEASURE" abbreviation= "Lte" description="Lote"/>
+	<Uom uomId="LITRO" uomTypeId= "VOLUME_LIQ_MEASURE" abbreviation= "Lts" description="Litro"/>
+	<Uom uomId="METRO3" uomTypeId= "VOLUME_DRY_MEASURE" abbreviation= "Mt3" description="Metro3"/>
+	<Uom uomId="METRO" uomTypeId= "LENGTH_MEASURE" abbreviation= "Mtr" description="Metro"/>
+	<Uom uomId="PAR" uomTypeId= "OTHER_MEASURE" abbreviation= "Par" description="Par"/>
+	<Uom uomId="TAMBO" uomTypeId= "VOLUME_LIQ_MEASURE" abbreviation= "Tam" description="Tambo"/>
+	<Uom uomId="TRAMO" uomTypeId= "LENGTH_MEASURE" abbreviation= "Tmo" description="Tramo"/>
+	<Uom uomId="SERVICIO" uomTypeId= "OTHER_MEASURE" abbreviation= "Ser" description="Servicio"/>
+	
+</entity-engine-xml>

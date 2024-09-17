@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<screen name="main-section-decorator">
+		<section>
+			<actions>
+				<set field="sectionName" value="gastosPorComp" global="true"/>
+				<set field="sectionStyle" value="twoColumn"/>
+			</actions>
+			<widgets>
+				<include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+			</widgets>		
+		</section>
+	</screen>
+	
+	<screen name="emptyGastosScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="GastosXComp"/>
+				<set field="sectionHeaderUiLabel" value="GastosXComp"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/gastos/emptyScreen.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="crearGastoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearGastosXComp"/>
+				<set field="sectionHeaderUiLabel" value="GastosXComp"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudGastos.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/gastos/crearSolicitud.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="verGastoProyecto">
+		<section>
+			<actions>
+				<set field="gastoProyectoId"  value="${parameters.gastoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudGastos.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/gastos/verGastoProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="consultarGastoScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/>  
+                <java location="com.absoluciones.proyectos.ConsultaGastosProyectos" invoke="buscarGastoConsulta"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/gastos/consultarGastoProyCons.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/gastos/listGastoProyCons.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="comprobarGastoScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/>  
+                <java location="com.absoluciones.proyectos.ConsultaGastosProyectos" invoke="buscarGastoConsultaComp"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/gastos/consultarGastoProyComp.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/gastos/listGastoProyComp.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="devolverGastoScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="DevolverGasto"/>  
+                <set field="sectionHeaderUiLabel" value="DevolverGasto"/>  
+                <java location="com.absoluciones.proyectos.ConsultaGastosProyectos" invoke="buscarGastoConsultaDevo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/gastos/consultarDevoGastoProyComp.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/gastos/listGastoDevoProyComp.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="comprobarGastoProyecto">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/> 
+                <set field="gastoProyectoId"  value="${parameters.gastoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudGastos.bsh"/>             
+            </actions>
+            <widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/gastos/verGastoComprueba.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+        </section>
+    </screen>
+    
+    <screen name="devolverGastoProyecto">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="DevolverGasto"/>  
+                <set field="sectionHeaderUiLabel" value="DevolverGasto"/> 
+                <set field="gastoProyectoId"  value="${parameters.gastoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudGastos.bsh"/>             
+            </actions>
+            <widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/gastos/verGastoDevuelve.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+        </section>
+    </screen>
+
+</screens>

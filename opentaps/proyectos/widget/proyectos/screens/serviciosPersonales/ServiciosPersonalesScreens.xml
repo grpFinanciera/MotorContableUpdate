@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<screen name="main-section-decorator">
+		<section>
+			<actions>
+				<set field="sectionName" value="serviciosPersonales" global="true"/>
+				<set field="sectionStyle" value="twoColumn"/>
+			</actions>
+			<widgets>
+				<include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+			</widgets>		
+		</section>
+	</screen>
+	
+	<screen name="emptyServiciosPersonalesScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ServiciosPersonales"/>
+				<set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/emptyScreen.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="crearServiciosPersonalesScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearServiciosPersonales"/>
+				<set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudServiciosPersonales.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/creaServiciosPersonales.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="verServiciosPersonales">
+		<section>
+			<actions>
+				<set field="servicioPersonalId"  value="${parameters.servicioPersonalId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudServiciosPersonales.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/verServiciosPersonales.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="pagoServicioPersonalScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ServiciosPersonalesPago"/>  
+                <set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>  
+                <java location="com.absoluciones.proyectos.ConsultaServiciosPersonales" invoke="buscarServiciosPersonalesPago"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/consultarServPersPago.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/listServPerPago.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="reembolsoServicioPersonalScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ServiciosPersonalesReembolso"/>  
+                <set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>  
+                <java location="com.absoluciones.proyectos.ConsultaServiciosPersonales" invoke="buscarServiciosPersonalesReembolso"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/consultarServPersReembolso.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/listServPerReembolso.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="consultarServiciosPersonalesScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaServiciosPersonales"/>  
+                <set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>  
+                <java location="com.absoluciones.proyectos.ConsultaServiciosPersonales" invoke="buscarServiciosPersonales"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/consultarServPersCons.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/listServPerCons.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="verPagoServiciosPersonales">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ConsultaServiciosPersonales"/>
+				<set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>
+				<set field="adqProyectoId"  value="${parameters.servicioPersonalId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudServiciosPersonales.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/verPagoServiciosPersonales.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="verReembolsoServiciosPersonales">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ConsultaServiciosPersonales"/>
+				<set field="sectionHeaderUiLabel" value="ServiciosPersonales"/>
+				<set field="adqProyectoId"  value="${parameters.servicioPersonalId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudServiciosPersonales.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/serviciosPersonales/verReembolsoServiciosPersonales.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+</screens>

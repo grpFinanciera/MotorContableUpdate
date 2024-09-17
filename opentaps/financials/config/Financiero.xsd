@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sifascpi.gob.mx/sifascpi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmis="http://www.sifascpi.gob.mx/sifascpi">
+
+
+  <xs:element name="InformacionFinanciera" type="cmis:CMIInformacionFinancieraSheet"></xs:element>
+
+  <xs:complexType name="CMIInformacionFinancieraSheet">
+    <xs:sequence>
+      <xs:element name="CatalogoCuentas" type="cmis:CMICatalogoCuentas" maxOccurs="1" minOccurs="0" />
+      <xs:element name="CatalogoFlujosEfectivo" type="cmis:CMICatalogoFlujosEfectivo" maxOccurs="1" minOccurs="0" />
+      <xs:element name="CatalogoCuentasVariaciones" type="cmis:CMICatalogoCuentasVariaciones" maxOccurs="1" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="centro" type="cmis:centros" use="required" />
+    <xs:attribute name="mes" type="cmis:meses" use="required" />
+    <xs:attribute name="anio" type="xs:integer" use="required" />
+  </xs:complexType>
+
+  <!-- Situacion Financiera -->
+  <xs:complexType name="CMICatalogoCuentas">
+    <xs:complexContent>
+	    <xs:extension base="cmis:CMICuentaContableId">
+             <xs:sequence>
+               <xs:element name="c1111-Efectivo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1112-BancosTesoreria" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1114-InversionesTemporales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1115-FondosConAfectacionEspecifica" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1116-DepositosFondosTercerosGarantiaAdministracion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1119-OtrosEfectivoYEquivalentes" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1121-InversionesFinancierasCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1122-CuentasPorCobrarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1123-DeudoresDiversosPorCobrarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1124-IngresosRecuperarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1125-DeudoresPorAnticiposDeTesoreriaCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1127-RecursosDestinadosGastosDirectos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1128-ImpuestoAlValorAgregadoAcreditable" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1129-OtrosDerechosARecibirEfectivoEquivalentesCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1131-AnticipoProveedoresAdquisicionBienesPrestacionesServiciosCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1132-AnticipoProveedoresAdquisicionBienesInmueblesMueblesCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1133-AnticipoProveedoresAdquisicionBienesIntangiblesCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1134-AnticipoContratistasObrasPublicarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1135-DepositoGarantizarAdquisicionesBienesServicio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1136-PagosProvisionesContribucionesFederales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1139-OtrosDerechosRecibirBienesServiciosCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1141-InventarioDeMercanciaParaVenta" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1142-InventarioMercanciasTerminada" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1143-InventarioMercanciaEnProcesoElaboracion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1144-InventarioMateriasPrimasMaterialesSuministros" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1145-BienesTransito" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1151-AlmacenMaterialesSuministrosConsumo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1161-EstimacionesCuentasIncobrablesDerechoRecibirEfectivoEquivalentes" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1162-EstimacionPorDeterioroDeInventarios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1194-AdquisicionConFondosDeTerceros" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1211-InversionesALargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1212-TitulosValoresLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1213-FideicomisosMandatosContratosAnalogos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1221-DocumentosPorCobrarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1222-DeudoresDiversosALargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1229-OtrosDerechosRecibirEfectivoEquivalenteLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1231-Terrenos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1232-Viviendas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1233-EdificiosNoHabitacionales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1234-Infraestructura" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1235-ConstruccionesProcesoBienesDominioPublico" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1236-ConstruccionesProcesoBienesPropio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1239-OtrosBienesInmuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1241-MobiliarioEquipoAdministracion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1242-MobiliarioEquipoEducacionalRecreativo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1243-EquiposInstrumentalMedicoLaboratorio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1244-VehiculosEquipoTransporte" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1245-EquipoDeDefensaYSeguridad" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1246-MaquinariaOtrosEquiposHerramientas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1247-ColeccionesObrasArteObjetosValiosos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1248-ActivosBiologicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1251-Software" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1252-PatentesMarcasDerechos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1253-ConcesionesYFranquicias" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1254-Licencia" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1255-ActivosPlanLaboral " type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1259-OtrosActivosIntangibles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1261-DepreciacionAcumuladaInmuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1262-DepreciacionAcumuladaInfraestructura" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1263-DepreciacionAcumuladaBienesMuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1264-DeterioroAcumuladoActivosBiologicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1265-AmortizacionAcumuladaActivosIntangibles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1266-DepreciacionAcumuladaBienesArrendamientoFinanciero" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1267-AmortizacionAcumuladaActivosDiferidos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1271-EstudiosFormulacionEvaluacionProyectos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1272-DerechosSobreBienesRegimenArrendamientoFinanciero" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1273-GastosPagadosAdelantadoLArgoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1274-AnticiposLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1276-ObrasEnBienesConcesionados" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1279-OtrosActivosDiferidos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1281-EstimacionesPerdidaCuentasIncobrablesDocCobrarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1282-EstimacionesPerdidaDeCuentasIncobrablesDeudoresDiversosLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1289-EstimacionesPorPerdidaOtrasCuentasIncobrablesLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1292-BienesEnArrendamientoFinanciero" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c1293-BienesEnComodato" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2111-ServiciosPersonalesPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2112-ProveedoresPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2113-ContratistasObrasPublicasPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2115-TransferenciasOtorgadasPorPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2117-RetencionesContribucionesPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2119-OtrasCuentasPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2121-DocumentosComercialesPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2129-OtrosDocumentosPorPagarCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2131-PorcionCortoPlazoDeudaPublicaInterna" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2132-PorcionCortoPlazoDeudaPublicaExterna" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2133-PorcionCortoPlazoArrendamientoFinanciero" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2151-IngresosCobradosAdelantadoCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2159-OtrosPasivosDiferidosCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2161-FondosEnGarantiaCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2162-FondosAdministracionCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2173-ProvisionParaPensionesCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2179-OtrasProvisionesCortoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2199-OtrosPasivoCirculantes" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2211-ProveedoresPagarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2212-ContratistasPagarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2213-ArrendamientoFinancieroCasosExcepcionalesPagarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2221-DocumentosComercialesPagarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2229-OtrosDocumentosPagarLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2235-ArrendamientoFinancieroLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2241-CreditosDiferidosLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2249-OtrosPasivosDiferidosLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2251-FondosGarantiaLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2252-FondosAdministracionLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2262-ProvisionesPensionesLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c2269-OtrosProvisionesLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3112-PatrimonioOCapitalSocial" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3113-AportacionesDelGobiernoFederalDeAnoEnCurso" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3114-AportacionesDelGobiernoFederalDeAnosAnteriores" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3121-SuperavitDeficitDonacion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3131-ActualizacionPatrimonio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3211-AhorroDesahorroEjercicio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3221-ResultadosEjerciciosAnteriores" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3231-RevaluoBienesInmuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3232-RevaluoBienesMuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3233-RevaluoBienesIntangibles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3241-ReservasDePatrimonio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3331-SuperavitPorReexpresion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3332-CorreccionPorReexpresion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c3333-ExcesoInsuficienciaPorActualizacion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4122-CuotasParaSeguridadSocial" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4174-IngresosOperacionEntidadesParaestatalesEmpresarialesYNoFinancieras" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4175-IngresosOperacionEntidadesParaestatalesNoEmpresarialesYNoFinancieras" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4221-TransferenciasInternasAsignacionesSectorPublico" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4223-SubsidiosYSubvenciones" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4311-InteresesGanadosValoresBonosCreditosOtros" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4312-IngresosDeFideicomisosPublicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4319-OtrosIngresosFinancieros" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4321-IncrementoVariacionInventariosMercanciasVenta" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4322-IncrementoVariacionInventariosMercanciasTerminadas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4323-IncrementoVariacionInventariosMercanciasProcesoElaboracion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4324-IncrementoVariacioninventariosMateriasPrimasMaterialesSuministrosProduccion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4325-IncrementoVariacionAlmacenMateriasPrimasMaterialesSuministrosConsumo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4331-DisminucionExcesoEstimacionesPerdidaDeterioroObsolencia" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4341-DisminucionExcesoProviciones" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4391-OtrosIngresosDeEjerciciosAnteriores" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4392-BonificacionesYDescuentosObtenidos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4393-DiferenciasTipoCambioAFavorEfectivoEquivalente" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4395-ResultadoPosicionMonetaria" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4396-UtilidadesPorParticipacionPatrimonial" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c4399-OtrosIngresosBeneficiosVarios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5111-RemuneracionesPersonalCaracterPermanente" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5112-RemuneracionesPersonalCaracterTransitorio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5113-RemuneracionesAdicionalesEspeciales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5114-SeguridadSocial" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5115-OtrasPrestacionesSocialesEconomicas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5116-PagoEstimulosServidoresPublicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5121-MaterialesAdministracionEmisionDocumentosArticulosOficiales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5122-AlimentosUtensilios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5123-MateriasPrimasMaterialesProduccionComercializacion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5124-MaterialesArticulosConstruccionReparacion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5125-ProductosQuimicosFarmaceuticosLaboratorio" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5126-CombustiblesLubricantesAditivos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5127-VestuarioBlancosPrendasProteccionArticulosDeportivos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5128-MaterialesSuministrosSeguridad" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5129-HerramientasRefaccionesAccesoriosMenores" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5131-ServiciosBasicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5132-ServiciosArrendamiento" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5133-ServiciosProfesionalesCientificosTecnicosOtrosServicios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5134-ServiciosFinancierosBancariosComerciales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5135-ServiciosInstalacionReparacionMantenimientoConservacion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5136-ServiciosComunicacionSocialPublicidad" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5137-ServiciosTrasladoViaticos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5138-ServiciosOficiales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5139-OtrosServiciosGenerales" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5231-Subsidios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5232-Subvenciones" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5241-AyudasSocialesAPersonas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5242-Becas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5243-AyudasSocialesAInstituciones" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5511-EstimacionesporPerdidaoDeterioroDeActivosCirculantes" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5512-EstimacionesPerdidaDeterioroActivoNoCirculante" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5513-DepreciaciondeBienesInmuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5514-DepreciaciondeInfraestructura" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5515-DepreciaciondeBienesMuebles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5516-DeterioroActivosBiologicos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5517-AmortizaciondeActivosIntangibles" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5518-AmortizacionActivosDiferidos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5522-ProvisionesdePasivosaLargoPlazo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5531-DisminucionPorVariacionDeInventariosDeMercanciasParaVenta" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5532-DisminucionPorVariacionDeInventariosDeMercanciasTerminadas" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5533-DisminucionPorVariacionDeInventariosMercanciasProcesoElaboracion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5534-DisminucionPorVariacionInventarioMateriasPrimasMaterialesSuministrosProduccion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5535-DisminucionPorVariacionAlmacenMaterialesSuministrosDeConsumo" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5592-PerdidasporResponsabilidades" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5593-BonificacionesyDescuentosOtorgados" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5594-DiferenciasporTipodeCambioNegativasenEfectivoyEquivalentes" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5596-ResultadoporPosicionMonetaria" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5599-OtrosGastosVarios" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5611-MateriaPrima" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5612-ManoDeObra" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5613-GastosDirectosEIndirectos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5614-MermasDeProduccion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5621-GastosDeBienesComercializados" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5711-MateriaPrima" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5712-ManoDeObra" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5713-GastosIndirectos" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5714-MermasDeProduccion" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+               <xs:element name="c5721-GastosDeBienesComercializados" type="cmis:CMICuentaContable" maxOccurs="1" minOccurs="1" />
+             </xs:sequence>
+	    </xs:extension>
+	</xs:complexContent>
+  </xs:complexType>
+  
+  <!-- Catalogo Flujos Efectivo -->
+  <xs:complexType name="CMICatalogoFlujosEfectivo">
+    <xs:complexContent>
+	    <xs:extension base="cmis:CMICuentaContableId">
+		    <xs:sequence>
+          <xs:element name="OrigenIngresosPorCuotasYAportacionesDeSeguridadSocial" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenIngresosPorVentaDeBienesYServicios" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenTransferenciasYDonativos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenSubsidiosYSubvenciones" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenOtrosIngresosYBeneficios" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionServiciosPersonales" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionMaterialesYSuministros" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionServiciosGenerales" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasAsignacionesSubsidiosOtrasAyudas" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasInternasYAsignacionesAlSectorPublico" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasAlRestoDelSectorPublico" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionSubsidiosYSubvenciones" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionAyudasSociales" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionPensionesYJubilaciones" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasFideicomisosMandatosContratosAnalogos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasALaSeguridadSocial" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionDonativos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionTransferenciasAlExterior" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenContribucionesCapital" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenVentasActivosFisicos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenVentaDisposicionObjetosDeValor" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenVentaDisposicionActivosNoProducidos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenTransferenciasDeCapitalRecibidas" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenOtros" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionActivosFijos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionObjetosDeValor" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionActivosNoProducidos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionOtros" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenDisminucionActivosFinancierosExcluidoEfectivoEquivalente" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="OrigenIncrementoOtrosPasivos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionIncrementoActivosFinancierosExcluidoEfectivoEquivalente" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="AplicacionDisminucionOtrosPasivos" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="EfectivoYEquivalentesAlEfectivoAlInicioDelEjercicio" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+          <xs:element name="EfectivoYEquivalentesAlEfectivoAlFinalDelEjercicio" type="cmis:CMICuentaContable1" maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+  </xs:complexType>
+  
+  <!-- Catalogo Cuentas Variaciones -->
+  <xs:complexType name="CMICatalogoCuentasVariaciones">
+    <xs:complexContent>
+	    <xs:extension base="cmis:CMICuentaContableId">
+		    <xs:sequence>
+          <xs:element name="v1001-PatrimonioAlFinalDelEjercicio" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1004-Aportaciones" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1005-DonacionesDeCapitalRecibidas" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1007-ResultadoDelEjercicio" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1008-ResultadoDelEjerciciosAnteriores" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1009-Revaluos" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1010-Reservas" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1016-Aportaciones" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1017-DonacionesDeCapitalRecibidas" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1019-ResultadosDelEjercicioAhorroDesahorro" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1020-ResultadosDeEjerciciosAnteriores" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1021-Revaluos" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+          <xs:element name="v1022-Reservas" type="cmis:CMICuentaContable2" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+  </xs:complexType>
+
+  <!-- Common Types -->
+  <!-- Common Types Situacion Financiera-->
+  <xs:complexType name="CMICuentaContableId">
+    <xs:attribute name="nivel" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="CMICuentaContable">
+    <xs:complexContent>
+      <xs:extension base="cmis:CMICuentaContableId">
+        <xs:attribute name="saldoInicial" type="xs:double" use="required" />
+        <xs:attribute name="cargos" type="xs:double" use="required" />
+        <xs:attribute name="abonos" type="xs:double" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CMICuentaContable1">
+    <xs:complexContent>
+      <xs:extension base="cmis:CMICuentaContableId">
+        <xs:attribute name="Total" type="xs:double" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CMICuentaContable2">
+    <xs:complexContent>
+      <xs:extension base="cmis:CMICuentaContableId">
+        <xs:attribute name="patrimonioContribuido" type="xs:double" use="required" />
+        <xs:attribute name="patrimonioGeneradoEA" type="xs:double" use="required" />
+		    <xs:attribute name="patrimonioGeneradoE" type="xs:double" use="required" />
+		    <xs:attribute name="ajusteXCambioValor" type="xs:double" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="centros">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CIO"/>
+      <xs:enumeration value="CIAD"/>
+      <xs:enumeration value="CIBNOR"/>
+      <xs:enumeration value="CICESE"/>
+      <xs:enumeration value="CICY"/>
+      <xs:enumeration value="CIMAT"/>
+      <xs:enumeration value="CIMAV"/>
+      <xs:enumeration value="INAOE"/>
+      <xs:enumeration value="INECOL"/>
+      <xs:enumeration value="IPICYT"/>
+      <xs:enumeration value="CIATEC"/>
+      <xs:enumeration value="CIATEJ"/>
+      <xs:enumeration value="CIATEQ"/>
+      <xs:enumeration value="CIDESI"/>
+      <xs:enumeration value="CIDETEQ"/>
+      <xs:enumeration value="CIQA"/>
+      <xs:enumeration value="	"/>
+      <xs:enumeration value="FIDERH"/>
+      <xs:enumeration value="INFOTEC"/>
+      <xs:enumeration value="CIDE"/>
+      <xs:enumeration value="CIESAS"/>
+      <xs:enumeration value="CIGGET"/>
+      <xs:enumeration value="COLMICH"/>
+      <!--<xs:enumeration value="COLSAN"/>-->
+      <xs:enumeration value="FINANCIERA"/>
+      <xs:enumeration value="ECOSUR"/>
+      <xs:enumeration value="COLEF"/>
+      <xs:enumeration value="MORA"/>
+      <xs:enumeration value="CENTROGEO"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="meses">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+      <xs:enumeration value="4" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="6" />
+      <xs:enumeration value="7" />
+      <xs:enumeration value="8" />
+      <xs:enumeration value="9" />
+      <xs:enumeration value="10" />
+      <xs:enumeration value="11" />
+      <xs:enumeration value="12" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

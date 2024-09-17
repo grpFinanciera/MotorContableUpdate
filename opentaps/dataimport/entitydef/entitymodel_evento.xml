@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidad Evento</title>
+	<description>Define la entidad para los eventos contables</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Jesus Rodrigo Ruiz Merlin</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="Evento" package-name="org.opentaps.dataimport"
+		title="Entidad para los datos del eventos contables">
+		<field name="acctgTransTypeId" type="id-ne"></field>
+		<field name="cuentaCargo" type="id-ne"></field>
+		<field name="cuentaAbono" type="id-ne"></field>
+		<field name="cuentaCancelar" type="id-ne"></field>
+		<field name="glFiscalTypeIdPres" type="id-ne"></field>
+		<field name="tipoPolizaIdPres" type="id-ne"></field>
+		<field name="cuentaCargoPatri" type="id-ne"></field>
+		<field name="cuentaAbonoPatri" type="id-ne"></field>
+		<field name="glFiscalTypeIdCont" type="id-ne"></field>
+		<field name="tipoPolizaIdCont" type="id-ne"></field>
+		<field name="cuentaCargoObra" type="id-ne"></field>
+		<field name="cuentaAbonoObra" type="id-ne"></field>
+		<field name="referencia" type="indicator"></field>
+		<field name="tipoMatriz" type="id-ne"></field>
+		<prim-key field="acctgTransTypeId" />
+		<relation type="one" fk-name="ACCTT" rel-entity-name="AcctgTransType">
+			<key-map field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="MGCC" title="cargo"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaCargo" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="MGCA" title="abono"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAbono" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="GLFTPR" title='glftpr'
+			rel-entity-name="GlFiscalType">
+			<key-map field-name="glFiscalTypeIdPres" rel-field-name="glFiscalTypeId" />
+		</relation>
+		<relation type="one" fk-name="MGCCP" title="cargop"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaCargoPatri" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="MGCAP" title="abonop"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAbonoPatri" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="GLFTCT" title='glftct'
+			rel-entity-name="GlFiscalType">
+			<key-map field-name="glFiscalTypeIdCont" rel-field-name="glFiscalTypeId" />
+		</relation>
+		<relation type="one" fk-name="TPC" title='tpc'
+			rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaIdCont" rel-field-name="tipoPolizaId" />
+		</relation>
+		<relation type="one" fk-name="TPP" title='tpp'
+			rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaIdPres" rel-field-name="tipoPolizaId" />
+		</relation>
+		<relation type="one" fk-name="MGCCPO" title="cargopo"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaCargoObra" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="MGCAPO" title="abonopo"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAbonoObra" rel-field-name="glAccountId" />
+		</relation>
+	</entity>
+</entitymodel>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios Almacen</description>
+    <vendor>ABSCE</vendor>
+    <version>1</version>
+    
+    <service name="getProductosInventarioXPedido" engine="java" auth="true"
+    		location="org.opentaps.warehouse.domain.inventory.ServiciosInventario" invoke="getProductosInventarioXPedido" >
+    	<attribute name="orderItems" type="List" mode="IN" optional="false"/>
+    	<attribute name="facilityId" type="String" mode="IN" optional="true"/>
+        <attribute name="quantityOnHandMap" type="Map" mode="OUT" optional="false"/>
+        <attribute name="availableToPromiseMap" type="Map" mode="OUT" optional="false"/>
+        <attribute name="mktgPkgQOHMap" type="Map" mode="OUT" optional="false"/>
+        <attribute name="mktgPkgATPMap" type="Map" mode="OUT" optional="false"/>
+    </service>
+    
+    <service name="buscarInventoryItem" engine="java" auth="true"
+    		location="org.opentaps.warehouse.domain.inventory.ServiciosInventario" invoke="buscarInventoryItem">
+    	<attribute name="locationSeqId" mode="IN" type="String" optional="true"/>
+    	<attribute name="productId" mode="IN" type="String" optional="true"/>
+    	<attribute name="internalName" mode="IN" type="String" optional="true"/>
+    	<attribute name="serialNumber" mode="IN" type="String" optional="true"/>
+    	<attribute name="lotId" mode="IN" type="String" optional="true"/>
+    	<attribute name="facilityId" mode="IN" type="String" optional="true"/>
+    	<attribute name="performFind" mode="IN" type="String" optional="true" />
+    	<attribute name="organizationName" mode="OUT" type="String" optional="true" />
+    	<attribute name="listMapInventoryItem" mode="OUT" type="List" optional="true" />
+    </service>
+    
+</services>

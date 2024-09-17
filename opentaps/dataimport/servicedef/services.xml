@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Data Import Services</description>
+    <vendor>Open Source Strategies, Inc.</vendor>
+    <version>1.0</version>
+
+    <service name="opentapsImporterInterface" engine="interface" location="" invoke="">
+        <description>
+            Interface for import services that implement OpentapsImporter.  Implementing
+            this interface will allow fine grained control over the import, such as
+            setting a maximum number to import, how many consecutive failures to have
+            before aborting the import, and similar configuration.
+        </description>
+        <attribute type="Integer" mode="IN" name="maxToImport" optional="true"/>
+        <attribute type="Integer" mode="IN" name="maxConsecutiveFailures" optional="true"/>
+    </service>
+
+    <service name="importCustomers" engine="java" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.CustomerImportServices" invoke="importCustomers">
+        <description>
+            Import customers using DataImportCustomer.  Specify the initial party that is responsible
+            for these records in CRMSFA.  Also specify the Accounts Receivable General Ledger account
+            with arGlAccountId, the offsetting account with offsettingGlAccountId, and the organization
+            of these accounts with organizationPartyId.
+            Note that this service is not wrapped in a transaction.  Each customer record imported is in its
+            own transaction, so it can store as many good records as possible.
+        </description>
+        <attribute type="String" mode="IN" name="initialResponsiblePartyId" optional="false"/>
+        <attribute type="String" mode="IN" name="arGlAccountId" optional="true"/>
+        <attribute type="String" mode="IN" name="offsettingGlAccountId" optional="true"/>
+        <attribute type="String" mode="IN" name="organizationPartyId" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="customersImported" optional="true"/>
+    </service>
+
+    <service name="importShoppingLists" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.ShoppingListImportServices" invoke="importShoppingLists">
+        <description>
+            Import shopping lists using DataImportShoppingList and DataImportShoppingListItem.
+            Note that this service is not wrapped in a transaction.  Each record imported is in its
+            own transaction, so it can store as many good records as possible.
+            The productStoreId parameters specify for which store to create the shopping lists.
+        </description>
+        <attribute type="String" mode="IN" name="productStoreId" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="shoppingListsImported" optional="true"/>
+    </service>
+
+    <service name="importCustomersCommissions" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.CustomerImportServices" invoke="importCustomersCommissions">
+        <description>
+            Import customersCommissions using DataImportCommissionRates.
+            Note that this service is not wrapped in a transaction.  Each customerCommisions record imported is in its
+            own transaction, so it can store as many good records as possible.
+        </description>
+        <attribute type="String" mode="IN" name="organizationPartyId" optional="false"/>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="importSuppliers" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.SupplierImportServices" invoke="importSuppliers">
+        <description>
+            Import suppliers using DataImportSupplier.
+            Note that this service is not wrapped in a transaction.  Each supplier record imported is in its
+            own transaction, so it can store as many good records as possible.
+        </description>
+        <attribute type="String" mode="IN" name="organizationPartyId" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+
+    <service name="importProducts" engine="java" use-transaction="false" transaction-timeout="28800"
+        location="org.opentaps.dataimport.ProductImportServices" invoke="importProducts">
+        <description>
+            Import products using DataImportProduct.
+            Note that this service is not wrapped in a transaction.  Each product record imported is in its
+            own transaction, so it can store as many good records as possible.
+            The goodIdentificationTypeIdN parameters correspond to the type of the customIdN fields in DataImportProduct.
+        </description>
+        <attribute type="String" mode="IN" name="goodIdentificationTypeId1" optional="true"/>
+        <attribute type="String" mode="IN" name="goodIdentificationTypeId2" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="productsImported" optional="true"/>
+    </service>
+
+    <service name="importOrders" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.OrderImportServices" invoke="importOrders">
+        <description>
+            Import orders using DataImportOrderHeader and DataImportOrderItems.
+            Note that this service is not wrapped in a transaction.  Each orderHeader/orderItems record set imported is in its
+                own transaction, so it can store as many good records as possible.
+            companyPartyId is the ID of the billFromVendor for the orders.
+            productStoreId is the productStore that the orders should be related to.
+            prodCatalogId is the productCatalog that the orders should be related to (optional).
+            importEmptyOrders controls whether orderHeaders
+                with no corresponding orderItems should be imported or ignored.
+            calculateGrandTotal controls whether the grand total for the order should be taken from the DataImportOrderHeader.grandTotal
+                field or calculated from orderItems and orderAdjustments
+        </description>
+        <attribute type="String" mode="IN" name="companyPartyId" optional="false"/>
+        <!--todo make the below optional-->
+        <attribute type="String" mode="IN" name="productStoreId" optional="true"/>
+        <attribute type="String" mode="IN" name="prodCatalogId" optional="true"/>
+        <attribute type="String" mode="IN" name="purchaseOrderShipToContactMechId" optional="true"/>
+        <attribute type="Boolean" mode="IN" name="importEmptyOrders" optional="false"/>
+        <attribute type="Boolean" mode="IN" name="calculateGrandTotal" optional="false"/>
+        <attribute type="Boolean" mode="IN" name="reserveInventory" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="ordersImported" optional="true"/>
+    </service>
+
+    <service name="importProductInventory" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.ProductImportServices" invoke="importProductInventory">
+        <description>
+            Import product inventory using DataImportInventory.
+            The organizationPartyId is the ownerPartyId of the facilityId, and all inventory values in DataImportInventory must
+            already be in the right currency.  One AcctgTrans plus many entries are created for each facility/ownerPartyId combination.
+            Both gl accounts must be configured for each owner of the inventory in the warehouse facilities.
+            Note that this service is not wrapped in a transaction.  Each inventory record set imported is in its
+                own transaction, so it can store as many good records as possible.
+            Will set a ProductFacility with minimumStock of 0 for the facilityId if no minimumStock is supplied and fill in reorderQuantity
+            and daysToShip as well.
+        </description>
+        <attribute name="inventoryGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="offsettingGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="importUSTaxRates" engine="java" use-transaction="false"
+        location="org.opentaps.dataimport.TaxImportServices" invoke="importUSTaxRates">
+        <description>
+            Import US county based tax rates using DataImportUSZipCodes and DataImportUSCountyTax.
+            TODO: documentation on how this works.  Some of it is in javadoc at the moment.
+        </description>
+        <attribute name="productStoreId" type="String" mode="IN" optional="false"/>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="importGlAccounts" engine="pojo" use-transaction="false"
+             location="org.opentaps.dataimport.domain.GlAccountImportService" invoke="importGlAccounts">
+        <description>
+            Import Great Ledger accounts using DataImportGlAccount bridge entity.
+            Note that this service is not wrapped in a transaction.  Each account record imported is in its
+            own transaction, so it can store as many good records as possible.
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="importTag" engine="pojo" use-transaction="false"
+             location="org.opentaps.dataimport.domain.TagImportService" invoke="importTag">
+        <description>
+            Import Tag.
+        </description>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="uploadFileForDataImport" engine="java" use-transaction="true" transaction-timeout="28800"
+             location="org.opentaps.dataimport.CommonImportServices" invoke="uploadFileForDataImport">
+       <description>Upload a file for Dataimport by running the service corresponding to the file format
+	   Currently on EXCEL is supported as a fileFormat
+	   Unlike other data import services, this is all in one transaction, so if part of the file fails, it is rejected</description>
+       <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN"/>
+       <attribute name="_uploadedFile_fileName" type="String" mode="IN"/>
+       <attribute name="_uploadedFile_contentType" type="String" mode="IN"/>
+       <attribute name="fileFormat" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="importParty" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.PartyImportService" invoke="importParty">
+        <description>
+            Import organizations using DataImportParty
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importPresupuestoInicial" engine="java" auth="true" transaction-timeout="43200"
+    	location="org.opentaps.dataimport.domain.PresupuestoInicialImportService" invoke="importPresupuestoInicial">
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="cicloId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="importOrdenesPago" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.OrdenesPagoImportService" invoke="importOrdenesPago">
+        <description>
+            Importa ordenes de pago 
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>   
+    
+    <service name="importOrdenesCobro" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.OrdenesCobroImportService" invoke="importOrdenesCobro">
+        <description>
+            Importa ordenes de cobro 
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+   
+    <service name="importSaldoInicialAuxiliar" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.SaldoInicialAuxiliarImportService" invoke="importSaldoInicialAuxiliar">
+        <description>
+            Importa saldos iniciales auxiiares 
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importAfectacionEgreso" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.AfectacionEgresoImportService" transaction-timeout="28800" invoke="importAfectacionEgreso">
+        <description>
+            Importa afectacion egreso 
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoDocumentoId" type="String" mode="IN" optional="false" />
+        <!--  <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="false" />-->
+        <attribute name="fechaContable" mode="IN" type="String" optional="false" />
+        <attribute name="indicador" type="String" mode="IN" optional="false"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="true"/>
+        <attribute name="cuentaId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>          
+    
+    <service name="registroContable_Presupuestal" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="registroContable_Presupuestal">
+        <implements service="clasificacionesPresup"/>
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="idTipoDoc" mode="IN" type="String" optional="false"/>
+        <attribute name="fechaTransaccion" mode="IN" type="java.sql.Timestamp" optional="true"/>
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />
+        <attribute name="referenciaDocumento" mode="IN" type="String" optional="true"/>
+        <attribute name="agrupadorOrigen" mode="IN" type="String" optional="true"/>
+        <attribute name="secuencia" mode="IN" type="String" optional="true" />
+        <attribute name="partyId" mode="IN" type="String" optional="true"/>
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+        <attribute name="monto" mode="IN" type="java.math.BigDecimal" optional="false"/>  
+        <attribute name="currency" mode="IN" type="String" optional="false"/>
+        <attribute name="tipoClave" mode="IN" type="String" optional="true"/>
+        <attribute name="caParty" mode="IN" type="String" optional="true"/>
+        <attribute name="caProductId" mode="IN" type="String" optional="true"/>
+        <attribute name="invoiceId" mode="IN" type="String" optional="true"/>
+        <attribute name="paymentId" mode="IN" type="String" optional="true"/>
+        <attribute name="shipmentId" mode="IN" type="String" optional="true"/>
+        <attribute name="receiptId" mode="IN" type="String" optional="true"/>
+        <attribute name="workEffortId" mode="IN" type="String" optional="true"/>
+        <attribute name="roleTypeId" mode="IN" type="String" optional="true"/>
+        <attribute name="descripcion" mode="IN" type="String" optional="true"/>
+        <attribute name="orderId" mode="IN" type="String" optional="true"/>
+        <attribute name="inventoryItemId" mode="IN" type="String" optional="true"/>
+        <attribute name="physicalInventoryId" mode="IN" type="String" optional="true"/>
+        <attribute name="fixedAssetId" mode="IN" type="String" optional="true"/>
+        <attribute name="contratoId" mode="IN" type="String" optional="true"/>
+        <attribute name="tipoPolizaId" mode="IN" type="String" optional="true"/>
+        <attribute name="tipoTransaccion" mode="IN" type="String" optional="true"/>
+    	<attribute name="listaTrans" mode="OUT" type="java.util.List" optional="false"/>
+    </service>
+    
+    <service name="importPagos" engine="pojo" use-transaction="false"
+             location="org.opentaps.dataimport.domain.PagosImportService" invoke="importPagos">
+        <description>
+            Importa Pagos.
+        </description>
+        <attribute name="importedRecords" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="registroContable" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="registroContable">
+        <implements service="registroContable_Presupuestal"/>
+        <attribute name="concepto" mode="IN" type="String" optional="true"/>
+        <attribute name="subConcepto" mode="IN" type="String" optional="true"/>
+        <attribute name="auxiliar" mode="IN" type="String" optional="true"/>
+        <attribute name="banderaAuxiliar" mode="IN" type="Boolean" optional="true"/>
+    </service>    
+    
+    <service name="reversaPresupuestal" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="reversaPresupuestal">
+        <attribute name="acctgTransId" mode="INOUT" type="String" optional="false"/>
+    </service>
+	
+	<service name="montosClave" engine="interface">
+        <attribute name="montoClave1" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave2" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave3" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave4" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave5" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave6" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave7" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave8" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave9" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave10" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave11" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave12" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave13" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave14" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave15" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave16" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave17" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave18" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave19" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave20" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave21" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave22" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave23" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave24" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave25" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave26" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave27" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave28" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="montoClave29" mode="IN" type="java.math.BigDecimal" optional="true" />
+		<attribute name="montoClave30" mode="IN" type="java.math.BigDecimal" optional="true" />
+	</service>
+    
+    <service name="actualizaGlAccountOrganization" engine="java" 
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="actualizaGlAccountOrganization">
+        <attribute name="monto" mode="IN" type="BigDecimal" optional="false"/>
+        <attribute name="cuenta" mode="IN" type="String" optional="false"/>
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="false"/>        
+        <attribute name="partyId" mode="IN" type="String" optional="false"/>
+        <attribute name="naturaleza" mode="IN" type="String" optional="false"/>
+        <attribute name="postedDate" mode="IN" type="java.util.Date" optional="false"/>
+    </service>
+	
+	<service name="cierrePresupuestal" engine="java" export="true" transaction-timeout="28800"    
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="cierrePresupuestal">
+        <attribute name="enumCode" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="obtenerNaturalezaCuenta" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="obtenerNaturalezaCuenta">
+        <attribute name="glAccountId" mode="IN" type="String" optional="false"/>
+        <attribute name="naturaleza" mode="OUT" type="String" optional="false"/>
+    </service>
+    
+    <service name="generaTransaccionCierreContable" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="generaTransaccionCierreContable">
+        <attribute name="fechaRegistro" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="tipoDocumento" mode="IN" type="String" optional="false"/>
+        <attribute name="usuario" mode="IN" type="String" optional="false"/>
+        <attribute name="organizationId" mode="IN" type="String" optional="false"/>
+        <attribute name="monto" mode="IN" type="java.math.BigDecimal" optional="false"/>
+        <attribute name="cuentas" mode="IN" type="java.util.Map" optional="false"/>
+        <attribute name="currency" mode="IN" type="String" optional="false"/>
+        <attribute name="agrupador" mode="IN" type="String" optional="true"/>
+        <attribute name="transacciones" mode="OUT" type="javolution.util.FastList" optional="false"/>
+    </service>
+    
+    <service name="actualizaCatalogos" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="actualizaCatalogos">
+    	<attribute name="auxiliar" mode="IN" type="String" optional="true"/>
+    	<attribute name="producto" mode="IN" type="String" optional="true"/>
+    	<attribute name="monto" mode="IN" type="java.math.BigDecimal" optional="false"/>
+    	<attribute name="organizationPartyId" mode="IN" type="String" optional="false"/>
+    	<attribute name="idTipoDoc" mode="IN" type="String" optional="false"/>
+    	<attribute name="cargo" mode="IN" type="String" optional="false"/>
+    	<attribute name="abono" mode="IN" type="String" optional="false"/>
+    	<attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+    	<attribute name="auxiliarAbono" mode="IN" type="String" optional="true"/>
+    	<attribute name="productoAbono" mode="IN" type="String" optional="true"/>
+    	<attribute name="reversa" mode="IN" type="String" optional="true"/>        
+    </service>
+    
+    <service name="obtenSaldoInicialFinal" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="obtenSaldoInicialFinal">
+    	<attribute name="idTipoDoc" mode="IN" type="String" optional="false"/>
+    	<attribute name="flag" mode="IN" type="String" optional="false"/>
+    	<attribute name="auxiliar" mode="IN" type="String" optional="true"/>
+    	<attribute name="producto" mode="IN" type="String" optional="true"/>
+        <attribute name="montosAux" mode="IN" type="java.util.List" optional="false"/>
+        <attribute name="saldoInicial" mode="OUT" type="java.math.BigDecimal" optional="true"/>
+        <attribute name="saldoActual" mode="OUT" type="java.math.BigDecimal" optional="true"/>
+    </service>
+        
+    <service name="actualizaSaldoCuentasBancarias" engine="java" export="true"
+    		location="org.opentaps.dataimport.MotorContableServices" invoke="actualizaSaldoCuentasBancarias">
+    	<attribute name="cuentaBancariaId" mode="IN" type="String" optional="false"/>
+    	<attribute name="debitCreditFlag" mode="IN" type="String" optional="false"/>    	
+    	<attribute name="modulo" mode="IN" type="String" optional="false"/>
+    	<attribute name="monto" mode="IN" type="java.math.BigDecimal" optional="false"/>
+    	<attribute name="periodo" mode="IN" type="Timestamp" optional="false"/>        
+    </service>
+    
+    <service name="importUser" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.UserImportService" invoke="importUser">
+        <description>
+            Importa usuarios 
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importFixedAsset" engine="pojo" use-transaction="false" auth="true" transaction-timeout="28800"
+        location="org.opentaps.dataimport.domain.FixedAssetImportService" invoke="importFixedAsset">
+        <description>
+            Importa activo fijo
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importLevantaActFijo" engine="pojo" use-transaction="false" auth="true" transaction-timeout="28800"
+        location="org.opentaps.dataimport.domain.LevantaFixedAssetImportService" invoke="importLevantaFixedAsset">
+        <description>
+            Importa levantamiento activo fijo
+        </description>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="editarCuentaBancaria" engine="java" export="true"
+        location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="editarCuentaBancaria" auth="true">                
+        <attribute name="cuentaId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="bancoId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="nombreCuenta" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroCuenta" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/> 
+        <attribute name="montoCuenta" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="currency" type="String" mode="IN" optional="false"/>
+        <attribute name="habilitadaId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoCuentaId" type="String" mode="IN" optional="true"/>
+        <attribute name="usoCuentaId" type="String" mode="IN" optional="true"/>
+                                
+    </service>
+    
+    <service name="guardaOrdenPagoPatrimonial" engine="java" export="true"
+        location="com.opensourcestrategies.financials.tesoreria.TesoreriaPendientes" invoke="guardaOrdenPagoPatrimonial" auth="true">                
+        <implements service="lineasContables"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipo" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fechaTransaccion" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false" description="Descripción"/>        
+        <attribute name="moneda" type="String" mode="IN" optional="false"/>
+        <attribute name="idPendienteTesoreria" type="String" mode="OUT" optional="false"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Evento Contable"/>
+        <attribute name="urlHost" type="String" mode="IN" optional="false"/>                                
+    </service>
+    
+    <service name="finalizarPendienteTesoreria" engine="java" export="true"
+        location="com.opensourcestrategies.financials.tesoreria.TesoreriaPendientes" invoke="finalizarPendienteTesoreria" auth="true">                
+        <attribute name="idPendienteTesoreria" type="String" mode="INOUT" optional="false"/>
+        <attribute name="tipo" type="String" mode="INOUT" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="auxiliar" type="String" mode="IN" optional="true"/>
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="estatus" type="String" mode="IN" optional="false"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/>
+       	<attribute name="acctgTransTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+        <attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>  
+        <attribute name="urlHost" mode="IN" type="String" optional="false"/>         
+    </service>
+        
+    <service name="enviarOrdenEjercer" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenEjercer" transaction-timeout="6000">
+        <description></description>
+        <implements service="lineasContables"/>
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/>        
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Evento Contable"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/> 
+        <attribute name="amountMap" type="Map" mode="IN" string-map-prefix="amount" optional="true" />
+        <attribute name="productIdMap" type="Map" mode="IN" string-map-prefix="productId" optional="true" />        
+        <attribute name="invoiceItemSeqIdMap" type="Map" mode="IN" string-map-prefix="invoiceItemSeqId" optional="true" />        
+        <attribute name="fechaPago" mode="IN" type="java.sql.Timestamp" optional="false"/>        
+    </service>
+    
+    <service name="enviarOrdenPagado" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenPagado" transaction-timeout="6000">
+        <description></description>        
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenPagoId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="true"/>
+        <attribute name="cuentaBancariaId" type="String" mode="IN" optional="true"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="paymentRefNum" type="String" mode="IN" optional="true"/>
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="true"/>        
+        <attribute name="montoPago" mode="IN" type="java.math.BigDecimal" optional="true"/>  
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />  
+<!--         <attribute name="sumaBancosCargo" mode="IN" type="java.util.List" optional="true"/> -->
+<!--         <attribute name="sumaBancosAbono" mode="IN" type="java.util.List" optional="true"/> -->
+        <attribute name="montoBancoContable" type="Map" mode="IN" string-map-prefix="montoBancoContable" optional="true" />
+        <attribute name="secuenciaConBanco" type="Map" mode="IN" string-map-prefix="secuenciaConBanco" optional="true" />
+        <attribute name="montoContableSinBanco" type="Map" mode="IN" string-map-prefix="montoContableSinBanco" optional="true" />
+        <attribute name="secuenciaSinBanco" type="Map" mode="IN" string-map-prefix="secuenciaSinBanco" optional="true" />
+        <attribute name="montoPresupuestal" mode="IN" type="java.math.BigDecimal" optional="true"/>                      
+    </service>
+        
+    <service name="enviarOrdenPagadoParcial" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenPagadoParcial" transaction-timeout="6000">
+        <description></description>        
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenPagoId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="true"/>
+        <attribute name="cuentaBancariaId" type="String" mode="IN" optional="true"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="paymentRefNum" type="String" mode="IN" optional="true"/>
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="true"/>        
+        <attribute name="montoPago" mode="IN" type="java.math.BigDecimal" optional="true"/>  
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />  
+        <attribute name="montoBancoContable" type="Map" mode="IN" string-map-prefix="montoBancoContable" optional="true" />
+        <attribute name="secuenciaConBanco" type="Map" mode="IN" string-map-prefix="secuenciaConBanco" optional="true" />
+        <attribute name="montoContableSinBanco" type="Map" mode="IN" string-map-prefix="montoContableSinBanco" optional="true" />
+        <attribute name="secuenciaSinBanco" type="Map" mode="IN" string-map-prefix="secuenciaSinBanco" optional="true" />
+        <attribute name="montoPresupuestal" mode="IN" type="java.math.BigDecimal" optional="true"/>                      
+    </service>
+        
+    <service name="enviarOrdenRecaudadoParcial" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenRecaudadoParcial" transaction-timeout="6000">
+        <description></description>        
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenCobroId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="true"/>
+        <attribute name="cuentaBancariaId" type="String" mode="IN" optional="true"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="paymentRefNum" type="String" mode="IN" optional="true"/>
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="true"/>        
+        <attribute name="montoCobro" mode="IN" type="java.math.BigDecimal" optional="true"/>  
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />  
+        <attribute name="montoBancoContable" type="Map" mode="IN" string-map-prefix="montoBancoContable" optional="true" />
+        <attribute name="secuenciaConBanco" type="Map" mode="IN" string-map-prefix="secuenciaConBanco" optional="true" />
+        <attribute name="montoContableSinBanco" type="Map" mode="IN" string-map-prefix="montoContableSinBanco" optional="true" />
+        <attribute name="secuenciaSinBanco" type="Map" mode="IN" string-map-prefix="secuenciaSinBanco" optional="true" />
+        <attribute name="montoPresupuestal" mode="IN" type="java.math.BigDecimal" optional="true"/>                      
+    </service>
+    
+    <service name="enviarOrdenIngresosDevengo" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenIngresosDevengo" transaction-timeout="6000">
+        <description></description>
+        <implements service="lineasContables"/>
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/>        
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Evento Contable"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/> 
+        <attribute name="amountMap" type="Map" mode="IN" string-map-prefix="amount" optional="true" />
+        <attribute name="productIdMap" type="Map" mode="IN" string-map-prefix="productId" optional="true" />        
+        <attribute name="invoiceItemSeqIdMap" type="Map" mode="IN" string-map-prefix="invoiceItemSeqId" optional="true" />
+        <attribute name="fechaCobro" mode="IN" type="java.sql.Timestamp" optional="false"/>
+    </service>
+    
+    <service name="enviarOrdenRecaudado" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="enviarOrdenRecaudado" transaction-timeout="6000">
+        <description></description>        
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenCobroId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="true"/>
+        <attribute name="cuentaBancariaId" type="String" mode="IN" optional="true"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="paymentRefNum" type="String" mode="IN" optional="true"/>
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="true"/>        
+        <attribute name="montoCobro" mode="IN" type="java.math.BigDecimal" optional="true"/>  
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />  
+<!--         <attribute name="sumaBancosCargo" mode="IN" type="java.util.List" optional="true"/> -->
+<!--         <attribute name="sumaBancosAbono" mode="IN" type="java.util.List" optional="true"/>                       -->
+    </service>       
+    
+    <service name="crearOrdenPago" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="crearOrdenPago" transaction-timeout="6000">
+        <description></description>
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>        
+        <attribute name="idOrdenPago" mode="OUT" type="String" optional="false"/>        
+    </service>
+    
+    <service name="importCompromisoDevengoNomina" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.CompromisoDevengoNominaImportService" invoke="importCompromisoDevengoNomina">
+        <!-- No es congruente poner tiempo de transaccion, sin embargo si no se agrega genera timeout -->
+        <description>
+            Importacion de la nomina Compromiso y Devengo 
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false" entity-name="PartyGroup" field-name="groupName" />
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoContable" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importEjercidoNomina" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.EjercidoNominaImportService" invoke="importEjercidoNomina">
+        <description>
+            Importacion de la nomina Ejercido y Pagado
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoEjercidoId" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoPagadoId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importOperacionPatrimonial" engine="pojo" auth="true" use-transaction="false"  transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.OperacionPatrimonialImportService" invoke="importOperacionPatrimonial">
+        <description>
+            Importacion de eventos patrimoniales
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoContable" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importValidacionPresupuestal" engine="pojo" auth="true" use-transaction="false"  transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.ValidacionPresupuestalImportService" invoke="importValidacionPresupuestal">
+        <description>
+            Importacion de suficiencia presupuestarial
+        </description>
+        <attribute name="momento" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importIngreso" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.IngresoImportService" invoke="importIngreso">
+        <description>
+            Importacion del Ingreso
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoDevengado" type="String" mode="IN" optional="false"/>
+        <attribute name="eventoRecaudado" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importRequisicion" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+        location="org.opentaps.dataimport.domain.RequisicionImportService" invoke="importRequisicion">
+        <description>
+            Importa requisiciones 
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="justificacion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+    
+    <service name="importCompensada" engine="java" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.CompensadaImportService" invoke="importCompensada">
+        <description>
+            Importa afectacion compensada 
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="true"/>
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+           
+	<service name="importHistorialBienes" engine="pojo" use-transaction="false" auth="true"
+        location="org.opentaps.dataimport.domain.HistorialBienesImportService" invoke="importHistorialBienes">
+        <description>
+            Importa historial de bienes 
+        </description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>                
+        <attribute type="Integer" mode="OUT" name="importedRecords" optional="true"/>
+    </service>
+         
+    <service name="actualizarFechaPago" engine="java" export="true"
+        location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="actualizarFechaPago" auth="true">
+        <description>Actualizacion de la fecha de pago de una Orden de pago</description>
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenPagoId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fechaPagoValor" mode="IN" type="java.sql.Timestamp" optional="true"/>        
+    </service>
+    
+    <service name="actualizarFechaCobro" engine="java" export="true"
+        location="com.opensourcestrategies.financials.tesoreria.TesoreriaOrdenPago" invoke="actualizarFechaCobro" auth="true">
+        <description>Actualizacion de la fecha de cobro de una Orden de cobro</description>
+        <attribute name="invoiceId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="ordenCobroId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fechaCobroValor" mode="IN" type="java.sql.Timestamp" optional="false"/>        
+    </service>
+    
+    <service name="importPagoExterno" engine="java" auth="true" use-transaction="false" transaction-timeout="43200"
+    	location="org.opentaps.dataimport.domain.PagoExternoImportService" invoke="importPagoExterno">
+    	<attribute name="eventoContableId" mode="IN" type="String" />
+    	<attribute name="organizationPartyId" mode="IN" type="String" />
+    </service>
+    
+</services>

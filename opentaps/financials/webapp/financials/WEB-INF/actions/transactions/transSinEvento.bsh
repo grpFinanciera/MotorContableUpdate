@@ -1,0 +1,45 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+if(acctgTransId!=null){
+acctgTrans = delegator.findByPrimaryKey("AcctgTransSinEvento", UtilMisc.toMap("acctgTransId", acctgTransId));
+context.put("acctgTrans",acctgTrans);
+
+listDetalle = delegator.findByAnd("DetalleAcctgTrans", UtilMisc.toMap("acctgTransId", acctgTransId));
+context.put("listDetalle",listDetalle);
+
+orderByBan = UtilMisc.toList("nombreBanco");
+condicionBan = EntityCondition.makeCondition("partyId",EntityOperator.EQUALS, parameters.get("organizationPartyId"));
+bancos = delegator.findByCondition("BancosCuentasPorOrganizacion", condicionBan , UtilMisc.toList("bancoId", "nombreBanco"), orderByBan);
+context.put("bancos", bancos);
+
+}
+
+listTipoAuxiliar = delegator.findByCondition("TipoAuxiliar",null,UtilMisc.toList("tipoAuxiliarId", "entidad","tipoEntidad","descripcion","urlBusqueda","tipo"),UtilMisc.toList("descripcion"));
+context.put("listTipoAuxiliar",listTipoAuxiliar);
+
+mapTipoAuxiliar = FastMap.newInstance();
+for(GenericValue tipoAuxiliar : listTipoAuxiliar){
+	mapTipoAuxiliar.put(tipoAuxiliar.getString("tipoAuxiliarId"),tipoAuxiliar);
+}
+
+context.put("mapTipoAuxiliar",mapTipoAuxiliar);
+
+listPoliza = delegator.findAll("TipoPoliza");
+context.put("listPoliza",listPoliza);

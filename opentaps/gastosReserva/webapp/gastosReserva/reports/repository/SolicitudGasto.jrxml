@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SolicitudGasto" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="GastoReservaId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[DECLARE @PERSONA AS varchar(MAX),
+		@NOMBRE_AUTORIZADOR_1 AS VARCHAR(MAX),
+		@FIRMA_1 AS VARCHAR(MAX);
+SET @PERSONA = (SELECT TOP 1 SW.PERSON_PARENT_ID FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='1' AND SW.STATUS_ID='AUTORIZADA' ORDER BY NIVEL_AUTOR DESC);
+
+SET @NOMBRE_AUTORIZADOR_1 = (SELECT TOP 1 (P.FIRST_NAME + ' ' + P.LAST_NAME) AS AUTORIZADOR FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+LEFT JOIN PERSON P ON P.PARTY_ID = SW.PERSON_PARENT_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='1' AND SW.STATUS_ID='AUTORIZADA' ORDER BY NIVEL_AUTOR DESC)
+
+SET @FIRMA_1 = (SELECT TOP 1 P.FIRMA_ID FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+LEFT JOIN PERSON P ON P.PARTY_ID = SW.PERSON_PARENT_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='1' AND SW.STATUS_ID='AUTORIZADA' ORDER BY NIVEL_AUTOR DESC)
+
+DECLARE @PERSONA2 AS varchar(MAX),
+		@NOMBRE_AUTORIZADOR_2 AS VARCHAR(MAX),
+		@FIRMA_2 AS VARCHAR(MAX);
+SET @PERSONA2 = (SELECT TOP 1 SW.PERSON_PARENT_ID FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='3' AND SW.STATUS_ID='AUTORIZADA'  ORDER BY NIVEL_AUTOR DESC);
+
+SET @NOMBRE_AUTORIZADOR_2 = (SELECT TOP 1 (P.FIRST_NAME + ' ' + P.LAST_NAME) AS AUTORIZADOR FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+LEFT JOIN PERSON P ON P.PARTY_ID = SW.PERSON_PARENT_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='3' AND SW.STATUS_ID='AUTORIZADA' ORDER BY NIVEL_AUTOR DESC)
+
+SET @FIRMA_2 = (SELECT TOP 1 P.FIRMA_ID FROM STATUS_WORK_FLOW SW
+LEFT JOIN GASTO_RESERVA_COMP GR ON SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+LEFT JOIN PERSON P ON P.PARTY_ID = SW.PERSON_PARENT_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND NIVEL_AUTOR='3' AND SW.STATUS_ID='AUTORIZADA' ORDER BY NIVEL_AUTOR DESC)
+
+select GR.GASTOS_RESERVA_ID, GR.MONTO, GR.OBSERVACIONES, GR.FECHA_AUTORIZACION, GR.CONCEPTO, GR.SOLICITANTE_ID, (P.FIRST_NAME +' ' + P.LAST_NAME) AS SOLICITANTE,
+	 P.FIRMA_ID AS FIRMA_SOLICITANTE, P.OCCUPATION, @PERSONA AS ID_AUTORIZADOR_1, @NOMBRE_AUTORIZADOR_1 AS AUTORIZADOR, @FIRMA_1 AS FIRMA_AUTORIZADOR,
+	 @PERSONA2 AS ID_AUTORIZADOR_2, @NOMBRE_AUTORIZADOR_2 AS AUTORIZADOR_2, @FIRMA_2 AS FIRMA_AUTORIZADOR_2,
+	 PG.GROUP_NAME AS AREA, GR.PROVEEDOR, dbo.FN_CANTIDAD_TEXTO_V(GR.MONTO, GR.TIPO_MONEDA) AS CANTIDAD, PGO.GROUP_NAME AS ORGANIZACION,
+	 PGO.LOGO_IMAGE_URL, PGO.LOGO_IMAGE_URL2
+FROM GASTO_RESERVA_COMP GR
+LEFT JOIN PERSON P ON P.PARTY_ID = GR.SOLICITANTE_ID
+LEFT JOIN STATUS_WORK_FLOW SW ON GR.WORK_FLOW_ID = SW.WORK_FLOW_ID
+LEFT JOIN PARTY_GROUP PG ON PG.PARTY_ID = GR.AREA_ID
+LEFT JOIN PARTY_GROUP PGO ON PGO.PARTY_ID = GR.ORGANIZATION_PARTY_ID
+WHERE GR.GASTOS_RESERVA_ID = $P{GastoReservaId} AND SW.WORK_FLOW_ID = GR.WORK_FLOW_ID
+GROUP BY GR.GASTOS_RESERVA_ID, GR.MONTO, GR.OBSERVACIONES, GR.FECHA_AUTORIZACION, GR.CONCEPTO, GR.SOLICITANTE_ID,P.FIRST_NAME, P.LAST_NAME,
+P.FIRMA_ID, P.OCCUPATION, PG.GROUP_NAME, GR.PROVEEDOR, GR.MONTO, GR.TIPO_MONEDA, PGO.GROUP_NAME, PGO.LOGO_IMAGE_URL, PGO.LOGO_IMAGE_URL2]]>
+	</queryString>
+	<field name="GASTOS_RESERVA_ID" class="java.lang.String"/>
+	<field name="MONTO" class="java.math.BigDecimal"/>
+	<field name="OBSERVACIONES" class="java.lang.String"/>
+	<field name="FECHA_AUTORIZACION" class="java.sql.Timestamp"/>
+	<field name="CONCEPTO" class="java.lang.String"/>
+	<field name="SOLICITANTE_ID" class="java.lang.String"/>
+	<field name="SOLICITANTE" class="java.lang.String"/>
+	<field name="FIRMA_SOLICITANTE" class="java.lang.String"/>
+	<field name="OCCUPATION" class="java.lang.String"/>
+	<field name="ID_AUTORIZADOR_1" class="java.lang.String"/>
+	<field name="AUTORIZADOR" class="java.lang.String"/>
+	<field name="FIRMA_AUTORIZADOR" class="java.lang.String"/>
+	<field name="ID_AUTORIZADOR_2" class="java.lang.String"/>
+	<field name="AUTORIZADOR_2" class="java.lang.String"/>
+	<field name="FIRMA_AUTORIZADOR_2" class="java.lang.String"/>
+	<field name="AREA" class="java.lang.String"/>
+	<field name="PROVEEDOR" class="java.lang.String"/>
+	<field name="CANTIDAD" class="java.lang.String"/>
+	<field name="ORGANIZACION" class="java.lang.String"/>
+	<field name="LOGO_IMAGE_URL" class="java.lang.String"/>
+	<field name="LOGO_IMAGE_URL2" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<staticText>
+				<reportElement x="101" y="28" width="349" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud de gasto a reserva de comprobar]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="1" y="0" width="100" height="79">
+					<printWhenExpression><![CDATA[new Boolean($F{LOGO_IMAGE_URL} != null && !$F{LOGO_IMAGE_URL}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($F{LOGO_IMAGE_URL})]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="450" y="0" width="122" height="79">
+					<printWhenExpression><![CDATA[new Boolean($F{LOGO_IMAGE_URL2} != null && !$F{LOGO_IMAGE_URL2}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($F{LOGO_IMAGE_URL2})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="8" width="349" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ORGANIZACION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="308">
+			<staticText>
+				<reportElement x="0" y="18" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. de Empleado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="78" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puesto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="18" width="136" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="58" width="136" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de autorización:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="436" y="78" width="136" height="20"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="101" y="98" width="471" height="56"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="98" width="101" height="56"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto del gasto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="154" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre proveedor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="174" width="572" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo de caja, sujeto a comprobacion, por la cantidad de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="220" width="100" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="101" y="237" width="472" height="1"/>
+			</line>
+			<line>
+				<reportElement x="101" y="260" width="472" height="1"/>
+			</line>
+			<line>
+				<reportElement x="101" y="283" width="472" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="210" width="571" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="38" width="302" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="18" width="302" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AREA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="58" width="302" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLICITANTE_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="78" width="302" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OCCUPATION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="38" width="137" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GASTOS_RESERVA_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="78" width="136" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{FECHA_AUTORIZACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="154" width="472" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PROVEEDOR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="1" y="194" width="82" height="16"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MONTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="194" width="489" height="16"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="215" width="471" height="66"/>
+				<textElement verticalAlignment="Top" lineSpacing="Double">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OBSERVACIONES}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="98" width="468" height="56"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CONCEPTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="73">
+			<rectangle>
+				<reportElement x="1" y="0" width="191" height="73"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="192" y="0" width="190" height="73"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="192" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="0" width="190" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable de área:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="24" width="191" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="192" y="24" width="190" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AUTORIZADOR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="39" width="192" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="192" y="39" width="190" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_AUTORIZADOR}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="382" y="0" width="190" height="73"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="382" y="0" width="190" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección de presupuesto y finanzas:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="24" width="190" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AUTORIZADOR_2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="39" width="190" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_AUTORIZADOR_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42"/>
+	</summary>
+</jasperReport>

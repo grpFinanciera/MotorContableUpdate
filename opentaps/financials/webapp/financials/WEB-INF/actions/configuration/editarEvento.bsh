@@ -1,0 +1,105 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+//obtener modulos
+orderByModulo= org.ofbiz.base.util.UtilMisc.toList("nombre");
+condicionModulo = UtilMisc.toList(
+	new EntityExpr("uso", EntityOperator.EQUALS, "Y")
+);
+resultadoModulo = delegator.findByCondition("Modulo", new EntityConditionList(condicionModulo, EntityOperator.AND) , UtilMisc.toList("moduloId", "nombre"), orderByModulo);
+context.put("listModulos", resultadoModulo);
+
+// obtener tipo poliza
+tiposPoliza = delegator.findAll("TipoPoliza");
+context.put("listTipoPoliza", tiposPoliza);
+
+//obtenemos los catalogos auxiliares
+tiposAuxiliar = delegator.findAll("TipoAuxiliar");
+context.put("listTipoAuxiliar", tiposAuxiliar);
+
+//obtenemos los momentos contables
+listMomentos = delegator.findAll("Momento");
+context.put("listMomentos", listMomentos);
+
+//obtenemos los tipos de Matriz
+listTipoMatriz = delegator.findAll("TipoMatriz");
+context.put("listTipoMatriz",listTipoMatriz);
+
+//obtenemos los eventos (predecesores)
+listEventoContable = delegator.findAll("EventoContable");
+context.put("listEventoContable",listEventoContable);
+print("listEventoContable ---> "+listEventoContable);
+
+acctgTransTypeId = parameters.get("acctgTransTypeId");
+
+eventoContable = delegator.findByPrimaryKey("EventoContable",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+lineaContable = delegator.findByAnd("LineaContable",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId),UtilMisc.toList("secuencia"));
+lineaPresupuestal = delegator.findByAnd("LineaPresupuestal",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId),UtilMisc.toList("secuencia"));
+acctgTransType = delegator.findByPrimaryKey("AcctgTransType",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+
+numLineaCont = lineaContable.size();
+numLineaPres = lineaPresupuestal.size();
+tieneLineaCont = "Y";
+tieneLineaPres = "Y";
+if (UtilValidate.isNotEmpty(lineaContable))
+{
+	tieneLineaCont = "N";
+}
+else
+{
+	lineaContable = delegator.makeValue("LineaContable");
+	lineaContable.put("secuencia", 1);
+	lineaContable = UtilMisc.toList(lineaContable);
+}
+
+if (UtilValidate.isNotEmpty(lineaPresupuestal))
+{
+	tieneLineaPres = "N";
+	
+}
+else
+{
+	lineaPresupuestal = delegator.makeValue("LineaPresupuestal");
+	lineaPresupuestal.put("secuencia", 1);
+	lineaPresupuestal = UtilMisc.toList(lineaPresupuestal);
+}
+
+comparacion = FastList.newInstance();
+            
+mapa2 = FastMap.newInstance();
+mapa2.put("idComparacion", ">");
+mapa2.put("descComparacion", "menor que");
+comparacion.add(mapa2);
+            
+mapa3 = FastMap.newInstance();
+mapa3.put("idComparacion", ">=");
+mapa3.put("descComparacion", "menor o igual que");
+comparacion.add(mapa3);
+            
+mapa4 = FastMap.newInstance();
+mapa4.put("idComparacion", "<");
+mapa4.put("descComparacion", "mayor que");
+comparacion.add(mapa4);
+            
+mapa5 = FastMap.newInstance();
+mapa5.put("idComparacion", "<=");
+mapa5.put("descComparacion", "mayor o igual que");
+comparacion.add(mapa5);
+
+context.put("acctgTransTypeId",acctgTransTypeId);
+context.put("eventoContable",eventoContable);
+context.put("lineaContable",lineaContable);
+context.put("lineaPresupuestal",lineaPresupuestal);
+context.put("acctgTransType",acctgTransType);
+context.put("tieneLineaCont",tieneLineaCont);
+context.put("tieneLineaPres",tieneLineaPres);
+context.put("numLineaCont",numLineaCont);
+context.put("numLineaPres",numLineaPres);
+context.put("comparacion", comparacion);

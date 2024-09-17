@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Mes</title>
+    <description>Defines los diferentes meses del año</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+	<entity entity-name="Mes" package-name="org.opentaps.dataimport"
+		title="Meses del año">
+		<field name="mesId" type="id" />
+		<field name="description" type="description" />
+		<prim-key field="mesId" />
+	</entity>
+    
+</entitymodel>

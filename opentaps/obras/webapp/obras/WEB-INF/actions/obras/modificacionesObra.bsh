@@ -1,0 +1,20 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.domain.DomainsLoader;
+import org.opentaps.foundation.infrastructure.*;
+import org.opentaps.common.util.UtilCommon;
+
+dl = new DomainsLoader(new Infrastructure(dispatcher), new User(userLogin));
+ledgerDomain = dl.loadDomainsDirectory().getLedgerDomain();
+ledgerRepository = ledgerDomain.getLedgerRepository();
+ledgerSpecification = ledgerRepository.getSpecification();
+
+obraId = UtilCommon.getParameter(context, "obraId");
+context.put("obraId", obraId);
+
+obra = delegator.findByPrimaryKey("Obra", UtilMisc.toMap("obraId", obraId));
+if (obra == null)
+{
+	obra = GenericValue.create(delegator.getModelEntity("Obra"));
+}
+
+context.put("obra", obra);

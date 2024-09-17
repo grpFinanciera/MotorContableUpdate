@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	
+    <Modulo moduloId="CONTABILIDAD" nombre="Modulo de Contabilidad" abreviatura="CO" />
+	<Modulo moduloId="CONTABILIDAD_E" nombre="Contabilidad de egresos" abreviatura="CE" padreModuloId="CONTABILIDAD" uso="Y"/>
+	<Modulo moduloId="CONTABILIDAD_I" nombre="Contabilidad de ingresos" abreviatura="CI" padreModuloId="CONTABILIDAD" uso="Y"/>
+	<Modulo moduloId="CONTABILIDAD_P" nombre="Contabilidad patrimonial" abreviatura="CP" padreModuloId="CONTABILIDAD" uso="Y"/>
+	<Modulo moduloId="CONTABILIDAD_B" nombre="Traspasos de bancos" abreviatura="TP" padreModuloId="CONTABILIDAD" uso="Y"/>
+	<Modulo moduloId="P_INICIAL" nombre="Carga de presupuesto inicial" abreviatura="PI" uso="Y"/>
+	<Modulo moduloId="TESORERIA" nombre="Modulo de tesoreria" abreviatura="TR"/>
+	<Modulo moduloId="TESORERIA_CXC_OR" nombre="Ordenes de cuentas por cobrar" abreviatura="TR_CXC_OR" padreModuloId="TESORERIA" uso="Y"/>
+	<Modulo moduloId="TESORERIA_CXC_PAG" nombre="Pagos de cuentas por cobrar" abreviatura="TR_CXC_PAG" padreModuloId="TESORERIA" uso="Y"/>
+	<Modulo moduloId="TESORERIA_CXP_OR" nombre="Ordenes de cuentas por pagar" abreviatura="TR_CXP_OR" padreModuloId="TESORERIA" uso="Y"/>
+	<Modulo moduloId="TESORERIA_PENDIENTES" nombre="Pendientes de Tesorería" abreviatura="TR_PNDTS" padreModuloId="TESORERIA" uso="Y"/>
+	<Modulo moduloId="DEVOLUCION" nombre="Devolucion" abreviatura="DV"/>
+	<Modulo moduloId="DEVOLUCION_DINERO" nombre="Devolucion de dinero" abreviatura="DV_DIN" padreModuloId="DEVOLUCION" uso="N"/>	
+	<Modulo moduloId="TESORERIA_CXP_PAG" nombre="Pagos de cuentas por pagar" abreviatura="TR_CXP_PAG" padreModuloId="TESORERIA" uso="Y"/>
+	<Modulo moduloId="INVENTARIO" nombre="Inventario" abreviatura="INV"/>
+	<Modulo moduloId="INVENTARIO_RECIBE" nombre="Recepción de pedido" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_PAGO_ANTI" nombre="Recepción de pedido con pago anticipado" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_ALTA" nombre="Altas de inventario" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_BAJA" nombre="Bajas de inventario" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_A_NUEVO" nombre="Alta de nuevo articulo" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_BAJA_BI" nombre="Bajas de bienes" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="INVENTARIO_SURTIR" nombre="Entrega de pedido interno" abreviatura="INV" padreModuloId="INVENTARIO" uso="Y"/>
+	<Modulo moduloId="ADQUISICIONES" nombre="Adquisiciones" abreviatura="ADQ"  uso="Y"/>
+	<Modulo moduloId="DEPRECIACION" nombre="Depreciacion" abreviatura="DEP"  uso="Y"/>
+	<Modulo moduloId="VIATICOS" nombre="Viaticos" abreviatura="VIA" uso="Y" />	
+	<Modulo moduloId="OBRAS" nombre="Obras" abreviatura="OBR" uso="Y" />	
+	<Modulo moduloId="TRASPASO_BANCO" nombre="Traspasos patrimoniales" abreviatura="TPAT" uso="Y" />
+	<Modulo moduloId="ORDEN_PAGO_PATRI" nombre="Ordenes de pago patrimoniales" abreviatura="OP_PAT" uso="Y" />
+	<Modulo moduloId="MODIFICACION_E" nombre="Modificaciones presupuestales de egresos" abreviatura="MOD_E" uso="Y" />
+	<Modulo moduloId="MODIFICACION_I" nombre="Modificaciones presupuestales de ingresos" abreviatura="MOD_I" uso="Y" />
+	<Modulo moduloId="AMPLIACION_PEDIDO" nombre="Ampliación de presupuesto de un pedido o contrato" abreviatura="AMP_ORD" uso="Y" />
+	<Modulo moduloId="REDUCCION_PEDIDO" nombre="Reducción de presupuesto de un pedido o contrato" abreviatura="REDU_ORD" uso="Y" />
+	<Modulo moduloId="DESHABILITADO" nombre="Módulo deshabilitado" abreviatura="DESH" />
+	<Modulo moduloId="CREA_CTRL_PATR" nombre="Creación Control Patrimonial" abreviatura="CCTRL_PAT" uso="Y" />
+	
+	<Banco bancoId="002" nombreBanco="Banco Nacional de México, S.A." estatus="1"/>
+	<Banco bancoId="012" nombreBanco="BBVA Bancomer, S.A." estatus="1"/>
+	<Banco bancoId="014" nombreBanco="Banco Santander, S.A." estatus="1"/>
+	<Banco bancoId="019" nombreBanco="Banco Nacional del Ejército, Fuerza Aérea y Armada, S.N.C." estatus="1"/>
+	<Banco bancoId="021" nombreBanco="HSBC México, S.A." estatus="1"/>
+	<Banco bancoId="022" nombreBanco="GE Money Bank, S.A." estatus="1"/>
+	<Banco bancoId="030" nombreBanco="Banco del Bajío, S.A." estatus="1"/>
+	<Banco bancoId="032" nombreBanco="IXE Banco, S.A." estatus="1"/>
+	<Banco bancoId="036" nombreBanco="Banco Inbursa, S.A." estatus="1"/>
+	<Banco bancoId="037" nombreBanco="Banco Interacciones, S.A." estatus="1"/>
+	<Banco bancoId="042" nombreBanco="Banca Mifel, S.A." estatus="1"/>
+	<Banco bancoId="044" nombreBanco="Scotiabank Inverlat, S.A." estatus="1"/>
+	<Banco bancoId="058" nombreBanco="Banco Regional de Monterrey, S.A." estatus="1"/>
+	<Banco bancoId="059" nombreBanco="Banco Invex, S.A." estatus="1"/>
+	<Banco bancoId="060" nombreBanco="Bansi, S.A." estatus="1"/>
+	<Banco bancoId="062" nombreBanco="Banca Afirme, S.A. AFIRME" estatus="1"/>
+	<Banco bancoId="072" nombreBanco="Banco Mercantil del Norte, S.A. BANORTE" estatus="1"/>
+	<Banco bancoId="102" nombreBanco="ABN AMRO Bank México, S.A. ABNAMRO" estatus="1"/>
+	<Banco bancoId="103" nombreBanco="American Express Bank (México), S.A. AMERICAN EXPRESS" estatus="1"/>
+	<Banco bancoId="106" nombreBanco="Bank of America México, S.A. BAMSA" estatus="1"/>
+	<Banco bancoId="108" nombreBanco="Bank of Tokyo-Mitsubishi UFJ (México), S.A. TOKYO" estatus="1"/>
+	<Banco bancoId="110" nombreBanco="Banco J.P. Morgan, S.A. JP MORGAN" estatus="1"/>
+	<Banco bancoId="112" nombreBanco="Banco Monex, S.A. BMONEX" estatus="1"/>
+	<Banco bancoId="113" nombreBanco="Banco Ve por Mas, S.A. VE POR MAS" estatus="1"/>
+	<Banco bancoId="116" nombreBanco="ING Bank (México), S.A. ING" estatus="1"/>
+	<Banco bancoId="124" nombreBanco="Deutsche Bank México, S.A. DEUTSCHE" estatus="1"/>
+	<Banco bancoId="126" nombreBanco="Banco Credit Suisse (México), S.A. CREDIT SUISSE" estatus="1"/>
+	<Banco bancoId="127" nombreBanco="Banco Azteca, S.A. AZTECA" estatus="1"/>
+	<Banco bancoId="128" nombreBanco="Banco Autofin México, S.A. AUTOFIN" estatus="1"/>
+	<Banco bancoId="129" nombreBanco="Barclays Bank México, S.A. BARCLAYS" estatus="1"/>
+	<Banco bancoId="130" nombreBanco="Banco Compartamos, S.A. COMPARTAMOS" estatus="1"/>
+	<Banco bancoId="131" nombreBanco="Banco Ahorro Famsa, S.A. FAMSA" estatus="1"/>
+	<Banco bancoId="132" nombreBanco="Banco Multiva, S.A. BMULTIVA" estatus="1"/>
+	<Banco bancoId="133" nombreBanco="Prudencial Bank, S.A. PRUDENTIAL" estatus="1"/>
+	<Banco bancoId="134" nombreBanco="Banco Wal Mart de México Adelante, S.A. WAL-MART" estatus="1"/>
+	<Banco bancoId="136" nombreBanco="Banco Regional, S.A. REGIONAL" estatus="1"/>
+	<Banco bancoId="137" nombreBanco="BanCoppel, S.A. BANCOPPEL" estatus="1"/>
+	<Banco bancoId="138" nombreBanco="Banco Amigo, S.A. AMIGO" estatus="1"/>
+	<Banco bancoId="139" nombreBanco="UBS Banco, S.A. UBS BANK" estatus="1"/>
+	<Banco bancoId="140" nombreBanco="Banco Fácil, S.A. FÁCIL" estatus="1"/>
+	<Banco bancoId="166" nombreBanco="Banco del Ahorro Nacional y Servicios Financieros, S.N.C." estatus="1"/>
+	
+	<TipoAuxiliar tipoAuxiliarId="BANCO" descripcion="Banco" entidad="CuentaBancaria" urlBusqueda="getCuentaBancoUsuario" nombreLooukup="" tipo="B"/>	
+	<!-- <TipoAuxiliar tipoAuxiliarId="VIATICO" descripcion="Viatico" entidad="" urlBusqueda="" nombreLooukup="" />-->
+
+	<TipoMatriz tipoMatrizId="A.1" descripcion="A.1 Devengada de egresos" />
+	<TipoMatriz tipoMatrizId="A.2" descripcion="A.2 Pagada de Egresos" />
+	<TipoMatriz tipoMatrizId="B.1" descripcion="B.1 Devengada de ingresos" />
+	<TipoMatriz tipoMatrizId="B.2" descripcion="B.2 Recaudada de ingresos" />
+	
+	<Regimen regimenId="PERSONA_MORAL" nombreRegimen="Persona moral" />
+	<Regimen regimenId="PERSONA_FISICA" nombreRegimen="Persona fisica" />
+	<TamanioAuxiliar tamanioAuxiliarId="MICRO" nombreTamanioAuxiliar="Micro" />
+	<TamanioAuxiliar tamanioAuxiliarId="PEQUENA" nombreTamanioAuxiliar="Pequeña" />
+	<TamanioAuxiliar tamanioAuxiliarId="MEDIANA" nombreTamanioAuxiliar="Mediana" />
+	<TamanioAuxiliar tamanioAuxiliarId="GRANDE" nombreTamanioAuxiliar="Grande" />
+	<SectorEconomico sectorEconomicoId="SERVICIOS" nombreSectorEconomico="Servicios" />
+	<SectorEconomico sectorEconomicoId="COMERCIAL" nombreSectorEconomico="Comercial" />
+	<SectorEconomico sectorEconomicoId="INDUSTRIAL" nombreSectorEconomico="Industrial" />
+	<OrigenCapital origenCapitalId="PUBLICO" nombreOrigenCapital="Publico" />
+	<OrigenCapital origenCapitalId="PRIVADO" nombreOrigenCapital="Privado" />
+	<OrigenCapital origenCapitalId="MIXTO" nombreOrigenCapital="Mixto" />		
+	
+	<EstadoFisicoActivo edoFisicoId="EXCELENTE" descripcion="Excelente"/>
+	<EstadoFisicoActivo edoFisicoId="BUENO" descripcion="Bueno"/>
+	<EstadoFisicoActivo edoFisicoId="REGULAR" descripcion="Regular"/>
+	<EstadoFisicoActivo edoFisicoId="MALO" descripcion="Malo"/>
+	<EstadoFisicoActivo edoFisicoId="NUEVO" descripcion="Nuevo"/>
+	<EstadoFisicoActivo edoFisicoId="OBSOLETO" descripcion="Obsoleto"/>
+	<EstadoFisicoActivo edoFisicoId="PARABAJA" descripcion="Para baja"/>
+	<EstadoFisicoActivo edoFisicoId="ROBADO" descripcion="Robado"/>
+	<EstadoFisicoActivo edoFisicoId="VENDIDO" descripcion="Vendido"/>		
+	
+	<Estatus statusId="PENDIENTE_E" descripcion="Reporte pendiente de firma" tipo="E"/>
+	<Estatus statusId="FIRMADO_E" descripcion="Reporte firmado totalmente" tipo="E"/>
+	<Estatus statusId="FIRMADO" descripcion="Reporte firmado" tipo="F"/>
+	<Estatus statusId="PENDIENTE_F" descripcion="Reporte pendiente de firma" tipo="F"/>
+	
+	<AcctgTransType acctgTransTypeId="SinEvento" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<SuficienciaPresupuestal suficienciaPresupuestalId="1" flag="Y"/>
+	
+	<StatusType description="Estados de asignacion de un activo fijo a un resguardante" hasTable="N" parentTypeId="" statusTypeId="ASIGN_ACTIVO_FIJO"/>	
+	<StatusItem description="Asignado" sequenceId="01" statusCode="ASIGNADO" statusId="ASIGN_ASIGNADO" statusTypeId="ASIGN_ACTIVO_FIJO"/>
+	<StatusItem description="Sin asignar" sequenceId="02" statusCode="SIN_ASIGNAR" statusId="ASIGN_SIN_ASIGNAR" statusTypeId="ASIGN_ACTIVO_FIJO"/>
+	<StatusItem description="Liberado" sequenceId="03" statusCode="LIBERADO" statusId="ASIGN_LIBERADO" statusTypeId="ASIGN_ACTIVO_FIJO"/>
+	<StatusItem description="Apartado" sequenceId="04" statusCode="APARTADO" statusId="ASIGN_APARTADO" statusTypeId="ASIGN_ACTIVO_FIJO"/>
+	
+	<StatusType description="Estados de notificaciones de un pedido o contrato con articulos recibidos en Control patrimonial" hasTable="N" parentTypeId="" statusTypeId="NOTIFIC_ACTIVO_FIJO"/>	
+	<StatusItem description="Pendiente" sequenceId="01" statusCode="PENDIENTE" statusId="PENDIENTE_NOTIFI" statusTypeId="NOTIFIC_ACTIVO_FIJO"/>
+	<StatusItem description="Resuelta" sequenceId="02" statusCode="RESUELTA" statusId="RESUELTA_NOTIFI" statusTypeId="NOTIFIC_ACTIVO_FIJO"/>
+	
+	<!--  
+	<Party partyId="1" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="MXN" statusId="PARTY_ENABLED" state="A"/>
+	<PartyGroup partyId="1" groupName="Nombre Institucion" />
+	<PartyRole partyId="1" roleTypeId="INTERNAL_ORGANIZATIO"/>
+	<SequenceValueItem seqName="PartyGroup" seqId="2" />
+	
+	<PartyAcctgPreference partyId="1" fiscalYearStartMonth="1" fiscalYearStartDate="1" baseCurrencyUomId="MXN"/>
+	<CustomTimePeriod customTimePeriodId="1" periodTypeId="FISCAL_YEAR" periodNum="2016" periodName="2016" fromDate="2016-01-01" thruDate="2017-01-01" isClosed="N" organizationPartyId="1"/>
+	<SequenceValueItem seqName="CustomTimePeriod" seqId="2" />
+	-->
+	
+	<EventoContable acctgTransTypeId="SALDO_INICIAL" tipoPolizaId="DIARIO"/>
+	
+	<!-- <Person partyId="admin" areaId="1"/> -->
+	
+	
+<!-- 	<UsoCuentaBancaria usoCuentaId="USO_CUENTA_1" nombre="Uso de cuenta 1" descripcion="Uso de cuenta 1 descripción"/> -->
+<!-- 	<UsoCuentaBancaria usoCuentaId="USO_CUENTA_2" nombre="Uso de cuenta 2" descripcion="Uso de cuenta 2 descripción"/> -->
+<!-- 	<UsoCuentaBancaria usoCuentaId="USO_CUENTA_3" nombre="Uso de cuenta 3" descripcion="Uso de cuenta 3 descripción"/> -->
+	
+<!-- 	<TipoCuentaBancaria tipoCuentaId="TIPO_CUENTA_1" nombre="Tipo de cuenta 1" descripcion="Tipo de cuenta 1 descripción"/> -->
+<!-- 	<TipoCuentaBancaria tipoCuentaId="TIPO_CUENTA_2" nombre="Tipo de cuenta 2" descripcion="Tipo de cuenta 2 descripción"/> -->
+<!-- 	<TipoCuentaBancaria tipoCuentaId="TIPO_CUENTA_3" nombre="Tipo de cuenta 3" descripcion="Tipo de cuenta 3 descripción"/>	-->
+
+	<AcctgTransType acctgTransTypeId="DEVO-LIBE-EJER" description="Devolución - liberación de presupuesto desde ejercido hasta el disponible" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="DEVO-LIBE-DEVE" description="Reducción de presupuesto de un contrato o pedido" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	
+	<EventoContable acctgTransTypeId="DEVO-LIBE-EJER" tipoPolizaId="DIARIO" moduloId="INVENTARIO" descripcion="Devolución - liberación de presupuesto desde ejercido hasta el disponible"/>
+	<EventoContable acctgTransTypeId="DEVO-LIBE-DEVE" tipoPolizaId="DIARIO" moduloId="INVENTARIO" descripcion="Devolución - liberación de presupuesto desde devengado hasta el disponible"/>
+	
+<!-- 	<LineaPresupuestal acctgTransTypeId="DEVO-LIBE-EJER" secuencia="1" cuentaCargo="8.2.5" cuentaAbono="8.2.6.1" momentoCompara="EJERCIDO" momentoEjecutar1="DEVENGADO_E" comparacion=">=" descripcion="Liberación de ejercido a devengado"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="DEVO-LIBE-EJER" secuencia="2" cuentaCargo="8.2.4" cuentaAbono="8.2.5" momentoCompara="DEVENGADO_E" momentoEjecutar1="COMPROMETIDO" comparacion=">=" descripcion="Liberación de devengado a comprometido"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="DEVO-LIBE-EJER" secuencia="3" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Liberación de comprometido a disponible"/>		 -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="DEVO-LIBE-DEVE" secuencia="1" cuentaCargo="8.2.4" cuentaAbono="8.2.5" momentoCompara="DEVENGADO_E" momentoEjecutar1="COMPROMETIDO" comparacion=">=" descripcion="Liberación de devengado a comprometido"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="DEVO-LIBE-DEVE" secuencia="2" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Liberación de comprometido a disponible"/> -->
+
+	<!-- Momentos del presupuesto de egresos , recuerde configurar las cuentas asociadas-->
+	<Momento momentoId="APROBADO" description="Presupuesto de egresos aprobado" />
+	<Momento momentoId="DISPONIBLE" description="Presupuesto de egresos disponible" />
+	<Momento momentoId="MODIFICADO_AMP_E" description="Ampliaciones al presupuesto de egresos" />
+	<Momento momentoId="MODIFICADO_RED_E" description="Reducciones al presupuesto de egresos" />
+	<Momento momentoId="MODIFICADO_AMP_COM_E" description="Ampliaciones compensadas al presupuesto de egresos" />
+	<Momento momentoId="MODIFICADO_RED_COM_E" description="Reducciones compensadas al presupuesto de egresos" />
+	<Momento momentoId="COMPROMETIDO" description="Presupuesto de egresos comprometido" />
+	<Momento momentoId="DEVENGADO_E" description="Presupuesto de egresos devengado" />
+	<Momento momentoId="EJERCIDO" description="Presupuesto de egresos ejercido pendiente de pago" />
+	<Momento momentoId="PAGADO" description="Presupuesto de egresos ejercido pagado" />
+	
+	
+	<!-- Momentos de la ley de ingresos , recuerde configurar las cuentas asociadas -->
+	<Momento momentoId="ESTIMADO" description="Ley de ingresos estimada" />
+	<Momento momentoId="EJECUTAR" description="Ley de ingresos por ejecutar" />
+	<Momento momentoId="MODIFICADO_AMP_I" description="Ampliaciones a la ley de ingresos" />
+	<Momento momentoId="MODIFICADO_RED_I" description="Reducciones a la ley de ingresos" />
+	<Momento momentoId="MODIFICADO_AMP_COM_I" description="Ampliaciones compensadas a la ley de ingresos" />
+	<Momento momentoId="MODIFICADO_RED_COM_I" description="Reducciones compensadas a la ley de ingresos" />
+	<Momento momentoId="DEVENGADO_I" description="Ley de ingresos devengada pendiente de recaudar" />
+	<Momento momentoId="RECAUDADO" description="Ley de ingresos recaudada" />
+	
+	<!-- Momentos que se traspasan presupuestalmente  -->
+	<!-- Egresos -->
+	<MovimientoMensual movimientoMensualId="DISPONIBLE" description="Traspaso Mensual del gasto disponible" />
+	<MovimientoMensual movimientoMensualId="COMPROMETIDO" description="Traspaso Mensual del gasto comprometido" />
+	<MovimientoMensual movimientoMensualId="DEVENGADO_E" description="Traspaso Mensual del gasto devengado" />
+	<!-- Ingresos -->
+	<MovimientoMensual movimientoMensualId="EJERCIDO" description="Traspaso Mensual del gasto ejercido" />
+	
+
+			
+</entity-engine-xml>

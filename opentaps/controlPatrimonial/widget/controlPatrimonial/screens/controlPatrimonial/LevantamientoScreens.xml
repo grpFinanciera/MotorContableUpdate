@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="levantamiento" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>    
+        
+    <screen name="emptyLevantamientoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlPatrimonialLevantamiento"/>  
+                <set field="sectionHeaderUiLabel" value="ControlPatrimonialLevantamiento"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LevantamientoActivoFijo">
+    	<section>
+    		<actions>
+    		    <set field="titleProperty" value="ActivoFijoLevantamiento"/>
+                <set field="headerItem" value="ActivoFijoLevantamiento"/>
+                <set field="tabButtonItem" value="ActivoFijoLevantamiento"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/levantamiento.bsh"/>
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultarLevantamiento"/>
+    		</actions>
+			<widgets>
+                <decorator-screen name="main-section-decorator" >
+                    <decorator-section name="section-body">                                             
+						<platform-specific>
+						   <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/levantamiento.ftl"/></html>
+						</platform-specific>
+                    </decorator-section>
+					<decorator-section name="search-results">
+						<include-screen name="FixedAssetSearchResults"/>
+					</decorator-section>
+                </decorator-screen>	
+			</widgets>    		
+    	</section>
+    </screen>
+    
+    
+</screens>

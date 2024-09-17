@@ -1,0 +1,18 @@
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+
+acctgTransTypeId = parameters.get("acctgTransTypeId");
+context.put("acctgTransTypeId",acctgTransTypeId);
+
+EventoContable = delegator.findByPrimaryKey("EventoContable",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+context.put("EventoContable",EventoContable);
+
+afectacionId = parameters.get("afectacionId");
+
+Afectacion = delegator.findByPrimaryKey("Afectacion",UtilMisc.toMap("afectacionId",afectacionId));
+context.put("Afectacion",Afectacion);
+
+AfectacionDetalle = delegator.findByAnd("AfectacionDetalle",UtilMisc.toMap("afectacionId",afectacionId));
+context.put("AfectacionDetalle",AfectacionDetalle);
+
+

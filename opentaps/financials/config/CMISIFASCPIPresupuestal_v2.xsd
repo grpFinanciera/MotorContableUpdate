@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sifascpi.gob.mx/sifascpi"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmis="http://www.sifascpi.gob.mx/sifascpi">
+
+	<xs:element name="InformacionPresupuestal" type="cmis:CMIInformacionPresupuestalSheet"></xs:element>
+
+	<xs:complexType name="CMIInformacionPresupuestalSheet">
+		<xs:sequence>
+			<xs:element name="IngresosPresupuestarios" type="cmis:CMIIngresosPresupuestarios" maxOccurs="1" minOccurs="0" />
+			<xs:element name="EgresosPresupuestarios" type="cmis:CMIEgresosPresupuestarios"	maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="centro" type="cmis:centros" use="required" />
+		<xs:attribute name="mes" type="cmis:meses" use="required" />
+		<xs:attribute name="anio" type="xs:integer" use="required" />
+	</xs:complexType>
+
+	<!-- Situacion Presupuestal -->
+	<xs:complexType name="CMIIngresosPresupuestarios">
+		<xs:sequence>
+			<xs:element name="FuenteDeIngresos" type="cmis:CMIFuenteDeIngresos" maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Egresos Presupuestarios -->
+	<xs:complexType name="CMIEgresosPresupuestarios">
+		<xs:sequence>
+			<xs:element name="EjercicioDelPresupuesto" type="cmis:CMIEjercicioDelPresupuesto"	maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Ingresos Y Otros Beneficios -->
+	<xs:complexType name="CMIFuenteDeIngresos">
+		<xs:complexContent>
+			<xs:extension base="cmis:CMIIngreso_id">
+				<xs:sequence>
+          <xs:element name="i7110-IngresosPorVentasDeBienesYServiciosDeOrganismosDescentralizados" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i7210-IngresosDeOperacionDeEntidadesParaestatales" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i7410-DonativosEnEfectivoAEntidadesParaestatales" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i7510-IngresosDelasEntidadesParaestatalesPorConceptosDiferentesASuActividad" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i8210-Aportaciones" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i9110-TransferenciasInternasYAsignacionesAlSectorPublico" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="i9310-SubsidiosYSubvenciones" type="cmis:CMIDatosIngresos" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+        
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Ejercicio del Presupuesto -->
+	<xs:complexType name="CMIEjercicioDelPresupuesto">
+		<xs:complexContent>
+			<xs:extension base="cmis:CMIEgreso_id">
+				<xs:sequence>
+          <xs:element name="g1100-RemuneracionesAlPersonalDeCaracterPermanente" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1200-RemuneracionesAlPersonalDeCaracterTransitorio" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1300-RemuneracionesAdicionalesYEspeciales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1400-SeguridadSocial" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1500-OtrasPrestacionesSocialesYEconomicas" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1600-Previsiones" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g1700-PagodeEstimulosAServidoresPublicos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2100-MaterialesDeAdmonEmisionDeDocsYArticulosOficiales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2200-AlimentosUtencilios" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2300-MateriasprimasYMaterialesDeProduccionYComercializacion" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2400-MaterialesYArticulosDeConstruccionYDereparacion" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2500-ProductosQuimicosFarmaceuticosDELaboratorio" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2600-CombustiblesLubricantesAditivos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2700-VestuarioBlancosPrendasDeProteccionYArticulosDeportivos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2800-MaterialesYSuministrosParaSeguridad" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g2900-HerramientasRefaccionesYAccesoriosMenores" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3100-ServiciosBasicos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3200-ServiciosDeArrendamiento" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3300-ServiciosProfesionalesCientificosYTecnicosYOtrosServicios" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3400-ServiciosfinancierosBancariosYComerciales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3500-ServiciosDeInstalacionReparacionMantenimientoYConservacion" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3600-ServiciosDeComunicacionSocialYPublicidad" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3700-ServiciosDeTrasladoYViaticos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3800-ServiciosOficiales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g3900-OtrosServiciosGenerales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g4300-SubsidiosYSubvenciones" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g4400-AyudasSociales" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g4600-TransferenciasFideicomisosMandatosOtrosAnalogos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5100-MobiliarioYEquipoDeAdministracion" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5200-MobiliarioYEquipoEducacionalYRecreativo" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5300-EquipoInstrumentalMedicoYDeLaboratorio" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5400-EquipoDeTransporte" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5600-MaquinariaOtrosEquiposYHerramientas" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5800-BienesInmuebles" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g5900-ActivosIntangibles" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g6200-ObraPublicaEnBienesPublicos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g7500-InversionesEnFideicomisosMandatosYOtrosAnalogos" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9100-AmortizacionDeLaDeudaPublica" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9200-InteresesDeLaDeudaPublica" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9300-ComisionesDeLaDeudaPublica" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9400-GastosDeLaDeudaPublica" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9500-CostosPorCoberturas" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9600-ApoyosFinancieros" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+          <xs:element name="g9900-AdeudosDeEjerciciosFiscalesAnteriores" type="cmis:CMIDatosEgresos" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Common Types -->
+	<xs:complexType name="CMIIngreso_id">
+		<xs:attribute name="nivel" type="xs:string" />
+	</xs:complexType>
+ 
+  <xs:complexType name="CMIDatosIngresos">
+		<xs:complexContent>
+			<xs:extension base="cmis:CMIIngreso_id">
+				<xs:attribute name="ingresoAprobado" type="xs:double" use="required" />
+				<xs:attribute name="ampliacionesReducciones" type="xs:double"  use="required" />
+				<xs:attribute name="ingresoDevengado" type="xs:double" use="required" />
+				<xs:attribute name="ingresoCobrado" type="xs:double" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CMIEgreso_id">
+		<xs:attribute name="nivel" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="CMIDatosEgresos">
+		<xs:complexContent>
+			<xs:extension base="cmis:CMIEgreso_id">
+				<!--<attribute name="CapituloDelGasto" type="int" use="required" /> -->
+				<xs:attribute name="egresoAprobado"	type="xs:double" use="required" />
+				<xs:attribute name="ampliacionesReducciones" type="xs:double"	use="required" />
+				<xs:attribute name="egresoComprometido" type="xs:double" use="required" />
+				<xs:attribute name="egresoDevengado" type="xs:double" use="required" />
+				<xs:attribute name="egresoEjercido" type="xs:double" use="required" />
+				<xs:attribute name="egresoPagado" type="xs:double" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="centros">
+		<xs:restriction base="xs:string">
+      <xs:enumeration value="CIO"/>
+      <xs:enumeration value="CIAD"/>
+      <xs:enumeration value="CIBNOR"/>
+      <xs:enumeration value="CICESE"/>
+      <xs:enumeration value="CICY"/>
+      <xs:enumeration value="CIMAT"/>
+      <xs:enumeration value="CIMAV"/>
+      <xs:enumeration value="INAOE"/>
+      <xs:enumeration value="INECOL"/>
+      <xs:enumeration value="IPICYT"/>
+      <xs:enumeration value="CIATEC"/>
+      <xs:enumeration value="CIATEJ"/>
+      <xs:enumeration value="CIATEQ"/>
+      <xs:enumeration value="CIDESI"/>
+      <xs:enumeration value="CIDETEQ"/>
+      <xs:enumeration value="CIQA"/>
+      <xs:enumeration value="COMIMSA"/>
+      <xs:enumeration value="FIDERH"/>
+      <xs:enumeration value="INFOTEC"/>
+      <xs:enumeration value="CIDE"/>
+      <xs:enumeration value="CIESAS"/>
+      <xs:enumeration value="CIGGET"/>
+      <xs:enumeration value="COLMICH"/>
+      <!--<xs:enumeration value="COLSAN"/>-->
+      <xs:enumeration value="FINANCIERA"/>
+      <xs:enumeration value="ECOSUR"/>
+      <xs:enumeration value="COLEF"/>
+      <xs:enumeration value="MORA"/>
+      <xs:enumeration value="CENTROGEO"/>
+    </xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="meses">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" />
+			<xs:enumeration value="2" />
+			<xs:enumeration value="3" />
+			<xs:enumeration value="4" />
+			<xs:enumeration value="5" />
+			<xs:enumeration value="6" />
+			<xs:enumeration value="7" />
+			<xs:enumeration value="8" />
+			<xs:enumeration value="9" />
+			<xs:enumeration value="10" />
+			<xs:enumeration value="11" />
+			<xs:enumeration value="12" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

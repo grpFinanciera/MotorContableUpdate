@@ -1,0 +1,308 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.common.domain.organization.OrganizationRepository;
+import org.opentaps.common.util.UtilAccountingTags;
+import org.ofbiz.common.AB.*;
+import org.opentaps.base.entities.ClasifPresupuestal;
+import org.opentaps.base.entities.EstructuraClave;
+import org.opentaps.base.entities.UsoClave;
+import org.opentaps.base.entities.FixedAssetType;
+import org.opentaps.base.entities.Mes;
+import org.opentaps.base.entities.Enumeration;
+import org.opentaps.common.util.UtilDate;
+import org.ofbiz.base.util.UtilValidate;
+import org.opentaps.common.util.UtilCommon;
+
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+import org.opentaps.common.util.UtilConfig;
+
+import java.util.*;
+import org.ofbiz.base.util.UtilDateTime;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.util.EntityFindOptions;
+import org.ofbiz.entity.condition.EntityOperator;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityCondition;
+import org.ofbiz.entity.condition.EntityConditionList;
+import com.opensourcestrategies.crmsfa.forecasts.UtilForecast;
+import com.opensourcestrategies.financials.util.UtilFinancial;
+import org.ofbiz.order.finaccount.UtilClavePresupuestal;
+
+
+
+import org.ofbiz.base.util.*;
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+ciclo = UtilCommon.getCicloId(request);
+context.put("ciclo",ciclo);
+
+acctgTagUsageTypeId = UtilClavePresupuestal.INGRESO_TAG;
+
+userLogin = request.getAttribute("userLogin");
+context.put("partyId", userLogin.get("partyId"));
+
+orderTipoCobroBy = UtilMisc.toList("description");
+condicionTipoCobro = EntityCondition.makeCondition("parentTypeId",EntityOperator.EQUALS,"RECEIPT");
+tipoCobro = delegator.findByCondition("PaymentType", condicionTipoCobro , null, orderTipoCobroBy);
+print("tipoCobro: " + tipoCobro);
+context.put("tipoCobro", tipoCobro);
+
+orderByBan = UtilMisc.toList("nombreBanco");
+condicionBan = EntityCondition.makeCondition("partyId",EntityOperator.EQUALS, userLogin.get("partyId"));
+bancos = delegator.findByCondition("BancoPorAsignacionCuentaUsuario", condicionBan , UtilMisc.toList("bancoId", "nombreBanco"), orderByBan);
+context.put("bancos", bancos);
+
+
+
+
+ordenCobroId = parameters.get("ordenCobroId");
+print("ordenCobroId: " + ordenCobroId);
+context.put("ordenCobroId", ordenCobroId);
+
+invoiceId = parameters.get("invoiceId");
+print("invoiceId: " + invoiceId);
+context.put("invoiceId", invoiceId);
+
+condicionInvoiceList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId), 
+										new EntityExpr("invoiceId", EntityOperator.EQUALS, invoiceId));
+condicionInvoice = new EntityConditionList(condicionInvoiceList, EntityOperator.AND);
+datosInvoice = delegator.findByCondition("ConsultarDescripcionesOrdenCobro", condicionInvoice, null, null);
+context.put("datosInvoice", datosInvoice);
+
+
+
+paymentId = null;
+
+
+condicionAcctgTransTypeId = EntityCondition.makeCondition("ordenCobroId",EntityOperator.EQUALS, ordenCobroId);
+acctgTransTypeIdList = delegator.findByCondition("OrdenCobro", condicionAcctgTransTypeId , UtilMisc.toList("acctgTransTypeId", "statusId", "paymentId", "fechaCobro"), null);
+
+if(!acctgTransTypeIdList.isEmpty()) 
+{   evento = acctgTransTypeIdList.iterator();
+    while( evento.hasNext() ) 
+    {   eventoItem = evento.next() ;        
+        acctgTransTypeId = eventoItem.getString("acctgTransTypeId");
+        statusId = eventoItem.getString("statusId");
+        paymentId = eventoItem.getString("paymentId");
+        fechaCobro = eventoItem.getTimestamp("fechaCobro");        
+		context.put("acctgTransTypeId", acctgTransTypeId);
+		context.put("statusId", statusId);            
+		context.put("paymentId", paymentId);
+		context.put("fechaCobro", fechaCobro);                
+    }
+}
+
+
+
+
+
+sumaCargo = BigDecimal.ZERO;
+sumaAbono = BigDecimal.ZERO;
+sumaPresu = BigDecimal.ZERO;
+sumaPresuRestante = BigDecimal.ZERO;
+sumaTotal = BigDecimal.ZERO;
+
+condicionMatriz = EntityCondition.makeCondition("acctgTransTypeId",EntityOperator.EQUALS, acctgTransTypeId);
+matrizList = delegator.findByCondition("LineaPresupuestal", condicionMatriz , UtilMisc.toList("tipoMatrizId"), null);
+
+tipoMatrizId = "";
+
+if(!matrizList.isEmpty()) 
+{   lineaPres = matrizList.iterator();
+    while( lineaPres.hasNext() ) 
+    {   item = lineaPres.next() ;        
+        tipoMatrizId = item.getString("tipoMatrizId");                              
+    }
+}
+
+orderBySumaBancosCargo = UtilMisc.toList("invoiceItemSeqId");
+condicionSumaBancosCargoList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId), 
+											new EntityExpr("idCatalogoPres", EntityOperator.EQUALS, null),
+											 new EntityExpr("idCatalogoCargo", EntityOperator.EQUALS, "BANCO"));
+condicionSumaBancosCargo = new EntityConditionList(condicionSumaBancosCargoList, EntityOperator.AND);
+
+sumaBancosCargo = delegator.findByCondition("OrdenCobroMulti", condicionSumaBancosCargo, UtilMisc.toList("monto"), orderBySumaBancosCargo);    
+        
+if(!sumaBancosCargo.isEmpty()) 
+{   context.put("sumaBancosCargo", sumaBancosCargo);
+	suma = sumaBancosCargo.iterator();
+    while( suma.hasNext() ) {
+        sumaItem = suma.next() ;        
+        sumaCargo = sumaCargo.add(sumaItem.getBigDecimal("monto"));
+    }
+}
+
+orderBySumaBancosAbono = UtilMisc.toList("invoiceItemSeqId");
+condicionSumaBancosAbonoList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId), 
+											new EntityExpr("idCatalogoPres", EntityOperator.EQUALS, null),
+											 new EntityExpr("idCatalogoAbono", EntityOperator.EQUALS, "BANCO"));
+condicionSumaBancosAbono = new EntityConditionList(condicionSumaBancosAbonoList, EntityOperator.AND);
+sumaBancosAbono = delegator.findByCondition("OrdenCobroMulti", condicionSumaBancosAbono, UtilMisc.toList("monto"), orderBySumaBancosAbono);    
+        
+if(!sumaBancosAbono.isEmpty()) 
+{   context.put("sumaBancosAbono", sumaBancosAbono);
+	suma = sumaBancosAbono.iterator();
+    while( suma.hasNext() ) {
+        sumaItem = suma.next() ;        
+        sumaAbono = sumaAbono.add(sumaItem.getBigDecimal("monto"));                
+    }
+}
+
+print("sumaCargo: "+ sumaCargo);
+print("sumaAbono: "+ sumaAbono);
+context.put("sumaCargo", sumaCargo);
+context.put("sumaAbono", sumaAbono);
+
+	orderBySumaPresu = UtilMisc.toList("invoiceItemSeqId");
+	condicionSumaPresuList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId), 
+											new EntityExpr("idCatalogoPres", EntityOperator.EQUALS, "PRESUPUESTO"));
+	condicionSumaPresu  = new EntityConditionList(condicionSumaPresuList, EntityOperator.AND);
+	sumaPresupuestal = delegator.findByCondition("OrdenCobroMulti", condicionSumaPresu, UtilMisc.toList("monto", "montoRestante"), orderBySumaPresu);
+	if(!sumaPresupuestal.isEmpty()) 
+	{   context.put("sumaPresupuestal", sumaPresupuestal);
+		suma = sumaPresupuestal.iterator();
+	    while( suma.hasNext() ) {
+	        sumaItem = suma.next() ;        
+	        sumaPresu = sumaPresu.add(sumaItem.getBigDecimal("monto"));                
+	        sumaPresuRestante = sumaPresuRestante.add(sumaItem.getBigDecimal("montoRestante"));
+	    }
+	}
+
+
+print("sumaPresu: "+ sumaPresu);
+context.put("sumaPresu", sumaPresu);
+
+print("sumaPresuRestante: "+ sumaPresuRestante);
+context.put("sumaPresuRestante", sumaPresuRestante);
+
+print("tipoMatrizId: " + tipoMatrizId);
+if(UtilValidate.isEmpty(tipoMatrizId))
+{	
+	sumaTotal = sumaCargo.add(sumaAbono);
+}
+else if(tipoMatrizId.equals("B.2"))
+{	
+	sumaTotal = sumaPresu.add(sumaCargo.add(sumaAbono));
+}
+
+context.put("tipoMatrizId", tipoMatrizId);
+print("sumaTotal: "+ sumaTotal);
+context.put("sumaTotal", sumaTotal);
+
+
+
+orderByConsultaLineasCont = UtilMisc.toList("descripcion");
+
+condicionConsultaLineasContList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId),
+													new EntityExpr("idCatalogoPres", EntityOperator.EQUALS, null));
+condicionConsultaLineasCont = new EntityConditionList(condicionConsultaLineasContList, EntityOperator.AND);
+
+print("condicionConsultaLineasCont: " + condicionConsultaLineasCont);
+datosLineasCont = delegator.findByCondition("ConsultaLineasContablesOrdenCobro", condicionConsultaLineasCont , null, orderByConsultaLineasCont);
+context.put("datosLineasCont", datosLineasCont);
+
+
+numClasAdmin = UtilClavePresupuestal.indiceClasAdmin(acctgTagUsageTypeId, organizationPartyId, delegator, ciclo);
+orderByConsultaLineasPres = UtilMisc.toList("descripcion");
+condicionConsultaLineasPresList = UtilMisc.toList(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId),
+											  	  new EntityExpr("secuenciaLineaContable", EntityOperator.EQUALS, "0"));
+condicionConsultaLineasPres = new EntityConditionList(condicionConsultaLineasPresList, EntityOperator.AND);
+datosLineasPresMap = delegator.findByCondition("ConsultaLineasPresupuestalesOrdenCobro", condicionConsultaLineasPres , null, orderByConsultaLineasPres);
+datosLineasPres = new ArrayList();
+if(!datosLineasPresMap.isEmpty()) 
+{   datosLineasPresIter = datosLineasPresMap.iterator();
+	while( datosLineasPresIter.hasNext() ) 
+	{	map = datosLineasPresIter.next();		
+		String clavePresupuestal = "";
+		for(int i=1; i<16; i++)
+		{	if(numClasAdmin == i)
+			{	clavePresupuestal = clavePresupuestal+(UtilFinancial.buscaExternalId(map.getString("acctgTagEnumIdAdmin"),delegator));
+			}
+		    String clasif = (String)map.getString("acctgTagEnumId" + i);
+		    if(clasif != null && !clasif.isEmpty())
+		    {	clavePresupuestal = clavePresupuestal+UtilFinancial.buscaSequenceId(clasif, delegator);
+		    }	    	    
+		}
+		map.put("idCatalogoPres", clavePresupuestal);		
+		datosLineasPres.add(map);
+	}	
+}
+context.put("datosLineasPres", datosLineasPres);
+
+if(paymentId != null)
+{	condicionesPoliza = new ArrayList();
+	condicionesPoliza.add(new EntityExpr("paymentId", EntityOperator.EQUALS, paymentId));
+	datosPoliza = delegator.findByCondition("AcctgTrans",new EntityConditionList(condicionesPoliza, EntityOperator.AND),UtilMisc.toList("acctgTransId", "poliza"),UtilMisc.toList("acctgTransId"));
+	context.put("datosPoliza", datosPoliza);
+	
+	condicionesPayment = new ArrayList();
+	condicionesPayment.add(new EntityExpr("paymentId", EntityOperator.EQUALS, paymentId));
+	datosPayment = delegator.findByCondition("PaymentTypeVista",new EntityConditionList(condicionesPayment, EntityOperator.AND),null,null);
+	context.put("datosPayment", datosPayment);
+	
+	// obtener el catalogo de cuentas
+	bancoId = "";
+	if(!datosPayment.isEmpty()) 
+	{   bancoIter = datosPayment.iterator();
+	    while( bancoIter.hasNext() ) {
+	        bancoItem = bancoIter.next();        
+	        bancoId = bancoItem.getString("bancoId");                
+	    }
+	}
+	orderBy = org.ofbiz.base.util.UtilMisc.toList("numeroCuenta");
+	condicionDoc = EntityCondition.makeCondition("bancoId",EntityOperator.EQUALS,bancoId);
+	cuentas = delegator.findByCondition("CuentasBanco", condicionDoc , UtilMisc.toList("numeroCuenta", "nombreCuenta", "cuentaBancariaId", "bancoId"), orderBy);
+	print("Cuentas: " + cuentas);
+	context.put("cuentas", cuentas);
+}
+else
+{	cuentas = delegator.findAllCache("CuentaBancaria", UtilMisc.toList("nombreCuenta"));
+	context.put("cuentas", cuentas);
+}
+
+
+	//Obtiene montos presupuestales
+	
+	listaExprs = FastList.newInstance();
+    condicion = null;
+    listaExprs.add(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId));
+    listCondicion = new EntityExpr(
+                                 new EntityExpr("idCatalogoCargo", EntityOperator.EQUALS, "BANCO"),
+                                 EntityOperator.OR,
+                                 new EntityExpr("idCatalogoAbono", EntityOperator.EQUALS, "BANCO"));
+	listaExprs.add(listCondicion);                                
+	Cond = new FastList();
+    Cond.addAll(listaExprs);        
+    condicion = new EntityConditionList(Cond, EntityOperator.AND);
+    orderBy = org.ofbiz.base.util.UtilMisc.toList("secuencia");
+	montoCobrarContable = delegator.findByCondition("ObtenerMontoContableACobrar", condicion , null, null);
+	print("montoCobrarContable: " + montoCobrarContable);
+	context.put("montoCobrarContable", montoCobrarContable);
+	
+	
+	//Obtiene montos presupuestales
+	
+	//Obtiene montos presupuestales
+	
+	listaExprsPres = FastList.newInstance();
+    condicionPres = null;
+    listaExprsPres.add(new EntityExpr("ordenCobroId", EntityOperator.EQUALS, ordenCobroId));
+    listaExprsPres.add(new EntityExpr("idCatalogoPres", EntityOperator.EQUALS, "PRESUPUESTO"));
+    listCondicionPres = new EntityExpr(
+                                 new EntityExpr("catalogoCargo", EntityOperator.EQUALS, "BANCO"),
+                                 EntityOperator.OR,
+                                 new EntityExpr("catalogoAbono", EntityOperator.EQUALS, "BANCO"));
+	listaExprsPres.add(listCondicionPres);                                
+	CondPres = new FastList();
+    CondPres.addAll(listaExprsPres);        
+    condicionPres = new EntityConditionList(CondPres, EntityOperator.AND);
+    orderByPres = org.ofbiz.base.util.UtilMisc.toList("secuencia");
+	montoCobrarPresupuestal = delegator.findByCondition("ObtenerMontoPresupuestalACobrar", condicionPres , null, orderByPres);
+	print("montoCobrarPresupuestal: " + montoCobrarPresupuestal);
+	context.put("montoCobrarPresupuestal", montoCobrarPresupuestal);

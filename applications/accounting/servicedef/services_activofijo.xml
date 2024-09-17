@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+        
+    <service name="ActualizaPoliza" engine="java"
+            location="org.ofbiz.accounting.activofijo.ActivoFijoServices" invoke="actualizaPoliza" auth="true">
+        <description>Actualiza Polizas Masivamente en los Activos Fijos</description>
+        <permission-service service-name="acctgPrefPermissionCheck" main-action="UPDATE"/>
+        <attribute name="numeroPolizaAnt" type="String" mode="IN"  optional="false" description="Número de Póliza Anterior"/>
+        <attribute name="numeroPolizaNueva" type="String" mode="IN"  optional="false" description="Número de Póliza Nueva"/>
+    </service>
+    
+    <service name="ProcesoDepreciacionActivo" engine="java"
+            location="org.ofbiz.accounting.activofijo.ActivoFijoServices" invoke="ProcesoDepreciacionActivo" auth="true" transaction-timeout="28800">
+        <description>Realiza la depreciacion de una categoria de activo fijo en un periodo dado</description>
+        <permission-service service-name="acctgPrefPermissionCheck" main-action="UPDATE"/>
+        <attribute name="tipoActivoFijoId" type="String" mode="IN"  optional="false" description="Tipo de activo fijo a depreciar"/>
+        <attribute name="mesId" type="String" mode="IN"  optional="false" description="Mes de depreciacion"/>
+        <attribute name="cicloId" type="String" mode="IN"  optional="false" description="Anio de depreciacion"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN"  optional="false" description="Evento contable"/>
+        <attribute name="comentario" type="String" mode="IN"  optional="false" description="Comentario para la depreciacion"/>
+        <attribute name="poliza" type="String" mode="OUT"  optional="true" description="Identificador de la poliza contable generada"/>
+    </service>        
+    <service name="cancelFixedAsset" engine="java" auth="true"
+    		location="org.ofbiz.accounting.activofijo.ActivoFijoServices" invoke="cancelFixedAsset">
+    	<attribute name="fixedAssetId" mode="INOUT" type="String" optional="false" />
+    </service>
+</services>

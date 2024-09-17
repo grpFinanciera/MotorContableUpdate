@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    
+    <!-- Pantallas Generales -->    
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="solicitante" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+   	<screen name="emptySolicitanteScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="GastosReservaSolicitante"/>  
+                <set field="sectionHeaderUiLabel" value="GastosReservaSolicitante"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Pantallas Crear Solicitud -->
+    <screen name="crearSolicitudScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="GastosReservaCrearSolicitaud"/>  
+                <set field="sectionHeaderUiLabel" value="GastosReservaCrearSolicitaud"/>
+                <script location="component://gastosReserva/webapp/gastosReserva/WEB-INF/actions/solicitante/crearSolicitud.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/crearSolicitud.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Pantallas Buscar Solicitud -->
+    <screen name="verGastoReserva">
+		<section>
+            <actions>
+                <set field="gastosReservaId"  value="${parameters.gastosReservaId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <set field="avisoTesorero"  value="Y"/>
+                <script location="component://gastosReserva/webapp/gastosReserva/WEB-INF/actions/solicitante/verGastoReserva.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/verGastoReserva.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    
+ 	<screen name="buscarGastoReserva">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="BuscarGastoReserva"/>  
+                <set field="sectionHeaderUiLabel" value="BuscarGastoReserva"/>
+                <set field="requestGasto" value="verGastoReserva" />
+                <java location="com.absoluciones.gastosreserva.BusquedaGastosReserva" invoke="buscaGasto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/consultarGasto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/listaGasto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Pantallas Comprobar Solicitud -->
+    <screen name="comprobarSolicitudScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="GastosReservaComprobarSolicitaud"/>  
+                <set field="sectionHeaderUiLabel" value="GastosReservaComprobarSolicitaud"/>
+                <script location="component://gastosReserva/webapp/gastosReserva/WEB-INF/actions/solicitante/comprobarSolicitud.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific>
+	                                <html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/comprobarSolicitud.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="verSolicitudesPendientesScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Solicitudes Pendientes por Comprobar"/>
+                <set field="requestGasto" value="comprobarSolicitudScreen" />
+                <set field="performFind" value="Y" />
+                <set field="estatus" value="OTORGADA_GR"/>
+                <set field="persona" value="solicitante"/>
+                <java location="com.absoluciones.gastosreserva.BusquedaGastosReserva" invoke="gastosPendientes"/>   
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/listaGastoPend.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+	<screen name="viewAcctgTrans">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransPresupuestal.bsh"/>
+                <java location="com.opensourcestrategies.financials.transactions.BuscarPolizas" invoke="buscaDetalleEntries"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransPoliza.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesGroup.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesAuxiliares.ftl"/>
+                        </html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+   <screen name="viewAcctgPresupuestal">
+    	<section>	
+    		<actions>
+    			<script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgPresupuestal.bsh"/>
+    			<set field="pageTitleLabel" value="FinancialsInfoClave"/>
+    		</actions>
+    		<widgets>
+    			<decorator-screen name="main-section-decorator">
+    				<decorator-section name="section-body">
+    					<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransInfoClave.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntries.ftl"/>
+                           </html></platform-specific>
+                        </container>                    	
+    				</decorator-section>
+    			</decorator-screen>
+    		</widgets>
+    	</section>
+    </screen>
+    
+    <screen name="viewAcctgTransEntry">
+        <section>
+            <actions>
+                <entity-one entity-name="AcctgTrans" value-field="acctgTrans"/>
+                <entity-one entity-name="AcctgTransEntry" value-field="acctgTransEntry"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-body">
+                                <!-- only include the options if acctgTrans.isPosted = N -->
+                                <section>
+                                    <condition><if-compare field="acctgTrans.isPosted" operator="equals" value="N"/></condition>
+                                    <widgets>
+                                        <platform-specific><html>
+                                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntryOptions.ftl"/>
+                                        </html></platform-specific>
+                                    </widgets>
+                                </section>
+                                <include-form name="viewAcctgTransEntry" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AccountActivitiesDetail">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsAccountActivitiesDetail"/>
+                <set field="sectionHeaderUiLabel" value="FinancialsAccountActivitiesDetail"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/reports/AccountActivitiesDetail.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <platform-specific>
+                                <html><html-template location="component://financials/webapp/financials/reports/AccountActivitiesDetail.ftl"/></html>
+                            </platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

@@ -1,0 +1,27 @@
+import org.ofbiz.base.util.*;
+import org.ofbiz.common.AB.UtilWorkflow;
+import org.ofbiz.entity.condition.*;
+
+PagoAnticipado = delegator.findByPrimaryKey("OrderHeader", UtilMisc.toMap("orderId", orderId));
+context.put("PagoAnticipado",PagoAnticipado);
+
+context.put("comentarios", UtilWorkflow.getComentarios(delegator, orderId,"PAGO_ANTICIPADO"));
+
+context.put("autorizadores", UtilWorkflow.getAutorizadoresAprobados(delegator, orderId,"PAGO_ANTICIPADO"));
+
+conditionsStatusAutorizacion = UtilMisc.toList(
+    new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("origenId", EntityOperator.EQUALS, orderId),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "PAGO_ANTICIPADO")
+ );
+
+ statusAutorizacion = delegator.findByCondition("StatusAutorizacionWorkFlow", new EntityConditionList(conditionsStatusAutorizacion, EntityOperator.AND), null, null);
+ context.put("statusAutorizacion", statusAutorizacion);
+ 
+ conditionsAutorizador = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "AUTORIZADOR")    
+ );
+ 
+ rolesAutorizador = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsAutorizador, EntityOperator.AND), null, null);
+ context.put("rolesAutorizador", rolesAutorizador);

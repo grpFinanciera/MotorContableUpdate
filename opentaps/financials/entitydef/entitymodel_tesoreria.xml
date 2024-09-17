@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<title>Entity of an Open Source Strategies Financials component</title>
+    <description>None</description>
+    <copyright>ABCSE Consultoria.</copyright>
+    <author>None</author>
+    <version>1.0</version>
+    
+    <entity entity-name="Banco" 
+            package-name="org.ab.accounting.ledger"
+            title="Catalogo de Bancos">
+    	<description>Catálogo de Bancos</description>
+    	<field name="bancoId" type="id-ne"/>
+    	<field name="nombreBanco" type="description"/>
+    	<field name="nombreCorto" type="description"/>
+    	<field name="estatus" type="indicator"/>
+      	<prim-key field="bancoId"/>
+    </entity>            
+    
+    <entity entity-name="Sucursal"
+    		package-name="org.ab.accounting.ledger"
+    		title="Catalogo de Sucursales">
+    	<field name="sucursalId" type="id-ne"/>
+    	<field name="nombreSucursal" type="description"/>
+    	<field name="estatus" type="indicator"/>
+    	<field name="bancoId" type="id-ne"/>
+    	<prim-key field="sucursalId"/>
+    	<relation type="one" fk-name="SUCURSAL_BANCO" rel-entity-name="Banco">
+        	<key-map field-name="bancoId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="CuentaBancaria" 
+    		package-name="org.ab.accounting.ledger"
+            title="Catalogo de Cuentas Bancarias">
+    	<field name="cuentaBancariaId" type="id"/>
+    	<field name="sucursalId" type="id"/>
+    	<field name="nombreCuenta" type="description"/>
+    	<field name="numeroCuenta" type="short-varchar"/>
+    	<field name="descripcion" type="description"/>
+    	<field name="moneda" type="id"/>
+    	<field name="saldoInicial" type="currency-amount"/>    	
+    	<field name="estatus" type="indicator"/>
+    	<field name="bancoId" type="id-ne"/>
+    	<field name="habilitada" type="indicator"/>
+    	<field name="tipoCuentaBancariaId" type="id-ne"/>
+    	<field name="usoCuentaBancariaId" type="id-ne"/>
+    	<field name="createdByUserLogin" type="id-vlong"/>
+      	<field name="lastModifiedByUserLogin" type="id-vlong"/>
+    	<prim-key field="cuentaBancariaId"/>
+    	<relation type="one" fk-name="FK_DBO_CTA_BCA_SUC" rel-entity-name="Sucursal">
+        	<key-map field-name="sucursalId"/>
+      	</relation>
+      	<relation type="one" fk-name="CTA_BANCARIA_BANCO" rel-entity-name="Banco">
+        	<key-map field-name="bancoId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="SucursalContactMech" 
+    		package-name="org.ab.accounting.ledger"
+            title="Tabla para ligar la sucursal con los datos de contacto">
+    	<field name="sucursalId" type="id"/>
+    	<field name="contactMechId" type="id"/>    	
+    	<prim-key field="sucursalId"/>
+    	<prim-key field="contactMechId"/>
+    	<relation type="one" fk-name="FK_SUC_CONT_MEC" rel-entity-name="Sucursal">
+        	<key-map field-name="sucursalId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_CONT_CONT_MEC" rel-entity-name="ContactMech">
+        	<key-map field-name="contactMechId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="PartyCuentaBancaria" 
+    		package-name="org.ab.accounting.ledger"
+            title="Tabla para ligar la cuenta bancaria con una Party">
+    	<field name="cuentaBancariaId" type="id"/>
+    	<field name="partyId" type="id-ne"/>
+    	<field name="asignacion" type="indicator"/>
+    	<prim-key field="cuentaBancariaId"/>
+    	<prim-key field="partyId"/>
+    	<relation type="one" fk-name="FK_DBO_CTA_BAN_PAR" rel-entity-name="CuentaBancaria">
+        	<key-map field-name="cuentaBancariaId"/>
+      	</relation>
+      	<relation type="one" fk-name="PARTY_PARTY" rel-entity-name="Party">
+        	<key-map field-name="partyId"/>
+      	</relation>
+    </entity>
+  
+    <entity entity-name="PendientesTesoreria" 
+            package-name="org.ab.accounting.ledger"
+            title="Actividades Pendientes para el Tesorero">
+        <description>Actividades Pendientes para el Tesorero</description>
+        <field name="idPendienteTesoreria" type="id-ne"/>
+        <field name="tipo" type="id"/>
+        <field name="descripcion" type="description"/>        
+        <field name="estatus" type="short-varchar"/>
+        <field name="auxiliar" type="description"/>
+        <field name="monto" type="currency-amount-precise"/>        
+        <field name="fechaTransaccion" type="date-time"></field>
+        <field name="fechaContable" type="date-time"></field>
+        <field name="moneda" type="id"/>
+        <field name="acctgTransTypeId" type="id-ne"/>
+        <field name="bancoId" type="id-ne"/>
+        <field name="cuentaBancariaId" type="id-ne"/>
+        <field name="poliza" type="id-ne"/>
+        <field name="acctgTransId" type="id-ne"/>
+        <!-- Pago externo -->
+        <field name="conceptoPago" type="name_long" />
+        <field name="paymentTypeId" type="id" /> <!-- Método de pago -->
+        <field name="numeroCheque" type="id-long" />
+        <field name="nombreExterno" type="description" />
+        <field name="pagoExternoId" type="id-ne"/>
+        <!-- Pago externo -->
+        <prim-key field="idPendienteTesoreria"/>
+        <prim-key field="tipo"/>
+        <relation type="one" fk-name="FK_DBO_ACCTG_TRANS" rel-entity-name="AcctgTrans">
+        	<key-map field-name="acctgTransId"/>
+      	</relation>
+        <relation type="one" fk-name="FK_DBO_PAGO_EXT" rel-entity-name="PagoExterno">
+        	<key-map field-name="pagoExternoId"/>
+      	</relation>
+        <relation type="one" fk-name="FK_DBO_PAY_TYPE" rel-entity-name="PaymentType">
+        	<key-map field-name="paymentTypeId"/>
+      	</relation>
+        <relation type="one" fk-name="FK_DBO_EVENTO_CONT" rel-entity-name="EventoContable">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="PendientesTesoreriaItem" 
+            package-name="org.ab.accounting.ledger"
+            title="Elementos de linea contable para la entidad de Actividades Pendientes para el Tesorero">
+        <description>Elementos de linea contable para la entidad de Actividades Pendientes para el Tesorero</description>
+        <field name="idPendienteTesoreria" type="id-ne"/>
+        <field name="tipo" type="id"/>
+        <field name="secuenciaLineaContable" type="numeric"/>
+        <field name="descripcion" type="description"/>
+    	<field name="idCatalogoCargo" type="id-ne"/>
+    	<field name="idCatalogoAbono" type="id-ne"/>    	    
+    	<field name="monto" type="fixed-point"/>        
+        <prim-key field="idPendienteTesoreria"/>        
+        <prim-key field="secuenciaLineaContable"/>
+        <prim-key field="tipo"/>
+        <relation type="one" fk-name="FK_DBO_PEN_TESO" rel-entity-name="PendientesTesoreria">
+        	<key-map field-name="idPendienteTesoreria"/>
+        	<key-map field-name="tipo"/>
+      	</relation>
+    </entity>
+    
+    <view-entity entity-name="BuscaCargoBanco" 
+    	package-name="com.absoluciones.tesoreria"
+    	title="Busqueda de Cargos en pendientes tesoreria item">
+    	<member-entity entity-alias="PTI" entity-name="PendientesTesoreriaItem"/>
+    	
+    	<alias name="idCatalogoCargo" entity-alias="PTI" group-by="true"/>
+    	
+    	<alias name="idPendienteTesoreria" entity-alias="PTI" group-by="true"/>
+    	<alias name="tipo" entity-alias="PTI" group-by="true"/>
+    	
+    	<alias name="monto" entity-alias="PTI" function="sum"/>
+    	
+    	<entity-condition><condition-expr field-name="idCatalogoCargo" value="BANCO"/></entity-condition>
+    </view-entity>
+
+    <view-entity entity-name="BuscaAbonoBanco" 
+    	package-name="com.absoluciones.tesoreria"
+    	title="Busqueda de Cargos en pendientes tesoreria item">
+    	<member-entity entity-alias="PTI" entity-name="PendientesTesoreriaItem"/>
+    	
+    	<alias name="idCatalogoAbono" entity-alias="PTI" group-by="true"/>
+    	
+		<alias name="idPendienteTesoreria" entity-alias="PTI" group-by="true"/>
+    	<alias name="tipo" entity-alias="PTI" group-by="true"/>
+    	
+    	<alias name="monto" entity-alias="PTI" function="sum"/>
+    	
+    	<entity-condition><condition-expr field-name="idCatalogoAbono" value="BANCO"/></entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="BuscaPendientesTesoreria" 
+    	package-name="com.absoluciones.tesoreria"
+    	title="Busqueda de todos los pendientes por pagar del tesorero">
+    	<member-entity entity-alias="PT" entity-name="PendientesTesoreria" />
+    	<member-entity entity-alias="PG" entity-name="PartyGroup"/>
+    	<member-entity entity-alias="PER" entity-name="Person"/>
+		<member-entity entity-alias="PTIC" entity-name="PendientesTesoreriaItem"><description>Con esta entidad se obtiene el saldo del cargo</description></member-entity>
+		<member-entity entity-alias="PTIA" entity-name="PendientesTesoreriaItem"><description>Con esta entidad se obtiene el saldo del abono</description></member-entity>
+    	
+    	<alias-all entity-alias="PT" group-by="true" />
+    	<alias name="groupName" entity-alias="PG" group-by="true"/>
+    	<alias name="firstName" entity-alias="PER" group-by="true"/>
+    	<alias name="lastName" entity-alias="PER" group-by="true"/>
+    	<alias name="partyId" field="auxiliar" entity-alias="PT" group-by="true"/>
+    	
+    	<view-link  entity-alias="PT" rel-entity-alias="PG" rel-optional="true">
+    		<key-map field-name="auxiliar" rel-field-name="partyId"/>
+    	</view-link>
+    	<view-link  entity-alias="PT" rel-entity-alias="PER" rel-optional="true">
+    		<key-map field-name="auxiliar" rel-field-name="partyId"/>
+    	</view-link>
+    	<view-link  entity-alias="PT" rel-entity-alias="PTIC" rel-optional="true">
+    		<key-map field-name="idPendienteTesoreria"/>
+    		<key-map field-name="tipo"/>
+    	</view-link>
+    	<view-link  entity-alias="PT" rel-entity-alias="PTIA" rel-optional="true">
+    		<key-map field-name="idPendienteTesoreria"/>
+    		<key-map field-name="tipo"/>
+    	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="SucursalBanco"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para ligar sucursales con el banco">
+      <member-entity entity-alias="BAN" entity-name="Banco"/>      
+      <member-entity entity-alias="SUC" entity-name="Sucursal"/>            
+      <alias entity-alias="BAN" name="bancoId"/>
+      <alias entity-alias="BAN" name="nombreBanco"/>
+      <alias entity-alias="SUC" name="sucursalId"/>
+      <alias entity-alias="SUC" name="nombreSucursal"/>                           
+      <view-link entity-alias="BAN" rel-entity-alias="SUC">
+        <key-map field-name="bancoId"/>
+      </view-link>                                         
+    </view-entity>                     
+    
+    <entity entity-name="TraspasoBanco" 
+    		package-name="org.ab.accounting.ledger"
+            title="Detalle de los traspasos entre cuentas bancarias">
+    	<field name="idTraspaso" type="id"/>
+    	<field name="bancoIdOrigen" type="id-ne"/>
+    	<field name="debitCreditFlagOrigen" type="indicator"/>
+    	<field name="depositoRetiroFlagOrigen" type="indicator"/>
+    	<field name="bancoIdDestino" type="id-ne"/>  
+    	<field name="debitCreditFlagDestino" type="indicator"/>
+    	<field name="depositoRetiroFlagDestino" type="indicator"/>  	
+    	<field name="acctgTransId" type="id-ne"/>
+    	<field name="cuentaOrigen" type="short-varchar"/>
+    	<field name="cuentaDestino" type="short-varchar"/>
+    	<field name="monto" type="currency-amount"/> 
+    	<field name="moneda" type="id"/>   	    
+    	<field name="partyId" type="id-ne"/>
+    	<field name="tipotransaccion" type="short-varchar"/>
+    	<field name="createdByUserLogin" type="id-vlong"/>
+    	<field name="descripcion" type="description"/>
+    	<field name="fechaContable" type="date-time"></field>
+    	<prim-key field="idTraspaso"/>    	
+      	<relation type="one" fk-name="FK_TRASP_TRANS" rel-entity-name="AcctgTrans">
+            <key-map field-name="acctgTransId"/>
+        </relation>
+    </entity>
+    
+    <view-entity entity-name="ConsultaTraspasoBanco" 
+    		package-name="com.absoluciones.tesoreria"
+    		title="Consulta de traspasos de bancos">
+    	<member-entity entity-alias="TR" entity-name="TraspasoBanco" />
+    	<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+    	<member-entity entity-alias="BO" entity-name="Banco"/>
+    	<member-entity entity-alias="BD" entity-name="Banco" />
+    	<member-entity entity-alias="CO" entity-name="CuentaBancaria" />
+    	<member-entity entity-alias="CD" entity-name="CuentaBancaria" />
+    	
+    	<alias name="acctgTransId" entity-alias="TR" />
+    	<alias name="descripcion" entity-alias="TR" />
+    	<alias name="createdStamp" entity-alias="TR" />
+    	<alias name="postedDate" entity-alias="AT" />
+    	<alias name="organizationPartyId" entity-alias="AT" />
+    	<alias name="bancoOrigen" field="nombreBanco" entity-alias="BO" />
+    	<alias name="bancoOrigenId" field="bancoId" entity-alias="BO" />
+    	<alias name="bancoDestino" field="nombreBanco" entity-alias="BD" />
+    	
+		<alias name="bancoDestinoId" field="bancoId" entity-alias="BD" />    	
+    	<alias name="cuentaOrigen" field="nombreCuenta" entity-alias="CO" />
+    	<alias name="cuentaOrigenId" field="cuentaBancariaId" entity-alias="CO" />
+    	<alias name="cuentaDestino" field="nombreCuenta" entity-alias="CD" />
+    	<alias name="cuentaDestinoId" field="cuentaBancariaId" entity-alias="CD" />
+    	<alias name="monto" entity-alias="TR" />
+    	
+    	<view-link entity-alias="TR" rel-entity-alias="AT">
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    	<view-link entity-alias="TR" rel-entity-alias="BO" rel-optional="true">
+    		<key-map field-name="bancoIdOrigen" rel-field-name="bancoId"/>
+    	</view-link>
+    	<view-link entity-alias="TR" rel-entity-alias="BD" rel-optional="true">
+    		<key-map field-name="bancoIdDestino" rel-field-name="bancoId"/>
+    	</view-link>
+    	<view-link entity-alias="TR" rel-entity-alias="CO" rel-optional="true">
+    		<key-map field-name="cuentaOrigen" rel-field-name="cuentaBancariaId"/>
+    	</view-link>
+    	<view-link entity-alias="TR" rel-entity-alias="CD" rel-optional="true">
+    		<key-map field-name="cuentaDestino" rel-field-name="cuentaBancariaId"/>
+    	</view-link>
+    	
+    </view-entity>
+      	
+    <view-entity entity-name="CuentaSucursalBanco"
+            package-name="org.ab.accounting.ledger"
+            title="Vista para consultar el detalle de las cuentas bancarias">
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>
+      <member-entity entity-alias="PAC" entity-name="PartyCuentaBancaria"/>
+      <member-entity entity-alias="SUC" entity-name="Sucursal"/>    
+      <member-entity entity-alias="TC" entity-name="TipoCuenta"/>
+      <member-entity entity-alias="UC" entity-name="UsoCuentaBancaria"/>                       
+      <alias entity-alias="CUE" name="cuentaBancariaId"/>
+      <alias entity-alias="CUE" name="sucursalId"/>
+      <alias entity-alias="CUE" name="nombreCuenta"/>
+      <alias entity-alias="CUE" name="numeroCuenta"/>
+      <alias entity-alias="CUE" name="descripcion"/>
+      <alias entity-alias="CUE" name="moneda"/>
+      <alias entity-alias="CUE" name="bancoId"/>
+      <alias entity-alias="CUE" name="habilitada"/>
+      <alias entity-alias="BAN" name="nombreBanco"/>
+      <alias entity-alias="SUC" name="nombreSucursal"/>
+      <alias entity-alias="PAC" name="partyId"/> 
+      <alias entity-alias="PAC" name="asignacion"/> 
+      <alias entity-alias="TC" name="nombre"/>
+      <alias entity-alias="UC" name="nombreUsoCuenta" field="nombre"/>                            
+      <view-link entity-alias="CUE" rel-entity-alias="BAN">
+        <key-map field-name="bancoId"/>
+      </view-link>
+      <view-link entity-alias="CUE" rel-entity-alias="SUC" rel-optional="true">
+        <key-map field-name="sucursalId"/>
+      </view-link>
+      <view-link entity-alias="CUE" rel-entity-alias="PAC">
+        <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+      <view-link entity-alias="CUE" rel-entity-alias="TC" rel-optional="true">
+        <key-map field-name="tipoCuentaBancariaId" rel-field-name="tipoCuentaId"/>
+      </view-link>     
+      <view-link entity-alias="CUE" rel-entity-alias="UC" rel-optional="true">
+        <key-map field-name="usoCuentaBancariaId" rel-field-name="usoCuentaId"/>
+      </view-link>                   
+    </view-entity>
+    
+    <view-entity entity-name="SaldosCuentasBancarias"
+            package-name="org.ab.accounting.ledger"
+            title="Vista para consultar el detalle de las cuentas bancarias por fecha">
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>  
+      <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>                          
+      <alias entity-alias="CUE" name="cuentaBancariaId" group-by="true"/>
+      <alias entity-alias="CUE" name="bancoId" group-by="true"/>
+      <alias entity-alias="CUE" name="saldoInicial" group-by="true"/>
+      <alias entity-alias="ATE" name="acctgTransId" group-by="true"/>
+      <alias entity-alias="ATE" name="debitCreditFlag" group-by="true"/>
+      <alias entity-alias="ATE" name="amount" function="sum"/>
+      <alias entity-alias="ATR" name="postedDate" group-by="true"/>  
+      <alias entity-alias="ATR" name="organizationPartyId" group-by="true"/>                           
+      <view-link entity-alias="CUE" rel-entity-alias="ATE">
+        <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+      <view-link entity-alias="ATE" rel-entity-alias="ATR">
+        <key-map field-name="acctgTransId"/>
+      </view-link>                          
+    </view-entity>
+    
+    <view-entity entity-name="BancoCuentas"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para ligar los solamente los bancos que tengan cuentas bancarias">
+      <member-entity entity-alias="BAN" entity-name="Banco"/>      
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>            
+      <alias entity-alias="BAN" name="bancoId" group-by="true"/>
+      <alias entity-alias="BAN" name="nombreBanco" group-by="true"/>      
+      <view-link entity-alias="BAN" rel-entity-alias="CUE">
+        <key-map field-name="bancoId"/>
+      </view-link>                  
+      <relation type="one" fk-name="CUENTA_BANCO" rel-entity-name="Banco">
+        <key-map field-name="bancoId"/>
+      </relation>                       
+    </view-entity>
+            
+    <view-entity entity-name="CuentasBanco"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener las cuentas bancarias de un solo banco y una sola organizacion">
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>
+      <member-entity entity-alias="PAC" entity-name="PartyCuentaBancaria"/>                        
+      <alias entity-alias="CUE" name="cuentaBancariaId" group-by="true"/>
+      <alias entity-alias="CUE" name="bancoId" group-by="true"/>
+      <alias entity-alias="CUE" name="numeroCuenta" group-by="true"/>
+      <alias entity-alias="CUE" name="nombreCuenta" group-by="true"/>
+      <alias entity-alias="CUE" name="habilitada" group-by="true"/>
+      <alias entity-alias="CUE" name="tipoCuentaBancariaId" group-by="true"/>
+      <alias entity-alias="CUE" name="usoCuentaBancariaId" group-by="true"/>      
+      <alias entity-alias="PAC" name="partyId" group-by="true"/>            
+      <view-link entity-alias="PAC" rel-entity-alias="CUE">
+        <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+      <view-link entity-alias="CUE" rel-entity-alias="BAN">
+        <key-map field-name="bancoId"/>
+      </view-link>                  
+      <relation type="one" fk-name="FK_DBO_BAN_CUE" rel-entity-name="Banco">
+        <key-map field-name="bancoId"/>
+      </relation>                       
+    </view-entity>
+    
+    
+    <view-entity entity-name="BancosCuentasPorOrganizacion"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener las cuentas bancarias filtradas por organizacion">
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>
+      <member-entity entity-alias="PAC" entity-name="PartyCuentaBancaria"/>                              
+      <alias entity-alias="BAN" name="bancoId" group-by="true"/>
+      <alias entity-alias="BAN" name="nombreBanco" group-by="true"/>
+      <alias entity-alias="PAC" name="partyId" group-by="true"/>                  
+      <view-link entity-alias="PAC" rel-entity-alias="CUE">
+        <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+      <view-link entity-alias="CUE" rel-entity-alias="BAN">
+        <key-map field-name="bancoId"/>
+      </view-link>                  
+      <relation type="one" fk-name="BANCO_CUENTA" rel-entity-name="Banco">
+        <key-map field-name="bancoId"/>
+      </relation>                       
+    </view-entity>
+    
+    <view-entity entity-name="InvoicePartyEventoContable"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener la informacion del invoice para la pantalla intermedia de Ejercido">
+      <member-entity entity-alias="INV" entity-name="Invoice"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>                              
+      <alias entity-alias="INV" name="invoiceId"/>
+      <alias entity-alias="INV" name="invoiceTypeId"/>
+      <alias entity-alias="INV" name="partyIdFrom"/>
+      <alias entity-alias="INV" name="partyId"/>
+      <alias entity-alias="INV" name="invoiceDate"/>
+      <alias entity-alias="INV" name="description"/>
+      <alias entity-alias="INV" name="currencyUomId"/>
+      <alias entity-alias="INV" name="acctgTransTypeId"/>
+      <alias entity-alias="INV" name="invoiceTotal"/>
+      <alias entity-alias="INV" name="statusId"/>
+      <alias entity-alias="EVE" name="descripcion"/>
+      <alias entity-alias="PAG" name="groupName"/>                  
+      <view-link entity-alias="INV" rel-entity-alias="EVE">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+      <view-link entity-alias="INV" rel-entity-alias="PAG">
+        <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+      </view-link>                                              
+    </view-entity>    
+
+    
+    <entity entity-name="OrdenPago" 
+    		package-name="org.ab.accounting.ledger"
+            title="Informacion general de una orden de pago">
+    	<field name="ordenPagoId" type="id-ne"/>
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="acctgTransTypeId" type="id-ne"/>
+    	<field name="statusId" type="id-ne"/> 
+    	<field name="paymentId" type="id-ne"/>
+    	<field name="fechaPago" type="date-time"></field>
+    	<prim-key field="ordenPagoId"/>    	
+      	<relation type="one" fk-name="ORDEN_PAGO_INVOICE" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="ORDEN_PAGO_EVENTO" rel-entity-name="EventoContable">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</relation>
+      	<relation type="one" fk-name="ORDEN_PAGO_ESTATUS" rel-entity-name="Estatus">
+        	<key-map field-name="statusId"/>
+      	</relation>
+      	<relation type="one" fk-name="ORDEN_PAGO_PAYMENT" rel-entity-name="Payment">
+        	<key-map field-name="paymentId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="OrdenCobro" 
+    		package-name="org.ab.accounting.ledger"
+            title="Informacion general de una orden de cobro">
+    	<field name="ordenCobroId" type="id-ne"/>
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="acctgTransTypeId" type="id-ne"/>
+    	<field name="statusId" type="id-ne"/> 
+    	<field name="paymentId" type="id-ne"/>
+    	<field name="fechaCobro" type="date-time"/>
+    	<prim-key field="ordenCobroId"/>    	
+      	<relation type="one" fk-name="FK_DBO_ORD_COB_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="ORDEN_COBRO_EVENTO" rel-entity-name="EventoContable">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_ORD_COB_STA" rel-entity-name="Estatus">
+        	<key-map field-name="statusId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_ORD_COB_PAY" rel-entity-name="Payment">
+        	<key-map field-name="paymentId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="OrdenPagoMulti" 
+    		package-name="org.ab.accounting.ledger"
+            title="Informacion de los multicargos y multiabonos que aplican para las Ordenes de pago">
+    	<field name="ordenPagoId" type="id"/>
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="invoiceItemSeqId" type="id-ne"/>
+    	<field name="secuenciaLineaContable" type="numeric"/>
+    	<field name="idCatalogoCargo" type="id-ne"/>
+    	<field name="idCatalogoAbono" type="id-ne"/>
+    	<field name="idCatalogoPres" type="id-ne"/>    	
+    	<field name="monto" type="fixed-point"/>
+    	<field name="montoRestante" type="fixed-point"/>    	    	
+    	<prim-key field="ordenPagoId"/>
+    	<prim-key field="invoiceId"/>    	
+    	<prim-key field="invoiceItemSeqId"/>
+    	<prim-key field="secuenciaLineaContable"/>      	  	
+      	<relation type="one" fk-name="FK_DBO_OPM_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_OPM_OP" rel-entity-name="OrdenPago">
+        	<key-map field-name="ordenPagoId"/>
+      	</relation>
+      	<index name="INDX_OPM" unique="true">
+      		<index-field name="secuenciaLineaContable"/>
+      		<index-field name="ordenPagoId"/>
+      		<index-field name="invoiceId"/>
+      		<index-field name="invoiceItemSeqId"/>
+      		<index-field name="lastUpdatedTxStamp"/>
+      	</index>
+    </entity>
+    
+    <entity entity-name="OrdenCobroMulti" 
+    		package-name="org.ab.accounting.ledger"
+            title="Informacion de los multicargos y multiabonos que aplican para las Ordenes de cobro">
+    	<field name="ordenCobroId" type="id"/>
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="invoiceItemSeqId" type="id-ne"/>
+    	<field name="secuenciaLineaContable" type="numeric"/>
+    	<field name="idCatalogoCargo" type="id-ne"/>
+    	<field name="idCatalogoAbono" type="id-ne"/>
+    	<field name="idCatalogoPres" type="id-ne"/>    	
+    	<field name="monto" type="fixed-point"/>   
+    	<field name="montoRestante" type="fixed-point"/> 	    	
+    	<prim-key field="ordenCobroId"/>
+    	<prim-key field="invoiceId"/>    	
+    	<prim-key field="invoiceItemSeqId"/>
+    	<prim-key field="secuenciaLineaContable"/>      	  	
+      	<relation type="one" fk-name="FK_DBO_OCM_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_OCM_OC" rel-entity-name="OrdenCobro">
+        	<key-map field-name="ordenCobroId"/>
+      	</relation>
+    </entity>
+           
+	<view-entity entity-name="PendienteTesoreriaEventoStatus"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el detalle de una Orden de pago patrimonial">
+      <member-entity entity-alias="PEN" entity-name="PendientesTesoreria"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="EST" entity-name="Estatus"/>                              
+      <alias entity-alias="PEN" name="idPendienteTesoreria" group-by="true"/>
+      <alias entity-alias="PEN" name="tipo" group-by="true"/>
+      <alias entity-alias="PEN" name="descripcion" group-by="true"/>      
+      <alias entity-alias="PEN" name="estatus" group-by="true"/>
+      <alias entity-alias="PEN" name="moneda" group-by="true"/>
+      <alias entity-alias="PEN" name="fechaTransaccion" group-by="true"/>
+      <alias entity-alias="PEN" name="fechaContable" group-by="true"/>
+      <alias entity-alias="PEN" name="acctgTransTypeId" group-by="true"/>
+      <alias entity-alias="PEN" name="bancoId" group-by="true"/>
+      <alias entity-alias="PEN" name="cuentaBancariaId" group-by="true"/>
+      <alias entity-alias="EVE" field="descripcion" name="descripcionEvento" group-by="true"/>
+      <alias entity-alias="EST" field="descripcion" name="descripcionEstatus" group-by="true"/>                                   
+      <view-link entity-alias="PEN" rel-entity-alias="EST">
+        <key-map field-name="estatus" rel-field-name="statusId"/>
+      </view-link>
+      <view-link entity-alias="PEN" rel-entity-alias="EVE" rel-optional="true">
+        <key-map field-name="acctgTransTypeId" rel-field-name="acctgTransTypeId"/>
+      </view-link>                            
+    </view-entity>
+          
+    
+    <view-entity entity-name="ConsultaOrdenPago"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el listado de las ordenes de pago por pagar">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>
+      <member-entity entity-alias="INV" entity-name="Invoice"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>                              
+      <alias entity-alias="ORD" name="ordenPagoId" group-by="true"/>
+      <alias entity-alias="ORD" name="createdStamp" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>      
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>
+      <alias entity-alias="ORD" name="invoiceId" group-by="true"/>
+      <alias entity-alias="ORD" name="acctgTransTypeId" group-by="true"/>
+      <alias entity-alias="ORD" name="statusId" group-by="true"/>
+      <alias entity-alias="ORD" name="fechaPago" group-by="true"/>
+      <alias entity-alias="INV" name="currencyUomId" group-by="true"/>
+      <alias entity-alias="INV" name="description" group-by="true"/>
+      <alias entity-alias="INV" name="partyIdFrom" group-by="true"/>
+      <alias entity-alias="EVE" name="descripcion" group-by="true"/>
+      <alias entity-alias="PAG" name="groupName" group-by="true"/>
+      <view-link entity-alias="INV" rel-entity-alias="ORD">
+        <key-map field-name="invoiceId"/>
+      </view-link>
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenPagoId"/>
+      </view-link>
+      <view-link entity-alias="INV" rel-entity-alias="PAG">
+        <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+      </view-link>                            
+      <view-link entity-alias="ORD" rel-entity-alias="EVE">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>                
+    </view-entity>
+    
+    <view-entity entity-name="ConsultaOrdenCobro"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el listado de las ordenes de cobro por cobrar">
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>
+      <member-entity entity-alias="INV" entity-name="Invoice"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>                              
+      <alias entity-alias="ORD" name="ordenCobroId" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>      
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>
+      <alias entity-alias="ORD" name="invoiceId" group-by="true"/>
+      <alias entity-alias="ORD" name="acctgTransTypeId" group-by="true"/>
+      <alias entity-alias="ORD" name="statusId" group-by="true"/>
+      <alias entity-alias="ORD" name="fechaCobro" group-by="true"/>
+      <alias entity-alias="INV" name="description" group-by="true"/>
+      <alias entity-alias="INV" name="partyId" group-by="true"/>
+      <alias entity-alias="INV" name="currencyUomId" group-by="true"/>
+      <alias entity-alias="EVE" name="descripcion" group-by="true"/>
+      <alias entity-alias="PAG" name="groupName" group-by="true"/>
+      <view-link entity-alias="INV" rel-entity-alias="ORD">
+        <key-map field-name="invoiceId"/>
+      </view-link>
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenCobroId"/>
+      </view-link>
+      <view-link entity-alias="INV" rel-entity-alias="PAG">
+        <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+      </view-link>                            
+      <view-link entity-alias="ORD" rel-entity-alias="EVE">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>                
+    </view-entity>
+        
+    <view-entity entity-name="ConsultaLineasContablesOrdenPago"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el listado de las lineas contables de una orden de pago">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="LIN" entity-name="LineaContable"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>
+      <alias entity-alias="ORD" name="ordenPagoId"/>
+      <alias entity-alias="ORD" name="acctgTransTypeId" />
+      <alias entity-alias="MUL" name="monto"/>
+      <alias entity-alias="MUL" name="montoRestante"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono"/>
+      <alias entity-alias="MUL" name="idCatalogoPres"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId"/>        
+      <alias entity-alias="LIN" name="secuencia"/>
+      <alias entity-alias="LIN" name="descripcion"/>
+      <alias entity-alias="LIN" name="catalogoCargo"/>
+      <alias entity-alias="LIN" name="catalogoAbono"/>
+      <view-link entity-alias="ORD" rel-entity-alias="LIN">
+		<key-map field-name="acctgTransTypeId"/>
+      </view-link>
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenPagoId"/>
+      </view-link>
+      <relation type="one" fk-name="ORDEN_PAGO_LINEAS" rel-entity-name="OrdenPago">
+        	<key-map field-name="ordenPagoId"/>
+      </relation>
+	<entity-condition>
+		<condition-expr entity-alias="MUL" field-name="secuenciaLineaContable" rel-entity-alias="LIN" rel-field-name="secuencia"/>
+	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="ConsultaLineasPresupuestalesOrdenPago"            
+        package-name="org.ab.accounting.ledger"
+        title="Vista para obtener el listado de las lineas presupuestales de una orden de pago">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaPresupuestal"/>
+      <member-entity entity-alias="INV" entity-name="InvoiceItem"/>                             
+      <alias entity-alias="ORD" name="ordenPagoId"/>
+      <alias entity-alias="ORD" name="acctgTransTypeId"/>  
+      <alias entity-alias="MUL" name="monto"/>
+      <alias entity-alias="MUL" name="montoRestante"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono"/>
+      <alias entity-alias="MUL" name="idCatalogoPres"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId"/>        
+      <alias entity-alias="LIN" name="secuencia"/>
+      <alias entity-alias="LIN" name="descripcion"/>
+      <alias entity-alias="LIN" name="catalogoCargo"/>
+      <alias entity-alias="LIN" name="catalogoAbono"/>      
+      <alias entity-alias="INV" name="acctgTagEnumId1"/>
+      <alias entity-alias="INV" name="acctgTagEnumId2"/>
+      <alias entity-alias="INV" name="acctgTagEnumId3"/>
+      <alias entity-alias="INV" name="acctgTagEnumId4"/>
+      <alias entity-alias="INV" name="acctgTagEnumId5"/>
+      <alias entity-alias="INV" name="acctgTagEnumId6"/>
+      <alias entity-alias="INV" name="acctgTagEnumId7"/>
+      <alias entity-alias="INV" name="acctgTagEnumId8"/>
+      <alias entity-alias="INV" name="acctgTagEnumId9"/>
+      <alias entity-alias="INV" name="acctgTagEnumId10"/>
+      <alias entity-alias="INV" name="acctgTagEnumId11"/>
+      <alias entity-alias="INV" name="acctgTagEnumId12"/>
+      <alias entity-alias="INV" name="acctgTagEnumId13"/>
+      <alias entity-alias="INV" name="acctgTagEnumId14"/>
+      <alias entity-alias="INV" name="acctgTagEnumId15"/>
+      <alias entity-alias="INV" name="acctgTagEnumIdAdmin" />
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenPagoId"/>
+      </view-link>
+      <view-link entity-alias="MUL" rel-entity-alias="INV">
+        <key-map field-name="invoiceItemSeqId"/>
+        <key-map field-name="invoiceId"/>
+      </view-link>  
+      <view-link entity-alias="ORD" rel-entity-alias="LIN" rel-optional="true">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+    </view-entity>
+        
+    <view-entity entity-name="ConsultaLineasContablesOrdenCobro"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el listado de las lineas contables de una orden de Cobro">
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaContable"/>                             
+      <alias entity-alias="ORD" name="ordenCobroId"/>      
+      <alias entity-alias="MUL" name="monto"/>
+      <alias entity-alias="MUL" name="montoRestante"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono"/>
+      <alias entity-alias="MUL" name="idCatalogoPres"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId"/>        
+      <alias entity-alias="LIN" name="secuencia"/>
+      <alias entity-alias="LIN" name="descripcion"/>
+      <alias entity-alias="LIN" name="catalogoCargo"/>
+      <alias entity-alias="LIN" name="catalogoAbono"/>
+      
+      <view-link entity-alias="ORD" rel-entity-alias="LIN">
+		<key-map field-name="acctgTransTypeId"/>
+      </view-link>
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenCobroId"/>
+      </view-link>
+      <relation type="one" fk-name="ORDEN_COBRO_LINEAS" rel-entity-name="OrdenCobro">
+        	<key-map field-name="ordenCobroId"/>
+      </relation>
+	<entity-condition>
+		<condition-expr entity-alias="MUL" field-name="secuenciaLineaContable" rel-entity-alias="LIN" rel-field-name="secuencia"/>
+	</entity-condition>
+    </view-entity>
+  
+    <view-entity entity-name="ConsultaLineasPresupuestalesOrdenCobro"            
+        package-name="org.ab.accounting.ledger"
+        title="Vista para obtener el listado de las lineas presupuestales de una orden de cobro">
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaPresupuestal"/>
+      <member-entity entity-alias="INV" entity-name="InvoiceItem"/>                             
+      <alias entity-alias="ORD" name="ordenCobroId"/>
+      <alias entity-alias="ORD" name="acctgTransTypeId"/>      
+      <alias entity-alias="MUL" name="monto"/>
+      <alias entity-alias="MUL" name="montoRestante"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono"/>
+      <alias entity-alias="MUL" name="idCatalogoPres"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId"/>        
+      <alias entity-alias="LIN" name="secuencia"/>
+      <alias entity-alias="LIN" name="descripcion"/>
+      <alias entity-alias="LIN" name="catalogoCargo"/>
+      <alias entity-alias="LIN" name="catalogoAbono"/>
+      <alias entity-alias="INV" name="acctgTagEnumId1"/>
+      <alias entity-alias="INV" name="acctgTagEnumId2"/>
+      <alias entity-alias="INV" name="acctgTagEnumId3"/>
+      <alias entity-alias="INV" name="acctgTagEnumId4"/>
+      <alias entity-alias="INV" name="acctgTagEnumId5"/>
+      <alias entity-alias="INV" name="acctgTagEnumId6"/>
+      <alias entity-alias="INV" name="acctgTagEnumId7"/>
+      <alias entity-alias="INV" name="acctgTagEnumId8"/>
+      <alias entity-alias="INV" name="acctgTagEnumId9"/>
+      <alias entity-alias="INV" name="acctgTagEnumId10"/>
+      <alias entity-alias="INV" name="acctgTagEnumId11"/>
+      <alias entity-alias="INV" name="acctgTagEnumId12"/>
+      <alias entity-alias="INV" name="acctgTagEnumId13"/>
+      <alias entity-alias="INV" name="acctgTagEnumId14"/>
+      <alias entity-alias="INV" name="acctgTagEnumId15"/>
+      <alias entity-alias="INV" name="acctgTagEnumIdAdmin" />
+      <view-link entity-alias="ORD" rel-entity-alias="MUL">
+        <key-map field-name="ordenCobroId"/>
+      </view-link>
+      <view-link entity-alias="MUL" rel-entity-alias="INV">
+        <key-map field-name="invoiceItemSeqId"/>
+        <key-map field-name="invoiceId"/>
+      </view-link>  
+      <view-link entity-alias="ORD" rel-entity-alias="LIN" rel-optional="true">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+    </view-entity>
+      
+    <view-entity entity-name="LineasPagoOrdenPago"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el listado de las lineas contables para sumarizar el monto presupuestal en el momento pagado">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaContable"/>                             
+      <alias entity-alias="ORD" name="ordenPagoId"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono"/>
+      <alias entity-alias="MUL" name="monto"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId"/>      
+      <alias entity-alias="LIN" name="catalogoCargo"/>
+      <alias entity-alias="LIN" name="catalogoAbono"/>
+      <alias entity-alias="LIN" name="excepcion"/>
+      <alias entity-alias="LIN" name="secuencia"/>                                                        
+      <view-link entity-alias="ORD" rel-entity-alias="LIN">
+        <key-map field-name="acctgTransTypeId"/>
+      </view-link>                       
+      <view-link entity-alias="LIN" rel-entity-alias="MUL">
+        <key-map field-name="secuencia" rel-field-name="secuenciaLineaContable"/>
+      </view-link>           
+      <relation type="one" fk-name="FK_DBO_ORD_PAG_LIN" rel-entity-name="OrdenPago">
+        	<key-map field-name="ordenPagoId"/>
+      </relation>                                                        
+    </view-entity>
+    
+    <view-entity entity-name="PaymentTypeVista"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el detalle de un pago creado y el tipo de pago">
+      <member-entity entity-alias="PAY" entity-name="Payment"/>
+      <member-entity entity-alias="PTY" entity-name="PaymentType"/>                                   
+      <alias entity-alias="PAY" name="paymentId"/>            
+      <alias entity-alias="PAY" name="comments"/>
+      <alias entity-alias="PAY" name="paymentRefNum"/>
+      <alias entity-alias="PAY" name="effectiveDate"/>      
+      <alias entity-alias="PAY" name="bancoId"/>
+      <alias entity-alias="PAY" name="cuentaBancariaId"/>
+      <alias entity-alias="PAY" name="paymentTypeId"/>  
+      <alias entity-alias="PTY" name="description"/>                                                           
+      <view-link entity-alias="PAY" rel-entity-alias="PTY">
+        <key-map field-name="paymentTypeId"/>
+      </view-link>                                                                                                    
+    </view-entity>
+    
+    <view-entity entity-name="AsignacionCuentaUsuario"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista de las asignaciones de las cuentas bancarias">
+      <member-entity entity-alias="PCB" entity-name="PartyCuentaBancaria"/>
+      <member-entity entity-alias="CTA" entity-name="CuentaBancaria"/>      
+      <member-entity entity-alias="PER" entity-name="Person"/>
+      <alias entity-alias="CTA" name="cuentaBancariaId"/>            
+      <alias entity-alias="CTA" name="nombreCuenta"/>
+      <alias entity-alias="CTA" name="numeroCuenta"/>
+      <alias entity-alias="CTA" name="descripcion"/>
+      <alias entity-alias="CTA" name="habilitada"/>
+      <alias entity-alias="CTA" name="tipoCuentaBancariaId"/>
+      <alias entity-alias="CTA" name="usoCuentaBancariaId"/>
+      <alias name="firstName" entity-alias="PER"/>
+      <alias name="lastName" entity-alias="PER"/>
+      <alias name="partyId" entity-alias="PER"/>
+      <alias entity-alias="PCB" name="asignacion"/>                                  
+      <view-link entity-alias="PCB" rel-entity-alias="PER" >
+           <key-map field-name="partyId"/>
+       </view-link>
+       <view-link entity-alias="PCB" rel-entity-alias="CTA" >
+           <key-map field-name="cuentaBancariaId" />
+       </view-link>                                         
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoPaymentApplication"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener los montos que se registraran en Payment Application">
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>
+      <member-entity entity-alias="ITE" entity-name="InvoiceItem"/>      
+      <alias entity-alias="MUL" name="monto" function="sum"/>            
+      <alias entity-alias="MUL" name="ordenPagoId" group-by="true"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>
+      <view-link entity-alias="ITE" rel-entity-alias="MUL" >
+      	<key-map field-name="invoiceItemSeqId"/>
+      	<key-map field-name="invoiceId"/>
+      </view-link>                                                    
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoPaymentApplicationIngreso"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener los montos que se registraran en Payment Application">
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>
+      <member-entity entity-alias="ITE" entity-name="InvoiceItem"/>      
+      <alias entity-alias="MUL" name="monto" function="sum"/>            
+      <alias entity-alias="MUL" name="ordenCobroId" group-by="true"/>
+      <alias entity-alias="MUL" name="invoiceItemSeqId" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>
+      <view-link entity-alias="ITE" rel-entity-alias="MUL" >
+      	<key-map field-name="invoiceItemSeqId"/>
+      	<key-map field-name="invoiceId"/>
+      </view-link>                                                    
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerDetalleOrdenPagoPatrimonial"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el detalle de la orden de pago patrimonial">
+      <member-entity entity-alias="ITE" entity-name="PendientesTesoreriaItem"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>      
+      <alias entity-alias="ITE" name="secuenciaLineaContable"/>            
+      <alias entity-alias="ITE" name="descripcion"/>      
+      <alias entity-alias="ITE" name="idCatalogoCargo"/>
+      <alias entity-alias="ITE" name="idCatalogoAbono"/>
+      <alias entity-alias="PAG" name="groupName"/>
+      <alias entity-alias="PAG" name="partyId"/>                                                          
+    </view-entity>            
+    
+    <view-entity entity-name="BancoPorAsignacionCuentaUsuario"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener los bancos que puede consultar un usuario dada sus asignaciones de cuentas bancarias">
+      <member-entity entity-alias="PAR" entity-name="PartyCuentaBancaria"/>
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>      
+      <member-entity entity-alias="PER" entity-name="Person"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>
+      <alias entity-alias="BAN" name="bancoId" group-by="true"/>            
+      <alias entity-alias="BAN" name="nombreBanco" group-by="true"/>
+      <alias entity-alias="PER" name="partyId" group-by="true"/>                                        
+      <view-link entity-alias="PER" rel-entity-alias="PAR" >
+           <key-map field-name="partyId"/>
+      </view-link>
+       <view-link entity-alias="PAR" rel-entity-alias="CUE" >
+           <key-map field-name="cuentaBancariaId" />
+       </view-link>
+       <view-link entity-alias="CUE" rel-entity-alias="BAN" >
+           <key-map field-name="bancoId" />
+       </view-link>                                         
+    </view-entity>           
+    
+    <view-entity entity-name="CuentasPorAsignacionCuentaUsuario"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener las cuentas bancarias que puede consultar un usuario dada sus asignaciones">
+      <member-entity entity-alias="PAR" entity-name="PartyCuentaBancaria"/>
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>      
+      <member-entity entity-alias="PER" entity-name="Person"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>
+      <alias entity-alias="CUE" name="cuentaBancariaId"/>            
+      <alias entity-alias="CUE" name="nombreCuenta"/>
+      <alias entity-alias="CUE" name="numeroCuenta"/>
+      <alias entity-alias="CUE" name="descripcion"/>      
+      <alias entity-alias="CUE" name="bancoId"/>    
+      <alias entity-alias="PER" name="partyId"/>                                    
+      <view-link entity-alias="PER" rel-entity-alias="PAR" >
+           <key-map field-name="partyId"/>
+      </view-link>
+       <view-link entity-alias="PAR" rel-entity-alias="CUE" >
+           <key-map field-name="cuentaBancariaId" />
+       </view-link>
+       <view-link entity-alias="CUE" rel-entity-alias="BAN" >
+           <key-map field-name="bancoId" />
+       </view-link>                                         
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoContableAPagar"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el monto y los conceptos a pagar contablemente en una orden de pago">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaContable"/>
+      <alias entity-alias="ORD" name="ordenPagoId" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>
+      <alias entity-alias="MUL" name="montoRestante" function="sum"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable" group-by="true"/>            
+      <alias entity-alias="LIN" name="secuencia" group-by="true"/>
+      <alias entity-alias="LIN" name="descripcion" group-by="true"/>                                               
+      <view-link entity-alias="LIN" rel-entity-alias="ORD" >
+           <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="MUL" >
+           <key-map field-name="ordenPagoId" />
+       </view-link>                    
+       <entity-condition>
+            <condition-expr entity-alias="MUL" field-name="secuenciaLineaContable" operator="equals" rel-entity-alias="LIN" rel-field-name="secuencia"/>
+      </entity-condition>                           
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoContableACobrar"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el monto y los conceptos a pagar contablemente en una orden de cobro">
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaContable"/>
+      <alias entity-alias="ORD" name="ordenCobroId" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>
+      <alias entity-alias="MUL" name="montoRestante" function="sum"/>
+      <alias entity-alias="MUL" name="idCatalogoCargo" group-by="true"/>
+      <alias entity-alias="MUL" name="idCatalogoAbono" group-by="true"/>
+      <alias entity-alias="MUL" name="secuenciaLineaContable" group-by="true"/>            
+      <alias entity-alias="LIN" name="secuencia" group-by="true"/>
+      <alias entity-alias="LIN" name="descripcion" group-by="true"/>                                               
+      <view-link entity-alias="LIN" rel-entity-alias="ORD" >
+           <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="MUL" >
+           <key-map field-name="ordenCobroId" />
+       </view-link>                    
+       <entity-condition>
+            <condition-expr entity-alias="MUL" field-name="secuenciaLineaContable" operator="equals" rel-entity-alias="LIN" rel-field-name="secuencia"/>
+      </entity-condition>                           
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoPresupuestalAPagar"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el monto y los conceptos a pagar presupuestalmente en una orden de pago">
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenPagoMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaPresupuestal"/>
+      <alias entity-alias="ORD" name="ordenPagoId" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>
+      <alias entity-alias="MUL" name="montoRestante" function="sum"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>            
+      <alias entity-alias="LIN" name="secuencia" group-by="true"/>
+      <alias entity-alias="LIN" name="descripcion" group-by="true"/>    
+      <alias entity-alias="LIN" name="catalogoCargo" group-by="true"/>
+      <alias entity-alias="LIN" name="catalogoAbono" group-by="true"/>                                           
+      <view-link entity-alias="LIN" rel-entity-alias="ORD" >
+           <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="MUL" >
+           <key-map field-name="ordenPagoId" />
+       </view-link>                                                      
+    </view-entity>
+    
+    <view-entity entity-name="ObtenerMontoPresupuestalACobrar"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener el monto y los conceptos a pagar presupuestalmente en una orden de cobro">
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <member-entity entity-alias="MUL" entity-name="OrdenCobroMulti"/>      
+      <member-entity entity-alias="LIN" entity-name="LineaPresupuestal"/>
+      <alias entity-alias="ORD" name="ordenCobroId" group-by="true"/>
+      <alias entity-alias="MUL" name="monto" function="sum"/>
+      <alias entity-alias="MUL" name="montoRestante" function="sum"/>
+      <alias entity-alias="MUL" name="idCatalogoPres" group-by="true"/>            
+      <alias entity-alias="LIN" name="secuencia" group-by="true"/>
+      <alias entity-alias="LIN" name="descripcion" group-by="true"/>    
+      <alias entity-alias="LIN" name="catalogoCargo" group-by="true"/>
+      <alias entity-alias="LIN" name="catalogoAbono" group-by="true"/>                                           
+      <view-link entity-alias="LIN" rel-entity-alias="ORD" >
+           <key-map field-name="acctgTransTypeId"/>
+      </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="MUL" >
+           <key-map field-name="ordenCobroId" />
+       </view-link>                                                      
+    </view-entity>
+    
+    <view-entity entity-name="ConsultaPagosOrdenPago"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener los montos aplicados a una orden de pago">
+      <member-entity entity-alias="PAY" entity-name="Payment"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>      
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="STA" entity-name="StatusItem"/>
+      <alias entity-alias="PAY" name="paymentId" />
+      <alias entity-alias="PAY" name="ordenPagoId" />
+      <alias entity-alias="PAY" name="partyIdFrom" />
+      <alias entity-alias="PAY" name="partyIdTo" />            
+      <alias entity-alias="PAY" name="statusId" />           
+      <alias entity-alias="PAY" name="paymentRefNum" />
+      <alias entity-alias="PAY" name="comments" />
+      <alias entity-alias="PAY" name="amount" />      
+      <alias entity-alias="PAY" name="bancoId" />
+      <alias entity-alias="PAY" name="cuentaBancariaId" />
+      <alias entity-alias="PAY" name="poliza" />
+      <alias entity-alias="PAY" name="acctgTransId" />
+      <alias entity-alias="BAN" name="nombreBanco" />
+      <alias entity-alias="STA" name="description" />    
+      <alias entity-alias="CUE" name="nombreCuenta" />
+      <alias entity-alias="CUE" name="descripcion" />
+      <alias entity-alias="CUE" name="numeroCuenta" />                                                            
+      <view-link entity-alias="PAY" rel-entity-alias="BAN" >
+           <key-map field-name="bancoId"/>
+      </view-link>
+      <view-link entity-alias="PAY" rel-entity-alias="CUE" >
+           <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+       <view-link entity-alias="PAY" rel-entity-alias="STA" >
+           <key-map field-name="statusId" />
+       </view-link>                                                      
+    </view-entity>
+    
+    <view-entity entity-name="ConsultaCobrosOrdenCobro"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener los montos aplicados a una orden de cobro">
+      <member-entity entity-alias="PAY" entity-name="Payment"/>
+      <member-entity entity-alias="BAN" entity-name="Banco"/>      
+      <member-entity entity-alias="CUE" entity-name="CuentaBancaria"/>
+      <member-entity entity-alias="STA" entity-name="StatusItem"/>
+      <alias entity-alias="PAY" name="paymentId" />
+      <alias entity-alias="PAY" name="ordenCobroId" />
+      <alias entity-alias="PAY" name="partyIdFrom" />
+      <alias entity-alias="PAY" name="partyIdTo" />            
+      <alias entity-alias="PAY" name="statusId" />           
+      <alias entity-alias="PAY" name="paymentRefNum" />
+      <alias entity-alias="PAY" name="comments" />
+      <alias entity-alias="PAY" name="amount" />      
+      <alias entity-alias="PAY" name="bancoId" />
+      <alias entity-alias="PAY" name="cuentaBancariaId" />
+      <alias entity-alias="PAY" name="poliza" />
+      <alias entity-alias="PAY" name="acctgTransId" />
+      <alias entity-alias="BAN" name="nombreBanco" />
+      <alias entity-alias="STA" name="description" />    
+      <alias entity-alias="CUE" name="nombreCuenta" />
+      <alias entity-alias="CUE" name="descripcion" />
+      <alias entity-alias="CUE" name="numeroCuenta" />                                                            
+      <view-link entity-alias="PAY" rel-entity-alias="BAN" >
+           <key-map field-name="bancoId"/>
+      </view-link>
+      <view-link entity-alias="PAY" rel-entity-alias="CUE" >
+           <key-map field-name="cuentaBancariaId"/>
+      </view-link>
+       <view-link entity-alias="PAY" rel-entity-alias="STA" >
+           <key-map field-name="statusId" />
+       </view-link>                                                      
+    </view-entity>
+    
+    <view-entity entity-name="ConsultarDescripcionesOrdenPago"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener las descripciones y nombres de evento, auxiliar, estatusde una orden de pago">
+      <member-entity entity-alias="INV" entity-name="Invoice"/>
+      <member-entity entity-alias="EST" entity-name="Estatus"/>      
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="ORD" entity-name="OrdenPago"/>
+      <member-entity entity-alias="PAT" entity-name="PaymentType"/>
+      <alias entity-alias="INV" name="partyIdFrom" />
+      <alias entity-alias="INV" name="invoiceDate" />
+      <alias entity-alias="INV" name="description" />
+      <alias entity-alias="INV" name="currencyUomId" />
+      <alias entity-alias="INV" name="invoiceId" />
+      <alias entity-alias="INV" name="paymentTypeId" />            
+      <alias entity-alias="EST" name="descripcionStatus" field="descripcion" />           
+      <alias entity-alias="PAG" name="groupName" />      
+      <alias entity-alias="EVE" name="descripcionEvento" field="descripcion" />
+      <alias entity-alias="ORD" name="ordenPagoId" /> 
+      <alias entity-alias="PAT" name="descriptionPayment" field="description"/>                                                                                   
+       <view-link entity-alias="EST" rel-entity-alias="ORD" >
+           <key-map field-name="statusId" />
+       </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="EVE" >
+           <key-map field-name="acctgTransTypeId" />
+       </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="INV" >
+           <key-map field-name="invoiceId"/>
+      </view-link>
+       <view-link entity-alias="INV" rel-entity-alias="PAG" >
+           <key-map field-name="partyIdFrom" rel-field-name="partyId" />
+       </view-link>
+       
+        <view-link entity-alias="INV" rel-entity-alias="PAT" >
+           <key-map field-name="paymentTypeId"/>
+      </view-link>
+                                                             
+    </view-entity> 
+    
+    <view-entity entity-name="ConsultarDescripcionesOrdenCobro"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para obtener las descripciones y nombres de evento, auxiliar, estatusde una orden de cobro">
+      <member-entity entity-alias="INV" entity-name="Invoice"/>
+      <member-entity entity-alias="EST" entity-name="Estatus"/>      
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>
+      <member-entity entity-alias="EVE" entity-name="EventoContable"/>
+      <member-entity entity-alias="ORD" entity-name="OrdenCobro"/>
+      <alias entity-alias="INV" name="partyIdFrom" />
+      <alias entity-alias="INV" name="invoiceDate" />
+      <alias entity-alias="INV" name="description" />
+      <alias entity-alias="INV" name="currencyUomId" />
+      <alias entity-alias="INV" name="invoiceId" />            
+      <alias entity-alias="EST" name="descripcionStatus" field="descripcion" />           
+      <alias entity-alias="PAG" name="groupName" />      
+      <alias entity-alias="EVE" name="descripcionEvento" field="descripcion" />
+      <alias entity-alias="ORD" name="ordenCobroId" />                                                                                    
+       <view-link entity-alias="EST" rel-entity-alias="ORD" >
+           <key-map field-name="statusId" />
+       </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="EVE" >
+           <key-map field-name="acctgTransTypeId" />
+       </view-link>
+       <view-link entity-alias="ORD" rel-entity-alias="INV" >
+           <key-map field-name="invoiceId"/>
+      </view-link>
+       <view-link entity-alias="INV" rel-entity-alias="PAG" >
+           <key-map field-name="partyIdFrom" rel-field-name="partyId" />
+       </view-link>                                                      
+    </view-entity>
+    
+    <extend-entity entity-name="Invoice">        
+      	<field name="poliza" type="id-ne"/>
+      	<field name="paymentTypeId" type="id-ne"></field>
+      	<field name="acctgTransTypeId" type="id-ne"/>
+      	<field name="createdByUserLogin" type="id-vlong" />
+        <relation type="one" fk-name="INV_ACCT_TRANS_TYP" rel-entity-name="EventoContable">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</relation>
+        <relation type="one" fk-name="INVOICE_USER_LOGIN" rel-entity-name="UserLogin">
+        	<key-map field-name="createdByUserLogin" rel-field-name="userLoginId"/>
+      	</relation>   	   	
+      	<relation type="one" fk-name="INVOICE_PAY_TP" rel-entity-name="PaymentType">
+        <key-map field-name="paymentTypeId"/>
+      </relation>
+    </extend-entity>   
+
+	<view-entity entity-name="AcctgTransEntrySumTipoTrans"
+	        package-name="mx.com.ab.contabilidad.entidades" 
+	        title="Suma de registros contables por tipo de transacción">
+	
+		<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+		<member-entity entity-alias="GLA" entity-name="GlAccount"/>
+	
+		<!-- SELECT -->
+		<alias entity-alias="ATE" name="glAccountId" group-by="true" />
+		<alias entity-alias="ATE" name="debitCreditFlag" group-by="true"/>
+		<alias entity-alias="ATE" name="amount" function="sum"/>
+		<alias entity-alias="GLA" name="glAccountClassId" group-by="true"/>
+		<!-- WHERE -->
+		<alias entity-alias="ATR" name="postedDate" />
+		<alias entity-alias="ATR" name="isPosted"/>
+		<alias entity-alias="ATR" name="acctgTransTypeId" />
+		<alias entity-alias="ATE" name="organizationPartyId" />
+		
+		
+		<view-link entity-alias="ATR" rel-entity-alias="ATE">
+		    <key-map field-name="acctgTransId"/>
+		</view-link>
+		<view-link entity-alias="ATE" rel-entity-alias="GLA">
+           <key-map field-name="glAccountId"/>
+       </view-link>
+	</view-entity>                                        
+
+    <entity entity-name="UsoCuentaBancaria" 
+            package-name="org.ab.accounting.ledger"
+            title="Catalogo de uso de cuenta">
+    	<description>Catálogo de uso de cuenta</description>
+    	<field name="usoCuentaId" type="id-ne"/>
+    	<field name="nombre" type="name"/>
+    	<field name="descripcion" type="description"/>
+      	<prim-key field="usoCuentaId"/>
+    </entity>
+    
+    <entity entity-name="TipoCuentaBancaria" 
+            package-name="org.ab.accounting.ledger"
+            title="Catalogo de tipo de cuenta">
+    	<description>Catálogo de tipo de cuenta</description>
+    	<field name="tipoCuentaId" type="id-ne"/>
+    	<field name="nombre" type="name"/>
+    	<field name="descripcion" type="description"/>
+      	<prim-key field="tipoCuentaId"/>
+    </entity>                              
+    
+    <view-entity entity-name="AcctgTransEntrySumTipoTrans"
+	        package-name="mx.com.ab.contabilidad.entidades" 
+	        title="Suma de registros contables por tipo de transacción">
+	
+		<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+		<member-entity entity-alias="GLA" entity-name="GlAccount"/>
+	
+		<!-- SELECT -->
+		<alias entity-alias="ATE" name="glAccountId" group-by="true" />
+		<alias entity-alias="ATE" name="debitCreditFlag" group-by="true"/>
+		<alias entity-alias="ATE" name="amount" function="sum"/>
+		<alias entity-alias="GLA" name="glAccountClassId" group-by="true"/>
+		<!-- WHERE -->
+		<alias entity-alias="ATR" name="postedDate" />
+		<alias entity-alias="ATR" name="isPosted"/>
+		<alias entity-alias="ATR" name="acctgTransTypeId" />
+		<alias entity-alias="ATE" name="organizationPartyId" />
+		
+		
+		<view-link entity-alias="ATR" rel-entity-alias="ATE">
+		    <key-map field-name="acctgTransId"/>
+		</view-link>
+		<view-link entity-alias="ATE" rel-entity-alias="GLA">
+           <key-map field-name="glAccountId"/>
+       </view-link>
+	</view-entity>  
+	
+	<entity entity-name="PagoExterno" package-name="com.absoluciones.tesoreria">
+		<field name="pagoExternoId" type="id-ne" />
+        <field name="clavePresupuestal" type="description"/>
+        <field name="userLoginId" type="id-vlong-ne" />
+        <field name="acctgTransId" type="id-ne" />
+        <prim-key field="pagoExternoId" />
+		<relation type="one" fk-name="FK_DBO_PEXT_USR" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PEXT_ACCTG" rel-entity-name="AcctgTrans">
+			<key-map field-name="acctgTransId"/>
+		</relation>		
+	</entity>                                      
+             
+</entitymodel>
+

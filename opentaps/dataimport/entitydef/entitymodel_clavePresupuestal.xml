@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Clave Presupuestal</title>
+    <description>Se almacenaran todas las claves presupuestales que se registren dentro del sistema</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+    <entity entity-name="ClavePresupuestal" package-name="org.opentaps.dataimport"
+            title="Tabla para almacenar las diferentes claves presupuestales">   
+        <field name="clavePresupuestal" type="description"/>
+        <field name="tipo" type="id-ne"/>
+        <field name="idSecuencia" type="id-ne"/>
+        <field name="clasificacion1" type="description"/> 
+        <field name="clasificacion2" type="description"/>
+        <field name="clasificacion3" type="description"/>
+        <field name="clasificacion4" type="description"/>
+        <field name="clasificacion5" type="description"/>
+        <field name="clasificacion6" type="description"/>
+        <field name="clasificacion7" type="description"/>
+        <field name="clasificacion8" type="description"/>
+        <field name="clasificacion9" type="description"/>
+        <field name="clasificacion10" type="description"/>
+        <field name="clasificacion11" type="description"/>
+        <field name="clasificacion12" type="description"/>
+        <field name="clasificacion13" type="description"/>
+        <field name="clasificacion14" type="description"/>
+        <field name="clasificacion15" type="description"/>
+        <field name="inactivo" type="indicator"/>
+        <prim-key field="clavePresupuestal"/>
+        <relation rel-entity-name="EstructuraClave" type="one" fk-name="FK_DBO_ESTRUCT">
+        	<key-map field-name="idSecuencia"/>
+        </relation>
+        <index name="INDX_CVE_PRES" unique="true">
+        	<index-field name="clavePresupuestal"/>
+        	<index-field name="clasificacion1"/>
+        	<index-field name="clasificacion2"/>
+        	<index-field name="clasificacion3"/>
+        	<index-field name="clasificacion4"/>
+        	<index-field name="clasificacion5"/>
+        	<index-field name="clasificacion6"/>
+        	<index-field name="clasificacion7"/>
+        	<index-field name="clasificacion8"/>
+        	<index-field name="clasificacion9"/>
+        	<index-field name="clasificacion10"/>
+        	<index-field name="clasificacion11"/>
+        	<index-field name="clasificacion12"/>
+        	<index-field name="clasificacion13"/>
+        	<index-field name="clasificacion14"/>
+        	<index-field name="clasificacion15"/>
+        </index>
+    </entity>
+    
+    <entity entity-name="SuficienciaPresupuestal" package-name="org.opentaps.dataimport"
+            title="Tabla para indicar si el sistema valida suficiencia presupuestal">   
+        <field name="suficienciaPresupuestalId" type="id-ne"/>
+        <field name="flag" type="indicator"/>
+        <prim-key field="suficienciaPresupuestalId"/>
+    </entity>
+    
+	<view-entity entity-name="ClasificacionAgrupada" package-name="org.opentaps.dataimport"
+    		title="Vista para agrupar clasificaciones">
+    	<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />		
+    	<alias name="clasificacion1" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion2" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion3" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion4" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion5" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion6" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion7" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion8" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion10" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion11" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion12" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion13" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion14" entity-alias="CVE" group-by="true"/>
+    	<alias name="clasificacion15" entity-alias="CVE" group-by="true"/>
+    	<alias name="tipo" entity-alias="CVE"/>
+    	<alias name="inactivo" entity-alias="CVE" />
+    </view-entity>    
+</entitymodel>

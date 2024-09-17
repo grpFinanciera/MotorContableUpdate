@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Control Patrimonial Services</description>
+    <version>1.0</version>
+        
+    <service name="guardaActivoFijo" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="guardaActivoFijo">
+    	<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false" description="Fecha Contable"/>
+        <attribute name="fixedAssetTypeId" type="String" mode="IN" optional="false" description="Tipo de activo fijo"/>
+        <attribute name="idMotivo" type="String" mode="IN" optional="false" description="Motivo de alta"/>
+    	<attribute name="productId" type="String" mode="IN" optional="false" description="Producto"/>    	
+    	<attribute name="nombreActivo" type="String" mode="IN" optional="false" description="Nombre de activo fijo"/>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderItemId" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaAdquisicion" type="Timestamp" mode="IN" optional="false" description="Fecha Adquisicion"/>
+        <attribute name="statusId" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroSerie" type="String" mode="IN" optional="true"/>
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false" description="Costo de compra"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/>
+        <attribute name="ubicacionRapidaId" type="String" mode="IN" optional="false" description="Ubicación física"/>
+        <attribute name="marca" type="String" mode="IN" optional="true"/>
+        <attribute name="modelo" type="String" mode="IN" optional="true"/>
+        <attribute name="proveedorId" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="false" description="Área"/>
+        <attribute name="observaciones" type="String" mode="IN" optional="true"/>
+        <attribute name="caracteristicas" type="String" mode="IN" optional="true"/>
+        <attribute name="partidaGenerica" type="String" mode="IN" optional="true"/>
+        <attribute name="fixedAssetIdAnterior" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationId" type="String" mode="IN" optional="false" description="Organismo"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="true" description="Almacén"/>
+        
+        <attribute name="resguardante" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioResguardo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinResguardo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaAsignacion" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="comentariosAsignacion" type="String" mode="IN" optional="true"/>        
+        
+        <attribute name="fechaUltimoServicio" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaSiguienteServicio" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinalVidaUtil" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaRealVidaUtil" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaVencimientoGarantia" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="edoFisicoId" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroFactura" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroPoliza" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioPoliza" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinPoliza" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="aniosVidaUtil" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="placa" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoUnidadVehiculoId" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="valorSalvamento" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="depreciacion" type="BigDecimal" mode="IN" optional="true"/>
+        
+        <attribute name="domicilio" type="String" mode="IN" optional="true"/>
+        <attribute name="municipio" type="String" mode="IN" optional="true"/>
+        <attribute name="localidad" type="String" mode="IN" optional="true"/>
+        <attribute name="ejido" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoTerreno" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoDocLegalPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="descDocLegalPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="origenAdquisicion" type="String" mode="IN" optional="true"/>
+        <attribute name="formaAdquisicion" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoEmisorTituloPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="valorContruccion" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="valorRazonable" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="fechaAvaluo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaTituloPropiedad" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="claveCatastral" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioClaveCatastral" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaVenciClaveCatastral" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="superficieTerreno" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="superficieConstruccion" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="superficieDisponible" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="folioRegPubliPropieComercio" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInscRegPropieComer" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="ciudadInscRegPubPropComer" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaIncorInventario" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fixedAssetId" type="String" mode="OUT" optional="true"/>        
+    </service>
+    
+    <service name="editarActivoFijo" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="editarActivoFijo">
+    	<!-- <implements service="guardaActivoFijo"/> -->
+    	<attribute name="fixedAssetId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="fixedAssetTypeId" type="String" mode="IN" optional="false" description="Tipo de activo fijo"/>
+    	<attribute name="productId" type="String" mode="IN" optional="false" description="Producto"/>    	
+    	<attribute name="nombreActivo" type="String" mode="IN" optional="false" description="Nombre de activo fijo"/>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderItemId" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaAdquisicion" type="Timestamp" mode="IN" optional="false" description="Fecha Adquisicion"/>
+        <attribute name="statusId" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroSerie" type="String" mode="IN" optional="true"/>
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false" description="Costo de compra"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/>
+        <attribute name="ubicacionRapidaId" type="String" mode="IN" optional="false" description="Ubicación física"/>
+        <attribute name="marca" type="String" mode="IN" optional="true"/>
+        <attribute name="modelo" type="String" mode="IN" optional="true"/>
+        <attribute name="proveedorId" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="false" description="Área"/>
+        <attribute name="observaciones" type="String" mode="IN" optional="true"/>
+        <attribute name="caracteristicas" type="String" mode="IN" optional="true"/>
+        <attribute name="partidaGenerica" type="String" mode="IN" optional="true"/>
+        <attribute name="fixedAssetIdAnterior" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationId" type="String" mode="IN" optional="false" description="Organismo"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="true" description="Almacén"/>
+        
+        <attribute name="resguardante" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioResguardo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinResguardo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaAsignacion" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="comentariosAsignacion" type="String" mode="IN" optional="true"/>        
+        
+        <attribute name="fechaUltimoServicio" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaSiguienteServicio" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinalVidaUtil" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaRealVidaUtil" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaVencimientoGarantia" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="edoFisicoId" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroFactura" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroPoliza" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioPoliza" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaFinPoliza" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="aniosVidaUtil" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="placa" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoUnidadVehiculoId" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="valorSalvamento" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="depreciacion" type="BigDecimal" mode="IN" optional="true"/>
+        
+        <attribute name="domicilio" type="String" mode="IN" optional="true"/>
+        <attribute name="municipio" type="String" mode="IN" optional="true"/>
+        <attribute name="localidad" type="String" mode="IN" optional="true"/>
+        <attribute name="ejido" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoTerreno" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoDocLegalPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="descDocLegalPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="origenAdquisicion" type="String" mode="IN" optional="true"/>
+        <attribute name="formaAdquisicion" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoEmisorTituloPropiedad" type="String" mode="IN" optional="true"/>
+        <attribute name="valorContruccion" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="valorRazonable" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="fechaAvaluo" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaTituloPropiedad" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="claveCatastral" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInicioClaveCatastral" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaVenciClaveCatastral" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="superficieTerreno" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="superficieConstruccion" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="superficieDisponible" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="folioRegPubliPropieComercio" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaInscRegPropieComer" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="ciudadInscRegPubPropComer" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaIncorInventario" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="bajaActivoFijo" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="bajaActivoFijo">
+    	<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="fixedAssetId" type="String" mode="IN" optional="false"/>
+    	<attribute name="fixedAssetTypeId" type="String" mode="IN" optional="false"/>
+    	<attribute name="monto" type="String" mode="IN" optional="false"/>
+    	<attribute name="montoDepreciacion" type="String" mode="IN" optional="true"/>
+    	<attribute name="idMotivo" type="String" mode="IN" optional="false"/>
+    	<attribute name="nombreActivo" type="String" mode="IN" optional="false"/>
+    	<attribute name="comentario" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="ProcesoDepreciacion" engine="java"
+            location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" invoke="procesoDepreciacion" auth="true" transaction-timeout="28800">
+        <description>Realiza la depreciacion de una categoria de activo fijo en un periodo dado</description>
+        <attribute name="fixedAssetTypeId" type="String" mode="IN"  optional="false" description="Tipo de activo fijo a depreciar"/>
+        <attribute name="mesId" type="String" mode="IN"  optional="false" description="Mes de depreciacion"/>
+        <attribute name="enumCode" type="String" mode="IN"  optional="false" description="Anio de depreciacion"/>
+        <!--<attribute name="acctgTransTypeId" type="String" mode="IN"  optional="false" description="Evento contable"/>-->
+        <attribute name="comentario" type="String" mode="IN"  optional="false" description="Comentario para la depreciacion"/>
+        <attribute name="poliza" type="String" mode="OUT"  optional="true" description="Identificador de la poliza contable generada"/>
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="false" />
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+    </service>
+        
+    <service name="verResguardoActivoFijo" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="verResguardoActivoFijo">
+        <attribute name="fixedAssetId" type="String" mode="INOUT" optional="false"/>
+    	<attribute name="partyId" type="String" mode="IN" optional="false"/>    	
+    	<attribute name="fechaDesde" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="fechaHasta" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="fechaAsignacion" type="Timestamp" mode="IN" optional="true"/>        
+        <attribute name="statusId" type="String" mode="IN" optional="false"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>                
+    </service>       
+    
+    <service name="cargarPaginaActivo" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="cargarPaginaActivo">
+        <attribute name="fixedAssetId" type="String" mode="INOUT" optional="false"/>    	       
+    </service> 
+        
+    <service name="actualizaPolizaSeguro" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="actualizaPolizaSeguro">
+        <attribute name="numPolizaNuevo" type="String" mode="IN" optional="false" description="Número de póliza de seguro nueva"/>
+    	<attribute name="numPolizaAnt" type="String" mode="IN" optional="false" description="Número de póliza de seguro anterior"/>    	
+    	<attribute name="fechaDesdeNueva" type="Timestamp" mode="IN" optional="false" description="Fecha de incio de póliza de seguro nueva"/>
+        <attribute name="fechaHastaNueva" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="comentario" type="String" mode="IN" optional="true"/>               
+    </service>
+    
+    <service name="asignarPermisoAlmacen" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="asignarPermisoAlmacen">
+        <attribute name="partyId" type="String" mode="IN" optional="false" description="Usuario"/>
+    	<attribute name="facilityId" type="String" mode="IN" optional="false" description="Almacén"/>    	    	              
+    </service>           
+    
+    <service name="asignarResponsablePermisoAlmacen" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="asignarResponsablePermisoAlmacen">
+        <attribute name="partyId" type="String" mode="IN" optional="false" description="Usuario"/>
+    	<attribute name="facilityId" type="String" mode="IN" optional="false" description="Almacén"/>    	    	              
+    </service>
+             
+    <service name="actualizarResguardos" engine="java" location="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" 
+    		auth="true" invoke="actualizarResguardos">		
+		<attribute name="nuevoResguardante" type="String" mode="IN" optional="false"/>
+		<attribute name="resguardante" type="String" mode="IN" optional="false"/>		    	
+    	<attribute name="fechaInicioResguardo" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="fechaFinResguardo" type="Timestamp" mode="IN" optional="true"/>
+    	<attribute name="fechaAsignacion" type="Timestamp" mode="IN" optional="true"/>
+    	<attribute name="comentariosAsignacion" type="String" mode="IN" optional="true"/>
+        <attribute name="fixedAssetId" type="Map" string-map-prefix="fixedAssetId" mode="IN" optional="false"/>
+        <attribute name="excepcion" type="Map" string-map-prefix="excepcion" mode="IN" optional="false"/>        
+    </service>
+    
+</services>

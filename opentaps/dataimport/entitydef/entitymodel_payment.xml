@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Pagos</title>
+    <description>Define la tabla preliminar a payment para Data Import</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Omar Banos</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+	<entity entity-name="DataImportPayment" package-name="org.opentaps.dataimport"
+		title="Entidad para recibir y aplicar pagos">
+		<field name="idRegistroPago" type="id-ne"/>
+		<field name="partyIdFrom" type="id-ne"/>   
+        <field name="partyIdTo" type="id-ne"></field>        
+        <field name="tipoPago" type="id-ne"/>  
+        <field name="tipoDocumento" type="id-ne"/>
+        <field name="fechaContable" type="date-time"/> 
+        <field name="referenciaPago" type="short-varchar"/>
+        <field name="descripcionPago" type="comment"/>
+        <field name="banco" type="id-ne"/>
+        <field name="cuentaBancaria" type="id"/>
+        <field name="moneda" type="id"/>   
+        <field name="idFactura" type="id-ne"></field>
+        <field name="descripcion" type="comment"/>
+        <field name="referenciaFactura" type="short-varchar"></field>
+        <field name="montoAplicado" type="currency-amount" />
+        <!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field>  
+        <field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>      
+		<prim-key field="idRegistroPago"/>  
+		<relation type="one" fk-name="FK_USR_PAY" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>	
+    </entity> 
+    
+</entitymodel>

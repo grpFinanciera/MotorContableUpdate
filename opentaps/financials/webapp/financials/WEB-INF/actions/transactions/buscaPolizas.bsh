@@ -1,0 +1,4 @@
+import org.opentaps.common.util.UtilCommon;
+
+listaTipoPoliza = delegator.findAll("TipoPoliza");
+context.put("listaTipoPoliza",listaTipoPoliza);

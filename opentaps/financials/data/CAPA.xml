@@ -1,0 +1,388 @@
+<entity-engine-xml>
+
+<!--     <ClasifPresupuestal descripcion="Clasificación por Programa Sectorial" clasificacionId="CL_P_SECTORIAL" tieneNivel="S"/> -->
+<!--     <ClasifPresupuestal descripcion="Clasificación por PED" clasificacionId="CL_PED" tieneNivel="S"/> -->
+<!--     <ClasifPresupuestal descripcion="Clasificación por Proyecto-Proceso" clasificacionId="CL_PROYECTO_PROCESO" tieneNivel="S"/> -->
+    
+<!--     <EnumerationType description="Clasificación por Programa Sectorial" enumTypeId="CL_P_SECTORIAL" hasTable="N" parentTypeId="ACCOUNTING_TAG" clasificacionId="CL_P_SECTORIAL"/> -->
+<!--     <EnumerationType description="Clasificación por PED" enumTypeId="CL_PED" hasTable="N" parentTypeId="ACCOUNTING_TAG" clasificacionId="CL_PED"/> -->
+<!--     <EnumerationType description="Clasificación por Proyecto-Proceso" enumTypeId="CL_PROYECTO_PROCESO" hasTable="N" parentTypeId="ACCOUNTING_TAG" clasificacionId="CL_PROYECTO_PROCESO"/> -->
+    
+<!--     <NivelAdministrativo descripcion="Tipo de Institución" idNivelAdmin="TIPO_INSTITUCION" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Responsable" idNivelAdmin="UNIDAD_RESPONSABLE" idNivelAdminPadre="TIPO_INSTITUCION" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Operativa" idNivelAdmin="UNIDAD_OPERATIVA" idNivelAdminPadre="UNIDAD_RESPONSABLE" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Ejecutora" idNivelAdmin="UNIDAD_EJECUTORA" idNivelAdminPadre="UNIDAD_OPERATIVA" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Consecutuivo jerárquico" idNivelAdmin="CONSECUTIVO_GERARQUI" idNivelAdminPadre="UNIDAD_EJECUTORA" clasificacionId="CL_ADMINISTRATIVA"/> -->
+    
+<!--     <NivelPresupuestal descripcion="Rubro de ingreso" nivelId="RUBRO" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de ingreso" nivelId="TIPO" nivelPadreId="RUBRO" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Clase de ingreso" nivelId="CLASE" nivelPadreId="TIPO" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Concepto" nivelId="CONCEPTO" nivelPadreId="CLASE" clasificacionId="CL_CRI"/> -->
+<!--     <NivelPresupuestal descripcion="Nivel 5 de ingreso" nivelId="NIVEL_5_CRI" nivelPadreId="CONCEPTO" clasificacionId="CL_CRI"/> -->
+<!--     <NivelPresupuestal descripcion="Fuente de financiamiento" nivelId="FUENTE_FINAN" clasificacionId="CL_FUENTEFIN"/> -->
+<!--     <NivelPresupuestal descripcion="Nivel 2 de fuente de financiamiento" nivelId="NIVEL2FFIN" nivelPadreId="FUENTE_FINAN" clasificacionId="CL_FUENTEFIN"/> -->
+<!--     <NivelPresupuestal descripcion="Nivel 3 de fuente de financiamiento" nivelId="NIVEL3FFIN" nivelPadreId="NIVEL2FFIN" clasificacionId="CL_FUENTEFIN"/> -->
+<!--     <NivelPresupuestal descripcion="Nivel 4 de fuente de financiamiento" nivelId="NIVEL4FFIN" nivelPadreId="NIVEL3FFIN" clasificacionId="CL_FUENTEFIN"/> -->
+<!-- 	<NivelPresupuestal descripcion="Municipio" nivelId="MUNICIPIO" clasificacionId="CL_GEOGRAFICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Localidad" nivelId="LOCALIDAD" nivelPadreId="MUNICIPIO" clasificacionId="CL_GEOGRAFICA"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Programa sectorial" nivelId="PROGRAMA_SEC" clasificacionId="CL_P_SECTORIAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Folio" nivelId="FOLIO" nivelPadreId="PROGRAMA_SEC" clasificacionId="CL_P_SECTORIAL"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Eje PED" nivelId="EJE_PED" clasificacionId="CL_PED"/> -->
+<!-- 	<NivelPresupuestal descripcion="Sector PED" nivelId="SECTOR_PED" nivelPadreId="EJE_PED" clasificacionId="CL_PED"/> -->
+<!-- 	<NivelPresupuestal descripcion="Estrategía PED" nivelId="ESTRATEGIA_PED" nivelPadreId="SECTOR_PED" clasificacionId="CL_PED"/> -->
+<!-- 	<NivelPresupuestal descripcion="Objetivo PED" nivelId="OBJETIVO_PED" nivelPadreId="ESTRATEGIA_PED" clasificacionId="CL_PED"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de programa" nivelId="TIPO_PROGRAMA" clasificacionId="CL_PROGRAMATICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Folio del programa (MIR)" nivelId="FOLIO_PROGRAMA" nivelPadreId="TIPO_PROGRAMA" clasificacionId="CL_PROGRAMATICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de proceso" nivelId="TIPO_PROCESO" clasificacionId="CL_PROYECTO_PROCESO"/> -->
+<!-- 	<NivelPresupuestal descripcion="Subtipo de proceso" nivelId="SUB_TIPO" nivelPadreId="TIPO_PROCESO" clasificacionId="CL_PROYECTO_PROCESO"/> -->
+<!-- 	<NivelPresupuestal descripcion="Ambito/Uso de proceso" nivelId="AMBITO_USO" nivelPadreId="SUB_TIPO" clasificacionId="CL_PROYECTO_PROCESO"/> -->
+<!-- 	<NivelPresupuestal descripcion="Folio de proceso" nivelId="FOLIO_PROCESO" nivelPadreId="AMBITO_USO" clasificacionId="CL_PROYECTO_PROCESO"/> -->
+<!-- 	<NivelPresupuestal descripcion="Capítulo de gasto" nivelId="CAPITULO" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Concepto de gasto" nivelId="CONCEPTO_COG" nivelPadreId="CAPITULO" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Partida genérica de gasto" nivelId="PARTIDA_GENERICA" nivelPadreId="CONCEPTO_COG" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Partida específica de gasto" nivelId="PARTIDA_ESPECIFICA" nivelPadreId="PARTIDA_GENERICA" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de gasto" nivelId="TIPO_GASTO" clasificacionId="CL_TIPOGASTO"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Finalidad" nivelId="FINALIDAD" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Función" nivelId="FUNCION" nivelPadreId="FINALIDAD" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Subfunción" nivelId="SUBFUNCION" nivelPadreId="FUNCION" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Actividad Institucional" nivelId="ACT_INSTITUCIONAL" nivelPadreId="SUBFUNCION" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de Ingreso" nivelId="TIPO_INGRESO" clasificacionId="CL_TIPOINGRESO"/>  -->
+	
+	<Sucursal sucursalId="10001" nombreSucursal="BACALAR" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10002" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10003" nombreSucursal="COZUMEL" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10004" nombreSucursal="TULUM" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10005" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10006" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10007" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10008" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10009" nombreSucursal="CHETUMAL" estatus="1" bancoId="012"/>
+	
+	<Sucursal sucursalId="10010" nombreSucursal="BACALAR" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10011" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10012" nombreSucursal="COZUMEL" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10013" nombreSucursal="TULUM" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10014" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10015" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10016" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10017" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="002"/>
+	<Sucursal sucursalId="10018" nombreSucursal="CHETUMAL" estatus="1" bancoId="002"/>
+	
+	<Sucursal sucursalId="10019" nombreSucursal="BACALAR" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10020" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10021" nombreSucursal="COZUMEL" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10022" nombreSucursal="TULUM" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10023" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10024" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10025" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10026" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10027" nombreSucursal="CHETUMAL" estatus="1" bancoId="072"/>
+	
+	<Sucursal sucursalId="10028" nombreSucursal="BACALAR" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10029" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10030" nombreSucursal="COZUMEL" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10031" nombreSucursal="TULUM" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10032" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10033" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10034" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10035" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10036" nombreSucursal="CHETUMAL" estatus="1" bancoId="021"/>
+	
+	<Sucursal sucursalId="10037" nombreSucursal="BACALAR" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10038" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10039" nombreSucursal="COZUMEL" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10040" nombreSucursal="TULUM" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10041" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10042" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10043" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10044" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="014"/>
+	<Sucursal sucursalId="10045" nombreSucursal="CHETUMAL" estatus="1" bancoId="014"/>
+	
+	<Sucursal sucursalId="10046" nombreSucursal="BACALAR" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10047" nombreSucursal="OTHON P BLANCO" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10048" nombreSucursal="COZUMEL" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10049" nombreSucursal="TULUM" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10050" nombreSucursal="SOLIDARIDAD" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10051" nombreSucursal="LAZARO CARDENAS" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10052" nombreSucursal="FELIPE CARRILLO PUERTO" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10053" nombreSucursal="JOSE MARIA MORELOS" estatus="1" bancoId="044"/>
+	<Sucursal sucursalId="10054" nombreSucursal="CHETUMAL" estatus="1" bancoId="044"/>
+	
+	
+    
+<!--     <AcctgTransType acctgTransTypeId="MOD_AMP_COM_LI" description="Ampliación compensada a la ley de ingresos" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" theirPartyId="N" productId="N"/> -->
+<!--     <AcctgTransType acctgTransTypeId="MOD_RED_COM_LI" description="Reducción compensada a la ley de ingresos" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" theirPartyId="N" productId="N"/> -->
+<!--     <AcctgTransType acctgTransTypeId="MOD_AMP_COM_PE" description="Ampliación compensada al presupuesto de egresos" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" theirPartyId="N" productId="N"/> -->
+<!--     <AcctgTransType acctgTransTypeId="MOD_RED_COM_PE" description="Reducción compensada al presupuesto de egresos" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" theirPartyId="N" productId="N"/> -->
+
+<!--     <Evento acctgTransTypeId="MOD_AMP_COM_LI" cuentaCargo="8.1.1.2.3.1" cuentaAbono="8.1.2.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N"/> -->
+<!--     <Evento acctgTransTypeId="MOD_RED_COM_LI" cuentaCargo="8.1.2.1" cuentaAbono="8.1.1.2.3.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N"/> -->
+<!--     <Evento acctgTransTypeId="MOD_AMP_COM_PE" cuentaCargo="8.2.2.1" cuentaAbono="8.2.2.2.3.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/> -->
+<!--     <Evento acctgTransTypeId="MOD_RED_COM_PE" cuentaCargo="8.2.2.2.3.2" cuentaAbono="8.2.2.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/> -->
+
+<!--     <TipoDocumento idTipoDoc="MOD_AMP_COM_LI" descripcion="Ampliación compensada a la ley de ingresos" acctgTransTypeId="MOD_AMP_COM_LI" mEjecutar1="EJECUTAR" mEjecutar2="MODIFICADO_AMP_COM_I" moduloId="CONTABILIDAD_I"/> -->
+<!--     <TipoDocumento idTipoDoc="MOD_RED_COM_LI" descripcion="Reducción compensada a la ley de ingresos" acctgTransTypeId="MOD_RED_COM_LI" mComparativo="EJECUTAR" mEjecutar1="MODIFICADO_RED_COM_I" comparacion=">=" moduloId="CONTABILIDAD_I"/> -->
+<!--     <TipoDocumento idTipoDoc="MOD_AMP_COM_PE" descripcion="Ampliación compensada al presupuesto de egresos" acctgTransTypeId="MOD_AMP_COM_PE" mEjecutar1="DISPONIBLE" mEjecutar2="MODIFICADO_AMP_COM_E" moduloId="CONTABILIDAD_E"/> -->
+<!--     <TipoDocumento idTipoDoc="MOD_RED_COM_PE" descripcion="Reducción compensada al presupuesto de egresos" acctgTransTypeId="MOD_RED_COM_PE" mComparativo="DISPONIBLE" mEjecutar1="MODIFICADO_RED_COM_E" comparacion=">=" moduloId="CONTABILIDAD_E"/> -->
+
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto disponible" movimientoMensualId="DISPONIBLE"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto comprometido" movimientoMensualId="COMPROMETIDO"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto devengado" movimientoMensualId="DEVENGADO_E"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto ejercido" movimientoMensualId="EJERCIDO"/>-->
+
+<!--     <RoleType description="Cliente" hasTable="N" parentTypeId="" roleTypeId="CLIENTE"/> -->
+<!--     <RoleType description="Depósitos en garantía" hasTable="N" parentTypeId="" roleTypeId="DEPOSITO_GARANTIA"/> -->
+<!--     <RoleType description="Deudores externos" hasTable="N" parentTypeId="" roleTypeId="DEUDORES_EXT"/> -->
+<!--     <RoleType description="Préstamos otorgados" hasTable="N" parentTypeId="" roleTypeId="PRESTAMO_O"/> -->
+<!--     <RoleType description="Deudores por viáticos" hasTable="N" parentTypeId="" roleTypeId="DEUDORES_VIATICOS"/> -->
+    
+<!--     <PartyType description="Cliente" hasTable="N" parentTypeId="" partyTypeId="CLIENTE" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!--     <PartyType description="Depósitos en garantía" hasTable="N" parentTypeId="" partyTypeId="DEPOSITO_GARANTIA" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!--     <PartyType description="Deudores externos" hasTable="N" parentTypeId="" partyTypeId="DEUDORES_EXT" auxiliar="Y" tipoAuxiliar="D"/>  -->
+<!--     <PartyType description="Préstamos otorgados" hasTable="N" parentTypeId="" partyTypeId="PRESTAMO_O" auxiliar="Y" tipoAuxiliar="D"/>  -->
+<!--     <PartyType description="Deudores por viáticos" hasTable="N" parentTypeId="" partyTypeId="DEUDORES_VIATICOS" auxiliar="Y" tipoAuxiliar="D"/>  -->
+
+<!-- 	<AcctgTransType acctgTransTypeId="COM_LIBERACION" description="Liberación de presupuesto" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="COM_LIBERACION" tipoPolizaId="EGRESO" moduloId="TESORERIA" descripcion="Liberación de presupuesto"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="COM_LIBERACION" secuencia="1" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Liberacion"/> -->
+
+<!-- 	Evento para ampliar el presupuesto de un pedido u orden de pago, del diponible al comprometido  -->
+	<AcctgTransType acctgTransTypeId="PECO-AMP" description="Ampliación de presupuesto de un pedido o contrato" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<EventoContable acctgTransTypeId="PECO-AMP" tipoPolizaId="DIARIO" moduloId="AMPLIACION_PEDIDO" descripcion="Ampliación de presupuesto de un pedido o contrato"/>
+	<LineaPresupuestal acctgTransTypeId="PECO-AMP" secuencia="1" cuentaCargo="8.2.4" cuentaAbono="8.2.2.1" momentoCompara="DISPONIBLE" momentoEjecutar1="COMPROMETIDO" comparacion=">=" descripcion="Comprometido de ampliación de pedido o contrato"/>
+	
+	<AcctgTransType acctgTransTypeId="PECO-REDU" description="Reducción de presupuesto de un pedido o contrato" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<EventoContable acctgTransTypeId="PECO-REDU" tipoPolizaId="DIARIO" moduloId="REDUCCION_PEDIDO" descripcion="Reducción de presupuesto de un pedido o contrato"/>
+	<LineaPresupuestal acctgTransTypeId="PECO-REDU" secuencia="1" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Comprometido de reducción de pedido o contrato"/>
+	
+	<AcctgTransType acctgTransTypeId="CPCP-001" description="Depreciación de Mobiliario y Equipo Educacional y Recreativo" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-002" description="Depreciación de Equipo e Instrumental Médico y de Laboratorio" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-003" description="Depreciación de Equipo de Transporte" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-004" description="Depreciación de Maquinaria, otros Equipos y Herramientas" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-005" description="Depreciación de Otros Bienes Muebles" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-006" description="Depreciación de Mobiliario y Equipo de Administración" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-007" description="Depreciación de bienes informáticos" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-008" description="Amortización de Software" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-009" description="Amortización de Licencias" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-0010" description="Amortización de Otros Activos Intangibles" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-0011" description="Depreciación de Edificios no habitacionales" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-0012" description="Depreciación de Infraestructura" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-0013" description="Depreciación de Otros bienes Inmuebles " parentTypeId="INTERNAL_ACCTG_TRANS"/>	
+	<EventoContable acctgTransTypeId="CPCP-001" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Mobiliario y Equipo Educacional y Recreativo"/>
+	<EventoContable acctgTransTypeId="CPCP-002" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Equipo e Instrumental Médico y de Laboratorio"/>
+	<EventoContable acctgTransTypeId="CPCP-003" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Equipo de Transporte"/>
+	<EventoContable acctgTransTypeId="CPCP-004" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Maquinaria, otros Equipos y Herramientas"/>
+	<EventoContable acctgTransTypeId="CPCP-005" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Otros Bienes Muebles"/>
+	<EventoContable acctgTransTypeId="CPCP-006" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Mobiliario y Equipo de Administración"/>
+	<EventoContable acctgTransTypeId="CPCP-007" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de bienes informáticos"/>
+	<EventoContable acctgTransTypeId="CPCP-008" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Amortización de Software"/>
+	<EventoContable acctgTransTypeId="CPCP-009" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Amortización de Licencias"/>
+	<EventoContable acctgTransTypeId="CPCP-0010" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Amortización de Otros Activos Intangibles"/>
+	<EventoContable acctgTransTypeId="CPCP-0011" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Edificios no habitacionales"/>
+	<EventoContable acctgTransTypeId="CPCP-0012" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Infraestructura"/>
+	<EventoContable acctgTransTypeId="CPCP-0013" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Otros bienes Inmuebles "/>
+	<LineaContable acctgTransTypeId="CPCP-001" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.02" descripcion="Depreciación de Mobiliario y Equipo Educacional y Recreativo"/>
+	<LineaContable acctgTransTypeId="CPCP-002" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.03" descripcion="Depreciación de Equipo e Instrumental Médico y de Laboratorio"/>
+	<LineaContable acctgTransTypeId="CPCP-003" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.04" descripcion="Depreciación de Equipo de Transporte"/>
+	<LineaContable acctgTransTypeId="CPCP-004" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.05" descripcion="Depreciación de Maquinaria, otros Equipos y Herramientas"/>
+	<LineaContable acctgTransTypeId="CPCP-005" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.06" descripcion="Depreciación de Otros Bienes Muebles"/>
+	<LineaContable acctgTransTypeId="CPCP-006" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.01" descripcion="Depreciación de Mobiliario y Equipo de Administración"/>
+	<LineaContable acctgTransTypeId="CPCP-007" secuencia="1" cuentaCargo="5.5.1.5" cuentaAbono="1.2.6.3.07" descripcion="Depreciación de bienes informáticos"/>
+	<LineaContable acctgTransTypeId="CPCP-008" secuencia="1" cuentaCargo="5.5.1.7" cuentaAbono="1.2.6.5.01" descripcion="Amortización de Software"/>
+	<LineaContable acctgTransTypeId="CPCP-009" secuencia="1" cuentaCargo="5.5.1.7" cuentaAbono="1.2.6.5.02" descripcion="Amortización de Licencias"/>
+	<LineaContable acctgTransTypeId="CPCP-0010" secuencia="1" cuentaCargo="5.5.1.7" cuentaAbono="1.2.6.5.03" descripcion="Amortización de Otros Activos Intangibles"/>
+	<LineaContable acctgTransTypeId="CPCP-0011" secuencia="1" cuentaCargo="5.5.1.3" cuentaAbono="1.2.6.1.01" descripcion="Depreciación de Edificios no habitacionales"/>
+	<LineaContable acctgTransTypeId="CPCP-0012" secuencia="1" cuentaCargo="5.5.1.4" cuentaAbono="1.2.6.1.02" descripcion="Depreciación de Infraestructura"/>
+	<LineaContable acctgTransTypeId="CPCP-0013" secuencia="1" cuentaCargo="5.5.1.3" cuentaAbono="1.2.6.1.03" descripcion="Depreciación de Otros bienes Inmuebles "/>
+	
+	
+	
+<!-- 	<EventoContable acctgTransTypeId="PERIOD_CLOSING" tipoPolizaId="DIARIO" description="Cierre Contable"/> -->
+	
+	<UbicacionRapida ubicacionRapidaId="ADMON_OBRA_PUBLICA" descripcion="Administración de Obra Publica" />
+	<UbicacionRapida ubicacionRapidaId="ADMON_Y_FINANZAS" descripcion="Administración y Finanzas" />
+	<UbicacionRapida ubicacionRapidaId="ALMACEN" descripcion="Almacén" />
+	<UbicacionRapida ubicacionRapidaId="ATENCION_USUARIOS" descripcion="Atención a Usuarios" />
+	<UbicacionRapida ubicacionRapidaId="BRIGADA_CALIDAD_AGUA" descripcion="Brigada Calidad del Agua" />
+	<UbicacionRapida ubicacionRapidaId="BRIGADA_ELECTROMECAN" descripcion="Brigada Electromecánica" />
+	<UbicacionRapida ubicacionRapidaId="CALIDAD_DEL_AGUA" descripcion="Calidad del Agua" />
+	<UbicacionRapida ubicacionRapidaId="CAPTACION" descripcion="Captación" />
+	<UbicacionRapida ubicacionRapidaId="COMERCIALIZACION" descripcion="Comercialización" />
+	<UbicacionRapida ubicacionRapidaId="COMUNICACION_SOCIAL" descripcion="Comunicación Social" />
+	<UbicacionRapida ubicacionRapidaId="CONSTRUCCION" descripcion="Construcción" />
+	<UbicacionRapida ubicacionRapidaId="CONTABILIDAD" descripcion="Contabilidad" />
+	<UbicacionRapida ubicacionRapidaId="CONTRALORIA_INTERNA" descripcion="Contraloría Interna" />
+	<UbicacionRapida ubicacionRapidaId="CONTROL_DE_REZAGO" descripcion="Control de Rezago" />
+	<UbicacionRapida ubicacionRapidaId="COORD_ADMON_FINANZAS" descripcion="Coordinación Administrativa y Financiera" />
+	<UbicacionRapida ubicacionRapidaId="COORD_COMERCIAL" descripcion="Coordinación Comercial" />
+	<UbicacionRapida ubicacionRapidaId="COORD_CONSTRUCCION" descripcion="Coordinación de construcción" />
+	<UbicacionRapida ubicacionRapidaId="COORD_OPERATIVA" descripcion="Coordinación operativa" />
+	<UbicacionRapida ubicacionRapidaId="COORD_ORG_OPERADORES" descripcion="Coordinación de Organismos Operadores" />
+	<UbicacionRapida ubicacionRapidaId="DELEG_ZONA_NORTE" descripcion="Delegación Zona Norte" />
+	<UbicacionRapida ubicacionRapidaId="DESALOJO_BRIGADA_1" descripcion="Desalojo Brigada 1" />
+	<UbicacionRapida ubicacionRapidaId="DESALOJO_BRIGADA_2" descripcion="Desalojo Brigada 2" />
+	<UbicacionRapida ubicacionRapidaId="DIR_ATENCION_USUARIO" descripcion="Dirección de Atención a Usuarios" />
+	<UbicacionRapida ubicacionRapidaId="DIR_DESARROLLO_COM" descripcion="Dirección de desarrollo Comercial" />
+	<UbicacionRapida ubicacionRapidaId="DIR_FINANCIEROS" descripcion="Dirección Financieros" />
+	<UbicacionRapida ubicacionRapidaId="DIR_GEST_AMBIENTAL" descripcion="Direccion de Gestion Ambiental" />
+	<UbicacionRapida ubicacionRapidaId="DIR_GRAL_INFORMACION" descripcion="Dirección General de información" />
+	<UbicacionRapida ubicacionRapidaId="DIR_IMAGEN_INST" descripcion="Dirección de Imagen Institucional" />
+	<UbicacionRapida ubicacionRapidaId="DIR_INFORMATICA" descripcion="Dirección de Informática" />
+	<UbicacionRapida ubicacionRapidaId="DIR_JURIDICA" descripcion="Direccion Juridica" />
+	<UbicacionRapida ubicacionRapidaId="DIR_NORM_OBRA_P" descripcion="Dirección de Normatividad de Obra Publica" />
+	<UbicacionRapida ubicacionRapidaId="DIR_OPERACON_COMER" descripcion="Dirección de Operación Comercial" />
+	<UbicacionRapida ubicacionRapidaId="DIR_PATRIMONIO" descripcion="Dirección de Patrimonio" />
+	<UbicacionRapida ubicacionRapidaId="DIR_REC_HUMANOS" descripcion="Dirección de Recursos Humanos" />
+	<UbicacionRapida ubicacionRapidaId="DIR_TECNICA_COMER" descripcion="Dirección Técnica Comercial" />
+	<UbicacionRapida ubicacionRapidaId="DIR_USO_EFIC_AGUA" descripcion="Dirección de Uso Eficiente de Agua y Energía" />
+	<UbicacionRapida ubicacionRapidaId="DIRECCON_GENERAL" descripcion="Dirección General" />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_1" descripcion="Distribución Brigada 1 " />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_2" descripcion="Distribución Brigada 2" />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_3" descripcion="Distribución Brigada 3" />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_4" descripcion="Distribución Brigada 4" />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_5" descripcion="Distribución Brigada 5" />
+	<UbicacionRapida ubicacionRapidaId="DIST_BRIGADA_6" descripcion="Distribución Brigada 6 Zona Maya" />
+	<UbicacionRapida ubicacionRapidaId="DRAEF" descripcion="Dir de Rec de Adeudos y Ejec F" />
+	<UbicacionRapida ubicacionRapidaId="ELECOMECANICA_BRIG_1" descripcion="Electromecánica Brigada 1" />
+	<UbicacionRapida ubicacionRapidaId="ELECTROMECANICA" descripcion="Electromecánica" />
+	<UbicacionRapida ubicacionRapidaId="FACTURACION_MEDICION" descripcion="Facturación y Medición" />
+	<UbicacionRapida ubicacionRapidaId="GERENCIA_GENERAL" descripcion="Gerencia General" />
+	<UbicacionRapida ubicacionRapidaId="INGRESOS_Y_EGRESOS" descripcion="Ingresos y Egresos" />
+	<UbicacionRapida ubicacionRapidaId="KANTUNILKIN" descripcion="Kantunilkin" />
+	<UbicacionRapida ubicacionRapidaId="L_P_S" descripcion="Litros Por Segundo" />
+	<UbicacionRapida ubicacionRapidaId="LINEA_DE_PRODUCCION" descripcion="Línea de Producción" />
+	<UbicacionRapida ubicacionRapidaId="LOGISTICA_INST" descripcion="Logistica Institucional" />
+	<UbicacionRapida ubicacionRapidaId="MEDICION" descripcion="Medición" />
+	<UbicacionRapida ubicacionRapidaId="NOMINA" descripcion="Nomina" />
+	<UbicacionRapida ubicacionRapidaId="O.P.B" descripcion="Othón P. Blanco" />
+	<UbicacionRapida ubicacionRapidaId="OBRA_PUBLICA" descripcion="Obra Publica" />
+	<UbicacionRapida ubicacionRapidaId="OPERACION" descripcion="Operación" />
+	<UbicacionRapida ubicacionRapidaId="PADRON_USUARIOS" descripcion="Padrón de Usuarios" />
+	<UbicacionRapida ubicacionRapidaId="PARTICIPACION_SOCIAL" descripcion="Participación Social" />
+	<UbicacionRapida ubicacionRapidaId="PLANEACION" descripcion="Planeación" />
+	<UbicacionRapida ubicacionRapidaId="PLAYA_DEL_CARMEN" descripcion="Playa del Carmen" />
+	<UbicacionRapida ubicacionRapidaId="PRODUCCION" descripcion="Producción" />
+	<UbicacionRapida ubicacionRapidaId="PRODUCTIVIDAD" descripcion="Productividad y Calidad" />
+	<UbicacionRapida ubicacionRapidaId="PROGRAMA_COSTRUCCION" descripcion="Programas Construcción" />
+	<UbicacionRapida ubicacionRapidaId="RECOLECCION" descripcion="Recolección de Aguas Residuales" />
+	<UbicacionRapida ubicacionRapidaId="RECUPERACION_PERDIDA" descripcion="Recuperación de Perdidas" />
+	<UbicacionRapida ubicacionRapidaId="RECURSOS_FINANCIEROS" descripcion="Recursos Financieros" />
+	<UbicacionRapida ubicacionRapidaId="RECURSOS_HUMANOS" descripcion="Recursos Humanos" />
+	<UbicacionRapida ubicacionRapidaId="RECURSOS_MATERIALES" descripcion="Recursos Materiales" />
+	<UbicacionRapida ubicacionRapidaId="RIVERA_MAYA" descripcion="Riviera Maya" />
+	<UbicacionRapida ubicacionRapidaId="SECRETARIA_TECNICA" descripcion="Secretaria Técnica" />
+	<UbicacionRapida ubicacionRapidaId="SERVICIOS_GENERALES" descripcion="Servicios Generales" />
+	<UbicacionRapida ubicacionRapidaId="SOLIDARIDAD" descripcion="SOLIDARIDAD" />
+	<UbicacionRapida ubicacionRapidaId="SOPORTE_ADMIVO" descripcion="Soporte Administrativo" />
+	<UbicacionRapida ubicacionRapidaId="SUBDIRECCION_GENERAL" descripcion="Subdirección General" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_1" descripcion="Tomas Brigada 1" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_2" descripcion="Tomas Brigada 2" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_3" descripcion="Tomas Brigada 3" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_4_TUL" descripcion="Tomas Brigada 4 Tulum" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_5" descripcion="Tomas Brigada 5" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_5_RM" descripcion="Tomas Brigada 5 Riviera Maya" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_BRIGADA_6" descripcion="Tomas Brigada 6" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_DESC_NUEVAS" descripcion="Tomas y descargas Nuevas" />
+	<UbicacionRapida ubicacionRapidaId="TOMAS_Y_DESCARGAS" descripcion="TOMAS Y DESCARGAS" />
+	<UbicacionRapida ubicacionRapidaId="TRATAMIENTO" descripcion="Tratamiento" />
+	<UbicacionRapida ubicacionRapidaId="TULUM" descripcion="Tulum" />
+	<UbicacionRapida ubicacionRapidaId="UNIDAD_VINC_ENLACE" descripcion="Unidad de Vinculación y Enlace" />
+	<UbicacionRapida ubicacionRapidaId="VIGILANCIA" descripcion="Vigilancia" />
+	<UbicacionRapida ubicacionRapidaId="ZONA_DE_CAPTACION" descripcion="Zona de Captación" />
+	<UbicacionRapida ubicacionRapidaId="ZONA_MAYA" descripcion="Zona Maya" />    
+	
+	<AcctgTransType acctgTransTypeId="CIPE-01" description="Cierre presupuestario (Superávit)" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/> 
+	<EventoContable acctgTransTypeId="CIPE-01" tipoPolizaId="DIARIO" moduloId="CONTABILIDAD" descripcion="Cierre presupuestario (Superávit)"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="1" cuentaCargo="8.1.4.1" cuentaAbono="8.1.2.1" descripcion="Cierre 1" cuentaCancelar="8.1.4.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="2" cuentaCargo="8.1.2.1" cuentaAbono="8.1.3.1" descripcion="Cierre 2" cuentaCancelar="8.1.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="3" cuentaCargo="8.1.3.2" cuentaAbono="8.1.2.1" descripcion="Cierre 3" cuentaCancelar="8.1.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="4" cuentaCargo="8.1.2.1" cuentaAbono="8.1.3.3.01" descripcion="Cierre 4" cuentaCancelar="8.1.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="5" cuentaCargo="8.1.3.3.02" cuentaAbono="8.1.2.1" descripcion="Cierre 5" cuentaCancelar="8.1.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="6" cuentaCargo="8.1.2.1" cuentaAbono="8.1.1.1" descripcion="Cierre 6" cuentaCancelar="8.1.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="7" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" descripcion="Cierre 7" cuentaCancelar="8.2.4"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="8" cuentaCargo="8.2.3.1" cuentaAbono="8.2.2.1" descripcion="Cierre 8" cuentaCancelar="8.2.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="9" cuentaCargo="8.2.2.1" cuentaAbono="8.2.3.2" descripcion="Cierre 9" cuentaCancelar="8.2.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="10" cuentaCargo="8.2.3.3.01" cuentaAbono="8.2.2.1" descripcion="Cierre 10" cuentaCancelar="8.2.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="11" cuentaCargo="8.2.2.1" cuentaAbono="8.2.3.3.02" descripcion="Cierre 11" cuentaCancelar="8.2.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="12" cuentaCargo="8.2.1.1" cuentaAbono="8.2.2.1" descripcion="Cierre 12" cuentaCancelar="8.2.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="13" cuentaCargo="9.3" cuentaAbono="8.2.5" descripcion="Cierre 13" cuentaCancelar="8.2.5"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="14" cuentaCargo="9.3" cuentaAbono="8.2.6.1" descripcion="Cierre 14" cuentaCancelar="8.2.6.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="15" cuentaCargo="8.1.5.1" cuentaAbono="8.2.7" descripcion="Cierre 15" cuentaCancelar="8.2.7"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="16" cuentaCargo="8.1.5.1" cuentaAbono="9.3" descripcion="Cierre 16" cuentaCancelar="9.3"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="17" cuentaCargo="8.1.5.1" cuentaAbono="9.1" descripcion="Cierre 17" cuentaCancelar="8.1.5.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="18" cuentaCargo="8.2.1.1" cuentaAbono="8.1.1.1" descripcion="Cierre 18" cuentaCancelar="8.2.1.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="19" cuentaCargo="9.1" cuentaAbono="8.1.1.1" descripcion="Cierre 19" cuentaCancelar="8.1.1.1"/>
+	
+	<AcctgTransType acctgTransTypeId="CIPE-02" description="Cierre presupuestario (Déficit)" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/> 
+	<EventoContable acctgTransTypeId="CIPE-02" tipoPolizaId="DIARIO" moduloId="CONTABILIDAD" descripcion="Cierre presupuestario (Déficit)"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="1" cuentaCargo="8.1.4.1" cuentaAbono="8.1.2.1" descripcion="Cierre 1" cuentaCancelar="8.1.4.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="2" cuentaCargo="8.1.2.1" cuentaAbono="8.1.3.1" descripcion="Cierre 2" cuentaCancelar="8.1.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="3" cuentaCargo="8.1.3.2" cuentaAbono="8.1.2.1" descripcion="Cierre 3" cuentaCancelar="8.1.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="4" cuentaCargo="8.1.2.1" cuentaAbono="8.1.3.3.01" descripcion="Cierre 4" cuentaCancelar="8.1.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="5" cuentaCargo="8.1.3.3.02" cuentaAbono="8.1.2.1" descripcion="Cierre 5" cuentaCancelar="8.1.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="6" cuentaCargo="8.1.2.1" cuentaAbono="8.1.1.1" descripcion="Cierre 6" cuentaCancelar="8.1.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="7" cuentaCargo="8.2.2.1" cuentaAbono="8.2.4" descripcion="Cierre 7" cuentaCancelar="8.2.4"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="8" cuentaCargo="8.2.3.1" cuentaAbono="8.2.2.1" descripcion="Cierre 8" cuentaCancelar="8.2.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="9" cuentaCargo="8.2.2.1" cuentaAbono="8.2.3.2" descripcion="Cierre 9" cuentaCancelar="8.2.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="10" cuentaCargo="8.2.3.3.01" cuentaAbono="8.2.2.1" descripcion="Cierre 10" cuentaCancelar="8.2.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="11" cuentaCargo="8.2.2.1" cuentaAbono="8.2.3.3.02" descripcion="Cierre 11" cuentaCancelar="8.2.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="12" cuentaCargo="8.2.1.1" cuentaAbono="8.2.2.1" descripcion="Cierre 12" cuentaCancelar="8.2.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="13" cuentaCargo="9.3" cuentaAbono="8.2.5" descripcion="Cierre 13" cuentaCancelar="8.2.5"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="14" cuentaCargo="9.3" cuentaAbono="8.2.6.1" descripcion="Cierre 14" cuentaCancelar="8.2.6.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="15" cuentaCargo="8.1.5.1" cuentaAbono="8.2.7" descripcion="Cierre 15" cuentaCancelar="8.2.7"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="16" cuentaCargo="8.1.5.1" cuentaAbono="9.3" descripcion="Cierre 16" cuentaCancelar="9.3"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="17" cuentaCargo="8.1.5.1" cuentaAbono="9.2" descripcion="Cierre 17" cuentaCancelar="8.1.5.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="18" cuentaCargo="8.2.1.1" cuentaAbono="8.1.1.1" descripcion="Cierre 18" cuentaCancelar="8.2.1.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="19" cuentaCargo="9.2" cuentaAbono="8.1.1.1" descripcion="Cierre 19" cuentaCancelar="8.1.1.1"/>
+	
+	<FixedAssetType description="Muebles de oficina y estanteria" fixedAssetTypeId="MUEBLES_OFICINA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="511" acctgTransTypeId="CPCP-006"/>
+	<FixedAssetType description="Muebles, excepto de oficina y estanteria" fixedAssetTypeId="MUEBLES_OTROS" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="512" acctgTransTypeId="CPCP-006"/>
+	<FixedAssetType description="Bienes artisticos, culturales y cientificos" fixedAssetTypeId="BIENES_ARTISTICOS" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="513" acctgTransTypeId="CPCP-006"/>
+	<FixedAssetType description="Objetos de valor" fixedAssetTypeId="OBJETOS_VALOR" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="514" acctgTransTypeId="CPCP-006"/>
+	<FixedAssetType description="Equipo de computo y de tecnologias de la informacion" fixedAssetTypeId="EQUIPO_COMPUTO" hasTable="N" parentTypeId="" aniosVidaUtil="3" montoDepreciacion="33.3" montoDepreciacionLisr="30" prefijoCucop="515" acctgTransTypeId="CPCP-007"/>
+	<FixedAssetType description="Otros mobiliarios y equipos de administracion" fixedAssetTypeId="EQUIPOS_ADMINISTRATI" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="519" acctgTransTypeId="CPCP-005"/>				
+	<FixedAssetType description="Equipos y aparatos audiovisuales" fixedAssetTypeId="EQUIPO_AUDIOVISUAL" hasTable="N" parentTypeId="" aniosVidaUtil="3" montoDepreciacion="33.3" montoDepreciacionLisr="10" prefijoCucop="521" acctgTransTypeId="CPCP-001"/>
+	<FixedAssetType description="Aparatos deportivos" fixedAssetTypeId="APARATOS_DEPORTIVOS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="10" prefijoCucop="522" acctgTransTypeId="CPCP-001"/>
+	<FixedAssetType description="Camaras fotograficas y de video" fixedAssetTypeId="EQUIPO_FOTO_VIDEO" hasTable="N" parentTypeId="" aniosVidaUtil="3" montoDepreciacion="33.3" montoDepreciacionLisr="10" prefijoCucop="523" acctgTransTypeId="CPCP-001"/>
+	<FixedAssetType description="Otro mobiliario y equipo educacional y recreativo" fixedAssetTypeId="EQUIPO_EDUCACIONAL" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="10" prefijoCucop="529" acctgTransTypeId="CPCP-001"/>				
+	<FixedAssetType description="Equipo medico y de laboratorio" fixedAssetTypeId="EQUIPO_MEDICO_LAB" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="10" prefijoCucop="531" acctgTransTypeId="CPCP-002"/>
+	<FixedAssetType description="Instrumental medico y de laboratorio" fixedAssetTypeId="INSTRUMENTAL_MEDICO" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="10" prefijoCucop="532" acctgTransTypeId="CPCP-002"/>
+	<FixedAssetType description="Vehiculos y equipo terrestre" fixedAssetTypeId="VEHICULOS_TERRESTRES" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="25" prefijoCucop="541" acctgTransTypeId="CPCP-003"/>
+	<FixedAssetType description="Carrocerias y remolques" fixedAssetTypeId="CARROCERIAS_REMOLQUE" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="25" prefijoCucop="542" acctgTransTypeId="CPCP-003"/>
+	<FixedAssetType description="Equipo aeroespacial" fixedAssetTypeId="EQUIPO_AEROESPACIAL" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="25" prefijoCucop="543" acctgTransTypeId="CPCP-003"/>
+	<FixedAssetType description="Equipo ferroviario" fixedAssetTypeId="EQUIPO_FERROVIARIO" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="25" prefijoCucop="544" acctgTransTypeId="CPCP-003"/>
+	<FixedAssetType description="Embarcaciones" fixedAssetTypeId="EMBARCACIONES" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="6" prefijoCucop="545" acctgTransTypeId="CPCP-003"/>
+	<FixedAssetType description="Otros equipos de transporte" fixedAssetTypeId="OTROS_EQUIPOS_TRANSP" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="25" prefijoCucop="549" acctgTransTypeId="CPCP-003"/>				
+	<FixedAssetType description="Maquinaria y equipo agropecuario" fixedAssetTypeId="EQUIPO_AGROPECUARIO" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="561" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Maquinaria y equipo industrial" fixedAssetTypeId="EQUIPO_INDUSTRIAL" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="562" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Maquinaria y equipo de construccion" fixedAssetTypeId="EQUIPO_CONSTRUCCION" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="563" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Sistemas de aire acondicionado, calefaccion y de refrigeracion" fixedAssetTypeId="REFRIGERACION_CALEFA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="564" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Equipo de comunicacion y telecomunicacion" fixedAssetTypeId="EQUIPO_TELECOMUNICA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="565" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Equipos de generacion electrica, aparatos y accesorios electricos" fixedAssetTypeId="EQUIPO_GEN_ELECTRICA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="566" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Herramientas y maquinas-herramienta" fixedAssetTypeId="MAQUINARIA_HERRAMIEN" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="567" acctgTransTypeId="CPCP-004"/>
+	<FixedAssetType description="Otros equipos" fixedAssetTypeId="OTROS_EQUIPOS" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="35" prefijoCucop="569" acctgTransTypeId="CPCP-004"/>				
+	<FixedAssetType description="Bovinos" fixedAssetTypeId="BOVINOS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="571"/>
+	<FixedAssetType description="Porcinos" fixedAssetTypeId="PORCINOS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="572"/>
+	<FixedAssetType description="Aves" fixedAssetTypeId="AVES" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="573"/>
+	<FixedAssetType description="Ovinos y caprinos" fixedAssetTypeId="OVINOS_CAPRINOS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="574"/>
+	<FixedAssetType description="Peces y acuicultura" fixedAssetTypeId="PECES_ACUICULTURA" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="575"/>
+	<FixedAssetType description="Equinos" fixedAssetTypeId="EQUINOS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="576"/>
+	<FixedAssetType description="Especies menores y de zoologico" fixedAssetTypeId="ESPECIES_MENORES" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="577"/>
+	<FixedAssetType description="Arboles y plantas" fixedAssetTypeId="ARBOLES_PLANTAS" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="578"/>
+	<FixedAssetType description="Otros activos biologicos" fixedAssetTypeId="OTROS_ACTIVOS_BIOLOG" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="20" montoDepreciacionLisr="100" prefijoCucop="579"/>				
+	<FixedAssetType description="Terrenos" fixedAssetTypeId="TERRENO" hasTable="N" parentTypeId="" aniosVidaUtil="0" montoDepreciacion="0" montoDepreciacionLisr="0" prefijoCucop="581"/>
+	<FixedAssetType description="Viviendas" fixedAssetTypeId="VIVIENDA" hasTable="N" parentTypeId="" aniosVidaUtil="50" montoDepreciacion="2" montoDepreciacionLisr="5" prefijoCucop="582"/>
+	<FixedAssetType description="Edificios no residenciales" fixedAssetTypeId="EDIFICIO_NO_RESIDENC" hasTable="N" parentTypeId="" aniosVidaUtil="30" montoDepreciacion="3.3" montoDepreciacionLisr="5" prefijoCucop="583" acctgTransTypeId="CPCP-11"/>
+	<FixedAssetType description="Infraestructura" fixedAssetTypeId="INFRAESTRUCTURA" hasTable="N" parentTypeId="" aniosVidaUtil="25" montoDepreciacion="4" montoDepreciacionLisr="5" prefijoCucop="584" acctgTransTypeId="CPCP-12"/>
+	<FixedAssetType description="Otros bienes inmuebles" fixedAssetTypeId="OTROS_BIENES_INMUEBL" hasTable="N" parentTypeId="" aniosVidaUtil="20" montoDepreciacion="5" montoDepreciacionLisr="5" prefijoCucop="589" acctgTransTypeId="CPCP-13"/>				
+	<FixedAssetType description="Software" fixedAssetTypeId="SOFTWARE" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="" prefijoCucop="591" acctgTransTypeId="CPCP-08"/>
+	<FixedAssetType description="Patentes" fixedAssetTypeId="PATENTES" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="5" prefijoCucop="592" acctgTransTypeId="CPCP-10"/>
+	<FixedAssetType description="Marcas" fixedAssetTypeId="MARCAS" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="5" prefijoCucop="593" acctgTransTypeId="CPCP-10"/>
+	<FixedAssetType description="Derechos" fixedAssetTypeId="DERECHOS" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="5" prefijoCucop="594" acctgTransTypeId="CPCP-10"/>
+	<FixedAssetType description="Concesiones" fixedAssetTypeId="CONCESIONES" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="" prefijoCucop="595" acctgTransTypeId="CPCP-10"/>
+	<FixedAssetType description="Franquicias" fixedAssetTypeId="FRANQUICIAS" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="" prefijoCucop="596" acctgTransTypeId="CPCP-10"/>
+	<FixedAssetType description="Licencias informaticas e intelectuales" fixedAssetTypeId="LICENCIAS_INFORMATIC" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="" prefijoCucop="597" acctgTransTypeId="CPCP-09"/>
+	<FixedAssetType description="Licencias industriales, comerciales y otras" fixedAssetTypeId="LICENCIAS_COMERCIALE" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="" prefijoCucop="598" acctgTransTypeId="CPCP-09"/>
+	<FixedAssetType description="Otros activos intangibles" fixedAssetTypeId="OTROS_ACT_INTANGIBLE" hasTable="N" parentTypeId="" aniosVidaUtil="" montoDepreciacion="" montoDepreciacionLisr="5" prefijoCucop="599" acctgTransTypeId="CPCP-10"/>
+	
+</entity-engine-xml>

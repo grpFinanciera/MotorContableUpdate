@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+-->
+
+<entity-engine-xml>
+
+    <!-- The main enumeration type for all accounting tags  -->
+    <EnumerationType enumTypeId="ACCOUNTING_TAG" description="Etiqueta Contable"/>
+
+    <!-- Supported usage types for accounting tags
+    These should roughly mirror the invoice type, GL account type, etc. but they don't have to -->
+    <AcctgTagUsageType acctgTagUsageTypeId="FINANCIALS_REPORTS" description="Reportes en finanzas, incluyendo estados financieros"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="BALANCE_REPORTS" description="Etiquetas impresas en los Reportes del Estado de Cuenta en finanzas"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="PRCH_INV_ITEMS" description="Factura de compra"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="SALES_INV_ITEMS" description="Artículos de la factura de ventas"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="COMM_INV_ITEMS" description="Artículos de la factura de comisión"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="RETN_INV_ITEMS" description="Artículos de la factura de devolución"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="PRCH_INV_L_ITEMS" description="Buscar Factura de compra"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="SALES_INV_L_ITEMS" description="Buscar Artículos de la factura de ventas"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="COMM_INV_L_ITEMS" description="Buscar Artículos de la factura de comisión"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="PRCH_ORDER_ITEMS" description="Artículos de la orden de compra"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="SALES_ORDER_ITEMS" description="Artículos de la orden de ventas"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="DISBURSEMENT" description="Pagos que son del tipo Desembolso"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="RECEIPT" description="Pagos que son del tipo Recibo"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="L_DISBURSEMENT" description="Buscar Pagos que son del tipo Desembolso"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="L_RECEIPT" description="Buscar Pagos que son del tipo Recibo"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="ACCOUNTS_PAYABLE" description="Contabilización de Cuentas por Pagar"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="ACCOUNTS_RECEIVABLE" description="Contabilización de Cuentas por Cobrar"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="COMMISSIONS_PAYABLE" description="Contabilización de Comisiones por Pagar"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="TRANSACTION_ENTRY" description="Registros de transacciones"/>
+    <AcctgTagUsageType acctgTagUsageTypeId="CHECK_RUN" description="Pagos a múltiples proveedores"/>
+
+</entity-engine-xml>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para Operacion patrimonial</title>
+	<description>Define la entidad para los datos de la operacion patrimonial</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Miguel Castillo Nuñez</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="OperacionPatrimonial" package-name="org.opentaps.dataimport"
+		title="Entidad para los datos de operacion patrimonial.">
+		<field name="agrupadorP" type="id-ne"></field>
+		<field name="fechaTransaccion" type="date-time"></field>
+		<field name="fechaContable" type="date-time"></field>
+		<field name="status" type="indicator"></field>
+		<field name="organizationPartyId" type="id-ne"></field>
+		<field name="userLoginId" type="id-ne"></field>
+		<field name="description" type="description"></field>
+		<prim-key field="agrupadorP" />
+		<relation type="one" fk-name="FK_OP_PTY" title='accttdp'
+		    rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="OperacionPatrimonialDetalle" package-name="org.opentaps.dataimport"
+		title="Entidad que informa el detalle de la operacion patrimonial">
+		<field name="idDetalle" type="id-ne"/>
+		<field name="agrupadorP" type="id-ne"></field>
+		<field name="idTipoDoc" type="id-ne"/>
+		<field name="description" type="id-vlong"></field>
+		<field name="monto" type="currency-amount"></field>
+		<field name="tipoMoneda" type="id"></field>
+		<field name="theirPartyId" type="id-ne"></field>
+		<field name="productId" type="id-ne"></field>
+		<field name="theirPartyId2" type="id-ne"></field>
+		<field name="productId2" type="id-ne"></field>
+		<prim-key field="idDetalle"/>
+	    <relation type="one" fk-name="ACCTTDPP" title='accttdpp'
+		    rel-entity-name="OperacionPatrimonial">
+			<key-map field-name="agrupadorP" rel-field-name="agrupadorP" />
+		</relation>	
+		<relation type="one" fk-name="ACTDP" title='actdp'
+		    rel-entity-name="TipoDocumento">
+			<key-map field-name="idTipoDoc" rel-field-name="idTipoDoc" />
+		</relation>	
+		<relation type="one" fk-name="ACCTTXENT_CURNCYO" title="CurrencyO" rel-entity-name="Uom"> 
+        	<key-map field-name="tipoMoneda" rel-field-name="uomId"/>
+        </relation>
+	</entity>
+       
+	<entity entity-name="AfectacionCompensada" package-name="org.opentaps.dataimport"
+		title="Entidad para las afectaciones presupuestales compensadas">
+		<field name="agrupadorP" type="id-ne"></field>
+		<field name="fechaTransaccion" type="date-time"></field>
+		<field name="fechaContable" type="date-time"></field>
+		<field name="estatus" type="indicator"></field>
+		<field name="organizationPartyId" type="id-ne"></field>
+		<field name="userLoginId" type="id-ne"></field>
+		<field name="description" type="description"></field>
+		<field name="tipoMovimiento" type="id" />
+		<prim-key field="agrupadorP" />
+		<relation type="one" fk-name="ACCTTDP" title='accttdp'
+		    rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+	</entity> 
+	
+	<entity entity-name="AfectacionCompensadaDetalle" package-name="org.opentaps.dataimport"
+		title="Entidad para el detalle de las afectaciones presupuestales compensadas">
+		<field name="agrupadorD" type="id-ne"></field>
+		<field name="agrupadorP" type="id-ne"></field>
+		<field name="fecha" type="date-time"></field>
+		<field name="monto" type="currency-amount"></field>
+		<field name="clavePresupuestal" type="description"/>
+		<field name="flag" type="indicator"/>
+		<field name="tipoMoneda" type="id"></field>
+		<field name="acctgTransId" type="id-ne"/>
+		<prim-key field="agrupadorD" />
+		<relation type="one" fk-name="AFGTRVG" title='afgtrvg'
+		    rel-entity-name="AfectacionCompensada">
+			<key-map field-name="agrupadorP" />
+		</relation>
+		<relation type="one" fk-name="ACCTG_ENT_CLAVE"
+			rel-entity-name="ClavePresupuestal">
+			<key-map field-name="clavePresupuestal"/>
+		</relation>
+		<relation type="one" fk-name="ACCTG_AFE_COM"
+			rel-entity-name="AcctgTrans">
+			<key-map field-name="acctgTransId"/>
+		</relation> 
+	</entity>
+	
+	<entity entity-name="AcctgTransSinEvento" package-name="org.opentaps.dataimport"
+		title="Entidad para las transacciones sin uso de eventos">
+		<field name="acctgTransId" type="id-ne"></field>
+		<field name="fechaContable" type="date-time"></field>
+		<field name="currency" type="id"></field>
+		<field name="descripcion" type="description"></field>
+		<field name="organizationPartyId" type="id-ne"></field>
+		<field name="userLoginId" type="id-ne"></field>
+		<field name="acctgTransPoliza" type="id-ne"/>
+		<field name="tipoPolizaId" type="id-ne"/>
+		<field name="poliza" type="id-ne"/>
+		<prim-key field="acctgTransId" />		 
+	</entity>
+		
+	<entity entity-name="DetalleAcctgTrans" package-name="org.opentaps.dataimport"
+		title="Entidad para el detalle de las transacciones sin uso de eventos">
+		<field name="acctgTransId" type="id-ne"></field>
+		<field name="acctgTransEntryId" type="id-ne"></field>
+		<field name="monto" type="currency-amount"></field>
+		<field name="glAccountId" type="id"></field>
+		<field name="auxiliar" type="id-ne"></field>
+		<field name="cuentaBancariaId" type="id"/>
+		<field name="isDebitCreditFlag" type="indicator"/>
+		<prim-key field="acctgTransEntryId" />
+		<prim-key field="acctgTransId" />
+		<relation type="one" fk-name="ID_DETACCTG" rel-entity-name="AcctgTransSinEvento">
+			<key-map field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="TSE_GLA" rel-entity-name="GlAccount">
+            <key-map field-name="glAccountId"/>
+        </relation> 
+	</entity> 
+	
+	<entity entity-name="DataImportACompensada"
+		package-name="org.opentaps.dataimport" title="Entidad que almacena la importación del detalle de la requisición">
+		<field name="detalleId" type="numeric" />
+		<field name="renglon" type="numeric" />
+		<field name="moneda" type="id-ne" />
+		<field name="monto" type="currency-amount-precise" />
+		<field name="periodoR" type="id-ne" />
+		<field name="clasif1" type="id-ne"/>
+        <field name="clasif2" type="id-ne"/>
+        <field name="clasif3" type="id-ne"/>
+        <field name="clasif4" type="id-ne"/>
+        <field name="clasif5" type="id-ne"/>
+        <field name="clasif6" type="id-ne"/>
+        <field name="clasif7" type="id-ne"/>
+        <field name="clasif8" type="id-ne"/>
+        <field name="clasif9" type="id-ne"/>
+        <field name="clasif10" type="id-ne"/>
+        <field name="clasif11" type="id-ne"/>
+        <field name="clasif12" type="id-ne"/>
+        <field name="clasif13" type="id-ne"/>
+        <field name="clasif14" type="id-ne"/>
+        <field name="clasif15" type="id-ne"/>
+        <field name="clavePresupuestalR" type="description"><description>Clave presupuestal de Reduccion</description></field>
+        <field name="periodoA" type="id-ne" />
+		<field name="clasificacion1" type="id-ne"/>
+        <field name="clasificacion2" type="id-ne"/>
+        <field name="clasificacion3" type="id-ne"/>
+        <field name="clasificacion4" type="id-ne"/>
+        <field name="clasificacion5" type="id-ne"/>
+        <field name="clasificacion6" type="id-ne"/>
+        <field name="clasificacion7" type="id-ne"/>
+        <field name="clasificacion8" type="id-ne"/>
+        <field name="clasificacion9" type="id-ne"/>
+        <field name="clasificacion10" type="id-ne"/>
+        <field name="clasificacion11" type="id-ne"/>
+        <field name="clasificacion12" type="id-ne"/>
+        <field name="clasificacion13" type="id-ne"/>
+        <field name="clasificacion14" type="id-ne"/>
+        <field name="clasificacion15" type="id-ne"/>
+        <field name="clavePresupuestalA" type="description"><description>Clave presupuestal de Ampliación</description></field>
+        <field name="userLoginId" type="id-vlong-ne"></field>
+		<field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+		<prim-key field="detalleId" />
+		<relation type="one" fk-name="FK_USR_DI_AC" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="DataImportAfectacionCompensadaClave" package-name="com.absoluciones.importacion"
+		title="Vista que obitiene la información de la clave presupuestal para hacer la validación">
+		<member-entity entity-alias="DIAC" entity-name="DataImportACompensada" />
+		<member-entity entity-alias="CVER" entity-name="ClavePresupuestal" />
+		<member-entity entity-alias="CVEA" entity-name="ClavePresupuestal" />
+		
+		<alias name="detalleId" entity-alias="DIAC" group-by="true"/>
+		<alias name="periodoA" entity-alias="DIAC" group-by="true"/>
+		<alias name="periodoR" entity-alias="DIAC" group-by="true"/>
+		<alias name="moneda" entity-alias="DIAC" group-by="true"/>
+		<alias name="monto" entity-alias="DIAC" group-by="true"/>
+		<alias name="clavePresupuestalR" entity-alias="DIAC" group-by="true"/>
+		<alias name="clavePresupuestalA" entity-alias="DIAC" group-by="true"/>
+		<alias name="importStatusId" entity-alias="DIAC" group-by="true"/>
+		<alias name="userLoginId" entity-alias="DIAC" group-by="true"/>
+		
+		<alias name="clavePresupR" field="clavePresupuestal" entity-alias="CVER" group-by="true"/>
+		<alias name="inactivoR" field="inactivo" entity-alias="CVER" group-by="true"/>
+		
+		<alias name="clavePresupA" field="clavePresupuestal" entity-alias="CVEA" group-by="true"/>
+		<alias name="inactivoA" field="inactivo" entity-alias="CVEA" group-by="true"/>
+		
+		<view-link entity-alias="DIAC" rel-entity-alias="CVER" rel-optional="true">
+			<key-map field-name="clavePresupuestalR" rel-field-name="clavePresupuestal"/>
+		</view-link>
+		<view-link entity-alias="DIAC" rel-entity-alias="CVEA" rel-optional="true">
+			<key-map field-name="clavePresupuestalA" rel-field-name="clavePresupuestal"/>
+		</view-link>
+	</view-entity>
+	
+	
+</entitymodel>

@@ -1,0 +1,68 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.*;
+
+solicitudTransferenciaId = parameters.get("solicitudTransferenciaId");
+
+SolicitudTransferencia = delegator.findByPrimaryKey("SolicitudTransferencia",UtilMisc.toMap("solicitudTransferenciaId",solicitudTransferenciaId));
+context.put("solicitud",SolicitudTransferencia);
+
+detalleSolicitud = delegator.findByAnd("DetalleSolicitudTransfer", UtilMisc.toMap("solicitudTransferenciaId", solicitudTransferenciaId));
+context.put("detalleSolicitud",detalleSolicitud);
+
+Facility = delegator.findByPrimaryKey("Facility",UtilMisc.toMap("facilityId",SolicitudTransferencia.getString("almacenDestinoId")));
+
+listAlmacenes = delegator.findByAnd("Facility",UtilMisc.toMap("facilityTypeId",Facility.getString("facilityTypeId")));
+context.put("listAlmacenes",listAlmacenes);
+
+listRequisiciones = delegator.findByAnd("Requisicion", UtilMisc.toMap("personaSolicitanteId", userLogin.get("partyId"),"statusId","APROBADA","solicitudTransferenciaId",null));
+context.put("listRequisiciones",listRequisiciones);
+ 
+listOrdenes = delegator.findByAnd("OrderHeader", UtilMisc.toMap("createdBy", userLogin.get("userLoginId"),"statusId", "ORDER_COMPLETED","solicitudTransferenciaId",null));
+context.put("listOrdenes",listOrdenes);
+
+listPedidoInterno = delegator.findByAnd("PedidoInterno", UtilMisc.toMap("personaSolicitanteId", userLogin.get("partyId"),"statusId","ATENDIDA","solicitudTransferenciaId",null));
+context.put("listPedidoInterno",listPedidoInterno);
+ 
+conditionsSolicitante = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "SOLICITANTE")    
+);
+rolesSolicitante = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsSolicitante, EntityOperator.AND), null, null);
+context.put("rolesSolicitante", rolesSolicitante);
+
+conditionsAlmacenista = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "ALMACENISTA")    
+ );
+ 
+rolesAlmacenista = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsAlmacenista, EntityOperator.AND), null, null);
+context.put("rolesAlmacenista", rolesAlmacenista);
+
+
+conditionsAutorizador = UtilMisc.toList(
+    new EntityExpr("autorizadorId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "TRANSFERENCIA")    
+ );
+ rolesAutorizador = delegator.findByCondition("Autorizador", new EntityConditionList(conditionsAutorizador, EntityOperator.AND), null, null);
+ context.put("rolesAutorizador", rolesAutorizador);
+ 
+ 
+ conditionsStatusAutorizacion = UtilMisc.toList(
+    new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("origenId", EntityOperator.EQUALS, solicitudTransferenciaId),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "TRANSFERENCIA")
+ );
+
+ statusAutorizacion = delegator.findByCondition("StatusAutorizacionWorkFlow", new EntityConditionList(conditionsStatusAutorizacion, EntityOperator.AND), null, null);
+ context.put("statusAutorizacion", statusAutorizacion);
+ 
+ listControlWF = delegator.findByAnd("ControlWorkFlow",UtilMisc.toMap("origenId",solicitudTransferenciaId,"tipoWorkFlowId","TRANSFERENCIA"));
+ workFlowId = "";
+ print("listControlWF -->  "+listControlWF);
+ if(!listControlWF.isEmpty()){
+ 	workFlowId = listControlWF.get(0).getString("workFlowId");
+ 	listComentario = delegator.findByAnd("ComentarioWorkFlow",UtilMisc.toMap("workFlowId",workFlowId));
+ 	context.put("comentarios", listComentario);
+ 	 print("listComentario -->  "+listComentario);
+ }
+ 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Obras Services</description>
+    <version>1.0</version>
+    
+    <service name="crearObra" engine="java" default-entity-name="Obra"  auth="true"
+        location="com.absoluciones.obras.ObrasServices" invoke="crearObra">
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <auto-attributes include="pk" mode="OUT" optional="false"/>
+        <attribute name="clasificacionesMap" type="Map" string-map-prefix="clasificacion" mode="IN" optional="false" description="Clave Presupuestal"/>
+        <override name="statusId" optional="false"/>
+        <override name="organizationPartyId" optional="false" />
+        <override name="nombre" optional="false" description="Nombre"/>
+        <override name="descripcion" optional="false" description="Descripción"/>
+        <override name="justificacion" optional="false" description="Justificación"/>
+        <override name="productId" optional="false" description="Producto"/>
+        <override name="numAutCarteraInversion" optional="false" description="Número de Cartera de Inversión"/>
+        <override name="moneda" optional="false" description="Moneda"/>
+        <override name="montoAutorizado" optional="false" description="Monto Autorizado"/>
+        <override name="fechaInicio" optional="false" description="Fecha Inicial"/>
+        <override name="fechaFin" optional="false" description="Fecha Final"/>
+    </service>
+	<service name="actualizaObra" engine="java" default-entity-name="Obra"  auth="true"
+        location="com.absoluciones.obras.ObrasServices" invoke="actualizaObra">
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <auto-attributes include="pk" mode="INOUT" optional="false"/>
+    </service>
+    <service name="guardaDireccion" engine="java" auth="true" default-entity-name="PostalAddress" 
+    	location="com.absoluciones.obras.ObrasServices" invoke="guardaDireccion" >
+    	<auto-attributes include="nonpk" mode="IN" optional="true"/>
+    	<auto-attributes include="pk" mode="IN" optional="true"/>
+    	<auto-attributes include="pk" mode="OUT" optional="false"/><!-- contactMechId -->
+    	<attribute name="obraId" mode="IN" type="String" optional="false"/>
+    	<attribute name="COUNTRY" mode="IN" type="String"  optional="true" description="País"/>
+    	<attribute name="STATE" mode="IN" type="String" optional="true" description="Estado"/>
+    	<attribute name="MUNICIPALITY" mode="IN" type="String" optional="true" description="Municipio"/>
+    	<attribute name="CITY" mode="IN" type="String" optional="true" description="Ciudad"/>
+    </service>
+    
+    <!-- Servicio para actualizar las modificaciones de precio de la obra -->    
+    <service name="actualizarModificacionesObrasPrecio" default-entity-name="Obra" engine="java"
+        location="com.absoluciones.obras.ObrasServices" invoke="actualizarModificacionesObrasPrecio" auth="true">
+        <description>Actualizar las modificaciones del precio de la obra</description>
+        <attribute name="numOficioJustificacionTec" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioAutorizacionSFP" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioAutorizaContratant" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioTarjetas" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioConvenioModif" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioPresupuesto" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioFianzaCumplimiento" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioFianzaAmpliacion" type="String" mode="IN" optional="true" />
+        <attribute name="obraId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+    <!-- Servicio para actualizar las modificaciones de calendario de la obra -->    
+    <service name="actualizarModificacionesObrasCalendario" default-entity-name="Obra" engine="java"
+        location="com.absoluciones.obras.ObrasServices" invoke="actualizarModificacionesObrasCalendario" auth="true">
+        <description>Actualizar las modificaciones del calendario de la obra</description>
+        <attribute name="numOficioJustificaciTecMpa" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioAutorizacioSfpMpa" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioDictamenContrate" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioConvenio" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioCalendarEjecucion" type="String" mode="IN" optional="true" />
+        <attribute name="numOficioModifFianzaCumpl" type="String" mode="IN" optional="true" />
+        <attribute name="obraId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+    <service name="finiquitoObra" engine="java"
+        location="com.absoluciones.obras.ObrasServices" invoke="finiquitoContratoObra" auth="true">
+        <description>Realiza captura de datos de finiquito de un contrato de obra</description>
+        <attribute name="numOficioEntregaFisica" type="String" mode="IN"  optional="true"/>
+        <attribute name="numOficioEntregaRecepcion" type="String" mode="IN"  optional="true"/>
+        <attribute name="numOficioViciosOcultos" type="String" mode="IN"  optional="true" />
+        <attribute name="numOficioFiniquitoContrato" type="String" mode="IN" optional="true"/>
+        <attribute name="numOficioExtincionDerechos" type="String" mode="IN"  optional="true"/>
+        <attribute name="numOficioPlanosDefinitivos" type="String" mode="IN"  optional="true"/>
+        <attribute name="numOficioCatalogoConcepto" type="String" mode="IN"  optional="true"/>
+        <attribute name="obraId" type="String" mode="INOUT"  optional="true"/>
+        <attribute name="contratoId" type="String" mode="INOUT"  optional="true"/>
+    </service>
+    
+    <service name="contratoObra" engine="java"
+            location="com.absoluciones.obras.ObrasServices" invoke="contratoObra" auth="true">
+        <description>Realiza captura de datos del contrato de obra</description>
+        <attribute name="numContrato" type="String" mode="IN"  optional="true"/>
+        <attribute name="numReciboAnticipo" type="String" mode="IN"  optional="true"/>
+        <attribute name="numGarantiaAnticipo" type="String" mode="IN"  optional="true" />
+        <attribute name="numGarantiaCumplimiento" type="String" mode="IN" optional="true"/>
+        <attribute name="proveedor" type="String" mode="IN"  optional="true"/>
+        <attribute name="obraId" type="String" mode="INOUT"  optional="true"/>        
+    </service>
+    
+    <service name="iniciarObra" engine="java"
+            location="com.absoluciones.obras.ObrasServices" invoke="iniciarObra" auth="true">
+        <description>Realiza captura de datos de inicio de obra</description>
+        <attribute name="montosMeses" type="Map" string-map-prefix="montoMes" mode="IN" optional="false" description="Montos de los meses en el calendario de obra"/>
+        <attribute name="obraId" type="String" mode="INOUT"  optional="true"/>
+        <attribute name="valorObra" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="porcentajeAnticipoObra" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="montoAnticipo" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="retencionMillarIVDGLE" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="retencionMillarICIC" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="auxRetencionMillarIVDGLE" type="String" mode="IN"  optional="true"/>
+        <attribute name="auxRetencionMillarICIC" type="String" mode="IN"  optional="true"/>
+        <attribute name="mesInicio" type="String" mode="IN"  optional="true"/>
+        <attribute name="anioInicio" type="String" mode="IN"  optional="true"/>                        
+    </service>
+    
+    <service name="iniciarContratoObra" engine="java"
+            location="com.absoluciones.obras.ObrasServices" invoke="iniciarContratoObra" auth="true">
+        <description>Realiza captura de datos de inicio de obra</description>
+        <attribute name="numContrato" type="String" mode="IN"  optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN"  optional="true"/>        
+        <attribute name="numReciboAnticipo" type="String" mode="IN"  optional="true"/>
+        <attribute name="numGarantiaAnticipo" type="String" mode="IN"  optional="true" />
+        <attribute name="numGarantiaCumplimiento" type="String" mode="IN" optional="true"/>
+        <attribute name="contratistaId" type="String" mode="IN"  optional="true"/>
+        <attribute name="productId" type="String" mode="IN"  optional="true"/>        
+        <attribute name="montosMeses" type="Map" string-map-prefix="montoMes" mode="IN" optional="false" description="Montos de los meses en el calendario de obra"/>
+        <attribute name="mapRetenciones" type="Map" string-map-prefix="retencionId" mode="IN" optional="false" description="Lista de retenciones para un contrato"/>
+        <attribute name="obraId" type="String" mode="INOUT"  optional="true"/>
+        <attribute name="contratoId" type="String" mode="INOUT"  optional="true"/>
+        <attribute name="urlHost" type="String" mode="IN" optional="false"/>
+        <attribute name="valorContrato" type="String" mode="IN"  optional="true"/>
+        <attribute name="porcentajeAnticipoContrato" type="String" mode="IN"  optional="true"/>
+        <attribute name="montoAnticipo" type="String" mode="IN"  optional="true"/>
+        <attribute name="retencionMillarIVDGLE" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="retencionMillarICIC" type="BigDecimal" mode="IN"  optional="true"/>
+        <attribute name="auxRetencionMillarIVDGLE" type="String" mode="IN"  optional="true"/>
+        <attribute name="auxRetencionMillarICIC" type="String" mode="IN"  optional="true"/>
+        <attribute name="mesInicio" type="String" mode="IN"  optional="true"/>
+        <attribute name="anioInicio" type="String" mode="IN"  optional="true"/>
+        <attribute name="numRetenciones" type="String" mode="IN"  optional="true"/>
+        <attribute name="moneda" type="String" mode="IN"  optional="true"/>
+        <attribute name="fechaRealInicio" mode="IN" type="Timestamp" optional="true" />
+        <attribute name="fechaRealFin" mode="IN" type="Timestamp" optional="true" />
+    </service>   
+                             
+    <service name="enviarSolicitudObra" engine="java" location="com.absoluciones.obras.ObrasServices" auth="true" invoke="enviarSolicitud">
+    	<attribute name="obraId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>
+    	<attribute name="areaId" type="String" mode="IN" optional="false"/>
+    	<attribute name="comentario" type="String" mode="IN" optional="true"/>    	        
+    </service>
+    
+    <service name="cambiaStatusSolicitud" engine="java" auth="true"
+    		location="com.absoluciones.obras.ObrasServices" invoke="cambiaStatusSolicitud">
+    		<attribute name="obraId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="estatus" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="autorizarSolicitudObra" engine="java" location="com.absoluciones.obras.ObrasServices" auth="true" invoke="autorizarSolicitud">
+    	<attribute name="obraId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAutorizado" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>        		        
+    </service>
+    
+    <service name="rechazarSolicitudObra" engine="java" location="com.absoluciones.obras.ObrasServices" auth="true" invoke="rechazarSolicitud">
+    	<attribute name="obraId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioRechazo" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="comentarSolicitudObra" engine="java" location="com.absoluciones.obras.ObrasServices" auth="true" invoke="comentarSolicitud">
+    	<attribute name="obraId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioComentar" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>	
+    
+    <!-- Servicio para el seguimiento de la obra -->
+    <service name="seguimientoObra" engine="java" export="true"
+    		location="com.absoluciones.obras.SeguimientoObra" invoke="seguimientoDeObra">
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="performFind" mode="IN" type="String" optional="true"/>
+        <attribute name="obraId" mode="IN" type="String" optional="true"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="true" />
+        <attribute name="fechaRealInicio" mode="IN" type="Timestamp" optional="true" />
+        <attribute name="fechaRealFin" mode="IN" type="Timestamp" optional="true" />
+        <attribute name="description" mode="IN" type="String" optional="true"/>
+        <attribute name="montoAvance" mode="IN" type="java.math.BigDecimal" optional="true" />
+        <attribute name="contratoId" mode="IN" type="String" optional="true" />
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+    	<attribute name="tipoMoneda" mode="OUT" type="String" optional="true"/>
+    	<attribute name="seguimientoList" mode="OUT" type="java.util.List" optional="true"/>
+    </service>  
+    
+    <!-- Servicio para la finalización obra -->
+    <service name="finalizarObra" engine="java" export="true"
+    		location="com.absoluciones.obras.ObrasServices" invoke="finalizarObra">
+        <attribute name="obraId" mode="IN" type="String" optional="true"/>
+    </service>  
+    
+</services>

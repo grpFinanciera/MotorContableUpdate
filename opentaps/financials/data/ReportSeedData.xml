@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<entity-engine-xml>
+
+    <ReportRegistry reportId="FININVOICE" shortName="Financials Invoice Report" description="Report show you the invoice detail." reportLocation="component://financials/webapp/financials/reports/repository/Invoice.jrxml"/>
+
+    <ReportGroup reportGroupId="FIN_FORM" showInSelect="N" description="Financials Reports" application="financials" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="FIN_FORM" reportId="FININVOICE" sequenceNum="1"/>
+
+    <ReportRegistry reportId="FIN_BALANCE" shortName="Reporte de Presupuesto contra el Real más Gravámenes" description="" reportLocation="component://financials/webapp/financials/reports/repository/BalanceReport.jrxml" setupUri="BalanceReportSetup?"/>
+    <ReportRegistry reportId="BDGT_ACTLEXP_GLACCT" shortName="Presupuesto contra Gastos Reales por Cuenta de LM" description="" reportLocation="component://financials/webapp/financials/reports/repository/BudgetVsActualExpensesByGlAccount.jrxml" setupUri="setupReport?acctgTagUsage=FINANCIALS_REPORTS&amp;"/>
+    <ReportRegistry reportId="BDGT_ACTLEXP_DTL" shortName="Detalles del Presupuesto contra Gastos Reales" description="" reportLocation="component://financials/webapp/financials/reports/repository/BudgetVsActualExpensesDetail.jrxml" setupUri="setupReport?acctgTagUsage=FINANCIALS_REPORTS&amp;"/>
+    <ReportRegistry reportId="BDGT_ACTLEXP_ACCTP" shortName="Presupuesto contra Gastos Reales por Tipo de Cuenta de LM" description="" reportLocation="component://financials/webapp/financials/reports/repository/BudgetVsActualExpensesByGlAccountType.jrxml" setupUri="setupReport?acctgTagUsage=FINANCIALS_REPORTS&amp;"/>
+    <ReportRegistry reportId="ACCT_TAGS" shortName="Reporte de Etiquetas Contables" description="" reportLocation="component://financials/webapp/financials/reports/repository/AccountingTagsReport.jrxml"/>
+    <ReportRegistry reportId="GL_ACCTS" shortName="Reporte de Cuentas de LM" description="" reportLocation="component://financials/webapp/financials/reports/repository/GlAccountsReport.jrxml"/>
+    <ReportGroup reportGroupId="FIN_BUDGETING" showInSelect="Y" description="Presupuesto" application="financials" sequenceNum="1"/>
+    <ReportGroup reportGroupId="FIN_CONFIGURATION" showInSelect="Y" description="Configuración" application="financials" sequenceNum="5"/>
+    <ReportGroupMember reportGroupId="FIN_BUDGETING" reportId="FIN_BALANCE" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="FIN_BUDGETING" reportId="BDGT_ACTLEXP_DTL" sequenceNum="5"/>
+    <ReportGroupMember reportGroupId="FIN_BUDGETING" reportId="BDGT_ACTLEXP_GLACCT" sequenceNum="10"/>
+    <ReportGroupMember reportGroupId="FIN_BUDGETING" reportId="BDGT_ACTLEXP_ACCTP" sequenceNum="15"/>
+    <ReportGroupMember reportGroupId="FIN_CONFIGURATION" reportId="ACCT_TAGS" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="FIN_CONFIGURATION" reportId="GL_ACCTS" sequenceNum="5"/>
+
+
+    <ReportGroup reportGroupId="FIN_RECEIVABLES" showInSelect="N" description="Financials Receivables Reports" application="financials" sequenceNum="2"/>
+    <ReportGroup reportGroupId="FIN_PAYABLES" showInSelect="N" description="Financials Payables Reports" application="financials" sequenceNum="3"/>
+    <ReportGroup reportGroupId="FIN_FINANCIALS" showInSelect="N" description="%Financials" application="financials" sequenceNum="2"/>
+	
+	<!-- Reportes Contables HCGZ -->
+	<ReportGroup reportGroupId="CONAC_CONTABLES" showInSelect="N" description="%CONACContables" application="financials" sequenceNum="3"/>
+	<!-- Grupo Reportes presupuestales HCGZ -->
+    <ReportGroup reportGroupId="BUD_EXEC_E_R" showInSelect="N" description="%BudgetExecutionE_R" application="financials" sequenceNum="2"/>
+    <!-- Grupo Reportes Ingresos -->
+    <ReportGroup reportGroupId="BUD_EXEC_I_R" showInSelect="N" description="%BudgetExecutionI_R" application="financials" sequenceNum="3"/>
+	<!-- Grupo Analíticos HCGZ -->
+    <ReportGroup reportGroupId="BUD_EXEC_A" showInSelect="N" description="%BudgetExecution_A" application="financials" sequenceNum="2"/>
+    <!-- Reportes económicos HCGZ -->
+	<ReportGroup reportGroupId="CONAC_ECONOMICOS" showInSelect="N" description="%CONACEconomicos" application="financials" sequenceNum="2"/>
+    <!-- Catálogos HCGZ -->
+    <ReportGroup reportGroupId="CATALOGOS" showInSelect="N" description="%CATALOGOS" application="financials" sequenceNum="3"/>
+	<!-- Auxiliares HCGZ -->
+    <ReportGroup reportGroupId="AUXILIARES" showInSelect="N" description="%AUXILIARES" application="financials" sequenceNum="2"/>
+    <!-- Reportes CONAC -->
+    <ReportGroup reportGroupId="CONAC_PRESUPUESTALES" showInSelect="N" description="%CONACPresupuestales" application="financials" sequenceNum="2"/>
+    <!-- Reportes de la ley de disciplina financiera -->
+    <ReportGroup reportGroupId="LDF" showInSelect="N" description="%ReportesLDF" application="financials" sequenceNum="1"/>
+    
+</entity-engine-xml>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Planilla10Etiquetas" pageWidth="70" pageHeight="85" columnWidth="70" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="5.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="idProduct1" class="java.lang.String"/>
+	<field name="idProduct2" class="java.lang.String"/>
+	<field name="productName1" class="java.lang.String"/>
+	<field name="productName2" class="java.lang.String"/>
+	<field name="fechaAdqui1" class="java.lang.String"/>
+	<field name="fechaAdqui2" class="java.lang.String"/>
+	<field name="organizacion1" class="java.lang.String"/>
+	<field name="organizacion2" class="java.lang.String"/>
+	<detail>
+		<band height="50">
+			<componentElement>
+				<reportElement mode="Transparent" x="1" y="13" width="69" height="30"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{idProduct1}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="7" width="70" height="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{productName1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="0" width="27" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="5"/>
+				</textElement>
+				<!--<text><![CDATA[COLSAN]]></text>-->
+			</staticText>
+			<textField>
+				<reportElement x="38" y="0" width="27" height="7"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaAdqui1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,61 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+	application = parameters.get("componentName");
+	context.put("application", application);
+
+    userLogin = parameters.get("userLogin");
+    if (userLogin == null) {
+        return;
+    }
+    
+	conditions = UtilMisc.toList(
+	    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+	    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "TESORERO")
+	);
+	rolesTesorero = delegator.findByCondition("PartyRole", new EntityConditionList(conditions, EntityOperator.AND), null, null);
+	context.put("rolTesorero", rolesTesorero);
+    if(rolesTesorero == null || rolesTesorero.isEmpty()){
+    	return;
+    }
+	 // obtener el catalogo de documentos
+	searchConditions = FastList.newInstance();
+	//searchConditions.add(new EntityExpr("almacenistaId", EntityOperator.EQUALS, userLogin.get("partyId")));
+	searchConditions.add(new EntityExpr("statusId", EntityOperator.IN, UtilMisc.toList("INVOICE_IN_PROCESS", "EJERCIDO_PARCIAL")));
+	searchConditions.add(new EntityExpr("invoiceTypeId", EntityOperator.EQUALS, UtilMisc.toList("PURCHASE_INVOICE")));
+
+	allConditions = new EntityConditionList(searchConditions, EntityOperator.AND);
+	listInvoice = delegator.findByCondition("Invoice", allConditions, null,null);
+	contadorOP = listInvoice.size();	
+	context.put("contadorOP", contadorOP);

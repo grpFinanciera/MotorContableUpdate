@@ -1,0 +1,15 @@
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.party.contact.ContactHelper;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.base.entities.ReporteFirmantePartyGroup;
+
+reporteId = parameters.get("reporteId");
+
+condicion = EntityCondition.makeCondition("reporteId",EntityOperator.EQUALS, reporteId);
+listFirmantes = delegator.findByCondition("ReporteFirmantePerson", condicion , null, null);
+context.put("listFirmantes", listFirmantes);
+
+print("listFirmantes: " + listFirmantes); 
+ 

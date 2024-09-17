@@ -1,0 +1,10 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilValidate;
+import org.opentaps.common.util.UtilCommon;
+
+glAccountId = parameters.get("glAccountId");
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+
+context.put("glAccountId",glAccountId);
+context.put("organizationPartyId", organizationPartyId);
+context.put("userLogin",userLogin);

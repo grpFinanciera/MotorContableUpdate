@@ -1,0 +1,37 @@
+import org.ofbiz.base.util.UtilDateTime;
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.EntityCondition;
+import org.ofbiz.entity.condition.EntityOperator;
+
+import org.opentaps.base.entities.EstructuraClave;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilDate;
+
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+context.put("organizationPartyId", organizationPartyId);
+
+currentYear = UtilDateTime.getYearStart(UtilDateTime.nowTimestamp());
+tempCal = UtilDateTime.toCalendar(currentYear);
+defaultYear = tempCal.get(Calendar.YEAR);
+defaultYearId = defaultYear;
+
+orderBy = UtilMisc.toList("fromDate");
+condicionesPeriodo = EntityCondition.makeCondition("periodTypeId", EntityOperator.EQUALS, "FISCAL_YEAR");
+customTimePeriods = delegator.findByCondition("CustomTimePeriod", condicionesPeriodo, null, orderBy);
+
+for(periodo : customTimePeriods)
+{
+	fromDate = periodo.getDate("fromDate");
+	cal = Calendar.getInstance();
+	cal.setTime(fromDate);
+	year = cal.get(Calendar.YEAR);
+	periodo.set("fromDate",   year);
+	if (defaultYear == year)
+	{
+		defaultYearId = periodo.getString("periodNum");
+	}
+}
+
+
+context.put("customTimePeriods", customTimePeriods);
+context.put("defaultYearId", defaultYear);

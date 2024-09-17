@@ -1,0 +1,52 @@
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import java.util.List;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+listAreas = UtilClassification.getListaCatalogos("NivelesParty", delegator, "",true);	
+ context.put("listAreas",listAreas);
+
+ listFixedAssetType = delegator.findAll("FixedAssetType");
+ context.put("listFixedAssetType",listFixedAssetType);
+
+listUbicacionRapida = delegator.findAll("UbicacionRapida");
+ context.put("listUbicacionRapida",listUbicacionRapida);  
+
+ listEstadoFisico = delegator.findAll("EstadoFisicoActivo");
+ context.put("listEstadoFisico",listEstadoFisico);
+ 
+ listTipoUnidadVehiculo = delegator.findAll("TipoUnidadVehiculo");
+ context.put("listTipoUnidadVehiculo",listTipoUnidadVehiculo);
+ 
+ listTipoAdjudicacion = delegator.findAll("TipoAdjudicacion");
+ context.put("listTipoAdjudicacion",listTipoAdjudicacion);
+ listStatus = delegator.findByAnd("Estatus", UtilMisc.toMap("tipo", "A"));
+ context.put("listStatus",listStatus);
+  
+
+paginaList = new ArrayList();
+listPagina = new HashMap();
+listPagina.put("idTamano", "4x2");
+listPagina.put("medida", "1x1 - etiquetas");
+paginaList.add(listPagina);
+
+context.put("paginaList",paginaList);

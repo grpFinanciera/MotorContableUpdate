@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<!-- Permisos para el módulo de Control Patrimonial -->
+    <SecurityPermission description="Ver las operaciones en el Módulo de Control Patrimonial." permissionId="CONTROLPATRIMONIAL_VIEW"/>
+    <SecurityPermission description="Todas las operaciones en el Módulo de Control Patrimonial." permissionId="CONTROLPATRIMONIAL_ADMIN"/>
+    <!-- Control -->
+    <SecurityPermission description="Ver la pestaña de Control en el Módulo de Control Patrimonial." permissionId="CONTROLPATRIMONIAL_CONTROL_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Control en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_VIEW"/>    
+    <SecurityPermission description="Administrar el tab de Crear Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CREAACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CREAACTIVO_VIEW"/>
+	<SecurityPermission description="Administrar el tab de Consultar Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSUACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Consultar Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSUACTIVO_VIEW"/>    
+    <SecurityPermission description="Administrar el tab de Resguardante de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGUACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Resguardante de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGUACTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Poliza de seguro de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_POLISEGUACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Poliza de seguro de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_POLISEGUACTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Depreciacion de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_DEPRECIACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Depreciacion de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_DEPRECIACTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consultar depreciacion de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULDEPCTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consultar depreciacion de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULDEPCTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Permisos sobre almacén de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_PERMIALMACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Permisos sobre almacén de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_PERMIALMACTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Resguardo masivo de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGMASIACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Resguardo masivo de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGMASIACTIVO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Codigo de Barras de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CODIBARRCTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Codigo de Barras de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CODIBARRCTIVO_VIEW"/>       
+    <SecurityPermission description="Administrar el tab de Responsable sobre recepciones en almacén de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESPRECEPALMACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Responsable sobre recepciones en almacén de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESPRECEPALMACTIVO_VIEW"/>
+	<SecurityPermission description="Administrar el tab de Historial de bienes de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_HISTORBIENACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Historial de bienes de Activo Fijo en la pestaña de Control." permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_HISTORBIENACTIVO_VIEW"/>    
+    <!-- Levantamiento -->
+    <SecurityPermission description="Ver la pestaña de Levantamiento en el Módulo de Control Patrimonial." permissionId="CONTROLPATRIMONIAL_LEVANT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Levantamiento en la pestaña de Levantamiento." permissionId="CONTROLPATRIMONIAL_LEVANT_LEVANTGRP_VIEW"/>    																																   
+    <SecurityPermission description="Administrar el tab de Levantamiento de Activo fijo en la pestaña de Levantamiento." permissionId="CONTROLPATRIMONIAL_LEVANT_LEVAGRP_LEVANTAACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Levantamiento de Activo fijo en la pestaña de Levantamiento." permissionId="CONTROLPATRIMONIAL_LEVANT_LEVAGRP_LEVANTAACTIVO_VIEW"/>    
+    <!-- Reportes -->
+    <SecurityPermission description="Ver la pestaña de Reportes en el Módulo de Control Patrimonial." permissionId="CONTROLPATRIMONIAL_REPORT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Reportes en la pestaña de Reportes." permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_VIEW"/> 
+    <SecurityPermission description="Administrar el tab de Reportes en la pestaña de Reportes." permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_REPORTEACTIVO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes en la pestaña de Reportes." permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_REPORTEACTIVO_VIEW"/>
+            
+    <SecurityGroup groupId="CONT_PATRIM_ADMIN" description="Administrador de Control Patrimonial con permisos para todas las operaciones."/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CREAACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CREAACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSUACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSUACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGUACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGUACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_POLISEGUACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_POLISEGUACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_DEPRECIACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_DEPRECIACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULDEPCTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULDEPCTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_PERMIALMACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_PERMIALMACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGMASIACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESGMASIACTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CODIBARRCTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CODIBARRCTIVO_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESPRECEPALMACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_RESPRECEPALMACTIVO_VIEW"/>   
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_HISTORBIENACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_HISTORBIENACTIVO_VIEW"/> 
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULTABAJASACT_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_CONTROL_CONTRGRP_CONSULTABAJASACT_VIEW"/>   
+    
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_LEVANT_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_LEVANT_LEVANTGRP_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_LEVANT_LEVAGRP_LEVANTAACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_LEVANT_LEVAGRP_LEVANTAACTIVO_VIEW"/>     																      
+    
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_REPORT_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_VIEW"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_REPORTEACTIVO_ADMIN"/>
+    <SecurityGroupPermission groupId="CONT_PATRIM_ADMIN" permissionId="CONTROLPATRIMONIAL_REPORT_REPORTGRP_REPORTEACTIVO_VIEW"/>        	
+	
+	
+	<UserLoginSecurityGroup userLoginId="admin" groupId="CONT_PATRIM_ADMIN" fromDate="2001-01-01 00:00:00"/>
+</entity-engine-xml> 

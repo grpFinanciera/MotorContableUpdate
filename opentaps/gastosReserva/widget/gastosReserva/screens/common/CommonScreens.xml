@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+
+    <screen name="main-application-decorator">
+        <section>
+            <actions>
+                <property-map resource="gastosReserva" map-name="configProperties" global="true"/>
+
+                <set field="opentapsApplicationName" value="gastosReserva" global="true"/>
+                <set field="applicationSetupScreen" value="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganization"/>
+                <script location="component://gastosReserva/webapp/gastosReserva/WEB-INF/actions/includes/main-decorator.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="component://opentaps-common/widget/screens/common/CommonScreens.xml">
+                    <decorator-section name="application-layout">
+                        <decorator-section-include name="section-layout"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- TODO this might be redundant in new opentaps-common system -->
+    <screen name="PermissionErrorScreen">
+        <section>
+            <widgets>
+                <label style="head2">${uiLabelMap.GastosReservaViewPermissionError}</label>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

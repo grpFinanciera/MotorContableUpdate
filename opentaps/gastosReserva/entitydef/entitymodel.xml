@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of GastosReserva Component</title>
+    <description>None</description>
+    <version></version>
+    
+	<entity entity-name="GastoReservaComp"
+			package-name="com.absoluciones.gastosreserva"
+			title="Solicitud de gasto">
+		<field name="gastosReservaId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="solicitanteId" type="id-ne" />
+		<field name="areaId" type="id-ne"/>		
+		<field name="concepto" type="description"/>
+		<field name="tipoMoneda" type="id"/>
+		<field name="fecha" type="date"/>
+		<field name="monto" type="currency-amount-precise"/>
+		<field name="observaciones" type="description"/>
+		<field name="proveedor" type="description"/>
+		<field name="auxiliarId" type="id-ne" />
+		<field name="statusId" type="id-ne" />
+		<field name="workFlowId" type="id"/>
+		<field name="fechaAutorizacion" type="date"/>
+		<field name="fechaComprobacion" type="date"/>
+		<field name="acctgTransIdOtorga" type="id" />
+		<field name="acctgTransIdComprueba" type="id" />
+		<field name="acctgTransIdDevuelve" type="id" />
+		<prim-key field="gastosReservaId"/>
+		
+		<relation type="one" fk-name="FK_DBO_GAST_UOM" rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GAST_ORG" title="OrgParty"	rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>			
+		<relation type="one" fk-name="FK_DBO_GAST_PER" rel-entity-name="Person" title="PerPty">
+			<key-map field-name="solicitanteId" rel-field-name="partyId"/>
+		</relation>			
+		<relation type="one" fk-name="FK_DBO_GAST_AREA" rel-entity-name="PartyGroup" title="AreaPty">
+			<key-map field-name="areaId" rel-field-name="partyId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GAST_AUX" rel-entity-name="PartyGroup" title="Auxiliar">
+			<key-map field-name="auxiliarId" rel-field-name="partyId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GAST_STA" rel-entity-name="Estatus">
+			<key-map field-name="statusId" />
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_GAST_WF" rel-entity-name="ControlWorkFlow">
+			<key-map field-name="workFlowId" />
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_GAST_POLO" rel-entity-name="AcctgTrans" title="Otorga">
+			<key-map field-name="acctgTransIdOtorga" rel-field-name="acctgTransId" />
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_GAST_POL" rel-entity-name="AcctgTrans" title="Comprueba">
+			<key-map field-name="acctgTransIdComprueba" rel-field-name="acctgTransId" />
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_GAST_POL" rel-entity-name="AcctgTrans" title="Devuelve">
+			<key-map field-name="acctgTransIdDevuelve" rel-field-name="acctgTransId" />
+		</relation>	
+    </entity>
+    
+    <!-- Nota este extend tiene que estar aqui porque tiene que esperar a que se construya la clase GastoReservaComp-->
+    <extend-entity entity-name="AcctgTrans">
+        <field name="gastosReservaId" type="id" />
+		<relation type="one" fk-name="FK_DBO_ACCTG_GAST" rel-entity-name="GastoReservaComp">
+			<key-map field-name="gastosReservaId" />
+		</relation>
+	</extend-entity>
+	
+	<view-entity entity-name="BuscarGastoReserva"
+		package-name="com.absoluciones.gastosreserva"
+		title="Permite la búsqueda de los gastos a reserva de comprobar">
+		<member-entity entity-alias="GRC" entity-name="GastoReservaComp" />
+		<member-entity entity-alias="E" entity-name="Estatus" />
+		<member-entity entity-alias="P" entity-name="Person" />
+		<alias name="gastosReservaId" entity-alias="GRC" group-by="true" />
+		<alias name="descripcion" entity-alias="E" group-by="true" />
+		<alias name="solicitanteId" entity-alias="GRC" group-by="true" />
+		<alias name="fecha" entity-alias="GRC" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="GRC" group-by="true" />
+		<alias name="proveedor" entity-alias="GRC" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="GRC" group-by="true" />
+		<alias name="monto" entity-alias="GRC" group-by="true" />
+		<alias name="partyId" entity-alias="P" group-by="true" />
+		<alias name="firstName" entity-alias="P" group-by="true" />
+		<alias name="lastName" entity-alias="P" group-by="true" />
+		<alias name="statusId" entity-alias="GRC" group-by="true" />
+		<alias name="areaId" entity-alias="GRC" group-by="true"/>
+		<view-link entity-alias="GRC" rel-entity-alias="P">
+			<key-map field-name="solicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="GRC" rel-entity-alias="E">
+			<key-map field-name="statusId"/>
+		</view-link>
+	</view-entity>
+    
+    <view-entity entity-name="BuscarGastoReservaComp"
+		package-name="com.absoluciones.gastosreserva"
+		title="Permite la búsqueda de los gastos a reserva de comprobar">
+		<member-entity entity-alias="GRC" entity-name="GastoReservaComp" />
+		<member-entity entity-alias="E" entity-name="Estatus" />
+		<member-entity entity-alias="P" entity-name="Person" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+		<alias name="gastosReservaId" entity-alias="GRC" group-by="true" />
+		<alias name="descripcion" entity-alias="E" group-by="true" />
+		<alias name="solicitanteId" entity-alias="GRC" group-by="true" />
+		<alias name="fecha" entity-alias="GRC" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="GRC" group-by="true" />
+		<alias name="proveedor" entity-alias="GRC" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="GRC" group-by="true" />
+		<alias name="monto" entity-alias="GRC" group-by="true" />
+		<alias name="partyId" entity-alias="P" group-by="true" />
+		<alias name="firstName" entity-alias="P" group-by="true" />
+		<alias name="lastName" entity-alias="P" group-by="true" />
+		<alias name="descripcionWorkflow" field="descripcion"
+			entity-alias="TIP" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<alias name="statusGxC" field="statusId"  entity-alias="GRC" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<view-link entity-alias="GRC" rel-entity-alias="CON">
+			<key-map field-name="gastosReservaId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+		<view-link entity-alias="GRC" rel-entity-alias="P">
+			<key-map field-name="solicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="GRC" rel-entity-alias="E">
+			<key-map field-name="statusId"/>
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="BuscarGastoAutorizador"
+		package-name="com.absoluciones.gastosreserva"
+		title="Permite la búsqueda de los gastos a reserva de comprobar">
+		<member-entity entity-alias="GRC" entity-name="GastoReservaComp" />
+		<member-entity entity-alias="SW" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="P" entity-name="Person" />
+		<alias name="gastosReservaId" entity-alias="GRC" group-by="true" />
+		<alias name="workFlowId" entity-alias="GRC" group-by="true" />
+		<alias name="statusId" entity-alias="SW" group-by="true" />
+		<alias name="personParentId" entity-alias="SW" group-by="true" />
+		<alias name="solicitanteId" entity-alias="GRC" group-by="true" />
+		<alias name="fecha" entity-alias="GRC" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="GRC" group-by="true" />
+		<alias name="proveedor" entity-alias="GRC" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="GRC" group-by="true" />
+		<alias name="monto" entity-alias="GRC" group-by="true" />
+		<alias name="partyId" entity-alias="P" group-by="true" />
+		<alias name="firstName" entity-alias="P" group-by="true" />
+		<alias name="lastName" entity-alias="P" group-by="true" />
+		
+		<view-link entity-alias="GRC" rel-entity-alias="P">
+			<key-map field-name="solicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="GRC" rel-entity-alias="SW">
+			<key-map field-name="workFlowId"/>
+		</view-link>
+	</view-entity>
+	
+	
+	<entity entity-name="DetalleGasto"
+        package-name="com.absoluciones.gastosreserva"
+        title="Detalle del gasto">
+		<field name="detalleGId" type="id-ne"></field>
+		<field name="gastosReservaId" type="id-ne"/>
+		<field name="facturaNota" type="id-ne" />
+		<field name="montoSubtotalFactura" type="currency-amount-precise"/>
+		<field name="iva" type="currency-amount-precise"/>
+		<field name="montoTotalFactura" type="currency-amount-precise"/>
+		<field name="proveedor" type="description"/>
+		<field name="statusId" type="id-ne" />
+		<prim-key field="detalleGId"/>
+		<prim-key field="gastosReservaId"/>
+		
+		<relation type="one" fk-name="FK_DBO_GAST_RESRV" rel-entity-name="GastoReservaComp">
+			<key-map field-name="gastosReservaId" rel-field-name="gastosReservaId"/>
+		</relation>		
+		<relation type="one" fk-name="FK_DBO_GAST_STA" rel-entity-name="Estatus">
+			<key-map field-name="statusId" />
+		</relation>					
+    </entity>
+    
+    <view-entity entity-name="DetalleGastoSuma" 
+    	package-name="com.absoluciones.gastosreserva">
+    	<member-entity entity-alias="DG" entity-name="DetalleGasto" />
+    	
+    	<alias name="gastosReservaId" group-by="true" entity-alias="DG" />
+    	<alias name="montoTotalFactura" function="sum" entity-alias="DG" />
+    </view-entity>
+    
+	<entity entity-name="DetalleGastoPresupuesto"
+        package-name="com.absoluciones.gastosreserva"
+        title="Detalle del gasto presupuesto">
+        <field name="detallePresId" type="id-ne"/>
+        <field name="gastosReservaId" type="id-ne"/>
+        <field name="fecha" type="date"/>
+        <field name="clavePresupuestal" type="description"/>
+        <field name="monto" type="currency-amount-precise"/>
+		<field name="acctgTagEnumId1" type="id-ne"/>
+        <field name="acctgTagEnumId2" type="id-ne"/>
+        <field name="acctgTagEnumId3" type="id-ne"/>
+        <field name="acctgTagEnumId4" type="id-ne"/>
+        <field name="acctgTagEnumId5" type="id-ne"/>
+        <field name="acctgTagEnumId6" type="id-ne"/>
+        <field name="acctgTagEnumId7" type="id-ne"/>
+        <field name="acctgTagEnumId8" type="id-ne"/>
+        <field name="acctgTagEnumId9" type="id-ne"/>
+        <field name="acctgTagEnumId10" type="id-ne"/>
+        <field name="acctgTagEnumId11" type="id-ne"/>
+        <field name="acctgTagEnumId12" type="id-ne"/>
+        <field name="acctgTagEnumId13" type="id-ne"/>
+        <field name="acctgTagEnumId14" type="id-ne"/>
+        <field name="acctgTagEnumId15" type="id-ne"/>
+        <field name="acctgTagEnumIdAdmin" type="id-ne"/>
+        
+        <prim-key field="detallePresId"/>
+		<prim-key field="gastosReservaId"/>
+		
+		<relation type="one" fk-name="FK_DBO_PR_GASTO" rel-entity-name="GastoReservaComp" >
+			<key-map field-name="gastosReservaId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PR_GASTCVE" rel-entity-name="ClavePresupuestal" >
+			<key-map field-name="clavePresupuestal"/>
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="DetalleGastoPresupSuma" 
+    	package-name="com.absoluciones.gastosreserva">
+    	<member-entity entity-alias="DGP" entity-name="DetalleGastoPresupuesto" />
+    	
+    	<alias name="gastosReservaId" group-by="true" entity-alias="DGP" />
+    	<alias name="monto" function="sum" entity-alias="DGP" />
+    </view-entity>
+
+</entitymodel>

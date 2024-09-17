@@ -1,0 +1,23 @@
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilValidate;
+
+acctgTransTypeId = parameters.get("acctgTransTypeId");
+
+eventoContable = delegator.findByPrimaryKey("EventoContable",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+lineaContable = delegator.findByAnd("LineaContable",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId),UtilMisc.toList("secuencia"));
+lineaPresupuestal = delegator.findByAnd("LineaPresupuestal",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId),UtilMisc.toList("secuencia"));
+acctgTrans = delegator.findByAnd("AcctgTrans",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+ordenPago = delegator.findByAnd("OrdenPago",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+ordenCobro = delegator.findByAnd("OrdenCobro",UtilMisc.toMap("acctgTransTypeId",acctgTransTypeId));
+existeEvento = false;
+if (UtilValidate.isNotEmpty(acctgTrans) || UtilValidate.isNotEmpty(ordenPago) || UtilValidate.isNotEmpty(ordenCobro))
+{
+	existeEvento = true;
+}
+
+context.put("acctgTransTypeId",acctgTransTypeId);
+context.put("eventoContable",eventoContable);
+context.put("lineaContable",lineaContable);
+context.put("lineaPresupuestal",lineaPresupuestal);
+context.put("existeEvento",existeEvento);

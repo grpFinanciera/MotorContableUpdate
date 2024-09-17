@@ -1,0 +1,144 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.common.AB.UtilWorkflow;
+import org.opentaps.common.party.PartyHelper;
+import javolution.util.FastList;
+
+//entidadId=parameters.entidadId;
+
+if(UtilValidate.isEmpty(gastosReservaId)){
+	return;
+}
+
+userLogin = request.getAttribute("userLogin");
+partyId = userLogin.getString("partyId");
+Person = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", partyId));
+GastoReserva = delegator.findByPrimaryKey("GastoReservaComp", UtilMisc.toMap("gastosReservaId", gastosReservaId));
+
+//Estas consultas se hacen para ver el tipo de rol que tiene la persona que consulta el gastos
+tipoRol = UtilMisc.toList("SOLICITANTE", "AUTORIZADOR", "PRESUPUESTO");
+
+conditionsRol = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.IN, tipoRol));
+    
+roles = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsRol, EntityOperator.AND), null, null);
+
+rolSolicitante = false;
+rolAutorizador = false;
+
+for(GenericValue rol: roles){
+	if(rol.getString("roleTypeId") == "SOLICITANTE"){
+		rolSolicitante = true;
+	}else if(rol.getString("roleTypeId") == "AUTORIZADOR"){
+		rolAutorizador = true;
+	}
+}
+ 
+estatus= GastoReserva.getString("statusId");
+
+partyId=userLogin.get("partyId");
+userLoginId=userLogin.get("userLoginId");
+
+solicitanteId = GastoReserva.getString("solicitanteId");
+personSolicitante = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", solicitanteId));
+nombreSolicitanteGasto = PartyHelper.getCrmsfaPartyName(personSolicitante);
+areaSolicitanteId = GastoReserva.getString("areaId");
+areaSolicitante = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", areaSolicitanteId));
+groupSolicitanteName = areaSolicitante.getString("groupName");
+print("areasolic "+groupSolicitanteName );
+
+conditionsStatusAutorizacion = UtilMisc.toList(
+    new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("origenId", EntityOperator.EQUALS, gastosReservaId),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, UtilMisc.toList("GASTORESERVA"))
+ );
+ statusAutorizacion = delegator.findByCondition("StatusAutorizacionWorkFlow", new EntityConditionList(conditionsStatusAutorizacion, EntityOperator.AND), null, null);
+ 
+ autorizacion=null;
+ 
+ for(GenericValue stat: statusAutorizacion){
+	if(stat.getString("statusId") == "AUTORIZADA"){
+		autorizacion = "AUTORIZADA";
+	}else if(stat.getString("statusId") == "PENDIENTE"){
+		autorizacion = "PENDIENTE";
+	}else if(stat.getString("statusId") == "CANCELADA"){
+		autorizacion = "CANCELADA";
+	}else if(stat.getString("statusId") == "COMENTADA"){
+		autorizacion = "COMENTADA";
+	}
+}
+
+autorizador = "";
+esAutorizador=false;
+
+if(UtilValidate.isEmpty(GastoReserva.getString("workFlowId"))){
+	
+	autorizador = "";
+
+}else{
+
+	listAutorizadores = delegator.findByAnd("StatusWorkFlow", "personParentId", partyId, "workFlowId", GastoReserva.getString("workFlowId"), "statusId", "PENDIENTE");
+	
+	if(UtilValidate.isNotEmpty(listAutorizadores)){
+		
+			esAutorizador=true;
+		
+		}
+	
+}
+
+muestraAutorizador=false;
+
+if (esAutorizador && (estatus.equals("ENVIADA_GR") || estatus.equals("COMENTADA_GR"))){
+	muestraAutorizador=true;
+}
+
+if(rolAutorizador && statusAutorizacion != "AUTORIZADA"){
+	statusAutorizacion=true;
+}
+edita=false;
+if(((partyId.equals(solicitanteId))&&(estatus.equals("CREADA_GR")||estatus.equals("COMENTADA_GR")))||((esAutorizador) && (estatus.equals("ENVIADA_GR")||estatus.equals("COMENTADA_GR")))){
+	edita=true;
+}else{
+	edita=false;
+}
+
+//Se obtienen los comentarios desde la clase UtilWorkFlow AUTORIZADOR/SOLICITANTE
+context.put("comentarios", UtilWorkflow.getComentarios(delegator, gastosReservaId,"GASTORESERVA"));
+context.put("edita", edita);
+context.put("statusAutorizacion", statusAutorizacion);
+context.put("solicitanteId", solicitanteId);
+context.put("partyId", partyId);
+context.put("userLoginId", userLoginId);
+context.put("userLogin", userLogin);
+context.put("estatus", estatus);
+context.put("rolSolicitante", rolSolicitante);
+context.put("rolAutorizador", rolAutorizador);
+context.put("GastoReserva",GastoReserva);
+context.put("nombreSolicitanteGasto", nombreSolicitanteGasto);
+context.put("esAutorizador", esAutorizador);
+context.put("muestraAutorizador", muestraAutorizador);
+context.put("entidadId", gastosReservaId);
+context.put("entidad", "GastoReservaComp");
+context.put("tipoWorkFlowId", "GASTORESERVA");
+context.put("nomArea", groupSolicitanteName);
+context.put("avisoTesorero","Y");
+context.put("estatusAprobado","APROBADA_GR");
+context.put("estatusRechazado","RECHAZADA_GR");
+context.put("estatusComentado","COMENTADA_GR");
+context.put("listAutorizadoresStatus", delegator.findByAnd("AutorizadorAprobado", "workFlowId", GastoReserva.getString("workFlowId")));
+
+searchConditions = FastList.newInstance();
+searchConditions.add(new EntityExpr("secuencia", EntityOperator.GREATER_THAN_EQUAL_TO, 1));
+searchConditions.add(new EntityExpr("areaId", EntityOperator.EQUALS, GastoReserva.getString("areaId")));
+searchConditions.add(new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "GASTORESERVA"));
+allConditions = new EntityConditionList(searchConditions, EntityOperator.AND);
+
+orderBy = org.ofbiz.base.util.UtilMisc.toList("secuencia");
+
+context.put("listAutorizadores", delegator.findByCondition("BuscarAutorizador", allConditions, null, orderBy));

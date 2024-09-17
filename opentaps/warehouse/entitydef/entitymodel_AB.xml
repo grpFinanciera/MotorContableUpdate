@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <title>Archivo de entidades del modulo de Almacen</title>
+    <copyright></copyright>
+
+	<view-entity entity-name="ProductoInventarioOrder" package-name="org.ofbiz.workeffort.workeffort" 
+        title="Busca los productos en el inventario de un pedido o contrato">
+        <member-entity entity-alias="II" entity-name="InventoryItem" />
+        
+        <alias entity-alias="II" name="productId" group-by="true"/>
+        <alias entity-alias="II" name="facilityId" group-by="true"/>
+        <alias entity-alias="II" name="availableToPromiseTotal" function="sum"/>
+        <alias entity-alias="II" name="quantityOnHandTotal" function="sum"/>
+        
+	</view-entity>
+	
+	<view-entity entity-name="ConsultaAlmacenesPorPermisoUsuario" package-name="com.absoluciones.warehouse"
+		title="Consulta los almacenes dependiendo de los permisos de un usuario">
+		<member-entity entity-alias="FAC" entity-name="Facility" />
+		<member-entity entity-alias="PAR" entity-name="FacilityPartyPermission" />		
+		<member-entity entity-alias="SEC" entity-name="SecurityGroup" />
+		<alias name="facilityId" entity-alias="FAC" />
+		<alias name="facilityTypeId" entity-alias="FAC" />		
+		<alias name="ownerPartyId" entity-alias="FAC" />
+		<alias name="facilityName" entity-alias="FAC" />
+		<alias name="partyId" entity-alias="PAR" />
+		<alias name="securityGroupId" entity-alias="PAR" />
+		<alias name="fromDate" entity-alias="PAR" />
+		<alias name="groupId" entity-alias="SEC" />
+		<alias name="description" entity-alias="SEC" />					
+		<view-link entity-alias="FAC" rel-entity-alias="PAR">
+			<key-map field-name="facilityId" />
+		</view-link>
+		<view-link entity-alias="PAR" rel-entity-alias="SEC">
+			<key-map field-name="securityGroupId" rel-field-name="groupId"/>
+		</view-link>						
+	</view-entity>
+	
+	<view-entity entity-name="ConsultaArticulosEnAlmacenesPorPermisoUsuario" package-name="com.absoluciones.warehouse"
+		title="Consulta los articulos que tienen los almacenes dependiendo de los permisos de un usuario">
+		<member-entity entity-alias="FAC" entity-name="Facility" />
+		<member-entity entity-alias="INV" entity-name="InventoryItem" />				
+		<member-entity entity-alias="PAR" entity-name="FacilityPartyPermission" />		
+		<member-entity entity-alias="SEC" entity-name="SecurityGroup" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="facilityId" entity-alias="FAC" />
+		<alias name="facilityTypeId" entity-alias="FAC" />		
+		<alias name="ownerPartyId" entity-alias="FAC" />
+		<alias name="facilityName" entity-alias="FAC" />
+		<alias name="partyId" entity-alias="PAR" />
+		<alias name="securityGroupId" entity-alias="PAR" />
+		<alias name="fromDate" entity-alias="PAR" />
+		<alias name="groupId" entity-alias="SEC" />
+		<alias name="description" entity-alias="SEC" />
+		<alias name="inventoryItemId" entity-alias="INV" />
+		<alias name="productId" entity-alias="INV" />
+		<alias name="datetimeReceived" entity-alias="INV" />
+		<alias name="quantityOnHandTotal" entity-alias="INV" />
+		<alias name="unitCost" entity-alias="INV" />
+		<alias name="currencyUomId" entity-alias="INV" />
+		<alias name="internalName" entity-alias="PRO" />
+		<alias name="firstName" entity-alias="PER" />
+		<alias name="middleName" entity-alias="PER" />
+		<alias name="lastName" entity-alias="PER" />									
+		<entity-condition>
+			<condition-list>
+	            <condition-expr entity-alias="FAC" field-name="facilityId" operator="equals" rel-entity-alias="PAR" rel-field-name="facilityId"/>
+	            <condition-expr entity-alias="PER" field-name="partyId" operator="equals" rel-entity-alias="PAR" rel-field-name="partyId"/>
+	            <condition-expr entity-alias="PAR" field-name="securityGroupId" operator="equals" rel-entity-alias="SEC" rel-field-name="groupId"/>
+	            <condition-expr entity-alias="FAC" field-name="facilityId" operator="equals" rel-entity-alias="INV" rel-field-name="facilityId"/>
+	            <condition-expr entity-alias="INV" field-name="productId" operator="equals" rel-entity-alias="PRO" rel-field-name="productId"/>
+        	</condition-list>
+        </entity-condition>									
+	</view-entity>
+	
+	<entity entity-name="SolicitudTransferencia" package-name="com.absoluciones.warehouse" 
+		title="Almacena la solicitud de transferencia">
+		<field name="solicitudTransferenciaId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<field name="justificacion" type="very-long" />
+		<field name="fechaContable" type="date-time" />
+		<field name="fechaAtendida" type="date-time" />
+		<field name="fechaAutorizacion" type="date-time" />
+		<field name="personaSolicitanteId" type="id-ne"/>
+		<field name="almacenOrigenId" type="id-ne"/>
+		<field name="almacenDestinoId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="statusId" type="id-ne"/>
+	    <field name="areaPartyId" type="id-ne"/>
+	    <prim-key field="solicitudTransferenciaId"/>
+	    <relation type="one" fk-name="TRANSFER_PERSONA" rel-entity-name="Person">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="TRANSFER_ORG" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="TRANSFER_ALMACEN_O" title="Origen" rel-entity-name="Facility">
+			<key-map field-name="almacenOrigenId" rel-field-name="facilityId" />
+		</relation>
+		<relation type="one" fk-name="TRANSFER_ALMACEN_D" title="Destino" rel-entity-name="Facility">
+			<key-map field-name="almacenDestinoId" rel-field-name="facilityId" />
+		</relation>
+		<relation type="one" fk-name="TRANSFER_ESTATUS" rel-entity-name="Estatus">
+			<key-map field-name="statusId" rel-field-name="statusId" />
+		</relation>
+	    <relation type="one" fk-name="TRANSFER_AREA" title="Area" rel-entity-name="Party">
+	        <key-map field-name="areaPartyId" rel-field-name="partyId" />
+	    </relation>
+	</entity>    
+	
+	<entity entity-name="DetalleSolicitudTransfer" package-name="com.absoluciones.warehouse"
+		title="Almacena el detalle de la solicitud de transferencia">
+		<field name="detalleSolicitudTransferId" type="id-ne"/>
+		<field name="solicitudTransferenciaId" type="id-ne"/>
+		<field name="productId" type="id-ne"/>
+		<field name="cantidad" type="numeric"/>
+		<field name="cantidadTransferida" type="numeric"/>
+		<prim-key field="detalleSolicitudTransferId"/>
+		<prim-key field="solicitudTransferenciaId"/>
+		<relation type="one" fk-name="D_TRANS_PRODUCT" rel-entity-name="Product">
+			<key-map field-name="productId"/>
+		</relation>
+		<relation type="one" fk-name="D_TRANS_SOLICITUD" rel-entity-name="SolicitudTransferencia">
+			<key-map field-name="solicitudTransferenciaId" />
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="SumaCantidadProductoTransferencia" package-name="com.absoluciones.warehouse"
+		title="Agrupa las cantidades solicitadas de una solicitud de transferencia">
+		<member-entity entity-alias="DST" entity-name="DetalleSolicitudTransfer" />
+		<alias name="solicitudTransferenciaId" entity-alias="DST" group-by="true"/>
+		<alias name="productId" entity-alias="DST" group-by="true"/>
+		<alias name="cantidad" entity-alias="DST" function="sum"/>
+	</view-entity>
+	
+	<view-entity entity-name="SumaCantidadProductoRequisicionTransferencia" package-name="com.absoluciones.warehouse"
+		title="Agrupa las cantidades de los productos de una requisicion para validar la solicitud de transferencia">
+		<member-entity entity-alias="DR" entity-name="DetalleRequisicion" />
+		<alias name="requisicionId" entity-alias="DR" group-by="true"/>
+		<alias name="productId" entity-alias="DR" group-by="true"/>
+		<alias name="cantidad" entity-alias="DR" function="sum"/>
+	</view-entity>
+
+	<view-entity entity-name="SumaCantidadProductoPedidoTransferencia" package-name="com.absoluciones.warehouse"
+		title="Agrupa las cantidades de los productos de un pedido para validar la solicitud de transferencia">
+		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<alias name="orderId" entity-alias="OI" group-by="true"/>
+		<alias name="productId" entity-alias="OI" group-by="true"/>
+		<alias name="cantidad" field="quantity" entity-alias="OI" function="sum"/>
+	</view-entity>
+	
+	<view-entity entity-name="SumaCantidadProductoPedidoInternoTransferencia" package-name="com.absoluciones.warehouse"
+		title="Agrupa las cantidades de los productos de un pedido interno para validar la solicitud de transferencia">
+		<member-entity entity-alias="DPI" entity-name="DetallePedidoInterno" />
+		<alias name="pedidoInternoId" entity-alias="DPI" group-by="true"/>
+		<alias name="productId" entity-alias="DPI" group-by="true"/>
+		<alias name="cantidad" entity-alias="DPI" function="sum"/>
+	</view-entity>
+	
+	<view-entity entity-name="ConsultaSolicitudTransferencia" package-name="com.absoluciones.warehouse"
+		title="Entidad utilizada para consultar solicitudes de transferencia">
+		
+		<member-entity entity-alias="ST" entity-name="SolicitudTransferencia" />
+		<member-entity entity-alias="DST" entity-name="DetalleSolicitudTransfer" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="ES" entity-name="Estatus" />
+		
+		<alias name="solicitudTransferenciaId" entity-alias="ST" group-by="true"/>
+		<alias name="fechaAutorizacion" entity-alias="ST" group-by="true"/>
+		<alias name="personaSolicitanteId" entity-alias="ST" group-by="true"/>
+		<alias name="statusId" entity-alias="ST" group-by="true"/>
+		<alias name="productId" entity-alias="DST" group-by="true"/>
+		<alias name="firstName" entity-alias="PER" group-by="true"/>
+		<alias name="lastName" entity-alias="PER" group-by="true"/>
+		<alias name="partyId" entity-alias="PER" group-by="true"/>
+		<alias name="descripcion" entity-alias="ES" group-by="true"/>
+		
+		<view-link entity-alias="ST" rel-entity-alias="DST" rel-optional="true">
+			<key-map field-name="solicitudTransferenciaId"/>
+		</view-link>
+		<view-link entity-alias="ST" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="ST" rel-entity-alias="ES">
+			<key-map field-name="statusId"/>
+		</view-link>
+		
+	</view-entity>
+	
+	<!-- Vista para mostrar al autorizador el resumen de las solicitudes -->
+     <view-entity entity-name="SolicitudesTransferenciaPendientes"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de solicitudes de transferencia pendientes">          
+       <member-entity entity-alias="ST" entity-name="SolicitudTransferencia" />
+       <member-entity entity-alias="ES" entity-name="Estatus" />
+       <member-entity entity-alias="PER" entity-name="Person"/>
+	   <member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+	   <member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+	   <member-entity entity-alias="STW" entity-name="StatusWorkFlow" />
+	   <alias name="solicitudTransferenciaId" entity-alias="ST" group-by="true"/>
+       <alias name="descripcion" entity-alias="ST" group-by="true"/>
+       <alias name="personaSolicitanteId" entity-alias="ST" group-by="true"/>
+       <alias name="descripcionEstatus" field="descripcion" entity-alias="ES" group-by="true" />
+	   <alias name="firstName" entity-alias="PER" group-by="true"/>
+       <alias name="lastName" entity-alias="PER" group-by="true"/>
+       <alias name="partyId" entity-alias="PER" group-by="true"/>
+       <alias name="personParentId" entity-alias="STW" group-by="true" />
+       <alias name="statusId" entity-alias="STW" group-by="true" />
+	   <alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />
+	   
+	   <view-link entity-alias="ST" rel-entity-alias="ES">
+			<key-map field-name="statusId"/>
+		</view-link>
+	   <view-link entity-alias="ST" rel-entity-alias="PER" >
+           <key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+       </view-link>
+       <view-link entity-alias="ST" rel-entity-alias="CON">
+			<key-map field-name="solicitudTransferenciaId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STW">
+			<key-map field-name="workFlowId" />
+		</view-link>                     
+    </view-entity>
+	
+	<view-entity entity-name="ReporteInventario" package-name="com.absoluciones.warehouse"
+		title="Consulta los almacenes para el reporte de inventario">
+		
+		<member-entity entity-alias="PR" entity-name="Product" />
+		<member-entity entity-alias="II" entity-name="InventoryItem" />			
+		<member-entity entity-alias="FAC" entity-name="Facility" />	
+		<member-entity entity-alias="FAM" entity-name="Familia" />
+		<member-entity entity-alias="UOM" entity-name="Uom" />
+		<member-entity entity-alias="IID" entity-name="InventoryItemDetail" />
+		
+		<alias name="productId" entity-alias="PR" group-by="true"/>
+		<alias name="productName" entity-alias="PR" group-by="true"/>
+		<alias name="productTypeId" entity-alias="PR" group-by="true"/>
+		<alias name="quantityUomId" entity-alias="PR" group-by="true"/>
+		<alias name="facilityId" entity-alias="II" group-by="true"/>
+		<alias name="lotId" entity-alias="II" group-by="true"/>
+		<alias name="uomId" entity-alias="II" group-by="true"/>
+		<alias name="unitCost" entity-alias="II" group-by="true"/>
+		<alias name="quantityOnHandDiff" entity-alias="IID" function="sum"/>
+		<alias name="facilityName" entity-alias="FAC" group-by="true"/>
+		<alias name="descripcion" entity-alias="FAM" group-by="true"/>
+		<alias name="abbreviation" entity-alias="UOM" group-by="true"/>
+		<alias name="fechaContable" entity-alias="IID" group-by="false"/>
+			
+		<view-link entity-alias="PR" rel-entity-alias="II">
+			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="II" rel-entity-alias="FAC">
+			<key-map field-name="facilityId"/>
+		</view-link>
+		<view-link entity-alias="PR" rel-entity-alias="FAM" rel-optional="true">
+			<key-map field-name="familiaId" />
+		</view-link>		
+		<view-link entity-alias="PR" rel-entity-alias="UOM" rel-optional="true">
+			<key-map field-name="quantityUomId" rel-field-name="uomId"/>
+		</view-link>	
+		<view-link entity-alias="II" rel-entity-alias="IID">
+			<key-map field-name="inventoryItemId" />
+		</view-link>			
+	</view-entity>
+	
+	<view-entity entity-name="SolicitudTransferenciaCostoUnitario" package-name="com.absoluciones.warehouse"
+		title="Consulta para generar el reporte de solicitud de transferencia">
+		
+		<member-entity entity-alias="STI" entity-name="SolicitudTransferInventario" />
+		<member-entity entity-alias="II" entity-name="InventoryItem" />
+		<member-entity entity-alias="PRO" entity-name="Product" />			
+		
+		<alias name="productId" entity-alias="PRO" group-by="true"/>
+		<alias name="cantidadTransferida" entity-alias="STI" function="sum"/>
+		<alias name="productName" entity-alias="PRO" group-by="true"/>
+		<alias name="unitCost" entity-alias="II" group-by="true"/>
+		
+		<alias name="solicitudTransferenciaId" entity-alias="STI" group-by="true"/>
+			
+		<view-link entity-alias="STI" rel-entity-alias="II">
+			<key-map field-name="inventoryItemId" />
+		</view-link>
+		<view-link entity-alias="II" rel-entity-alias="PRO">
+			<key-map field-name="productId"/>
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="SolicitudTransferInventario" package-name="com.absoluciones.warehouse"
+		title="Almacena el detalle de la transferencia entre almacenes por cantidad">
+		<field name="detalleSolicitudTransferId" type="id-ne"/>
+		<field name="solicitudTransferenciaId" type="id-ne"/>
+		<field name="inventoryItemId" type="id-ne"/>
+		<field name="cantidadTransferida" type="numeric" />
+		<prim-key field="detalleSolicitudTransferId"/>
+		<prim-key field="solicitudTransferenciaId"/>
+		<prim-key field="inventoryItemId"/>
+		<relation type="one" fk-name="FK_STI_DST" rel-entity-name="DetalleSolicitudTransfer">
+			<key-map field-name="detalleSolicitudTransferId" />
+			<key-map field-name="solicitudTransferenciaId" />
+		</relation>
+		<relation type="one" fk-name="FK_STI_II" rel-entity-name="InventoryItem">
+			<key-map field-name="inventoryItemId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="Devolucion" 
+    		package-name="com.absoluciones.almacen"
+            title="Entidad para registrar las devoluciones en una orden de compra">
+    	<field name="devolucionId" type="id-ne"/>
+    	<field name="orderId" type="id-ne"/>
+    	<field name="orderItemSeqId" type="id-ne"/>
+    	<field name="acctgTransId" type="id-ne"/>
+    	<field name="poliza" type="id-ne"/>
+    	<field name="acctgTransTypeId" type="id-ne"/>
+    	<field name="fechaContable" type="date-time"/>
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="productId" type="id-ne"/>
+    	<field name="cantidad" type="currency-amount-precise"/>    	
+    	<field name="precioUnitario" type="currency-amount-precise"/>    	    	    	    
+    	<prim-key field="devolucionId"/>
+    	<prim-key field="orderId"/>    	
+    	<prim-key field="orderItemSeqId"/>      	  	      	
+      	<relation type="one" fk-name="FK_DEVOL_ORDER" rel-entity-name="OrderHeader">
+        	<key-map field-name="orderId"/>        	
+      	</relation>
+      	<relation type="one" fk-name="FK_DEVOL_ORDER_ITEM" rel-entity-name="OrderItem">
+        	<key-map field-name="orderItemSeqId"/>
+        	<key-map field-name="orderId"/>        	
+      	</relation>
+      	<relation type="one" fk-name="FK_DEVOL_ACCTG_TRANS" rel-entity-name="AcctgTrans">
+        	<key-map field-name="acctgTransId"/>
+      	</relation>      	      	
+      	<relation type="one" fk-name="FK_DEVOL_EVENTO_CONT" rel-entity-name="EventoContable">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DEVOL_INVOICE" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DEVOL_PRODUCT" rel-entity-name="Product">
+        	<key-map field-name="productId"/>
+      	</relation>
+    </entity>
+    
+    <view-entity entity-name="DevolucionRecepcionItems"
+            package-name="com.absoluciones.almacen"
+            title="Obtiene informacion de la recepcion para obtener los items que se pueden devolver">
+		<member-entity entity-alias="ITE" entity-name="OrderItem"/>
+		<member-entity entity-alias="SHI" entity-name="ShipmentReceipt"/>
+		<member-entity entity-alias="ORD" entity-name="OrderHeader"/>
+		<alias entity-alias="ITE" name="orderId"/>
+    	<alias entity-alias="ITE" name="orderItemSeqId"/>
+    	<alias entity-alias="ITE" name="productId"/>
+    	<alias entity-alias="ITE" name="unitPrice"/>    	
+    	<alias entity-alias="ITE" name="itemDescription"/>
+    	<alias entity-alias="ITE" name="statusId"/>
+    	<alias entity-alias="ITE" name="shipBeforeDate"/>
+    	<alias entity-alias="ITE" name="detalleRequisicionId"/>
+    	<alias entity-alias="ITE" name="requisicionId"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId1"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId2"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId3"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId4"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId5"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId6"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId7"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId8"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId9"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId10"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId11"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId12"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId13"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId14"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumId15"/>
+    	<alias entity-alias="ITE" name="acctgTagEnumIdAdmin"/>    	
+    	<alias entity-alias="SHI" name="receiptId"/>
+    	<alias entity-alias="SHI" name="shipmentId"/>
+    	<alias entity-alias="SHI" name="receivedByUserLoginId"/>
+    	<alias entity-alias="SHI" name="datetimeReceived"/>    	
+    	<alias entity-alias="SHI" name="quantityAccepted"/>
+    	<alias entity-alias="ORD" name="currencyUom"/>    	    		
+		<view-link entity-alias="ITE" rel-entity-alias="SHI">
+		  <key-map field-name="orderId" rel-field-name="orderId"/>
+		  <key-map field-name="orderItemSeqId" rel-field-name="orderItemSeqId"/>
+		</view-link>
+		<view-link entity-alias="ITE" rel-entity-alias="ORD">
+		  <key-map field-name="orderId"/>
+		</view-link>					
+	</view-entity>	
+	
+	<entity entity-name="ProductoAlmacenMaxMin" 
+    		package-name="com.absoluciones.almacen"
+            title="Entidad para registrar los maximos y minimos de un producto">
+    	<field name="productId" type="id-ne"/>
+    	<field name="facilityId" type="id-ne"/>
+    	<field name="maximo" type="numeric"/>
+    	<field name="minimo" type="numeric"/>
+    	<field name="cantidadActual" type="currency-amount-precise"/>    	    	    	    	   
+    	<prim-key field="productId"/>
+    	<prim-key field="facilityId"/>    	      	  	      
+      	<relation type="one" fk-name="FK_MAX_MIN_PRODUCTO" rel-entity-name="Product">
+        	<key-map field-name="productId"/>        	
+      	</relation>
+      	<relation type="one" fk-name="FK_MAX_MIN_FACILITY" rel-entity-name="Facility">
+        	<key-map field-name="facilityId"/>        	
+      	</relation>  	
+    </entity>
+    
+    <view-entity entity-name="ConsultaMaxMinAlmacen"
+            package-name="com.absoluciones.almacen"
+            title="Obtiene informacion de los productos que se encuentran en su minimo para enviar una notificacion al almacenista">
+		<member-entity entity-alias="PAR" entity-name="FacilityPartyPermission"/>
+		<member-entity entity-alias="MMI" entity-name="ProductoAlmacenMaxMin"/>
+		<alias entity-alias="MMI" name="productId"/>    	
+    	<alias entity-alias="MMI" name="cantidadActual"/>
+    	<alias entity-alias="MMI" name="minimo"/>
+    	<alias entity-alias="MMI" name="maximo"/>  
+    	<alias entity-alias="PAR" name="facilityId"/>
+    	<alias entity-alias="PAR" name="partyId"/>
+		<view-link entity-alias="PAR" rel-entity-alias="MMI">
+		  <key-map field-name="facilityId"/>
+		</view-link>		
+		<entity-condition>
+            <condition-expr entity-alias="MMI" field-name="cantidadActual" operator="less-equals" rel-entity-alias="MMI" rel-field-name="minimo"/>
+        </entity-condition>				
+	</view-entity>
+    
+</entitymodel>

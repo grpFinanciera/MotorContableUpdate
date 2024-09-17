@@ -1,0 +1,44 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+import org.opentaps.common.util.UtilCommon;
+
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+context.put("organizationPartyId",organizationPartyId);
+
+print("organizationPartyId   BSH ?"+organizationPartyId);
+
+context.put("userLogin",userLogin);
+
+//obtener Obras
+orderByObra= org.ofbiz.base.util.UtilMisc.toList("nombre");
+condicionO = UtilMisc.toList(
+	new EntityExpr("statusId", EntityOperator.EQUALS, "INICIADA_O"),
+	new EntityExpr("statusId", EntityOperator.EQUALS, "EN_PROCESO_O"),
+	new EntityExpr("statusId", EntityOperator.EQUALS, "TERMINADA_O")
+);
+resultadoObra = delegator.findByCondition("Obra", new EntityConditionList(condicionO, EntityOperator.OR) , UtilMisc.toList("obraId", "nombre"), orderByObra);
+context.put("obrasList", resultadoObra);
+
+
+seguimientoList = null;
+tipoMoneda = null;
+
+try {
+    print("seguimientoList: " + seguimientoList);
+	seguimientoList = parameters.get("seguimientoList"); 
+	context.put("seguimientoList", seguimientoList);
+	
+	print("tipoMoneda: " + tipoMoneda);
+	tipoMoneda = parameters.get("tipoMoneda"); 
+	context.put("tipoMoneda", tipoMoneda);
+
+} catch ( e ) { 
+    print( "caught exception: "+e );
+}

@@ -1,0 +1,48 @@
+//precargar numero de solicitud y motivo del gasto
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.service.ServiceUtil;
+import org.ofbiz.entity.GenericValue;
+import org.ofbiz.entity.condition.EntityCondition;
+import org.ofbiz.entity.condition.EntityOperator;
+import org.opentaps.common.party.PartyHelper;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+import java.util.List;
+import java.util.Map;
+import java.io.*;
+
+
+try{
+	gastosReservaId = parameters.get("gastosReservaId");
+	if(UtilValidate.isEmpty(gastosReservaId)){
+		return;
+	}
+	userLogin = request.getAttribute("userLogin");
+	partyId = userLogin.getString("partyId");
+	
+	GastoReserva = delegator.findByPrimaryKey("GastoReservaComp", UtilMisc.toMap("gastosReservaId", gastosReservaId));
+	proveedorId= GastoReserva.getString("proveedorId");
+	Proveedor = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", proveedorId));
+	
+	solicitanteId = GastoReserva.getString("solicitanteId");
+	Person = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", solicitanteId));
+	nombreSolicitanteGasto = PartyHelper.getCrmsfaPartyName(Person);
+	
+	areaId = GastoReserva.getString("areaId");
+	Area = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", areaId));
+	groupName = Area.getString("groupName");
+	
+	condiciones = EntityCondition.makeCondition("gastosReservaId", EntityOperator.EQUALS, gastosReservaId);
+	listDetalleGasto = delegator.findByCondition("DetalleGasto",condiciones, null, UtilMisc.toList("detalleGId DESC"));
+	Facturas = delegator.findByCondition("DetalleGasto",condiciones, null, UtilMisc.toList("detalleGId DESC"));
+	 	
+	context.put("nombreSolicitanteGasto", nombreSolicitanteGasto);
+	context.put("GastoReserva", GastoReserva);
+	context.put("FacturasProvName",Facturas);
+	context.put("nomArea", groupName);
+	
+}catch(Exception e){
+   return ServiceUtil.returnError("Registro no encontrado");
+ }

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <property key="ControlPatrimonialHome">
+    	<value xml:lang="en">Fixed Assets</value> 
+        <value xml:lang="es">Control Patrimonial</value>
+    </property>
+    
+    <property key="ControlPatrimonialControl">
+    	<value xml:lang="en">Control</value> 
+        <value xml:lang="es">Control</value>
+    </property>
+    
+    <property key="ControlPatrimonialLevantamiento">
+    	<value xml:lang="en">Inventory</value> 
+        <value xml:lang="es">Levantamiento de inventario</value>
+    </property>
+    
+    <property key="ControlPatrimonialReportes">
+    	<value xml:lang="en">Reports</value> 
+        <value xml:lang="es">Reportes</value>
+    </property>
+    
+    <property key="ControlFixedAssetId">
+    	<value xml:lang="en">Fixed asset id</value> 
+        <value xml:lang="es">Identificador de activo fijo</value>
+    </property>
+    
+    <property key="ControlNombre">
+    	<value xml:lang="en">Name</value> 
+        <value xml:lang="es">Nombre</value>
+    </property>
+    
+    <property key="ControlFechaAdquisicion">
+    	<value xml:lang="en">Date acquired</value> 
+        <value xml:lang="es">Adquisición</value>
+    </property>
+    
+    <property key="ControlCostoCompra">
+    	<value xml:lang="en">Cost</value> 
+        <value xml:lang="es">Costo</value>
+    </property>
+    
+    <property key="ControlResguardanteNombre">
+    	<value xml:lang="en">Assignment</value> 
+        <value xml:lang="es">Resguardante</value>
+    </property>
+    
+    <property key="ControlAreaNombre">
+    	<value xml:lang="en">Area</value> 
+        <value xml:lang="es">Área</value>
+    </property>
+    
+    <property key="ControlProveedorNombre">
+    	<value xml:lang="en">Supplier</value> 
+        <value xml:lang="es">Proveedor</value>
+    </property>
+    
+    <property key="ControlNumeroFactura">
+    	<value xml:lang="en">Bill</value> 
+        <value xml:lang="es">Factura</value>
+    </property>
+    
+    <property key="ControlPlaca">
+    	<value xml:lang="en">License plate</value> 
+        <value xml:lang="es">Placa</value>
+    </property>
+    
+    <property key="ControlModelo">
+    	<value xml:lang="en">Modelo</value> 
+        <value xml:lang="es">Modelo</value>
+    </property>
+    
+    <property key="ControlMarca">
+    	<value xml:lang="en">Brand</value> 
+        <value xml:lang="es">Marca</value>
+    </property>
+    
+    <property key="ControlNumeroSerie">
+    	<value xml:lang="en">Serial number</value> 
+        <value xml:lang="es">Número de serie</value>
+    </property>
+        
+    <property key="CrearActivoFijo">
+    	<value xml:lang="en">Create fixed asset</value> 
+        <value xml:lang="es">Crear activo fijo</value>
+    </property>
+    <property key="ControlFixedAssetType">
+    	<value xml:lang="en">Fixed asset type</value> 
+        <value xml:lang="es">Tipo de activo fijo</value>
+    </property>
+    <property key="NombreActivo">
+    	<value xml:lang="en">Fixed asset name</value> 
+        <value xml:lang="es">Nombre de activo fijo</value>
+    </property>
+    <property key="ControlOrdenCompra">
+    	<value xml:lang="en">Order id</value> 
+        <value xml:lang="es">Número de pedido o contrato</value>
+    </property>
+    <property key="ControlOrdenCompraItemId">
+    	<value xml:lang="en">Order item seq id</value> 
+        <value xml:lang="es">Secuencia artículo en pedido o contrato</value>
+    </property>
+    <property key="FechaAdquisicion">
+    	<value xml:lang="en">Date acquired</value> 
+        <value xml:lang="es">Fecha de alta</value>
+    </property>
+    <property key="NumeroSerie">
+    	<value xml:lang="en">Serial number</value> 
+        <value xml:lang="es">Número de serie</value>
+    </property>
+    <property key="CostoCompra">
+    	<value xml:lang="en">Purchase price</value> 
+        <value xml:lang="es">Costo de compra</value>
+    </property>
+    <property key="Caracteristicas">
+    	<value xml:lang="en">Features</value> 
+        <value xml:lang="es">Características</value>
+    </property>
+    <property key="DenominacionPartidaGenerica">
+    	<value xml:lang="en">Denominación genérica</value> 
+        <value xml:lang="es">Denominación genérica</value>
+    </property>
+    <property key="CodigoActivoAnterior">
+    	<value xml:lang="en">Old fixed asset id</value> 
+        <value xml:lang="es">Identificador de activo fijo anterior</value>
+    </property>
+    <property key="ControlOrganizationPartyId">
+    	<value xml:lang="en">Organization party id</value> 
+        <value xml:lang="es">Organismo</value>
+    </property>
+    <property key="Almacen">
+    	<value xml:lang="en">Facility</value> 
+        <value xml:lang="es">Almacén</value>
+    </property>
+    <property key="FechaInicioResguardo">
+    	<value xml:lang="en">Date from</value> 
+        <value xml:lang="es">Fecha inicio resguardo</value>
+    </property>
+    <property key="FechaFinResguardo">
+    	<value xml:lang="en">Date to</value> 
+        <value xml:lang="es">Fecha fin resguardo</value>
+    </property>
+    <property key="FechaAsignacion">
+    	<value xml:lang="en">Assignment date</value> 
+        <value xml:lang="es">Fecha de asignación de resguardo</value>
+    </property>
+    <property key="comentariosAsignacion">
+    	<value xml:lang="en">Assignment comment</value> 
+        <value xml:lang="es">Comentario de resguardo</value>
+    </property>
+    <property key="FechaUltimoServicio">
+    	<value xml:lang="en">Last service date</value> 
+        <value xml:lang="es">Fecha de último servicio</value>
+    </property>
+    <property key="FechaSiguienteServicio">
+    	<value xml:lang="en">Next service date</value> 
+        <value xml:lang="es">Fecha de siguiente servicio</value>
+    </property>
+    <property key="FechaFinalVidaUtil"> 
+        <value xml:lang="es">Fecha final vida útil</value>
+    </property>
+    <property key="FechaRealVidaUtil"> 
+        <value xml:lang="es">Fecha real vida útil</value>
+    </property>
+    <property key="FechaVencimientoGarantia"> 
+        <value xml:lang="es">Fecha vencimiento garantía</value>
+    </property>    
+    <property key="NumeroFactura"> 
+        <value xml:lang="es">Número de factura</value>
+    </property>
+    <property key="ControlPolizaSeguro"> 
+        <value xml:lang="es">Número de póliza de seguro</value>
+    </property>
+    <property key="FechaInicioPolizaSeguro">    
+        <value xml:lang="es">Fecha inicio de póliza de seguro</value>
+    </property>
+    <property key="FechaFinPolizaSeguro"> 
+        <value xml:lang="es">Fecha fin de póliza de seguro</value>
+    </property>
+    <property key="AniosVidaUtil">
+    	<value xml:lang="es">Años de vida útil</value>
+    </property>
+    <property key="TipoUnidad">
+    	<value xml:lang="es">Tipo de unidad</value>
+    </property>
+    <property key="ValorSalvamento">
+    	<value xml:lang="es">Valor de salvamento</value>
+    </property>
+    <property key="Depreciacion">
+    	<value xml:lang="es">Depreciación</value>
+    </property>
+    <property key="TipoTerreno">
+    	<value xml:lang="es">Tipo de terreno</value>
+    </property>
+    <property key="TipoDocLegalPropiedad">
+    	<value xml:lang="es">Tipo de documento legal de propiedad</value>
+    </property>
+    <property key="DescDocLegalPropiedad"> 
+        <value xml:lang="es">Descripción de documento legal de propiedad</value>
+    </property>
+    <property key="OrigenAdquisicion">    	
+        <value xml:lang="es">Origen de adquisición</value>
+    </property>
+    <property key="FormaAdquisicion">    	
+        <value xml:lang="es">Forma de adquisición</value>
+    </property>
+    <property key="TipoEmisorTituloPropiedad">    	
+        <value xml:lang="es">Tipo de emisor de título de propiedad</value>
+    </property>
+    <property key="ValorContruccion">    	
+        <value xml:lang="es">Valor de construcción</value>
+    </property>
+    <property key="ValorRazonable">    	
+        <value xml:lang="es">Valor razonable</value>
+    </property>
+    <property key="FechaAvaluo">    	
+        <value xml:lang="es">Fecha de avaluo</value>
+    </property>
+    <property key="FechaTituloPropiedad">    	
+        <value xml:lang="es">Fecha de título de propiedad</value>
+    </property>
+    <property key="ClaveCatastral">    	
+        <value xml:lang="es">Clave catastral</value>
+    </property>
+    <property key="FechaInicioClaveCatastral">    	
+        <value xml:lang="es">Fecha inicio de clave catastral</value>
+    </property>
+    <property key="FechaVenciClaveCatastral">    	
+        <value xml:lang="es">Fecha vencimiento de clave catastral</value>
+    </property>
+    <property key="SuperficieTerreno">    	
+        <value xml:lang="es">Superficie del terreno (m2)</value>
+    </property>
+    <property key="SuperficieConstrucción">    	
+        <value xml:lang="es">Superficie del construcción (m2)</value>
+    </property>
+    <property key="SuperficieDisponible">    	
+        <value xml:lang="es">Superficie disponible (m2)</value>
+    </property>
+    <property key="FolioRegPubliPropieComercio">    	
+        <value xml:lang="es">Folio de registro público de propiedad y comercio</value>
+    </property>
+    <property key="FechaInscRegPropieComerc">    	
+        <value xml:lang="es">Fecha de inscripción al registro público de propiedad y comercio</value>
+    </property>
+    <property key="CiudadInscRegPubPropComer">    	
+        <value xml:lang="es">Ciudad de inscripción al registro público de propiedad y comercio</value>
+    </property>
+    <property key="FechaIncorInventario">    	
+        <value xml:lang="es">Fecha de incorporación al inventario</value>
+    </property>
+    <property key="Automoviles">    	
+        <value xml:lang="es">Automóviles y unidades de transporte</value>
+    </property>
+    <property key="ConsultaActivoFijo">    	
+        <value xml:lang="es">Consultar activo fijo</value>
+    </property>
+    <property key="ControlId">    	
+        <value xml:lang="es">Id</value>
+    </property>
+    <property key="ControlSerie">    	
+        <value xml:lang="es">Serie</value>
+    </property>
+    <property key="ControlProduct">    	
+        <value xml:lang="es">Producto</value>
+    </property>
+    <property key="ControlEstadoFisico">    	
+        <value xml:lang="es">Estado físico</value>
+    </property>
+    <property key="ControlProveedor">    	
+        <value xml:lang="es">Proveedor</value>
+    </property>
+    <property key="ControlArea">    	
+        <value xml:lang="es">Área</value>
+    </property>
+    <property key="ControlResguardante">    	
+        <value xml:lang="es">Resguardante</value>
+    </property>
+    <property key="ControlUbicacionFisica">    	
+        <value xml:lang="es">Ubicación física</value>
+    </property>
+    <property key="ResguardoActivoFijo">    	
+        <value xml:lang="es">Resguardos</value>
+    </property>
+    <property key="PolizaAnterior">    	
+        <value xml:lang="es">Número de póliza de seguro anterior</value>
+    </property>
+    <property key="PolizaNueva">    	
+        <value xml:lang="es">Número de póliza de seguro nueva</value>
+    </property>
+    <property key="FechaDesde">    	
+        <value xml:lang="es">Fecha de incio de póliza de seguro nueva</value>
+    </property>
+    <property key="FechaHasta">    	
+        <value xml:lang="es">Fecha de vencimiento de póliza de seguro nueva</value>
+    </property>
+    <property key="ControlNumPoliza">    	
+        <value xml:lang="es">Número de póliza nueva</value>
+    </property>
+    <property key="ControlNumPolizaAnt">    	
+        <value xml:lang="es">Número de póliza anterior</value>
+    </property>
+    <property key="ControlFechaDesde">    	
+        <value xml:lang="es">Fecha inicio póliza</value>
+    </property>
+    <property key="ControlFechaHasta">    	
+        <value xml:lang="es">Fecha fin póliza</value>
+    </property>
+    <property key="ControlFechaCambio">    	
+        <value xml:lang="es">Fecha de actualización de póliza</value>
+    </property>
+    <property key="ControlComentario">    	
+        <value xml:lang="es">Comentario</value>
+    </property>
+    <property key="ControlPermisosAlmacenActivoFijo">    	
+        <value xml:lang="es">Asignación de almacenes a usuarios</value>
+    </property>    
+    <property key="ControlUsuario">    	
+        <value xml:lang="es">Usuario</value>
+    </property>
+    <property key="ControlAlmacen">    	
+        <value xml:lang="es">Almacén</value>
+    </property>
+    <property key="ControlPersonaId">    	
+        <value xml:lang="es">Id persona</value>
+    </property>
+    <property key="ControlNombrePersona">    	
+        <value xml:lang="es">Nombre</value>
+    </property>
+    <property key="ControlApellidoPersona">    	
+        <value xml:lang="es">Apellido</value>
+    </property>
+    <property key="ControlAlmacenId">    	
+        <value xml:lang="es">Id almacén</value>
+    </property>    
+    <property key="PermisosAlmacenActivoFijo">    	
+        <value xml:lang="es">Asignar almacén a usuario</value>
+    </property>
+    <property key="ConsultaDepreciacionActivoFijo">    	
+        <value xml:lang="es">Consultar depreciación</value>
+    </property>
+    <property key="ControlConsultaDepActivoFijo">    	
+        <value xml:lang="es">Consultar depreciación por categoría de activo fijo</value>
+    </property>
+    <property key="DepreciacionActivoFijo">    	
+        <value xml:lang="es">Depreciación</value>
+    </property>
+    <property key="ControlHistorialPolizasSeguro">    	
+        <value xml:lang="es">Historial de pólizas de seguro</value>
+    </property>
+    <property key="ActualizarPolizaSeguro">    	
+        <value xml:lang="es">Actualizar póliza de seguro</value>
+    </property>    
+    <property key="PolizaSeguroActivoFijo">    	
+        <value xml:lang="es">Actualizar póliza de seguro</value>
+    </property>
+    <property key="ControlResguardoActivoFijo">    	
+        <value xml:lang="es">Resguardos</value>
+    </property>
+    <property key="ControlConsultaActivoFijo">    	
+        <value xml:lang="es">Consultar activo fijo</value>
+    </property>
+    <property key="ControlVerConsultaActivoFijo">    	
+        <value xml:lang="es">Consulta de activo fijo</value>
+    </property>
+    <property key="ControlConsultaEdicionActivoFijo">    	
+        <value xml:lang="es">Consulta y edición de activo fijo</value>
+    </property>
+    <property key="ControlGuardarCambios">    	
+        <value xml:lang="es">Guardar cambios</value>
+    </property>
+    <property key="ControlTipoActivo">    	
+        <value xml:lang="es">Tipo de activo</value>
+    </property>
+    <property key="ControlMes">    	
+        <value xml:lang="es">Mes</value>
+    </property>
+    <property key="ControlAnio">    	
+        <value xml:lang="es">Año</value>
+    </property>
+    <property key="ControlMontoDepreciacion">    	
+        <value xml:lang="es">Monto depreciado</value>
+    </property>
+    <property key="ControlPorcentajeMensual">    	
+        <value xml:lang="es">Porcentaje mensual</value>
+    </property>
+    <property key="ControlDepreciacionAnual">    	
+        <value xml:lang="es">Porcentaje anual</value>
+    </property>
+    <property key="Costo">    	
+        <value xml:lang="es">Costo</value>
+    </property>
+    <property key="ControlPolizaContable">    	
+        <value xml:lang="es">Póliza</value>
+    </property>
+    <property key="ResguardoMasivoActivoFijo">    	
+        <value xml:lang="es">Resguardo masivo</value>
+    </property>
+    <property key="CodigoBarrasActivoFijo">    	
+        <value xml:lang="es">Imprimir código de barras</value>
+    </property>
+    <property key="ControlCodigoBarrasActivoFijo">    	
+        <value xml:lang="es">Imprimir planilla de código de barras</value>
+    </property>
+    <property key="ControlIndicacionesImpresion">    	
+        <value xml:lang="es">Opciones de impresión</value>
+    </property>
+    <property key="TamanoImpresion">    	
+        <value xml:lang="es">Número de etiquetas</value>
+    </property>
+    <property key="PosicionImpresion">    	
+        <value xml:lang="es">Posicion de inicio de impresión</value>
+    </property>
+    <property key="ControlImprimirCodigosBarras">    	
+        <value xml:lang="es">Resultados para imprimir código de barras</value>
+    </property>
+    <property key="ControlNuevoResguardante">    	
+        <value xml:lang="es">Nuevo resguardante</value>
+    </property>
+    <property key="ControlActualizarResguardos">    	
+        <value xml:lang="es">Actualziar resguardo</value>
+    </property>
+    <property key="ControlCambiarResguardante">    	
+        <value xml:lang="es">Cambiar resguardante</value>
+    </property>
+    <property key="ControlHistorialPolizasSeguro">    	
+        <value xml:lang="es">Historial de póliza de seguro</value>
+    </property>
+    <property key="ControlPolizaSeguroActivoFijo">    	
+        <value xml:lang="es">Póliza de seguro</value>
+    </property>
+    <property key="ResponsableRecepcionActivoFijo">    	
+        <value xml:lang="es">Responsable de recepciones</value>
+    </property>
+    <property key="ControlResponsableRecepcionAlmacenActivoFijo">    	
+        <value xml:lang="es">Responsable de recepcion de bienes en almacenes de Control patrimonial</value>
+    </property>
+    <property key="ControlResponsableNotificaciones">    	
+        <value xml:lang="es">Responsables que recibirán notificaciones por recepción de bienes en Control patrimonial</value>
+    </property>        
+	<property key="OpentapsRecepcionPendientesActivo">    	
+        <value xml:lang="es">Recepciones de pedidos o contratos pendientes</value>
+    </property>
+    <property key="ControlShipmentId">    	
+        <value xml:lang="es">Recepcion Id</value>
+    </property>
+    <property key="ControlEstatusNotificacion">    	
+        <value xml:lang="es">Estatus de notificaión</value>
+    </property>
+    <property key="ControlOrderName">    	
+        <value xml:lang="es">Descripción de pedido o contrato</value>
+    </property>
+    <property key="ControlOrderDate">    	
+        <value xml:lang="es">Fecha de pedido o contrato</value>
+    </property>
+    <property key="MarcarRevisada">    	
+        <value xml:lang="es">Marcar como revisada</value>
+    </property>
+    <property key="ControlIdAnterior">    	
+        <value xml:lang="es">Id Anterior</value>
+    </property>
+    <property key="ControlNotificacionesRecepcionBienesActivoFijo">    	
+        <value xml:lang="es">Notificaciones de recepción de bienes al Control patrimonial</value>
+    </property>                     
+    <property key="ControlListarElementosRecepcionPedidoContrato">    	
+        <value xml:lang="es">Lista de elementos recibidos en pedido o contrato</value>
+    </property>    
+    <property key="HistorialBienesActivoFijo">    	
+        <value xml:lang="es">Historial de bienes</value>
+    </property>
+    <property key="BajasActivoFijo">    	
+        <value xml:lang="es">Bajas de activo fijo</value>
+    </property>
+    <property key="ControlVerHistorialActivoFijo">    	
+        <value xml:lang="es">Ver historial de bienes de control patrimonial</value>
+    </property>
+    <property key="ControlMostrarHistorialBienesActivoFijo">    	
+        <value xml:lang="es">Mostrar el historial de bienes de control patrimonial</value>
+    </property>
+    <property key="ControlHistoricoActivoFijo">    	
+        <value xml:lang="es">Histórico de bienes</value>
+    </property>
+    <property key="Historico">    	
+        <value xml:lang="es">Histórico</value>
+    </property>
+    <property key="ControlValorAdquisicion">    	
+        <value xml:lang="es">Valor de adquisición</value>
+    </property>
+    <property key="ControlDepreciacionAcumulada">    	
+        <value xml:lang="es">Depreciación acumulada</value>
+    </property>
+    <property key="ControlValorContable">    	
+        <value xml:lang="es">Valor contable</value>
+    </property>
+    <property key="ControlDepreciacionMensual">    	
+        <value xml:lang="es">Depreciación mensual</value>
+    </property>
+    <property key="ControlHistorialConsultaActivoFijo">    	
+        <value xml:lang="es">Consultar historial de resguardos</value>
+    </property>
+    <property key="ControlVerResguardoActivoFijo">    	
+        <value xml:lang="es">Nuevo resguardo</value>
+    </property>
+    <property key="ControlPersonaResguardanteId">    	
+        <value xml:lang="es">Id resguardante</value>
+    </property>
+    <property key="ControlPatrimonialActivoFijoResguardo">    	
+        <value xml:lang="es">Informe de resguardo</value>
+    </property>
+    <property key="ControlPatrimonialActivoFijoResguardoAuto">    	
+        <value xml:lang="es">Informe de resguardo de automóviles</value>
+    </property>    
+    <property key="WarehouseActivoFijoResguardo">    	
+        <value xml:lang="es">Resguardo de Activo Fijo</value>
+    </property><property key="WarehouseActivoFijoResguardoUbicacion">    	
+        <value xml:lang="es">Resguardo de Activo Fijo por ubicación</value>
+    </property>
+    <property key="ActivoFijoGeneral">    	
+        <value xml:lang="es">Activo Fijo General</value>
+    </property>   
+    <property key="ActivoFijoGeneralArea">    	
+        <value xml:lang="es">Activo Fijo General por Área</value>
+    </property>  
+    <property key="ActivoFijoGeneralUbicacion">    	
+        <value xml:lang="es">Activo Fijo General por Ubicación</value>
+    </property>  
+    <property key="ActivoFijoDepreciacion">    	
+        <value xml:lang="es">Depreciación de Activo Fijo</value>
+    </property>
+</resource>

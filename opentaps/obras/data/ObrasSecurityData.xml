@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<!-- Permisos para el módulo de obras -->
+    <SecurityPermission description="Ver las operaciones en el Módulo de Obras." permissionId="OBRAS_VIEW"/>
+    <SecurityPermission description="Todas las operaciones en el Módulo de Obras." permissionId="OBRAS_ADMIN"/>
+    <!-- Obras -->
+    <SecurityPermission description="Ver la pestaña de Obras." permissionId="OBRAS_OBRAST_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Obras en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Crear Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_COBRAOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_COBRAOBRAS_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Solicitudes en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_BSOLICITOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Solicitudes en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_BSOLICITOBRAS_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Solicitudes Pendientes en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_SOLPENDOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Solicitudes Pendientes en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_SOLPENDOBRAS_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_BOBRAOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_BOBRAOBRAS_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Iniciar Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_IOBRAOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Iniciar Obra en la pestaña de Obras." permissionId="OBRAS_OBRAST_OBRAGRP_IOBRAOBRAS_ADMIN"/>
+    <!-- Seguimiento -->
+    <SecurityPermission description="Ver la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Seguimiento en la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_SEGUIGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Avance en la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_SEGUIGRP_SEGUIMOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Avance en la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_SEGUIGRP_SEGUIMOBRAS_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar en la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_SEGUIGRP_BSEGUIMOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar en la pestaña de Seguimiento." permissionId="OBRAS_SEGUIT_SEGUIGRP_BSEGUIMOBRAS_ADMIN"/>
+    <!-- Informes -->
+    <SecurityPermission description="Ver la pestaña de Informes." permissionId="OBRAS_REPORTET_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Informes en la pestaña de Informes." permissionId="OBRAS_REPORTET_INFORMESGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en la pestaña de Informes." permissionId="OBRAS_REPORTET_INFORMESGRP_INFSOBRAS_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en la pestaña de Informes." permissionId="OBRAS_REPORTET_INFORMESGRP_INFSOBRAS_ADMIN"/>
+    
+    
+    
+    <SecurityGroup groupId="OBRAS_ADMIN" description="Administrador de Obras con permisos para todas las operaciones."/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_COBRAOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_COBRAOBRAS_ADMIN"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_BSOLICITOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_BSOLICITOBRAS_ADMIN"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_SOLPENDOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_SOLPENDOBRAS_ADMIN"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_BOBRAOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_BOBRAOBRAS_ADMIN"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_IOBRAOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_OBRAST_OBRAGRP_IOBRAOBRAS_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_SEGUIGRP_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_SEGUIGRP_SEGUIMOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_SEGUIGRP_SEGUIMOBRAS_ADMIN"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_SEGUIGRP_BSEGUIMOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_SEGUIT_SEGUIGRP_BSEGUIMOBRAS_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_REPORTET_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_REPORTET_INFORMESGRP_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_REPORTET_INFORMESGRP_INFSOBRAS_VIEW"/>
+    <SecurityGroupPermission groupId="OBRAS_ADMIN" permissionId="OBRAS_REPORTET_INFORMESGRP_INFSOBRAS_ADMIN"/>
+	
+	
+	
+	<UserLoginSecurityGroup userLoginId="admin" groupId="OBRAS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+	
+</entity-engine-xml> 

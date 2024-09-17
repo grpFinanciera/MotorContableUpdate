@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="ACCOUNTS_PAYABLE" glAccountClassId="CURRENT_LIABILITY" glAccountTypeId="ACCOUNTS_PAYABLE" description="ACCOUNTS PAYABLE"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="ACCOUNTS_RECEIVABLE" glAccountClassId="CURRENT_ASSET" glAccountTypeId="ACCOUNTS_RECEIVABLE" description="ACCOUNTS RECEIVABLE"/>   -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="BANK_STLMNT_ACCOUNT" glAccountClassId="CASH_EQUIVALENT" glAccountTypeId="BANK_STLMNT_ACCOUNT" description="BANK ACCOUNT"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="COGS" glAccountClassId="COGS_EXPENSE" glAccountTypeId="COGS" description="COGS"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="COMMISSIONS_PAYABLE" glAccountClassId="CURRENT_LIABILITY" glAccountTypeId="COMMISSIONS_PAYABLE" description="COMMISSION PAYABLE"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="CURRENT_ASSET" glAccountClassId="CASH_EQUIVALENT" glAccountTypeId="CURRENT_ASSET" description="CASH EQUIVALENT"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="CURRENT_LIABILITY" glAccountClassId="CURRENT_LIABILITY" glAccountTypeId="CURRENT_LIABILITY" description="CURRENT LIABILITY"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="FIXED_ASSET" glAccountClassId="ACCUM_AMORTIZATION" glAccountTypeId="FIXED_ASSET" description="ACCUM AMORTIZATION"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="INVENTORY_ACCOUNT" glAccountClassId="INVENTORY_ASSET" glAccountTypeId="INVENTORY_ACCOUNT" description="INVENTORY"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="LONG_TERM_LIABILITY" glAccountClassId="LONGTERM_LIABILITY" glAccountTypeId="LONG_TERM_LIABILITY" description="LONG TERM LIABILITY"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="OPERATING_EXPENSE" glAccountClassId="AMORTIZATION" glAccountTypeId="OPERATING_EXPENSE" description="AMORTIZATION EXPENSE"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="OTHER_EXPENSE" glAccountClassId="INTEREST_EXPENSE" glAccountTypeId="OTHER_EXPENSE" description="INTEREST EXPENSE"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="OTHER_INCOME" glAccountClassId="CASH_INCOME" glAccountTypeId="OTHER_INCOME" description="CASH INCOME"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="OWNERS_EQUITY" glAccountClassId="OWNERS_EQUITY" glAccountTypeId="OWNERS_EQUITY" description="EQUITY"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="RAWMAT_INVENTORY" glAccountClassId="INVENTORY_ASSET" glAccountTypeId="RAWMAT_INVENTORY" description="RAW MATERIALS"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="REVENUE" glAccountClassId="REVENUE" glAccountTypeId="REVENUE" description="Hacienda pública/Patrimonio"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="TAX_EXPENSE" glAccountClassId="CASH_EXPENSE" glAccountTypeId="TAX_EXPENSE" description="TAX EXPENSE"/> -->
+<!--     <GlAccountClassTypeMap glAccountClassTypeKey="WIP_INVENTORY" glAccountClassId="INVENTORY_ASSET" glAccountTypeId="WIP_INVENTORY" description="WIP INVENTORY"/> -->
+    
+    <GlAccountClassTypeMap glAccountClassTypeKey="ASSET" glAccountClassId="ASSET" glAccountTypeId="ASSET" description="Activo"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="LIABILITY" glAccountClassId="LIABILITY" glAccountTypeId="LIABILITY" description="Pasivo"/>    
+    <GlAccountClassTypeMap glAccountClassTypeKey="ASSET_A" glAccountClassId="ASSET_A" glAccountTypeId="ASSET_A" description="Cuenta complementaria de Activo"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="CIERRE_CONTABLE_A" glAccountClassId="CIERRE_CONTABLE_A" glAccountTypeId="CIERRE_CONTABLE_A" description="Cuenta de cierre contable acreedora"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="CIERRE_CONTABLE_D" glAccountClassId="CIERRE_CONTABLE_D" glAccountTypeId="CIERRE_CONTABLE_D" description="Cuenta de cierre contable deudora"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="ORDEN_CONTABLE_A" glAccountClassId="ORDEN_CONTABLE_A" glAccountTypeId="ORDEN_CONTABLE_A" description="Cuenta de orden contable acreedora"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="ORDEN_CONTABLE_D" glAccountClassId="ORDEN_CONTABLE_D" glAccountTypeId="ORDEN_CONTABLE_D" description="Cuenta de orden contable deudora"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="PRESUPUESTO_A" glAccountClassId="PRESUPUESTO_A" glAccountTypeId="PRESUPUESTO_A" description="Cuenta de orden presupuestario acreedor"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="PRESUPUESTO_D" glAccountClassId="PRESUPUESTO_D" glAccountTypeId="PRESUPUESTO_D" description="Cuenta de orden presupuestario deudor"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="CIERRE_PRESUPUESTO_A" glAccountClassId="CIERRE_PRESUPUESTO_A" glAccountTypeId="CIERRE_PRESUPUESTO_A" description="Cuenta de cierre presupuestario acreedor"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="CIERRE_PRESUPUESTO_D" glAccountClassId="CIERRE_PRESUPUESTO_D" glAccountTypeId="CIERRE_PRESUPUESTO_D" description="Cuenta de cierre presupuestario deudor"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="INCOME" glAccountClassId="INCOME" glAccountTypeId="INCOME" description="Ingresos"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="EXPENSE" glAccountClassId="EXPENSE" glAccountTypeId="EXPENSE" description="Gastos"/>
+    <GlAccountClassTypeMap glAccountClassTypeKey="EQUITY" glAccountClassId="EQUITY" glAccountTypeId="EQUITY" description="Hacienda pública/Patrimonio"/>
+</entity-engine-xml>

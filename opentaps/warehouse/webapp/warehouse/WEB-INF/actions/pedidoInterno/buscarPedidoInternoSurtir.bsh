@@ -1,0 +1,19 @@
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.*;
+
+delegator = request.getAttribute("delegator");
+
+searchConditions = new ArrayList();
+searchConditions.add(new EntityExpr("tipo", EntityOperator.EQUALS, "S"));
+
+orConditions = new ArrayList();
+orConditions = new EntityConditionList( UtilMisc.toList(
+    new EntityExpr("statusId", EntityOperator.EQUALS, "ATENDIDA"),
+    new EntityExpr("statusId", EntityOperator.EQUALS, "SURTIDO")
+), EntityOperator.OR );
+
+searchConditions.add( orConditions );
+
+listEstatus = delegator.findByAnd("Estatus",searchConditions);
+context.put("listEstatus",listEstatus);

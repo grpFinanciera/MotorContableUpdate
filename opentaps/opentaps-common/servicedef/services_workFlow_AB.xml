@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>WorkFlow Services</description>
+    <version>1.0</version>
+    
+    <service name="accionWorkFlow" engine="java" location="org.ofbiz.common.AB.UtilWorkflow" auth="true" invoke="accionWorkFlow">
+    	<attribute name="entidadId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAccion" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/> 
+    	<attribute name="accion" mode="IN" type="String"/>
+    	<attribute name="estatus" mode="IN" type="String"/>
+    	<attribute name="tipoWorkFlowId" mode="IN" type="String"/>
+    	<attribute name="entidad" mode="IN" type="String"/>
+    	       		        
+    </service>
+</services>

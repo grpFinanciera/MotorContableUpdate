@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidad Tipo Documento</title>
+	<description>Define la entidad para los datos de los tipos de documentos</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Jesus Rodrigo Ruiz Merlin</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="Impuesto" package-name="org.opentaps.dataimport"
+		title="Entidad para los datos del los Impuestos.">
+		<field name="impuestoId" type="id-ne"></field>
+		<field name="descripcion" type="id-vlong"></field>
+		<prim-key field="impuestoId" />        
+	</entity>
+	
+	<entity entity-name="ImpuestoProductCategory" package-name="org.opentaps.dataimport"
+		title="Entidad para la relacion del impuesto con el ProductCategory.">
+		<field name="impuestoId" type="id-ne"></field>
+		<field name="productCategoryId" type="id-ne"></field>
+		<field name="fechaEfectiva" type="date-time" />
+		<field name="porcentaje" type="currency-amount"></field>
+		<prim-key field="impuestoId" />
+		<prim-key field="productCategoryId" />
+		<prim-key field="fechaEfectiva" />
+		<relation type="one" rel-entity-name="Impuesto">
+            <key-map field-name="impuestoId"/>            
+        </relation>
+        <relation type="one" rel-entity-name="ProductCategory">
+            <key-map field-name="productCategoryId"/>            
+        </relation>        
+	</entity>
+	
+	<entity entity-name="TipoDocumentoImpuesto" package-name="org.opentaps.dataimport"
+		title="Entidad para la relacion del impuesto con el TipoDocumento.">
+		<field name="impuestoId" type="id-ne"></field>
+		<field name="idTipoDoc" type="id-ne"></field>
+		<field name="cuentaCargo" type="id-vlong"/>
+		<field name="cuentaAbono" type="id-vlong"/>
+		<prim-key field="impuestoId" />
+		<prim-key field="idTipoDoc" />
+		<relation type="one" rel-entity-name="Impuesto">
+            <key-map field-name="impuestoId"/>            
+        </relation>
+        <relation type="one" rel-entity-name="TipoDocumento">
+            <key-map field-name="idTipoDoc"/>            
+        </relation>        
+	</entity>
+	
+</entitymodel>

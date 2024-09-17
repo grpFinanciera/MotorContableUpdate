@@ -1,0 +1,152 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.common.AB.UtilWorkflow;
+import javolution.util.FastList;
+
+//Se obtienen los datos del viatico para mostrar en pantalla SOLICITANTE
+Viatico = delegator.findByPrimaryKey("Viatico", UtilMisc.toMap("viaticoId", viaticoId));
+context.put("Viatico",Viatico);
+
+ //listAreas = UtilClassification.getListaCatalogos("NivelesParty", delegator, "",true);
+ //context.put("listAreas",listAreas);
+
+//Estas consultas se hacen para ver el tipo de rol que tiene la persona que consulta el viatico AUTORIZADOR/SOLICITANTE??
+conditionsSolicitante = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "SOLICITANTE")    
+ );
+ rolesSolicitante = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsSolicitante, EntityOperator.AND), null, null);
+ context.put("rolesSolicitante", rolesSolicitante);
+
+conditionsAutorizador = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "AUTORIZADOR")    
+ );
+ rolesAutorizador = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsAutorizador, EntityOperator.AND), null, null);
+ context.put("rolesAutorizador", rolesAutorizador);
+
+//Se obtiene el Id del viatico para obtener los comentarios desde la clase UtilWorkFlow AUTORIZADOR/SOLICITANTE
+ viaticoId = parameters.get("viaticoId");
+context.put("comentarios", UtilWorkflow.getComentariosViatico(delegator, viaticoId));
+
+//Se obtiene el estatus de la solicitud y se pasa al contexto AUTORIZADOR/SOLICITANTE
+conditionsStatusAutorizacion = UtilMisc.toList(
+    new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("origenId", EntityOperator.EQUALS, viaticoId),
+    new EntityExpr("tipoWorkFlowId", EntityOperator.IN, UtilMisc.toList("VIATICOSVI", "VIATICOS","VIATICOSGI"))
+ );
+ statusAutorizacion = delegator.findByCondition("StatusAutorizacionWorkFlow", new EntityConditionList(conditionsStatusAutorizacion, EntityOperator.AND), null, null);
+ context.put("statusAutorizacion", statusAutorizacion);
+
+//Se obtienen los detalles de la solicitud de viaticos PRESUPUESTO
+detalleViatico = delegator.findByAnd("DetalleViatico", UtilMisc.toMap("viaticoId", viaticoId));
+context.put("detalleViatico",detalleViatico);
+
+//Se obtiene la organizacion y el ciclo para as� obtener la estructura de la clave PRESUPUESTO
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+cicloId = UtilCommon.getCicloId(request);
+context.put("tagTypes", UtilAccountingTags.getClassificationTagsForOrganization(organizationPartyId, cicloId,UtilAccountingTags.EGRESO_TAG, delegator));
+
+//Se obtienen los Eventos que podr�n ser usados en la pantalla PRESUPUESTO
+tiposDocumentos = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "VIATICOS"));
+context.put("tiposDocumentos",tiposDocumentos);
+
+//Se obtienen todos los conceptos para el viatico SOLICITANTE COMPROBAR
+conceptosViaticos = delegator.findAll("ConceptoViatico");
+context.put("conceptosViaticos",conceptosViaticos);
+
+//Se obtiene la poliza, si es que existe PRESUPUESTO SOLICITANTE
+viaticoPoliza = delegator.findByPrimaryKey("ViaticoPoliza", UtilMisc.toMap("viaticoId", viaticoId));
+context.put("viaticoPoliza",viaticoPoliza);
+
+//Se obtienen los tipos de transporte SOLICITANTE COMPROBAR
+TiposTransportes = delegator.findAll("TipoTransporte");
+context.put("TiposTransportes",TiposTransportes);
+
+//Se realiza la consulta para saber si la persona ingresada tiene el rol de PRESUPUESTO
+conditionsPresupuesto = UtilMisc.toList(
+    new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")),
+    new EntityExpr("roleTypeId", EntityOperator.EQUALS, "PRESUPUESTO")    
+ );
+
+rolesPresupuesto = delegator.findByCondition("PartyRole", new EntityConditionList(conditionsPresupuesto, EntityOperator.AND), null, null);
+context.put("rolesPresupuesto", rolesPresupuesto);
+
+//Se consultan los comprobantes del usuario PRESUPUESTO
+Comprobantes = delegator.findByAnd("ConceptoViaticoMonto",UtilMisc.toMap("viaticoId", viaticoId));
+context.put("Comprobantes",Comprobantes); 
+
+//Se obtienen los lugares para los viajes SOLICITANTE
+Geos = delegator.findAll("Geo", UtilMisc.toList("geoName"));
+context.put("Geos",Geos);
+
+//Se obtiene la lista de programas por la clasificacion programatica SOLICITANTE
+Programas = delegator.findByAnd("Enumeration",UtilMisc.toMap("enumTypeId","CL_PROGRAMATICA"));
+context.put("Programas",Programas);
+
+//Se obtiene la lista de programas de viaticos SOLICITANTE
+Programas2 = delegator.findByAnd("ProgramaViatico",UtilMisc.toMap("estatus","Activo"));
+context.put("Programas2",Programas2);
+
+//Se obtiene la lista de Fuentes de financiamiento SOLICITANTE
+FuenteFinanciamiento = delegator.findAll("FuenteFinanciamiento");
+context.put("FuenteFinanciamiento",FuenteFinanciamiento);
+
+//Se genera la lista con el tipo de recursos para pasarla al contexto SOLICITANTE
+recursos = FastList.newInstance();
+mapa = FastMap.newInstance();
+mapa.put("idRec", "Fiscales");
+mapa.put("desc", "Fiscales");
+recursos.add(mapa);
+mapa2 = FastMap.newInstance();
+mapa2.put("idRec", "Propios");
+mapa2.put("desc", "Propios");
+recursos.add(mapa2);
+context.put("recursos",recursos);
+
+//Se obtiene el ciclo TODOS
+ciclo = UtilCommon.getCicloId(request);
+context.put("ciclo",ciclo);
+
+//Se obtienen los estatus de autorizacion
+
+searchConditions2 = FastList.newInstance();
+searchConditions2.add(new EntityExpr("origenId", EntityOperator.EQUALS, viaticoId));
+searchConditions2.add(new EntityExpr("tipoWorkFlowId", EntityOperator.IN, UtilMisc.toList("VIATICOSVI", "VIATICOS","VIATICOSGI")));
+allConditions2 = new EntityConditionList(searchConditions2, EntityOperator.AND);
+
+controlWF = delegator.findByCondition("ControlWorkFlow", allConditions2, null, null);
+if(UtilValidate.isNotEmpty(controlWF)){
+
+	workFlowId=controlWF.getFirst().getString("workFlowId");
+	tipoWF = controlWF.getFirst().getString("tipoWorkFlowId");
+	
+	context.put("listAutorizadoresStatus", delegator.findByAnd("AutorizadorAprobado", "workFlowId", workFlowId));
+	
+	//Se obtiene el flujo de autorizacion
+	searchConditions = FastList.newInstance();
+	searchConditions.add(new EntityExpr("secuencia", EntityOperator.GREATER_THAN_EQUAL_TO, 1));
+	searchConditions.add(new EntityExpr("areaId", EntityOperator.EQUALS, Viatico.getString("areaPartyId")));
+	searchConditions.add(new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, tipoWF));
+	allConditions = new EntityConditionList(searchConditions, EntityOperator.AND);
+	
+	orderBy = org.ofbiz.base.util.UtilMisc.toList("secuencia");
+	
+	context.put("listAutorizadores", delegator.findByCondition("BuscarAutorizador", allConditions, null, orderBy));
+}

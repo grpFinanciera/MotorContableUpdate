@@ -1,0 +1,31 @@
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.base.util.UtilMisc;
+
+Proyecto = delegator.findByPrimaryKey("Proyecto", UtilMisc.toMap("proyectoId", proyectoId));
+context.put("Proyecto",Proyecto);
+
+ParticipantesProyecto = delegator.findByAnd("ParticipantesProyecto", UtilMisc.toMap("proyectoId", proyectoId,"activo","Y"));
+context.put("ParticipantesProyecto",ParticipantesProyecto);
+
+eventosContables = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "CANCELA_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosContables", eventosContables);
+
+PresupuestoProyecto = delegator.findByAnd("PresupuestoProyecto", UtilMisc.toMap("proyectoId", proyectoId));
+context.put("PresupuestoProyecto",PresupuestoProyecto);
+
+ModificacionPresupuestoProyecto = delegator.findByAnd("ModificacionPresupuestoProyecto", UtilMisc.toMap("proyectoId", proyectoId));
+context.put("ModificacionPresupuestoProyecto",ModificacionPresupuestoProyecto);
+
+eventosContablesDevo = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "DEVUELVE_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosContablesDevo", eventosContablesDevo);
+
+orderTipoPagoBy = UtilMisc.toList("description");
+condicionTipoPago = EntityCondition.makeCondition("parentTypeId",EntityOperator.EQUALS,"DISBURSEMENT");
+tipoPago = delegator.findByCondition("PaymentType", condicionTipoPago , null, orderTipoPagoBy);
+print("tipoPago: " + tipoPago);
+context.put("tipoPago", tipoPago);
+
+DocumentosProyecto = delegator.findByAnd("DocumentosProyecto", UtilMisc.toMap("proyectoId", proyectoId));
+context.put("DocumentosProyecto",DocumentosProyecto);

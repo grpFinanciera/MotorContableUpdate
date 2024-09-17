@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- * Copyright (c) Open Source Strategies, Inc. * * Opentaps is free software: 
+	you can redistribute it and/or modify it * under the terms of the GNU Affero 
+	General Public License as published * by the Free Software Foundation, either 
+	version 3 of the License, or * (at your option) any later version. * * Opentaps 
+	is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the * GNU Affero General Public License for more details. * 
+	* You should have received a copy of the GNU Affero General Public License 
+	* along with Opentaps. If not, see <http://www.gnu.org/licenses/>. * * @author 
+	Leon Torres (leon@opensourcestrategies.com) -->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+	<!-- Include requests for common opentaps features. -->
+	<include location="component://opentaps-common/webapp/common/WEB-INF/common-controller.xml" />
+	
+	<include location="component://viaticos/webapp/viaticos/WEB-INF/controllerViaticosAB.xml"/>
+
+	<description>Viaticos Module Site Configuration File</description>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+
+	<!-- ================= -->
+	<!-- Security Mappings -->
+	<!-- ================= -->
+
+	<request-map uri="checkLogin" edit="false">
+		<description>Verify a user is logged in.</description>
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkLogin" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="login">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="login" />
+		<response name="success" type="request" value="setOrganization" />
+		<response name="requirePasswordChange" type="view"
+			value="requirePasswordChange" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="logout">
+		<security https="true" auth="true" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="logout" />
+		<response name="success" type="request" value="checkLogin" />
+		<response name="error" type="view" value="myHomeMain" />
+	</request-map>
+
+
+	<!-- ====================== -->
+	<!-- Basic Request Mappings -->
+	<!-- ====================== -->
+
+	<request-map uri="authview">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="error" />
+	</request-map>
+
+	<request-map uri="setSessionLocale">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.common.CommonEvents" invoke="setSessionLocale" />
+		<response name="success" type="request" value="myHomeMain" />
+		<response name="error" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="main">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<request-map uri="selectOrganizationForm">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="selectOrganizationForm" />
+	</request-map>
+	<request-map uri="setOrganization">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="setOrganization" />
+		<response name="selectOrganization" type="view"
+			value="selectOrganizationForm" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+
+	<!-- ================== -->
+	<!-- Main Request Maps -->
+	<!-- ================== -->
+
+	<!-- call this request when you have a donePage that you want to go to after 
+		finishing a service -->
+	<request-map uri="donePageRequestHelper">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="donePageRequestHelper" />
+		<response name="myProfile" type="view" value="myProfile" />
+		<!-- mostly for error redirects -->
+		<response name="myProfileEditContactMech" type="request"
+			value="myProfileEditContactMech" />
+		<!-- default -->
+		<response name="error" type="view" value="myHomeMain" />
+		<response name="" type="request" value="myHomeMain" />
+	</request-map>
+
+	<request-map uri="myHomeMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	
+    <!-- =================================== -->
+	<!--         Viaticos			 -->
+	<!-- =================================== -->
+	
+	<request-map uri="viaticosMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearViatico" />	
+	</request-map>
+	
+	<request-map uri="buscarViaticoS">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarViaticoS" />
+	</request-map>
+	
+	<request-map uri="buscarViaticoA">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarViaticoA" />
+	</request-map>
+	
+	<request-map uri="buscarViaticoP">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarViaticoP" />
+	</request-map>
+    
+    <request-map uri="registrarViatico"> 
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="guardarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="crearViatico"/>
+    </request-map>
+    
+    <request-map uri="actualizaInfoViatico">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="actualizaInfoViatico"/>
+		<response name="success" type="request-redirect" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+		<response name="error" type="view" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+    </request-map>
+    
+	<request-map uri="verViatico">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="actualizaViatico">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="guardarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="enviarViatico">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="enviarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>        
+        
+    <request-map uri="viaticosPendientes">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viaticosPendientes" />
+	</request-map>
+	
+	<request-map uri="viaticosPendientesComprobar">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viaticosPendientesComprobar" />
+	</request-map>
+	
+	<request-map uri="viaticosPendientesComprobarP">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viaticosPendientesComprobarP" />
+	</request-map>
+	
+	<request-map uri="viaticosPendientesComprometer">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viaticosPendientesComprometer" />
+	</request-map>
+	
+	<request-map uri="autorizarViatico">
+		<security https="true" auth="true"/>
+    	<event type="service" invoke="autorizarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="rechazarViatico">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="rechazarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="comentarViatico">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="comentarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="viaticosAprobados">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viaticosAprobados" />
+	</request-map>
+	
+	<request-map uri="agregaItemViatico">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="agregaItemViatico"/>
+		<response name="success" type="request-redirect" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+		<response name="error" type="view" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="agregaComprobanteViatico">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaComprobanteViatico"/>
+		<response name="success" type="request-redirect" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+		<response name="error" type="view" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="enviaObservacion">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="enviaObservacion"/>
+		<response name="success" type="request-redirect" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+		<response name="error" type="view" value="verViatico">
+			<redirect-parameter name="viaticoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="actualizaMontosItemsViatico">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="actualizaMontosItemsViatico" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="eliminaItemsViatico">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="eliminaItemsViatico" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="eliminaComprobanteViatico">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="eliminaComprobanteViatico" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="comprometerViatico">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="comprometerViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="cancelarViaticoPresupuesto">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="cancelarViaticoPresupuesto"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="comprobarViatico">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="comprobarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="comprobarViaticoSolicitante">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="comprobarViaticoSolicitante"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="crearSaldoViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearSaldoViaticoScreen" />	
+	</request-map>
+    
+    <request-map uri="crearSaldoViatico">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="crearSaldoViatico"/>
+        <response name="success" type="request-redirect" value="crearSaldoViaticoScreen">
+        </response>
+        <response name="error" type="view" value="crearSaldoViaticoScreen"/>
+    </request-map>
+    
+    <request-map uri="traspasoSaldoViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="traspasoSaldoViaticoScreen" />	
+	</request-map>
+	
+    <request-map uri="traspasoSaldoViatico">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="traspasoSaldoViatico"/>
+        <response name="success" type="request-redirect" value="traspasoSaldoViaticoScreen">
+        </response>
+        <response name="error" type="view" value="traspasoSaldoViaticoScreen"/>
+    </request-map>
+    
+    <request-map uri="deshabilitaUsuarioViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="deshabilitaUsuarioViaticoScreen" />	
+	</request-map>
+	
+	<request-map uri="desactivaUsuario">
+		<security https="true" auth="true" />
+		<event type="java" path="com.absoluciones.viaticos.AjaxEvents" invoke="desactivaUsuario" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+    
+    <request-map uri="consultarSaldoViatico">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultarSaldoViatico" />
+	</request-map>
+	
+	<request-map uri="editarViatico">
+		<security https="true" auth="true"/>
+    	<event type="service" invoke="editarViatico"/>
+        <response name="success" type="request-redirect" value="verViatico">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="cancelarViatico">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cancelarViatico"/>
+        <response name="success" type="request-redirect" value="viaticosMain">
+        	<redirect-parameter name="viaticoId"/>
+        </response>
+        <response name="error" type="view" value="verViatico"/>
+    </request-map>
+    
+    <request-map uri="obtenHijosGeo">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.viaticos.viaticos.AjaxEvents"
+			invoke="obtenHijosGeo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>	
+	
+	<request-map uri="obtenHijosTipoGeo">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.viaticos.viaticos.AjaxEvents"
+			invoke="obtenHijosTipoGeo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="viewAcctgTrans">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="viewAcctgTrans"/>
+    </request-map>
+	
+	<request-map uri="viewAcctgPresupuestal">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="viewAcctgPresupuestal" />
+	</request-map>
+    
+    <request-map uri="viewAcctgTransEntry">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viewAcctgTransEntry" />
+	</request-map>
+	
+	<!-- =================================== -->
+	<!--      Configuracion Request Maps     -->
+	<!-- =================================== -->
+	
+	<request-map uri="emptyConfiguracionScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyConfiguracionScreen" />
+		<response name="error" type="view" value="emptyConfiguracionScreen" />
+	</request-map>
+	<request-map uri="viaticosConfig">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="viaticosConfig" />
+		<response name="error" type="view" value="viaticosConfig" />
+	</request-map>
+	
+	<request-map uri="guardaPrograma"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="guardaPrograma"/>
+	    <response name="success" type="request-redirect" value="viaticosConfig"/>
+	    <response name="error" type="view" value="viaticosConfig"/>
+	</request-map>
+	
+	<request-map uri="eliminaPrograma">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="eliminaPrograma" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="habilitaPrograma">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="habilitaPrograma" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="cargarPaginaPrograma">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaPrograma"/>
+        <response name="success" type="request-redirect" value="viaticosConfig"/>
+        <response name="error" type="view" value="viaticosConfig"/>
+    </request-map>
+    
+    <!-- =================================== -->
+	<!--        Reportes Request Maps        -->
+	<!-- =================================== -->
+	
+	<request-map uri="reportsMain">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="reportsMain"/>
+	</request-map>
+	<request-map uri="viaticosReports">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="viaticosReports" />
+	</request-map>
+	
+	<!-- =================================== -->
+	<!--          Empty Request Maps         -->
+	<!-- =================================== -->
+	
+	<request-map uri="emptySolicitanteScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptySolicitanteScreen" />
+		<response name="error" type="view" value="emptySolicitanteScreen" />
+	</request-map>
+	<request-map uri="emptyAutorizadorScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyAutorizadorScreen" />
+		<response name="error" type="view" value="emptyAutorizadorScreen" />
+	</request-map>
+	<request-map uri="emptyPresupuestoScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyPresupuestoScreen" />
+		<response name="error" type="view" value="emptyPresupuestoScreen" />
+	</request-map>
+	<request-map uri="emptyReportScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyReportScreen" />
+		<response name="error" type="view" value="emptyReportScreen" />
+	</request-map>
+	
+	<!-- ============= -->
+    <!-- View Mappings -->
+    <!-- ============= -->
+
+    <view-map name="error" page="/error/error.jsp"/>
+    <view-map name="login" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#login"/>
+    <view-map name="requirePasswordChange" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#requirePasswordChange"/>
+    <view-map name="selectOrganizationForm" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganizationForm"/>
+
+    <!-- main screens for each section -->
+    <view-map name="myHomeMain" type="screen"
+    	page="component://viaticos/widget/viaticos/screens/myhome/MyHomeScreens.xml#myHome"/>
+	
+	<view-map name="viewAcctPresupuestal" type="screen" page="viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctPresupuestal" />
+	<view-map name="viewAcctgTransEntry" type="screen" page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgTransEntry" />
+	<view-map name="viewAcctgTrans" type="screen" page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgTrans" />
+	
+	<!-- Solicitante -->
+	<view-map name="emptySolicitanteScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/SolicitanteScreens.xml#emptySolicitanteScreen" />
+	<view-map name="buscarViaticoS" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/SolicitanteScreens.xml#buscarViaticoS" />
+	<view-map name="crearViatico" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/SolicitanteScreens.xml#crearViatico" />
+	<view-map name="viaticosPendientesComprobar" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/SolicitanteScreens.xml#viaticosPendientesComprobar" />
+	
+	<!-- Autorizador -->
+	<view-map name="emptyAutorizadorScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/AutorizadorScreens.xml#emptyAutorizadorScreen" />
+	<view-map name="buscarViaticoA" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/AutorizadorScreens.xml#buscarViaticoA" />
+	<view-map name="viaticosPendientes" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/AutorizadorScreens.xml#viaticosPendientes" />
+	
+	<!-- Presupuesto -->
+	<view-map name="emptyPresupuestoScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#emptyPresupuestoScreen" />
+	<view-map name="buscarViaticoP" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#buscarViaticoP" />
+	<view-map name="viaticosPendientesComprometer" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#viaticosPendientesComprometer" />
+    <view-map name="viaticosPendientesComprobarP" type="screen"
+    	page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#viaticosPendientesComprobarP" />
+	<view-map name="crearSaldoViaticoScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#crearSaldoViatico"/>
+	<view-map name="consultarSaldoViatico" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#consultarSaldoViatico"/>
+	<view-map name="traspasoSaldoViaticoScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#traspasoSaldoViatico"/>
+	<view-map name="viewAcctgPresupuestal" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgPresupuestal" />
+	<view-map name="deshabilitaUsuarioViaticoScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/PresupuestoScreens.xml#deshabilitaUsuarioViatico"/>
+		
+	<!-- Viaticos -->	
+	
+	<view-map name="verViatico" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#verViatico"/>
+	<view-map name="viewAcctgTransPolizasLista" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgTransPolizasLista" />
+	<view-map name="viewGlFiscalType" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewGlFiscalType" />
+	<view-map name="viewAcctPresupuestal" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctPresupuestal" />
+	<view-map name="viewAcctgTransEntry" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgTransEntry" />
+	<view-map name="viewAcctgTrans" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viewAcctgTrans" />				
+<!-- 	<view-map name="viaticosAprobados" type="screen" page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#viaticosAprobados" /> -->
+<!-- 	<view-map name="comprometerViatico" type="screen" page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#comprometerViatico"/> -->
+	
+	<!-- Config -->
+	<view-map name="emptyConfiguracionScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ConfiguracionScreens.xml#emptyConfiguracionScreen" />
+	<view-map name="viaticosConfig" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ConfiguracionScreens.xml#viaticosConfig" />
+		
+	<!-- Reportes -->
+	<view-map name="reportsMain" type="screen"
+		page="component://viaticos/widget/viaticos/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="emptyReportScreen" type="screen"
+		page="component://viaticos/widget/viaticos/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="viaticosReports" type="screen"
+		page="component://viaticos/widget/viaticos/screens/reports/ReportsScreens.xml#viaticosReports" />
+
+</site-conf>

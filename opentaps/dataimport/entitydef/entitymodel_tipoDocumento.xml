@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidad Tipo Documento</title>
+	<description>Define la entidad para los datos de los tipos de documentos</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Jesus Rodrigo Ruiz Merlin</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="TipoDocumento" package-name="org.opentaps.dataimport"
+		title="Entidad para los datos del los Tipos de Documentos.">
+		<field name="idTipoDoc" type="id-ne"></field>
+		<field name="predecesor" type="id-ne"></field>
+		<field name="descripcion" type="id-vlong"></field>
+		<field name="acctgTransTypeId" type="id-ne"></field>
+		<field name="mComparativo" type="id-ne"></field>
+		<field name="mEjecutar1" type="id-ne"></field>
+		<field name="mEjecutar2" type="id-ne"></field>
+		<field name="comparacion" type="long-varchar"></field>
+		<field name="moduloId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="flagLiberacion" type="indicator"></field>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<prim-key field="idTipoDoc" />
+        <relation type="one" rel-entity-name="Evento">
+            <key-map field-name="acctgTransTypeId"/>
+        </relation>		
+		<relation type="one" fk-name="MCC" title="mcc"
+			rel-entity-name="Momento">
+			<key-map field-name="mComparativo" rel-field-name="momentoId" />
+		</relation>
+		<relation type="one" fk-name="MCE1" title="mce1"
+			rel-entity-name="Momento">
+			<key-map field-name="mEjecutar1" rel-field-name="momentoId" />
+		</relation>
+		<relation type="one" fk-name="MCE2" title="mce2"
+			rel-entity-name="Momento">
+			<key-map field-name="mEjecutar2" rel-field-name="momentoId" />
+		</relation>
+		<relation type="one" fk-name="TIPO_DOC_MODULO" title="tipo_modulo"
+			rel-entity-name="Modulo">
+			<key-map field-name="moduloId" rel-field-name="moduloId" />
+		</relation>	
+		<relation type="one" fk-name="TIPO_DOC_PREDE" title="tipo_modulo_prede"
+			rel-entity-name="TipoDocumento">
+			<key-map field-name="predecesor" rel-field-name="idTipoDoc" />
+		</relation>	
+		<relation type="one" fk-name="FK_USR_TD" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>	
+	</entity>
+	
+	<entity entity-name="Modulo" package-name="org.opentaps.dataimport"
+		title="Entidad que informa el uso del tipo del documento">
+		<field name="moduloId" type="id-ne"/>
+		<field name="padreModuloId" type="id"/>
+		<field name="nombre" type="short-varchar"/>
+		<field name="abreviatura" type="very-short"/>
+		<field name="uso" type="indicator"></field>
+		<prim-key field="moduloId"/>
+	      <relation type="one" fk-name="MODULO_PARENT_ID" title="Parent_Modulo" rel-entity-name="Modulo">
+	        <key-map field-name="padreModuloId" rel-field-name="moduloId"/>
+	      </relation>		
+	</entity>
+	
+<!-- 	<entity entity-name="TipoDocumentoAlmacen" package-name="org.opentaps.dataimport" -->
+<!-- 		title="Entidad que almacena los documentos que utilizaremos para las altas y bajas dentro del inventario"> -->
+<!-- 		<field name="idTipoDoc" type="id-ne"/> -->
+<!-- 		<field name="facilityId" type="id"/> -->
+<!-- 		<field name="organizationPartyId" type="id-ne"/> -->
+<!-- 		<field name="flagVarianceReason" type="indicator"/> -->
+<!-- 		<prim-key field="idTipoDoc"/> -->
+<!-- 	    <relation type="one" fk-name="DOCUM_ALMC" rel-entity-name="TipoDocumento"> -->
+<!-- 	      <key-map field-name="idTipoDoc"/> -->
+<!-- 	    </relation>	 -->
+<!-- 	    <relation type="one" fk-name="FACILITY_ALMC" rel-entity-name="Facility"> -->
+<!-- 	      <key-map field-name="facilityId"/> -->
+<!-- 	    </relation>	 -->
+<!-- 	    <relation type="one" fk-name="ORGANIZA_ALMC" rel-entity-name="Party"> -->
+<!-- 	      <key-map field-name="organizationPartyId" rel-field-name="partyId"/> -->
+<!-- 	    </relation>		 -->
+<!-- 	</entity> -->
+	
+</entitymodel>

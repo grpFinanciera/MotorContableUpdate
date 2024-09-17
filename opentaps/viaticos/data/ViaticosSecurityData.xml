@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<!-- Permisos para el módulo de viáticos -->
+    <SecurityPermission description="Ver las operaciones en el Módulo de Viáticos." permissionId="VIATICOS_VIEW"/>
+    <SecurityPermission description="Todas las operaciones en el Módulo de Viáticos." permissionId="VIATICOS_ADMIN"/>
+    <!-- Solicitante -->
+    <SecurityPermission description="Ver la pestaña de Solicitante en el Módulo de Viáticos." permissionId="VIATICOS_SOLICT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Solicitante en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Viático en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Viático en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Solicitud de Viático en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Solicitud de Viático en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Viáticos Pendientes de Comprobar en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Viáticos Pendientes de Comprobar en la pestaña de Solicitante." permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_ADMIN"/>
+    <!-- Autorizador -->
+    <SecurityPermission description="Ver la pestaña de Autorizador en el Módulo de Viáticos." permissionId="VIATICOS_AUTORT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Autorizador en la pestaña de Autorizador." permissionId="VIATICOS_AUTORT_AUTORGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Viático en la pestaña de Autorizador." permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Viático en la pestaña de Autorizador." permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Viáticos Pendientes de Autorizar en la pestaña de Autorizador." permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Viáticos Pendientes de Autorizar en la pestaña de Autorizador." permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_ADMIN"/>
+    <!-- Presupuesto -->
+    <SecurityPermission description="Ver la pestaña de Presupuesto en el Módulo de Viáticos." permissionId="VIATICOS_PRESUPT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Presupuesto en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Viático en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Viático en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Viáticos Pendientes de Comprometer en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Viáticos Pendientes de Comprometer en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Viáticos Pendientes de Comprobar en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Viáticos Pendientes de Comprobar en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Saldo Viático en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Saldo Viático en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consultar Saldos Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consultar Saldos Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Traspasos Saldos Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Traspasos Saldos Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Deshabilitar Usuarios de Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_DESHABILITA_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Deshabilitar Usuarios de Viáticos en la pestaña de Presupuesto." permissionId="VIATICOS_PRESUPT_PRESUPGRP_DESHABILITA_ADMIN"/>
+    
+    <!-- Informes -->
+    <SecurityPermission description="Ver la pestaña de Informes en el Módulo de Viáticos." permissionId="VIATICOS_REPORTEST_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Informes en la pestaña de Informes." permissionId="VIATICOS_REPORTEST_REPORTESGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en la pestaña de Informes." permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en la pestaña de Informes." permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_ADMIN"/>
+    
+    
+    
+    <SecurityGroup groupId="VIATICOS_ADMIN" description="Administrador de Viaticos con permisos para todas las operaciones."/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_AUTORGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_ADMIN"/>
+    
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_CONFIG_CONFIGGRP_CONFIGURACIONGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_CONFIG_CONFIGGRP_CONFIGURACIONVIA_VIEW"/>
+    
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_REPORTEST_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_REPORTEST_REPORTESGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_ADMIN" permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_ADMIN"/>
+	
+	<SecurityGroup groupId="VIATICOS_SOLICITANTE" description="Solicitante de Viáticos con permisos para la pestaña de Solicitante."/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_SOLICITANTE" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_ADMIN"/>
+	
+    <SecurityGroup groupId="VIATICOS_AUTORIZADOR" description="Autorizador de Viáticos con permisos para la pestaña de Autorizador."/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_AUTORGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_AUTORGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_AUTORIZADOR" permissionId="VIATICOS_AUTORT_AUTORGRP_VPENDAUTOR_ADMIN"/>
+    
+    <SecurityGroup groupId="VIATICOS_PRESUPUESTO" description="Encargado del Presupuesto de Viáticos con permisos para la pestaña de Presupuesto."/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRMTR_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_VPENDCOMPRBR_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CSALDOVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_CONSSALDOVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_PRESUPT_PRESUPGRP_TSALDOVIATICO_ADMIN"/>
+	<SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_REPORTEST_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_REPORTEST_REPORTESGRP_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_VIEW"/>
+    <SecurityGroupPermission groupId="VIATICOS_PRESUPUESTO" permissionId="VIATICOS_REPORTEST_REPORTESGRP_REPORTESVIA_ADMIN"/>
+	
+	<!-- Generico -->
+    <SecurityGroup groupId="GENERICO" description="Grupo de Seguridad Genérico"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_BVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_SVIATICO_ADMIN"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="VIATICOS_SOLICT_SOLICGRP_VPENDCOMP_ADMIN"/>
+	
+	<UserLoginSecurityGroup userLoginId="admin" groupId="VIATICOS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+</entity-engine-xml> 

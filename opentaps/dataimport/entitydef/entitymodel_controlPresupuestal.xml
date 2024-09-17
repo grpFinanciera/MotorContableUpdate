@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Control Presupuestal</title>
+	<description>Define el monto mensual en cada cada clave presupuestal de acuerdo al momento contable</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Castillo Nuñez Miguel</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+	
+	
+	
+	<entity entity-name="DataImportValidPresup" package-name="org.opentaps.dataimport"
+		title="Entidad para validar la suficiencia presupuestal dentro del sistema.">
+		<field name="idValPres" type="id-ne"></field>
+		<field name="clasificacion1" type="description"></field>
+		<field name="clasificacion2" type="description"></field>
+		<field name="clasificacion3" type="description"></field>
+		<field name="clasificacion4" type="description"></field>
+		<field name="clasificacion5" type="description"></field>
+		<field name="clasificacion6" type="description"></field>
+		<field name="clasificacion7" type="description"></field>
+		<field name="clasificacion8" type="description"></field>
+		<field name="clasificacion9" type="description"></field>
+		<field name="clasificacion10" type="description"></field>
+		<field name="clasificacion11" type="description"></field>
+		<field name="clasificacion12" type="description"></field>
+		<field name="clasificacion13" type="description"></field>
+		<field name="clasificacion14" type="description"></field>
+		<field name="clasificacion15" type="description"></field>
+		<field name="monto" type="currency-amount"></field>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idValPres" />
+		<relation type="one" fk-name="FK_DI_USR_VP" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+</entitymodel>

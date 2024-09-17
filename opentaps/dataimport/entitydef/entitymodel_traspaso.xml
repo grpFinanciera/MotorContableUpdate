@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Traspasos Presupuestales</title>
+	<description>Entidad donde se almacenaranlos traspasos que se haran al final del mes</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Castillo Nuñez Miguel</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="Traspaso" package-name="org.opentaps.dataimport"
+		title="Entidad para almacenar los traspassos mensuales presupuestales">
+		<field name="idSecuencia" type="id"></field>
+		<field name="idSecuenciaViene" type="id-ne"></field>
+		<field name="idSecuenciaVa" type="id-ne"></field>
+		<field name="monto" type="currency-amount"></field>
+		<field name="fechaRegistro" type="date-time" />
+		<field name="usuario" type="name" />
+		<prim-key field="idSecuencia" />
+		<relation type="one" fk-name="TCPV" title="tcpv"
+			rel-entity-name="ControlPresupuestal">
+			<key-map field-name="idSecuenciaViene" rel-field-name="idSecuencia" />
+		</relation>
+		<relation type="one" fk-name="TCPVA" title="tcpva"
+			rel-entity-name="ControlPresupuestal">
+			<key-map field-name="idSecuenciaVa" rel-field-name="idSecuencia" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="MesTraspaso" package-name="org.opentaps.dataimport"
+		title="Entidad para registrar los meses presupuestales traspasados">
+		<field name="ciclo" type="description"></field>
+		<field name="mesId" type="id-ne"></field>
+		<prim-key field="mesId"/>
+      	<prim-key field="ciclo"/>
+		<relation type="one" fk-name="MT" title="mt"
+			rel-entity-name="Mes">
+			<key-map field-name="mesId" />
+		</relation>
+		<relation type="one" fk-name="CT" title="ct"
+			rel-entity-name="Enumeration">
+			<key-map field-name="ciclo" rel-field-name="enumCode" />
+		</relation>
+	</entity>
+
+	<view-entity entity-name="ResumenTraspaso" package-name="org.opentaps.dataimport"
+		title="Vista para el resumen de traspaso">
+		<member-entity entity-alias="TRAS" entity-name="Traspaso" />
+		<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+		<alias entity-alias="CTRL" name="clavePresupuestal" />
+		<alias entity-alias="CTRL" name="mesId" />
+		<alias entity-alias="CTRL" name="momentoId" />
+		<alias entity-alias="TRAS" name="monto" />
+		<view-link entity-alias="TRAS" rel-entity-alias="CTRL">
+			<key-map field-name="idSecuenciaViene" rel-field-name="idSecuencia" />
+		</view-link>
+	</view-entity>
+</entitymodel>

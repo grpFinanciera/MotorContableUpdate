@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- ============================================== -->
+	<!-- ====== Etiquetas Constancia de Recepción ===== -->
+	<!-- ============================================== -->
+    <property key="ConstanciaRecepEncabezado">
+    	<value xml:lang="en">PROOF OF RECEIPT OF WELL ( S) AND / OR SERVICE ( S )</value>
+    	<value xml:lang="es">CONSTANCIA DE RECEPCIÓN DE BIEN(ES) Y/O SERVICIO(S)</value>
+    </property>
+    <property key="ConstanciaRecepLugar">
+    	<value xml:lang="en">San Luis Potosí, S.L.P.</value>
+    	<value xml:lang="es">San Luis Potosí, S.L.P. </value>
+    </property>  
+    <property key="ConstanciaSuministrado">
+    	<value xml:lang="en">Suministrado por la persona física o moral:</value>
+    	<value xml:lang="es">Suministrado por la persona física o moral:</value>
+    </property>   
+    <property key="ConstanciaSatisfaccion">
+    	<value xml:lang="en">Se ha(n) recibido a entera satisfacción de quien suscribe, ya que cumple(n) con 
+    	las características establecidas en el pedido o contrato de referencia.</value>
+    	<value xml:lang="es">Se ha(n) recibido a entera satisfacción de quien suscribe, ya que cumple(n) con 
+    	las características establecidas en el pedido o contrato de referencia.</value>
+    </property>              
+    <property key="ConstanciaPorloAnterior">
+    	<value xml:lang="en">Por lo anterior se informa que procede el pago de el o los bien(es) y/o servicio(s)
+        recibido(s) con la factura o nota de remisión número</value>
+    	<value xml:lang="es">Por lo anterior se informa que procede el pago de el o los bien(es) y/o servicio(s)
+        recibido(s) con la factura o nota de remisión número</value>
+    </property>   
+    <property key="ConstanciaParaEfectos">
+    	<value xml:lang="en">Para efectos de realizar el pago, el proveedor deberá entregar a El Colegio de San
+  													Luis, A.C. el comprobante fiscal correspondiente.</value>
+    	<value xml:lang="es">Para efectos de realizar el pago, el proveedor deberá entregar a El Colegio de San
+  													Luis, A.C. el comprobante fiscal correspondiente.</value>
+    </property>
+    
+    <property key="ConstanciaCorrespondienteA">
+    	<value xml:lang="en">correspondiente al pedido o contrato número</value>
+    	<value xml:lang="es">correspondiente al pedido o contrato número</value>
+    </property> 
+    <property key="SalidasAlmacen">
+    	<value xml:lang="en">From storage</value>
+    	<value xml:lang="es">Salidas de almacén</value>
+    </property>
+    <property key="AltasAlmacen">
+    	<value xml:lang="es">Entradas al almacén</value>
+    </property>
+    <property key="BajasAlmacen">
+    	<value xml:lang="es">Salida de almacén</value>
+    </property>
+    <property key="MotivoAlta">
+    	<value xml:lang="es">Motivo de alta</value>
+    </property>
+    <property key="MotivoBaja">
+    	<value xml:lang="es">Motivo de baja</value>
+    </property>
+    <property key="NombreAlmacen">
+    	<value xml:lang="es">Almacén</value>
+    </property>
+    <property key="AlmacenId">
+    	<value xml:lang="es">Id de almacén</value>
+    </property>                        
+	<property key="RecibidoConfirmidadPedidoInterno">
+    	<value xml:lang="en">I received under the articles and materials listed above</value>
+    	<value xml:lang="es">He recibido de conformidad los artículos y materiales que arriba se detallan</value>
+    </property>
+    <property key="CodigoArticuloInventario">    	
+    	<value xml:lang="es">Código de artículo de inventario</value>
+    </property>
+    <property key="TransferirArticulosEntreAlmacenes">    	
+    	<value xml:lang="es">Transferir artículos entre almacenes</value>
+    </property>
+    <property key="CommonTransferir">    	
+    	<value xml:lang="es">Transferir</value>
+    </property>
+    <property key="WarehouseInventoryTransferenciasAlmacen">    	
+    	<value xml:lang="es">Transferencias entre almacenes</value>
+    </property>
+    <property key="TransferenciasEntreAlmacen">    	
+    	<value xml:lang="es">Transferencias entre almacenes</value>
+    </property>
+    <property key="AlmacenDestino">    	
+    	<value xml:lang="es">Almacén destino</value>
+    </property>
+    <property key="ListaArticulos">    	
+    	<value xml:lang="es">Lista de artículos</value>
+    </property>
+    <property key="FacilityName">    	
+    	<value xml:lang="es">Nombre almacén</value>
+    </property>
+    <property key="FacilityId">    	
+    	<value xml:lang="es">Almacén id</value>
+    </property>
+    <property key="ProductId">    	
+    	<value xml:lang="es">Id producto</value>
+    </property>
+    <property key="InternalName">    	
+    	<value xml:lang="es">Nombre producto</value>
+    </property>
+    <property key="DatetimeReceived">    	
+    	<value xml:lang="es">Fecha de recepción</value>
+    </property>
+    <property key="UnitCost">    	
+    	<value xml:lang="es">Costo unitario</value>
+    </property>
+    <property key="QuantityOnHandTotal">    	
+    	<value xml:lang="es">Cantidad disponible</value>
+    </property>
+    <property key="CantidadTransferir">    	
+    	<value xml:lang="es">Cantidad a transferir</value>
+    </property>   
+    <property key="AlmacenTransferencias">    	
+    	<value xml:lang="es">Transferencia entre almacenes</value>
+    	<value xml:lang="en">Transfer between warehouses</value>
+    </property> 
+    <property key="AlmacenSolicitudTransferencia">    	
+    	<value xml:lang="es">Solicitud de transferencia</value>
+    	<value xml:lang="en">Transfer request</value>
+    </property> 
+   <property key="AlmacenCrearSolicitudTransferencia">    	
+    	<value xml:lang="es">Crear solicitud de transferencia</value>
+    	<value xml:lang="en">Create transfer request</value>
+    </property> 
+   <property key="AlmacenSolicitudTransferenciaId">    	
+    	<value xml:lang="es">Número de solicitud de transferencia</value>
+    	<value xml:lang="en">Transfer request number</value>
+    </property> 
+   <property key="AlmacenOrigen">    	
+    	<value xml:lang="es">Almacén origen</value>
+    	<value xml:lang="en">Origin warehouse</value>
+    </property> 
+   <property key="AlmacenDestino">    	
+    	<value xml:lang="es">Almacén destino</value>
+    	<value xml:lang="en">Destination warehouse</value>
+    </property> 
+   <property key="AlmacenTransAgregarProducto">    	
+    	<value xml:lang="es">Agregar artículo a la transferencia</value>
+    	<value xml:lang="en">Add item to transfer</value>
+    </property>
+   <property key="AlmacenTransAgregarProductoRequisicion">    	
+    	<value xml:lang="es">Agregar artículo (s) de una requisición a la transferencia</value>
+    	<value xml:lang="en">Add item (s) of a requisition to transfer</value>
+    </property>
+   <property key="AlmacenTransAgregarProductoPedido">    	
+    	<value xml:lang="es">Agregar artículo (s) de un pedido o contrato a la transferencia</value>
+    	<value xml:lang="en">Add item (s) of an order or contract transfer</value>
+    </property>
+    <property key="AlmacenTransAgregarProductoPedidoInterno">    	
+    	<value xml:lang="es">Agregar artículo (s) de un pedido interno a la transferencia</value>
+    	<value xml:lang="en">Add item ( s ) of an internal transfer to request</value>
+    </property>
+   <property key="AlmacenBuscarSolicitudTransfer">    	
+    	<value xml:lang="es">Buscar solicitud de transferencia</value>
+    	<value xml:lang="en">Search transfer request</value>
+    </property>
+   <property key="AlmacenPendienteTransferir">    	
+    	<value xml:lang="es">Solicitudes pendientes por transferir</value>
+    	<value xml:lang="en">Pending requests to transfer</value>
+    </property>
+   <property key="AlmacenTransferenciaFiltro">    	
+    	<value xml:lang="es">Buscar solicitudes de transferencia</value>
+    	<value xml:lang="en">Search transfer requests</value>
+    </property>
+   <property key="AlmacenPendientesTransferir">    	
+    	<value xml:lang="es">Solicitudes pendientes por transferir</value>
+    	<value xml:lang="en">Pending requests to transfer</value>
+    </property>
+   <property key="AlmacenTransferir">    	
+    	<value xml:lang="es">Transferir</value>
+    	<value xml:lang="en">Transfer</value>
+    </property>
+    <property key="AlmacenPedidoInterno">    	
+    	<value xml:lang="es">Pedido interno</value>
+    	<value xml:lang="en">Internal order</value>
+    </property>
+    <property key="AlmacenReceptor">    	
+    	<value xml:lang="es">Almacén receptor</value>
+    	<value xml:lang="en">Warehouse receiver</value>
+    </property>
+	<property key="AlmacenFechaRecepcion">
+		<value xml:lang="es">Actualizar fecha de recepción</value>
+		<value xml:lang="en">Update date of receipt</value>
+	</property>
+    
+</resource>

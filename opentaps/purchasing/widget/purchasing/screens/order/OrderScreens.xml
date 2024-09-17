@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="gwtScripts[]" value="purchasinggwt/org.opentaps.gwt.purchasing.purchasing" global="true"/>
+                <set field="sectionName" value="order" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="openOrders">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchOpenOrders"/>  
+                <set field="sectionHeaderUiLabel" value="PurchOpenOrders"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="1"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="20"/>
+                <set field="onlyOpenOrders" value="true"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="subSectionBlock">
+                            <platform-specific>
+                                <html><html-template location="component://purchasing/webapp/purchasing/common/FindPurchaseOrders.ftl"/></html>
+                            </platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Buscar contratos o pedidos -->
+    <screen name="findOrders">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsFindOrders"/>  
+                <set field="sectionHeaderUiLabel" value="OpentapsFindOrders"/>  
+                <java location="org.opentaps.common.order.OrderServices" invoke="buscarPedidoContrato"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/consultarPedidoContrato.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/order/listPedido.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+<!--     <screen name="findOrders"> -->
+<!--         <section> -->
+<!--             <actions> -->
+<!--                 <set field="pageTitleLabel" value="OpentapsFindOrders"/>   -->
+<!--                 <set field="sectionHeaderUiLabel" value="OpentapsFindOrders"/> -->
+<!--                 <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="1"/> -->
+<!--                 <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="20"/> -->
+<!--             </actions> -->
+<!--             <widgets> -->
+<!--                 <decorator-screen name="main-section-decorator"> -->
+<!--                     <decorator-section name="section-body"> -->
+<!--                         <container style="subSectionBlock"> -->
+<!--                             <platform-specific> -->
+<!--                                 <html><html-template location="component://purchasing/webapp/purchasing/common/FindPurchaseOrders.ftl"/></html> -->
+<!--                             </platform-specific> -->
+<!--                         </container> -->
+<!--                     </decorator-section> -->
+<!--                 </decorator-screen> -->
+<!--             </widgets> -->
+<!--         </section> -->
+<!--     </screen> -->
+
+    <!-- This is the OFBiz orderview screen reconfigured for opentaps layout -->
+    <screen name="viewOrder">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsViewPurchaseOrder"/>
+                <set field="sectionHeaderUiLabel" value="OpentapsViewPurchaseOrder"/>
+                <set field="customerDetailLink" value="/partymgr/control/viewprofile?partyId=" global="true"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/OrderView.groovy"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/OrderViewWebSecure.groovy"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/viewOrder.bsh"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/getOrderAccountingTags.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                            <html><html-template location="component://purchasing/webapp/purchasing/order/viewOrder.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>    
+    </screen>
+
+    <!-- This is the OFBiz editOrderItem screen reconfigured for opentaps layout -->
+    <screen name="editOrder">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsOrderEditOrder"/>
+                <set field="sectionHeaderUiLabel" value="OpentapsOrderEditOrder"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/OrderView.groovy"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/OrderViewWebSecure.groovy"/>
+                <script location="component://crmsfa/webapp/crmsfa/WEB-INF/actions/orders/editOrder.bsh"/>
+                <script location="component://crmsfa/webapp/crmsfa/WEB-INF/actions/orders/view/excludeCancelledItems.bsh"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/viewOrder.bsh"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/getOrderAccountingTags.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                            <html><html-template location="component://purchasing/webapp/purchasing/order/editOrder.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>    
+    </screen>
+
+    <!-- This is the OFBiz OrderNewNote screen reconfigured for opentaps layout -->
+    <screen name="OrderNewNote">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsCreateNote"/>
+                <set field="sectionHeaderUiLabel" value="OpentapsCreateNote"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/NewNote.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                            <html><html-template location="component://order/webapp/ordermgr/order/newnote.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>    
+
+    <!-- TODO: this will be a template for similar pages that have to create invoices from a subset of order items -->
+    <screen name="invoiceSupplies">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchInvoiceSupplies"/>
+                <set field="sectionHeaderUiLabel" value="PurchInvoiceSupplies"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/invoiceSupplies.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                            <html><html-template location="component://purchasing/webapp/purchasing/order/invoiceSupplies.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="editProductDeliveryDate">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchEstimatedDeliveryDate"/>
+                <set field="sectionHeaderUiLabel" value="PurchEstimatedDeliveryDate"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/editProductDeliveryDate.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                            <html><html-template location="component://purchasing/webapp/purchasing/order/editProductDeliveryDate.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="editPurchaseOrderContactMech">
+        <section>
+            <actions>
+                <set field="donePage" value="orderview"/>
+                <set field="orderId"  value="${parameters.orderId}"/>
+                <set field="shipGroupSeqId" value="${parameters.shipGroupSeqId}"/>
+                <set field="oldContactMechId" value="${parameters.oldContactMechId}"/>
+                <set field="errorPage" value="editPurchaseOrderContactMech"/>
+                <set field="layoutSettings.javaScripts[]" value="/opentaps_js/opentapsPostalAddressValidation.js"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/editPurchaseOrderContactMech.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/editPurchaseOrderContactMech.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewAcctgTransPolizasLista">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="FinancialPolicyData"/> 
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransMuestraPoliza.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                           </html></platform-specific>                   
+                        </container>
+                        <frame-container title="${uiLabelMap.FinancialPolicyDetails}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransDatosPoliza.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                        
+                        <frame-container title="${uiLabelMap.FinancialBudgetKeys}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                                                 
+                        <frame-container title="${uiLabelMap.FinancialAccounts}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransPolizasDetalle.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	<screen name="viewAcctgTransPolizasLista">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="FinancialPolicyData"/> 
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransMuestraPoliza.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                           </html></platform-specific>                   
+                        </container>
+                        <frame-container title="${uiLabelMap.FinancialPolicyDetails}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransDatosPoliza.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                        
+                        <frame-container title="${uiLabelMap.FinancialBudgetKeys}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                                                 
+                        <frame-container title="${uiLabelMap.FinancialAccounts}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransPolizasDetalle.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>     
+    
+    <screen name="viewGlFiscalType">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewGlFiscalType.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="PageTitleViewAccountingTransaction"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body"> 
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/glFiscalType.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+<screen name="viewAcctPresupuestal">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransOperaDiaIngresos.bsh"/>
+ 				<script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="PageTitleViewAccountingTransaction"/>
+                <entity-condition entity-name="Geo" list="geos">   
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/>
+                           </html></platform-specific>
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/polizasDetalle.ftl"/>
+                           </html></platform-specific>
+                           <!--  <include-form name="viewAcctPresupuestal" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>  -->
+                        </container>
+<!--                           <include-form name="viewAcctgTrans" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/> -->
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntries.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+
+<screen name="viewAcctgTransEntry">
+        <section>
+            <actions>
+                <entity-one entity-name="AcctgTrans" value-field="acctgTrans"/>
+                <entity-one entity-name="AcctgTransEntry" value-field="acctgTransEntry"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-body">
+                                <!-- only include the options if acctgTrans.isPosted = N -->
+                                <section>
+                                    <condition><if-compare field="acctgTrans.isPosted" operator="equals" value="N"/></condition>
+                                    <widgets>
+                                        <platform-specific><html>
+                                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntryOptions.ftl"/>
+                                        </html></platform-specific>
+                                    </widgets>
+                                </section>
+                                <include-form name="viewAcctgTransEntry" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="viewAcctgTrans">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransPresupuestal.bsh"/>
+                <java location="com.opensourcestrategies.financials.transactions.BuscarPolizas" invoke="buscaDetalleEntries"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransPoliza.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesGroup.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesAuxiliares.ftl"/>
+                        </html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>    
+    
+    <screen name="emptyOrderScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsOrders"/>  
+                <set field="sectionHeaderUiLabel" value="OpentapsOrders"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://purchasing/webapp/purchasing/order/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verImprimirPoliza">
+		<section>
+            <actions>
+            	<set field="titleProperty" value="ImprimirPoliza"/>
+            	<set field="acctgTransId" value="${parameters.acctgTransId}"/>
+                <script location="component://opentaps-common/webapp/common/WEB-INF/actions/includes/selectOrganization.bsh"/>
+            </actions> 
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://financials/webapp/financials/reports/imprimirPoliza.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Documentacion Obligatoria -->
+    <screen name="documentosPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchDocumentosPendientes"/>  
+                <set field="sectionHeaderUiLabel" value="Documentos necesarios para el contrato o pedido"/>  
+                <java location="org.opentaps.common.order.OrderServices" invoke="documentosPendientes"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Documentos">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/documentosPendientes.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Cambio de fechas del pedido -->
+    <screen name="cambioFechasProducto">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchCambioFechas"/>  
+                <set field="sectionHeaderUiLabel" value="Cambiar fechas"/>  
+                <java location="org.opentaps.common.order.OrderServices" invoke="cambioFechasProducto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Productos">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/cambioFechas.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Cambio de fechas del pedido -->
+    <screen name="consultarPenalizaciones">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchConsultarPenalizaciones"/>  
+                <set field="sectionHeaderUiLabel" value="Penalizaciones"/>  
+                <java location="org.opentaps.common.order.OrderServices" invoke="consultarPenalizacion"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="${uiLabelMap.PurchConsultarPenalizaciones}">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/consultarPenalizaciones.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Pagos Anticipados Pendientes -->
+    <screen name="pagosAnticipadosPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchRequisicionesPendientes"/>  
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="pagosAnticipadosPendientes"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/order/listPagosAnticipadosPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verOrden">
+        <section>
+            <actions>
+                <set field="orderId"  value="${parameters.orderId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/editarOrdenPagoAnticipado.bsh"/>
+                <!-- <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="obtenerDetalleRequisicion"/> -->
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/verOrdenPagoAnti.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <screen name="editarPagoAnticipado">
+		<section>
+            <actions>
+                <set field="orderId"  value="${parameters.orderId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/pagoAnticipado.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/editarPagoAnticipado.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+</screens>

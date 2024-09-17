@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+        
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!-- This file may contain code which has been modified from that included with the Apache-licensed OFBiz product application -->
+<!-- This file has been modified by Open Source Strategies, Inc. -->
+        
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios Pedido Interno</description>
+    <version>1.0</version>
+
+    <service name="guardaPedidoInterno" engine="java" location="org.opentaps.warehouse.inventory.PedidoInternoServices" auth="true" invoke="guardaPedidoInterno">
+    	<attribute name="pedidoInternoId" type="String" mode="IN" optional="true"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false" description="Descripción"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false" description="Justificación"/>
+        <attribute name="almacenId" type="String" mode="IN" />
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true" />
+        <attribute name="areaPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="pedidoInternoId" type="String" mode="OUT" optional="false"/>        
+    </service>        
+    
+    <service name="agregaItemPedidoInterno" engine="java" auth="true"
+    		location="org.opentaps.warehouse.inventory.PedidoInternoServices" invoke="agregaItemPedidoInterno">
+    		<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="cantidad" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="productId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="enviarPedidoInterno" engine="java" location="org.opentaps.warehouse.inventory.PedidoInternoServices" auth="true" invoke="enviarPedidoInterno">
+    	<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="validaItemsPedidoInterno" engine="java" auth="true"
+    		location="org.opentaps.warehouse.inventory.PedidoInternoServices" invoke="validaItemsPedidoInterno">
+    		<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="false"/>    		
+    </service>
+    
+    <service name="cambiaStatusPedidoInterno" engine="java" auth="true"
+    		location="org.opentaps.warehouse.inventory.PedidoInternoServices" invoke="validaItemsPedidoInterno">
+    		<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="estatus" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="autorizarPedidoInterno" engine="java" location="org.opentaps.warehouse.inventory.PedidoInternoServices" auth="true" invoke="autorizarPedidoInterno">
+    	<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAutorizado" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>        		        
+    </service>
+    
+    <service name="rechazarPedidoInterno" engine="java" location="org.opentaps.warehouse.inventory.PedidoInternoServices" auth="true" invoke="rechazarPedidoInterno">
+    	<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioRechazo" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="comentarPedidoInterno" engine="java" location="org.opentaps.warehouse.inventory.PedidoInternoServices" auth="true" invoke="comentarPedidoInterno">
+    	<attribute name="pedidoInternoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioComentar" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>
+    	<attribute name="rol" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaRequisicionPedidoInterno" engine="java" auth="true"
+        location="org.opentaps.warehouse.inventory.PedidoInternoServices" invoke="agregaRequisicionPedidoInterno">
+        <attribute name="pedidoInternoId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="requisicionId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaOrdenPedidoInterno" engine="java" auth="true"
+        location="org.opentaps.warehouse.inventory.PedidoInternoServices" invoke="agregaOrdenPedidoInterno">
+        <attribute name="pedidoInternoId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+    </service>
+
+</services>
+

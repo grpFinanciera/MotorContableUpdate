@@ -1,0 +1,16 @@
+import org.ofbiz.base.util.UtilMisc;
+
+TiposTransportes = delegator.findAll("TipoTransporte");
+context.put("TiposTransportes",TiposTransportes);
+
+Geos = delegator.findAll("Geo", UtilMisc.toList("geoName"));
+context.put("Geos",Geos);
+
+Programas = delegator.findByAnd("Enumeration",UtilMisc.toMap("enumTypeId","CL_PROGRAMATICA","nivelId","PROYECTO_ESPECIFICO"));
+context.put("Programas",Programas);
+
+FuenteFinanciamiento = delegator.findAll("FuenteFinanciamiento");
+context.put("FuenteFinanciamiento",FuenteFinanciamiento);
+
+Programas2 = delegator.findByAnd("ProgramaViatico",UtilMisc.toMap("estatus","Activo"));
+context.put("Programas2",Programas2);

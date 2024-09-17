@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ import org.opentaps.common.util.UtilClassification;
+ import org.ofbiz.base.util.UtilMisc;
+ 
+ import org.ofbiz.base.util.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+ 
+ oganizationPartyId = parameters.get("organizationPartyId");
+ context.put("oganizationPartyId", oganizationPartyId);
+ 
+  listAreas = UtilClassification.getListaCatalogos("NivelesParty", delegator, "",true);	
+ context.put("listAreas",listAreas);
+ 
+eventosContables = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "CREA_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosContables", eventosContables);
+
+// obtener el catalogo de bancos
+orderByBan = org.ofbiz.base.util.UtilMisc.toList("nombreBanco");
+condicionBan = EntityCondition.makeCondition("partyId", EntityOperator.EQUALS, oganizationPartyId);
+bancos = delegator.findByCondition("BancosCuentasPorOrganizacion", condicionBan , UtilMisc.toList("bancoId", "nombreBanco"), orderByBan);
+context.put("bancos", bancos);
+
+eventosContablesPrev = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "PREV_PAGO_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosContablesPrev", eventosContablesPrev);

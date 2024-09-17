@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios contabilidad AB</description>
+    <vendor>Salvador Cortes</vendor>
+    <version>1.0</version>
+    
+    <service name="lineasContables" engine="interface">
+    	<attribute name="montoMap" type="Map" mode="IN" string-map-prefix="monto" optional="true" />
+    	<attribute name="catalogoCargoContMap" type="Map" mode="IN" string-map-prefix="catalogoCargoC" optional="true" />
+    	<attribute name="catalogoAbonoContMap" type="Map" mode="IN" string-map-prefix="catalogoAbonoC" optional="true" />
+    	<attribute name="catalogoCargoPresMap" type="Map" mode="IN" string-map-prefix="catalogoCargoP" optional="true" />
+    	<attribute name="catalogoAbonoPresMap" type="Map" mode="IN" string-map-prefix="catalogoAbonoP" optional="true" />
+    	<attribute name="clavePresupuestalMap" type="Map" mode="IN" string-map-prefix="clavePresupuestal" optional="true" />
+    </service>
+    
+    <service name="creaAfectacion" engine="java" default-entity-name="Afectacion"
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="creaAfectacion">
+    	<auto-attributes include="nonpk" mode="IN" optional="false"/>
+    	<override name="acctgTransTypeId" description="Evento"/>
+    	<override name="currency" description="Moneda"/>
+    	<auto-attributes include="pk" mode="OUT" optional="false"/>
+    	<override name="bancoId" optional="true"/>
+    	<override name="cuentaBancariaId" optional="true"/>
+    	<override name="tipoAfectacion" optional="true"/>
+    	<attribute name="moduloId" mode="IN" type="String" description="Tipo de afectación"/>
+    </service>
+    
+    <service name="agregarClaveAfecta" engine="java" 
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="agregarClaveAfecta">
+    	<implements service="clasificacionesPresup"/>
+    	<implements service="lineasContables"/>
+		<attribute name="afectacionId" mode="INOUT" type="String" optional="false"/>
+		<attribute name="monto" mode="IN" type="BigDecimal" optional="false"/>
+    </service>
+    
+    <service name="actualizaDetalle" engine="java" 
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="actualizaDetalle">
+		<attribute name="afectacionId" mode="INOUT" type="String" optional="false"/>
+		<attribute name="afectacionSeqId" mode="IN" type="String" />
+<!-- 		<attribute name="montoClave" mode="IN" type="BigDecimal" /> -->
+		<attribute name="montoClave" type="Map" string-map-prefix="montoClave" mode="IN" optional="true"/>
+		<attribute name="monto" type="Map" string-map-prefix="monto" mode="IN" optional="true"/>
+        <attribute name="catalogoCargo" type="Map" string-map-prefix="catalogoCargo" mode="IN" optional="true"/>
+        <attribute name="catalogoAbono" type="Map" string-map-prefix="catalogoAbono" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="actualizaEstatusDetalle" engine="java" 
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="actualizaEstatusDetalle">
+		<attribute name="afectacionId" mode="INOUT" type="String" optional="false"/>
+		<attribute name="afectacionSeqId" mode="IN" type="String" />
+    </service>
+    
+	<service name="creaTransaccionAfectacion" engine="java" 
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="creaTransaccionAfectacion">
+		<attribute name="afectacionId" mode="IN" type="String" optional="false"/>
+		<attribute name="acctgTransId" mode="OUT" type="String" optional="false" />
+    </service>
+    
+    <service name="buscaAfectacion" engine="java"
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="buscaAfectacion">
+    	<attribute name="acctgTransTypeId" mode="IN" type="String" optional="false" description="Evento" />	
+    	<attribute name="numeroPoliza" mode="IN" type="String" optional="true"/>	
+    	<attribute name="fechaTransaccion" mode="IN" type="java.sql.Timestamp" optional="true" />
+    	<attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true" />
+    	<attribute name="comentario" mode="IN" type="String" optional="true"/>	
+    	<attribute name="afectacionListBuilder" mode="OUT" type="org.opentaps.common.builder.EntityListBuilder" optional="false"/>
+    </service>
+    
+    <service name="crearMomento" engine="java" default-entity-name="MomentoAfecta"
+    		location="com.opensourcestrategies.financials.transactions.ControladorAfectacion" invoke="crearMomento">
+    		<implements service="lineasContables"/>
+    		<attribute name="montoClaveMap" type="Map" mode="IN" string-map-prefix="montoClave" optional="true" />
+    		<attribute name="comentario" mode="IN" type="String" optional="false" description="Comentario"/>
+    		<attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="false" />
+    		<attribute name="productoMap" type="Map" mode="IN" string-map-prefix="producto" optional="true" />
+    		<attribute name="afectacionSeqIdMap" type="Map" mode="IN" string-map-prefix="afectacionSeqId" optional="true" />
+    		<auto-attributes include="nonpk" mode="IN" optional="false"/>
+    		<attribute name="acctgTransId" mode="OUT" type="String" optional="false" />
+	</service>	
+	
+	<service name="firmaPDF" engine="java" 
+			location="com.opensourcestrategies.financials.firmaAvnazada.FirmaAvanzada" invoke="firmaPDF">
+			<attribute name="reporteId" mode="IN" type="String" optional="false" />
+			<attribute name="pdf" mode="IN" type="java.nio.ByteBuffer" optional="false"/>
+			<!-- <attribute name="certificado" mode="IN" type="java.nio.ByteBuffer" optional="false"/> -->
+			<attribute name="clavePrivada" mode="IN" type="java.nio.ByteBuffer" optional="false"/>
+			<attribute name="clave" mode="IN" type="String" optional="false" />
+			<attribute name="urlHost" type="String" mode="IN" optional="false"/> 
+	</service>
+		
+	<service name="guardaNuevoFirmante" engine="java" 
+			location="com.opensourcestrategies.financials.firmaAvnazada.FirmaAvanzada" invoke="guardNuevoFirmante">
+			<attribute name="reporteId" mode="IN" type="String" optional="false" />
+			<attribute name="workFlowId" mode="IN" type="String" optional="false" />
+			<!-- <attribute name="certificado" mode="IN" type="java.nio.ByteBuffer" optional="false"/> -->
+			<attribute name="clavePrivada" mode="IN" type="java.nio.ByteBuffer" optional="false"/>
+			<attribute name="clave" mode="IN" type="String" optional="false" />
+	</service>
+	
+	<service name="guardaElementoXML" engine="java" default-entity-name="ElementoReporte"
+			location="com.opensourcestrategies.financials.reports.ContabilidadElectronica" invoke="guardaElementoXML">
+			<auto-attributes mode="IN" include="pk" />
+			<auto-attributes mode="IN" include="nonpk" optional="true"/>
+	</service>
+	
+		
+</services>

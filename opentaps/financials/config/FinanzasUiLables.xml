@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<property key="ReportesLDF">
+		<value xml:lang="en">Financial Discipline Law</value>
+		<value xml:lang="es">Ley de Disciplina Financiera</value>
+	</property>
+	<property key="ReportesLDFEstadoSituacionFinancieraDet">
+		<value xml:lang="en">Statement of Detailed Financial Statements - FDL</value>
+		<value xml:lang="es">Estado de Situación Financiera Detallado - LDF</value>
+	</property>
+	<property key="ReportesLDFInfoAnaliticoDeudaPublica">
+		<value xml:lang="en">Analytical Report on Public Debt and Other Liabilities - FDL</value>
+		<value xml:lang="es">Informe Analítico de la Deuda Pública y Otros Pasivos - LDF</value>
+	</property>
+	<property key="ReportesLDFBalancePresupuestario">
+		<value xml:lang="en">Budgetary Balance - FDL</value>
+		<value xml:lang="es">Balance Presupuestario - LDF</value>
+	</property>
+	<property key="ReportesLDFEstadoAnaliticoIngresosDet">
+		<value xml:lang="en">Analytical State of Detailed Income - FDL</value>
+		<value xml:lang="es">Estado Analítico de Ingresos Detallado - LDF</value>
+	</property>
+	<property key="ReportesLDFAnaliticoPresupEgresosDetCOG">
+		<value xml:lang="en">Analytical Status of the Expenditure Budget Exercise - FDL (Classification by Object of Expenditure)</value>
+		<value xml:lang="es">Estado Analítico del Ejercicio del Presupuesto de Egresos Detallado - LDF (Clasificación por Objeto del Gasto)</value>
+	</property>
+	<property key="ReportesLDFAnaliticoPresupEgresosDetAdmin">
+		<value xml:lang="en">Analytical Status of the Detailed Expenses Budget Exercise - FDL (Administrative Classification)</value>
+		<value xml:lang="es">Estado Analítico del Ejercicio del Presupuesto de Egresos Detallado - LDF (Clasificación Administrativa)</value>
+	</property>
+	<property key="ReportesLDFAnaliticoPresupEgresosDetFuncional">
+		<value xml:lang="en">Analytical Status of the Expenditures Budget Exercise - FDL (Functional Classification)</value>
+		<value xml:lang="es">Estado Analítico del Ejercicio del Presupuesto de Egresos Detallado - LDF (Clasificación Funcional)</value>
+	</property>
+	<property key="ReportesLDFAnaliticoPresupEgresosDetServiciosPersonales">
+		<value xml:lang="en">Analytical Status of the Expenditures Budget Exercise - FDL (Classification of Personal Services by Category)</value>
+		<value xml:lang="es">Estado Analítico del Ejercicio del Presupuesto de Egresos Detallado - LDF (Clasificación de Servicios Personales por Categoría)</value>
+	</property>
+	<property key="ReportesLDFProyeccionesIngresos">
+		<value xml:lang="en">Income Projections - FDL</value>
+		<value xml:lang="es">Proyecciones de Ingresos - LDF</value>
+	</property>
+	<property key="ReportesLDFProyeccionesEgresos">
+		<value xml:lang="en">Projections of Expenses - FDL</value>
+		<value xml:lang="es">Proyecciones de Egresos - LDF</value>
+	</property>
+	<property key="ReportesLDFResultadoIngresos">
+		<value xml:lang="en">Income Statement - FDL</value>
+		<value xml:lang="es">Resultados de Ingresos - LDF</value>
+	</property>
+	<property key="ReportesLDFResultadoEgresos">
+		<value xml:lang="en">Results of Expenses - FDL</value>
+		<value xml:lang="es">Resultados de Egresos - LDF	</value>
+	</property>
+	<property key="CierreReportes">
+		<value xml:lang="en">Closing Accounting-Budget</value>
+		<value xml:lang="es">Cierre Contable-Presupuestal</value>
+	</property>
+</resource>

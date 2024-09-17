@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<entity-engine-xml>
+
+<!-- The Web Application -->
+<OpentapsWebApps applicationId="warehouse" shortName="Almacén" sequenceNum="20" applicationName="Inventario, Envío, Manufactura" description="Manejar serializado, a nivel de lote, o inventario no serializado. Recibe las órdenes de compra. Recoger, empacar y enviar sus órdenes. Fabricación de sus productos."
+             imageUrl="/opentaps_images/integratingweb/warehouse.png" imageHoverUrl="/opentaps_images/integratingweb/warehouseHover.png" linkUrl="/warehouse/control/main" lastUpdatedStamp="2009-07-18 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-18 16:41:58.415" createdStamp="2009-07-18 16:12:28.395" createdTxStamp="2009-07-18 16:12:28.395" hide="N"/>
+
+<!-- Tabs -->
+<OpentapsWebAppTab applicationId="warehouse" sequenceNum="010" tabId="myHome" uiLabel="OpentapsMyHome"
+                   linkUrl="myHomeMain"   securityModule="" securityAction="" handlerMethod=""/>
+<OpentapsWebAppTab applicationId="warehouse" sequenceNum="020" tabId="inventory" uiLabel="WarehouseInventory"
+                   linkUrl="emptyInventoryScreen"   securityModule="WRHS" securityAction="INVENT_VIEW" handlerMethod="org.opentaps.warehouse.security.WarehouseSecurity.checkFacilityPermission" handlerParameter="WRHS_INV_VIEW"/>
+<!-- <OpentapsWebAppTab applicationId="warehouse" sequenceNum="030" tabId="shipping" uiLabel="WarehouseShipping" -->
+<!--                    linkUrl="shippingMain"   securityModule="" securityAction="" handlerMethod="org.opentaps.warehouse.security.WarehouseSecurity.checkFacilityPermission" handlerParameter="WRHS_SHIP_VIEW"/> -->
+<!-- <OpentapsWebAppTab applicationId="warehouse" sequenceNum="040" tabId="manufacturing" uiLabel="WarehouseManufacturing" -->
+<!--                    linkUrl="manufacturingMain"   securityModule="" securityAction="" handlerMethod="org.opentaps.warehouse.security.WarehouseSecurity.checkFacilityPermission" handlerParameter="WRHS_MFG_VIEW"/> -->
+<!-- <OpentapsWebAppTab applicationId="warehouse" sequenceNum="030" tabId="activoFijo" uiLabel="AccountingFixedAsset"
+                    linkUrl="emptyActivoFijoScreen"   securityModule="WRHS" securityAction="ACTFIJOT_VIEW" handlerMethod="" handlerParameter=""/> -->
+<OpentapsWebAppTab applicationId="warehouse" sequenceNum="040" tabId="transferencias" uiLabel="AlmacenTransferencias"
+                    linkUrl="emptyTransferenciasScreen"   securityModule="WRHS" securityAction="TRANSFERT_VIEW" handlerMethod="" handlerParameter=""/>
+<OpentapsWebAppTab applicationId="warehouse" sequenceNum="050" tabId="configuration" uiLabel="OpentapsConfiguration"
+                   linkUrl="emptyConfigurationScreen"   securityModule="WRHS" securityAction="CONFIGT_VIEW" handlerMethod="org.opentaps.warehouse.security.WarehouseSecurity.checkFacilityPermission" handlerParameter="WRHS_CONFIG_VIEW"/>
+<OpentapsWebAppTab applicationId="warehouse" sequenceNum="060" tabId="reportesW" uiLabel="CommonReports"
+                   linkUrl="emptyReportScreen"   securityModule="WRHS" securityAction="INFORT_VIEW" handlerMethod="" handlerParameter=""/>
+<OpentapsWebAppTab applicationId="warehouse"  sequenceNum="500" tabId="ofbiz" uiLabel="opentaps"
+                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>
+
+
+<!-- Inventory shortcuts -->
+<OpentapsShortcutGroup applicationId="warehouse" tabId="inventory" groupId="warehouseInventory" sequenceNum="010"
+                       securityModule="WRHS_INVENT" securityAction="OPCGRP_VIEW" />
+<!-- <OpentapsShortcut shortcutId="backOrderedItems" groupId="warehouseInventory" sequenceNum="010" uiLabel="WarehouseBackOrderedItems"
+                  linkUrl="backOrderedItems"/> -->
+<OpentapsShortcut shortcutId="findInventoryItem" groupId="warehouseInventory" sequenceNum="020" uiLabel="WarehouseFindInventoryItem"
+                  linkUrl="findInventoryItem" securityModule="WRHS_INVENT_OPCGRP" securityAction="BARTINVENT_VIEW" />
+<OpentapsShortcut shortcutId="receiveInventoryItem" groupId="warehouseInventory" sequenceNum="030" uiLabel="WarehouseReceiveInventoryItem"
+                  linkUrl="receiveInventoryItem" securityModule="WRHS_INVENT_OPCGRP" securityAction="ALTANARTINVENT_VIEW" />
+<OpentapsShortcut shortcutId="receiveInventoryAgainstPurchaseOrder" groupId="warehouseInventory" sequenceNum="040" uiLabel="WarehouseReceivePurchaseOrder"
+                  linkUrl="ReceiveInventoryAgainstPurchaseOrder" securityModule="WRHS_INVENT_OPCGRP" securityAction="RPEDIDOINVENT_VIEW" />
+<OpentapsShortcut shortcutId="findShipmentReceipt" groupId="warehouseInventory" sequenceNum="050" uiLabel="WarehouseFindShipmentReceipts"
+                  linkUrl="findShipmentReceipt" securityModule="WRHS_INVENT_OPCGRP" securityAction="BRECEPINVENT_VIEW" />
+<OpentapsShortcut shortcutId="physicalInventory" groupId="warehouseInventory" sequenceNum="060" uiLabel="WarehouseInventoryAdjustQuantities"
+                  linkUrl="physicalInventory" securityModule="WRHS_INVENT_OPCGRP" securityAction="ALTAARTINVENT_VIEW" />
+<OpentapsShortcut shortcutId="physicalInventoryB" groupId="warehouseInventory" sequenceNum="070" uiLabel="WarehouseInventoryAdjustQuantitiesB"
+                  linkUrl="physicalInventoryB" securityModule="WRHS_INVENT_OPCGRP" securityAction="BAJAARTINVENT_VIEW" />
+<!-- <OpentapsShortcut shortcutId="stockMoves" groupId="warehouseInventory" sequenceNum="080" uiLabel="WarehouseStockMoves"
+                  linkUrl="stockMoves"/> -->
+<OpentapsShortcut shortcutId="findFacilityTransfers" groupId="warehouseInventory" sequenceNum="090" uiLabel="WarehouseInventoryTransfer"
+                  linkUrl="FindFacilityTransfers?facilityId=${facilityId}"/>                  
+<OpentapsShortcut shortcutId="transferenciasEntreAlmacen" groupId="warehouseInventory" sequenceNum="095" uiLabel="WarehouseInventoryTransferenciasAlmacen"
+                  linkUrl="transferenciasEntreAlmacen" securityModule="WRHS_INVENT_OPCGRP" securityAction="TRANSENTREALMACEN_VIEW" />                  
+<OpentapsShortcut shortcutId="manageLots" groupId="warehouseInventory" sequenceNum="100" uiLabel="WarehouseManageLots"
+                  linkUrl="manageLots" securityModule="WRHS_INVENT_OPCGRP" securityAction="ADMINLOTESINVENT_VIEW"/>
+<!-- <OpentapsShortcut shortcutId="traceInventory" groupId="warehouseInventory" sequenceNum="110" uiLabel="WarehouseTraceInventory"
+                  linkUrl="traceInventory"/> -->                                   
+<OpentapsShortcut shortcutId="salidaPedidosInternos" groupId="warehouseInventory" sequenceNum="120" uiLabel="WarehouseSalidaPedidosInternos"
+                  linkUrl="buscarPedidoInternoSurtir" securityModule="WRHS_INVENT_OPCGRP" securityAction="SALIDAPIINVENT_VIEW" />
+<OpentapsShortcut shortcutId="consultaAltas" groupId="warehouseInventory" sequenceNum="130" uiLabel="WarehouseConsultaAltas"
+                  linkUrl="consultaAltas" securityModule="WRHS_INVENT_OPCGRP" securityAction="CONALTINVENT_VIEW" />
+<OpentapsShortcut shortcutId="consultaBajas" groupId="warehouseInventory" sequenceNum="140" uiLabel="WarehouseConsultaBajas"
+                  linkUrl="consultaBajas" securityModule="WRHS_INVENT_OPCGRP" securityAction="CONBAJINVENT_VIEW" />   
+<OpentapsShortcut shortcutId="bajaBienes" groupId="warehouseInventory" sequenceNum="150" uiLabel="WarehouseInventoryBajaBienes"
+                  linkUrl="bajaBienes" securityModule="WRHS_INVENT_OPCGRP" securityAction="BAJABIENESINVENT_VIEW" />
+<OpentapsShortcut shortcutId="devoluciones" groupId="warehouseInventory" sequenceNum="160" uiLabel="WarehouseInventoryDevoluciones"
+                  linkUrl="devoluciones" securityModule="WRHS_INVENT_OPCGRP" securityAction="DEVOLUCIONESINVENT_VIEW" />
+<OpentapsShortcut shortcutId="consultaDevolucion" groupId="warehouseInventory" sequenceNum="170" uiLabel="WarehouseInventoryConsultaDevoluciones"
+                  linkUrl="consultaDevolucion" securityModule="WRHS_INVENT_OPCGRP" securityAction="CONSULDEVOLUINVENT_VIEW" />
+<OpentapsShortcut shortcutId="maximosMinimos" groupId="warehouseInventory" sequenceNum="180" uiLabel="WarehouseInventoryMaximosMinimos"
+                  linkUrl="maximosMinimos" securityModule="WRHS_INVENT_OPCGRP" securityAction="MAXIMOSMINIMOSINVENT_VIEW" />
+<OpentapsShortcut shortcutId="consultaProductosEnMinimo" groupId="warehouseInventory" sequenceNum="190" uiLabel="WarehouseInventoryConsultaProductosEnMinimo"
+                  linkUrl="consultaProductosEnMinimo" securityModule="WRHS_INVENT_OPCGRP" securityAction="CONSUPRODENMININVENT_VIEW" />
+<OpentapsShortcut shortcutId="actualizaRecepcion" groupId="warehouseInventory" sequenceNum="045" uiLabel="AlmacenFechaRecepcion"
+					linkUrl="actualizaFechaRecepcion" securityAction="FECHA_RECEPCION_VIEW" securityModule="WRHS_INVENT_OPCGRP"/>
+
+<!-- Shipping shortcuts -->
+<!-- <OpentapsShortcutGroup applicationId="warehouse" tabId="shipping" groupId="warehouseShipping" sequenceNum="010" />
+<OpentapsShortcut shortcutId="readyToShip" groupId="warehouseShipping" sequenceNum="010" uiLabel="WarehouseReadyToShip"
+                  linkUrl="readyToShip"/>
+<OpentapsShortcut shortcutId="incomingShipments" groupId="warehouseShipping" sequenceNum="020" uiLabel="WarehouseIncomingShipments"
+                  linkUrl="IncomingShipments?lookupFlag=Y&amp;formShipmentTypeId=INCOMING_SHIPMENT"/>
+<OpentapsShortcut shortcutId="outgoingShipments" groupId="warehouseShipping" sequenceNum="030" uiLabel="WarehouseOutgoingShipments"
+                  linkUrl="OutgoingShipments?lookupFlag=Y&amp;formShipmentTypeId=OUTGOING_SHIPMENT"/>
+<OpentapsShortcut shortcutId="createPicklist" groupId="warehouseShipping" sequenceNum="040" uiLabel="WarehouseCreatePicklist"
+                  linkUrl="createPicklist?maxNumberOfOrders=30"/>
+<OpentapsShortcut shortcutId="openPicklists" groupId="warehouseShipping" sequenceNum="050" uiLabel="WarehouseOpenPicklists"
+                  linkUrl="openPicklists"/>
+<OpentapsShortcut shortcutId="pickedPicklists" groupId="warehouseShipping" sequenceNum="060" uiLabel="WarehousePickedPicklists"
+                  linkUrl="pickedPicklists"/>
+<OpentapsShortcut shortcutId="packOrder" groupId="warehouseShipping" sequenceNum="070" uiLabel="WarehousePackOrder"
+                  linkUrl="PackOrder"/>
+<OpentapsShortcut shortcutId="quickScheduleShipment" groupId="warehouseShipping" sequenceNum="080" uiLabel="WarehouseScheduleAShipment"
+                  linkUrl="QuickScheduleShipmentRouteSegment"/>
+<OpentapsShortcut shortcutId="scheduleShipments" groupId="warehouseShipping" sequenceNum="090" uiLabel="WarehouseScheduleShipments"
+                  linkUrl="ScheduleShipmentRouteSegment"/>
+<OpentapsShortcut shortcutId="printShippingLabels" groupId="warehouseShipping" sequenceNum="100" uiLabel="WarehousePrintLabels"
+                  linkUrl="Labels"/> -->
+
+<!-- Manufacturing shortcuts -->
+<!-- <OpentapsShortcutGroup applicationId="warehouse" tabId="manufacturing" groupId="warehouseManufacturing" sequenceNum="010"/>
+<OpentapsShortcut shortcutId="manufacturingCalendar" groupId="warehouseManufacturing" sequenceNum="010" uiLabel="WarehouseManufacturingCalendar"
+                  linkUrl="manufacturingCalendar"/>
+<OpentapsShortcut shortcutId="findProductionRun" groupId="warehouseManufacturing" sequenceNum="020" uiLabel="WarehouseFindProductionRun"
+                  linkUrl="FindProductionRun"/>
+<OpentapsShortcut shortcutId="createProductionRun" groupId="warehouseManufacturing" sequenceNum="030" uiLabel="WarehouseCreateProductionRun"
+                  linkUrl="CreateProductionRun"/>
+<OpentapsShortcut shortcutId="createReverseAssembly" groupId="warehouseManufacturing" sequenceNum="040" uiLabel="WarehouseCreateReverseAssembly"
+                  linkUrl="createReverseAssemblyForm"/>
+<OpentapsShortcut shortcutId="createInventoryTransfersForProduction" groupId="warehouseManufacturing" sequenceNum="050" uiLabel="WarehouseCreateProductionTransfers"
+                  linkUrl="CreateInventoryTransfersForProduction"/>
+<OpentapsShortcut shortcutId="receiveOutsourcedPO" groupId="warehouseManufacturing" sequenceNum="060" uiLabel="WarehouseReceiveOutsourcedPO"
+                  linkUrl="receiveOutsourcedPO"/> -->
+                  
+<!-- Transferencias shotcuts -->
+<OpentapsShortcutGroup applicationId="warehouse" tabId="transferencias" groupId="warehouseTransferencias" sequenceNum="010"
+                       securityModule="WRHS_TRANSFERGRP" securityAction="TRANSFERGRP_VIEW" />
+<OpentapsShortcut shortcutId="solicitudTransfer" groupId="warehouseTransferencias" sequenceNum="010" uiLabel="AlmacenSolicitudTransferencia"
+                  linkUrl="solicitudTransferencia" securityModule="WRHS_TRANSFERT" securityAction="CREAR_SOLICITUD_VIEW" />
+<OpentapsShortcut shortcutId="buscaTransfer" groupId="warehouseTransferencias" sequenceNum="020" uiLabel="AlmacenBuscarSolicitudTransfer"
+                  linkUrl="buscaSolicitudTransferencia" securityModule="WRHS_TRANSFERT" securityAction="BUSCAR_SOLICITUD_VIEW" />
+<OpentapsShortcut shortcutId="pendienteTransfer" groupId="warehouseTransferencias" sequenceNum="030" uiLabel="AlmacenPendienteTransferir"
+                  linkUrl="pendientesTransferir" securityModule="WRHS_TRANSFERT" securityAction="SOLICITUD_PENDIENTE_VIEW" />
+
+<!-- Configuration shortcuts -->
+<OpentapsShortcutGroup applicationId="warehouse" tabId="configuration" groupId="warehouseConfiguration" sequenceNum="010"
+                       securityModule="WRHS_CONFIGT" securityAction="OPCGRP_VIEW" />
+<OpentapsShortcut shortcutId="viewWarehouse" groupId="warehouseConfiguration" sequenceNum="010" uiLabel="WarehouseViewWarehouse"
+                  linkUrl="viewWarehouse" securityModule="WRHS_CONFIGT_OPCGRP" securityAction="VALMACENCONF_VIEW" />
+<OpentapsShortcut shortcutId="findFacilityLocation" groupId="warehouseConfiguration" sequenceNum="020" uiLabel="WarehouseLocations"
+                  linkUrl="FindFacilityLocation" securityModule="WRHS_CONFIGT_OPCGRP" securityAction="UBICACIONCONF_VIEW" />
+<OpentapsShortcut shortcutId="viewTeamMembers" groupId="warehouseConfiguration" sequenceNum="030" uiLabel="OpentapsTeamMembers"
+                  linkUrl="viewTeamMembers" securityModule="WRHS_CONFIGT_OPCGRP" securityAction="MEQUIPOCONF_VIEW" />
+                  
+<!-- Reports shortcuts -->
+<OpentapsShortcutGroup applicationId="warehouse" tabId="reportesW" groupId="reportesGrupoW" sequenceNum="010" uiLabel="CommonReports"
+                       securityModule="WRHS_INFORT" securityAction="INFORGRP_VIEW"/>
+<OpentapsShortcut shortcutId="warehouseReportsMain" groupId="reportesGrupoW" sequenceNum="010" uiLabel="CommonReports"
+                  linkUrl="warehouseReports" securityModule="WRHS_INFORT_INFORGRP" securityAction="INFTABINFOR_VIEW" />
+                  
+<!-- Activo Fijo shortcuts -->
+<!-- <OpentapsShortcutGroup applicationId="warehouse" tabId="activoFijo" groupId="activoFijoGroup" sequenceNum="010" uiLabel="AccountingFixedAsset" -->
+<!--                   securityModule="WRHS_ACTFIJOT" securityAction="ACTFIJOGRP_VIEW"/> -->
+<!-- <OpentapsShortcut shortcutId="activoFijoLevantamiento" groupId="activoFijoGroup" sequenceNum="010" uiLabel="ActivoFijoLevantamiento" -->
+<!--                   linkUrl="LevantamientoActivoFijo" securityModule="WRHS_ACTFIJOT_ACTFIJOGRP" securityAction="LEVACTFIJO_VIEW" /> -->
+<!-- <OpentapsShortcut shortcutId="activoFijoReportes" groupId="activoFijoGroup" sequenceNum="020" uiLabel="CommonReports" -->
+<!--                   linkUrl="activoFijoReports" securityModule="WRHS_ACTFIJOT_ACTFIJOGRP" securityAction="ACTFIJOREPORTES_VIEW" /> -->
+
+</entity-engine-xml>
+

@@ -1,0 +1,107 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+docId = null;
+
+try {
+
+   print("documento: " + parameters.get("documento"));
+   docId = parameters.get("documento");
+   
+   tipoDocumento = delegator.findByPrimaryKey("TipoDocumento", UtilMisc.toMap("idTipoDoc", docId));
+   evento = delegator.findByPrimaryKey("Evento", UtilMisc.toMap("acctgTransTypeId", docId));
+   tipoTrans = delegator.findByPrimaryKey("AcctgTransType", UtilMisc.toMap("acctgTransTypeId", docId));
+   
+   modulo=tipoDocumento.getString("moduloId");
+   predecesor=tipoDocumento.getString("predecesor");
+   mComparativo=tipoDocumento.getString("mComparativo");
+   mEjecutar1=tipoDocumento.getString("mEjecutar1");
+   mEjecutar2=tipoDocumento.getString("mEjecutar2");
+   fiscalPres=evento.getString("glFiscalTypeIdPres");
+   fiscalCont=evento.getString("glFiscalTypeIdCont");
+   polizaPres=evento.getString("tipoPolizaIdPres");
+   polizaCont=evento.getString("tipoPolizaIdCont");
+ 
+   tModulo = delegator.findByPrimaryKey("Modulo", UtilMisc.toMap("moduloId", modulo));
+   
+   mapTipoDocumento = new HashMap();
+   mapEvento = new HashMap();
+   mapTipoTrans = new HashMap();
+   mapModulo = new HashMap();
+   
+   mapTipoDocumento.putAll(tipoDocumento.getAllFields());
+   mapEvento.putAll(evento.getAllFields());
+   mapTipoTrans.putAll(tipoTrans.getAllFields());
+   mapModulo.putAll(tModulo.getAllFields());
+   
+   if(polizaPres != null){
+   		tPolizaPres = delegator.findByPrimaryKey("TipoPoliza", UtilMisc.toMap("tipoPolizaId", polizaPres));
+   		mapTipoPolizaPres = new HashMap();
+   		mapTipoPolizaPres.putAll(tPolizaPres.getAllFields());
+   		context.put("mapTipoPolizaPres", mapTipoPolizaPres);
+   }
+   
+   if(polizaCont != null){
+  		tPolizaCont = delegator.findByPrimaryKey("TipoPoliza", UtilMisc.toMap("tipoPolizaId", polizaCont));
+  		mapTipoPolizaCont = new HashMap();
+  		mapTipoPolizaCont.putAll(tPolizaCont.getAllFields());
+  		context.put("mapTipoPolizaCont", mapTipoPolizaCont);	
+   }
+   
+   if(fiscalPres != null){
+  		tfiscalPres = delegator.findByPrimaryKey("GlFiscalType", UtilMisc.toMap("glFiscalTypeId", fiscalPres));
+  		mapFiscalTypePres = new HashMap();
+  		mapFiscalTypePres.putAll(tfiscalPres.getAllFields());
+  		context.put("mapFiscalTypePres", mapFiscalTypePres);	
+   }
+   
+   if(fiscalCont != null){
+  		tfiscalCont = delegator.findByPrimaryKey("GlFiscalType", UtilMisc.toMap("glFiscalTypeId", fiscalCont));
+  		mapFiscalTypeCont = new HashMap();
+  		mapFiscalTypeCont.putAll(tfiscalCont.getAllFields());
+  		context.put("mapFiscalTypeCont", mapFiscalTypeCont);	
+   }
+   
+   if(predecesor != null){
+  		tpredecesor = delegator.findByPrimaryKey("TipoDocumento", UtilMisc.toMap("idTipoDoc", predecesor));
+  		mapPredecesor = new HashMap();
+  		mapPredecesor.putAll(tpredecesor.getAllFields());
+  		context.put("mapPredecesor", mapPredecesor);	
+   }
+   
+   if(mComparativo != null){
+  		tmComparativo = delegator.findByPrimaryKey("Momento", UtilMisc.toMap("momentoId", mComparativo));
+  		mapComparativo = new HashMap();
+  		mapComparativo.putAll(tmComparativo.getAllFields());
+  		context.put("mapComparativo", mapComparativo);	
+   }
+   
+   if(mEjecutar1 != null){
+  		tmEjecutar1 = delegator.findByPrimaryKey("Momento", UtilMisc.toMap("momentoId", mEjecutar1));
+  		mapEjecutar1 = new HashMap();
+  		mapEjecutar1.putAll(tmEjecutar1.getAllFields());
+  		context.put("mapEjecutar1", mapEjecutar1);	
+   }
+   
+   if(mEjecutar2 != null){
+  		tmEjecutar2 = delegator.findByPrimaryKey("Momento", UtilMisc.toMap("momentoId", mEjecutar2));
+  		mapEjecutar2 = new HashMap();
+  		mapEjecutar2.putAll(tmEjecutar2.getAllFields());
+  		context.put("mapEjecutar2", mapEjecutar2);	
+   }
+   
+   context.put("mapTipoDocumento", mapTipoDocumento);
+   context.put("mapEvento", mapEvento);
+   context.put("mapTipoTrans", mapTipoTrans);
+   context.put("mapModulo", mapModulo);
+
+} catch ( e ) { 
+    print( "Existio un error" );
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="configuracionV" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyConfiguracionScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoConfiguracion"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoConfiguracion"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://viaticos/webapp/viaticos/viaticos/emptyConfigScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viaticosConfig">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ConfiguracionPrograma"/>
+				<set field="sectionHeaderUiLabel" value="Configuracion"/>
+				<script location="component://viaticos/webapp/viaticos/WEB-INF/actions/viaticos/programasViaticos.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://viaticos/webapp/viaticos/viaticos/configuraPrograma.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+        
+</screens>

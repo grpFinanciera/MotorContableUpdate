@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para WorkFlow</title>
+	<description>Define las entidades para work flow</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.financial      -->
+	<!-- =========================== -->
+	
+	
+	<entity entity-name="PedidoInterno" package-name="org.opentaps.warehouse.inventory"
+		title="Entidad que almacena el pedido interno">
+		<field name="pedidoInternoId" type="id-ne"/>
+		<field name="descripcion" type="description"/>
+		<field name="justificacion" type="very-long" />
+		<field name="fechaAtendida" type="date-time" />
+		<field name="personaSolicitanteId" type="id-ne"/>
+		<field name="almacenId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="statusId" type="id-ne"/>
+	    <field name="areaPartyId" type="id-ne"/>
+	    <field name="solicitudTransferenciaId" type="id" />
+		<prim-key field="pedidoInternoId"/>
+		<relation type="one" fk-name="ID_PERSON_DD"
+			rel-entity-name="Person">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_ORG_TED"
+			rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_FACILITY_TERM"
+			rel-entity-name="Facility">
+			<key-map field-name="almacenId" rel-field-name="facilityId" />
+		</relation>
+		<relation type="one" fk-name="ID_ESTATUS_PI"
+			rel-entity-name="Estatus">
+			<key-map field-name="statusId" rel-field-name="statusId" />
+		</relation>
+	    <relation type="one" fk-name="FK_PED_INT_ARE_PTY" title="AreaParty"
+	        rel-entity-name="Party">
+	        <key-map field-name="areaPartyId" rel-field-name="partyId" />
+	    </relation>
+	    <relation type="one" fk-name="ID_SOL_TRA_PEDIN" rel-entity-name="SolicitudTransferencia">
+			<key-map field-name="solicitudTransferenciaId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="DetallePedidoInterno" package-name="org.opentaps.warehouse.inventory"
+		title="Entidad que almacena el detalle del pedido interno">
+		<field name="detallePedidoInternoId" type="id-ne"/>
+		<field name="pedidoInternoId" type="id-ne"/>
+		<field name="productId" type="id-ne"/>
+		<field name="cantidad" type="numeric"/>
+		<field name="cantidadEntregada" type="numeric"/>
+		<field name="detalleRequisicionId" type="id-ne"/>
+      	<field name="requisicionId" type="id-ne"/>
+      	<field name="orderId" type="id-ne"/>
+      	<field name="orderItemSeqId" type="id-ne"/>
+		<prim-key field="detallePedidoInternoId"/>
+		<prim-key field="pedidoInternoId"/>
+		<relation type="one" fk-name="ID_PRODUCTP" title="idproductd"
+			rel-entity-name="Product">
+			<key-map field-name="productId" rel-field-name="productId" />
+		</relation>
+		<relation type="one" fk-name="ID_PEDIDOINT" rel-entity-name="PedidoInterno">
+			<key-map field-name="pedidoInternoId" rel-field-name="pedidoInternoId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PINT_DREQ" rel-entity-name="DetalleRequisicion">
+        	<key-map field-name="detalleRequisicionId"/>
+        	<key-map field-name="requisicionId"/>
+        </relation>
+        <relation type="one" fk-name="FK_DBO_PINT_ORIT" rel-entity-name="OrderItem">
+        	<key-map field-name="orderId"/>
+        	<key-map field-name="orderItemSeqId"/>
+        </relation>
+	</entity>
+	
+	<view-entity entity-name="BuscarPedidoInterno" package-name="com.absoluciones.almacen"
+		title="Busqueda de Pedidos Internos">
+		<member-entity entity-alias="PI" entity-name="PedidoInterno"/>
+		<member-entity entity-alias="EST" entity-name="Estatus"/>
+		<member-entity entity-alias="PER" entity-name="Person"/>
+		<member-entity entity-alias="PRG" entity-name="PartyGroup"/>
+		
+		<alias-all entity-alias="PI" />
+		<alias name="createdStamp" entity-alias="PI" />
+		<alias name="descripcionEstatus" field="descripcion" entity-alias="EST"/>
+		<alias name="partyIdPerson" field="partyId" entity-alias="PER"/>
+		<alias name="firstName" entity-alias="PER"/>
+		<alias name="lastName" entity-alias="PER"/>
+		<alias name="partyIdGroup" field="partyId" entity-alias="PRG"/>
+		<alias name="groupName" entity-alias="PRG"/>
+		
+		<view-link entity-alias="PI" rel-entity-alias="EST">
+			<key-map field-name="statusId"/>
+		</view-link>
+		<view-link entity-alias="PI" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="PI" rel-entity-alias="PRG">
+			<key-map field-name="areaPartyId" rel-field-name="partyId"/>
+		</view-link>
+		
+	</view-entity>
+	
+	<entity entity-name="ComentarioPedidoInterno" package-name="org.opentaps.warehouse.inventory"
+		title="Entidad que almacena el control de comentarios del pedido interno">
+		<field name="comentarioId" type="numeric"/>
+		<field name="pedidoInternoId" type="id-ne"/>
+		<field name="comentario" type="very-long"/>
+		<field name="personaId" type="id-ne"/>		
+		<prim-key field="comentarioId"/>
+		<relation type="one" fk-name="ID_PERSONAD_CPI"
+			rel-entity-name="Person">
+			<key-map field-name="personaId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_COM_PI"
+			rel-entity-name="PedidoInterno">
+			<key-map field-name="pedidoInternoId" rel-field-name="pedidoInternoId" />
+		</relation>
+	</entity>
+	
+	<!-- Vista para obtener los comentarios -->
+     <view-entity entity-name="ObtenerComentariosPedidoInterno"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de comentarios por pedido interno">
+       <member-entity entity-alias="COM" entity-name="ComentarioPedidoInterno"/>
+       <member-entity entity-alias="PER" entity-name="Person"/>
+       <alias name="pedidoInternoId" entity-alias="COM" group-by="true"/>
+       <alias name="comentarioId" entity-alias="COM" group-by="true"/>
+       <alias name="comentario" entity-alias="COM" group-by="true"/>                    
+       <alias name="firstName" entity-alias="PER" group-by="true"/>
+       <alias name="lastName" entity-alias="PER" group-by="true"/>              
+       <view-link entity-alias="COM" rel-entity-alias="PER" >
+           <key-map field-name="personaId" rel-field-name="partyId"/>
+       </view-link>                     
+    </view-entity>
+	
+	 <view-entity entity-name="BuscarPedidoInternoSinProduct"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de pedidos internos de acuerdo a parametros de entrada. SIN PRODUCT">
+       <member-entity entity-alias="PI" entity-name="PedidoInterno"/>
+       <member-entity entity-alias="PER" entity-name="Person"/>
+       <member-entity entity-alias="STA" entity-name="Estatus"/>
+       <alias name="pedidoInternoId" entity-alias="PI" group-by="true"/>
+       <alias name="statusId" entity-alias="PI" group-by="true"/>
+       <alias name="createdStamp" entity-alias="PI" group-by="true"/>
+       <alias name="descripcion" entity-alias="STA" group-by="true"/>
+       <alias name="personaSolicitanteId" entity-alias="PI" group-by="true"/>                    
+       <alias name="fechaAtendida" entity-alias="PI" group-by="true"/>
+       <alias name="organizationPartyId" entity-alias="PI" group-by="true"/>
+       <alias name="firstName" entity-alias="PER" group-by="true"/>
+       <alias name="lastName" entity-alias="PER" group-by="true"/>       
+       <view-link entity-alias="PI" rel-entity-alias="PER" >
+           <key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+       </view-link>
+       <view-link entity-alias="PI" rel-entity-alias="STA" >
+           <key-map field-name="statusId" />
+       </view-link>                      
+    </view-entity>
+    
+    <view-entity entity-name="BuscarPedidoInternoConProduct"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de pedidos internos de acuerdo a parametros de entrada. CON PARAMETRO PRODUCT">
+       <member-entity entity-alias="PI" entity-name="PedidoInterno"/>
+       <member-entity entity-alias="DRE" entity-name="DetallePedidoInterno"/>
+       <member-entity entity-alias="PER" entity-name="Person"/>
+       <member-entity entity-alias="PRO" entity-name="Product"/>
+       <member-entity entity-alias="STA" entity-name="Estatus"/>
+
+       <alias name="pedidoInternoId" entity-alias="PI" group-by="true"/>
+       <alias name="statusId" entity-alias="PI" group-by="true"/>
+       <alias name="createdStamp" entity-alias="PI" group-by="true"/>
+       <alias name="descripcion" entity-alias="STA" group-by="true"/>
+       <alias name="personaSolicitanteId" entity-alias="PI" group-by="true"/>                    
+       <alias name="fechaAtendida" entity-alias="PI" group-by="true"/>
+       <alias name="organizationPartyId" entity-alias="PI" group-by="true"/>
+       <alias name="firstName" entity-alias="PER" group-by="true"/>
+       <alias name="lastName" entity-alias="PER" group-by="true"/>
+       <alias name="partyId" entity-alias="PER" group-by="true"/>
+       <alias name="productName" entity-alias="PRO" group-by="false"/>
+       <alias name="productId" entity-alias="DRE" group-by="false"/>
+
+       <view-link entity-alias="PI" rel-entity-alias="DRE">
+           <key-map field-name="pedidoInternoId"/>
+       </view-link>
+       <view-link entity-alias="PI" rel-entity-alias="PER" >
+           <key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+       </view-link> 
+       <view-link entity-alias="DRE" rel-entity-alias="PRO" rel-optional="true">
+           <key-map field-name="productId"/>
+       </view-link>
+       <view-link entity-alias="PI" rel-entity-alias="STA" >
+           <key-map field-name="statusId" />
+       </view-link>              
+    </view-entity>
+    
+	<!-- Vista para mostrar al autorizador el resumen de las solicitudes -->
+     <view-entity entity-name="PedidosInternosPendientes"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de pedidos internos pendientes.">          
+       <member-entity entity-alias="PI" entity-name="PedidoInterno"/>
+       <member-entity entity-alias="PER" entity-name="Person"/>
+       <member-entity entity-alias="STW" entity-name="StatusWorkFlow" />
+	   <member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+	   <member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+	   <alias name="pedidoInternoId" entity-alias="PI" group-by="true"/>
+       <alias name="descripcion" entity-alias="PI" group-by="true"/>
+       <alias name="personaSolicitanteId" entity-alias="PI" group-by="true"/>
+	   <alias name="firstName" entity-alias="PER" group-by="true"/>
+       <alias name="lastName" entity-alias="PER" group-by="true"/>
+       <alias name="personParentId" entity-alias="STW" group-by="true" />
+	   <alias name="statusId" entity-alias="STW" group-by="true" />
+	   <alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />	
+	   <view-link entity-alias="PI" rel-entity-alias="PER" >
+           <key-map field-name="personaSolicitanteId" rel-field-name="partyId"/>
+       </view-link>
+       <view-link entity-alias="PI" rel-entity-alias="CON">
+			<key-map field-name="pedidoInternoId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STW">
+			<key-map field-name="workFlowId" />
+		</view-link>                     
+    </view-entity>
+		
+    <entity entity-name="SurtirPedidoInterno" package-name="org.opentaps.warehouse.inventory"
+		title="Entidad para almacenar la informacion del pedido interno a surtir">
+		<field name="agrupador" type="id-ne"></field>
+		<field name="fechaTransaccion" type="date-time"></field>
+		<field name="fechaContable" type="date-time"></field>
+		<field name="status" type="indicator"></field>
+		<field name="numPedido" type="id-ne"></field>
+		<field name="userLoginId" type="id-ne"></field>
+		<field name="numeroFactura" type="description"></field>
+		<field name="comentario" type="description"></field>
+		<field name="acctgTransTypeId" type="id-ne"></field>
+		<prim-key field="agrupador" />
+		<relation type="one" fk-name="PEDINT" title='pedint'
+		    rel-entity-name="PedidoInterno">
+			<key-map field-name="numPedido" rel-field-name="pedidoInternoId" />
+		</relation>
+		<relation type="one" fk-name="PEDEVNT" title='pedevnt'
+		    rel-entity-name="EventoContable">
+			<key-map field-name="acctgTransTypeId" />
+		</relation>
+	</entity> 
+	
+	 <view-entity entity-name="SurtirPedidoInternoParcial"
+                 package-name="org.opentaps.warehouse.inventory"
+                 title="Permite la búsqueda de pedidos internos para surtir.">          
+       <member-entity entity-alias="DPI" entity-name="DetallePedidoInterno"/>
+       <member-entity entity-alias="PER" entity-name="Product"/>
+	   <alias name="detallePedidoInternoId" entity-alias="DPI" group-by="true"/>
+       <alias name="pedidoInternoId" entity-alias="DPI" group-by="true"/>
+	   <alias name="productId" entity-alias="DPI" group-by="true"/>
+       <alias name="cantidad" entity-alias="DPI" group-by="true"/>
+       <alias name="cantidadEntregada" entity-alias="DPI" group-by="true" />
+	   <alias name="productName" entity-alias="PER" group-by="true" />
+	   <view-link entity-alias="DPI" rel-entity-alias="PER" >
+           <key-map field-name="productId"/>
+       </view-link>                    
+    </view-entity>
+    
+	<view-entity entity-name="PolizaPedido" package-name="com.absoluciones.almacen"
+			title="Polizas por pedido interno">
+		<member-entity entity-alias="PI" entity-name="PhysicalInventory" />
+		<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+		<alias name="pedidoInternoId" entity-alias="PI"/>
+		<alias name="poliza" entity-alias="AT" group-by="true"/>
+		<alias name="acctgTransId" entity-alias="AT" group-by="true"/>
+		<view-link entity-alias="PI" rel-entity-alias="AT">
+			<key-map field-name="acctgTransId"/>
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="PedidoInternoEntregado" package-name="com.absoluciones.almacen"
+			title="Vista para reporte salida de almacen de pedidos internos">
+		<member-entity entity-alias="PI" entity-name="PedidoInterno" />
+		<member-entity entity-alias="PHI" entity-name="PhysicalInventory" />
+  		<member-entity entity-alias="IID" entity-name="InventoryItemDetail" />
+		<member-entity entity-alias="II" entity-name="InventoryItem"/>
+		<member-entity entity-alias="AT" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="PR" entity-name="Product"/>
+		<member-entity entity-alias="U" entity-name="Uom"/>
+		<alias name="pedidoInternoId" entity-alias="PI"/>
+		<alias name="acctgTransId" entity-alias="PHI"/>
+		<alias name="productId" entity-alias="II"/>
+		<alias name="productName" entity-alias="PR"/>
+		<alias name="cantidad" field="quantityOnHandDiff" entity-alias="IID"/>
+		<alias name="monto" field="unitCost" entity-alias="II"/>
+ 		<alias name="unidadMedida" field="description" entity-alias="U"/>
+		<view-link entity-alias="PI" rel-entity-alias="PHI">
+			<key-map field-name="pedidoInternoId"/>
+		</view-link>
+		<view-link entity-alias="PHI" rel-entity-alias="IID">
+			<key-map field-name="physicalInventoryId"/>
+		</view-link>
+		<view-link entity-alias="IID" rel-entity-alias="II">
+			<key-map field-name="inventoryItemId"/>
+		</view-link>
+		<view-link entity-alias="PHI" rel-entity-alias="AT">
+			<key-map field-name="acctgTransId"/>
+		</view-link>
+		<view-link entity-alias="II" rel-entity-alias="PR">
+			<key-map field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="PR" rel-entity-alias="U" rel-optional="true">
+			<key-map field-name="quantityUomId" rel-field-name="uomId"/>
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="ConsultaAltaBajaAlmacen" package-name="com.absoluciones.almacen"
+			title="Vista para reporte de altas y bajas de almacen">
+		<member-entity entity-alias="PHI" entity-name="PhysicalInventory" />
+  		<member-entity entity-alias="IID" entity-name="InventoryItemDetail" />
+		<member-entity entity-alias="II" entity-name="InventoryItem"/>
+		<member-entity entity-alias="PR" entity-name="Product"/>
+		<member-entity entity-alias="VAR" entity-name="VarianceReason"/>		
+		<alias name="acctgTransId" entity-alias="PHI"/>
+		<alias name="productId" entity-alias="II"/>
+		<alias name="facilityId" entity-alias="II"/>
+		<alias name="productName" entity-alias="PR"/>
+		<alias name="cantidad" field="quantityOnHandDiff" entity-alias="IID"/>
+		<alias name="monto" field="unitCost" entity-alias="II"/>
+ 		<alias name="unidadMedida" field="quantityUomId" entity-alias="PR"/>
+ 		<alias name="descripcionRazon" field="description" entity-alias="VAR"/>		
+		<view-link entity-alias="PHI" rel-entity-alias="IID">
+			<key-map field-name="physicalInventoryId"/>
+		</view-link>
+		<view-link entity-alias="IID" rel-entity-alias="II">
+			<key-map field-name="inventoryItemId"/>
+		</view-link>		
+		<view-link entity-alias="II" rel-entity-alias="PR">
+			<key-map field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="IID" rel-entity-alias="VAR">
+			<key-map field-name="reasonEnumId" rel-field-name="varianceReasonId"/>
+		</view-link>		
+	</view-entity>		
+        
+</entitymodel>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<property key="DataImportIngresosReport">
+        <value xml:lang="en">Import Report Income</value>
+        <value xml:lang="es">Reporte de importación de Ingresos</value>
+    </property>
+    
+    <property key="ImportStatus">
+        <value xml:lang="en">Import Status</value>
+        <value xml:lang="es">Estado de la importación</value>
+    </property>
+    
+     <property key="ImportError">
+        <value xml:lang="en">Import Error</value>
+        <value xml:lang="es">Error de la importación</value>
+    </property>
+    
+     <property key="IngresoID">
+        <value xml:lang="en">Id. Income</value>
+        <value xml:lang="es">Id. Ingreso</value>
+    </property>
+    
+    <property key="RowNumber">
+        <value xml:lang="en">Row number</value>
+        <value xml:lang="es">Número de fila</value>
+    </property>
+    <property key="ReporteEjercidoPagadoNominaPresup">
+        <value xml:lang="en">Report import - paid payroll exercised (budget)</value>
+        <value xml:lang="es">Reporte de importación del ejercido-pagado de nómina (presupuestal)</value>
+    </property>
+    <property key="ReporteEjercidoPagadoNominaCont">
+        <value xml:lang="en">Report import - paid payroll exercised (accounting)</value>
+        <value xml:lang="es">Reporte de importación del ejercido-pagado de nómina (contable)</value>
+    </property>
+    <property key="ReporteCompromisoDevengoNominaPresup">
+        <value xml:lang="en">Report import - accrual payroll commitment (budget)</value>
+        <value xml:lang="es">Reporte de importación del compromiso-devengo de nómina (presupuestal)</value>
+    </property>
+    <property key="ReporteCompromisoDevengoNominaCont">
+        <value xml:lang="en">Report import - accrual payroll commitment (accounting)</value>
+        <value xml:lang="es">Reporte de importación del compromiso-devengo de nómina (contable)</value>
+    </property>
+    <property key="DataImportPagoExterno">
+        <value xml:lang="en">Data import external payments</value>
+        <value xml:lang="es">Importación de datos de pago a externos</value>
+    </property>
+    <property key="PagoExterno">
+        <value xml:lang="en">External payments</value>
+        <value xml:lang="es">Pagos a externos</value>
+    </property>
+    
+
+</resource>

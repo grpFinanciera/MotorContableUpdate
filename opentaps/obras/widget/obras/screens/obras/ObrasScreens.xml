@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+            	<!-- <set field="requiredPermission" value="OBRAS"/> -->
+                <set field="sectionName" value="obras" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+	<!-- Crear Obra -->
+    <screen name="crearObra">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="CrearObra"/>  
+                <set field="sectionHeaderUiLabel" value="CrearObra"/>  
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/crearObra.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/crearObra.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Modificaciones de Obra -->
+    
+    <screen name="modificacionesObra">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ObrasDocumentacionModificaiconObra"/>
+                <set field="sectionHeaderUiLabel" value="ObrasDocumentacionModificaiconObra"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/modificacionesObra.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <container style="screenlet">
+                                    <container style="screenlet-body">
+                                        <platform-specific>
+                                            <html><html-template location="component://obras/webapp/obras/obras/modificacionesObraPrecio.ftl"/></html>
+                                        </platform-specific>
+                                    </container>
+                                    <container style="screenlet-body">
+                                        <platform-specific>
+                                            <html><html-template location="component://obras/webapp/obras/obras/modificacionesObraCalendario.ftl"/></html>
+                                        </platform-specific>
+                                    </container>
+                                </container>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="vistaObra">
+		<section>    
+        <actions>
+            <set field="pageTitleLabel" value="VerObra"/>  
+            <set field="sectionHeaderUiLabel" value="VerObra"/>  
+            <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+            <script location="component://obras/webapp/obras/WEB-INF/actions/obras/verObra.bsh"/>
+        </actions>
+        <widgets>
+            <decorator-screen name="main-section-decorator">
+                <decorator-section name="section-body">
+                <platform-specific>
+                    <html><html-template location="component://obras/webapp/obras/obras/verObra.ftl"/></html>
+                </platform-specific>
+                </decorator-section>
+            </decorator-screen>
+        </widgets>
+    	</section>    
+    </screen>
+    
+	<screen name="editarDireccion">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ObraDireccion"/>  
+                <set field="sectionHeaderUiLabel" value="ObraDireccion"/>  
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/editarDireccion.bsh"/>		            
+            </actions>
+            <widgets>
+            <decorator-screen name="main-section-decorator">
+                <decorator-section name="section-body">            
+	                <platform-specific>
+	                    <html><html-template location="component://obras/webapp/obras/contactmech/editarDireccion.ftl"/></html>
+	                </platform-specific>
+                </decorator-section>
+			</decorator-screen>
+            </widgets>
+        </section>
+    </screen>    
+    
+    <!-- Crear Solicitud de Autorizacion de Obra -->
+<!--     <screen name="solicitarAutorizacion"> -->
+<!--         <section> -->
+<!--             <actions> -->
+<!--                 <set field="pageTitleLabel" value="Solicitar Autorizacion"/>   -->
+<!--                 <set field="sectionHeaderUiLabel" value="Solicitar Autorizacion"/>   -->
+<!--                 <script location="component://obras/webapp/obras/WEB-INF/actions/obras/solicitarAutorizacion.bsh"/> -->
+<!--             </actions> -->
+<!--             <widgets> -->
+<!--                 <decorator-screen name="main-section-decorator"> -->
+<!--                     <decorator-section name="section-body"> -->
+<!--                         <platform-specific> -->
+<!--                            <html><html-template location="component://obras/webapp/obras/obras/solicitarAutorizacion.ftl"/></html> -->
+<!--                         </platform-specific> -->
+<!--                     </decorator-section> -->
+<!--                 </decorator-screen> -->
+<!--             </widgets> -->
+<!--         </section> -->
+<!--     </screen> -->
+    
+    <screen name="verSolicitud">
+		<section>
+            <actions>
+                <set field="obraId"  value="${parameters.obraId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/editarSolicitud.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://obras/webapp/obras/obras/verSolicitud.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Buscar Obra -->
+    <screen name="buscarSolicitudes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Buscar Solicitudes"/>  
+                <set field="sectionHeaderUiLabel" value="Buscar Solicitudes"/>  
+                <java location="com.absoluciones.obras.ConsultarSolicitud" invoke="buscaSolicitud"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://obras/webapp/obras/obras/consultarSolicitud.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/listSolicitudes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Obras Pendientes -->
+    <screen name="solicitudesPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Solicitudes Pendientes"/>  
+                <java location="com.absoluciones.obras.ConsultarSolicitud" invoke="solicitudesPendientes"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/listSolicitudesPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<!-- Buscar Obra -->
+    <screen name="buscarObra">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Buscar Obra"/>  
+                <set field="sectionHeaderUiLabel" value="Buscar Obra"/>  
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="buscarObra"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://obras/webapp/obras/obras/consultaObra.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/listaObra.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>     
+        
+    <!-- Buscar Contrato -->
+    <screen name="buscarContrato">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Buscar Contrato"/>  
+                <set field="sectionHeaderUiLabel" value="Buscar Contrato"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/crearContratoObra.bsh"/>  
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="buscarContrato"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://obras/webapp/obras/obras/consultaContrato.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/listaContrato.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>  
+    
+    <screen name="verFiniquitoObra">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Datos de obra"/>                 
+                <set field="pageTitleLabel" value="Finiquito de la obra"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/muestraFiniquitoObra.bsh"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/finiquitoObra.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verDatosContratoObra">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Datos de obra"/>                 
+                <set field="pageTitleLabel" value="Datos del contrato de obra"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/muestraDatosContratoObra.bsh"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/datosContratoObra.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>    
+    
+    <screen name="crearContratoObra">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Crear contrato de obra"/>                 
+                <set field="pageTitleLabel" value="Datos del contrato de obra"/> 
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/crearContratoObra.bsh"/>
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="consultaMeses"/>
+                <entity-condition entity-name="Retencion" list="retenciones">                   					
+					 <order-by field-name="descripcion"/>
+                </entity-condition>               
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/crearContratoObra.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="vistaInicioContratoObra">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Ver contrato de obra"/>                 
+                <set field="pageTitleLabel" value="Datos del contrato de obra"/> 
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/verContratoObra.bsh"/>
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="consultaMeses"/>               
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/verContratoObra.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <!-- Inicio Obra -->
+    <screen name="inicioObra">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Iniciar Obra"/>  
+                <set field="sectionHeaderUiLabel" value="Seleccionar Obra"/>  
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="inicioObra"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://obras/webapp/obras/obras/consultaObraInicio.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/listaObraInicio.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="vistaInicioObra">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Datos de obra"/>                 
+                <set field="pageTitleLabel" value="Inicio de obra"/>
+                <script location="component://obras/webapp/obras/WEB-INF/actions/obras/muestraInicioObra.bsh"/>
+                <java location="com.absoluciones.obras.ConsultaObra" invoke="consultaMeses"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://obras/webapp/obras/obras/inicioObra.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewAcctgTransPolizasLista">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="FinancialPolicyData"/> 
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransMuestraPoliza.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                           </html></platform-specific>                   
+                        </container>
+                        <frame-container title="${uiLabelMap.FinancialPolicyDetails}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransDatosPoliza.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                        
+                        <frame-container title="${uiLabelMap.FinancialBudgetKeys}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                                                 
+                        <frame-container title="${uiLabelMap.FinancialAccounts}">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/transactions/acctgTransPolizasDetalle.ftl"/></html>
+                        </platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewGlFiscalType">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewGlFiscalType.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="PageTitleViewAccountingTransaction"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body"> 
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/glFiscalType.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+<screen name="viewAcctPresupuestal">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransOperaDiaIngresos.bsh"/>
+ 				<script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="PageTitleViewAccountingTransaction"/>
+                <entity-condition entity-name="Geo" list="geos">   
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/>
+                           </html></platform-specific>
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/polizasDetalle.ftl"/>
+                           </html></platform-specific>
+                           <!--  <include-form name="viewAcctPresupuestal" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>  -->
+                        </container>
+<!--                           <include-form name="viewAcctgTrans" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/> -->
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntries.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+
+<screen name="viewAcctgTransEntry">
+        <section>
+            <actions>
+                <entity-one entity-name="AcctgTrans" value-field="acctgTrans"/>
+                <entity-one entity-name="AcctgTransEntry" value-field="acctgTransEntry"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-body">
+                                <!-- only include the options if acctgTrans.isPosted = N -->
+                                <section>
+                                    <condition><if-compare field="acctgTrans.isPosted" operator="equals" value="N"/></condition>
+                                    <widgets>
+                                        <platform-specific><html>
+                                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntryOptions.ftl"/>
+                                        </html></platform-specific>
+                                    </widgets>
+                                </section>
+                                <include-form name="viewAcctgTransEntry" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="viewAcctgTrans">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransPresupuestal.bsh"/>
+                <java location="com.opensourcestrategies.financials.transactions.BuscarPolizas" invoke="buscaDetalleEntries"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransPoliza.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesGroup.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesAuxiliares.ftl"/>
+                        </html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyObrasScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ObrasHome"/>  
+                <set field="sectionHeaderUiLabel" value="ObrasHome"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://obras/webapp/obras/obras/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verImprimirPoliza">
+		<section>
+            <actions>
+            	<set field="titleProperty" value="ImprimirPoliza"/>
+            	<set field="acctgTransId" value="${parameters.acctgTransId}"/>
+                <script location="component://opentaps-common/webapp/common/WEB-INF/actions/includes/selectOrganization.bsh"/>
+            </actions> 
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://financials/webapp/financials/reports/imprimirPoliza.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+
+</screens>

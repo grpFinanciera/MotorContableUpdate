@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Presupuesto Inicial</title>
+	<description>Define los datos necesarios para ingresar el presupuesto Inicial</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Ruiz Merlin Jesus Rodrigo</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="DataImportCompDevNomPres" package-name="org.opentaps.dataimport"
+		title="Entidad para definir el compromiso y devengo de la nomina presupuestal dentro del sistema.">
+		<field name="renglon" type="numeric" />
+		<field name="idCompDevNominaPres" type="id-ne" />
+		<field name="clasificacion1" type="description" />
+		<field name="clasificacion2" type="description" />
+		<field name="clasificacion3" type="description" />
+		<field name="clasificacion4" type="description" />
+		<field name="clasificacion5" type="description" />
+		<field name="clasificacion6" type="description" />
+		<field name="clasificacion7" type="description" />
+		<field name="clasificacion8" type="description" />
+		<field name="clasificacion9" type="description" />
+		<field name="clasificacion10" type="description" />
+		<field name="clasificacion11" type="description" />
+		<field name="clasificacion12" type="description" />
+		<field name="clasificacion13" type="description" />
+		<field name="clasificacion14" type="description" />
+		<field name="clasificacion15" type="description" />
+		<field name="clavePresupuestal" type="description"/>
+		<field name="auxiliarCargo" type="description" />
+		<field name="auxiliarAbono" type="description" />
+		<field name="monto" type="currency-amount-precise" />
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idCompDevNominaPres" />
+		<relation type="one" fk-name="FK_DBO_COMDEVP_USR" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+	<view-entity entity-name="DataImportCompDevNomPresClave" package-name="com.absoluciones.importacion"
+		title="Vista que obitiene la información de la clave presupuestal para hacer la validación">
+		<member-entity entity-alias="DICDNP" entity-name="DataImportCompDevNomPres" />
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+		<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+		
+		<alias name="renglon" entity-alias="DICDNP" group-by="true"/>
+		<alias name="idCompDevNominaPres" entity-alias="DICDNP" group-by="true"/>
+		<alias name="clavePresupuestal" entity-alias="DICDNP" group-by="true"/>
+		<alias name="auxiliarCargo" entity-alias="DICDNP" group-by="true"/>
+		<alias name="auxiliarAbono" entity-alias="DICDNP" group-by="true"/>
+		<alias name="monto" entity-alias="DICDNP" group-by="true"/>
+		<alias name="importStatusId" entity-alias="DICDNP" group-by="true"/>
+		<alias name="userLoginId" entity-alias="DICDNP" group-by="true"/>
+		<alias name="clavePresup" field="clavePresupuestal" entity-alias="CVE" group-by="true"/>
+		<alias name="inactivo" entity-alias="CVE" group-by="true"/>
+		<alias name="montoControl" field="monto" entity-alias="CTRL" group-by="true"/>
+		<alias name="momentoId" entity-alias="CTRL" group-by="true"/>
+		<alias name="mesId" entity-alias="CTRL" group-by="true"/>
+		<alias name="ciclo" entity-alias="CTRL" group-by="true"/>
+		
+		<view-link entity-alias="DICDNP" rel-entity-alias="CVE" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+		<view-link entity-alias="DICDNP" rel-entity-alias="CTRL" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="DataImportCompDevNomCont" package-name="org.opentaps.dataimport"
+		title="Entidad para definir el compromiso y devengo de la nomina contable dentro del sistema.">
+		<field name="renglon" type="numeric" />
+		<field name="idCompDevNominaCont" type="id-ne"></field>
+		<field name="descripcionLinea" type="description"></field>
+		<field name="auxiliarCargo" type="description"></field>
+		<field name="auxiliarAbono" type="description"></field>
+		<field name="monto" type="currency-amount-precise"></field>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idCompDevNominaCont" />
+		<relation type="one" fk-name="FK_DBO_COMDEVC_USR" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+	<entity entity-name="DataImportEjerNomPres" package-name="org.opentaps.dataimport"
+		title="Entidad para definir el ejercido de la nomina presupuestal dentro del sistema.">
+		<field name="renglon" type="numeric" />
+		<field name="idEjerNominaPres" type="id-ne"></field>
+		<field name="clasificacion1" type="description" />
+		<field name="clasificacion2" type="description" />
+		<field name="clasificacion3" type="description" />
+		<field name="clasificacion4" type="description" />
+		<field name="clasificacion5" type="description" />
+		<field name="clasificacion6" type="description" />
+		<field name="clasificacion7" type="description" />
+		<field name="clasificacion8" type="description" />
+		<field name="clasificacion9" type="description" />
+		<field name="clasificacion10" type="description" />
+		<field name="clasificacion11" type="description" />
+		<field name="clasificacion12" type="description" />
+		<field name="clasificacion13" type="description" />
+		<field name="clasificacion14" type="description" />
+		<field name="clasificacion15" type="description" />
+		<field name="clavePresupuestal" type="description"/>
+		<field name="auxiliarCargo" type="description" />
+		<field name="auxiliarAbono" type="description" />
+		<field name="monto" type="currency-amount-precise" />
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idEjerNominaPres" />
+		<relation type="one" fk-name="FK_DBO_EJERPRE_USR" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+	<view-entity entity-name="DataImportEjerNomPresClave" package-name="com.absoluciones.importacion"
+		title="Vista que obitiene la información de la clave presupuestal para hacer la validación del ejercido del presupuesto">
+		<member-entity entity-alias="DIENP" entity-name="DataImportEjerNomPres" />
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+		<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+		
+		<alias name="renglon" entity-alias="DIENP" group-by="true"/>
+		<alias name="idEjerNominaPres" entity-alias="DIENP" group-by="true"/>
+		<alias name="clavePresupuestal" entity-alias="DIENP" group-by="true"/>
+		<alias name="auxiliarCargo" entity-alias="DIENP" group-by="true"/>
+		<alias name="auxiliarAbono" entity-alias="DIENP" group-by="true"/>
+		<alias name="monto" entity-alias="DIENP" group-by="true"/>
+		<alias name="importStatusId" entity-alias="DIENP" group-by="true"/>
+		<alias name="userLoginId" entity-alias="DIENP" group-by="true"/>
+		<alias name="clavePresup" field="clavePresupuestal" entity-alias="CVE" group-by="true"/>
+		<alias name="inactivo" entity-alias="CVE" group-by="true"/>
+		<alias name="montoControl" field="monto" entity-alias="CTRL" group-by="true"/>
+		<alias name="momentoId" entity-alias="CTRL" group-by="true"/>
+		<alias name="mesId" entity-alias="CTRL" group-by="true"/>
+		<alias name="ciclo" entity-alias="CTRL" group-by="true"/>
+		
+		<view-link entity-alias="DIENP" rel-entity-alias="CVE" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+		<view-link entity-alias="DIENP" rel-entity-alias="CTRL" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="DataImportEjerNomCont" package-name="org.opentaps.dataimport"
+		title="Entidad para definir el ejercido de la nomina contable dentro del sistema.">
+		<field name="renglon" type="numeric" />
+		<field name="idEjerNominaCont" type="id-ne"></field>
+		<field name="descripcionLinea" type="description"></field>
+		<field name="auxiliarCargo" type="description"></field>
+		<field name="auxiliarAbono" type="description"></field>
+		<field name="monto" type="currency-amount-precise"></field>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idEjerNominaCont" />
+		<relation type="one" fk-name="FK_DBO_EJERCON_USR" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+	<entity entity-name="DataImportOperPatr" package-name="org.opentaps.dataimport"
+		title="Entidad para definir una operacion patrimonial dentro del sistema.">
+		<field name="idOperacionPatrimonial" type="id-ne"></field>
+		<field name="descripcionLinea" type="description"></field>
+		<field name="auxiliarCargo" type="description"></field>
+		<field name="auxiliarAbono" type="description"></field>
+		<field name="monto" type="currency-amount"></field>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idOperacionPatrimonial" />
+		<relation type="one" fk-name="FK_USR_DI_OPE_PAT" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+</entitymodel>

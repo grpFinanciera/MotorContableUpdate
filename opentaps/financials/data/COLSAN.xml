@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	
+<!-- 	<ClasifPresupuestal descripcion="Clasificación por Ramo" clasificacionId="CL_RAMO" tieneNivel="S"/>     -->
+<!-- 	<EnumerationType description="Clasificación por Ramo" enumTypeId="CL_RAMO" hasTable="N" parentTypeId="ACCOUNTING_TAG" clasificacionId="CL_RAMO"/> -->
+	
+<!-- 	<NivelAdministrativo descripcion="Tipo de Institución" idNivelAdmin="TIPO_INSTITUCION" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Responsable" idNivelAdmin="UNIDAD_RESPONSABLE" idNivelAdminPadre="TIPO_INSTITUCION" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Operativa" idNivelAdmin="UNIDAD_OPERATIVA" idNivelAdminPadre="UNIDAD_RESPONSABLE" clasificacionId="CL_ADMINISTRATIVA"/> -->
+<!-- 	<NivelAdministrativo descripcion="Unidad Ejecutora" idNivelAdmin="UNIDAD_EJECUTORA" idNivelAdminPadre="UNIDAD_OPERATIVA" clasificacionId="CL_ADMINISTRATIVA"/> -->
+	
+<!-- 	<NivelPresupuestal descripcion="Ciclo" nivelId="CICLO" clasificacionId="CL_CICLO"/> -->
+<!-- 	<NivelPresupuestal descripcion="Capítulo de gasto" nivelId="CAPITULO" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Concepto de gasto" nivelId="CONCEPTO_COG" nivelPadreId="CAPITULO" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Partida genérica de gasto" nivelId="PARTIDA_GENERICA" nivelPadreId="CONCEPTO_COG" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Partida específica de gasto" nivelId="PARTIDA_ESPECIFICA" nivelPadreId="PARTIDA_GENERICA" clasificacionId="CL_COG"/> -->
+<!-- 	<NivelPresupuestal descripcion="Rubro de ingreso" nivelId="RUBRO" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de ingreso" nivelId="TIPO" nivelPadreId="RUBRO" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Clase de ingreso" nivelId="CLASE" nivelPadreId="TIPO" clasificacionId="CL_CRI"/> -->
+<!--	<NivelPresupuestal descripcion="Concepto de ingreso" nivelId="CONCEPTO" nivelPadreId="CLASE" clasificacionId="CL_CRI"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de gasto" nivelId="TIPO_GASTO" clasificacionId="CL_TIPOGASTO"/>     -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de Ingreso" nivelId="TIPO_INGRESO" clasificacionId="CL_TIPOINGRESO"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Finalidad" nivelId="FINALIDAD" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Función" nivelId="FUNCION" nivelPadreId="FINALIDAD" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Subfunción" nivelId="SUBFUNCION" nivelPadreId="FUNCION" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Actividad Institucional" nivelId="ACT_INSTITUCIONAL" nivelPadreId="SUBFUNCION" clasificacionId="CL_FUNCIONAL"/> -->
+<!-- 	<NivelPresupuestal descripcion="Programa Presupuestario" nivelId="PROG_PRESUPUESTARIO" clasificacionId="CL_PROGRAMATICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Tipo de Proyecto" nivelId="TIPO_PROYECTO" nivelPadreId="PROG_PRESUPUESTARIO" clasificacionId="CL_PROGRAMATICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Proyecto Específico" nivelId="PROYECTO_ESPECIFICO" nivelPadreId="TIPO_PROYECTO" clasificacionId="CL_PROGRAMATICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Fuente de financiamiento" nivelId="FUENTE_FINAN" clasificacionId="CL_FUENTEFIN"/> -->
+<!-- 	<NivelPresupuestal descripcion="Nivel 2 Fuente de financiamiento" nivelId="NIVEL2FFIN" nivelPadreId="FUENTE_FINAN" clasificacionId="CL_FUENTEFIN"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Región" nivelId="REGION" clasificacionId="CL_GEOGRAFICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Municipio" nivelId="MUNICIPIO" nivelPadreId="REGION" clasificacionId="CL_GEOGRAFICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Localidad" nivelId="LOCALIDAD" nivelPadreId="MUNICIPIO" clasificacionId="CL_GEOGRAFICA"/>  -->
+<!-- 	<NivelPresupuestal descripcion="Entidad Federativa" nivelId="ENTIDAD_F" clasificacionId="CL_GEOGRAFICA"/> -->
+<!-- 	<NivelPresupuestal descripcion="Ramo" nivelId="RAMO" clasificacionId="CL_RAMO"/> -->
+	
+	<TipoAdjudicacion tipoAdjudicacionId="10000" nombreTipoAdjudicacion="Licitación pública" descTipoAdjudicacion="Desc Licitación pública"/>
+	<TipoAdjudicacion tipoAdjudicacionId="10001" nombreTipoAdjudicacion="Invitación a cuando menos tres" descTipoAdjudicacion="Desc Invitación a cuando menos tres"/>
+	<TipoAdjudicacion tipoAdjudicacionId="10002" nombreTipoAdjudicacion="Adjudicación directa" descTipoAdjudicacion="Desc Adjudicación directa"/>
+	
+	<SubTipoAdjudicacion tipoAdjudicacionId="10000" subTipoAdjudicacionId="10001" nombreSubTipoAdjudicacion="Licitación pública nacional"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10000" subTipoAdjudicacionId="10002" nombreSubTipoAdjudicacion="Licitación pública internacional bajo la cobertura de los tratados"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10000" subTipoAdjudicacionId="10003" nombreSubTipoAdjudicacion="Licitación pública internacional abierta"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10001" subTipoAdjudicacionId="10001" nombreSubTipoAdjudicacion="Invitación a cuando menos tres personas nacional"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10001" subTipoAdjudicacionId="10002" nombreSubTipoAdjudicacion="Invitación a cuando menos tres personas internacional bajo la cobertura de los tratados"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10001" subTipoAdjudicacionId="10003" nombreSubTipoAdjudicacion="Invitación a cuando menos tres personas internacional abierta"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10002" subTipoAdjudicacionId="10001" nombreSubTipoAdjudicacion="Adjudicación directa nacional"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10002" subTipoAdjudicacionId="10002" nombreSubTipoAdjudicacion="Adjudicación directa internacional bajo la cobertura de los tratados"/>
+	<SubTipoAdjudicacion tipoAdjudicacionId="10002" subTipoAdjudicacionId="10003" nombreSubTipoAdjudicacion="Adjudicación directa internacional abierta"/>	
+	
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10001" nombreDocumento="Calendario de eventos" notaDocumento="(FO-CON-06)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10002" nombreDocumento="Estratificación de las Mipymes" notaDocumento="(FO-CON-14) ** En caso de existir PYMES"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10003" nombreDocumento="Resumen de convocatoria a la licitación pública" notaDocumento="(FO-CON-07)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10004" nombreDocumento="Acta de junta de aclaraciones" notaDocumento="(FO-CON-08)"/>
+	<!-- <TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10005" nombreDocumento="Lista de verificación para revisar proposiciones" notaDocumento="(FO-CON-09)"/> -->
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10006" nombreDocumento="Acta" notaDocumento="(FO-CON-10)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10007" nombreDocumento="Resultado de la evaluación técnica" notaDocumento="(FO-CON-11)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10008" nombreDocumento="Resultado de la evaluación económica" notaDocumento="(FO-CON-12)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10009" nombreDocumento="Acta de fallo" notaDocumento="(FO-CON-13)"/>
+<!-- 	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10010" nombreDocumento="Contrato" notaDocumento=""/>	     -->
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10010" nombreDocumento="Contrato" notaDocumento="."/>	    
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10011" nombreDocumento="Art. 26 Fracción I" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10012" nombreDocumento="Art. del 26 Bis al 39" flagArticulo="Y"/>  
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10000" docTipoAdjudicacionId="10013" nombreDocumento="Póliza de garantía" notaDocumento="."/>  	    
+	
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10001" nombreDocumento="Estratificación de las Mipymes" notaDocumento="(FO-CON-14)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10002" nombreDocumento="Calendario de eventos" notaDocumento="(FO-CON-06)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10003" nombreDocumento="Acta de junta de aclaraciones" notaDocumento="(FO-CON-08)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10004" nombreDocumento="Formato de verificación para revisar proposiciones" notaDocumento="(FO-CON-09)"/>
+<!-- 	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10005" nombreDocumento="Acta" notaDocumento="(FO-CON-10)"/> -->
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10006" nombreDocumento="Resultado de la evaluación técnica" notaDocumento="(FO-CON-11)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10007" nombreDocumento="Resultado de la evaluación económica" notaDocumento="(FO-CON-12)"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10008" nombreDocumento="Contrato" notaDocumento="."/>	    
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10009" nombreDocumento="Art. 26 Fracción II" flagArticulo="Y"/>
+<!-- 	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10010" nombreDocumento="Art. 40" flagArticulo="Y"/> -->
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10011" nombreDocumento="Art. 42" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10012" nombreDocumento="Art. 43" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10013" nombreDocumento="Art. 41" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10001" docTipoAdjudicacionId="10013" nombreDocumento="Póliza de garantía" notaDocumento="."/>     
+	
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10001" nombreDocumento="Documento en el que conste la justificación de le excepción a la licitación pública" notaDocumento="."/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10002" nombreDocumento="Dictamen de procedencia de excepción" notaDocumento="."/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10003" nombreDocumento="Documentación del proveedor adjudicado" notaDocumento="."/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10004" nombreDocumento="Art. 26 Fracción III" flagArticulo="Y"/>
+<!-- 	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10005" nombreDocumento="Art. 40" flagArticulo="Y"/> -->
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10006" nombreDocumento="Art. 41" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10007" nombreDocumento="Art. 42" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10008" nombreDocumento="Art. 1" flagArticulo="Y"/>
+	<TipoAdjudicacionDoc tipoAdjudicacionId="10002" docTipoAdjudicacionId="10009" nombreDocumento="Póliza de garantía" notaDocumento="."/> 
+	
+	<TipoAdjudicacionArticulo tipoFraccionId="1" docTipoAdjudicacionId="10006" fraccion="Fracción I"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="2" docTipoAdjudicacionId="10006" fraccion="Fracción II"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="3" docTipoAdjudicacionId="10006" fraccion="Fracción III"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="4" docTipoAdjudicacionId="10006" fraccion="Fracción IV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="5" docTipoAdjudicacionId="10006" fraccion="Fracción V"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="6" docTipoAdjudicacionId="10006" fraccion="Fracción VI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="7" docTipoAdjudicacionId="10006" fraccion="Fracción VII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="8" docTipoAdjudicacionId="10006" fraccion="Fracción VIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="9" docTipoAdjudicacionId="10006" fraccion="Fracción IX"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="10" docTipoAdjudicacionId="10006" fraccion="Fracción X"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="11" docTipoAdjudicacionId="10006" fraccion="Fracción XI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="12" docTipoAdjudicacionId="10006" fraccion="Fracción XII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="13" docTipoAdjudicacionId="10006" fraccion="Fracción XIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="14" docTipoAdjudicacionId="10006" fraccion="Fracción XIV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="15" docTipoAdjudicacionId="10006" fraccion="Fracción XV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="16" docTipoAdjudicacionId="10006" fraccion="Fracción XVI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="17" docTipoAdjudicacionId="10006" fraccion="Fracción XVII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="18" docTipoAdjudicacionId="10006" fraccion="Fracción XVIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="19" docTipoAdjudicacionId="10006" fraccion="Fracción XIX"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="20" docTipoAdjudicacionId="10006" fraccion="Fracción XX"/>
+	
+	<TipoAdjudicacionArticulo tipoFraccionId="21" docTipoAdjudicacionId="10013" fraccion="Fracción I"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="22" docTipoAdjudicacionId="10013" fraccion="Fracción II"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="23" docTipoAdjudicacionId="10013" fraccion="Fracción III"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="24" docTipoAdjudicacionId="10013" fraccion="Fracción IV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="25" docTipoAdjudicacionId="10013" fraccion="Fracción V"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="26" docTipoAdjudicacionId="10013" fraccion="Fracción VI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="27" docTipoAdjudicacionId="10013" fraccion="Fracción VII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="28" docTipoAdjudicacionId="10013" fraccion="Fracción VIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="29" docTipoAdjudicacionId="10013" fraccion="Fracción IX"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="30" docTipoAdjudicacionId="10013" fraccion="Fracción X"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="31" docTipoAdjudicacionId="10013" fraccion="Fracción XI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="32" docTipoAdjudicacionId="10013" fraccion="Fracción XII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="33" docTipoAdjudicacionId="10013" fraccion="Fracción XIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="34" docTipoAdjudicacionId="10013" fraccion="Fracción XIV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="35" docTipoAdjudicacionId="10013" fraccion="Fracción XV"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="36" docTipoAdjudicacionId="10013" fraccion="Fracción XVI"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="37" docTipoAdjudicacionId="10013" fraccion="Fracción XVII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="38" docTipoAdjudicacionId="10013" fraccion="Fracción XVIII"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="39" docTipoAdjudicacionId="10013" fraccion="Fracción XIX"/>
+	<TipoAdjudicacionArticulo tipoFraccionId="40" docTipoAdjudicacionId="10013" fraccion="Fracción XX"/>
+	
+	<TipoAdjudicacionDescArticul descArtId="21" docTipoAdjudicacionId="10008" descripcion="Articulo 1. La presente Ley es de orden publico y tiene por objeto reglamentar la aplicacion del articulo 134 de la Constitucion Politica de los Estados Unidos Mexicanos en materia de las adquisiciones, arrendamientos de bienes muebles y prestacion de servicios de cualquier naturaleza, que realicen:"/>
+	<TipoAdjudicacionDescArticul descArtId="22" docTipoAdjudicacionId="10008" descripcion="I. Las unidades administrativas de la Presidencia de la Republica; "/>
+	<TipoAdjudicacionDescArticul descArtId="23" docTipoAdjudicacionId="10008" descripcion="II.	Las Secretarias de Estado y la Consejeria Juridica del Ejecutivo Federal; "/>
+	<TipoAdjudicacionDescArticul descArtId="24" docTipoAdjudicacionId="10008" descripcion="Nota de vigencia: La reforma al parrafo tercero del articulo 1, publicada por Decreto DOF 11-08-2014, entrara en vigor de conformidad con lo que establece el Articulo Segundo Transitorio de dicho Decreto. "/>
+	<TipoAdjudicacionDescArticul descArtId="25" docTipoAdjudicacionId="10008" descripcion="III.	La Procuraduria General de la Republica; "/>
+	<TipoAdjudicacionDescArticul descArtId="26" docTipoAdjudicacionId="10008" descripcion="IV.	Los organismos descentralizados; "/>
+	<TipoAdjudicacionDescArticul descArtId="27" docTipoAdjudicacionId="10008" descripcion="V.	Las empresas de participacion estatal mayoritaria y los fideicomisos en los que el fideicomitente sea el gobierno federal o una entidad paraestatal, y "/>
+	<TipoAdjudicacionDescArticul descArtId="28" docTipoAdjudicacionId="10008" descripcion="VI.	Las entidades federativas, los municipios y los entes publicos de unas y otros, con cargo total o parcial a recursos federales, conforme a los convenios que celebren con el Ejecutivo Federal. No quedan comprendidos para la aplicacion de la presente Ley los fondos previstos en el Capitulo V de la Ley de Coordinacion Fiscal. "/>
+	<TipoAdjudicacionDescArticul descArtId="29" docTipoAdjudicacionId="10011" descripcion="Articulo 26. Las dependencias y entidades seleccionaran de entre los procedimientos que a continuacion se señalan, aquel que de acuerdo con la naturaleza de la contratacion asegure al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demas circunstancias pertinentes: "/>
+	<TipoAdjudicacionDescArticul descArtId="30" docTipoAdjudicacionId="10011" descripcion="I.	Licitacion publica; "/>
+	<TipoAdjudicacionDescArticul descArtId="31" docTipoAdjudicacionId="10011" descripcion="II.	Invitacion a cuando menos tres personas, o "/>
+	<TipoAdjudicacionDescArticul descArtId="32" docTipoAdjudicacionId="10011" descripcion="III.	Adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="33" docTipoAdjudicacionId="10012" descripcion="Articulo 26. Las dependencias y entidades seleccionaran de entre los procedimientos que a continuacion se señalan, aquel que de acuerdo con la naturaleza de la contratacion asegure al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demas circunstancias pertinentes: "/>
+	<TipoAdjudicacionDescArticul descArtId="34" docTipoAdjudicacionId="10012" descripcion="I.	Licitacion publica; "/>
+	<TipoAdjudicacionDescArticul descArtId="35" docTipoAdjudicacionId="10012" descripcion="II.	Invitacion a cuando menos tres personas, o "/>
+	<TipoAdjudicacionDescArticul descArtId="36" docTipoAdjudicacionId="10012" descripcion="III.	Adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="37" docTipoAdjudicacionId="10009" descripcion="Articulo 26. Las dependencias y entidades seleccionaran de entre los procedimientos que a continuacion se señalan, aquel que de acuerdo con la naturaleza de la contratacion asegure al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demas circunstancias pertinentes: "/>
+	<TipoAdjudicacionDescArticul descArtId="38" docTipoAdjudicacionId="10009" descripcion="I.	Licitacion publica; "/>
+	<TipoAdjudicacionDescArticul descArtId="39" docTipoAdjudicacionId="10009" descripcion="II.	Invitacion a cuando menos tres personas, o "/>
+	<TipoAdjudicacionDescArticul descArtId="40" docTipoAdjudicacionId="10009" descripcion="III.	Adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="41" docTipoAdjudicacionId="10004" descripcion="Articulo 26. Las dependencias y entidades seleccionaran de entre los procedimientos que a continuacion se señalan, aquel que de acuerdo con la naturaleza de la contratacion asegure al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demas circunstancias pertinentes: "/>
+	<TipoAdjudicacionDescArticul descArtId="42" docTipoAdjudicacionId="10004" descripcion="I.	Licitacion publica; "/>
+	<TipoAdjudicacionDescArticul descArtId="43" docTipoAdjudicacionId="10004" descripcion="II.	Invitacion a cuando menos tres personas, o "/>
+	<TipoAdjudicacionDescArticul descArtId="44" docTipoAdjudicacionId="10004" descripcion="III.	Adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="45" docTipoAdjudicacionId="10010" descripcion="Articulo 40.- En los supuestos que preve el articulo 41 de esta Ley, las dependencias y entidades, bajo su responsabilidad, podran optar por no llevar a cabo el procedimiento de licitacion publica y celebrar contratos a traves de los procedimientos de invitacion a cuando menos tres personas o de adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="46" docTipoAdjudicacionId="10010" descripcion="La seleccion del procedimiento de excepcion que realicen las dependencias y entidades debera fundarse y motivarse, segun las circunstancias que concurran en cada caso, en criterios de economia, eficacia, eficiencia, imparcialidad, honradez y transparencia que resulten procedentes para obtener las mejores condiciones para el Estado. El acreditamiento del o los criterios en los que se funda; asi como la justificacion de las razones en las que se sustente el ejercicio de la opcion, deberan constar por escrito y ser firmado por el titular del area usuaria o requirente de los bienes o servicios. "/>
+	<TipoAdjudicacionDescArticul descArtId="47" docTipoAdjudicacionId="10010" descripcion="Parrafo reformado DOF 07-07-2005, 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="48" docTipoAdjudicacionId="10010" descripcion="En cualquier supuesto se invitara a personas que cuenten con capacidad de respuesta inmediata, asi como con los recursos tecnicos, financieros y demas que sean necesarios, y cuyas actividades comerciales o profesionales esten relacionadas con los bienes o servicios objeto del contrato a celebrarse. "/>
+	<TipoAdjudicacionDescArticul descArtId="49" docTipoAdjudicacionId="10010" descripcion="En estos casos, el titular del area responsable de la contratacion, a mas tardar el ultimo dia habil de cada mes, enviara al organo interno de control en la dependencia o entidad de que se trate, un informe relativo a los contratos formalizados durante el mes calendario inmediato anterior, acompañando copia del escrito aludido en este articulo y de un dictamen en el que se hara constar el analisis de la o las proposiciones y las razones para la adjudicacion del contrato. No sera necesario rendir este informe en las operaciones que se realicen al amparo del articulo 41 fracciones IV y XII, de este ordenamiento. "/>
+	<TipoAdjudicacionDescArticul descArtId="50" docTipoAdjudicacionId="10010" descripcion="Parrafo reformado DOF 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="51" docTipoAdjudicacionId="10010" descripcion="En caso del procedimiento de invitacion a cuando menos tres personas fundamentados en las fracciones III, VII, VIII, IX primer parrafo, X, XI, XII, XIV, XV, XVI, XVII y XIX del articulo 41 de esta Ley, el escrito a que se refiere el segundo parrafo de este articulo, debera estar acompañado de los nombres y datos generales de las personas que seran invitadas; tratandose de adjudicaciones directas, en todos los casos debera indicarse el nombre de la persona a quien se propone realizarla; en ambos procedimientos, debera acompañarse el resultado de la investigacion de mercado que sirvio de base para su seleccion. "/>
+	<TipoAdjudicacionDescArticul descArtId="52" docTipoAdjudicacionId="10010" descripcion="Parrafo adicionado DOF 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="53" docTipoAdjudicacionId="10010" descripcion="A los procedimientos de contratacion de invitacion a cuando menos tres personas y de adjudicacion directa, le sera aplicable el caracter a que hacen referencia las fracciones I, II y III del articulo 28 de la presente Ley. "/>
+	<TipoAdjudicacionDescArticul descArtId="54" docTipoAdjudicacionId="10005" descripcion="Articulo 40.- En los supuestos que preve el articulo 41 de esta Ley, las dependencias y entidades, bajo su responsabilidad, podran optar por no llevar a cabo el procedimiento de licitacion publica y celebrar contratos a traves de los procedimientos de invitacion a cuando menos tres personas o de adjudicacion directa. "/>
+	<TipoAdjudicacionDescArticul descArtId="55" docTipoAdjudicacionId="10005" descripcion="La seleccion del procedimiento de excepcion que realicen las dependencias y entidades debera fundarse y motivarse, segun las circunstancias que concurran en cada caso, en criterios de economia, eficacia, eficiencia, imparcialidad, honradez y transparencia que resulten procedentes para obtener las mejores condiciones para el Estado. El acreditamiento del o los criterios en los que se funda; asi como la justificacion de las razones en las que se sustente el ejercicio de la opcion, deberan constar por escrito y ser firmado por el titular del area usuaria o requirente de los bienes o servicios. "/>
+	<TipoAdjudicacionDescArticul descArtId="56" docTipoAdjudicacionId="10005" descripcion="Parrafo reformado DOF 07-07-2005, 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="57" docTipoAdjudicacionId="10005" descripcion="En cualquier supuesto se invitara a personas que cuenten con capacidad de respuesta inmediata, asi como con los recursos tecnicos, financieros y demas que sean necesarios, y cuyas actividades comerciales o profesionales esten relacionadas con los bienes o servicios objeto del contrato a celebrarse. "/>
+	<TipoAdjudicacionDescArticul descArtId="58" docTipoAdjudicacionId="10005" descripcion="En estos casos, el titular del area responsable de la contratacion, a mas tardar el ultimo dia habil de cada mes, enviara al organo interno de control en la dependencia o entidad de que se trate, un informe relativo a los contratos formalizados durante el mes calendario inmediato anterior, acompañando copia del escrito aludido en este articulo y de un dictamen en el que se hara constar el analisis de la o las proposiciones y las razones para la adjudicacion del contrato. No sera necesario rendir este informe en las operaciones que se realicen al amparo del articulo 41 fracciones IV y XII, de este ordenamiento. "/>
+	<TipoAdjudicacionDescArticul descArtId="59" docTipoAdjudicacionId="10005" descripcion="Parrafo reformado DOF 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="60" docTipoAdjudicacionId="10005" descripcion="En caso del procedimiento de invitacion a cuando menos tres personas fundamentados en las fracciones III, VII, VIII, IX primer parrafo, X, XI, XII, XIV, XV, XVI, XVII y XIX del articulo 41 de esta Ley, el escrito a que se refiere el segundo parrafo de este articulo, debera estar acompañado de los nombres y datos generales de las personas que seran invitadas; tratandose de adjudicaciones directas, en todos los casos debera indicarse el nombre de la persona a quien se propone realizarla; en ambos procedimientos, debera acompañarse el resultado de la investigacion de mercado que sirvio de base para su seleccion. "/>
+	<TipoAdjudicacionDescArticul descArtId="61" docTipoAdjudicacionId="10005" descripcion="Parrafo adicionado DOF 28-05-2009 "/>
+	<TipoAdjudicacionDescArticul descArtId="62" docTipoAdjudicacionId="10005" descripcion="A los procedimientos de contratacion de invitacion a cuando menos tres personas y de adjudicacion directa, le sera aplicable el caracter a que hacen referencia las fracciones I, II y III del articulo 28 de la presente Ley. "/>
+	<TipoAdjudicacionDescArticul descArtId="63" docTipoAdjudicacionId="10006" descripcion="Articulo 41. Las dependencias y entidades, bajo su responsabilidad, podran contratar adquisiciones, arrendamientos y servicios, sin sujetarse al procedimiento de licitacion publica, a traves de los procedimientos de invitacion a cuando menos tres personas o de adjudicacion directa, cuando: "/>
+	<TipoAdjudicacionDescArticul descArtId="64" docTipoAdjudicacionId="10006" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="65" docTipoAdjudicacionId="10006" descripcion="I.	No existan bienes o servicios alternativos o sustitutos tecnicamente razonables, o bien, que en el mercado solo existe un posible oferente, o se trate de una persona que posee la titularidad o el licenciamiento exclusivo de patentes, derechos de autor, u otros derechos exclusivos, o por tratarse de obras de arte; "/>
+	<TipoAdjudicacionDescArticul descArtId="66" docTipoAdjudicacionId="10006" descripcion="II.	Peligre o se altere el orden social, la economia, los servicios publicos, la salubridad, la seguridad o el ambiente de alguna zona o region del pais como consecuencia de caso fortuito o de fuerza mayor; "/>
+	<TipoAdjudicacionDescArticul descArtId="67" docTipoAdjudicacionId="10006" descripcion="III.	Existan circunstancias que puedan provocar perdidas o costos adicionales importantes, cuantificados y justificados; "/>
+	<TipoAdjudicacionDescArticul descArtId="68" docTipoAdjudicacionId="10006" descripcion="IV.	Se realicen con fines exclusivamente militares o para la armada, o su contratacion mediante licitacion publica ponga en riesgo la seguridad nacional o la seguridad publica, en los terminos de las leyes de la materia. No quedan comprendidos en los supuestos a que se refiere esta fraccion los requerimientos administrativos que tengan los sujetos de esta Ley; "/>
+	<TipoAdjudicacionDescArticul descArtId="69" docTipoAdjudicacionId="10006" descripcion="V.	Derivado de caso fortuito o fuerza mayor, no sea posible obtener bienes o servicios mediante el procedimiento de licitacion publica en el tiempo requerido para atender la eventualidad de que se trate, en este supuesto las cantidades o conceptos deberan limitarse a lo estrictamente necesario para afrontarla; "/>
+	<TipoAdjudicacionDescArticul descArtId="70" docTipoAdjudicacionId="10006" descripcion="VI.	Se haya rescindido un contrato adjudicado a traves de licitacion publica, en cuyo caso se podra adjudicar al licitante que haya obtenido el segundo o ulteriores lugares, siempre que la diferencia en precio con respecto a la proposicion inicialmente adjudicada no sea superior a un margen del diez por ciento. Tratandose de contrataciones en las que la evaluacion se haya realizado mediante puntos y porcentajes o costo beneficio, se podra adjudicar al segundo o ulterior lugar, dentro del referido margen; "/>
+	<TipoAdjudicacionDescArticul descArtId="71" docTipoAdjudicacionId="10006" descripcion="VIII.	Existan razones justificadas para la adquisicion o arrendamiento de bienes de marca determinada; "/>
+	<TipoAdjudicacionDescArticul descArtId="72" docTipoAdjudicacionId="10006" descripcion="IX.	Se trate de adquisiciones de bienes perecederos, granos y productos alimenticios basicos o semiprocesados, semovientes. Asimismo, cuando se trate de bienes usados o reconstruidos en los que el precio no podra ser mayor al que se determine mediante avaluo que practicaran las instituciones de credito o terceros habilitados para ello conforme a las disposiciones aplicables, expedido dentro de los seis meses previos y vigente al momento de la adjudicacion del contrato respectivo, sin perjuicio de lo dispuesto en el articulo 12 Bis de esta Ley; "/>
+	<TipoAdjudicacionDescArticul descArtId="73" docTipoAdjudicacionId="10006" descripcion="X.	Se trate de servicios de consultorias, asesorias, estudios o investigaciones, debiendo aplicar el procedimiento de invitacion a cuando menos tres personas, entre las que se incluiran instituciones publicas y privadas de educacion superior y centros publicos de investigacion. "/>
+	<TipoAdjudicacionDescArticul descArtId="74" docTipoAdjudicacionId="10006" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="75" docTipoAdjudicacionId="10006" descripcion="Solo podra autorizarse la contratacion mediante adjudicacion directa, cuando la informacion que se tenga que proporcionar a los licitantes para la elaboracion de su proposicion, se encuentre reservada en los terminos establecidos en la Ley Federal de Transparencia y Acceso a la Informacion Publica Gubernamental; "/>
+	<TipoAdjudicacionDescArticul descArtId="76" docTipoAdjudicacionId="10006" descripcion="XI.	Se trate de adquisiciones, arrendamientos o servicios cuya contratacion se realice con campesinos o grupos urbanos marginados, como personas fisicas o morales; "/>
+	<TipoAdjudicacionDescArticul descArtId="77" docTipoAdjudicacionId="10006" descripcion="XII.	Se trate de la adquisicion de bienes que realicen las dependencias y entidades para su comercializacion directa o para someterlos a procesos productivos que las mismas realicen en cumplimiento de su objeto o fines propios expresamente establecidos en el acto juridico de su constitucion; "/>
+	<TipoAdjudicacionDescArticul descArtId="78" docTipoAdjudicacionId="10006" descripcion="XIII.	Se trate de adquisiciones de bienes provenientes de personas que, sin ser proveedores habituales, ofrezcan bienes en condiciones favorables, en razon de encontrarse en estado de liquidacion o disolucion, o bien, bajo intervencion judicial; "/>
+	<TipoAdjudicacionDescArticul descArtId="79" docTipoAdjudicacionId="10006" descripcion="XIV.	Se trate de los servicios prestados por una persona fisica a que se refiere la fraccion VII del articulo 3 de esta Ley, siempre que estos sean realizados por ella misma sin requerir de la utilizacion de mas de un especialista o tecnico; "/>
+	<TipoAdjudicacionDescArticul descArtId="80" docTipoAdjudicacionId="10006" descripcion="XV.	Se trate de servicios de mantenimiento de bienes en los que no sea posible precisar su alcance, establecer las cantidades de trabajo o determinar las especificaciones correspondientes; "/>
+	<TipoAdjudicacionDescArticul descArtId="81" docTipoAdjudicacionId="10006" descripcion="XVI.	El objeto del contrato sea el diseño y fabricacion de un bien que sirva como prototipo para efectuar las pruebas que demuestren su funcionamiento. En estos casos la dependencia o entidad debera pactar que los derechos sobre el diseño, uso o cualquier otro derecho exclusivo, se constituyan a favor de la Federacion o de las entidades segun corresponda. De ser satisfactorias las pruebas, se formalizara el contrato para la produccion de mayor numero de bienes por al menos el veinte por ciento de las necesidades de la dependencia o entidad, con un plazo de tres años; "/>
+	<TipoAdjudicacionDescArticul descArtId="82" docTipoAdjudicacionId="10006" descripcion="XVII.	Se trate de equipos especializados, sustancias y materiales de origen quimico, fisico quimico o bioquimico para ser utilizadas en actividades experimentales requeridas en proyectos de investigacion cientifica y desarrollo tecnologico, siempre que dichos proyectos se encuentren autorizados por quien determine el titular de la dependencia o el organo de gobierno de la entidad; "/>
+	<TipoAdjudicacionDescArticul descArtId="83" docTipoAdjudicacionId="10006" descripcion="XVIII.	Se acepte la adquisicion de bienes o la prestacion de servicios a titulo de dacion en pago, en los terminos de la Ley del Servicio de Tesoreria de la Federacion; "/>
+	<TipoAdjudicacionDescArticul descArtId="84" docTipoAdjudicacionId="10006" descripcion="XIX.	Las adquisiciones de bienes y servicios relativos a la operacion de instalaciones nucleares, y "/>
+	<TipoAdjudicacionDescArticul descArtId="85" docTipoAdjudicacionId="10006" descripcion="XX.	Se trate de la suscripcion de contratos especificos que deriven de un contrato marco. "/>
+	<TipoAdjudicacionDescArticul descArtId="86" docTipoAdjudicacionId="10006" descripcion="La dictaminacion de la procedencia de la contratacion y de que esta se ubica en alguno de los supuestos contenidos en las fracciones II, IV, V, VI, VII, IX primer parrafo, XI, XII y XX sera responsabilidad del area usuaria o requirente. "/>
+	<TipoAdjudicacionDescArticul descArtId="87" docTipoAdjudicacionId="10006" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="88" docTipoAdjudicacionId="10006" descripcion="Las contrataciones a que se refiere este articulo, se realizaran preferentemente a traves de procedimientos de invitacion a cuando menos tres personas, en los casos previstos en sus fracciones VII, VIII, IX primer parrafo, XI, XII y XV. "/>
+	<TipoAdjudicacionDescArticul descArtId="89" docTipoAdjudicacionId="10011" descripcion="Articulo 42. Las dependencias y entidades, bajo su responsabilidad, podran contratar adquisiciones, arrendamientos y servicios, sin sujetarse al procedimiento de licitacion publica, a traves de los de invitacion a cuando menos tres personas o de adjudicacion directa, cuando el importe de cada operacion no exceda los montos maximos que al efecto se estableceran en el Presupuesto de Egresos de la Federacion, siempre que las operaciones no se fraccionen para quedar comprendidas en los supuestos de excepcion a la licitacion publica a que se refiere este articulo. "/>
+	<TipoAdjudicacionDescArticul descArtId="90" docTipoAdjudicacionId="10011" descripcion="Si el monto de la operacion corresponde a una invitacion a cuando menos tres personas, la procedencia de la adjudicacion directa solo podra ser autorizada por el oficial mayor o equivalente. "/>
+	<TipoAdjudicacionDescArticul descArtId="91" docTipoAdjudicacionId="10011" descripcion="Lo dispuesto en el tercer parrafo del articulo 40 de esta Ley resultara aplicable a la contratacion mediante los procedimientos de invitacion a cuando menos tres personas y de adjudicacion directa que se fundamenten en este articulo. "/>
+	<TipoAdjudicacionDescArticul descArtId="92" docTipoAdjudicacionId="10011" descripcion="La suma de las operaciones que se realicen al amparo de este articulo no podra exceder del treinta por ciento del presupuesto de adquisiciones, arrendamientos y servicios autorizado a la dependencia o entidad en cada ejercicio presupuestario. La contratacion debera ajustarse a los limites establecidos en el Presupuesto de Egresos de la Federacion. "/>
+	<TipoAdjudicacionDescArticul descArtId="93" docTipoAdjudicacionId="10011" descripcion="En el supuesto de que un procedimiento de invitacion a cuando menos tres personas haya sido declarado desierto, el titular del area responsable de la contratacion en la dependencia o entidad podra adjudicar directamente el contrato. "/>
+	<TipoAdjudicacionDescArticul descArtId="94" docTipoAdjudicacionId="10011" descripcion="Para contratar adjudicaciones directas, cuyo monto sea igual o superior a la cantidad de trescientas veces el salario minimo diario general vigente en el Distrito Federal, se debera contar con al menos tres cotizaciones con las mismas condiciones, que se hayan obtenido en los treinta dias previos al de la adjudicacion y consten en documento en el cual se identifiquen indubitablemente al proveedor oferente. "/>
+	<TipoAdjudicacionDescArticul descArtId="95" docTipoAdjudicacionId="10007" descripcion="Articulo 42. Las dependencias y entidades, bajo su responsabilidad, podran contratar adquisiciones, arrendamientos y servicios, sin sujetarse al procedimiento de licitacion publica, a traves de los de invitacion a cuando menos tres personas o de adjudicacion directa, cuando el importe de cada operacion no exceda los montos maximos que al efecto se estableceran en el Presupuesto de Egresos de la Federacion, siempre que las operaciones no se fraccionen para quedar comprendidas en los supuestos de excepcion a la licitacion publica a que se refiere este articulo. "/>
+	<TipoAdjudicacionDescArticul descArtId="96" docTipoAdjudicacionId="10007" descripcion="Si el monto de la operacion corresponde a una invitacion a cuando menos tres personas, la procedencia de la adjudicacion directa solo podra ser autorizada por el oficial mayor o equivalente. "/>
+	<TipoAdjudicacionDescArticul descArtId="97" docTipoAdjudicacionId="10007" descripcion="Lo dispuesto en el tercer parrafo del articulo 40 de esta Ley resultara aplicable a la contratacion mediante los procedimientos de invitacion a cuando menos tres personas y de adjudicacion directa que se fundamenten en este articulo. "/>
+	<TipoAdjudicacionDescArticul descArtId="98" docTipoAdjudicacionId="10007" descripcion="La suma de las operaciones que se realicen al amparo de este articulo no podra exceder del treinta por ciento del presupuesto de adquisiciones, arrendamientos y servicios autorizado a la dependencia o entidad en cada ejercicio presupuestario. La contratacion debera ajustarse a los limites establecidos en el Presupuesto de Egresos de la Federacion. "/>
+	<TipoAdjudicacionDescArticul descArtId="99" docTipoAdjudicacionId="10007" descripcion="En el supuesto de que un procedimiento de invitacion a cuando menos tres personas haya sido declarado desierto, el titular del area responsable de la contratacion en la dependencia o entidad podra adjudicar directamente el contrato. "/>
+	<TipoAdjudicacionDescArticul descArtId="100" docTipoAdjudicacionId="10007" descripcion="Para contratar adjudicaciones directas, cuyo monto sea igual o superior a la cantidad de trescientas veces el salario minimo diario general vigente en el Distrito Federal, se debera contar con al menos tres cotizaciones con las mismas condiciones, que se hayan obtenido en los treinta dias previos al de la adjudicacion y consten en documento en el cual se identifiquen indubitablemente al proveedor oferente. "/>
+
+	<TipoAdjudicacionDescArticul descArtId="101" docTipoAdjudicacionId="10013" descripcion="Articulo 41. Las dependencias y entidades, bajo su responsabilidad, podran contratar adquisiciones, arrendamientos y servicios, sin sujetarse al procedimiento de licitacion publica, a traves de los procedimientos de invitacion a cuando menos tres personas o de adjudicacion directa, cuando: "/>
+	<TipoAdjudicacionDescArticul descArtId="102" docTipoAdjudicacionId="10013" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="103" docTipoAdjudicacionId="10013" descripcion="I.	No existan bienes o servicios alternativos o sustitutos tecnicamente razonables, o bien, que en el mercado solo existe un posible oferente, o se trate de una persona que posee la titularidad o el licenciamiento exclusivo de patentes, derechos de autor, u otros derechos exclusivos, o por tratarse de obras de arte; "/>
+	<TipoAdjudicacionDescArticul descArtId="104" docTipoAdjudicacionId="10013" descripcion="II.	Peligre o se altere el orden social, la economia, los servicios publicos, la salubridad, la seguridad o el ambiente de alguna zona o region del pais como consecuencia de caso fortuito o de fuerza mayor; "/>
+	<TipoAdjudicacionDescArticul descArtId="105" docTipoAdjudicacionId="10013" descripcion="III.	Existan circunstancias que puedan provocar perdidas o costos adicionales importantes, cuantificados y justificados; "/>
+	<TipoAdjudicacionDescArticul descArtId="106" docTipoAdjudicacionId="10013" descripcion="IV.	Se realicen con fines exclusivamente militares o para la armada, o su contratacion mediante licitacion publica ponga en riesgo la seguridad nacional o la seguridad publica, en los terminos de las leyes de la materia. No quedan comprendidos en los supuestos a que se refiere esta fraccion los requerimientos administrativos que tengan los sujetos de esta Ley; "/>
+	<TipoAdjudicacionDescArticul descArtId="107" docTipoAdjudicacionId="10013" descripcion="V.	Derivado de caso fortuito o fuerza mayor, no sea posible obtener bienes o servicios mediante el procedimiento de licitacion publica en el tiempo requerido para atender la eventualidad de que se trate, en este supuesto las cantidades o conceptos deberan limitarse a lo estrictamente necesario para afrontarla; "/>
+	<TipoAdjudicacionDescArticul descArtId="108" docTipoAdjudicacionId="10013" descripcion="VI.	Se haya rescindido un contrato adjudicado a traves de licitacion publica, en cuyo caso se podra adjudicar al licitante que haya obtenido el segundo o ulteriores lugares, siempre que la diferencia en precio con respecto a la proposicion inicialmente adjudicada no sea superior a un margen del diez por ciento. Tratandose de contrataciones en las que la evaluacion se haya realizado mediante puntos y porcentajes o costo beneficio, se podra adjudicar al segundo o ulterior lugar, dentro del referido margen; "/>
+	<TipoAdjudicacionDescArticul descArtId="109" docTipoAdjudicacionId="10013" descripcion="VIII.	Existan razones justificadas para la adquisicion o arrendamiento de bienes de marca determinada; "/>
+	<TipoAdjudicacionDescArticul descArtId="110" docTipoAdjudicacionId="10013" descripcion="IX.	Se trate de adquisiciones de bienes perecederos, granos y productos alimenticios basicos o semiprocesados, semovientes. Asimismo, cuando se trate de bienes usados o reconstruidos en los que el precio no podra ser mayor al que se determine mediante avaluo que practicaran las instituciones de credito o terceros habilitados para ello conforme a las disposiciones aplicables, expedido dentro de los seis meses previos y vigente al momento de la adjudicacion del contrato respectivo, sin perjuicio de lo dispuesto en el articulo 12 Bis de esta Ley; "/>
+	<TipoAdjudicacionDescArticul descArtId="111" docTipoAdjudicacionId="10013" descripcion="X.	Se trate de servicios de consultorias, asesorias, estudios o investigaciones, debiendo aplicar el procedimiento de invitacion a cuando menos tres personas, entre las que se incluiran instituciones publicas y privadas de educacion superior y centros publicos de investigacion. "/>
+	<TipoAdjudicacionDescArticul descArtId="112" docTipoAdjudicacionId="10013" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="113" docTipoAdjudicacionId="10013" descripcion="Solo podra autorizarse la contratacion mediante adjudicacion directa, cuando la informacion que se tenga que proporcionar a los licitantes para la elaboracion de su proposicion, se encuentre reservada en los terminos establecidos en la Ley Federal de Transparencia y Acceso a la Informacion Publica Gubernamental; "/>
+	<TipoAdjudicacionDescArticul descArtId="114" docTipoAdjudicacionId="10013" descripcion="XI.	Se trate de adquisiciones, arrendamientos o servicios cuya contratacion se realice con campesinos o grupos urbanos marginados, como personas fisicas o morales; "/>
+	<TipoAdjudicacionDescArticul descArtId="115" docTipoAdjudicacionId="10013" descripcion="XII.	Se trate de la adquisicion de bienes que realicen las dependencias y entidades para su comercializacion directa o para someterlos a procesos productivos que las mismas realicen en cumplimiento de su objeto o fines propios expresamente establecidos en el acto juridico de su constitucion; "/>
+	<TipoAdjudicacionDescArticul descArtId="116" docTipoAdjudicacionId="10013" descripcion="XIII.	Se trate de adquisiciones de bienes provenientes de personas que, sin ser proveedores habituales, ofrezcan bienes en condiciones favorables, en razon de encontrarse en estado de liquidacion o disolucion, o bien, bajo intervencion judicial; "/>
+	<TipoAdjudicacionDescArticul descArtId="117" docTipoAdjudicacionId="10013" descripcion="XIV.	Se trate de los servicios prestados por una persona fisica a que se refiere la fraccion VII del articulo 3 de esta Ley, siempre que estos sean realizados por ella misma sin requerir de la utilizacion de mas de un especialista o tecnico; "/>
+	<TipoAdjudicacionDescArticul descArtId="118" docTipoAdjudicacionId="10013" descripcion="XV.	Se trate de servicios de mantenimiento de bienes en los que no sea posible precisar su alcance, establecer las cantidades de trabajo o determinar las especificaciones correspondientes; "/>
+	<TipoAdjudicacionDescArticul descArtId="119" docTipoAdjudicacionId="10013" descripcion="XVI.	El objeto del contrato sea el diseño y fabricacion de un bien que sirva como prototipo para efectuar las pruebas que demuestren su funcionamiento. En estos casos la dependencia o entidad debera pactar que los derechos sobre el diseño, uso o cualquier otro derecho exclusivo, se constituyan a favor de la Federacion o de las entidades segun corresponda. De ser satisfactorias las pruebas, se formalizara el contrato para la produccion de mayor numero de bienes por al menos el veinte por ciento de las necesidades de la dependencia o entidad, con un plazo de tres años; "/>
+	<TipoAdjudicacionDescArticul descArtId="120" docTipoAdjudicacionId="10013" descripcion="XVII.	Se trate de equipos especializados, sustancias y materiales de origen quimico, fisico quimico o bioquimico para ser utilizadas en actividades experimentales requeridas en proyectos de investigacion cientifica y desarrollo tecnologico, siempre que dichos proyectos se encuentren autorizados por quien determine el titular de la dependencia o el organo de gobierno de la entidad; "/>
+	<TipoAdjudicacionDescArticul descArtId="121" docTipoAdjudicacionId="10013" descripcion="XVIII.	Se acepte la adquisicion de bienes o la prestacion de servicios a titulo de dacion en pago, en los terminos de la Ley del Servicio de Tesoreria de la Federacion; "/>
+	<TipoAdjudicacionDescArticul descArtId="122" docTipoAdjudicacionId="10013" descripcion="XIX.	Las adquisiciones de bienes y servicios relativos a la operacion de instalaciones nucleares, y "/>
+	<TipoAdjudicacionDescArticul descArtId="123" docTipoAdjudicacionId="10013" descripcion="XX.	Se trate de la suscripcion de contratos especificos que deriven de un contrato marco. "/>
+	<TipoAdjudicacionDescArticul descArtId="124" docTipoAdjudicacionId="10013" descripcion="La dictaminacion de la procedencia de la contratacion y de que esta se ubica en alguno de los supuestos contenidos en las fracciones II, IV, V, VI, VII, IX primer parrafo, XI, XII y XX sera responsabilidad del area usuaria o requirente. "/>
+	<TipoAdjudicacionDescArticul descArtId="125" docTipoAdjudicacionId="10013" descripcion="LEY DE ADQUISICIONES, ARRENDAMIENTOS Y SERVICIOS DEL SECTOR PuBLICO "/>
+	<TipoAdjudicacionDescArticul descArtId="126" docTipoAdjudicacionId="10013" descripcion="Las contrataciones a que se refiere este articulo, se realizaran preferentemente a traves de procedimientos de invitacion a cuando menos tres personas, en los casos previstos en sus fracciones VII, VIII, IX primer parrafo, XI, XII y XV. "/>
+	
+<!--	<Momento description="Presupuesto de egresos aprobado" momentoId="APROBADO" cuentaAsociada ="8.2.1"/>-->
+<!--	<Momento description="Ampliaciones al presupuesto de egresos" momentoId="MODIFICADO_AMP_E" cuentaAsociada ="8.2.3.1"/> -->
+<!--	<Momento description="Reducciones al presupuesto de egresos" momentoId="MODIFICADO_RED_E" cuentaAsociada ="8.2.3.2"/> -->
+<!--	<Momento description="Ampliaciones compensadas al presupuesto de egresos" momentoId="MODIFICADO_AMP_COM_E" cuentaAsociada ="8.2.3.3.01"/> -->
+<!--	<Momento description="Reducciones compensadas al presupuesto de egresos" momentoId="MODIFICADO_RED_COM_E" cuentaAsociada ="8.2.3.3.02"/> -->
+<!--	<Momento description="Presupuesto de egresos disponible" momentoId="DISPONIBLE" cuentaAsociada ="8.2.2"/> -->
+<!--	<Momento description="Presupuesto de egresos comprometido" momentoId="COMPROMETIDO" cuentaAsociada ="8.2.4"/> -->
+<!--	<Momento description="Presupuesto de egresos devengado" momentoId="DEVENGADO_E" cuentaAsociada ="8.2.5"/> -->
+<!--	<Momento description="Presupuesto de egresos ejercido pendiente de pago" momentoId="EJERCIDO" cuentaAsociada ="8.2.6"/> -->
+<!--	<Momento description="Presupuesto de egresos ejercido pagado" momentoId="PAGADO" cuentaAsociada ="8.2.7"/> -->
+<!--	<Momento description="Ley de ingresos estimada" momentoId="ESTIMADO" cuentaAsociada ="8.1.1"/> -->
+<!--	<Momento description="Ampliaciones a la ley de ingresos" momentoId="MODIFICADO_AMP_I" cuentaAsociada ="8.1.3.1"/> -->
+<!--	<Momento description="Reducciones a la ley de ingresos" momentoId="MODIFICADO_RED_I" cuentaAsociada ="8.1.3.2"/> -->
+<!--	<Momento description="Ampliaciones compensadas a la ley de ingresos" momentoId="MODIFICADO_AMP_COM_I" cuentaAsociada ="8.1.3.3.01"/>  -->
+<!--	<Momento description="Reducciones compensadas a la ley de ingresos" momentoId="MODIFICADO_RED_COM_I" cuentaAsociada ="8.1.3.3.02"/> -->
+<!--	<Momento description="Ley de ingresos por ejecutar" momentoId="EJECUTAR" cuentaAsociada ="8.1.2"/> -->
+<!--	<Momento description="Ley de ingresos devengada pendiente de recaudar" momentoId="DEVENGADO_I" cuentaAsociada ="8.1.4"/> -->
+<!--	<Momento description="Ley de ingresos recaudada" momentoId="RECAUDADO" cuentaAsociada ="8.1.5"/>  -->
+
+	
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto disponible" movimientoMensualId="DISPONIBLE"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto comprometido" movimientoMensualId="COMPROMETIDO"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto devengado" movimientoMensualId="DEVENGADO_E"/>-->
+<!--	<MovimientoMensual description="Traspaso Mensual del gasto ejercido" movimientoMensualId="EJERCIDO"/>-->
+	
+<!-- 	<EventoContable acctgTransTypeId="SALDO_INICIAL" tipoPolizaId="DIARIO"/> -->
+<!-- 	<EventoContable acctgTransTypeId="PERIOD_CLOSING" tipoPolizaId="DIARIO" description="Cierre Contable"/> -->
+	
+<!-- 	<Evento acctgTransTypeId="SALDO_INICIAL" referencia="N" tipoPolizaIdCont="DIARIO"/> -->
+<!-- 	<Evento acctgTransTypeId="PERIOD_CLOSING" referencia="N" tipoPolizaIdCont="DIARIO"/> -->
+<!-- 	<Evento acctgTransTypeId="P_INICIAL_INGRESO" cuentaCargo="8.1.1" cuentaAbono="8.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N" />  -->
+<!-- 	<Evento acctgTransTypeId="P_INICIAL_EGRESO" cuentaCargo="8.2.2" cuentaAbono="8.2.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />  -->
+<!-- 	<Evento acctgTransTypeId="MOD_AMP_LI" cuentaCargo="8.1.3.1" cuentaAbono="8.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N" />  -->
+<!-- 	<Evento acctgTransTypeId="MOD_RED_LI" cuentaCargo="8.1.2" cuentaAbono="8.1.3.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_AMP_COM_LI" cuentaCargo="8.1.3.3.01" cuentaAbono="8.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_RED_COM_LI" cuentaCargo="8.1.2" cuentaAbono="8.1.3.3.02" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="DEV_LI" cuentaCargo="8.1.2" cuentaAbono="8.1.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="INGRESO" referencia="M" tipoMatriz="B.1"/>  -->
+<!-- 	<Evento acctgTransTypeId="REC_LI" cuentaCargo="8.1.4" cuentaAbono="8.1.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_INGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="INGRESO" referencia="M" tipoMatriz="B.2"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_AMP_PE" cuentaCargo="8.2.2" cuentaAbono="8.2.3.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_RED_PE" cuentaCargo="8.2.3.2" cuentaAbono="8.2.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_AMP_COM_PE" cuentaCargo="8.2.2" cuentaAbono="8.2.3.3.01" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="MOD_RED_COM_PE" cuentaCargo="8.2.3.3.02" cuentaAbono="8.2.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="COM_PE" cuentaCargo="8.2.4" cuentaAbono="8.2.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="DEV_PE" cuentaCargo="8.2.5" cuentaAbono="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="M" tipoMatriz="A.1"/>  -->
+<!-- 	<Evento acctgTransTypeId="EJE_PE" cuentaCargo="8.2.6" cuentaAbono="8.2.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="PAG_PE" cuentaCargo="8.2.7" cuentaAbono="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="M" tipoMatriz="A.2"/>  -->
+<!-- 	<Evento acctgTransTypeId="COM_PE_SA" cuentaCargo="8.2.4" cuentaAbono="8.2.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="DEV_PE_SA" cuentaCargo="8.2.5" cuentaAbono="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="M" tipoMatriz="A.1"/>  -->
+<!-- 	<Evento acctgTransTypeId="EJE_PE_SA" cuentaCargo="8.2.6" cuentaAbono="8.2.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="PAG_PE_SA" cuentaCargo="8.2.7" cuentaAbono="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="M" tipoMatriz="A.2"/> -->
+<!-- 	<Evento acctgTransTypeId="DEV_PE_OBRA" cuentaCargo="8.2.5" cuentaAbono="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="M" tipoMatriz="A.1"/>  -->
+<!-- 	<Evento acctgTransTypeId="EJE_PE_OBRA" cuentaCargo="8.2.6" cuentaAbono="8.2.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N"/> -->
+<!-- 	<Evento acctgTransTypeId="PAG_PE_OBRA" cuentaCargo="8.2.7" cuentaAbono="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" cuentaCargoPatri="2.1.1.4" cuentaAbonoPatri="1.1.3.4" referencia="G" />   -->
+<!--    <Evento acctgTransTypeId="PAG_PE_OBRA_RE5" cuentaCargo="8.2.7" cuentaAbono="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" cuentaCargoPatri="2.1.1.4" cuentaAbonoPatri="2.1.1.7.13" cuentaCargoObra="2.1.1.7.13" cuentaAbonoObra="1.1.1.2.01" referencia="G" /> -->
+<!--    <Evento acctgTransTypeId="PAG_PE_OBRA_RE2" cuentaCargo="8.2.7" cuentaAbono="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" cuentaCargoPatri="2.1.1.4" cuentaAbonoPatri="2.1.1.7.12" cuentaCargoObra="2.1.1.7.12" cuentaAbonoObra="1.1.1.2.01" referencia="G" /> -->
+<!-- 	<Evento acctgTransTypeId="DEVO_COMPROMETIDO" cuentaCargo="8.2.2" cuentaAbono="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" /> -->
+<!-- 	<Evento acctgTransTypeId="COM_LIBERACION" cuentaCargo="8.2.2" cuentaAbono="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" /> -->
+	
+	
+<!-- 	<TipoDocumento idTipoDoc="SALDO_INICIAL" descripcion="Carga de saldos iniciales" acctgTransTypeId="SALDO_INICIAL"/> -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_CONTABLE" descripcion="Cierre Contable" acctgTransTypeId="PERIOD_CLOSING"/> -->
+<!-- 	<TipoDocumento idTipoDoc="P_INICIAL_INGRESO" descripcion="Ley de ingresos estimada" acctgTransTypeId="P_INICIAL_INGRESO" mEjecutar1="ESTIMADO" mEjecutar2="EJECUTAR" moduloId="P_INICIAL"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="P_INICIAL_EGRESO" descripcion="Presupuesto de egresos aprobado" acctgTransTypeId="P_INICIAL_EGRESO" mEjecutar1="APROBADO" mEjecutar2="DISPONIBLE" moduloId="P_INICIAL"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_AMP_LI" descripcion="Ampliación a la ley de ingresos" acctgTransTypeId="MOD_AMP_LI" mEjecutar1="MODIFICADO_AMP_I" mEjecutar2="EJECUTAR" moduloId="CONTABILIDAD_I"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_RED_LI" descripcion="Reducción a la ley de ingresos" acctgTransTypeId="MOD_RED_LI" mEjecutar1="MODIFICADO_RED_I" moduloId="CONTABILIDAD_I"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_AMP_COM_LI" descripcion="Ampliación compensada a la ley de ingresos" acctgTransTypeId="MOD_AMP_COM_LI" mEjecutar1="EJECUTAR" mEjecutar2="MODIFICADO_AMP_COM_I" moduloId="CONTABILIDAD_I"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_RED_COM_LI" descripcion="Reducción compensada a la ley de ingresos" acctgTransTypeId="MOD_RED_COM_LI" mComparativo="ESTIMADO" mEjecutar1="MODIFICADO_RED_COM_I" comparacion=">=" moduloId="CONTABILIDAD_I"/> -->
+<!-- 	<TipoDocumento idTipoDoc="DEV_LI" descripcion="Ley de ingresos devengada pendiente por recaudar" acctgTransTypeId="DEV_LI" mEjecutar1="DEVENGADO_I" moduloId="TESORERIA_CXC_OR"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="REC_LI" descripcion="Ley de ingresos recaudada" acctgTransTypeId="REC_LI" mEjecutar1="RECAUDADO" moduloId="TESORERIA_CXC_PAG" predecesor="DEV_LI"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_AMP_PE" descripcion="Ampliación al presupuesto de egresos" acctgTransTypeId="MOD_AMP_PE" mEjecutar1="DISPONIBLE" mEjecutar2="MODIFICADO_AMP_E" moduloId="CONTABILIDAD_E"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_RED_PE" descripcion="Reducción al presupuesto de egresos" acctgTransTypeId="MOD_RED_PE" mComparativo="DISPONIBLE" mEjecutar1="MODIFICADO_RED_E" comparacion=">=" moduloId="CONTABILIDAD_E"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_AMP_COM_PE" descripcion="Ampliación compensada al presupuesto de egresos" acctgTransTypeId="MOD_AMP_COM_PE" mEjecutar1="DISPONIBLE" mEjecutar2="MODIFICADO_AMP_COM_E" moduloId="CONTABILIDAD_E"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="MOD_RED_COM_PE" descripcion="Reducción compensada al presupuesto de egresos" acctgTransTypeId="MOD_RED_COM_PE" mComparativo="DISPONIBLE" mEjecutar1="MODIFICADO_RED_COM_E" comparacion=">=" moduloId="CONTABILIDAD_E"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="COM_PE" descripcion="Presupuesto de egresos comprometido" acctgTransTypeId="COM_PE" mComparativo="DISPONIBLE" mEjecutar1="COMPROMETIDO" comparacion=">=" moduloId="ADQUISICIONES"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="DEV_PE" descripcion="Presupuesto de egresos devengado" acctgTransTypeId="DEV_PE" mComparativo="COMPROMETIDO" mEjecutar1="DEVENGADO_E" comparacion=">=" moduloId="INVENTARIO" predecesor="COM_PE"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="EJE_PE" descripcion="Presupuesto de egresos ejercido pendiente de pago" acctgTransTypeId="EJE_PE" mComparativo="DEVENGADO_E" mEjecutar1="EJERCIDO" comparacion=">=" moduloId="TESORERIA_CXP_OR" predecesor="DEV_PE"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="PAG_PE" descripcion="Presupuesto de egresos pagado" acctgTransTypeId="PAG_PE" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="TESORERIA_CXP_PAG" predecesor="EJE_PE"/>      -->
+<!-- 	<TipoDocumento idTipoDoc="COM_PE_SA" descripcion="Presupuesto de egresos comprometido sin auxiliar" acctgTransTypeId="COM_PE_SA" mComparativo="DISPONIBLE" mEjecutar1="COMPROMETIDO" comparacion=">=" moduloId="CONTABILIDAD_E"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="DEV_PE_SA" descripcion="Presupuesto de egresos devengado sin auxiliar" acctgTransTypeId="DEV_PE_SA" mComparativo="COMPROMETIDO" mEjecutar1="DEVENGADO_E" comparacion=">=" moduloId="CONTABILIDAD_E" predecesor="COM_PE_SA"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="EJE_PE_SA" descripcion="Presupuesto de egresos ejercido pendiente de pago sin auxiliar" acctgTransTypeId="EJE_PE_SA" mComparativo="DEVENGADO_E" mEjecutar1="EJERCIDO" comparacion=">=" moduloId="TESORERIA_CXP_OR" predecesor="DEV_PE_SA"/>  -->
+<!-- 	<TipoDocumento idTipoDoc="PAG_PE_SA" descripcion="Presupuesto de egresos pagado sin auxiliar" acctgTransTypeId="PAG_PE_SA" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="TESORERIA_CXP_PAG" predecesor="EJE_PE_SA"/>  -->
+<!--    <TipoDocumento idTipoDoc="DEV_PE_OBRA" descripcion="Presupuesto de egresos devengado para obra" acctgTransTypeId="DEV_PE_OBRA" mComparativo="COMPROMETIDO" mEjecutar1="DEVENGADO_E" comparacion=">=" moduloId="OBRAS" /> --> 
+<!--    <TipoDocumento idTipoDoc="EJE_PE_OBRA" descripcion="Presupuesto de egresos ejercido pendiente de pago para obra" acctgTransTypeId="EJE_PE_OBRA" mComparativo="DEVENGADO_E" mEjecutar1="EJERCIDO" comparacion=">=" moduloId="OBRAS" predecesor="DEV_PE_OBRA"/> --> 
+<!--	<TipoDocumento idTipoDoc="PAG_PE_OBRA" descripcion="Presupuesto de egresos pagado para obra" acctgTransTypeId="PAG_PE_OBRA" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="OBRAS" predecesor="EJE_PE_OBRA"/> -->  
+<!-- 	<TipoDocumento idTipoDoc="PAG_PE_OBRA_RE5" descripcion="Presupuesto de egresos pagado para retenciones de obra del 5%" acctgTransTypeId="PAG_PE_OBRA_RE5" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="TESORERIA_CXP_PAG" predecesor="EJE_PE"/>    -->
+<!-- 	<TipoDocumento idTipoDoc="PAG_PE_OBRA_RE2" descripcion="Presupuesto de egresos pagado para retenciones de obra del 2%" acctgTransTypeId="PAG_PE_OBRA_RE2" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="TESORERIA_CXP_PAG" predecesor="EJE_PE"/> -->
+<!-- 	<TipoDocumento idTipoDoc="DEVO_COMPROMETIDO" descripcion="Devolución del compromiso por cancelación" acctgTransTypeId="DEVO_COMPROMETIDO" mComparativo="COMPROMETIDO" mEjecutar1="DISPONIBLE" comparacion=">=" moduloId="ADQUISICIONES" />  -->
+<!-- 	<TipoDocumento idTipoDoc="COM_LIBERACION" descripcion="Liberación de comprometido" acctgTransTypeId="COM_LIBERACION" mComparativo="COMPROMETIDO" mEjecutar1="DISPONIBLE" comparacion=">=" moduloId="CONTABILIDAD_E" flagLiberacion="Y" /> -->
+	
+	<!-- Evento Viaticos -->
+
+	<!-- Eventos para Cierre Presupuestal  -->
+<!-- 	<TipoPoliza description="Póliza de cierre presupuestal" tipoPolizaId="CIERRE_PRES" tipo="Presupuestal"/>		   -->
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES1" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES1" cuentaCargo="8.2.2" cuentaAbono="8.2.4" cuentaCancelar="8.2.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES1" descripcion="Cierre presupuestal para cancelar presupuesto de egresos comprometido" acctgTransTypeId="CIERRE_PRES1" />  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES2" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES2" cuentaCargo="8.2.3.1" cuentaAbono="8.2.2" cuentaCancelar="8.2.3.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES2" descripcion="Cierre presupuestal para cancelar ampliaciones al presupuesto de egresos" acctgTransTypeId="CIERRE_PRES2" predecesor="CIERRE_PRES1"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES3" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES3" cuentaCargo="8.2.3.3.01" cuentaAbono="8.2.2" cuentaCancelar="8.2.3.3.01" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES3" descripcion="Cierre presupuestal para cancelar ampliaciones compensadas al presupuesto de egresos" acctgTransTypeId="CIERRE_PRES3" predecesor="CIERRE_PRES2"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES4" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES4" cuentaCargo="8.2.2" cuentaAbono="8.2.3.2" cuentaCancelar="8.2.3.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES4" descripcion="Cierre presupuestal para cancelar reducciones al presupuesto de egresos" acctgTransTypeId="CIERRE_PRES4" predecesor="CIERRE_PRES3"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES5" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES5" cuentaCargo="8.2.2" cuentaAbono="8.2.3.3.02" cuentaCancelar="8.2.3.3.02" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES5" descripcion="Cierre presupuestal para cancelar reducciones compensadas al presupuesto de egresos" acctgTransTypeId="CIERRE_PRES5" predecesor="CIERRE_PRES4"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES6" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES6" cuentaCargo="8.2.1" cuentaAbono="8.2.2" cuentaCancelar="8.2.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES6" descripcion="Cierre presupuestal para cancelar presupuesto de egresos por ejercer" acctgTransTypeId="CIERRE_PRES6" predecesor="CIERRE_PRES5"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES7" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES7" cuentaCargo="8.2.1" cuentaAbono="9.1" cuentaCancelar="8.2.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES7" descripcion="Cierre presupuestal para cancelar presupuesto de egresos aprobado" acctgTransTypeId="CIERRE_PRES7" predecesor="CIERRE_PRES6"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES8" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES8" cuentaCargo="9.3" cuentaAbono="8.2.5" cuentaCancelar="8.2.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES8" descripcion="Cierre presupuestal para cancelar presupuesto de egresos devengado" acctgTransTypeId="CIERRE_PRES8" predecesor="CIERRE_PRES7"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES9" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES9" cuentaCargo="9.3" cuentaAbono="8.2.6" cuentaCancelar="8.2.6" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES9" descripcion="Cierre presupuestal para cancelar presupuesto de egresos ejercido" acctgTransTypeId="CIERRE_PRES9" predecesor="CIERRE_PRES8"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES10" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES10" cuentaCargo="9.2" cuentaAbono="8.2.7" cuentaCancelar="8.2.7" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES10" descripcion="Cierre presupuestal para cancelar presupuesto de egresos pagado" acctgTransTypeId="CIERRE_PRES10" predecesor="CIERRE_PRES9"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES11" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES11" cuentaCargo="8.1.4" cuentaAbono="8.1.2" cuentaCancelar="8.1.4" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES11" descripcion="Cierre presupuestal para cancelar ley de ingresos devengada" acctgTransTypeId="CIERRE_PRES11" predecesor="CIERRE_PRES10"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES12" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES12" cuentaCargo="8.1.2" cuentaAbono="8.1.3.1" cuentaCancelar="8.1.3.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES12" descripcion="Cierre presupuestal para cancelar ampliaciones a la ley de ingresos" acctgTransTypeId="CIERRE_PRES12" predecesor="CIERRE_PRES11"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES13" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES13" cuentaCargo="8.1.2" cuentaAbono="8.1.3.3.01" cuentaCancelar="8.1.3.3.01" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES13" descripcion="Cierre presupuestal para cancelar ampliaciones compensadas a la ley de ingresos" acctgTransTypeId="CIERRE_PRES13" predecesor="CIERRE_PRES12"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES14" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES14" cuentaCargo="8.1.3.2" cuentaAbono="8.1.2" cuentaCancelar="8.1.3.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES14" descripcion="Cierre presupuestal para cancelar reducciones a la ley de ingresos" acctgTransTypeId="CIERRE_PRES14" predecesor="CIERRE_PRES13"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES15" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES15" cuentaCargo="8.1.3.3.02" cuentaAbono="8.1.2" cuentaCancelar="8.1.3.3.02" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES15" descripcion="Cierre presupuestal para cancelar reducciones compensadas a la ley de ingresos" acctgTransTypeId="CIERRE_PRES15" predecesor="CIERRE_PRES14"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES16" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES16" cuentaCargo="8.1.2" cuentaAbono="8.1.1" cuentaCancelar="8.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES16" descripcion="Cierre presupuestal para cancelar ley de ingresos por ejecutar" acctgTransTypeId="CIERRE_PRES16" predecesor="CIERRE_PRES15"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES17" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES17" cuentaCargo="9.2" cuentaAbono="8.1.1" cuentaCancelar="8.1.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES17" descripcion="Cierre presupuestal para cancelar ley de ingresos estimada original" acctgTransTypeId="CIERRE_PRES17" predecesor="CIERRE_PRES16"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRES18" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRES18" cuentaCargo="8.1.5" cuentaAbono="9.1" cuentaCancelar="8.1.5" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRES18" descripcion="Cierre presupuestal para cancelar ley de ingresos recaudada" acctgTransTypeId="CIERRE_PRES18" predecesor="CIERRE_PRES17"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="CIERRE_PRESUPUESTAL" description="Cierre Presupuestal" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="CIERRE_PRESUPUESTAL" cuentaCargo="9.2" cuentaAbono="9.3" cuentaCancelar="9.3" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CIERRE_PRES" referencia="N" />  -->
+<!-- 	<TipoDocumento idTipoDoc="CIERRE_PRESUPUESTAL" descripcion="Cierre presupuestal para cancelar adefas" acctgTransTypeId="CIERRE_PRESUPUESTAL" predecesor="CIERRE_PRES18"/>  -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="ANT_OBRAS" parentTypeId="INTERNAL_ACCTG_TRANS" hasTable="N" description="Anticipo de obras" catalogoCargo="A" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="ANT_OBRAS" cuentaCargoPatri="1.1.3.4" cuentaAbonoPatri="1.1.1.2.01" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="G" />  -->
+<!-- 	<TipoDocumento idTipoDoc="ANT_OBRAS" descripcion="Anticipo de obras" acctgTransTypeId="ANT_OBRAS" moduloId="TESORERIA_PENDIENTES" /> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="DEVOLUCION_VIATICO" parentTypeId="INTERNAL_ACCTG_TRANS" hasTable="N" description="Devolución de viáticos en flujo" catalogoCargo="N" catalogoAbono="A"/>  -->
+<!-- 	<Evento acctgTransTypeId="DEVOLUCION_VIATICO" cuentaCargoPatri="1.1.1.2.01" cuentaAbonoPatri="1.1.2.3.02" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="INGRESO" referencia="G" />  -->
+<!-- 	<TipoDocumento idTipoDoc="DEVOLUCION_VIATICO" descripcion="Devolución de viáticos en flujo" acctgTransTypeId="DEVOLUCION_VIATICO" moduloId="TESORERIA_PENDIENTES" /> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="OTORGAMIENTO_VIATICO" parentTypeId="INTERNAL_ACCTG_TRANS" hasTable="N" description="Otorgamiento de viáticos" catalogoCargo="A" catalogoAbono="N"/>  -->
+<!-- 	<Evento acctgTransTypeId="OTORGAMIENTO_VIATICO" cuentaCargoPatri="1.1.2.3.02" cuentaAbonoPatri="1.1.1.2.01" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="EGRESO" referencia="G" />  -->
+<!-- 	<TipoDocumento idTipoDoc="OTORGAMIENTO_VIATICO" descripcion="Otorgamiento de viáticos" acctgTransTypeId="OTORGAMIENTO_VIATICO" moduloId="TESORERIA_PENDIENTES" /> -->
+
+	<Sucursal sucursalId="10001" nombreSucursal="San Luis Potosi" estatus="1" bancoId="012"/>
+	<Sucursal sucursalId="10002" nombreSucursal="San Luis Potosi" estatus="1" bancoId="021"/>
+	<Sucursal sucursalId="10003" nombreSucursal="San Luis Potosi" estatus="1" bancoId="072"/>
+	<Sucursal sucursalId="10004" nombreSucursal="San Luis Potosi" estatus="1" bancoId="014"/>
+	
+	<Uom uomId="BLOCK" uomTypeId="OTHER_MEASURE" abbreviation="Blo" description="Bloque"/>
+	<Uom uomId="CAJA" uomTypeId="OTHER_MEASURE" abbreviation="Caj" description="Caja"/>
+	<Uom uomId="HOJA" uomTypeId="OTHER_MEASURE" abbreviation="Hoj" description="Hoja"/>
+	<Uom uomId="PAQUETE" uomTypeId="OTHER_MEASURE" abbreviation="Paq" description="Paquete"/>
+	<Uom uomId="PIEZA" uomTypeId="OTHER_MEASURE" abbreviation="Pza" description="Pieza"/>
+	<Uom uomId="ROLLO" uomTypeId="OTHER_MEASURE" abbreviation="Rll" description="Rollo"/>
+	<Uom uomId="SUMINISTRO" uomTypeId="OTHER_MEASURE" abbreviation="Smn" description="Suministro"/>
+	<Uom uomId="BLISTER" uomTypeId="OTHER_MEASURE" abbreviation="Bli" description="Blister"/>
+	<Uom uomId="CAJILLA" uomTypeId="OTHER_MEASURE" abbreviation="Cji" description="Cajilla"/>
+	<Uom uomId="KILO" uomTypeId="WEIGHT_MEASURE" abbreviation="KG" description="Kilo"/>
+	
+	<ProductType description="Publicaciones" isPhysical="N" isDigital="N" hasTable="N" parentTypeId="" productTypeId="PUBLICACIONES"/>
+	
+	<ColeccionPublicacion coleccionId="1" nombreColeccion="Colección Investigaciones"/>
+	<ColeccionPublicacion coleccionId="2" nombreColeccion="Colección Biblioteca Tlaxcalteca"/>
+	<ColeccionPublicacion coleccionId="3" nombreColeccion="Colección Biblioteca Tlaxcalteca / Fuentes documentales"/>
+	<ColeccionPublicacion coleccionId="4" nombreColeccion="Cuadernos del Centro"/>
+	<ColeccionPublicacion coleccionId="5" nombreColeccion="Coediciones y Legados"/>
+	<ColeccionPublicacion coleccionId="6" nombreColeccion="Colección Datos"/>
+	<ColeccionPublicacion coleccionId="7" nombreColeccion="Colección Documentos"/>
+	<ColeccionPublicacion coleccionId="8" nombreColeccion="Colección Memorias"/>
+	<ColeccionPublicacion coleccionId="9" nombreColeccion="Literatura Potosina 1850-1950. Narrativa"/>
+	<ColeccionPublicacion coleccionId="10" nombreColeccion="Literatura Potosina 1850-1950. Poesía"/>
+	<ColeccionPublicacion coleccionId="11" nombreColeccion="Publicaciones Periódicas"/>
+	<ColeccionPublicacion coleccionId="12" nombreColeccion="Documentales en Video"/>
+	<ColeccionPublicacion coleccionId="13" nombreColeccion="Memorias Electrónicas"/>
+	<ColeccionPublicacion coleccionId="14" nombreColeccion="Colección Huasteca"/>
+	<ColeccionPublicacion coleccionId="15" nombreColeccion="Colección Literaria"/>
+	<ColeccionPublicacion coleccionId="16" nombreColeccion="Revista Vetas"/>
+	<ColeccionPublicacion coleccionId="17" nombreColeccion="Revista Frontera Interior"/>
+	<ColeccionPublicacion coleccionId="18" nombreColeccion="Colección Fin de Siglo"/>
+	<ColeccionPublicacion coleccionId="19" nombreColeccion="Colección Bicentenario"/>
+		    
+<!-- 	<RoleType description="Tesorero" hasTable="N" parentTypeId="" roleTypeId="TESORERO"/> -->
+	
+<!-- 	<RoleType description="Deudores diversos por cobrar" hasTable="N" parentTypeId="" roleTypeId="DEUDORES_D"/> -->
+<!-- 	<RoleType description="Activo por reserva laboral" hasTable="N" parentTypeId="" roleTypeId="ACTIVO_RL"/> -->
+	
+<!-- 	<PartyType description="Deudores diversos por cobrar" hasTable="N" parentTypeId="" partyTypeId="DEUDORES_D" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!-- 	<PartyType description="Activo por reserva laboral" hasTable="N" parentTypeId="" partyTypeId="ACTIVO_RL" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!-- 	<PartyType description="Empleados" hasTable="N" parentTypeId="" partyTypeId="EMPLEADO" auxiliar="Y" tipoAuxiliar="D"/> -->
+	
+<!-- 	<TipoAuxiliar tipoAuxiliarId="ACREEDOR" tipoEntidad="ACREEDOR" entidad="Party" descripcion="Auxiliar Acreedor" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="ANTICIPO_C" tipoEntidad="ANTICIPO_C" entidad="Party" descripcion="Auxiliar Anticipo a Contratista" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="ANTICIPO_P" tipoEntidad="ANTICIPO_P" entidad="Party" descripcion="Auxiliar Anticipo a Proveedor" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="CLIENTE" tipoEntidad="CLIENTE" entidad="Party" descripcion="Auxiliar Cliente" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="CONCEPTO_GENERAL" tipoEntidad="CONCEPTO_GENERAL" entidad="Party" descripcion="Auxiliar Conceptos Generales" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="CONTRATISTA" tipoEntidad="CONTRATISTA" entidad="Party" descripcion="Auxiliar Contratista" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="DEPOSITO_GARANTIA" tipoEntidad="DEPOSITO_GARANTIA" entidad="Party" descripcion="Auxiliar Deposito Garantía" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="DEUDORES_EXT" tipoEntidad="DEUDORES_EXT" entidad="Party" descripcion="Auxiliar Deudores Externos" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="EMPLEADO" tipoEntidad="EMPLEADO" entidad="Party" descripcion="Auxiliar Empleado" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="PROVEEDOR" tipoEntidad="PROVEEDOR" entidad="Party" descripcion="Auxiliar Proveedor" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="PRODUCTO" descripcion="Producto" entidad="Product" urlBusqueda="getAutoCompleteProduct" nombreLooukup="LookupProduct" tipo="P"/> -->
+	
+<!-- 	<RoleType description="Préstamo por fondo de ahorro" hasTable="N" parentTypeId="" flag="Y" roleTypeId="PR_FONDO_AHORRO"/> -->
+<!-- 	<PartyType description="Préstamo por fondo de ahorro" hasTable="N" parentTypeId="" partyTypeId="PR_FONDO_AHORRO" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="PR_FONDO_AHORRO" tipoEntidad="PR_FONDO_AHORRO" entidad="Party" descripcion="Préstamo por fondo de ahorro" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+	
+<!-- 	<RoleType description="Gastos por comprobar" hasTable="N" parentTypeId="" flag="Y" roleTypeId="GASTOS_COMPROBAR"/> -->
+<!-- 	<PartyType description="Gastos por comprobar" hasTable="N" parentTypeId="" partyTypeId="GASTOS_COMPROBAR" auxiliar="Y" tipoAuxiliar="D"/> -->
+<!-- 	<TipoAuxiliar tipoAuxiliarId="GASTOS_COMPROBAR" tipoEntidad="GASTOS_COMPROBAR" entidad="Party" descripcion="Gastos por comprobar" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+	
+<!-- 	<TipoAuxiliar tipoAuxiliarId="PERSON" tipoEntidad="PERSON" entidad="Party" descripcion="Gastos de viaje" urlBusqueda="getAutoCompletePartyIds" nombreLooukup="LookupPartyName" tipo="A"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="SEGUIMIENTO_OBRA2" description="Seguimiento de la obra" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="SEGUIMIENTO_OBRA2" tipoPolizaId="EGRESO" moduloId="OBRAS" descripcion="Seguimiento de la obra"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA2" secuencia="1" cuentaCargo="8.2.5" cuentaAbono="8.2.4" catalogoCargo="PRODUCTO" catalogoAbono="PROVEEDOR" momentoCompara="COMPROMETIDO" momentoEjecutar1="DEVENGADO_E" comparacion=">=" tipoMatrizId="A.1" descripcion="Devengado"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA2" secuencia="2" cuentaCargo="8.2.6" cuentaAbono="8.2.5" catalogoCargo="PRODUCTO" catalogoAbono="PROVEEDOR" momentoCompara="DEVENGADO_E" momentoEjecutar1="EJERCIDO" comparacion=">=" descripcion="Ejercido"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA2" secuencia="3" cuentaCargo="8.2.7" cuentaAbono="8.2.6" catalogoCargo="PROVEEDOR" momentoCompara="EJERCIDO" momentoEjecutar1="PAGADO" comparacion=">=" descripcion="Pago"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="SEGUIMIENTO_OBRA3" description="Seguimiento de la obra" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="SEGUIMIENTO_OBRA3" tipoPolizaId="EGRESO" moduloId="OBRAS" descripcion="Seguimiento de la obra"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA3" secuencia="1" cuentaCargo="8.2.5" cuentaAbono="8.2.4" catalogoCargo="PRODUCTO" catalogoAbono="PROVEEDOR" momentoCompara="COMPROMETIDO" momentoEjecutar1="DEVENGADO_E" comparacion=">=" tipoMatrizId="A.1" descripcion="Devengado"/> -->
+<!-- 	<AcctgTransType acctgTransTypeId="SEGUIMIENTO_OBRA3" description="Seguimiento de la obra" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="SEGUIMIENTO_OBRA3" tipoPolizaId="EGRESO" moduloId="OBRAS" descripcion="Seguimiento de la obra"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA3" secuencia="1" cuentaCargo="8.2.5" cuentaAbono="8.2.4" catalogoCargo="PRODUCTO" catalogoAbono="PROVEEDOR" momentoCompara="COMPROMETIDO" momentoEjecutar1="DEVENGADO_E" comparacion=">=" tipoMatrizId="A.1" descripcion="Devengado"/> -->
+<!-- 	<AcctgTransType acctgTransTypeId="SEGUIMIENTO_OBRA3" description="Seguimiento de la obra" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="SEGUIMIENTO_OBRA3" tipoPolizaId="EGRESO" moduloId="OBRAS" descripcion="Seguimiento de la obra"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="SEGUIMIENTO_OBRA3" secuencia="1" cuentaCargo="8.2.5" cuentaAbono="8.2.4" catalogoCargo="PRODUCTO" catalogoAbono="PROVEEDOR" momentoCompara="COMPROMETIDO" momentoEjecutar1="DEVENGADO_E" comparacion=">=" tipoMatrizId="A.1" descripcion="Devengado"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="COM_PE" description="Presupuesto de egresos comprometido" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="COM_PE" tipoPolizaId="EGRESO" moduloId="ADQUISICIONES" descripcion="Presupuesto de egresos comprometido"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="COM_PE" secuencia="1" cuentaCargo="8.2.4" cuentaAbono="8.2.2" momentoCompara="DISPONIBLE" momentoEjecutar1="COMPROMETIDO" comparacion=">=" descripcion="Comprometido"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="EJE_PE" description="Presupuesto de egresos pendiente por ejercer" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="EJE_PE" tipoPolizaId="EGRESO" moduloId="TESORERIA" descripcion="Presupuesto de egresos pendiente por ejercer"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="EJE_PE" secuencia="1" cuentaCargo="8.2.6" cuentaAbono="8.2.5" momentoCompara="DEVENGADO_E" momentoEjecutar1="EJERCIDO" comparacion=">=" descripcion="Ejercido"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="COM_LIBERACION" description="Liberación de presupuesto" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="COM_LIBERACION" tipoPolizaId="EGRESO" moduloId="TESORERIA" descripcion="Liberación de presupuesto"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="COM_LIBERACION" secuencia="1" cuentaCargo="8.2.2" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Liberacion"/> -->
+
+<!-- 	<AcctgTransType acctgTransTypeId="PECO-AMP" description="Ampliación de presupuesto de un pedido o contrato" parentTypeId="INTERNAL_ACCTG_TRANS"/>  -->
+<!-- 	<EventoContable acctgTransTypeId="PECO-AMP" tipoPolizaId="DIARIO" moduloId="AMPLIACION_PEDIDO" descripcion="Ampliación de presupuesto de un pedido o contrato"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="PECO-AMP" secuencia="1" cuentaCargo="8.2.4" cuentaAbono="8.2.2" momentoCompara="DISPONIBLE" momentoEjecutar1="COMPROMETIDO" comparacion=">=" descripcion="Ampliación de pedido o contrato"/> -->
+	
+<!-- 	<AcctgTransType acctgTransTypeId="PECO-REDU" description="Reducción de presupuesto de un pedido o contrato" parentTypeId="INTERNAL_ACCTG_TRANS"/> -->
+<!-- 	<EventoContable acctgTransTypeId="PECO-REDU" tipoPolizaId="DIARIO" moduloId="REDUCCION_PEDIDO" descripcion="Reducción de presupuesto de un pedido o contrato"/> -->
+<!-- 	<LineaPresupuestal acctgTransTypeId="PECO-REDU" secuencia="1" cuentaCargo="8.2.2" cuentaAbono="8.2.4" momentoCompara="COMPROMETIDO" momentoEjecutar1="DISPONIBLE" comparacion=">=" descripcion="Reducción de pedido o contrato"/> -->
+
+	<AcctgTransType acctgTransTypeId="CPCP-001" description="Depreciación de Bienes Inmuebles" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-002" description="Depreciación de Mobiliario y Equipo de Administración" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-003" description="Depreciación de Mobiliario y Equipo Educacional y Recreativo" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-004" description="Depreciación acumulada de maquinaria y equipo" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-005" description="Depreciación acumulada de comunicaciones y telecomunicaciones" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-006" description="Depreciación de Equipo de Transporte" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPCP-007" description="Depreciación de Bienes informáticos" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPAL-001" description="Creación de Muebles de Oficina" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPAL-002" description="Creación de Otros Muebles" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPAL-003" description="Creación de Bienes Artisticos" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPAL-004" description="Creación de Objetos de Valor" parentTypeId="INTERNAL_ACCTG_TRANS"/>
+	<AcctgTransType acctgTransTypeId="CPAL-005" description="Creación de Bienes Informaticos y TI" parentTypeId="INTERNAL_ACCTG_TRANS"/>	
+		
+	<EventoContable acctgTransTypeId="CPCP-001" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Bienes Inmuebles"/>
+	<EventoContable acctgTransTypeId="CPCP-002" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Mobiliario y Equipo de Administración"/>
+	<EventoContable acctgTransTypeId="CPCP-003" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Mobiliario y Equipo Educacional y Recreativo"/>
+	<EventoContable acctgTransTypeId="CPCP-004" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación acumulada de maquinaria y equipo"/>
+	<EventoContable acctgTransTypeId="CPCP-005" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación acumulada de comunicaciones y telecomunicaciones"/>
+	<EventoContable acctgTransTypeId="CPCP-006" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Equipo de Transporte"/>
+	<EventoContable acctgTransTypeId="CPCP-007" tipoPolizaId="DIARIO" moduloId="DEPRECIACION" descripcion="Depreciación de Bienes informáticos"/>
+	<EventoContable acctgTransTypeId="CPAL-001" tipoPolizaId="DIARIO" moduloId="CREA_CTRL_PATR" descripcion="Creación de Muebles de Oficina"/>
+	<EventoContable acctgTransTypeId="CPAL-002" tipoPolizaId="DIARIO" moduloId="CREA_CTRL_PATR" descripcion="Creación de Otros Muebles"/>
+	<EventoContable acctgTransTypeId="CPAL-003" tipoPolizaId="DIARIO" moduloId="CREA_CTRL_PATR" descripcion="Creación de Bienes Artisticos"/>
+	<EventoContable acctgTransTypeId="CPAL-004" tipoPolizaId="DIARIO" moduloId="CREA_CTRL_PATR" descripcion="Creación de Objetos de Valor"/>
+	<EventoContable acctgTransTypeId="CPAL-005" tipoPolizaId="DIARIO" moduloId="CREA_CTRL_PATR" descripcion="Creación de Bienes Informaticos y TI"/>	
+	<!--<LineaContable acctgTransTypeId="CPCP-001" secuencia="1" cuentaCargo="5.5.1.3" cuentaAbono="1.2.6.1.01" descripcion="Depreciación de Bienes Inmuebles"/>
+	<LineaContable acctgTransTypeId="CPCP-002" secuencia="1" cuentaCargo="5.5.1.5.01" cuentaAbono="1.2.6.2.01" descripcion="Depreciación de Mobiliario y Equipo de Administración"/>
+	<LineaContable acctgTransTypeId="CPCP-003" secuencia="1" cuentaCargo="5.5.1.5.02" cuentaAbono="1.2.6.2.03" descripcion="Depreciación de Mobiliario y Equipo Educacional y Recreativo"/>
+	<LineaContable acctgTransTypeId="CPCP-004" secuencia="1" cuentaCargo="5.5.1.5.03" cuentaAbono="1.2.6.2.05" descripcion="Depreciación acumulada de maquinaria y equipo"/>
+	<LineaContable acctgTransTypeId="CPCP-005" secuencia="1" cuentaCargo="5.5.1.5.03" cuentaAbono="1.2.6.2.06" descripcion="Depreciación acumulada de comunicaciones y telecomunicaciones"/>
+	<LineaContable acctgTransTypeId="CPCP-006" secuencia="1" cuentaCargo="5.5.1.5.04" cuentaAbono="1.2.6.2.08" descripcion="Depreciación de Equipo de Transporte"/>
+	<LineaContable acctgTransTypeId="CPCP-007" secuencia="1" cuentaCargo="5.5.1.5.05" cuentaAbono="1.2.6.2.10" descripcion="Depreciación de Bienes informáticos"/> -->	
+	
+	<Retencion retencionId="10000" nombreRetencion="Retención 5 al millar I.V.D.G.L.E" descripcion="Retención 5 al millar I.V.D.G.L.E" porcentaje="5" auxiliar="91K01"/>
+	<Retencion retencionId="10001" nombreRetencion="Retención 2 al millar I.C.I.C" descripcion="Retención 2 al millar I.C.I.C" porcentaje="2" auxiliar="91K01"/>
+
+ 	<UbicacionRapida ubicacionRapidaId="E1N1ALMLIB" descripcion="EDIFICIO 1 NIVEL 1 ALMACEN LIBRERÍA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1ALSEGE" descripcion="EDIFICIO 1 NIVEL 1 ALMACEN SERVICIOS GENERALES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1AREPUB" descripcion="EDIFICIO 1 NIVEL 1 AREA PUBLICA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1ARPUBH" descripcion="EDIFICIO 1 NIVEL 1 AREA PUBLICA BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1ARPUBM" descripcion="EDIFICIO 1 NIVEL 1 AREA PUBLICA BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1BIBLIO" descripcion="EDIFICIO 1 NIVEL 1 BIBLIOTECA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CABAHO" descripcion="EDIFICIO 1 NIVEL 1 CAFETERIA BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CABAMU" descripcion="EDIFICIO 1 NIVEL 1 CAFETERIA BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CAFCOC" descripcion="EDIFICIO 1 NIVEL 1 COCINA DE CAFETERIA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CAFETE" descripcion="EDIFICIO 1, NIVEL 1, CAFETERÍA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CASVIG" descripcion="EDIFICIO 1 NIVEL 1 CASETA DE VIGILANCIA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CENFOT" descripcion="EDIFICIO 1 NIVEL 1 CENTRO DE FOTOCOPIADO "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUAMAQ" descripcion="EDIFICIO 1 NIVEL 1 CUARTO DE MAQUINAS "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI01" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI02" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 02 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI03" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 03 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI04" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 04 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI05" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 05 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI06" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 06 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI07" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 07 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI08" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 08 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI09" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 09 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI10" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI11" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 11 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1CUBI12" descripcion="EDIFICIO 1 NIVEL 1 CUBICULO 12 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1PASILL" descripcion="EDIFICIO 1 NIVEL 1 PASILLO "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1PASILL" descripcion="EDIFICIO 1 NIVEL 2 PASILLO "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1SALCMC" descripcion="EDIFICIO 1 NIVEL 1 SALA CAPITÁN MIGUEL CALDERA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N1SITE01" descripcion="EDIFICIO 1 NIVEL 1 SITE 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AREPUB" descripcion="EDIFICIO 1 NIVEL 2 AREA PUBLICA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AUBAHO" descripcion="EDIFICIO 1 NIVEL 2 AUDITORIO BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AUBAMU" descripcion="EDIFICIO 1 NIVEL 2 AUDITORIO BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AUDCAB" descripcion="EDIFICIO 1 NIVEL 2 AUDITORIO CABINA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AUDITO" descripcion="EDIFICIO 1 NIVEL 2 AUDITORIO "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AULA01" descripcion="EDIFICIO 3 NIVEL 1 AULA I "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2AULA02" descripcion="EDIFICIO 3 NIVEL 1 AULA II "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2BAÑHOM" descripcion="EDIFICIO 1 NIVEL 2 BAÑO HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2BAÑMUJ" descripcion="EDIFICIO 1 NIVEL 2 BAÑO MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2BIBLIO" descripcion="EDIFICIO 1 NIVEL 2 BIBLIOTECA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI01" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI02" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 02 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI03" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 03 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI04" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 04 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI05" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 05 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2CUBI06" descripcion="EDIFICIO 1 NIVEL 2 CUBICULO 06 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2RECEPC" descripcion="EDIFICIO 1 NIVEL 2 RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2SASE03" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS III "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2SASE04" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS IV "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2SASE05" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS V "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2SASE06" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS VI "/>
+	<UbicacionRapida ubicacionRapidaId="E1N2UNTEIN" descripcion="EDIFICIO 1 NIVEL 2 UNIDAD DE TECNOLOGIAS DE INFORMACION "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3ARECAF" descripcion="EDIFICIO 1 NIVEL 3 AREA DE CAFÉ "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3BAÑHOM" descripcion="EDIFICIO 1 NIVEL 3 BAÑO HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3BAÑMUJ" descripcion="EDIFICIO 1 NIVEL 3 BAÑO MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3BIBLIO" descripcion="EDIFICIO 1 NIVEL 3 BIBLIOTECA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3PREBAÑ" descripcion="EDIFICIO 1 NIVEL 3 PRESIDENCIA BAÑO "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3PREREC" descripcion="EDIFICIO 1 NIVEL 3 PRESIDENCIA RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3PRESI1" descripcion="EDIFICIO 1 NIVEL 3 PRESIDENCIA AREA 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3PRESID" descripcion="EDIFICIO 1 NIVEL 3 PRESIDENCIA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3SEACAD" descripcion="EDIFICIO 1 NIVEL 3 SECRETARIA ACADEMICA "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3SEACRE" descripcion="EDIFICIO 1 NIVEL 3 SECRETARIA ACADEMICA RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E1N3SECAC1" descripcion="EDIFICIO 1 NIVEL 3 SECRETARIA ACADEMICA AREA 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1APCO01" descripcion="EDIFICIO 2 NIVEL 1 APOYO A COORDINACIONES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1ARECAF" descripcion="EDIFICIO 2 NIVEL 1 AREA DE CAFÉ "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1AREPUB" descripcion="EDIFICIO 2 NIVEL 1 AREA PUBLICA "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1BAÑHOM" descripcion="EDIFICIO 2 NIVEL 1 BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1BAÑMUJ" descripcion="EDIFICIO 2 NIVEL 1 BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI01" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 1  "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI02" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI03" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI04" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 4 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI05" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 5 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI06" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 6 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI07" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 7 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI08" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 8 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI09" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 9 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI10" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI11" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 11 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI12" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 12 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1CUBI13" descripcion="EDIFICIO 2 NIVEL 1 CUBICULO 13 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1PASILL" descripcion="EDIFICIO 2 NIVEL 1 PASILLO "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1RECEPC" descripcion="EDIFICIO 2 NIVEL 1 RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1RECEPC" descripcion="EDIFICIO 2 NIVEL 2 RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E2N1SALPRO" descripcion="EDIFICIO 2 NIVEL 1 SALA DE PROFESORES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2APCO02" descripcion="EDIFICIO 2 NIVEL 2 APOYO A COORDINACIONES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2ARECAF" descripcion="EDIFICIO 2 NIVEL 2 AREA DE SERVICIO DE CAFÉ "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2BAÑHOM" descripcion="EDIFICIO 2 NIVEL 2 BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2BAÑMUJ" descripcion="EDIFICIO 2 NIVEL 2 BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI01" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI02" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI03" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI04" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 4 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI05" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 5 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI06" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 6 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI07" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 7 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI08" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 8 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI09" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 9 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI10" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI11" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 11 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI12" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 12 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2CUBI13" descripcion="EDIFICIO 2 NIVEL 2 CUBICULO 13 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N2PASILL" descripcion="EDIFICIO 2 NIVEL 2 PASILLO "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3ARECAF" descripcion="EDIFICIO 2 NIVEL 3 AREA SERVICIO DE CAFE "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3BAÑHOM" descripcion="EDIFICIO 2 NIVEL 3 BAÑOS HOMBRES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3BAÑMUJ" descripcion="EDIFICIO 2 NIVEL 3 BAÑOS MUJERES "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI01" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI02" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI03" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI04" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 4 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI05" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 5 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI06" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 6 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI07" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 7 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI08" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 8 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI09" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 9 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI10" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI11" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 11 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI12" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 12 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI13" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 13 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI14" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 14 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3CUBI15" descripcion="EDIFICIO 2 NIVEL 3 CUBICULO 15 "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3PASILL" descripcion="EDIFICIO 2 NIVEL 3 PASILLO "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3RECEPC" descripcion="EDIFICIO 2 NIVEL 3 RECEPCION "/>
+	<UbicacionRapida ubicacionRapidaId="E2N3TERRAZ" descripcion="EDIFICIO 2 NIVEL 3 TERRAZA "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1ARCDOC" descripcion="EDIFICIO 3 NIVEL 1 ARCHIVO DOCENCIA "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1AREPUB" descripcion="EDIFICIO 3 NIVEL 1 ÁREA PÚBLICA "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1AULMAG" descripcion="EDIFICIO 3 NIVEL 1 AULA MAGNA "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CASILL" descripcion="EDIFICIO 3 NIVEL 1 CASILLEROS "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CUBI01" descripcion="EDIFICIO 3 NIVEL 1 CUBICULO 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CUBI02" descripcion="EDIFICIO 3 NIVEL 1 CUBICULO 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CUBI03" descripcion="EDIFICIO 3 NIVEL 1 CUBICULO 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CUBPV1" descripcion="EDIFICIO 3 NIVEL 1 CUBICULO PROFESORES VISITANTES 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1CUBPV2" descripcion="EDIFICIO 3 NIVEL 1 CUBICULO PROFESORES VISITANTES 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1REDO" descripcion="EDIFICIO 3, NIVEL 1, RECEPCIÓN DOCENCIA "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE07" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS VII "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE08" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS VIII "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE09" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS IX "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE10" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS X "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE11" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS XI "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE12" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS XII "/>
+	<UbicacionRapida ubicacionRapidaId="E3N1SASE13" descripcion="EDIFICIO 3 NIVEL 1 SALA DE SEMINARIOS XIII "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2ARPRFI" descripcion="EDIFICIO 3 NIVEL 2 ARCHIVO PRESUPUESTO Y FINANZAS "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2ARREMA" descripcion="EDIFICIO 3, NIVEL 2, ARCHIVO RECURSOS MATERIALES Y SERVICIOS "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2CUBI01" descripcion="EDIFICIO 3 NIVEL 2 CUBICULO 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2CUBI02" descripcion="EDIFICIO 3 NIVEL 2 CUBICULO 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2CUBI03" descripcion="EDIFICIO 3 NIVEL 2 CUBICULO 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2LABACA" descripcion="EDIFICIO 3 NIVEL 2 LABORATORIO ACADEMICO "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2LABCOM" descripcion="EDIFICIO 3 NIVEL 2 LABORATORIO DE COMPUTO "/>
+	<UbicacionRapida ubicacionRapidaId="E3N2SEPTIC" descripcion="EDIFICIO 03 NIVEL 02 AREA DE LIMPIEZA "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CABLOC" descripcion="EDIFICIO 4 NIVEL 1 CABINA Y LOCUTORIO "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI01" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI02" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 02 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI03" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 03 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI04" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 04 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI05" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 05 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI06" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 06 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI07" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 07 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI08" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 08 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI09" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 09 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1CUBI10" descripcion="EDIFICIO 4 NIVEL 1 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1SAVI01" descripcion="EDIFICIO 4 NIVEL 1 SALA DE VIDEOCONFERENCIAS 1 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1SAVI02" descripcion="EDIFICIO 4 NIVEL 1 SALA DE VIDEOCONFERENCIAS 2 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N1SAVI03" descripcion="EDIFICIO 4 NIVEL 1 SALA DE VIDEOCONFERENCIAS 3 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2ARCH01" descripcion="EDIFICIO 4 NIVEL 2 ARCHIVO 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2ARCH02" descripcion="EDIFICIO 4 NIVEL 2 ARCHIVO 02 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2ARCH03" descripcion="EDIFICIO 4 NIVEL 2 ARCHIVO 03 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2ARECAF" descripcion="EDIFICIO 4 NIVEL 2 AREA DE SERVICIO DE CAFÉ "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI01" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 01 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI02" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 02 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI03" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 03 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI04" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 04 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI05" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 05 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI06" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 06 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI07" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 07 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI08" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 08 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI09" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 09 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI10" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 10 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI11" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 11 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI12" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 12 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI13" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 13 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2CUBI14" descripcion="EDIFICIO 4 NIVEL 2 CUBICULO 14 "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2SALCAP" descripcion="EDIFICIO 4 NIVEL 2 SALA DE CAPACITACIÓN "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2SECGRA" descripcion="EDIFICIO 4 NIVEL 2 SECRETARÍA GENERAL "/>
+	<UbicacionRapida ubicacionRapidaId="E4N2SEGRRE" descripcion="EDIFICIO 4 NIVEL 2 RECEPCIÓN SECRETARIA GENERAL "/>
+	<UbicacionRapida ubicacionRapidaId="E5N1ACFIMA" descripcion="EDIFICIO 5 NIVEL 1 ACTIVO FIJO Y MATERIALES GENERALES "/>
+	<UbicacionRapida ubicacionRapidaId="ESTACIONAA" descripcion="ESTACIONAMIENTO PERSONAL DE EL COLEGIO "/>
+	<UbicacionRapida ubicacionRapidaId="ESTACIONAB" descripcion="ESTACIONAMIENTO ESTUDIANTES Y VISITANTES "/>
+
+	<SecurityPermission description="Ver el tab de Contabilidad Electrónica en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_CONTELECTRPT_VIEW"/>
+	<SecurityPermission description="Administrar el tab de Contabilidad Electrónica en Informes" permissionId="FINANCIALS_RPT_OPCIONESGRPRPT_CONTELECTRPT_ADMIN"/>
+	
+<!-- 		<RoleType description="Préstamo por fondo de ahorro" hasTable="N" parentTypeId="" flag="Y" roleTypeId="PR_FONDO_AHORRO"/> -->
+<!-- 	   <RoleType description="Aportantes" hasTable="N" parentTypeId="" flag="Y" roleTypeId="APORTANTES"/> -->
+<!-- 	   <RoleType description="IVA Acreditable por proyecto" hasTable="N" parentTypeId="" flag="Y" roleTypeId="IVA_ACR_PROYECTO"/> -->
+<!-- 	   <RoleType description="Proveedor" hasTable="N" parentTypeId="" flag="Y" roleTypeId="PROVEEDOR"/> -->
+<!-- 		<RoleType description="Gastos por comprobar" hasTable="N" parentTypeId="" flag="Y" roleTypeId="GASTOS_COMPROBAR"/> -->
+<!-- 		<RoleType description="Acreedor" hasTable="N" parentTypeId="ORGANIZATION_ROLE" flag="Y" roleTypeId="ACREEDOR"/> -->
+
+<!--<ReporteCatalogo reporteId="0001" reporteNombre="Estado de Situación Financiera"/>
+	<ReporteCatalogo reporteId="0002" reporteNombre="Estado de Actividades"/>
+	<ReporteCatalogo reporteId="0003" reporteNombre="Estado de Variación en la Hacienda Pública"/>
+	<ReporteCatalogo reporteId="0004" reporteNombre="Estado de Flujo de Efectivo"/>
+	<ReporteCatalogo reporteId="0005" reporteNombre="Estado de Cambios en la Situación Financiera"/>
+	<ReporteCatalogo reporteId="0006" reporteNombre="Estado Analítico del Activo"/>
+	<ReporteCatalogo reporteId="0007" reporteNombre="Estado Analítico de la Deuda y Otros Pasivos"/>
+	<ReporteCatalogo reporteId="0008" reporteNombre="Balance General del Fideicomiso de Fondo de Ahorro de los Servidores Públicos"/>
+	<ReporteCatalogo reporteId="0009" reporteNombre="Estado de Actividades del Fideicomiso del Fondo de Ahorro de los Servidores Públicos"/>
+	<ReporteCatalogo reporteId="0010" reporteNombre="Estados Financieros Dictaminados"/>
+	<ReporteCatalogo reporteId="0011" reporteNombre="Institucional"/>
+	<ReporteCatalogo reporteId="0012" reporteNombre="Estado analítico del ejercicio del presupuesto de egresos clasificación administrativa"/>
+	<ReporteCatalogo reporteId="0013" reporteNombre="Estado analítico del ejercicio del presupuesto de egresos clasificación económica (por tipo de gasto)"/>
+	<ReporteCatalogo reporteId="0014" reporteNombre="Estado analítico del ejercicio del presupuesto de egresos clasificación funcional (finalidad y función)"/>
+	<ReporteCatalogo reporteId="0015" reporteNombre="Gasto por categoría programática"/>
+	<ReporteCatalogo reporteId="0016" reporteNombre="Estado analítico del ejercicio del presupuesto de egresos clasificación por objeto del gasto (capítulo y concepto)"/>
+	<ReporteCatalogo reporteId="0017" reporteNombre="Estado analítico de ingresos"/> -->
+	
+	<ReporteCatalogo reporteId="0001" reporteNombre="Orden de pago"/>
+	
+	<FixedAssetType description="Bienes artisticos, culturales y cientificos" fixedAssetTypeId="BIENES_ARTISTICOS" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="513"/>
+	<FixedAssetType description="Edificios no residenciales" fixedAssetTypeId="EDIFICIO_NO_RESIDENC" hasTable="N" parentTypeId="" aniosVidaUtil="30" montoDepreciacion="5" montoDepreciacionLisr="5" prefijoCucop="583" acctgTransTypeId="CPCP-01"/>
+	<FixedAssetType description="Equipo de computo y de tecnologias de la informacion" fixedAssetTypeId="EQUIPO_COMPUTO" hasTable="N" parentTypeId="" aniosVidaUtil="3" montoDepreciacion="30" montoDepreciacionLisr="30" prefijoCucop="515" acctgTransTypeId="CPCP-07"/>
+	<FixedAssetType description="Maquinaria y equipo de construccion" fixedAssetTypeId="EQUIPO_CONSTRUCCION" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="563" acctgTransTypeId="CPCP-04"/>
+	<FixedAssetType description="Otro mobiliario y equipo educacional y recreativo" fixedAssetTypeId="EQUIPO_EDUCACIONAL" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="529" acctgTransTypeId="CPCP-03"/>
+	<FixedAssetType description="Maquinaria y equipo industrial" fixedAssetTypeId="EQUIPO_INDUSTRIAL" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="562" acctgTransTypeId="CPCP-04"/>
+	<FixedAssetType description="Equipo de comunicacion y telecomunicacion" fixedAssetTypeId="EQUIPO_TELECOMUNICA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="565" acctgTransTypeId="CPCP-05"/>
+	<FixedAssetType description="Otros mobiliarios y equipos de administracion" fixedAssetTypeId="EQUIPOS_ADMINISTRATI" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="519" acctgTransTypeId="CPCP-02"/>
+	<FixedAssetType description="Herramientas menores" fixedAssetTypeId="HERRAMIENTAS" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="291" acctgTransTypeId="CPCP-04"/>
+	<FixedAssetType description="Herramientas y maquinas-herramienta" fixedAssetTypeId="MAQUINARIA_HERRAMIEN" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="567" acctgTransTypeId="CPCP-04"/>
+	<FixedAssetType description="Material electrico y electronico" fixedAssetTypeId="MATER_ELECTRI_ELECTR" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="246" acctgTransTypeId="CPCP-04"/>
+	<FixedAssetType description="Muebles de oficina y estanteria" fixedAssetTypeId="MUEBLES_OFICINA" hasTable="N" parentTypeId="" aniosVidaUtil="10" montoDepreciacion="10" montoDepreciacionLisr="10" prefijoCucop="511" acctgTransTypeId="CPCP-02"/>
+	<FixedAssetType description="Terrenos" fixedAssetTypeId="TERRENO" hasTable="N" parentTypeId="" aniosVidaUtil="0" montoDepreciacion="0" montoDepreciacionLisr="0" prefijoCucop="581"/>
+	<FixedAssetType description="Vehiculos y equipo terrestre" fixedAssetTypeId="VEHICULOS_TERRESTRES" hasTable="N" parentTypeId="" aniosVidaUtil="5" montoDepreciacion="25" montoDepreciacionLisr="25" prefijoCucop="541" acctgTransTypeId="CPCP-06"/>
+	
+	<AcctgTransType acctgTransTypeId="CIPE-01" description="Cierre presupuestario (Superávit)" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/> 
+
+	<EventoContable acctgTransTypeId="CIPE-01" tipoPolizaId="DIARIO" moduloId="CONTABILIDAD" descripcion="Cierre presupuestario (Superávit)"/>
+	<!-- <LineaContable acctgTransTypeId="CIPE-01" secuencia="1" cuentaCargo="8.1.4" cuentaAbono="8.1.2" descripcion="Cierre 1" cuentaCancelar="8.1.4"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="2" cuentaCargo="8.1.2" cuentaAbono="8.1.3.1" descripcion="Cierre 2" cuentaCancelar="8.1.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="3" cuentaCargo="8.1.3.2" cuentaAbono="8.1.2" descripcion="Cierre 3" cuentaCancelar="8.1.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="4" cuentaCargo="8.1.2" cuentaAbono="8.1.3.3.01" descripcion="Cierre 4" cuentaCancelar="8.1.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="5" cuentaCargo="8.1.3.3.02" cuentaAbono="8.1.2" descripcion="Cierre 5" cuentaCancelar="8.1.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="6" cuentaCargo="8.1.2" cuentaAbono="8.1.1" descripcion="Cierre 6" cuentaCancelar="8.1.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="7" cuentaCargo="8.2.2" cuentaAbono="8.2.4" descripcion="Cierre 7" cuentaCancelar="8.2.4"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="8" cuentaCargo="8.2.3.1" cuentaAbono="8.2.2" descripcion="Cierre 8" cuentaCancelar="8.2.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="9" cuentaCargo="8.2.2" cuentaAbono="8.2.3.2" descripcion="Cierre 9" cuentaCancelar="8.2.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="10" cuentaCargo="8.2.3.3.01" cuentaAbono="8.2.2" descripcion="Cierre 10" cuentaCancelar="8.2.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="11" cuentaCargo="8.2.2" cuentaAbono="8.2.3.3.02" descripcion="Cierre 11" cuentaCancelar="8.2.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="12" cuentaCargo="8.2.1" cuentaAbono="8.2.2" descripcion="Cierre 12" cuentaCancelar="8.2.2"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="13" cuentaCargo="9.3" cuentaAbono="8.2.5" descripcion="Cierre 13" cuentaCancelar="8.2.5"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="14" cuentaCargo="9.3" cuentaAbono="8.2.6" descripcion="Cierre 14" cuentaCancelar="8.2.6"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="15" cuentaCargo="8.1.5" cuentaAbono="8.2.7" descripcion="Cierre 15" cuentaCancelar="8.2.7"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="16" cuentaCargo="8.1.5" cuentaAbono="9.3" descripcion="Cierre 16" cuentaCancelar="9.3"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="17" cuentaCargo="8.1.5" cuentaAbono="9.1" descripcion="Cierre 17" cuentaCancelar="8.1.5"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="18" cuentaCargo="8.2.1" cuentaAbono="8.1.1" descripcion="Cierre 18" cuentaCancelar="8.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-01" secuencia="19" cuentaCargo="9.1" cuentaAbono="8.1.1" descripcion="Cierre 19" cuentaCancelar="8.1.1"/> -->
+
+	<AcctgTransType acctgTransTypeId="CIPE-02" description="Cierre presupuestario (Déficit)" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS"/> 
+
+	<EventoContable acctgTransTypeId="CIPE-02" tipoPolizaId="DIARIO" moduloId="CONTABILIDAD" descripcion="Cierre presupuestario (Déficit)"/>
+	<!-- <LineaContable acctgTransTypeId="CIPE-02" secuencia="1" cuentaCargo="8.1.4" cuentaAbono="8.1.2" descripcion="Cierre 1" cuentaCancelar="8.1.4"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="2" cuentaCargo="8.1.2" cuentaAbono="8.1.3.1" descripcion="Cierre 2" cuentaCancelar="8.1.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="3" cuentaCargo="8.1.3.2" cuentaAbono="8.1.2" descripcion="Cierre 3" cuentaCancelar="8.1.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="4" cuentaCargo="8.1.2" cuentaAbono="8.1.3.3.01" descripcion="Cierre 4" cuentaCancelar="8.1.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="5" cuentaCargo="8.1.3.3.02" cuentaAbono="8.1.2" descripcion="Cierre 5" cuentaCancelar="8.1.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="6" cuentaCargo="8.1.2" cuentaAbono="8.1.1" descripcion="Cierre 6" cuentaCancelar="8.1.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="7" cuentaCargo="8.2.2" cuentaAbono="8.2.4" descripcion="Cierre 7" cuentaCancelar="8.2.4"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="8" cuentaCargo="8.2.3.1" cuentaAbono="8.2.2" descripcion="Cierre 8" cuentaCancelar="8.2.3.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="9" cuentaCargo="8.2.2" cuentaAbono="8.2.3.2" descripcion="Cierre 9" cuentaCancelar="8.2.3.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="10" cuentaCargo="8.2.3.3.01" cuentaAbono="8.2.2" descripcion="Cierre 10" cuentaCancelar="8.2.3.3.01"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="11" cuentaCargo="8.2.2" cuentaAbono="8.2.3.3.02" descripcion="Cierre 11" cuentaCancelar="8.2.3.3.02"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="12" cuentaCargo="8.2.1" cuentaAbono="8.2.2" descripcion="Cierre 12" cuentaCancelar="8.2.2"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="13" cuentaCargo="9.3" cuentaAbono="8.2.5" descripcion="Cierre 13" cuentaCancelar="8.2.5"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="14" cuentaCargo="9.3" cuentaAbono="8.2.6" descripcion="Cierre 14" cuentaCancelar="8.2.6"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="15" cuentaCargo="8.1.5" cuentaAbono="8.2.7" descripcion="Cierre 15" cuentaCancelar="8.2.7"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="16" cuentaCargo="8.1.5" cuentaAbono="9.3" descripcion="Cierre 16" cuentaCancelar="9.3"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="17" cuentaCargo="8.1.5" cuentaAbono="9.2" descripcion="Cierre 17" cuentaCancelar="8.1.5"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="18" cuentaCargo="8.2.1" cuentaAbono="8.1.1" descripcion="Cierre 18" cuentaCancelar="8.2.1"/>
+	<LineaContable acctgTransTypeId="CIPE-02" secuencia="19" cuentaCargo="9.2" cuentaAbono="8.1.1" descripcion="Cierre 19" cuentaCancelar="8.1.1"/> -->
+
+     
+	
+</entity-engine-xml>

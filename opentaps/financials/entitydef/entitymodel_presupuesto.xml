@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades de presupuesto</title>
+	<description>Se generan todas las entidades para presupuesto</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Esperanza Pérez Alva</author>
+	<version>1.0</version>
+	
+	<entity entity-name="ControlPresupuestal" package-name="org.opentaps.financials"
+		title="Entidad para llevar el control presupuestal de la aplicación">
+		<field name="idSecuencia" type="id"></field>
+		<field name="clavePresupuestal" type="description"></field>
+		<field name="ciclo" type="id-ne"></field>
+		<field name="mesId" type="id-ne"></field>
+		<field name="momentoId" type="id-ne"></field>
+		<field name="monto" type="currency-amount-precise" ></field>
+		<prim-key field="idSecuencia" />
+		<relation type="one" fk-name="CPCP" title="cpcp"
+			rel-entity-name="ClavePresupuestal">
+			<key-map field-name="clavePresupuestal" rel-field-name="clavePresupuestal" />
+		</relation>
+		<relation type="one" fk-name="CPM" title="cpm"
+			rel-entity-name="Mes">
+			<key-map field-name="mesId" rel-field-name="mesId" />
+		</relation>
+		<relation type="one" fk-name="CPMC" title="cpmc"
+			rel-entity-name="Momento">
+			<key-map field-name="momentoId" rel-field-name="momentoId" />
+		</relation>
+        <index name="INDX_CTRL_PRES" unique="true">
+        	<index-field name="idSecuencia"/>
+       	</index>
+       	<index name="UNIQ_CONTROL" unique="true">
+       		<index-field name="clavePresupuestal"/>
+       		<index-field name="ciclo"/>
+       		<index-field name="mesId"/>
+       		<index-field name="momentoId"/>
+       	</index>
+	</entity>
+	
+	 <view-entity entity-name="ConsultaClavePresupuestalPoliza" 
+    		package-name="org.ofbiz.accounting.ledger">
+    		
+    	<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+    	<member-entity entity-alias="CLP" entity-name="ClavePresupuestal"/>
+    	<member-entity entity-alias="M" entity-name="Momento"/>
+    	<member-entity entity-alias="TP" entity-name="TipoPoliza"/>
+    	<member-entity entity-alias="UL" entity-name="UserLogin"/>
+    	<member-entity entity-alias="P" entity-name="Person"/>
+    	
+    	<alias entity-alias="ATE" name="acctgTransId" group-by="true" />
+    	<alias entity-alias="ATE" name="clavePresupuestal" group-by="true" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId1" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId2" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId3" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId4" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId5" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId6" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId7" group-by="true" />
+		<alias entity-alias="ATE" name="acctgTagEnumId8" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId9" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId10" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId11" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId12" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId13" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId14" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumId15" group-by="true"/>
+		<alias entity-alias="ATE" name="acctgTagEnumIdAdmin" group-by="true"/>
+    	<alias entity-alias="ATR" name="acctgTransTypeId" group-by="true" />
+    	<alias entity-alias="ATR" name="createdByUserLogin" group-by="true" />   
+    	<alias entity-alias="CLP" name="tipo" group-by="true" />	
+    	<alias entity-alias="P" name="firstName" group-by="true" />
+    	<alias entity-alias="P" name="lastName" group-by="true" /> 
+    	<alias entity-alias="ATR" name="tipoPolizaId" group-by="true" />
+    	<alias entity-alias="ATR" name="poliza" group-by="true" />
+    	<alias entity-alias="M" name="descripcionMomento" field="description" group-by="true" />
+    	<alias entity-alias="M" name="momentoId" group-by="true" />
+    	<alias entity-alias="ATR" name="postedDate" group-by="true" />
+    	<alias entity-alias="TP" name="description" group-by="true" />   	
+    	<alias entity-alias="ATE" name="amount" function="sum"/>
+    	<alias entity-alias="ATE" name="debitCreditFlag" group-by="true" />
+    	<alias entity-alias="ATE" name="currencyUomId" group-by="true" />
+		<alias entity-alias="UL" name="partyId" group-by="true" />   	
+    	<alias entity-alias="ATR" name="organizationPartyId" group-by="true"/> 
+    	      
+      	<view-link entity-alias="ATR" rel-entity-alias="ATE" >
+      		<key-map field-name="acctgTransId"/>
+      	</view-link>
+      	<view-link entity-alias="ATR" rel-entity-alias="UL">
+      		<key-map field-name="createdByUserLogin" rel-field-name="userLoginId"/>
+      	</view-link>
+    	<view-link entity-alias="UL" rel-entity-alias="P" rel-optional="true">
+        	<key-map field-name="partyId"/>        
+      	</view-link>
+      	<view-link entity-alias="ATR" rel-entity-alias="TP" >
+      		<key-map field-name="tipoPolizaId"/>
+      	</view-link>    
+      	<view-link entity-alias="ATE" rel-entity-alias="CLP" >
+      		<key-map field-name="clavePresupuestal"/>
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="M">
+      		<key-map field-name="glAccountId" rel-field-name="cuentaAsociada"/>
+      	</view-link>   
+    	  	
+    </view-entity>
+    
+    <view-entity entity-name="ControlPresupuestalClave" 
+    	package-name="com.absolucionesestrategicas.presupuesto">
+    
+	    <member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+	    <member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+	    
+	    <alias entity-alias="CVE" name="clavePresupuestal" />
+	    <alias entity-alias="CVE" name="tipo" />
+	    <alias entity-alias="CVE" name="clasificacion1" />
+	    <alias entity-alias="CVE" name="clasificacion2" />
+	    <alias entity-alias="CVE" name="clasificacion3" />
+	    <alias entity-alias="CVE" name="clasificacion4" />
+	    <alias entity-alias="CVE" name="clasificacion5" />
+	    <alias entity-alias="CVE" name="clasificacion6" />
+	    <alias entity-alias="CVE" name="clasificacion7" />
+	    <alias entity-alias="CVE" name="clasificacion8" />
+	    <alias entity-alias="CVE" name="clasificacion9" />
+	    <alias entity-alias="CVE" name="clasificacion10" />
+	    <alias entity-alias="CVE" name="clasificacion11" />
+	    <alias entity-alias="CVE" name="clasificacion12" />
+	    <alias entity-alias="CVE" name="clasificacion13" />
+	    <alias entity-alias="CVE" name="clasificacion14" />
+	    <alias entity-alias="CVE" name="clasificacion15" />
+	    <alias entity-alias="CTRL" name="momentoId" />
+	    <alias entity-alias="CTRL" name="mesId" />
+	    <alias entity-alias="CTRL" name="ciclo" />
+	    <alias entity-alias="CTRL" name="monto" />
+    
+		<view-link entity-alias="CTRL" rel-entity-alias="CVE" >
+      		<key-map field-name="clavePresupuestal"/>
+      	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="CuentasMatrizEgreso" package-name="com.absoluciones.presupuesto"
+    	title="Vista para obtener la matriz de egreso de una lista de claves ">
+    	<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+    	<member-entity entity-alias="ME" entity-name="MatrizEgreso" />
+    	<member-entity entity-alias="LP" entity-name="LineaPresupuestal" />
+    	
+    	<!-- SELECT -->
+    	
+    	<alias entity-alias="CVE" name="clavePresupuestal" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion1" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion2" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion3" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion4" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion5" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion6" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion7" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion8" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion9" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion10" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion11" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion12" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion13" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion14" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion15" group-by="true" />   
+		<alias entity-alias="ME" name="matrizId" group-by="true" />  
+		<alias entity-alias="ME" name="cargo" group-by="true" />  
+		<alias entity-alias="ME" name="abono" group-by="true" />
+
+		<!-- WHERE -->
+		
+    	<alias entity-alias="CVE" name="tipo" group-by="false" />
+    	<alias entity-alias="ME" name="tipoGasto" />
+    	<alias entity-alias="ME" name="cog" />
+    	<alias entity-alias="LP" name="tipoMatrizId" />
+    	<alias entity-alias="LP" name="acctgTransTypeId" />
+    	
+    </view-entity>
+    
+    <view-entity entity-name="CuentasMatrizIngreso" package-name="com.absoluciones.presupuesto"
+    	title="Vista para obtener la matriz de egreso de una lista de claves ">
+    	<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+    	<member-entity entity-alias="MI" entity-name="MatrizIngreso" />
+    	<member-entity entity-alias="LP" entity-name="LineaPresupuestal" />
+    	
+    	<!-- SELECT -->
+    	
+    	<alias entity-alias="CVE" name="clavePresupuestal" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion1" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion2" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion3" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion4" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion5" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion6" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion7" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion8" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion9" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion10" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion11" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion12" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion13" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion14" group-by="true" />
+		<alias entity-alias="CVE" name="clasificacion15" group-by="true" />    
+		<alias entity-alias="MI" name="matrizId" group-by="true" />   
+		<alias entity-alias="MI" name="cargo" group-by="true" />  
+		<alias entity-alias="MI" name="abono" group-by="true" />
+
+		<!-- WHERE -->
+		
+    	<alias entity-alias="CVE" name="tipo" group-by="false" />
+    	<alias entity-alias="MI" name="cri" />
+    	<alias entity-alias="LP" name="tipoMatrizId" />
+    	<alias entity-alias="LP" name="acctgTransTypeId" />
+    	
+    	
+    </view-entity>
+    
+    <entity entity-name="ClavePresupuestalTipoCambio" package-name="com.absoluciones.presupuesto"
+            title="Tabla para guardar el historial de la clave presupuestal del tipo de cambio">   
+        <field name="idClaveTipoCambio" type="id-ne"/>
+        <field name="clavePresupuestal" type="description"/>
+        <field name="tipo" type="id-ne"/>  
+        <field name="organizationPartyId" type="id-ne" />
+        <field name="acctgTagEnumId1" type="description"/> 
+        <field name="acctgTagEnumId2" type="description"/>
+        <field name="acctgTagEnumId3" type="description"/>
+        <field name="acctgTagEnumId4" type="description"/>
+        <field name="acctgTagEnumId5" type="description"/>
+        <field name="acctgTagEnumId6" type="description"/>
+        <field name="acctgTagEnumId7" type="description"/>
+        <field name="acctgTagEnumId8" type="description"/>
+        <field name="acctgTagEnumId9" type="description"/>
+        <field name="acctgTagEnumId10" type="description"/>
+        <field name="acctgTagEnumId11" type="description"/>
+        <field name="acctgTagEnumId12" type="description"/>
+        <field name="acctgTagEnumId13" type="description"/>
+        <field name="acctgTagEnumId14" type="description"/>
+        <field name="acctgTagEnumId15" type="description"/>
+        <field name="acctgTagEnumIdAdmin" type="description"/>
+        <field name="flag" type="indicator"/>
+        <field name="fechaDesde" type="date-time"></field>
+        <field name="fechaHasta" type="date-time"></field>
+        <prim-key field="idClaveTipoCambio"/>
+        <relation type="one" fk-name="FK_DBO_TIPOCAM_CVE" rel-entity-name="ClavePresupuestal">
+        	<key-map field-name="clavePresupuestal"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_TIPOCAM_ORG" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="Etiqueta" 
+    	package-name="com.absoluciones.presupuesto">
+    	<field name="etiquetaId" type="id-ne" />
+    	<field name="descripcion" type="description" />
+        <field name="fromDate" type="date-time"><description>Define si la etiqueta esta activa Si es null estará activa.</description></field>
+        <field name="thruDate" type="date-time"><description>Define si la etiqueta esta activa Si es null estará activa.</description></field>
+    	<prim-key field="etiquetaId"/>
+    </entity>
+    
+    <entity entity-name="EtiquetaEnumeration" 
+    	package-name="com.absoluciones.presupuesto">
+    	<field name="etiquetaId" type="id-ne" />
+    	<field name="enumId" type="id-ne" />
+    	<prim-key field="etiquetaId"/>
+    	<prim-key field="enumId"/>
+    	<relation type="one" fk-name="FK_DBO_ETIQUETA" rel-entity-name="Etiqueta" >
+    		<key-map field-name="etiquetaId"/>
+    	</relation>
+    	<relation type="one" fk-name="FK_DBO_ENUM" rel-entity-name="Enumeration" >
+    		<key-map field-name="enumId"/>
+    	</relation>
+    </entity>
+    
+	<view-entity entity-name="CtrlPresupuestalSuma" package-name="com.absoluciones.presupuesto">
+		<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+		<alias name="clavePresupuestal" entity-alias="CTRL" group-by="true"/>
+		<alias name="ciclo" entity-alias="CTRL" group-by="true"/>
+		<alias name="mesId" entity-alias="CTRL" group-by="true"/>
+		<alias name="momentoId" entity-alias="CTRL" group-by="true"/>
+		<alias name="monto" entity-alias="CTRL" function="sum"/>
+	</view-entity>
+
+	<view-entity entity-name="ClavePresupuestalAgrup" package-name="com.absoluciones.presupuesto" 
+		title="Agrupa la clave presupuestal">
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+	    <alias entity-alias="CVE" name="clasificacion1" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion2" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion3" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion4" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion5" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion6" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion7" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion8" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion9" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion10" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion11" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion12" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion13" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion14" group-by="true"/>
+	    <alias entity-alias="CVE" name="clasificacion15" group-by="true"/>
+	    <alias entity-alias="CVE" name="idSecuencia" group-by="true"/>
+	</view-entity>	
+    
+</entitymodel>

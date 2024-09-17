@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <title>Entity definitions for the Opentaps Purchasing Application</title>
+    <copyright>Copyright (c) 2005 - 2006 Open Source Strategies Inc.</copyright>
+
+	<!-- Vista para encontrar el precio y producto de un item -->
+	<view-entity entity-name="BuscarPP"
+		package-name="org.opentaps.purchasing.order"
+		title="Permite la búsqueda del producto y el precio de un item.">
+		<member-entity entity-alias="IID" entity-name="InventoryItemDetail" />
+		<member-entity entity-alias="II" entity-name="InventoryItem" />
+		<alias name="availableToPromiseDiff" entity-alias="IID" group-by="true" />
+		<alias name="inventoryItemId" entity-alias="IID" group-by="true" />
+		<alias name="physicalInventoryId" entity-alias="IID" group-by="true" />
+		<alias name="inventoryItemDetailSeqId" entity-alias="IID" group-by="true" />
+		<alias name="effectiveDate" entity-alias="IID" group-by="true" />
+		<alias name="productId" entity-alias="II" group-by="true" />
+		<alias name="unitCost" entity-alias="II" group-by="true" />
+		<alias name="ownerPartyId" entity-alias="II" group-by="true" />
+		<view-link entity-alias="IID" rel-entity-alias="II">
+			<key-map field-name="inventoryItemId" />
+		</view-link>
+	</view-entity>    
+	
+	<!-- Vista para encontrar el precio y producto recibido -->
+	<view-entity entity-name="BuscarPPR"
+		package-name="org.opentaps.purchasing.order"
+		title="Permite la búsqueda del producto y el precio recibidos en inventario.">
+		<member-entity entity-alias="IID" entity-name="InventoryItemDetail" />
+		<member-entity entity-alias="SR" entity-name="ShipmentReceipt" />
+		<member-entity entity-alias="II" entity-name="InventoryItem" />
+		<alias name="receiptId" entity-alias="SR" group-by="true" />
+		<alias name="quantityAccepted" entity-alias="SR" group-by="true" />
+		<alias name="inventoryItemId" entity-alias="SR" group-by="true" />
+		<alias name="shipmentId" entity-alias="SR" group-by="true" />
+		<alias name="orderId" entity-alias="SR" group-by="true" />
+		<alias name="inventoryItemDetailSeqId" entity-alias="IID" group-by="true" />
+		<alias name="effectiveDate" entity-alias="IID" group-by="true" />
+		<alias name="productId" entity-alias="II" group-by="true" />
+		<alias name="unitCost" entity-alias="II" group-by="true" />
+		<alias name="ownerPartyId" entity-alias="II" group-by="true" />
+		<view-link entity-alias="II" rel-entity-alias="IID">
+			<key-map field-name="inventoryItemId" />
+		</view-link>
+		<view-link entity-alias="IID" rel-entity-alias="SR" >
+			<key-map field-name="receiptId" />
+		</view-link>
+	</view-entity> 
+
+	<entity entity-name="PhysicalInventoryHistory"
+		package-name="org.opentaps.purchasing.order" 
+		title="Entidad que almacena el historico de entradas y salidas del inventario">
+		<field name="inventoryHistoryId" type="id-ne" />
+		<field name="productId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne" />
+		<field name="unitCost" type="currency-precise" />
+		<field name="cantidad" type="numeric" />
+		<field name="effectiveDate" type="date-time" />
+		<prim-key field="inventoryHistoryId" />
+		<relation type="one" fk-name="ID_PRODUCTD_II" 
+			rel-entity-name="Product">
+			<key-map field-name="productId"  />
+		</relation>
+		<relation type="one" fk-name="ID_ORGANISMO_TEDII"
+			rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+	</entity>
+	
+	<!-- Vista para encontrar los productos pendientes -->	
+	<view-entity entity-name="BuscarPedidos"	
+		package-name="org.opentaps.purchasing.order" title="Buscar Pedidos">
+		
+		<member-entity entity-alias="OH" entity-name="OrderHeader" />
+		<member-entity entity-alias="OI" entity-name="OrderItem" />	
+		<member-entity entity-alias="SI" entity-name="StatusItem" />
+		
+		<alias name="orderId" entity-alias="OH" group-by="true" />
+		<alias name="orderName" entity-alias="OH" group-by="true" />
+		<alias name="entryDate" entity-alias="OH" group-by="true" />
+		<alias name="statusId" entity-alias="OH" group-by="true" />
+		<alias name="grandTotal" entity-alias="OH" group-by="true" />
+		<alias name="currencyUom" entity-alias="OH" group-by="true" />
+		<alias name="billFromPartyId" entity-alias="OH" group-by="true" />
+		<alias name="billToPartyId" entity-alias="OH" group-by="true" />
+		<alias name="createdStamp" entity-alias="OH" group-by="true" />
+		<alias name="createdBy" entity-alias="OH" group-by="true" />
+		<alias name="description" entity-alias="SI" group-by="true" />	
+		<alias name="requisicionId" entity-alias="OI" group-by="false" />	
+		<alias name="productId" entity-alias="OI" group-by="false" />		
+
+		<view-link entity-alias="OH" rel-entity-alias="OI">
+			<key-map field-name="orderId" />
+		</view-link>
+		<view-link entity-alias="OH" rel-entity-alias="SI">
+			<key-map field-name="statusId" />
+		</view-link>
+
+	</view-entity>
+	
+	<entity entity-name="TipoAdjudicacion"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene el catalogo de tipos de adjudicacion">
+		<field name="tipoAdjudicacionId" type="id-ne" />
+		<field name="nombreTipoAdjudicacion" type="description" />
+		<field name="descTipoAdjudicacion" type="very-long" />
+		<prim-key field="tipoAdjudicacionId" />
+	</entity>
+
+	<entity entity-name="TipoAdjudicacionDoc"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene el catalogo de documentos por cada tipos de adjudicacion">
+		<field name="tipoAdjudicacionId" type="id-ne" />
+		<field name="docTipoAdjudicacionId" type="id-ne" />
+		<field name="nombreDocumento" type="description" />
+		<field name="notaDocumento" type="description" />
+		<field name="flagArticulo" type="indicator" />
+		<prim-key field="tipoAdjudicacionId" />
+		<prim-key field="docTipoAdjudicacionId" />
+		<relation type="one" fk-name="ID_TIPO_ADJUDI"
+			rel-entity-name="TipoAdjudicacion">
+			<key-map field-name="tipoAdjudicacionId" rel-field-name="tipoAdjudicacionId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="TipoAdjudicacionArticulo"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene el catalogo de fracciones por cada tipo de articulo">
+		<field name="tipoFraccionId" type="id-ne" />
+		<field name="docTipoAdjudicacionId" type="id-ne" />
+		<field name="fraccion" type="description" />
+		<prim-key field="tipoFraccionId" />
+	</entity>
+	
+	<entity entity-name="TipoAdjudicacionDescArticul"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene la descripción de cada uno de los articulos">
+		<field name="descArtId" type="id-ne" />
+		<field name="docTipoAdjudicacionId" type="id-ne" />
+		<field name="descripcion" type="very-long" />
+		<prim-key field="descArtId" />
+	</entity>
+	
+	<entity entity-name="SubTipoAdjudicacion"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene el catalogo de sub tipos de procesos de contratación">
+		<field name="tipoAdjudicacionId" type="id-ne" />
+		<field name="subTipoAdjudicacionId" type="id-ne" />
+		<field name="nombreSubTipoAdjudicacion" type="description" />		
+		<prim-key field="tipoAdjudicacionId" />
+		<prim-key field="subTipoAdjudicacionId" />
+		<relation type="one" fk-name="FK_DBO_SUB_ADJ"
+			rel-entity-name="TipoAdjudicacion">
+			<key-map field-name="tipoAdjudicacionId"/>
+		</relation>
+	</entity>
+	    
+	<entity entity-name="Requisicion"
+		package-name="com.absoluciones.adquisiciones" title="Entidad que informa la requisicion">
+		<field name="requisicionId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<field name="justificacion" type="very-long" />
+		<field name="fechaAutorizada" type="date-time" />
+		<field name="fechaContable" type="date-time" />
+		<field name="personaSolicitanteId" type="id-ne" />
+		<field name="montoTotal" type="currency-precise" />
+		<field name="almacenId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne" />
+		<field name="areaPartyId" type="id-ne" />
+		<field name="tipoMoneda" type="id" />
+		<field name="statusId" type="id-ne" />
+		<field name="pedidoInternoId" type="id-ne" />
+		<field name="solicitudTransferenciaId" type="id" />
+		<field name="statusPedidoId" type="id-ne" />
+		<prim-key field="requisicionId" />
+		<relation type="one" fk-name="ID_PERSONAD_DD"
+			rel-entity-name="Person">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_ORGANISMO_TED"
+			rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_ORGA_TTTT" rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>
+		<relation type="one" fk-name="ID_FACILITY_TER"
+			rel-entity-name="Facility">
+			<key-map field-name="almacenId" rel-field-name="facilityId" />
+		</relation>
+		<relation type="one" fk-name="ID_AREA_PARTY" rel-entity-name="PartyGroup">
+			<key-map field-name="areaPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_ESTATUS_REQ" rel-entity-name="Estatus">
+			<key-map field-name="statusId" rel-field-name="statusId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_REQ_ESTATUS" rel-entity-name="Estatus" title="Pedido">
+			<key-map field-name="statusPedidoId" rel-field-name="statusId" />
+		</relation>
+		<relation type="one" fk-name="ID_PED_INT_REQ" rel-entity-name="PedidoInterno">
+			<key-map field-name="pedidoInternoId" rel-field-name="pedidoInternoId" />
+		</relation>
+		<relation type="one" fk-name="ID_SOL_TRA_REQ" rel-entity-name="SolicitudTransferencia">
+			<key-map field-name="solicitudTransferenciaId" />
+		</relation>
+		<index name="INDEX_REQUISICION">
+			<index-field name="requisicionId"/>
+			<index-field name="personaSolicitanteId"/>
+			<index-field name="organizationPartyId"/>
+			<index-field name="createdStamp"/>
+			<index-field name="descripcion"/>
+			<index-field name="tipoMoneda"/>
+			<index-field name="fechaContable"/>
+		</index>
+	</entity>
+
+	<entity entity-name="DetalleRequisicion"
+		package-name="com.absoluciones.adquisiciones" title="Entidad que informa el detalle de la requisicion">
+		<field name="detalleRequisicionId" type="id-ne" />
+		<field name="requisicionId" type="id-ne" />
+		<field name="clavePresupuestal" type="description" />
+		<field name="monto" type="currency-precise" />
+		<field name="productId" type="id-ne" />
+		<field name="estatusProducto" type="id-ne" />
+		<field name="cantidad" type="numeric" />
+		<field name="descripcion" type="description" />
+		<field name="customTimePeriodId" type="id-ne" />
+		<field name="fechaEntrega" type="date-time" />
+		<field name="procedencia" type="description" />
+		<field name="iva" type="indicator" />
+		<prim-key field="detalleRequisicionId" />
+		<prim-key field="requisicionId" />
+		<relation type="one" fk-name="ID_PRODUCTD" rel-entity-name="Product">
+			<key-map field-name="productId" />
+		</relation>
+		<relation type="one" fk-name="ID_REQUSICION" title="idrequisicion"
+			rel-entity-name="Requisicion">
+			<key-map field-name="requisicionId" rel-field-name="requisicionId" />
+		</relation>
+		<relation type="one" fk-name="ID_ESTATUS_DET_REQ"
+			rel-entity-name="Estatus">
+			<key-map field-name="estatusProducto" rel-field-name="statusId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_TIMEPERIOD" rel-entity-name="CustomTimePeriod" >
+			<key-map field-name="customTimePeriodId" />
+		</relation>
+	</entity>
+	
+		<!-- Vista para encontrar requisición -->
+	<view-entity entity-name="BuscarRequisicionSinProduct"
+		package-name="com.absoluciones.adquisiciones"
+		title="Permite la búsqueda de requisiciones de acuerdo a parametros de entrada. SIN PRODUCT">
+		<member-entity entity-alias="REQ" entity-name="Requisicion" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+
+		<alias name="fechaContable" entity-alias="REQ" group-by="true" />
+		<alias name="requisicionId" entity-alias="REQ" group-by="true" />
+		<alias name="descripcion" entity-alias="REQ" group-by="true" />
+		<alias name="areaPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="statusId" entity-alias="REQ" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="REQ" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="REQ" group-by="true" />
+		<alias name="fechaAutorizada" entity-alias="REQ" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="montoTotal" entity-alias="REQ" group-by="true" />
+		<alias name="createdStamp" entity-alias="REQ" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<view-link entity-alias="REQ" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+
+	<!-- Vista para encontrar requisición -->
+	<view-entity entity-name="BuscarRequisicionConProduct"
+		package-name="com.absoluciones.adquisiciones"
+		title="Permite la búsqueda de requisiciones de acuerdo a parametros de entrada. CON PARAMETRO PRODUCT">
+		<member-entity entity-alias="REQ" entity-name="Requisicion" />
+		<member-entity entity-alias="DRE" entity-name="DetalleRequisicion" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="STA" entity-name="Estatus"></member-entity>
+
+		<alias name="requisicionId" entity-alias="REQ" group-by="true" />
+		<alias name="descripcion" entity-alias="REQ" group-by="true" />
+		<alias name="areaPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="statusId" entity-alias="REQ" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="REQ" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="REQ" group-by="true" />
+		<alias name="fechaAutorizada" entity-alias="REQ" group-by="true" />		
+		<alias name="organizationPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="montoTotal" entity-alias="REQ" group-by="true" />
+		<alias name="createdStamp" entity-alias="REQ" group-by="true" />
+		<alias name="fechaContable" entity-alias="REQ" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="partyId" entity-alias="PER" group-by="true"/>		
+		<alias name="descripcionStatus" entity-alias="STA" field="descripcion" group-by="true"/>
+		<alias name="productId" entity-alias="DRE" group-by="false" />
+		<alias name="procedencia" entity-alias="DRE" group-by="true" />
+		<alias name="iva" entity-alias="DRE" group-by="true" />
+		<alias name="productName" entity-alias="PRO" group-by="false" />
+		
+		<view-link entity-alias="REQ" rel-entity-alias="DRE" rel-optional="true">
+			<key-map field-name="requisicionId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="DRE" rel-entity-alias="PRO" rel-optional="true">
+			<key-map field-name="productId" />
+		</view-link>
+		<view-link rel-entity-alias="STA" entity-alias="REQ">
+			<key-map field-name="statusId"/>
+		</view-link>
+	</view-entity>
+	
+	<extend-entity entity-name="OrderItem">
+		<field name="customTimePeriodId" type="id-ne" />
+		<relation type="one" fk-name="FK_DBO_OI_TIMEPER" rel-entity-name="CustomTimePeriod" >
+			<key-map field-name="customTimePeriodId" />
+		</relation>
+	</extend-entity>
+    
+    <view-entity entity-name="RequisicionPorDetalle" package-name="org.opentaps.purchasing.supplier"
+        title="Obtiene el numero de requisicion de cada detalleRequisicion">
+      <member-entity entity-alias="DR" entity-name="DetalleRequisicion"/>
+      
+      <alias entity-alias="DR" name="requisicionId" group-by="true"/>
+      <alias entity-alias="DR" name="estatusProducto"/>
+      <alias entity-alias="DR" name="customTimePeriodId"/>
+      
+    </view-entity>   
+    
+	<entity entity-name="DocumentoObligatorio"
+		package-name="com.absoluciones.adquisiciones"
+		title="Entidad que contiene los documentos obligatorios de cada contrato o pedido">
+		<field name="docId" type="id-ne" />
+		<field name="orderId" type="id-ne" />
+		<field name="tipoAdjudicacionId" type="id-ne" />
+		<field name="docTipoAdjudicacionId" type="id-ne" />
+		<field name="flag" type="indicator" />
+		<field name="userC" type="id-vlong-ne"></field>
+		<field name="userM" type="id-vlong-ne"></field>
+		<field name="fechaActualizacion" type="date-time" />
+		<prim-key field="docId" />
+		<relation type="one" fk-name="FK_DBO_OBLI_ADJ" rel-entity-name="TipoAdjudicacionDoc">
+			<key-map field-name="tipoAdjudicacionId" />
+			<key-map field-name="docTipoAdjudicacionId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_OBLI_ORDER" rel-entity-name="OrderHeader">
+			<key-map field-name="orderId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_OBLI_USRC" rel-entity-name="UserLogin" title="C">
+			<key-map field-name="userC" rel-field-name="userLoginId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_OBLI_USRM" rel-entity-name="UserLogin" title="M">
+			<key-map field-name="userM" rel-field-name="userLoginId"/>
+		</relation>
+	</entity>
+	
+	
+	<entity entity-name="TipoPenaDeductiva"
+		package-name="com.absoluciones.adquisiciones" 
+		title="Entidad que almacena el tipo de penas convencionales que pueden existir y/o las deductivas">
+		<field name="penaId" type="id-ne" />
+		<field name="base" type="description" />
+		<field name="calculo" type="id-ne" />
+		<field name="penaDeductivaFlag" type="indicator" />
+		<field name="zonaEconomicaFlag" type="indicator" />
+		<prim-key field="penaId" />
+	</entity>
+	
+	<entity entity-name="PenaDeductiva"
+		package-name="com.absoluciones.adquisiciones" 
+		title="Entidad que almacena el tipo de decutiva y/o pena convencional que tiene la organización">
+		<field name="penaDeductivaId" type="id-ne" />
+		<field name="penaId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne" />
+		<prim-key field="penaDeductivaId" />
+		<relation type="one" fk-name="FK_DBO_PENA_TIPO" rel-entity-name="TipoPenaDeductiva">
+			<key-map field-name="penaId"  />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PENA_ORG" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+	</entity>
+	
+	<!-- Vista para encontrar el precio y producto recibido -->
+	<view-entity entity-name="BuscarPenaDeductiva"
+		package-name="com.absoluciones.adquisiciones"
+		title="Permite la búsqueda del pena o deductiva.">
+		<member-entity entity-alias="TPD" entity-name="TipoPenaDeductiva" />
+		<member-entity entity-alias="PD" entity-name="PenaDeductiva" />
+		<alias name="penaId" entity-alias="PD" group-by="true" />
+		<alias name="penaDeductivaId" entity-alias="PD" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="PD" group-by="true" />
+		<alias name="penaDeductivaFlag" entity-alias="TPD" group-by="true" />
+		<alias name="calculo" entity-alias="TPD" group-by="true" />
+		<alias name="zonaEconomicaFlag" entity-alias="TPD" group-by="true" />
+		<view-link entity-alias="TPD" rel-entity-alias="PD">
+			<key-map field-name="penaId" />
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="AplicaPenaDeductiva"
+		package-name="com.absoluciones.adquisiciones" 
+		title="Entidad que almacena el el tipo de penas o deductivas aplicadas">
+		<field name="aplicaPenaId" type="id-ne" />
+		<field name="penaDeductivaId" type="id-ne" />
+		<field name="userLoginId" type="id-vlong-ne"></field> 
+		<field name="invoiceId" type="id-ne" />
+		<field name="flag" type="indicator" />
+		<field name="userLoginIdCancel" type="id-vlong-ne"></field>
+		<field name="descripcionCancela" type="description" /> 
+		<prim-key field="aplicaPenaId" />
+		<relation type="one" fk-name="FK_DBO_APLICA_PENA" rel-entity-name="PenaDeductiva">
+			<key-map field-name="penaDeductivaId"  />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PENA_USR" rel-entity-name="UserLogin" >
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+		<relation type="one" fk-name="FK_DBO_PENA_USRC" rel-entity-name="UserLogin" title="C">
+        	<key-map field-name="userLoginIdCancel" rel-field-name="userLoginId" />
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_PENA_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+	</entity>
+	
+	<entity entity-name="DetalleAplicaPenaDeductiva"
+		package-name="com.absoluciones.adquisiciones" 
+		title="Entidad que almacena el detalle de la pena y/o deductiva">
+		<field name="detalleAplicaPenaId" type="id-ne" />
+		<field name="aplicaPenaId" type="id-ne" />
+		<field name="orderId" type="id-ne" />
+		<field name="orderItemSeqId" type="id-ne" />
+		<field name="cantidad" type="currency-precise" />
+		<field name="monto" type="currency-precise" />
+		<field name="descripcion" type="description" />
+		<prim-key field="detalleAplicaPenaId" />
+		<prim-key field="aplicaPenaId" />
+		<relation type="one" fk-name="FK_DBO_DET_APLICA" rel-entity-name="AplicaPenaDeductiva">
+			<key-map field-name="aplicaPenaId"  />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_DET_ORDER" rel-entity-name="OrderItem">
+			<key-map field-name="orderId" />
+			<key-map field-name="orderItemSeqId" />
+		</relation>
+	</entity>
+	
+	<!-- Vista para traer las penas convencionales -->
+	<view-entity entity-name="BuscarDetallePenas"
+		package-name="com.absoluciones.adquisiciones"
+		title="Permite la búsqueda de penas convencionales.">
+		<member-entity entity-alias="APD" entity-name="AplicaPenaDeductiva" />
+		<member-entity entity-alias="PD" entity-name="PenaDeductiva" />
+		<member-entity entity-alias="TPD" entity-name="TipoPenaDeductiva" />
+		<member-entity entity-alias="DPD" entity-name="DetalleAplicaPenaDeductiva" />
+		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<member-entity entity-alias="PR" entity-name="Product" />
+		<member-entity entity-alias="INV" entity-name="Invoice" />
+		<member-entity entity-alias="STA" entity-name="StatusItem" />
+		<alias name="aplicaPenaId" entity-alias="APD" group-by="true" />
+		<alias name="invoiceId" entity-alias="APD" group-by="true" />
+		<alias name="createdStamp" entity-alias="APD" group-by="true" />
+		<alias name="penaDeductivaFlag" entity-alias="TPD" group-by="true" />
+		<alias name="base" entity-alias="TPD" group-by="true" />
+		<alias name="penaId" entity-alias="PD" group-by="true" />
+		<alias name="penaDeductivaId" entity-alias="PD" group-by="true" />
+		<alias name="detalleAplicaPenaId" entity-alias="DPD" group-by="true" />
+		<alias name="orderId" entity-alias="DPD" group-by="true" />
+		<alias name="orderItemSeqId" entity-alias="DPD" group-by="true" />
+		<alias name="cantidad" entity-alias="DPD" group-by="true" />
+		<alias name="monto" entity-alias="DPD" group-by="true" />
+		<alias name="descripcion" entity-alias="DPD" group-by="true" /> 
+		<alias name="productId" entity-alias="OI" group-by="true" />  
+		<alias name="productName" entity-alias="PR" group-by="true" />
+		<alias name="moneda" field="currencyUomId" entity-alias="INV" group-by="true" />
+		<alias name="estatus" field="description" entity-alias="STA" group-by="true" />
+		<view-link entity-alias="TPD" rel-entity-alias="PD">
+			<key-map field-name="penaId" />
+		</view-link>
+		<view-link entity-alias="PD" rel-entity-alias="APD">
+			<key-map field-name="penaDeductivaId" />
+		</view-link>
+		<view-link entity-alias="APD" rel-entity-alias="DPD">
+			<key-map field-name="aplicaPenaId" />
+		</view-link>
+		<view-link entity-alias="DPD" rel-entity-alias="OI">
+			<key-map field-name="orderId" />
+			<key-map field-name="orderItemSeqId" />
+		</view-link>
+		<view-link entity-alias="OI" rel-entity-alias="PR">
+			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="APD" rel-entity-alias="INV" rel-optional="true">
+			<key-map field-name="invoiceId" />
+		</view-link>
+		<view-link entity-alias="INV" rel-entity-alias="STA" rel-optional="true">
+			<key-map field-name="statusId" />
+		</view-link>		
+	</view-entity>
+	
+	<view-entity entity-name="SolicitudesPagoAntiPendientes"
+		package-name="com.absoluciones.adquisiciones"
+		title="Busqueda de solicitudes de ordenes de pago con pagos anticipados pendientes">
+		<member-entity entity-alias="OH" entity-name="OrderHeader" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+		<member-entity entity-alias="UL" entity-name="UserLogin" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<alias name="orderId" entity-alias="OH" group-by="true" />
+		<alias name="orderName" entity-alias="OH" group-by="true" />
+		<alias name="orderDate" entity-alias="OH" group-by="true" />
+		<alias name="partyId" entity-alias="UL" group-by="true" />
+		<alias name="grandTotal" entity-alias="OH" group-by="true" />
+		<alias name="descripcionWorkflow" field="descripcion" entity-alias="TIP" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />	
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<alias name="pagoAnticipado" entity-alias="OH" group-by="true" />
+		<alias name="proveedorPagoAnticipado" entity-alias="OH" group-by="true" />
+		<alias name="areaId" entity-alias="PER" group-by="true" />
+		<alias name="groupName" entity-alias="PAG" group-by="true" />
+		<view-link entity-alias="OH" rel-entity-alias="CON">
+			<key-map field-name="orderId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="OH" rel-entity-alias="UL">
+			<key-map field-name="createdBy" rel-field-name="userLoginId"/>
+		</view-link>
+		<view-link entity-alias="UL" rel-entity-alias="PER">
+			<key-map field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="PER" rel-entity-alias="PAG">
+			<key-map field-name="areaId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+	    
+</entitymodel>

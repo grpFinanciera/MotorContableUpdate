@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://opentaps-common/webapp/common/WEB-INF/common-controller.xml"/>
+
+    <description>Proyectos Component Site Configuration File</description>
+    <owner></owner>
+    
+    <handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+
+    <!-- ================= -->
+	<!-- Security Mappings -->
+	<!-- ================= -->
+
+	<request-map uri="checkLogin" edit="false">
+		<description>Verify a user is logged in.</description>
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkLogin" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="login">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="login" />
+		<response name="success" type="request" value="setOrganization" />
+		<response name="requirePasswordChange" type="view"
+			value="requirePasswordChange" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="logout">
+		<security https="true" auth="true" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="logout" />
+		<response name="success" type="request" value="checkLogin" />
+		<response name="error" type="view" value="myHomeMain" />
+	</request-map>
+	
+	<!-- ====================== -->
+	<!-- Basic Request Mappings -->
+	<!-- ====================== -->
+
+	<request-map uri="authview">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="error" />
+	</request-map>
+	<request-map uri="setSessionLocale">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.common.CommonEvents" invoke="setSessionLocale" />
+		<response name="success" type="request" value="myHomeMain" />
+		<response name="error" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="main">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<request-map uri="selectOrganizationForm">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="selectOrganizationForm" />
+	</request-map>
+	<request-map uri="setOrganization">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="setOrganization" />
+		<response name="selectOrganization" type="view"
+			value="selectOrganizationForm" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+
+	<!-- ================== -->
+	<!-- Main Request Maps -->
+	<!-- ================== -->
+
+	<!-- call this request when you have a donePage that you want to go to after 
+		finishing a service -->
+	<request-map uri="donePageRequestHelper">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="donePageRequestHelper" />
+		<response name="myProfile" type="view" value="myProfile" />
+		<!-- mostly for error redirects -->
+		<response name="myProfileEditContactMech" type="request"
+			value="myProfileEditContactMech" />
+		<!-- default -->
+		<response name="error" type="view" value="myHomeMain" />
+		<response name="" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="myHomeMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	
+	<!-- ============= -->
+	<!--   Principal   -->
+	<!-- ============= -->
+	<request-map uri="emptyPrincipalScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyPrincipalScreen" />
+		<response name="error" type="view" value="emptyPrincipalScreen" />
+	</request-map>
+	
+	<request-map uri="altaProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="altaProyectoScreen"/>
+		<response name="error" type="view" value="altaProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="guardaProyecto"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="guardaProyecto"/>
+	    <response name="success" type="request-redirect" value="agregaPresupuesto">
+	    	<redirect-parameter name="proyectoId"/>
+	        </response>
+	    <response name="error" type="view" value="altaProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="agregaPresupuesto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="agregaPresupuesto"/>
+		<response name="error" type="view" value="agregaPresupuesto"/>
+	</request-map>
+	
+	<request-map uri="agregaParticipantes">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="agregaParticipantes"/>
+		<response name="error" type="view" value="agregaParticipantes"/>
+	</request-map>
+	
+	<request-map uri="agregaUsuariosProyecto">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaUsuariosProyecto"/>
+		<response name="success" type="request-redirect" value="agregaParticipantes">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+		<response name="error" type="view" value="agregaParticipantes">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="agregaPresupuestoProyecto">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaPresupuestoProyecto"/>
+		<response name="success" type="request-redirect" value="agregaPresupuesto">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+		<response name="error" type="view" value="agregaPresupuesto">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="modificaPresupuesto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="modificaPresupuesto"/>
+		<response name="error" type="view" value="modificaPresupuesto"/>
+	</request-map>
+	
+	<request-map uri="modificarPresupuesto">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="modificarPresupuesto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map> 
+    
+    <request-map uri="cargarPaginaProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaProyecto"/>
+        <response name="success" type="request-redirect" value="agregaParticipantes">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="agregaParticipantes"/>
+    </request-map>
+    
+    <request-map uri="cargarPaginaModPreProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaProyecto"/>
+        <response name="success" type="request-redirect" value="modificaPresupuesto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="modificaPresupuesto"/>
+    </request-map>
+    
+    <request-map uri="obtieneCuentasBancarias">
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="obtieneCuentasBancarias" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+    
+    <request-map uri="actualizaParticipantes">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="actualizaParticipantes" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map> 
+	
+	<request-map uri="eliminaParticipantes">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaParticipantes" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map> 
+	
+	 <request-map uri="actualizaEtapasPresupuesto">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="actualizaEtapasPresupuesto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map> 
+	
+	<request-map uri="eliminaEtapaPresupuesto">
+    	<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaEtapaPresupuesto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map> 
+	
+	<request-map uri="guardarProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="guardarProyecto"/>
+        <response name="success" type="request-redirect" value="verProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="agregaParticipantes"/>
+   </request-map> 
+   
+   <request-map uri="verProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verProyecto"/>
+		<response name="error" type="view" value="verProyecto"/>
+	</request-map>
+	
+	<request-map uri="editarProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="editarProyecto"/>
+		<response name="error" type="view" value="editarProyecto"/>
+	</request-map>
+	
+	<request-map uri="actualizarProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="actualizarProyecto"/>
+        <response name="success" type="request-redirect" value="verProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="editarProyecto"/>
+   </request-map> 
+   
+   <request-map uri="cancelarProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cancelarProyecto"/>
+        <response name="success" type="request-redirect" value="verProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="editarProyecto"/>
+   </request-map> 
+	
+	<request-map uri="consultaProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="consultaProyectoScreen"/>
+		<response name="error" type="view" value="consultaProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="previsionProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="previsionProyectoScreen"/>
+		<response name="error" type="view" value="previsionProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="verPrevision">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verPrevision"/>
+		<response name="error" type="view" value="verPrevision"/>
+	</request-map>
+	
+	<request-map uri="pagoProvisionProyectos">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="pagoProvisionProyectos"/>
+        <response name="success" type="request-redirect" value="verPrevision">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="verPrevision"/>
+   </request-map>
+	
+	<request-map uri="usuariosProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="usuariosProyectoScreen"/>
+		<response name="error" type="view" value="usuariosProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="modificaEtapaProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="modificaEtapaProyectoScreen"/>
+		<response name="error" type="view" value="modificaEtapaProyectoScreen"/>
+	</request-map>
+	
+	 <request-map uri="modificaEtapaPresupuesto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="modificaEtapaPresupuesto"/>
+		<response name="error" type="view" value="modificaEtapaPresupuesto"/>
+	</request-map>
+	
+	<request-map uri="cargarPaginaPresupuestoProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaProyecto"/>
+        <response name="success" type="request-redirect" value="agregaPresupuesto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="modificaEtapaPresupuesto"/>
+    </request-map> 
+	
+	<request-map uri="agregaPresupuestoModProyecto">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaPresupuestoModProyecto"/>
+		<response name="success" type="request-redirect" value="modificaEtapaPresupuesto">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+		<response name="error" type="view" value="modificaEtapaPresupuesto">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="cargarPaginaModProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaProyecto"/>
+        <response name="success" type="request-redirect" value="modificaEtapaPresupuesto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="modificaEtapaPresupuesto"/>
+    </request-map> 
+    
+    <request-map uri="eliminaModificacionesProyecto">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaModificacionesProyecto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+    
+    <request-map uri="guardaModProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="guardaModProyecto"/>
+        <response name="success" type="request-redirect" value="verProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="modificaEtapaPresupuesto"/>
+   </request-map>
+	
+	<request-map uri="agregaEtapaProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="agregaEtapaProyectoScreen"/>
+		<response name="error" type="view" value="agregaEtapaProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="agregaInterComProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="agregaInterComProyectoScreen"/>
+		<response name="error" type="view" value="agregaInterComProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="registraInteresComision">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="registraInteresComision"/>
+		<response name="error" type="view" value="registraInteresComision"/>
+	</request-map>
+	
+	<request-map uri="concluirInteresComisionProyecto">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="concluirInteresComisionProyecto"/>
+		<response name="success" type="request-redirect" value="verProyecto">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+		<response name="error" type="view" value="registraInteresComision">
+			<redirect-parameter name="proyectoId"/>
+		</response>
+    </request-map>
+	
+	<request-map uri="terminaProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="terminaProyectoScreen"/>
+		<response name="error" type="view" value="terminaProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="concluirProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="concluirProyecto"/>
+		<response name="error" type="view" value="concluirProyecto"/>
+	</request-map>
+	
+	<request-map uri="cierreProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cierreProyecto"/>
+        <response name="success" type="request-redirect" value="verProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="concluirProyecto"/>
+   </request-map> 
+   
+   <request-map uri="devuelveProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="devuelveProyectoScreen"/>
+		<response name="error" type="view" value="devuelveProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="devolverProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="devolverProyecto"/>
+		<response name="error" type="view" value="devolverProyecto"/>
+	</request-map>
+	
+	<request-map uri="devoProyectos">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="devoProyectos"/>
+        <response name="success" type="request-redirect" value="devolverProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="devolverProyecto"/>
+   </request-map>
+   
+   <request-map uri="cargaDocumentosProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="cargaDocumentosProyectoScreen"/>
+		<response name="error" type="view" value="cargaDocumentosProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="CargaDocumentosProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargaDocumentosProyecto" />
+		<response name="success" type="view" value="cargaDocumentosProyectoScreen"/>
+		<response name="error" type="view" value="cargaDocumentosProyectoScreen"/>
+    </request-map>
+	
+	<request-map uri="descargaDocumentosProyectoScreen">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="descargaDocumentosProyectoScreen"/>
+		<response name="error" type="view" value="descargaDocumentosProyectoScreen"/>
+	</request-map>
+	
+	<request-map uri="verDocumentosProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verDocumentosProyecto"/>
+		<response name="error" type="view" value="verDocumentosProyecto"/>
+	</request-map>
+	
+	<request-map uri="descargaDocumento">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="descargaDocumento" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="eliminaDocumento">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaDocumento" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="cargarPaginaProyectoDocumentos">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaProyectoDocumentos"/>
+        <response name="success" type="request-redirect" value="verDocumentosProyecto">
+        	<redirect-parameter name="proyectoId"/>
+        </response>
+        <response name="error" type="view" value="verDocumentosProyecto"/>
+    </request-map>
+	<!-- ============= -->
+	<!--   Viaticos    -->
+	<!-- ============= -->
+	<request-map uri="emptyViaticosScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyViaticosScreen" />
+		<response name="error" type="view" value="emptyViaticosScreen" />
+	</request-map>
+	
+	<request-map uri="crearViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearViaticoScreen" />
+		<response name="error" type="view" value="crearViaticoScreen" />
+	</request-map>
+	
+	<request-map uri="obtieneParticipantes">
+    	<security https="true" auth="true"/>
+        <event type="java"
+            path="org.opentaps.proyectos.principal.AjaxEvents"
+            invoke="obtieneParticipantes" />
+        <response name="success" type="none" />
+        <response name="error" type="none" />
+    </request-map>
+    
+    <request-map uri="obtienePresupuesto">
+    	<security https="true" auth="true"/>
+        <event type="java"
+            path="org.opentaps.proyectos.principal.AjaxEvents"
+            invoke="obtienePresupuesto" />
+        <response name="success" type="none" />
+        <response name="error" type="none" />
+    </request-map>
+    
+    <request-map uri="RegistraViatico"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="registraViatico"/>
+	    <response name="success" type="request-redirect" value="verViaticoProyecto">
+	    	<redirect-parameter name="viaticoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="crearViaticoScreen"/>
+	</request-map>
+	
+	<request-map uri="verViaticoProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verViaticoProyecto"/>
+		<response name="error" type="view" value="verViaticoProyecto"/>
+	</request-map>
+	
+	<request-map uri="comprobarViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="comprobarViaticoScreen" />
+		<response name="error" type="view" value="comprobarViaticoScreen" />
+	</request-map>
+	
+	<request-map uri="devolverViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="devolverViaticoScreen" />
+		<response name="error" type="view" value="devolverViaticoScreen" />
+	</request-map>
+	
+	<request-map uri="comprobarViatico">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="comprobarViatico" />
+		<response name="error" type="view" value="comprobarViatico" />
+	</request-map>
+	
+	<request-map uri="devolverViaticoProyecto">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="devolverViaticoProyecto"/>
+        <response name="success" type="request-redirect" value="verViaticoProyecto">
+        	<redirect-parameter name="viaticoProyectoId"/>
+        </response>
+        <response name="error" type="view" value="comprobarViatico"/>
+    </request-map>
+	
+	<request-map uri="devolverViatico">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="devolverViatico" />
+		<response name="error" type="view" value="devolverViatico" />
+	</request-map>
+	
+	<request-map uri="agregaComprobanteViaticoProy">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaComprobanteViaticoProy"/>
+		<response name="success" type="request-redirect" value="comprobarViatico">
+			<redirect-parameter name="viaticoProyectoId"/>
+		</response>
+		<response name="error" type="view" value="comprobarViatico">
+			<redirect-parameter name="viaticoProyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="eliminaComprobanteViaticoProy">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaComprobanteViaticoProy" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="consultarViaticoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultarViaticoScreen" />
+		<response name="error" type="view" value="consultarViaticoScreen" />
+	</request-map>
+	
+	<request-map uri="generaPolizaComprobada"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="generaPolizaComprobada"/>
+	    <response name="success" type="request-redirect" value="verViaticoProyecto">
+	    	<redirect-parameter name="viaticoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="verViaticoProyecto"/>
+	</request-map>
+	
+	<request-map uri="generaPolizaDevo"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="generaPolizaDevo"/>
+	    <response name="success" type="request-redirect" value="verViaticoProyecto">
+	    	<redirect-parameter name="viaticoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="verViaticoProyecto"/>
+	</request-map>
+	
+	<!-- ============= -->
+	<!-- Gastos X comp -->
+	<!-- ============= -->
+	<request-map uri="emptyGastosScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyGastosScreen" />
+		<response name="error" type="view" value="emptyGastosScreen" />
+	</request-map>
+	
+	<request-map uri="crearGastoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearGastoScreen" />
+		<response name="error" type="view" value="crearGastoScreen" />
+	</request-map>
+	
+	<request-map uri="registrarSolicitudGastoProyecto"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="registraGasto"/>
+	    <response name="success" type="request-redirect" value="verGastoProyecto">
+	    	<redirect-parameter name="gastoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="crearGastoScreen"/>
+	</request-map>
+	
+	<request-map uri="verGastoProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verGastoProyecto"/>
+		<response name="error" type="view" value="verGastoProyecto"/>
+	</request-map>
+	
+	<request-map uri="consultarGastoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultarGastoScreen" />
+		<response name="error" type="view" value="consultarGastoScreen" />
+	</request-map>
+	
+	<request-map uri="comprobarGastoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="comprobarGastoScreen" />
+		<response name="error" type="view" value="comprobarGastoScreen" />
+	</request-map>
+	
+	<request-map uri="devolverGastoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="devolverGastoScreen" />
+		<response name="error" type="view" value="devolverGastoScreen" />
+	</request-map>
+	
+	<request-map uri="comprobarGastoProyecto">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="comprobarGastoProyecto" />
+		<response name="error" type="view" value="comprobarGastoProyecto" />
+	</request-map>
+	
+	<request-map uri="devolverViaticoGasto">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="devolverViaticoGasto"/>
+        <response name="success" type="request-redirect" value="verGastoProyecto">
+        	<redirect-parameter name="gastoProyectoId"/>
+        </response>
+        <response name="error" type="view" value="comprobarGastoProyecto"/>
+    </request-map>
+	
+	<request-map uri="devolverGastoProyecto">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="devolverGastoProyecto" />
+		<response name="error" type="view" value="devolverGastoProyecto" />
+	</request-map>
+	
+	<request-map uri="agregaDetalleGastosProyectos">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaDetalleGastosProyectos"/>
+		<response name="success" type="request-redirect" value="comprobarGastoProyecto">
+			<redirect-parameter name="gastoProyectoId"/>
+		</response>
+		<response name="error" type="view" value="comprobarGastoProyecto">
+			<redirect-parameter name="gastoProyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="eliminaFacturasProy">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaFacturasProy" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="generaPolizaGastoComprobada"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="generaPolizaGastoComprobada"/>
+	    <response name="success" type="request-redirect" value="verGastoProyecto">
+	    	<redirect-parameter name="gastoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="verGastoProyecto"/>
+	</request-map>
+	
+	<request-map uri="generaPolizaGastoDevo"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="generaPolizaGastoDevo"/>
+	    <response name="success" type="request-redirect" value="verGastoProyecto">
+	    	<redirect-parameter name="gastoProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="verGastoProyecto"/>
+	</request-map>
+	
+	<!-- ============= -->
+	<!-- Adquisiciones -->
+	<!-- ============= -->
+	<request-map uri="emptyAdquisicionesScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyAdquisicionesScreen" />
+		<response name="error" type="view" value="emptyAdquisicionesScreen" />
+	</request-map>
+	
+	<request-map uri="crearAdquisicionScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearAdquisicionScreen" />
+		<response name="error" type="view" value="crearAdquisicionScreen" />
+	</request-map>
+	
+	<request-map uri="RegistrarAdquisicion"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="registrarAdquisicion"/>
+	    <response name="success" type="request-redirect" value="verAdquisicionProyecto">
+	    	<redirect-parameter name="adqProyectoId"/>
+	    </response>
+	    <response name="error" type="view" value="crearAdquisicionScreen"/>
+	</request-map>
+	
+	<request-map uri="verAdquisicionProyecto">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verAdquisicionProyecto"/>
+		<response name="error" type="view" value="verAdquisicionProyecto"/>
+	</request-map>
+	
+	<request-map uri="agregaProductoAdq">
+    	<security https="true" auth="true"/>
+		<event type="service" invoke="agregaProductoAdq"/>
+		<response name="success" type="request-redirect" value="verAdquisicionProyecto">
+			<redirect-parameter name="adqProyectoId"/>
+		</response>
+		<response name="error" type="view" value="verAdquisicionProyecto">
+			<redirect-parameter name="adqProyectoId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="cargarPaginaAdqProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaAdqProyecto"/>
+        <response name="success" type="request-redirect" value="verAdquisicionProyecto">
+        	<redirect-parameter name="adqProyectoId"/>
+        </response>
+        <response name="error" type="view" value="verAdquisicionProyecto"/>
+    </request-map>
+    
+    <request-map uri="eliminaProductos">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaProductos" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="guardarAdquisicion">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="guardarAdquisicion"/>
+        <response name="success" type="request-redirect" value="verAdquisicionProyecto">
+        	<redirect-parameter name="adqProyectoId"/>
+        </response>
+        <response name="error" type="view" value="verAdquisicionProyecto"/>
+   </request-map>
+   
+   <request-map uri="pagoAdquisicionScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="pagoAdquisicionScreen" />
+		<response name="error" type="view" value="pagoAdquisicionScreen" />
+	</request-map>
+	
+	<request-map uri="verPagoAdquisicion">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verPagoAdquisicion"/>
+		<response name="error" type="view" value="verPagoAdquisicion"/>
+	</request-map>
+	
+	<request-map uri="cancelarAdqProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cancelarAdqProyecto"/>
+        <response name="success" type="request-redirect" value="verPagoAdquisicion">
+        	<redirect-parameter name="adqProyectoId"/>
+        </response>
+        <response name="error" type="view" value="verPagoAdquisicion"/>
+   </request-map> 
+	
+	<request-map uri="pagoAdquisicion">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="pagoAdquisicion"/>
+        <response name="success" type="request-redirect" value="verAdquisicionProyecto">
+        	<redirect-parameter name="adqProyectoId"/>
+        </response>
+        <response name="error" type="view" value="verPagoAdquisicion"/>
+   </request-map>
+	
+	<request-map uri="consultarAdquisicionScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultarAdquisicionScreen" />
+		<response name="error" type="view" value="consultarAdquisicionScreen" />
+	</request-map>
+	
+	<!-- ==================== -->
+	<!-- Servicios Personales -->
+	<!-- ==================== -->
+	<request-map uri="emptyServiciosPersonalesScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyServiciosPersonalesScreen" />
+		<response name="error" type="view" value="emptyServiciosPersonalesScreen" />
+	</request-map>
+	
+	<request-map uri="crearServiciosPersonalesScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearServiciosPersonalesScreen" />
+		<response name="error" type="view" value="crearServiciosPersonalesScreen" />
+	</request-map>
+	
+	<request-map uri="RegistrarServiciosPersonales"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="registrarServiciosPersonales"/>
+	    <response name="success" type="request-redirect" value="verServiciosPersonales">
+	    	<redirect-parameter name="servicioPersonalId"/>
+	    </response>
+	    <response name="error" type="view" value="crearServiciosPersonalesScreen"/>
+	</request-map>
+	
+	<request-map uri="verServiciosPersonales">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verServiciosPersonales"/>
+		<response name="error" type="view" value="verServiciosPersonales"/>
+	</request-map>
+	
+	<request-map uri="pagoServicioPersonalScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="pagoServicioPersonalScreen" />
+		<response name="error" type="view" value="pagoServicioPersonalScreen" />
+	</request-map>
+	
+	<request-map uri="reembolsoServicioPersonalScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="reembolsoServicioPersonalScreen" />
+		<response name="error" type="view" value="reembolsoServicioPersonalScreen" />
+	</request-map>
+	
+	<request-map uri="verPagoServiciosPersonales">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verPagoServiciosPersonales"/>
+		<response name="error" type="view" value="verPagoServiciosPersonales"/>
+	</request-map>
+	
+	<request-map uri="verReembolsoServiciosPersonales">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verReembolsoServiciosPersonales"/>
+		<response name="error" type="view" value="verReembolsoServiciosPersonales"/>
+	</request-map>
+	
+	<request-map uri="cancelarServPerProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cancelarServPerProyecto"/>
+        <response name="success" type="request-redirect" value="verPagoServiciosPersonales">
+        	<redirect-parameter name="servicioPersonalId"/>
+        </response>
+        <response name="error" type="view" value="verPagoServiciosPersonales"/>
+   </request-map>
+	
+	<request-map uri="pagoServiciosPersonales">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="pagoServiciosPersonales"/>
+        <response name="success" type="request-redirect" value="verPagoServiciosPersonales">
+        	<redirect-parameter name="servicioPersonalId"/>
+        </response>
+        <response name="error" type="view" value="verPagoServiciosPersonales"/>
+   </request-map>
+   
+   <request-map uri="reembolsoServiciosPersonales">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="reembolsoServiciosPersonales"/>
+        <response name="success" type="request-redirect" value="verReembolsoServiciosPersonales">
+        	<redirect-parameter name="servicioPersonalId"/>
+        </response>
+        <response name="error" type="view" value="verReembolsoServiciosPersonales"/>
+   </request-map>
+	
+	<request-map uri="consultarServiciosPersonalesScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultarServiciosPersonalesScreen" />
+		<response name="error" type="view" value="consultarServiciosPersonalesScreen" />
+	</request-map>
+	
+	<!-- ============= -->
+	<!--    Config     -->
+	<!-- ============= -->
+	<request-map uri="emptyConfiguracionScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyConfiguracionScreen" />
+		<response name="error" type="view" value="emptyConfiguracionScreen" />
+	</request-map>
+	
+	<request-map uri="configuraObjetoGasto">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="configuraObjetoGasto" />
+		<response name="error" type="view" value="configuraObjetoGasto" />
+	</request-map>
+	
+	<request-map uri="guardaObjetoGasto"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="guardaObjetoGasto"/>
+	    <response name="success" type="request-redirect" value="configuraObjetoGasto"/>
+	    <response name="error" type="view" value="configuraObjetoGasto"/>
+	</request-map>
+	
+	<request-map uri="eliminaObjetoGastoProyecto">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="org.opentaps.proyectos.principal.AjaxEvents"
+			invoke="eliminaObjetoGastoProyecto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="cargarPaginaObjetoProyecto">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="cargarPaginaObjetoProyecto"/>
+        <response name="success" type="request-redirect" value="configuraObjetoGasto"/>
+        <response name="error" type="view" value="configuraObjetoGasto"/>
+    </request-map>
+	
+	<!-- ============= -->
+	<!--   Reportes    -->
+	<!-- ============= -->
+	<request-map uri="emptyReportesScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyReportesScreen" />
+		<response name="error" type="view" value="emptyReportesScreen" />
+	</request-map>
+
+	<request-map uri="reportes">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="reportes" />
+		<response name="error" type="view" value="reportes" />
+	</request-map>
+
+    <!-- ============= -->
+	<!-- View Mappings -->
+	<!-- ============= -->
+
+	<view-map name="error" page="/error/error.jsp" />
+	<view-map name="login" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#login" />
+	<view-map name="requirePasswordChange" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#requirePasswordChange" />
+	<view-map name="selectOrganizationForm" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganizationForm" />
+		
+	<!-- main screens for each section -->
+	<view-map name="myHomeMain" type="screen" 
+		page="component://proyectos/widget/proyectos/screens/myhome/MyHomeScreens.xml#myHome" />
+	
+	<!-- Principal -->
+	<view-map name="emptyPrincipalScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#emptyPrincipalScreen" />
+	<view-map name="altaProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#altaProyectoScreen"/>
+	<view-map name="agregaPresupuesto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#agregaPresupuesto"/>
+	<view-map name="modificaPresupuesto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#modificaPresupuesto"/>
+	<view-map name="agregaParticipantes" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#agregaParticipantes"/>
+	<view-map name="verProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#verProyecto"/>
+	<view-map name="editarProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#editarProyecto"/>
+	<view-map name="consultaProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#consultaProyectoScreen"/>
+	<view-map name="previsionProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#previsionProyectoScreen"/>
+	<view-map name="verPrevision" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#verPrevision"/>
+	<view-map name="modificaEtapaProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#modificaEtapaProyectoScreen"/>
+	<view-map name="modificaEtapaPresupuesto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#modificaEtapaPresupuesto"/>
+	<view-map name="agregaEtapaProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#agregaEtapaProyectoScreen"/>
+	<view-map name="agregaInterComProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#agregaInterComProyectoScreen"/>
+	<view-map name="registraInteresComision" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#registraInteresComision"/>
+	<view-map name="usuariosProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#usuariosProyectoScreen"/>
+	<view-map name="terminaProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#terminaProyectoScreen"/>
+	<view-map name="concluirProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#concluirProyecto"/>
+	<view-map name="devuelveProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#devuelveProyectoScreen"/>
+	<view-map name="devolverProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#devolverProyecto"/>
+	<view-map name="cargaDocumentosProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#cargaDocumentosProyectoScreen"/>
+	<view-map name="descargaDocumentosProyectoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#descargaDocumentosProyectoScreen"/>
+	<view-map name="verDocumentosProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/principal/PrincipalScreens.xml#verDocumentosProyecto"/>
+		
+	<!-- Viaticos  -->
+	<view-map name="emptyViaticosScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#emptyViaticosScreen" />
+	<view-map name="crearViaticoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#crearViaticoScreen" />		
+	<view-map name="verViaticoProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#verViaticoProyecto"/>
+	<view-map name="consultarViaticoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#consultarViaticoScreen" />
+	<view-map name="comprobarViaticoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#comprobarViaticoScreen" />
+	<view-map name="devolverViaticoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#devolverViaticoScreen" />
+	<view-map name="comprobarViatico" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#comprobarViatico"/>
+	<view-map name="devolverViatico" type="screen"
+		page="component://proyectos/widget/proyectos/screens/viaticos/ViaticosScreens.xml#devolverViatico"/>
+		
+	<!-- GastosXCom -->
+	<view-map name="emptyGastosScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#emptyGastosScreen" />
+	<view-map name="crearGastoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#crearGastoScreen" />
+	<view-map name="verGastoProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#verGastoProyecto"/>
+	<view-map name="consultarGastoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#consultarGastoScreen" />
+	<view-map name="comprobarGastoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#comprobarGastoScreen" />
+	<view-map name="devolverGastoScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#devolverGastoScreen" />
+	<view-map name="comprobarGastoProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#comprobarGastoProyecto" />
+	<view-map name="devolverGastoProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/gastos/GastosScreens.xml#devolverGastoProyecto" />
+		
+	<!-- Adquisiciones -->
+	<view-map name="emptyAdquisicionesScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#emptyAdquisicionesScreen" />
+	<view-map name="crearAdquisicionScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#crearAdquisicionScreen" />
+	<view-map name="verAdquisicionProyecto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#verAdquisicionProyecto"/>	
+	<view-map name="pagoAdquisicionScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#pagoAdquisicionScreen" />
+	<view-map name="verPagoAdquisicion" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#verPagoAdquisicion"/>	
+	<view-map name="consultarAdquisicionScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/adquisiciones/AdquisicionesScreens.xml#consultarAdquisicionScreen" />
+		
+	<!-- Servicios personales -->
+	<view-map name="emptyServiciosPersonalesScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#emptyServiciosPersonalesScreen" />
+	<view-map name="crearServiciosPersonalesScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#crearServiciosPersonalesScreen" />
+	<view-map name="verServiciosPersonales" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#verServiciosPersonales"/>
+	<view-map name="pagoServicioPersonalScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#pagoServicioPersonalScreen" />
+	<view-map name="reembolsoServicioPersonalScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#reembolsoServicioPersonalScreen" />
+	<view-map name="verPagoServiciosPersonales" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#verPagoServiciosPersonales"/>
+	<view-map name="verReembolsoServiciosPersonales" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#verReembolsoServiciosPersonales"/>
+	<view-map name="consultarServiciosPersonalesScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/serviciosPersonales/ServiciosPersonalesScreens.xml#consultarServiciosPersonalesScreen" />
+		
+	<!-- Config -->
+	<view-map name="emptyConfiguracionScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/configuracion/ConfiguracionScreens.xml#emptyConfiguracionScreen" />
+	<view-map name="configuraObjetoGasto" type="screen"
+		page="component://proyectos/widget/proyectos/screens/configuracion/ConfiguracionScreens.xml#configuraObjetoGasto" />
+		
+	<!-- Reportes -->
+	<view-map name="emptyReportesScreen" type="screen"
+		page="component://proyectos/widget/proyectos/screens/reportes/ReportesScreens.xml#emptyReportesScreen" />
+	<view-map name="reportes" type="screen"
+		page="component://proyectos/widget/proyectos/screens/reportes/ReportesScreens.xml#reportes" />
+</site-conf>

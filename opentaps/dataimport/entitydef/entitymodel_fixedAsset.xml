@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Fixed Asset Import Entities</title>
+    <description>Defines intermediate entities for importing fixed asset data</description>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+    <entity entity-name="DataImportFixedAsset"
+        package-name="org.opentaps.dataimport"
+        title="Intermediate import entity (i.e., the bridge table) for Fixed Asset data.">
+        <field name="numeroExpediente" type="id-ne"/>
+        <field name="fixedAssetId" type="id-ne"/>
+        <field name="product" type="id-ne"/>
+        <field name="fixedAssetName" type="name"/>
+        <field name="marca" type="id-long"/>
+        <field name="color" type="id-ne"/>
+        <field name="modelo" type="id-long"/>
+        <field name="serialNumber" type="long-varchar"/> 
+        <field name="factura" type="id-long"/>
+        <field name="fechaFactura" type="date-time"/>
+        <field name="talon" type="id-ne"/>
+        <field name="cheque" type="id-ne"/>
+        <field name="fechaPago" type="date-time"/>
+        <field name="moneda" type="id"/>
+        <field name="proveedor" type="id-ne"/>
+        <field name="dateAcquired" type="date-time"/>
+        <field name="purchaseCost" type="fixed-point"/>
+        <field name="vencimientoGarantia" type="date-time"/>
+        <field name="comments" type="long-varchar"/>
+        <field name="clase" type="id"/>
+        <field name="obsolescencia" type="date-time"/>
+        <field name="estadoFisico" type="id"/>
+        <field name="area" type="id-ne"/>
+        <field name="ubicacionRapidaId" type="id-ne"/>
+        <field name="partyId" type="id-ne"/>
+        <field name="fechaResguardo" type="date-time"/>
+        <field name="polizaSeguro" type="id-long"/>
+        <field name="fechaInicioSeguro" type="date-time"/>
+        <field name="fechaFinSeguro" type="date-time"/>
+        <field name="caracteristicas" type="very-long"/>
+		<field name="denominacionPartidaGen" type="description"/>
+		<field name="idActivoAnterior" type="id-long"/>
+		<field name="aniosVidaUtil" type="id-ne"/>
+		<field name="statusId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="fechaInicioResguardo" type="date-time"/>
+        <field name="fechaFinResguardo" type="date-time"/>
+        <field name="fechaAsignacion" type="date-time"/>
+        <field name="comentarioResguardo" type="long-varchar"/>
+        <field name="depreciation" type="fixed-point"/>
+       
+        
+        <!--Bienes inmuebles-->
+        <field name="domicilio" type="very-long"/>
+        <field name="municipio" type="long-varchar"/>
+        <field name="localidad" type="long-varchar"/>
+        <field name="ejido" type="long-varchar"/>
+        <field name="tipoTerreno" type="long-varchar"/>
+        <field name="tipoDocumentoLegalPropiedad" type="long-varchar"/>
+        <field name="descDocumentoLegalPropiedad" type="very-long"/>
+        <field name="origenAdquisicion" type="long-varchar"/>
+        <field name="formaAdquisicion" type="long-varchar"/>
+        <field name="tipoEmisorTituloPropiedad" type="long-varchar"/>
+        <field name="valorContruccion" type="fixed-point"/>
+        <field name="valorRazonable" type="fixed-point"/>
+        <field name="fechaAvaluo" type="date-time"/>
+        <field name="fechaTituloPropiedad" type="date-time"/>
+        <field name="claveCatastral" type="long-varchar"/>
+        <field name="fechaInicioClaveCatastral" type="date-time"/>
+        <field name="vencimientoClaveCatastral" type="date-time"><description>Fecha de vencimiento de clave catastral</description></field>
+        <field name="superficieTerreno" type="currency-precise"/>
+        <field name="superficieConstruccion" type="currency-precise"/>
+        <field name="superficieDisponible" type="currency-precise"/>
+        <field name="folioRppc" type="long-varchar"><description>folio Registro Publico De Propiedad Comercio</description></field>
+        <field name="fechaInscripcionRppc" type="date-time"><description>fecha Inscripcion Registro Publico De Propiedad Comercio</description></field>
+        <field name="ciudadInscripcionRPPC" type="long-varchar"><description>ciudad Inscripcion Registro Publico De Propiedad Comercio</description></field>        
+        <field name="fechaIncorporacionInventario" type="date-time"/>
+        <!--Tipo de Adjudicación-->
+        <field name="tipoAdjudicacion" type="id-ne"/>
+        <field name="subUnidadResponsable" type="id-ne"/>
+        
+        <!--Vehiculos-->
+        <field name="numTarjetaCirculacion" type="id-ne"/>
+        <field name="placa" type="id-ne"/>
+        <field name="tipoUnidadVehiculoId" type="id-ne"/>
+        <field name="numeroMotor" type="id-long"/>
+        <field name="usoVehiculo" type="id-long"/>
+        
+        <!--Almacen-->
+        <field name="facilityId" type="id-ne"/>
+        		
+		
+        <!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+        <field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time"/>
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>        
+        <prim-key field="fixedAssetId"/>
+        <relation type="one" fk-name="FK_USR_DI_FIX_ASS" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_TIP_UNI_VEHI_DI" rel-entity-name="TipoUnidadVehiculo">
+            <key-map field-name="tipoUnidadVehiculoId" />
+        </relation>	
+    </entity>  
+    
+    <entity entity-name="DataImportLevantaActFijo" 
+	    package-name="org.opentaps.dataimport"
+	    title="Tabla intermedia para importacion del levantamiento de activo fijo">
+    	<field name="fixedAssetId" type="id-ne"/>
+    	<field name="ubicacion" type="description"/>
+    	<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+        <field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time"/>
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>        
+        <prim-key field="fixedAssetId"/>
+        <relation type="one" fk-name="FK_USR_DI_FIX_ASS" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+    </entity>
+    
+</entitymodel>

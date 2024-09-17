@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<screen name="main-section-decorator">
+		<section>
+			<actions>
+				<set field="sectionName" value="adquisiciones" global="true"/>
+				<set field="sectionStyle" value="twoColumn"/>
+			</actions>
+			<widgets>
+				<include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+			</widgets>		
+		</section>
+	</screen>
+	
+	<screen name="emptyAdquisicionesScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="Adquisiciones"/>
+				<set field="sectionHeaderUiLabel" value="Adquisiciones"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/adquisiciones/emptyScreen.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="crearAdquisicionScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearAdquisiciones"/>
+				<set field="sectionHeaderUiLabel" value="Adquisiciones"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudAdquisiciones.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/adquisiciones/creaAdquisicion.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="verAdquisicionProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearAdquisiciones"/>
+				<set field="sectionHeaderUiLabel" value="Adquisiciones"/>
+				<set field="adqProyectoId"  value="${parameters.adqProyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudAdquisiciones.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/adquisiciones/verAdquisicionProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	 <screen name="pagoAdquisicionScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PagoAdquisiciones"/>  
+                <set field="sectionHeaderUiLabel" value="Adquisiciones"/>  
+                <java location="com.absoluciones.proyectos.ConsultarAdquisicion" invoke="buscaAdquisicionPago"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/adquisiciones/consultaAdquisicionPago.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/adquisiciones/listAdquisicionPago.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="consultarAdquisicionScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaAdquisiciones"/>  
+                <set field="sectionHeaderUiLabel" value="Adquisiciones"/>  
+                <java location="com.absoluciones.proyectos.ConsultarAdquisicion" invoke="buscaAdquisicion"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/adquisiciones/consultaAdquisicion.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/adquisiciones/listAdquisicion.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verPagoAdquisicion">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearAdquisiciones"/>
+				<set field="sectionHeaderUiLabel" value="Adquisiciones"/>
+				<set field="adqProyectoId"  value="${parameters.adqProyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudAdquisiciones.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/adquisiciones/verPagoAdquisicionProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+</screens>

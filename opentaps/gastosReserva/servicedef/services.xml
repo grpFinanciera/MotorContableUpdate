@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>GastosReserva Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+	
+	<!-- Crear Solicitud -->
+	 <service name="guardarSolicitudGastosReserva" engine="java" 
+	 		location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="guardarSolicitudGastosReserva">
+    	<attribute name="gastosReservaId" type="String" mode="OUT" optional="false" />
+    	<attribute name="areaId" type="String" mode="IN" optional="false" description="Área"/>
+        <attribute name="concepto" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="fecha" type="Timestamp" mode="IN" optional="false" />
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="proveedor" type="String" mode="IN" optional="true" description="Proveedor"/>
+        <attribute name="auxiliarId" type="String" mode="IN" description="Auxiliar contable" />
+    	<attribute name="observaciones" type="String" mode="IN" optional="true"/>
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="false" description="Organización"/>   
+    </service>
+    
+    <!-- Buscar Solicitud -->
+    <service name="actualizarGastoReserva" engine="java" location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="enviarSolicitud">
+    	<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false"/>
+    	<attribute name="concepto" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="urlHost" type="String" mode="IN" optional="false"/>
+        <attribute name="fecha" type="Timestamp" mode="IN" optional="false" />
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="proveedor" type="String" mode="IN" optional="true" description="Proveedor"/>
+    	<attribute name="observaciones" type="String" mode="IN" optional="true"/>	        
+    </service>
+    
+    <service name="cancelarGastoReserva" engine="java" location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="cancelarSolicitud">
+    	<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false"/>        
+    </service>
+    
+    <!-- Comprobar Solicitud -->
+    
+     <service name="agregaDetalleGastos" engine="java" location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="agregaDetalleGastos">
+    		<attribute name="detalleGId" type="String" mode="OUT" optional="false"/>
+    		<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false" />
+    		<attribute name="facturaNota" type="String" mode="IN" optional="false"/>
+    		<attribute name="montoSubtotalFactura" type="String" mode="IN" optional="false"/>
+    		<attribute name="iva" type="String" mode="IN" optional="false"/>
+    		<attribute name="montoTotalFactura" type="String" mode="IN" optional="false"/>
+    		<attribute name="proveedor" type="String" mode="IN" optional="false" description="Proveedor"/>
+    </service>
+    
+    <service name="solicitudesPendientes" engine="java" location="com.absoluciones.gastosreserva.busquedaGastosReserva" auth="true" invoke="solicitudesPendientes">
+    		<attribute name="detalleGId" type="String" mode="OUT" optional="false"/>
+    		<attribute name="gastosReservaId" type="String" mode="IN" optional="false" />
+    		<attribute name="facturaNota" type="String" mode="IN" optional="false"/>
+    		<attribute name="montoSubtotalFactura" type="String" mode="IN" optional="false"/>
+    		<attribute name="iva" type="String" mode="IN" optional="false"/>
+    		<attribute name="montoTotalFactura" type="String" mode="IN" optional="false"/>
+    		<attribute name="proveedor" type="String" mode="IN" optional="false" description="Proveedor"/>    
+    </service>
+    
+   	<service name="comprobarSolicitudGastosReserva" engine="java" location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="comprobarSolicitudGastosReserva">
+    	<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false"/>  
+    </service>
+    
+    <service name="agregaDetalleGastoPresupuesto" engine="java"
+    	location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="agregaDetalleGastoPresupuesto">
+    	<implements service="clasificacionesPresup"/>
+    	<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false" />
+    	<attribute name="fecha" type="Date" mode="IN" optional="false" />
+    	<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="presupuestarSolicitudGastosReserva" engine="java"
+    	location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="presupuestarSolicitudGastosReserva">
+    	<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+	<service name="devolucion100GastoReserva" engine="java"
+		location="com.absoluciones.gastosreserva.ServiciosGastosReserva" auth="true" invoke="devolucion100GastoReserva">
+		<attribute name="gastosReservaId" type="String" mode="INOUT" optional="false" />
+	</service>
+       	
+</services>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+    <!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para modulo de Importacion de datos</title>
+	<description>Define las entidades para Importacion de datos</description>
+	<version>1.0</version>
+	
+	<entity entity-name="DataImportDetRequisicion"
+		package-name="com.absoluciones.dataImport" title="Entidad que almacena la importación del detalle de la requisición">
+		<field name="dataImportRequisicionId" type="id-ne" />
+		<field name="detalleId" type="id-ne" />
+		<field name="monto" type="currency-amount-precise" />
+		<field name="productId" type="id-ne" />
+		<field name="cantidad" type="currency-amount-precise" />
+		<field name="descripcion" type="description" />
+		<field name="clasificacion1" type="description"/>
+        <field name="clasificacion2" type="description"/>
+        <field name="clasificacion3" type="description"/>
+        <field name="clasificacion4" type="description"/>
+        <field name="clasificacion5" type="description"/>
+        <field name="clasificacion6" type="description"/>
+        <field name="clasificacion7" type="description"/>
+        <field name="clasificacion8" type="description"/>
+        <field name="clasificacion9" type="description"/>
+        <field name="clasificacion10" type="description"/>
+        <field name="clasificacion11" type="description"/>
+        <field name="clasificacion12" type="description"/>
+        <field name="clasificacion13" type="description"/>
+        <field name="clasificacion14" type="description"/>
+        <field name="clasificacion15" type="description"/>
+		<field name="fechaEntrega" type="date-time" />
+		<field name="procedencia" type="description" />
+		<field name="iva" type="indicator" />
+        <field name="renglon" type="numeric"/>
+        <field name="mes" type="numeric"/>
+        <field name="anio" type="numeric"/>
+        <field name="customTimePeriodId" type="id"/>
+        <field name="clavePresupuestal" type="description"/>
+        <field name="userLoginId" type="id-vlong-ne"></field>
+		<field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+		<prim-key field="dataImportRequisicionId" />
+		<relation type="one" fk-name="FK_DBO_USR" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="ValidaDetalleReq" package-name="com.absoluciones.dataImport"
+		title="Une las tablas de DataImportDetRequisicion, ClavePresupuestal y Producto para validar datos">
+		<member-entity entity-alias="DIDR" entity-name="DataImportDetRequisicion" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="CP" entity-name="ClavePresupuestal" />
+		
+		<alias name="detalleId" entity-alias="DIDR" />
+		<alias name="productIdDet" entity-alias="DIDR" field="productId"/>
+		<alias name="clavePresupuestalDet" entity-alias="DIDR" field="clavePresupuestal"/>
+		<alias name="customTimePeriodId" entity-alias="DIDR" />
+		<alias name="monto" entity-alias="DIDR" />
+		<alias name="cantidad" entity-alias="DIDR" />
+		<alias name="fechaEntrega" entity-alias="DIDR" />
+		<alias name="procedencia" entity-alias="DIDR" />
+		<alias name="iva" entity-alias="DIDR" />
+		<alias name="renglon" entity-alias="DIDR" />
+		<alias name="importStatusId" entity-alias="DIDR" />
+		<alias name="userLoginId" entity-alias="DIDR" />
+		<alias name="descripcion" entity-alias="DIDR" />
+		<alias name="productId" entity-alias="PRO" />
+		<alias name="clavePresupuestal" entity-alias="CP" />
+		
+		<view-link entity-alias="DIDR" rel-entity-alias="PRO" rel-optional="true">
+			<key-map field-name="productId"  />
+		</view-link>
+		<view-link entity-alias="DIDR" rel-entity-alias="CP" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>		
+	</view-entity>
+	
+	<entity entity-name="DataImportPagoExterno" package-name="com.absoluciones.importacionDatos">
+		<field name="dataImportPagoExternoId" type="id-ne" />
+		<field name="renglon" type="numeric"/>
+		<field name="clasificacion1" type="description"/>
+        <field name="clasificacion2" type="description"/>
+        <field name="clasificacion3" type="description"/>
+        <field name="clasificacion4" type="description"/>
+        <field name="clasificacion5" type="description"/>
+        <field name="clasificacion6" type="description"/>
+        <field name="clasificacion7" type="description"/>
+        <field name="clasificacion8" type="description"/>
+        <field name="clasificacion9" type="description"/>
+        <field name="clasificacion10" type="description"/>
+        <field name="clasificacion11" type="description"/>
+        <field name="clasificacion12" type="description"/>
+        <field name="clasificacion13" type="description"/>
+        <field name="clasificacion14" type="description"/>
+        <field name="clasificacion15" type="description"/>
+        <field name="clavePresupuestal" type="description"/>
+        <field name="nombreExterno" type="description" />
+        <field name="fechaContable" type="date" />
+        <field name="conceptoPago" type="name_long" />
+        <field name="cuentaBancariaId" type="id" />
+        <field name="monto" type="currency-amount-precise" />
+        <field name="moneda" type="id-ne"/>
+        <field name="metodoPago" type="id" />
+        <field name="numeroCheque" type="id-long" />
+        <field name="userLoginId" type="id-vlong-ne" />
+		<field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+        <!-- Campos calculados para realizar la validación de presupuesto -->
+        <field name="mesId" type="id-ne" />
+        <field name="ciclo" type="id-ne" />
+        <field name="momentoId" type="id-ne" />
+
+        <prim-key field="dataImportPagoExternoId" />
+		<relation type="one" fk-name="FK_DBO_EXT_USR" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="ValidaPagoExterno" package-name="com.absoluciones.importacionDatos">
+		<member-entity entity-alias="DIPE" entity-name="DataImportPagoExterno"/>
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal"/>
+		<member-entity entity-alias="CTA" entity-name="CuentaBancaria"/>
+		<member-entity entity-alias="PT" entity-name="PaymentType"/>
+		<member-entity entity-alias="UOM" entity-name="Uom"/>
+		<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+
+		<alias name="dataImportPagoExternoId" entity-alias="DIPE" group-by="true" />
+		<alias name="renglon" entity-alias="DIPE" group-by="true" />
+		<alias name="nombreExterno" entity-alias="DIPE" group-by="true" />
+		<alias name="fechaContable" entity-alias="DIPE" group-by="true" />
+		<alias name="conceptoPago" entity-alias="DIPE" group-by="true" />
+		<alias name="cuentaBancariaId" entity-alias="DIPE" group-by="true" />
+		<alias name="importStatusId" entity-alias="DIPE" group-by="true" />
+		<alias name="userLoginId" entity-alias="DIPE" group-by="true" />
+		<alias name="numeroCheque" entity-alias="DIPE" group-by="true" />
+		<alias name="bancoId" entity-alias="CTA" group-by="true"/>
+		<alias name="cuentaBancariaIdCta" entity-alias="CTA" field="cuentaBancariaId" group-by="true"/>
+		<alias name="monto" entity-alias="DIPE" group-by="true" />
+		<alias name="moneda" entity-alias="DIPE" group-by="true" />
+		<alias name="uomId" entity-alias="UOM" group-by="true" />
+		<alias name="metodoPago" entity-alias="DIPE" group-by="true" />
+		<alias name="paymentTypeId" entity-alias="PT" group-by="true"/>
+		<alias name="clavePresupuestal" entity-alias="DIPE" group-by="true" />
+		<alias name="clavePresupuestalCve" entity-alias="CVE" field="clavePresupuestal" group-by="true"/>
+		<alias name="inactivo" entity-alias="CVE" group-by="true"/>
+		<alias name="montoControl" field="monto" entity-alias="CTRL" group-by="true"/>
+		
+		<view-link entity-alias="DIPE" rel-entity-alias="CVE" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+		<view-link entity-alias="DIPE" rel-entity-alias="CTA" rel-optional="true">
+			<key-map field-name="cuentaBancariaId"/>
+		</view-link>
+		<view-link entity-alias="DIPE" rel-entity-alias="PT" rel-optional="true">
+			<key-map field-name="metodoPago" rel-field-name="paymentTypeId" />
+		</view-link>
+		<view-link entity-alias="DIPE" rel-entity-alias="CTRL" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+			<key-map field-name="mesId"/>
+			<key-map field-name="ciclo"/>
+			<key-map field-name="momentoId"/>
+		</view-link>
+		<view-link entity-alias="DIPE" rel-entity-alias="UOM" rel-optional="true">
+			<key-map field-name="moneda" rel-field-name="uomId" />
+		</view-link>		
+	</view-entity>
+    
+</entitymodel>

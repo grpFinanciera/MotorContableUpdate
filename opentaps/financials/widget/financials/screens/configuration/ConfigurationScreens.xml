@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @author Ali Afzal Malik (ali@opensourcestrategies.com)
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="configuration" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="organizationTimePeriods">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/timePeriods.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_PERIODOTIEMPOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <container style="screenlet">
+                                    <container style="screenlet-header">
+                                        <label style="boxhead" text="${uiLabelMap.FinancialsTimePeriodsFor} ${parameters.organizationName}"/>
+                                    </container>
+                                    <container style="screenlet-body">
+                                        <platform-specific>
+                                            <html><html-template location="component://financials/webapp/financials/configuration/timePeriods.ftl"/></html>
+                                        </platform-specific>
+                                    </container>
+                                    <container style="screenlet-header">
+                                        <label style="boxhead" text="${uiLabelMap.FinancialsCreateANewTimePeriodFor} ${parameters.organizationName}"/>
+                                    </container>
+                                    <container style="screenlet-body">
+                                        <include-form name="createCustomTimePeriod" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                                    </container>
+                                </container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                        <!-- <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsTimePeriodsFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/timePeriods.ftl"/></html>
+                                </platform-specific>
+                            </container>
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsCreateANewTimePeriodFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="createCustomTimePeriod" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="listGlAccounts">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="CommonConfiguration"/>  
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listGlAccounts.bsh"/>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_LISTACUENTASCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/glAccounts.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                      <!-- <platform-specific>
+                        <html><html-template location="component://financials/webapp/financials/configuration/glAccounts.ftl"/></html>
+                      </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="listGlAccountTypes">
+        <section>
+            <actions>
+                <set field="targetNameToUse" value="createGlAccountTypeDefault"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listGlAccountTypes.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsConfigureLedgerConfigurationFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="listGlAccountTypes" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsConfigureLedgerAccountFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addGlAccountTypeDefault" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="updateGlAccountTypeDefault">
+        <section>
+            <actions>
+                <set field="targetNameToUse" value="updateGlAccountTypeDefault"/>
+                <set field="glAccountTypeId" value="${parameters.glAccountTypeId}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listGlAccountTypes.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsUpdateGlAccountType} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addGlAccountTypeDefault" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="listPaymentMethods">
+        <section>
+            <actions>
+                <set field="targetNameToUse" value="createPaymentMethod"/>
+                <set field="paymentMethodTypeId" value="${parameters.paymentMethodTypeId}"/>
+                <entity-one entity-name="PartyAcctgPreference" value-field="partyAcctgPreference">
+                    <field-map field-name="partyId" value="${parameters.organizationPartyId}"/>
+                </entity-one>
+                <set field="targetNameToUse" value="createPaymentMethod"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listPaymentMethods.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsPaymentMethodsFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="listPaymentMethods" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsAddPaymentMethodsFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addPaymentMethod" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsSelectRefundPaymentMethod} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="refundPaymentMethod" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>  
+    <screen name="updateGlAccount">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/updateGlAccount.bsh"/>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">  
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsUpdateGlAccountFor} ${parameters.organizationName}"/>
+                            </container>                        
+                            <container style="screenlet-body">
+                                <include-form name="updateGlAccount" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="addExistingGlAccount">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listGlAccounts.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsAddExistingAccountFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addExistingGlAccount" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="addNewGlAccount">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/listGlAccounts.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsAddNewAccountFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addNewGlAccount" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="addSubAccount">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/updateGlAccount.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsAddSubAccountFor} ${parameters.organizationName}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="addSubAccount" location="component://financials/widget/financials/forms/configuration/ConfigurationForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>  
+
+    <!-- View/Create PartyAcctgPreference -->
+    <screen name="configureOrganization">
+        <section>
+            <actions>			
+                <set field="partyId" from-field="parameters.organizationPartyId"/>
+                <entity-one entity-name="PartyAcctgPreference" value-field="partyAcctgPreference"/>
+                <set field="organizationPartyId" from-field="parameters.organizationPartyId"/>
+                <service service-name="getPartyAccountingPreferences" result-map="result">
+                    <field-map field-name="organizationPartyId"/>
+                </service>
+                <set field="agregatedPartyAcctgPreference" from-field="result.partyAccountingPreference"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                            <container style="screenlet-header">
+                                <label style="boxhead" text="${uiLabelMap.FinancialsConfigureOrganization}"/>
+                            </container>
+                            <container style="screenlet-body">
+                                <include-form name="PartyAcctgPreference" location="component://accounting/widget/GlSetupForms.xml"/>
+                            </container>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- list the configured accounting tags -->
+    <screen name="accountingTags">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsAccountingTags"/>  
+                <java location="com.opensourcestrategies.financials.configuration.BuscarClasificacion" invoke="buscarClasificacion"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLASIFSCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/createAccountingTag.ftl"/></html>
+                                </platform-specific>
+                                <platform-specific>
+						            <html><html-template location="component://financials/webapp/financials/configuration/clasificaciones.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Estructura de Clasificaciones -->
+    <screen name="classificationTagsUsage">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsAccountingStructUsage"/>  
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/clasificacionPre.bsh"/>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/classificationTagsUsage.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                      <!-- <platform-specific>
+                        <html><html-template location="component://financials/webapp/financials/configuration/classificationTagsUsage.ftl"/></html>
+                      </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="classificationTagsUsageYear">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsAccountingStructUsage"/>
+                <set field="customYear"  value="${parameters.customYear}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/classificationTagsUsageYear.bsh"/>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_ESTRUCTCLAVECFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/classificationTagsUsageYear.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Eventos -->
+    <screen name="OEventos">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsEvents}"/>  
+                <set field="sectionHeaderUiLabel" value="Creación de eventos"/>
+                <set field="creaOEventos" value="createEvents"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/getDatosEvento.bsh"/>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="Evento">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/configuration/createEvents.ftl"/>
+                                    </html></platform-specific>                         
+                                </frame-container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                        <!-- <frame-container title="Evento">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/configuration/createEvents.ftl"/>
+                            </html></platform-specific>                         
+                        </frame-container> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewEventos">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/viewEvento.bsh"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="PageTitleViewEvents"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body"> 
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/configuration/detalleEvento.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+     <screen name="buscarEventos">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.BuscarEvento}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.BuscarEvento}"/>  
+                <java location="org.opentaps.financials.motor.ConsultarEventos" invoke="buscaEventos"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_BEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="Filtros de búsqueda">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/configuration/consultaEventos.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/listEventos.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                        <!-- <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/configuration/consultaEventos.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/configuration/listEventos.ftl"/></html>
+                        </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyConfigurationScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Configuración"/>  
+                <set field="sectionHeaderUiLabel" value="Configuración"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://financials/webapp/financials/tesoreria/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="CrearEvento">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.CrearEvento}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.CrearEvento}"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/datosEvento.bsh"/>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/crearEvento.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+    
+    <screen name="EditarEvento">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsEditarEvento}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsEditarEvento}"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/editarEvento.bsh"/>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_EEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/editarEvento.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+    
+    <screen name="EditarEventoLineasCont">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsEditarEvento}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsEditarEvento}"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/editarEvento.bsh"/>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_EEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/editarEventoLineasCont.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+	
+	<screen name="VerEvento">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.VerEvento}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.VerEvento}"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/verEvento.bsh"/>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CEVENTOCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/verEvento.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+	
+	<screen name="Firmantes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.Firmantes}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.Firmantes}"/>
+				<script location="component://financials/webapp/financials/WEB-INF/actions/configuration/consultaReportesFirma.bsh"/>
+				<entity-condition entity-name="ReporteCatalogo" list="reporteCatalogo">                   					
+					 <order-by field-name="reporteId"/>
+                </entity-condition>              
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/consultaReportesFirma.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>	
+	
+	<screen name="consultarReportesFirma">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ElegirFirmante"/>  
+                <set field="sectionHeaderUiLabel" value="ElegirFirmante"/>  
+                <set field="reporteId"  value="${parameters.reporteId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/consultaReportesFirma.bsh"/>                               
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/configuration/consultaFirmantes.ftl"/>
+                            </html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+	<screen name="ConfiguraXML">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.ConfiguraReporteXML}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.ConfiguraReporteXML}"/>  
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/configuraReporteXML.bsh"/>     
+                <java location="com.opensourcestrategies.financials.reports.ContabilidadElectronica" invoke="consultaElementoReporte"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/configuration/configuraReporteXML.ftl"/>
+                            </html></platform-specific>
+                            <platform-specific>
+                            	<html>
+									<html-template location="component://financials/webapp/financials/configuration/listElementoXML.ftl"/>
+	                        	</html>
+	                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="CrearTipoAuxiliar">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsCrearTipoAuxiliares}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsCrearTipoAuxiliares}"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/crearTipoAuxiliar.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+    
+    <screen name="consultaMatriz">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsConsultaMatriz}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsConsultaMatriz}"/>  
+                <java location="org.opentaps.financials.motor.ConsultaMatriz" invoke="consultaMatriz"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+                                <frame-container title="Filtros de búsqueda">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/configuration/consultaMatriz.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/listMatriz.ftl"/></html>
+                                </platform-specific>
+                            </widgets>                            
+                        </section>                        
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="editarMatriz">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsEditarMatriz}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsEditarMatriz}"/>  
+                <java location="org.opentaps.financials.motor.ConsultaMatriz" invoke="editarMatriz"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+                                <frame-container title="Filtros de búsqueda">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/configuration/editarMatriz.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/listEditarMatriz.ftl"/></html>
+                                </platform-specific>
+                            </widgets>                            
+                        </section>                        
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="CrearClavePres">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsCrearClavePres}"/>  
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsCrearClavePres}"/>
+                <java
+				location="com.opensourcestrategies.financials.transactions.ConsultarMomentos"
+				invoke="buscaMomentos"
+                />
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/crearClavePres.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+    
+    <screen name="ConsultarClavePres">
+	<section>
+		<actions>
+			<set field="pageTitleLabel" value="Consultar clave presupuestal" />
+			<set field="sectionHeaderUiLabel" value="Consultar clave presupuestal" />
+			<java
+				location="com.opensourcestrategies.financials.transactions.ConsultarMomentos"
+				invoke="buscaClaves" />
+		</actions>
+		<widgets>
+			<decorator-screen name="main-section-decorator">
+				<decorator-section name="section-body">
+					<section>
+						<condition>
+							<or>
+								<if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CONSCLAVEPRESCFG"
+									action="_VIEW" />
+							</or>
+						</condition>
+						<widgets>
+							<frame-container title="Filtros de búsqueda">
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://financials/webapp/financials/configuration/consultaClaves.ftl" />
+									</html>
+								</platform-specific>
+							</frame-container>
+							<platform-specific>
+								<html>
+									<html-template
+										location="component://financials/webapp/financials/configuration/listClaves.ftl" />
+								</html>
+							</platform-specific>
+						</widgets>
+						<fail-widgets>
+							<include-screen name="PermissionErrorScreen"
+								location="component://financials/widget/financials/screens/common/CommonScreens.xml" />
+						</fail-widgets>
+					</section>
+				</decorator-section>
+			</decorator-screen>
+		</widgets>
+	</section>
+</screen>
+
+<screen name="ClavePresTipoCambio">
+	<section>
+		<actions>
+			<set field="pageTitleLabel" value="Configurar clave presupuestal de tipo de cambio" />
+			<set field="sectionHeaderUiLabel" value="Configurar clave presupuestal de tipo de cambio" />
+			<java location="com.opensourcestrategies.financials.transactions.ConsultarMomentos" invoke="buscaClavesTipoCambio" />
+			<script
+					location="component://financials/webapp/financials/WEB-INF/actions/configuration/cierrePresupuestal.bsh" />
+		</actions>
+		<widgets>
+			<decorator-screen name="main-section-decorator">
+				<decorator-section name="section-body">
+					<section>
+						<condition>
+							<or>
+								<if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CLAPRESTIPCAMBCFG"
+									action="_VIEW" />
+							</or>
+						</condition>
+						<widgets>
+							<frame-container>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://financials/webapp/financials/configuration/clavePresTipoCambio.ftl" />
+									</html>
+								</platform-specific>
+							</frame-container>							
+						</widgets>
+						<fail-widgets>
+							<include-screen name="PermissionErrorScreen"
+								location="component://financials/widget/financials/screens/common/CommonScreens.xml" />
+						</fail-widgets>
+					</section>
+				</decorator-section>
+			</decorator-screen>
+		</widgets>
+	</section>
+</screen>
+
+	<screen name="cierrePresupuestal">
+		<section>
+			<actions>
+			<script
+					location="component://financials/webapp/financials/WEB-INF/actions/configuration/cierrePresupuestal.bsh" />
+			<set field="cierrePresupuestal" value="cierrePresupuestal"/>
+			    <entity-condition entity-name="Mes" list="meses">
+					<order-by field-name="mesId" />
+				</entity-condition>
+				<entity-condition entity-name="Enumeration" list="ciclos">
+					<condition-expr field-name="enumTypeId" value="CL_CICLO"/>
+					<order-by field-name="sequenceId" />					
+				</entity-condition>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+					    <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_CIERREPRESTX" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="${uiLabelMap.FinancialsTraspasos}">
+							        <platform-specific>
+								        <html>
+									        <html-template location="component://financials/webapp/financials/configuration/traspasos.ftl" />
+								        </html>
+							        </platform-specific>
+						        </frame-container>
+                                <frame-container title="${uiLabelMap.FinancialsCierrePresupuestal}">
+							        <platform-specific>
+								        <html>
+									        <html-template location="component://financials/webapp/financials/configuration/cierrePresupuestal.ftl" />
+								        </html>
+							        </platform-specific>
+						        </frame-container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>  
+
+	<screen name="penalizacionClavePres">
+	<section>
+		<actions>
+			<set field="pageTitleLabel" value="${uiLabelMap.FinancialsCrearClavePres}" />
+			<set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsCrearClavePres}" />
+			<java location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="clavePenalizacion" />
+			<script
+					location="component://financials/webapp/financials/WEB-INF/actions/configuration/cierrePresupuestal.bsh" />
+		</actions>
+		<widgets>
+			<decorator-screen name="main-section-decorator">
+				<decorator-section name="section-body">
+					<section>
+						<condition>
+							<or>
+								<if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_PENALIZACIONCLAVEPRES"
+									action="_VIEW" />
+							</or>
+						</condition>
+						<widgets>
+							<frame-container>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://financials/webapp/financials/configuration/penalizacionClavePres.ftl" />
+									</html>
+								</platform-specific>
+							</frame-container>							
+						</widgets>
+						<fail-widgets>
+							<include-screen name="PermissionErrorScreen"
+								location="component://financials/widget/financials/screens/common/CommonScreens.xml" />
+						</fail-widgets>
+					</section>
+				</decorator-section>
+			</decorator-screen>
+		</widgets>
+	</section>
+</screen>
+	
+	<screen name="updateStructureGlAccount">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="${uiLabelMap.FinancialsStructureUpdateGlAccount}"/>
+                <set field="sectionHeaderUiLabel" value="${uiLabelMap.FinancialsStructureUpdateGlAccount}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/cambiarCuenta.bsh"/> 
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>                            
+                            <widgets>
+	                            <platform-specific><html>
+	                                <html-template location="component://financials/webapp/financials/configuration/cambiarEstructura.ftl"/>
+	                            </html></platform-specific>                         
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>		
+	</screen>
+	
+   <!-- list the configured accounting tags usage for the organization -->
+    <screen name="accountingTagsUsage">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsAccountingTagUsage"/>  
+                <script location="component://financials/webapp/financials/WEB-INF/actions/configuration/accountingTags.bsh"/>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_ETIQUSOCONTCFG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/accountingTagsPostingCheck.ftl"/></html>
+                                </platform-specific>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/accountingTagsUsage.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                      <!-- <platform-specific>
+                        <html><html-template location="component://financials/webapp/financials/configuration/accountingTagsPostingCheck.ftl"/></html>
+                      </platform-specific>
+                      <platform-specific>
+                        <html><html-template location="component://financials/webapp/financials/configuration/accountingTagsUsage.ftl"/></html>
+                      </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="administracionEtiqueta">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PresupuestoAdminEtiquetas"/>
+                <entity-condition list="listEtiqueta" entity-name="Etiqueta" ><order-by field-name="descripcion"/></entity-condition>
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_ADMETIQUETA" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/administracionEtiqueta.ftl"/></html>
+                                </platform-specific>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/listEtiqueta.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="asociarEtiqueta">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PresupuestoAsociarEtiqueta"/>
+                <entity-condition list="listEtiqueta" entity-name="Etiqueta" filter-by-date="true"><order-by field-name="descripcion"/></entity-condition>
+                <entity-condition list="listEtiquetaEnumeration" entity-name="EtiquetaEnumeration" />
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_CONFIG_OPCIONESGRPCFG_ASOCETIQUETA" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/asociarEtiqueta.ftl"/></html>
+                                </platform-specific>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/configuration/listEtiquetaEnumeration.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+<!-- The Web Application -->
+<OpentapsWebApps applicationId="viaticos" shortName="Viáticos" sequenceNum="40" applicationName="Viáticos" description="Viáticos"
+                 imageUrl="/opentaps_images/integratingweb/viaticos.png" imageHoverUrl="/opentaps_images/integratingweb/viaticosHover.png" linkUrl="/viaticos/control/main" />
+
+<!-- Tabs -->
+<OpentapsWebAppTab applicationId="viaticos" sequenceNum="010" tabId="myHome" uiLabel="ViaticosHome"
+                   linkUrl="myHomeMain"    securityModule="" securityAction=""
+                   handlerMethod="" handlerParameter=""/>
+                   
+<OpentapsWebAppTab applicationId="viaticos"  sequenceNum="020" tabId="solicitante" uiLabel="ViaticoSolicitante"
+                   linkUrl="emptySolicitanteScreen"  securityModule="VIATICOS" securityAction="SOLICT_VIEW" handlerMethod=""/>   
+                                   
+<OpentapsWebAppTab applicationId="viaticos"  sequenceNum="030" tabId="autorizador" uiLabel="ViaticoAutorizador"
+                   linkUrl="emptyAutorizadorScreen"  securityModule="VIATICOS" securityAction="AUTORT_VIEW" handlerMethod=""/>
+                   
+<OpentapsWebAppTab applicationId="viaticos"  sequenceNum="040" tabId="presupuesto" uiLabel="ViaticoPresupuesto"
+                   linkUrl="emptyPresupuestoScreen"  securityModule="VIATICOS" securityAction="PRESUPT_VIEW" handlerMethod=""/>   
+                   
+<OpentapsWebAppTab applicationId="viaticos" sequenceNum="050" tabId="configuracionV" uiLabel="Configuracion"
+                   linkUrl="emptyConfiguracionScreen" securityModule="VIATICOS" securityAction="CONFIG_VIEW"
+                   handlerMethod="" handlerParameter=""/>                
+
+<OpentapsWebAppTab applicationId="viaticos" sequenceNum="060" tabId="reportesV" uiLabel="CommonReports"
+                   linkUrl="emptyReportScreen" securityModule="VIATICOS" securityAction="REPORTEST_VIEW"
+                   handlerMethod="" handlerParameter=""/>
+                   
+<OpentapsWebAppTab applicationId="viaticos"  sequenceNum="500" tabId="ofbiz" uiLabel="opentaps"
+                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>                   
+
+<!-- Solicitante -->
+<OpentapsShortcutGroup applicationId="viaticos" tabId="solicitante" groupId="grupoSolicitante" sequenceNum="010" uiLabel="ViaticoSolicitante"
+                       securityModule="VIATICOS_SOLICT" securityAction="SOLICGRP_VIEW"/>
+	
+<OpentapsShortcut shortcutId="buscarViaticoS" groupId="grupoSolicitante" sequenceNum="010" uiLabel="ViaticoBuscarViatico"
+                  linkUrl="buscarViaticoS" securityModule="VIATICOS_SOLICT_SOLICGRP" securityAction="BVIATICO_VIEW"/>
+	
+<OpentapsShortcut shortcutId="viaticosMain" groupId="grupoSolicitante" sequenceNum="020" uiLabel="ViaticoDiemRequest"
+                  linkUrl="viaticosMain" securityModule="VIATICOS_SOLICT_SOLICGRP" securityAction="SVIATICO_VIEW"/>
+	
+<OpentapsShortcut shortcutId="viaticosPendientesComprobar" groupId="grupoSolicitante" sequenceNum="030" uiLabel="ViaticoPendienteComprobar"
+                  linkUrl="viaticosPendientesComprobar" securityModule="VIATICOS_SOLICT_SOLICGRP" securityAction="VPENDCOMP_VIEW"/>                  
+
+<!-- Autorizador -->
+<OpentapsShortcutGroup applicationId="viaticos" tabId="autorizador" groupId="grupoAutorizador" sequenceNum="020" uiLabel="ViaticoAutorizador"
+                       securityModule="VIATICOS_AUTORT" securityAction="AUTORGRP_VIEW"/>
+	
+<OpentapsShortcut shortcutId="buscarViaticoA" groupId="grupoAutorizador" sequenceNum="010" uiLabel="ViaticoBuscarViatico"
+                  linkUrl="buscarViaticoA" securityModule="VIATICOS_AUTORT_AUTORGRP" securityAction="BVIATICO_VIEW"/>
+	
+<OpentapsShortcut shortcutId="viaticosPendientesAutorizar" groupId="grupoAutorizador" sequenceNum="020" uiLabel="ViaticoPendienteAutorizar"
+                  linkUrl="viaticosPendientes" securityModule="VIATICOS_AUTORT_AUTORGRP" securityAction="VPENDAUTOR_VIEW"/>                  
+
+<!-- Presupuesto -->
+<OpentapsShortcutGroup applicationId="viaticos" tabId="presupuesto" groupId="grupoPresupuesto" sequenceNum="030" uiLabel="ViaticoPresupuesto"
+                       securityModule="VIATICOS_PRESUPT" securityAction="PRESUPGRP_VIEW" />
+	
+<OpentapsShortcut shortcutId="buscarViaticoP" groupId="grupoPresupuesto" sequenceNum="010" uiLabel="ViaticoBuscarViatico"
+                  linkUrl="buscarViaticoP" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="BVIATICO_VIEW"/>
+	
+<OpentapsShortcut shortcutId="viaticosPendientesComprometer" groupId="grupoPresupuesto" sequenceNum="020" uiLabel="ViaticoPendienteComprometer"
+                  linkUrl="viaticosPendientesComprometer" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="VPENDCOMPRMTR_VIEW"/>
+	
+<OpentapsShortcut shortcutId="viaticosPendientesComprobarP" groupId="grupoPresupuesto" sequenceNum="030" uiLabel="ViaticoPendienteComprobar"
+                  linkUrl="viaticosPendientesComprobarP" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="VPENDCOMPRBR_VIEW"/>                                    
+	
+<OpentapsShortcut shortcutId="crearSaldoViatico" groupId="grupoPresupuesto" sequenceNum="040" uiLabel="ViaticoCrearSaldo"
+                  linkUrl="crearSaldoViaticoScreen" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="CSALDOVIATICO_VIEW"/>	                  
+	
+<OpentapsShortcut shortcutId="consultarSaldoViatico" groupId="grupoPresupuesto" sequenceNum="050" uiLabel="ViaticoConsultarSaldos"
+                  linkUrl="consultarSaldoViatico" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="CONSSALDOVIATICO_VIEW"/>
+	
+<OpentapsShortcut shortcutId="traspasoSaldoViatico" groupId="grupoPresupuesto" sequenceNum="060" uiLabel="ViaticoTraspasoSaldos"
+                  linkUrl="traspasoSaldoViaticoScreen" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="TSALDOVIATICO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="deshabilitarUsuario" groupId="grupoPresupuesto" sequenceNum="070" uiLabel="ViaticoDeshabilitaUsuario"
+                  linkUrl="deshabilitaUsuarioViaticoScreen" securityModule="VIATICOS_PRESUPT_PRESUPGRP" securityAction="DESHABILITA_VIEW"/>
+                  	
+<!-- Comprometer Viatico -->
+<!-- <OpentapsShortcut shortcutId="viaticosAprobados" groupId="grupoViaticos" sequenceNum="040" uiLabel="Viaticos Aprobados" -->
+<!--                   linkUrl="viaticosAprobados" securityModule="" securityAction=""/>                   -->
+<!-- Comprobar Viatico -->
+<!-- <OpentapsShortcut shortcutId="comprobarViatico" groupId="grupoViaticos" sequenceNum="050" uiLabel="Comprobar Viatico" -->
+<!--                   linkUrl="comprobarViatico" securityModule="" securityAction=""/>                                          -->
+
+<!-- Configuracion group -->
+<OpentapsShortcutGroup applicationId="viaticos" tabId="configuracionV" groupId="configuracionGrupoV" sequenceNum="040" uiLabel="Configuracion"
+                       securityModule="VIATICOS_CONFIG_CONFIGGRP" securityAction="CONFIGURACIONGRP_VIEW"/>
+<OpentapsShortcut shortcutId="viaticosConfigMain" groupId="configuracionGrupoV" sequenceNum="010" uiLabel="Configuracion Proyectos base"
+                  linkUrl="viaticosConfig" securityModule="VIATICOS_CONFIG_CONFIGGRP" securityAction="CONFIGURACIONVIA_VIEW" />
+                   
+<!-- Reportes group -->
+<OpentapsShortcutGroup applicationId="viaticos" tabId="reportesV" groupId="reportesGrupoV" sequenceNum="050" uiLabel="CommonReports"
+                       securityModule="VIATICOS_REPORTEST" securityAction="REPORTESGRP_VIEW"/>
+<OpentapsShortcut shortcutId="viaticosReportsMain" groupId="reportesGrupoV" sequenceNum="010" uiLabel="CommonReports"
+                  linkUrl="viaticosReports" securityModule="VIATICOS_REPORTEST_REPORTESGRP" securityAction="REPORTESVIA_VIEW" />
+                   
+
+</entity-engine-xml>

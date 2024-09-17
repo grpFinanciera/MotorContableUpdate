@@ -1,0 +1,29 @@
+ 
+import javolution.util.FastMap;
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.warehouse.facility.UtilWarehouse;
+
+facility = null;
+facility = FastMap.newInstance(); // initiate a blank map, which simplifies the FTL
+context.put("facility", facility);
+
+facilityTypes = delegator.findAllCache("FacilityType", UtilMisc.toList("description"));
+context.put("facilityTypes", facilityTypes);
+
+//Facility types
+Collection facilityTypes = delegator.findAll("FacilityType");
+if (facilityTypes != null)
+  context.put("facilityTypes", facilityTypes);
+
+// all possible inventory item types
+inventoryItemTypes = delegator.findAllCache("InventoryItemType", UtilMisc.toList("description"));
+context.put("inventoryItemTypes", inventoryItemTypes);
+
+// unit of measures
+weightUomList = UtilMisc.toList(UtilMisc.toMap("description", "None", "uomId", ""));
+weightUomList2 = delegator.findByAndCache("Uom", UtilMisc.toMap("uomTypeId", "WEIGHT_MEASURE"));
+if (weightUomList2 != null) {
+    weightUomList.addAll(weightUomList2);
+}
+
+context.put("weightUomList", weightUomList);

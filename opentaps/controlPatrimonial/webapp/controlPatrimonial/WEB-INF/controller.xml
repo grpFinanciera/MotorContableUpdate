@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- * Copyright (c) Open Source Strategies, Inc. * * Opentaps is free software: 
+	you can redistribute it and/or modify it * under the terms of the GNU Affero 
+	General Public License as published * by the Free Software Foundation, either 
+	version 3 of the License, or * (at your option) any later version. * * Opentaps 
+	is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the * GNU Affero General Public License for more details. * 
+	* You should have received a copy of the GNU Affero General Public License 
+	* along with Opentaps. If not, see <http://www.gnu.org/licenses/>. * * @author 
+	Leon Torres (leon@opensourcestrategies.com) -->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+	<!-- Include requests for common opentaps features. -->
+	<include location="component://opentaps-common/webapp/common/WEB-INF/common-controller.xml" />
+	
+	<include location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/controllerControlPatrimonialAB.xml"/>
+
+	<description>Control Patrimonial Module Site Configuration File</description>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+
+	<!-- ================= -->
+	<!-- Security Mappings -->
+	<!-- ================= -->
+
+	<request-map uri="checkLogin" edit="false">
+		<description>Verify a user is logged in.</description>
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkLogin" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="login">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="login" />
+		<response name="success" type="request" value="setOrganization" />
+		<response name="requirePasswordChange" type="view"
+			value="requirePasswordChange" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="logout">
+		<security https="true" auth="true" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="logout" />
+		<response name="success" type="request" value="checkLogin" />
+		<response name="error" type="view" value="myHomeMain" />
+	</request-map>
+
+
+	<!-- ====================== -->
+	<!-- Basic Request Mappings -->
+	<!-- ====================== -->
+
+	<request-map uri="authview">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="error" />
+	</request-map>
+
+	<request-map uri="setSessionLocale">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.common.CommonEvents" invoke="setSessionLocale" />
+		<response name="success" type="request" value="myHomeMain" />
+		<response name="error" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="main">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<request-map uri="selectOrganizationForm">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="selectOrganizationForm" />
+	</request-map>
+	<request-map uri="setOrganization">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="setOrganization" />
+		<response name="selectOrganization" type="view"
+			value="selectOrganizationForm" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	
+<!-- 	<request-map uri="selectFacilityForm"> -->
+<!--         <security https="true" auth="true"/> -->
+<!--         <response name="success" type="view" value="selectFacilityForm"/> -->
+<!--     </request-map>	 -->
+<!-- 	<request-map uri="setFacility"> -->
+<!--         <security https="true" auth="true"/> -->
+<!--         <event type="java" path="org.opentaps.common.event.CommonEvents"  -->
+<!--         	invoke="setFacility" /> -->
+<!--         <response name="selectFacility" type="view"  -->
+<!--         	value="selectFacilityForm"/> -->
+<!--         <response name="success" type="view" value="myHomeMain"/> -->
+<!--     </request-map> -->
+
+	<!-- ================== -->
+	<!-- Main Request Maps -->
+	<!-- ================== -->
+
+	<!-- call this request when you have a donePage that you want to go to after 
+		finishing a service -->
+	<request-map uri="donePageRequestHelper">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="donePageRequestHelper" />
+		<response name="myProfile" type="view" value="myProfile" />
+		<!-- mostly for error redirects -->
+		<response name="myProfileEditContactMech" type="request"
+			value="myProfileEditContactMech" />
+		<!-- default -->
+		<response name="error" type="view" value="myHomeMain" />
+		<response name="" type="request" value="myHomeMain" />
+	</request-map>
+
+	<request-map uri="myHomeMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	
+    <!-- =================================== -->
+	<!--         Control Patrimonial			 -->
+	<!-- =================================== -->
+	
+	<request-map uri="controlPatrimonialMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyControlScreen" />	
+	</request-map>		
+	
+	<request-map uri="viewAcctgTrans">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="viewAcctgTrans"/>
+    </request-map>
+	
+	<request-map uri="viewAcctgPresupuestal">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="viewAcctgPresupuestal" />
+	</request-map>
+    
+    <request-map uri="viewAcctgTransEntry">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viewAcctgTransEntry" />
+	</request-map>
+	
+	<!-- ================== -->
+	<!-- Tab Control en		--> 	
+	<!-- Control patrimonial-->
+	<!-- ================== -->
+	
+	<request-map uri="crearActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="crearActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="guardaActivoFijo"> 
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="guardaActivoFijo"/>
+        <response name="success" type="request-redirect" value="verActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+        <response name="error" type="view" value="crearActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="verActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="verBajaActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verBajaActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="consultaActivoFijo">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultaActivoFijo" />
+	</request-map>
+	
+	<request-map uri="ConsultaBajasActivoFijo">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ConsultaBajasActivoFijo" />
+	</request-map>
+	
+	<request-map uri="ProductBarCode.pdf">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ProductBarCode.pdf">
+        	<redirect-parameter name="dateAcquired"/>
+        </response>
+    </request-map>
+    
+    <request-map uri="PlanillaCodigoBarras.pdf">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="PlanillaCodigoBarras.pdf">
+        	<redirect-parameter name="dateAcquired"/>
+        </response>
+    </request-map>  
+          
+    <request-map uri="planillaCodigos.pdf">
+        <security https="true" auth="true"/>
+        <event type="java" invoke="preparaPlanillaCodigos" path="com.absoluciones.controlPatrimonial.ImpresionPlanillaCodigoBarras"/>
+        <response name="success" type="request" value="runReport"/>
+        <response name="error" type="view" value="codigoBarrasActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="planillaCodigosServlet">
+		<security auth="true" https="true" />
+		<event type="java" invoke="preparaPlanillaCodigosServlet"
+			path="com.absoluciones.controlPatrimonial.ImpresionPlanillaCodigoBarras" />
+		<response name="reporte1" type="view" value="imprimePlanilla10" />
+		<response name="reporte2" type="view" value="imprimePlanilla30" />		
+		<response name="error" type="view" value="codigoBarrasActivoFijo" />
+	</request-map>
+    
+    <request-map uri="editarActivoFijo"> 
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="editarActivoFijo"/>
+        <response name="success" type="request-redirect" value="editarActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+        <response name="error" type="request-redirect" value="verActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+    </request-map>
+
+	<request-map uri="bajaActivoFijo"> 
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="bajaActivoFijo"/>
+        <response name="success" type="request-redirect" value="verBajaActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+        <response name="error" type="request-redirect" value="verBajaActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+    </request-map>
+    
+    <request-map uri="depreciacionActivoFijo">
+    	<security https="true" auth="true"/>
+		<response name="success" type="view" value="depreciacionActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="ProcesoDepreciacion">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="ProcesoDepreciacion"/>		
+		<response name="success" type="view" value="depreciacionActivoFijo"/>
+		<response name="error" type="view" value="depreciacionActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="consultaDepActivoFijo">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="consultaDepActivoFijo" />
+	</request-map>
+		
+	<request-map uri="resguardoActivoFijo">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="resguardoActivoFijo" />
+	</request-map>
+	
+	<request-map uri="verResguardoActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verResguardoActivoFijo"/>
+    </request-map>
+        
+    <request-map uri="crearAsignacionActivoFijo"> 
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="verResguardoActivoFijo"/>
+        <response name="success" type="request-redirect" value="verResguardoActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+        <response name="error" type="request-redirect" value="verResguardoActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+    </request-map>
+	
+	<request-map uri="cargarPaginaActivo">
+		<security https="true" auth="true" />
+    	<event type="service" invoke="cargarPaginaActivo"/>
+        <response name="success" type="request-redirect" value="verResguardoActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+        <response name="error" type="view" value="verResguardoActivoFijo">
+        	<redirect-parameter name="fixedAssetId"/>
+        </response>
+    </request-map>
+    
+    <request-map uri="actualizaAsignacionActivo">
+    	<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.controlPatrimonial.AjaxEvents"
+			invoke="actualizaAsignacionActivo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="eliminaAsignacionActivo">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.controlPatrimonial.AjaxEvents"
+			invoke="eliminaAsignacionActivo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+		
+	<request-map uri="polizaSeguroActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="polizaSeguroActivoFijo"/>
+    </request-map>
+        
+    <request-map uri="actualizaPolizaSeguro"> 
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="actualizaPolizaSeguro"/>
+        <response name="success" type="view" value="polizaSeguroActivoFijo"/>
+        <response name="error" type="view" value="polizaSeguroActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="permisosAlmacenActivoFijo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="permisosAlmacenActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="asignarPermisoAlmacen">
+		<security https="true" auth="true" />
+		<event type="service" invoke="asignarPermisoAlmacen" />
+		<response name="success" type="request-redirect" value="permisosAlmacenActivoFijo" />
+		<response name="error" type="view" value="permisosAlmacenActivoFijo" />
+	</request-map>
+	
+	<request-map uri="eliminaPermisoAlmacenActivo">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.controlPatrimonial.AjaxEvents"
+			invoke="eliminaPermisoAlmacenActivo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="responsableRecepcionActivoFijo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="responsableRecepcionActivoFijo"/>
+    </request-map>	
+    
+    <request-map uri="asignarResponsablePermisoAlmacen">
+		<security https="true" auth="true" />
+		<event type="service" invoke="asignarResponsablePermisoAlmacen" />
+		<response name="success" type="request-redirect" value="responsableRecepcionActivoFijo" />
+		<response name="error" type="view" value="responsableRecepcionActivoFijo" />
+	</request-map>
+	
+	<request-map uri="eliminaResponsablePermisoAlmacen">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.controlPatrimonial.AjaxEvents"
+			invoke="eliminaResponsablePermisoAlmacen" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="marcarNotificacionResuelta">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.controlPatrimonial.AjaxEvents"
+			invoke="marcarNotificacionResuelta" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>	
+		
+	<request-map uri="resguardoMasivoActivoFijo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="resguardoMasivoActivoFijo"/>
+    </request-map>
+	
+	<request-map uri="actualizarResguardos"> 
+		<security https="true" auth="true" />
+    	<event type="service" invoke="actualizarResguardos"/>
+        <response name="success" type="request-redirect" value="resguardoMasivoActivoFijo"/>        	        
+        <response name="error" type="view" value="resguardoMasivoActivoFijo"/>
+    </request-map>
+    
+    <request-map uri="codigoBarrasActivoFijo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="codigoBarrasActivoFijo"/>
+    </request-map>
+        
+    <request-map uri="recepcionesPendientes">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="recepcionesPendientes" />
+	</request-map>
+	
+	<request-map uri="verRecepcionPendiente">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verRecepcionPendiente"/>
+	</request-map>
+	
+    <request-map uri="historialBienesActivoFijo">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="historialBienesActivoFijo" />
+	</request-map>
+	
+	<request-map uri="verHistorialActivoFijo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verHistorialActivoFijo"/>
+    </request-map>
+    <!-- ================== -->
+	<!-- Tab Levantamiento	--> 	
+	<!-- Control patrimonial-->
+	<!-- ================== --> 
+        
+    <request-map uri="LevantamientoActivoFijo">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="LevantamientoActivoFijo" />
+		<response name="error" type="view" value="LevantamientoActivoFijo" />
+	</request-map>
+	
+	<request-map uri="AgregaActivo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="agregaActivo"/>
+        <response name="success" type="view" value="LevantamientoActivoFijo"/>
+        <response name="error"  type="view" value="LevantamientoActivoFijo"/>
+    </request-map>  
+    
+    <request-map uri="IniciaLevantamiento">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.absoluciones.controlPatrimonial.ControlPatrimonialServices" invoke="borrarLevantamiento"/>
+        <response name="success" type="view" value="LevantamientoActivoFijo" />
+        <response name="error" type="view" value="LevantamientoActivoFijo" />
+    </request-map>
+        
+    <!-- =================================== -->
+	<!--        Reportes Request Maps        -->
+	<!-- =================================== -->
+	
+	<request-map uri="reportsMain">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="reportsMain"/>
+	</request-map>
+	<request-map uri="controlPatrimonialReports">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="controlPatrimonialReports" />
+	</request-map>	
+	<request-map uri="activoFijoReports">
+        <security https="true" auth="true" />		
+        <response name="success" type="view" value="activoFijoReports" />
+    </request-map>
+	
+	
+	<!-- =================================== -->
+	<!--          Empty Request Maps         -->
+	<!-- =================================== -->
+	
+	<request-map uri="emptyControlScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyControlScreen" />
+		<response name="error" type="view" value="emptyControlScreen" />
+	</request-map>
+	<request-map uri="emptyLevantamientoScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyLevantamientoScreen" />
+		<response name="error" type="view" value="emptyLevantamientoScreen" />
+	</request-map>
+	<request-map uri="emptyReportScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyReportScreen" />
+		<response name="error" type="view" value="emptyReportScreen" />
+	</request-map>	
+	
+	<request-map uri="LookupFixedAsset">
+		<security auth="true" https="true"/>
+		<response name="success" type="view" value="LookupFixedAsset"/>
+	</request-map>
+	
+	<!-- ============= -->
+    <!-- View Mappings -->
+    <!-- ============= -->
+
+    <view-map name="error" page="/error/error.jsp"/>
+    <view-map name="login" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#login"/>
+    <view-map name="requirePasswordChange" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#requirePasswordChange"/>
+    <view-map name="selectOrganizationForm" type="screen"
+    	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganizationForm"/>
+<!--     <view-map name="selectFacilityForm" type="screen"  -->
+<!--     	page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectFacilityForm"/> -->
+
+    <!-- main screens for each section -->
+    <view-map name="myHomeMain" type="screen"
+    	page="component://controlPatrimonial/widget/controlPatrimonial/screens/myhome/MyHomeScreens.xml#myHome"/>
+	
+	<view-map name="viewAcctPresupuestal" type="screen" page="controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctPresupuestal" />
+	<view-map name="viewAcctgTransEntry" type="screen" page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctgTransEntry" />
+	<view-map name="viewAcctgTrans" type="screen" page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctgTrans" />
+	
+	<!-- Control -->
+	<view-map name="emptyControlScreen" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#emptyControlScreen" />
+	<view-map name="crearActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#crearActivoFijo" />
+	<view-map name="verActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#verActivoFijo" />
+	<view-map name="verBajaActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#verBajaActivoFijo" />
+	<view-map name="consultaActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#consultaActivoFijo" />
+	<view-map name="ConsultaBajasActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#ConsultaBajasActivoFijo" />
+	<view-map name="ProductBarCode.pdf" type="screenfop" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#ProductBarCode.fo" content-type="application/pdf" encoding="none"/>
+	<view-map name="depreciacionActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#depreciacionActivoFijo"/>
+	<view-map name="consultaDepActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#consultaDepActivoFijo" />
+	<view-map name="resguardoActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#resguardoActivoFijo" />
+	<view-map name="verResguardoActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#verResguardoActivoFijo" />
+	<view-map name="polizaSeguroActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#polizaSeguroActivoFijo" />
+	<view-map name="permisosAlmacenActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#permisosAlmacenActivoFijo" />
+	<view-map name="resguardoMasivoActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#resguardoMasivoActivoFijo" />
+	<view-map name="codigoBarrasActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#codigoBarrasActivoFijo" />
+	<view-map name="PlanillaCodigoBarras.pdf" type="screenfop" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#PlanillaCodigoBarras.fo" content-type="application/pdf" encoding="none"/>
+	<view-map name="imprimePlanilla10" type="jasperreports"
+		page="component://controlPatrimonial/webapp/controlPatrimonial/reports/repository/PlanillaCodigoBarras.jrxml" content-type="application/pdf" encoding="none" />
+	<view-map name="imprimePlanilla30" type="jasperreports"
+		page="component://controlPatrimonial/webapp/controlPatrimonial/reports/repository/PlanillaCodigoBarras30.jrxml" content-type="application/pdf" encoding="none" />																													
+	<view-map name="responsableRecepcionActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#responsableRecepcionActivoFijo" />
+	<view-map name="recepcionesPendientes" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#recepcionesPendientes" />
+	<view-map name="verRecepcionPendiente" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#verRecepcionPendiente" />
+	<view-map name="historialBienesActivoFijo" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlScreens.xml#historialBienesActivoFijo" />						
+	
+	<!-- Levantamiento -->
+	<view-map name="emptyLevantamientoScreen" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/LevantamientoScreens.xml#emptyLevantamientoScreen" />
+	<view-map name="LevantamientoActivoFijo" type="screen" 
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/LevantamientoScreens.xml#LevantamientoActivoFijo" />		
+	
+	<!-- Reportes -->	
+	<view-map name="reportsMain" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="emptyReportScreen" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="activoFijoReports" type="screen"
+        page="component://controlPatrimonial/widget/controlPatrimonial/screens/reports/ReportsScreens.xml#activoFijoReports"/>		
+	
+	<!-- Control Patrimonial -->	
+		
+	<view-map name="viewAcctPresupuestal" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctPresupuestal" />
+	<view-map name="viewAcctgTransEntry" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctgTransEntry" />
+	<view-map name="viewAcctgTrans" type="screen"
+		page="component://controlPatrimonial/widget/controlPatrimonial/screens/controlPatrimonial/ControlPatrimonialScreens.xml#viewAcctgTrans" />				
+	
+	<!-- Lookup -->
+	
+	<view-map name="LookupFixedAsset" type="screen" page="component://accounting/widget/LookupScreens.xml#LookupFixedAsset"/>		
+
+</site-conf>

@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+	application = parameters.get("componentName");
+	context.put("application", application);
+
+
+    userLogin = parameters.get("userLogin");
+    if (userLogin == null) {
+        return;
+    }
+    
+	 // obtener el catalogo de documentos
+	searchConditions = FastList.newInstance();
+             searchConditions.add(new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")));
+             searchConditions.add(new EntityExpr("statusId", EntityOperator.EQUALS, "PENDIENTE"));
+            searchConditions.add(new EntityExpr("tipoWorkFlowId", EntityOperator.IN, UtilMisc.toList("VIATICOSVI", "VIATICOS","VIATICOSGI")));
+             allConditions = new EntityConditionList(searchConditions, EntityOperator.AND);
+	listWorkflows = delegator.findByCondition("StatusAutorizacionWorkFlow", allConditions, null,null);
+	contador = listWorkflows.size();
+	context.put("contador", contador);

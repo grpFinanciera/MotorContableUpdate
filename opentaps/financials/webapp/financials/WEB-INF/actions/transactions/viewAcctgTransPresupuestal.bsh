@@ -1,0 +1,48 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @author Leon Torres (leon@opensourcestrategies.com)
+ */
+
+/*
+ * Find the acctg trans and the list of entries for a transaction
+ */
+
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.entity.condition.*;
+
+acctgTransId = UtilCommon.getParameter(context, "acctgTransId");
+if (acctgTransId == null) {
+    // get the ID when multi form is used
+    acctgTransId = UtilCommon.getParameter(request, "acctgTransId_o_0"); 
+}
+
+//Se buscan las claves presupuestales de la transaccion
+clavesPresupuestales = delegator.findByAnd("AcctgTransClavesPresupuestales",UtilMisc.toMap("acctgTransId", acctgTransId));
+context.put("clavesPresupuestales",clavesPresupuestales);
+
+listTransType = UtilMisc.toList("REVERSE","PERIOD_CLOSING","CIERRE_PRESUPUESTAL");
+listCondicion = UtilMisc.toList(EntityCondition.makeCondition("acctgTransTypeId", EntityOperator.IN, listTransType),
+								EntityCondition.makeCondition("acctgTransId", EntityOperator.EQUALS, acctgTransId));
+condicionesReversa = EntityCondition.makeCondition(listCondicion,EntityOperator.AND);
+
+reversas = delegator.findByCondition("AcctgTrans", condicionesReversa,UtilMisc.toList("acctgTransId"),UtilMisc.toList("acctgTransId"));
+tieneReversa = false;
+if(reversas != null && !reversas.isEmpty()){
+	tieneReversa = true;
+}
+context.put("tieneReversa",tieneReversa);

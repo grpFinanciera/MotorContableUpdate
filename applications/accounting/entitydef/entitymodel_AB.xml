@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entidades o extensiones de Activos Fijos</title>
+    <description>None</description>
+    <copyright></copyright>
+    <author>JSCF</author>
+    <version>1.0</version>
+
+    <!-- ========================================================= -->
+    <!-- ======================== Data Model ===================== -->
+    <!-- The modules in this file are as follows:                  -->
+    <!--  - org.ofbiz.accounting.budget -->
+    <!--  - org.ofbiz.accounting.finaccount -->
+    <!--  - org.ofbiz.accounting.fixedasset -->
+    <!--  - org.ofbiz.accounting.invoice -->
+    <!--  - org.ofbiz.accounting.ledger -->
+    <!--  - org.ofbiz.accounting.payment -->
+    <!--  - org.ofbiz.accounting.tax -->
+    <!--  - org.ofbiz.accounting.rate -->
+    <!-- ========================================================= -->
+
+
+    <!-- ========================================================= -->
+    <!-- org.ofbiz.accounting -->
+    <!-- ========================================================= -->
+	
+	<extend-entity entity-name="AcctgTrans">
+		<field name="obraId" type="id-ne"/>
+		<field name="poliza" type="id-ne"/>
+		<field name="tipoPolizaId" type="id" />
+		<field name="estructuraId" type="id"><description>Id de la estructura clave presupuestal</description></field>
+		<field name="contratoId" type="id-ne"/>
+		<field name="isReversa" type="indicator" />
+		<field name="afectacionId" type="id" />
+		<field name="momentoAfectacionId" type="id" />
+		<field name="beneficiarioCheque" type="description" />
+		<field name="numeroCheque" type="description" />
+		<field name="tipoMovimiento" type="id" />
+		
+		<relation type="one" fk-name="ACCTTX_OBRA" rel-entity-name="Obra">
+			<key-map field-name="obraId"/>
+		</relation>
+		<relation type="one" fk-name="TPCP" title="tpcp"
+			rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaId" rel-field-name="tipoPolizaId" />
+		</relation>
+		<relation type="one" fk-name="ACCTTX_ESTRU_CLAVE" 
+			rel-entity-name="EstructuraClave">
+			<key-map field-name="estructuraId" rel-field-name="idSecuencia"/>
+		</relation>
+		<relation type="one" fk-name="CONTRATOOBRA" title="contratoObra"
+			rel-entity-name="ContratoObra">
+			<key-map field-name="contratoId" />
+		</relation>       			
+		<relation type="one" fk-name="ACCTTX_AFECTACION" rel-entity-name="Afectacion">
+			<key-map field-name="afectacionId" />
+		</relation>
+		<relation type="one" fk-name="ACCTTX_MOMENTO_AFE" rel-entity-name="MomentoAfecta">
+			<key-map field-name="momentoAfectacionId" />
+		</relation>
+		<index name="INDEX_ACCTG_TRANS" unique="true">
+			<index-field name="poliza"/>
+			<index-field name="tipoPolizaId"/>
+		</index>
+	</extend-entity>
+	
+    <extend-entity entity-name="AcctgTransEntry">
+    	<field name="cuentaBancariaId" type="id"/>
+    	<field name="acctgTagEnumIdAdmin" type="id-ne"/>
+    	<field name="clavePresupuestal" type="description"/>
+    	<field name="fechaPresupuestal" type="date-time" />
+    	<relation type="one" rel-entity-name="CuentaBancaria" fk-name="CT_BAN" title="cuentaBancaria">
+            <key-map field-name="cuentaBancariaId" rel-field-name="cuentaBancariaId"/>
+        </relation>
+		<relation type="one" fk-name="ACCTG_ENT_ADMIN" title="admin" rel-entity-name="Party">
+        	<key-map field-name="acctgTagEnumIdAdmin" rel-field-name="partyId"/>
+      	</relation>
+		<relation type="one" fk-name="FK_ATE_CLAVE"
+			rel-entity-name="ClavePresupuestal">
+			<key-map field-name="clavePresupuestal"/>
+		</relation>      	        
+    </extend-entity>	
+    
+	<view-entity entity-name="AcctgTransEntryClavePresupuestal"
+            package-name="org.ofbiz.accounting.ledger"
+            title="Busca la informacón de una póliza por clave presupuestal">
+	    <member-entity entity-alias="ACT" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+		<alias entity-alias="ACT" name="acctgTransId" />
+		<alias entity-alias="ACT" name="acctgTransTypeId"/>
+		<alias entity-alias="ACT" name="description" />
+		<alias entity-alias="ACT" name="tipoPolizaId" />
+		<alias entity-alias="ACT" name="transactionDate" />
+		<alias entity-alias="ACT" name="organizationPartyId" />
+		<alias entity-alias="ACT" name="createdByUserLogin" />
+		<alias entity-alias="ACT" name="postedDate" />
+		<alias entity-alias="ACT" name="poliza" />
+		<alias entity-alias="ACT" name="estructuraId" />
+		<alias entity-alias="ATE" name="acctgTransEntrySeqId" />
+		<alias entity-alias="ATE" name="theirPartyId" />
+		<alias entity-alias="ATE" name="productId" />
+		<alias entity-alias="ATE" name="clavePresupuestal" />
+		<alias entity-alias="ATE" name="glAccountId" />
+		<alias entity-alias="ATE" name="debitCreditFlag" />
+		<alias entity-alias="ATE" name="amount" />
+		<alias entity-alias="ATE" name="currencyUomId" />
+		<alias entity-alias="ATE" name="acctgTagEnumId1" />
+		<alias entity-alias="ATE" name="acctgTagEnumId2" />
+		<alias entity-alias="ATE" name="acctgTagEnumId3" />
+		<alias entity-alias="ATE" name="acctgTagEnumId4" />
+		<alias entity-alias="ATE" name="acctgTagEnumId5" />
+		<alias entity-alias="ATE" name="acctgTagEnumId6" />
+		<alias entity-alias="ATE" name="acctgTagEnumId7" />
+		<alias entity-alias="ATE" name="acctgTagEnumId8" />
+		<alias entity-alias="ATE" name="acctgTagEnumId9" />
+		<alias entity-alias="ATE" name="acctgTagEnumId10" />
+		<alias entity-alias="ATE" name="acctgTagEnumId11" />
+		<alias entity-alias="ATE" name="acctgTagEnumId12" />
+		<alias entity-alias="ATE" name="acctgTagEnumId13" />
+		<alias entity-alias="ATE" name="acctgTagEnumId14" />
+		<alias entity-alias="ATE" name="acctgTagEnumId15" />
+		<alias entity-alias="ATE" name="acctgTagEnumIdAdmin" />
+		<view-link entity-alias="ACT" rel-entity-alias="ATE">
+		  <key-map field-name="acctgTransId"/>
+		</view-link>
+		<relation type="one" fk-name="FK_ATE_EVENTO" rel-entity-name="EventoContable">
+		  <key-map field-name="acctgTransTypeId"/>
+		</relation>	      
+		<relation type="one" fk-name="TIPO_POLIZA_VCVE" rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaId" />
+		</relation>
+		<relation type="one" fk-name="FK_ATE_ORG" rel-entity-name="PartyGroup">
+		  <key-map field-name="organizationPartyId" rel-field-name="partyId"/>
+		</relation>
+		<relation type="one" fk-name="FK_ATE_USR" rel-entity-name="UserLogin">
+		  <key-map field-name="createdByUserLogin" rel-field-name="userLoginId"/>
+		</relation>
+		<relation type="one" fk-name="FK_ATE_ESTR_CVE" 
+			rel-entity-name="EstructuraClave">
+			<key-map field-name="estructuraId" rel-field-name="idSecuencia"/>
+		</relation>
+		<relation type="one" fk-name="FK_ATE_AUX" title="Aux" rel-entity-name="PartyGroup">
+		  <key-map field-name="theirPartyId" rel-field-name="partyId"/>
+		</relation>
+		<relation type="one" fk-name="FK_ATE_PROD"
+			rel-entity-name="Product">
+			<key-map field-name="productId"/>
+		</relation>
+		<relation type="one" fk-name="FK_ATE_CVE_PRES"
+			rel-entity-name="ClavePresupuestal">
+			<key-map field-name="clavePresupuestal"/>
+		</relation>
+        <relation type="one" fk-name="FK_ATE_GL_ACC" rel-entity-name="GlAccount">
+            <key-map field-name="glAccountId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG1" title="tag1">
+            <key-map field-name="acctgTagEnumId1" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG2" title="tag2">
+            <key-map field-name="acctgTagEnumId2" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG3" title="tag3">
+            <key-map field-name="acctgTagEnumId3" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG4" title="tag4">
+            <key-map field-name="acctgTagEnumId4" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG5" title="tag5">
+            <key-map field-name="acctgTagEnumId5" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG6" title="tag6">
+            <key-map field-name="acctgTagEnumId6" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG7" title="tag7">
+            <key-map field-name="acctgTagEnumId7" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG8" title="tag8">
+            <key-map field-name="acctgTagEnumId8" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG9" title="tag9">
+            <key-map field-name="acctgTagEnumId9" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG10" title="tag10">
+            <key-map field-name="acctgTagEnumId10" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG11" title="tag11">
+            <key-map field-name="acctgTagEnumId11" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG12" title="tag12">
+            <key-map field-name="acctgTagEnumId12" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG13" title="tag13">
+            <key-map field-name="acctgTagEnumId13" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG14" title="tag14">
+            <key-map field-name="acctgTagEnumId14" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="ACCT_TR_ENT_TAG15" title="tag15">
+            <key-map field-name="acctgTagEnumId15" rel-field-name="enumId"/>
+        </relation>
+		<relation type="one" rel-entity-name="Party" fk-name="ACCT_TR_ENT_ADMIN" title="admin" >
+        	<key-map field-name="acctgTagEnumIdAdmin" rel-field-name="partyId"/>
+      	</relation>  
+	</view-entity>
+    
+    <view-entity entity-name="AcctgTransClavesPresupuestales"            
+            package-name="org.ab.accounting.ledger"
+            title="Vista para buscar cuentas presupuestales de una transaccion">
+      <member-entity entity-alias="ACEN" entity-name="AcctgTransEntry"/>
+      <alias entity-alias="ACEN" name="acctgTransId" group-by="true"/>
+      <alias entity-alias="ACEN" name="clavePresupuestal" group-by="true"/>
+      <relation type="one" fk-name="ACTTG_ENTRY_CLAVE" rel-entity-name="ClavePresupuestal">
+        <key-map field-name="clavePresupuestal"/>
+      </relation>                       
+    </view-entity> 	
+
+	<extend-entity entity-name="FixedAsset">
+		<field name="ubicacionRapidaId" type="id-ne"/>
+		<field name="marca" type="id-long"/>
+		<field name="color" type="id-ne"/>
+		<field name="modelo" type="id-long"/>
+		<field name="moneda" type="id"/>
+		<field name="fechaVencGarantia" type="date-time" />
+		<field name="edoFisicoId" type="id"/>
+		<field name="numeroFactura" type="id-long"/>
+		<field name="fechaFactura" type="date-time"/>
+        <field name="talon" type="id-ne"/>
+        <field name="cheque" type="id-ne"/>
+        <field name="fechaPago" type="date-time"/>
+		<field name="proveedor" type="id"/>
+		<field name="areaPartyId" type="id"/>		
+		<field name="numeroPoliza" type="id-long"/>
+		<field name="fechaIniPoliza" type="date-time"/>
+		<field name="fechaFinPoliza" type="date-time"/>
+		<field name="observaciones" type="description"/>
+		<field name="caracteristicas" type="very-long"/>
+		<field name="denominacionPartidaGen" type="description"/>
+		<field name="idActivoAnterior" type="id-long"/>
+		<field name="aniosVidaUtil" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>		
+		<field name="statusId" type="id-ne"/>
+		
+		<!--Bienes inmuebles-->
+		<field name="numeroExpediente" type="id-ne"/>
+        <field name="domicilio" type="very-long"/>
+        <field name="municipio" type="long-varchar"/>
+        <field name="localidad" type="long-varchar"/>
+        <field name="ejido" type="long-varchar"/>
+        <field name="tipoTerreno" type="long-varchar"/>
+        <field name="tipoDocumentoLegalPropiedad" type="long-varchar"/>
+        <field name="descDocumentoLegalPropiedad" type="very-long"/>
+        <field name="origenAdquisicion" type="long-varchar"/>
+        <field name="formaAdquisicion" type="long-varchar"/>
+        <field name="tipoEmisorTituloPropiedad" type="long-varchar"/>
+        <field name="valorContruccion" type="fixed-point"/>
+        <field name="valorRazonable" type="fixed-point"/>
+        <field name="fechaAvaluo" type="date-time"/>
+        <field name="fechaTituloPropiedad" type="date-time"/>
+        <field name="claveCatastral" type="long-varchar"/>
+        <field name="fechaInicioClaveCatastral" type="date-time"/>
+        <field name="vencimientoClaveCatastral" type="date-time"><description>Fecha de vencimiento de clave catastral</description></field>
+        <field name="superficieTerreno" type="currency-precise"/>
+        <field name="superficieConstruccion" type="currency-precise"/>
+        <field name="superficieDisponible" type="currency-precise"/>
+        <field name="folioRppc" type="long-varchar"><description>folio Registro Publico De Propiedad Comercio</description></field>
+        <field name="fechaInscripcionRppc" type="date-time"><description>fecha Inscripcion Registro Publico De Propiedad Comercio</description></field>
+        <field name="ciudadInscripcionRPPC" type="long-varchar"><description>ciudad Inscripcion Registro Publico De Propiedad Comercio</description></field>        
+        <field name="fechaIncorporacionInventario" type="date-time"/>
+        <!--Vehiculos-->
+        <field name="numTarjetaCirculacion" type="id-ne"/>
+        <field name="placa" type="id-ne"/>
+        <field name="tipoUnidadVehiculoId" type="id-ne"/>
+        <field name="numeroMotor" type="id-long"/>
+        <field name="usoVehiculo" type="id-long"/>
+        <!--Almacen-->
+        <field name="facilityId" type="id-ne"/>
+        <field name="shipmentId" type="id-ne"/>
+        <!--Tipo de Adjudicación-->
+        <field name="tipoAdjudicacionId" type="id-ne"/>
+        <field name="subUnidadResponsable" type="id-ne"/>
+		
+		<relation type="one" fk-name="FXDASTUBICA_FK" rel-entity-name="UbicacionRapida">
+			<key-map field-name="ubicacionRapidaId"/>
+		</relation>		
+		<relation type="one" fk-name="FX_ASS_UOMID" title="Moneda" rel-entity-name="Uom">
+			<key-map field-name="uomId"/>
+		</relation>		
+		<relation type="one" fk-name="FK_FX_ASS_PROV" title="Proveedor" rel-entity-name="Party">
+			<key-map field-name="proveedor" rel-field-name="partyId"/>		
+		</relation>	
+		<relation type="one" fk-name="FK_FX_ASS_ORG" title="Organization" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId"/>			
+		</relation>	
+		<relation type="one" fk-name="FX_ASS_AREA" title="Area" rel-entity-name="Party">
+			<key-map field-name="areaPartyId" rel-field-name="partyId"/>
+		</relation>	
+		<relation type="one" fk-name="FK_FX_AS_EDOFISICO" rel-entity-name="EstadoFisicoActivo">
+			<key-map field-name="edoFisicoId" rel-field-name="edoFisicoId"/>
+		</relation>			
+		<relation type="one" fk-name="FXDESTATUS_FK" rel-entity-name="Estatus">
+			<key-map field-name="statusId"/>
+		</relation>
+		<relation type="one" fk-name="FX_FACILITY_FK" rel-entity-name="Facility">
+			<key-map field-name="facilityId"/>
+		</relation>
+		<relation type="one" fk-name="FX_SHIPMENT_FK" rel-entity-name="Shipment">
+			<key-map field-name="shipmentId"/>
+		</relation>
+		<relation type="one" fk-name="FK_TIPO_UNI_VEHI" rel-entity-name="TipoUnidadVehiculo">
+            <key-map field-name="tipoUnidadVehiculoId" />
+        </relation>	
+        <relation type="one" fk-name="FK_TIPO_ADJ" rel-entity-name="TipoAdjudicacion">
+            <key-map field-name="tipoAdjudicacionId" />
+        </relation>				
+	</extend-entity>
+	
+	<entity entity-name="EstadoFisicoActivo"
+		package-name="org.ofbiz.accounting.fixedasset" title="Catálogo de Estado Físico del Activo">
+		<field name="edoFisicoId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<prim-key field="edoFisicoId"/>
+	</entity>
+	
+	<entity entity-name="UbicacionRapida"
+		package-name="org.ofbiz.accounting.fixedasset" title="Ubicaciones Rapidas">
+		<field name="ubicacionRapidaId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<prim-key field="ubicacionRapidaId"/>
+	</entity>
+    
+    <view-entity entity-name="SumaBancos" 
+			package-name="org.opentaps.financials.financials" 
+			title="Suma las transacciones relacionadas a cuentas bancarias">
+		<member-entity entity-alias="ETY" entity-name="AcctgTransEntry" />
+		<alias entity-alias="ETY" name="acctgTransId" group-by="true"/>
+		<alias entity-alias="ETY" name="debitCreditFlag" group-by="true"/>
+		<alias entity-alias="ETY" name="cuentaBancariaId" group-by="false"/>
+		<alias entity-alias="ETY" name="amount" function="sum" />
+	</view-entity>
+	
+	<entity entity-name="InvoiceItemLinea" 
+    		package-name="org.ofbiz.accounting.invoice"
+            title="Lineas contables para cada invoice Item">
+    	<field name="invoiceId" type="id-ne"/>
+    	<field name="invoiceItemSeqId" type="id-ne"/>
+    	<field name="secuenciaLineaContable" type="numeric"/>
+    	<field name="tipoLinea" type="id-ne"/>
+    	<field name="descripcion" type="description"/>
+    	<field name="catalogoCargo" type="id-ne"/>
+    	<field name="catalogoAbono" type="id-ne"/>
+    	<field name="valorCatalogoCargo" type="id-ne"/>
+    	<field name="valorCatalogoAbono" type="id-ne"/>    	
+    	<field name="monto" type="fixed-point"/>    	    	
+    	<prim-key field="invoiceId"/>
+    	<prim-key field="invoiceItemSeqId"/>    	
+    	<prim-key field="secuenciaLineaContable"/>      	  	
+      	<relation type="one" fk-name="INV_ITEM_LINEA_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>
+      	<relation type="one" fk-name="INV_ITEM_LINEA_SEQ" rel-entity-name="InvoiceItem">
+      		<key-map field-name="invoiceId"/>
+        	<key-map field-name="invoiceItemSeqId"/>
+      	</relation>
+    </entity>	   
+    
+    <entity entity-name="RecepcionDevengoMontos" 
+    		package-name="org.ofbiz.shipment.shipment"
+            title="Devengo en la recepcion por montos">
+    	<field name="orderId" type="id-ne"/>
+    	<field name="orderItemSeqId" type="id-ne"/>
+    	<field name="shipmentId" type="id-ne"/>
+    	<field name="numeroFactura" type="id-ne"/>
+    	<field name="fechaFactura" type="date-time"/>
+    	<field name="fechaContable" type="date-time"/>
+    	<field name="productId" type="id-ne"/>
+    	<field name="cantidad" type="numeric"/>
+    	<field name="precioUnitario" type="fixed-point"/>    	
+    	<field name="proveedor" type="id-ne"/>
+    	<field name="userPartyId" type="id-ne"/>
+    	<field name="requisicionId" type="id-ne"/>
+    	<field name="detalleRequisicionId" type="id-ne"/> 
+    	<field name="invoiceId" type="id-ne" />   	    	    	
+    	<prim-key field="orderId"/>
+    	<prim-key field="orderItemSeqId"/>    	
+    	<prim-key field="shipmentId"/>
+    	<prim-key field="invoiceId"/>      	  	      	
+      	<relation type="one" fk-name="FK_RECEP_ORD_ITEM" rel-entity-name="OrderItem">
+        	<key-map field-name="orderItemSeqId"/>
+        	<key-map field-name="orderId"/>        	
+      	</relation>
+      	<relation type="one" fk-name="FK_RECEP_SHIP" rel-entity-name="Shipment">
+        	<key-map field-name="shipmentId"/>
+      	</relation>      	
+      	<relation type="one" fk-name="FK_RECEP_PROD" rel-entity-name="Product">
+      		<key-map field-name="productId"/>       
+      	</relation>
+      	<relation type="one" fk-name="FK_RECEP_PARGRP" rel-entity-name="PartyGroup">
+      		<key-map field-name="proveedor" rel-field-name="partyId"/>       
+      	</relation>
+      	<relation type="one" fk-name="FK_RECEP_PERSON" rel-entity-name="Person">
+      		<key-map field-name="userPartyId" rel-field-name="partyId"/>       
+      	</relation>
+      	<relation type="one" fk-name="FK_RECEP_INV" rel-entity-name="Invoice">
+        	<key-map field-name="invoiceId"/>
+      	</relation>      	
+    </entity>
+    
+    <view-entity entity-name="ConstanciaRecepcionDevengoPorMontos"
+            package-name="org.ofbiz.shipment.shipment"
+            title="Obtiene la informacion parea imprimir la contancia de recepcion">
+	    <member-entity entity-alias="REC" entity-name="RecepcionDevengoMontos"/>
+		<member-entity entity-alias="PRO" entity-name="Product"/>
+		<member-entity entity-alias="PAG" entity-name="PartyGroup"/>
+		<member-entity entity-alias="PER" entity-name="Person"/>
+		<member-entity entity-alias="ITE" entity-name="OrderItem"/>
+		<member-entity entity-alias="DET" entity-name="DetalleRequisicion"/>
+		<member-entity entity-alias="SH" entity-name="Shipment" />
+		<member-entity entity-alias="FCY" entity-name="Facility" />
+		<alias entity-alias="REC" name="orderId"/>
+    	<alias entity-alias="REC" name="orderItemSeqId"/>
+    	<alias entity-alias="REC" name="shipmentId"/>
+    	<alias entity-alias="REC" name="numeroFactura"/>    	
+    	<alias entity-alias="REC" name="fechaFactura"/>
+    	<alias entity-alias="REC" name="fechaContable"/>
+    	<alias entity-alias="REC" name="productId"/>
+    	<alias entity-alias="REC" name="cantidad"/>
+    	<alias entity-alias="REC" name="precioUnitario"/>    	
+    	<alias entity-alias="REC" name="proveedor"/>
+    	<alias entity-alias="REC" name="userPartyId"/>
+    	<alias entity-alias="REC" name="requisicionId"/>
+    	<alias entity-alias="REC" name="detalleRequisicionId"/>    	
+    	<alias entity-alias="PRO" name="productName"/>
+    	<alias entity-alias="PRO" name="internalName"/>    	
+    	<alias entity-alias="PAG" name="groupName"/>
+    	<alias entity-alias="PER" name="firstName"/>
+    	<alias entity-alias="PER" name="lastName"/>
+    	<alias entity-alias="PER" name="firmaId"/>
+      	<alias entity-alias="ITE" name="comments"/>
+      	<alias entity-alias="ITE" name="itemDescription"/>
+      	<alias entity-alias="DET" name="descripcion"/>
+      	<alias entity-alias="SH" name="facilityId" field="destinationFacilityId"/>
+      	<alias entity-alias="FCY" name="facilityName"/>
+		<view-link entity-alias="REC" rel-entity-alias="PRO">
+		  <key-map field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="REC" rel-entity-alias="PAG">
+		  <key-map field-name="proveedor" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="REC" rel-entity-alias="PER">
+		  <key-map field-name="userPartyId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="REC" rel-entity-alias="ITE">
+		  <key-map field-name="orderId"/>
+		  <key-map field-name="orderItemSeqId"/>
+		</view-link>
+		<view-link entity-alias="REC" rel-entity-alias="SH" rel-optional="true">
+			<key-map field-name="shipmentId" />
+		</view-link>
+		<view-link entity-alias="SH" rel-entity-alias="FCY" rel-optional="true">
+			<key-map field-name="destinationFacilityId" rel-field-name="facilityId" />
+		</view-link>
+		<view-link entity-alias="ITE" rel-entity-alias="DET" rel-optional="true" >		  
+		  <key-map field-name="detalleRequisicionId"/>
+		  <key-map field-name="requisicionId"/>
+		</view-link>		 
+	</view-entity> 
+	
+	<view-entity entity-name="DescripcionArticulo" package-name="com.opensourcestrategies.financials.tesoreria">
+		<description>Obtiene las descripciones de los artículos desde 
+						la requisición hasta la pre orden de pago</description>
+		<member-entity entity-alias="OIB" entity-name="OrderItemBilling" />
+		<member-entity entity-alias="II" entity-name="InvoiceItem" />
+		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<member-entity entity-alias="DR" entity-name="DetalleRequisicion" />
+		<alias entity-alias="DR" name="requisicionId" />
+		<alias entity-alias="DR" name="detalleRequisicionId" />
+		<alias entity-alias="DR" name="descripcionReq" field="descripcion"  />
+		<alias entity-alias="OI" name="orderId" />
+		<alias entity-alias="OI" name="orderItemSeqId" />
+		<alias entity-alias="OI" name="descripcionOrd" field="itemDescription"  />
+		<alias entity-alias="II" name="invoiceId" />
+		<alias entity-alias="II" name="invoiceItemSeqId" />
+		<alias entity-alias="II" name="descripcionInv" field="description"  />
+		<view-link entity-alias="OIB" rel-entity-alias="II">
+			<key-map field-name="invoiceId"/>
+			<key-map field-name="invoiceItemSeqId"/>
+		</view-link>
+		<view-link entity-alias="OIB" rel-entity-alias="OI">
+			<key-map field-name="orderId"/>
+			<key-map field-name="orderItemSeqId"/>
+		</view-link>
+		<view-link entity-alias="OI" rel-entity-alias="DR" rel-optional="true">
+			<key-map field-name="requisicionId"/>
+			<key-map field-name="detalleRequisicionId"/>
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="GlAccountStructure"
+		package-name="org.ofbiz.accounting.ledger" title="Almacena los cambios que se generan en la estructura de la lista de cuentas">
+		<field name="idStructure" type="id-ne"></field>
+		<field name="glAccountIdAnterior" type="id-ne"></field>
+		<field name="glAccountIdNueva" type="id-ne"></field>
+		<field name="userLoginId" type="id-vlong-ne"></field> 
+		<prim-key field="idStructure"/>
+      	<relation type="one" fk-name="FK_USR_SESS_CHANGE" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+    
+</entitymodel>

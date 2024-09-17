@@ -1,0 +1,14 @@
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+
+userLogin = request.getAttribute("userLogin");
+
+// get the organization party ID
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+organizationParty = session.getAttribute("organizationParty");
+if (UtilValidate.isNotEmpty(organizationParty)) {
+	context.put("applicationSetupOrganization", organizationParty);
+}
+
+context.put("organizationPartyId", organizationPartyId);
+parameters.put("organizationPartyId", organizationPartyId);

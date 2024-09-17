@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<property key="PresupuestoAdminEtiquetas">
+		<value xml:lang="en">Managing Budget Tags</value>
+		<value xml:lang="es">Administración de etiquetas presupuestales</value>
+	</property>
+	<property key="PresupuestoEtiquetaId">
+		<value xml:lang="en">Tag id</value>
+		<value xml:lang="es">Identificador de la etiqueta</value>
+	</property>
+	<property key="PresupuestoEtiqueta">
+		<value xml:lang="en">Tag</value>
+		<value xml:lang="es">Etiqueta</value>
+	</property>
+	<property key="PresupuestoFechaVigencia">
+		<value xml:lang="en">Effective date</value>
+		<value xml:lang="es">Fecha de vigencia</value>
+	</property>
+	<property key="PresupuestoEtiquetasConfiguradas">
+		<value xml:lang="en">Configured tags</value>
+		<value xml:lang="es">Etiquetas configuradas</value>
+	</property>
+	<property key="PresupuestoAsociarEtiqueta">
+		<value xml:lang="en">Tag Association</value>
+		<value xml:lang="es">Asociar etiqueta</value>
+	</property>
+</resource>

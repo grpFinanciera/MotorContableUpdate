@@ -1,0 +1,6 @@
+ import org.opentaps.common.util.UtilCommon;
+ import org.opentaps.common.util.UtilAccountingTags;
+ 
+ organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+ cicloId = UtilCommon.getCicloId(request);
+ context.put("tagTypes", UtilAccountingTags.getClassificationTagsForOrganization(organizationPartyId, cicloId,UtilAccountingTags.EGRESO_TAG, delegator));

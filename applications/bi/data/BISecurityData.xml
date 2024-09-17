@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    
+	<!-- Permisos para el módulo de Inteligencia de Negocios -->
+    <SecurityPermission description="Ver las operaciones en el Módulo de Inteligencia de Negocios." permissionId="INTNEGOCIOS_VIEW"/>
+    <SecurityPermission description="Todas las operaciones en el Módulo de Viáticos." permissionId="INTNEGOCIOS_ADMIN"/>
+    
+    <SecurityGroup groupId="INTNEGOCIOS_ADMIN" description="Administrador de Inteligencia de Negocios con permisos para todas las operaciones."/>
+    <SecurityGroupPermission groupId="INTNEGOCIOS_ADMIN" permissionId="INTNEGOCIOS_VIEW"/>
+    <SecurityGroupPermission groupId="INTNEGOCIOS_ADMIN" permissionId="INTNEGOCIOS_ADMIN"/>
+	
+    <UserLoginSecurityGroup userLoginId="admin" groupId="INTNEGOCIOS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+    
+</entity-engine-xml> 

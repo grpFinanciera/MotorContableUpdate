@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<screen name="main-section-decorator">
+		<section>
+			<actions>
+				<set field="sectionName" value="viaticos" global="true"/>
+				<set field="sectionStyle" value="twoColumn"/>
+				<set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+			</actions>
+			<widgets>
+				<include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+			</widgets>		
+		</section>
+	</screen>
+	
+	<screen name="emptyViaticosScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="Viaticos"/>
+				<set field="sectionHeaderUiLabel" value="Viaticos"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/viaticos/emptyScreen.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="crearViaticoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="CrearViaticos"/>
+				<set field="sectionHeaderUiLabel" value="Viaticos"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudProyectosViaticos.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/viaticos/crearSolicitudViatico.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="consultarViaticoScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/>  
+                <java location="com.absoluciones.proyectos.ConsultaViaticosProyectos" invoke="buscarViaticoConsulta"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/viaticos/consultarViaticoProyCons.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/viaticos/listViaticosProyCons.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="verViaticoProyecto">
+		<section>
+			<actions>
+				<set field="viaticoProyectoId"  value="${parameters.viaticoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudProyectosViaticos.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/viaticos/verViaticoProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<!-- Buscar Viatico -->
+    <screen name="comprobarViaticoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/>  
+                <java location="com.absoluciones.proyectos.ConsultaViaticosProyectos" invoke="buscarViatico"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/viaticos/consultarViaticoProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/viaticos/listViaticosProyectos.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="devolverViaticoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="DevolverViatico"/>  
+                <set field="sectionHeaderUiLabel" value="DevolverViatico"/>  
+                <java location="com.absoluciones.proyectos.ConsultaViaticosProyectos" invoke="buscarDevoViatico"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/viaticos/consultarDevoViaticoProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/viaticos/listViaticosDevoProyectos.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="comprobarViatico">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/> 
+                <set field="viaticoProyectoId"  value="${parameters.viaticoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudProyectosViaticos.bsh"/>             
+            </actions>
+            <widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/viaticos/verViaticoComprueba.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+        </section>
+    </screen>
+    
+    <screen name="devolverViatico">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoDevolverViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoDevolverViatico"/> 
+                <set field="viaticoProyectoId"  value="${parameters.viaticoProyectoId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/solicitudProyectosViaticos.bsh"/>             
+            </actions>
+            <widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/viaticos/verViaticoDevuelve.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+        </section>
+    </screen>
+
+</screens>

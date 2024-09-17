@@ -1,0 +1,164 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ *  @author Chris Liberty (cliberty@opensourcestrategies.com)
+ */
+
+import org.ofbiz.entity.util.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.service.*;
+import org.opentaps.common.util.UtilMessage;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+
+//put to history
+context{"history"} = UtilCommon.makeHistoryEntry(UtilMessage.getUiLabels(locale).get("EdoFlujoEfect"), null, FastList.newInstance());
+
+organizationPartyId = context.get("organizationPartyId");
+glFiscalTypeId1 = context.get("glFiscalTypeId1");
+glFiscalTypeId2 = context.get("glFiscalTypeId2");
+fromDate1 = context.get("fromDate1");
+thruDate1 = context.get("thruDate1");
+fromDate2 = context.get("fromDate2");
+thruDate2 = context.get("thruDate2");
+if (fromDate1 == null || thruDate1 == null || fromDate2 == null || thruDate2 == null) return;
+
+input = UtilMisc.toMap("organizationPartyId", organizationPartyId, "glFiscalTypeId1", glFiscalTypeId1, "glFiscalTypeId2", glFiscalTypeId2);
+input.put("userLogin", userLogin);
+input.put("fromDate1", fromDate1);
+input.put("thruDate1", thruDate1);
+input.put("fromDate2", fromDate2);
+input.put("thruDate2", thruDate2);
+
+// add tags from the request to the service parameters
+UtilAccountingTags.addTagParameters(request, input);
+
+context.put("input",input);
+
+result = dispatcher.runSync("getComparativeEstadoFlujoEfectivo", input);
+if (ServiceUtil.isError(result)) return;
+
+//Se obtienen las listas principales 
+set1FlujoDeEfectivo = result.get("set1FlujoDeEfectivo");
+set2FlujoDeEfectivo = result.get("set2FlujoDeEfectivo");
+
+context.put("set1FlujoDeEfectivo", set1FlujoDeEfectivo);
+context.put("set2FlujoDeEfectivo", set2FlujoDeEfectivo);
+
+//Se mandan al contexto las primeras listas (From)
+context.put("cuentasImpuestoFr", set1FlujoDeEfectivo.get("cuentasImpuesto"));
+context.put("cuentasContribuFr", set1FlujoDeEfectivo.get("cuentasContribu"));
+context.put("cuentasParticipaFr", set1FlujoDeEfectivo.get("cuentasParticipa"));
+context.put("cuentasTransfeFr", set1FlujoDeEfectivo.get("cuentasTransfe"));
+context.put("cuentasOtrosIngFr", set1FlujoDeEfectivo.get("cuentasOtrosIng"));
+context.put("cuentasIcreVariaFr", set1FlujoDeEfectivo.get("cuentasIcreVaria"));
+context.put("cuentasGastosFunFr", set1FlujoDeEfectivo.get("cuentasGastosFun"));
+context.put("cuentasTransGastosFr", set1FlujoDeEfectivo.get("cuentasTransGastos"));
+context.put("cuentaPartiAportaFr", set1FlujoDeEfectivo.get("cuentaPartiAporta"));
+context.put("cuentaInteComisFr", set1FlujoDeEfectivo.get("cuentaInteComis"));
+context.put("cuentasOtrosGastosFr", set1FlujoDeEfectivo.get("cuentasOtrosGastos"));
+
+//Se mandan al contexto las siguientes listas (Thru)
+context.put("cuentasImpuestoTr", set2FlujoDeEfectivo.get("cuentasImpuesto"));
+context.put("cuentasContribuTr", set2FlujoDeEfectivo.get("cuentasContribu"));
+context.put("cuentasParticipaTr", set2FlujoDeEfectivo.get("cuentasParticipa"));
+context.put("cuentasTransfeTr", set2FlujoDeEfectivo.get("cuentasTransfe"));
+context.put("cuentasOtrosIngTr", set2FlujoDeEfectivo.get("cuentasOtrosIng"));
+context.put("cuentasIcreVariaTr", set2FlujoDeEfectivo.get("cuentasIcreVaria"));
+context.put("cuentasGastosFunTr", set2FlujoDeEfectivo.get("cuentasGastosFun"));
+context.put("cuentasTransGastosTr", set2FlujoDeEfectivo.get("cuentasTransGastos"));
+context.put("cuentaPartiAportaTr", set2FlujoDeEfectivo.get("cuentaPartiAporta"));
+context.put("cuentaInteComisTr", set2FlujoDeEfectivo.get("cuentaInteComis"));
+context.put("cuentasOtrosGastosTr", set2FlujoDeEfectivo.get("cuentasOtrosGastos"));
+
+//Ahora se mandan las diferencias de las fechas
+context.put("difCuentasImpuesto", result.get("difCuentasImpuesto"));
+context.put("difCuentasContribu", result.get("difCuentasContribu"));
+context.put("difCuentasParticipa", result.get("difCuentasParticipa"));
+context.put("difCuentasTransfe", result.get("difCuentasTransfe"));
+context.put("difCuentasOtrosIng", result.get("difCuentasOtrosIng"));
+context.put("difCuentasIcreVaria", result.get("difCuentasIcreVaria"));
+context.put("difCuentasGastosFun", result.get("difCuentasGastosFun"));
+context.put("difCuentasTransGastos", result.get("difCuentasTransGastos"));
+context.put("difCuentaPartiAporta", result.get("difCuentaPartiAporta"));
+context.put("difCuentaInteComis", result.get("difCuentaInteComis"));
+context.put("difCuentasOtrosGastos", result.get("difCuentasOtrosGastos"));
+
+//Creamos las listas a iterar con las cuentas que se encontraron en la fecha incial y en la fecha final y las enviamos al contexto
+cuentasImpuestoAgre = new HashMap(); 
+cuentasImpuestoAgre.putAll(context.get("cuentasImpuestoFr"));
+cuentasImpuestoAgre.putAll(context.get("cuentasImpuestoTr")); 
+cuentasImpuestoList = EntityUtil.orderBy(cuentasImpuestoAgre.keySet(), UtilMisc.toList("glAccountId"));
+context.put("cuentasImpuestoList", cuentasImpuestoList);
+cuentasContribuAgre = new HashMap(); 
+cuentasContribuAgre.putAll(context.get("cuentasContribuFr"));
+cuentasContribuAgre.putAll(context.get("cuentasContribuTr")); 
+cuentasContribuList = EntityUtil.orderBy(cuentasContribuAgre.keySet(), UtilMisc.toList("glAccountId"));  
+context.put("cuentasContribuList", cuentasContribuList);
+cuentasParticipaAgre = new HashMap();
+cuentasParticipaAgre.putAll(context.get("cuentasParticipaFr"));
+cuentasParticipaAgre.putAll(context.get("cuentasParticipaTr"));
+print("cuentasParticipaAgre.- "+ cuentasParticipaAgre);
+cuentasParticipaList = EntityUtil.orderBy(cuentasParticipaAgre.keySet(), UtilMisc.toList("glAccountId"));
+print("cuentasParticipaList.- "+ cuentasParticipaList);  
+context.put("cuentasParticipaList", cuentasParticipaList);
+cuentasTransfeAgre = new HashMap(); 
+cuentasTransfeAgre.putAll(context.get("cuentasTransfeFr"));
+cuentasTransfeAgre.putAll(context.get("cuentasTransfeTr"));
+cuentasTransfeList = EntityUtil.orderBy(cuentasTransfeAgre.keySet(), UtilMisc.toList("glAccountId"));  
+context.put("cuentasTransfeList", cuentasTransfeList);        
+cuentasOtrosIngAgre = new HashMap(); 
+cuentasOtrosIngAgre.putAll(context.get("cuentasOtrosIngFr"));
+cuentasOtrosIngAgre.putAll(context.get("cuentasOtrosIngTr")); 
+cuentasOtrosIngList = EntityUtil.orderBy(cuentasOtrosIngAgre.keySet(), UtilMisc.toList("glAccountId"));   
+context.put("cuentasOtrosIngList", cuentasOtrosIngList);       
+cuentasIcreVariaAgre = new HashMap();
+cuentasIcreVariaAgre.putAll(context.get("cuentasIcreVariaFr"));
+cuentasIcreVariaAgre.putAll(context.get("cuentasIcreVariaTr"));
+cuentasIcreVariaList = EntityUtil.orderBy(cuentasIcreVariaAgre.keySet(), UtilMisc.toList("glAccountId"));    
+context.put("cuentasIcreVariaList", cuentasIcreVariaList);  
+cuentasGastosFunAgre = new HashMap(); 
+cuentasGastosFunAgre.putAll(context.get("cuentasGastosFunFr"));
+cuentasGastosFunAgre.putAll(context.get("cuentasGastosFunTr")); 
+cuentasGastosFunList = EntityUtil.orderBy(cuentasGastosFunAgre.keySet(), UtilMisc.toList("glAccountId"));
+context.put("cuentasGastosFunList", cuentasGastosFunList);  
+cuentasTransGastosAgre = new HashMap();
+cuentasTransGastosAgre.putAll(context.get("cuentasTransGastosFr"));
+cuentasTransGastosAgre.putAll(context.get("cuentasTransGastosTr")); 
+cuentasTransGastosList = EntityUtil.orderBy(cuentasTransGastosAgre.keySet(), UtilMisc.toList("glAccountId"));
+context.put("cuentasTransGastosList", cuentasTransGastosList);          
+cuentaPartiAportaAgre = new HashMap(); 
+cuentaPartiAportaAgre.putAll(context.get("cuentaPartiAportaFr"));
+cuentaPartiAportaAgre.putAll(context.get("cuentaPartiAportaTr")); 
+cuentaPartiAportaList = EntityUtil.orderBy(cuentaPartiAportaAgre.keySet(), UtilMisc.toList("glAccountId")); 
+context.put("cuentaPartiAportaList", cuentaPartiAportaList);
+cuentaInteComisAgre = new HashMap(); 
+cuentaInteComisAgre.putAll(context.get("cuentaInteComisFr"));
+cuentaInteComisAgre.putAll(context.get("cuentaInteComisTr")); 
+cuentaInteComisList = EntityUtil.orderBy(cuentaInteComisAgre.keySet(), UtilMisc.toList("glAccountId"));  
+context.put("cuentaInteComisList", cuentaInteComisList);  
+cuentasOtrosGastosAgre = new HashMap(); 
+cuentasOtrosGastosAgre.putAll(context.get("cuentasOtrosGastosFr"));
+cuentasOtrosGastosAgre.putAll(context.get("cuentasOtrosGastosTr")); 
+cuentasOtrosGastosList = EntityUtil.orderBy(cuentasOtrosGastosAgre.keySet(), UtilMisc.toList("glAccountId"));
+context.put("cuentasOtrosGastosList", cuentasOtrosGastosList);
+
+// put the correct GlFiscalTypes into the context for the display tier
+glFiscalType1 = delegator.findByPrimaryKey("GlFiscalType", UtilMisc.toMap("glFiscalTypeId", glFiscalTypeId1));
+glFiscalType2 = delegator.findByPrimaryKey("GlFiscalType", UtilMisc.toMap("glFiscalTypeId", glFiscalTypeId2));
+context.put("glFiscalType1", glFiscalType1);
+context.put("glFiscalType2", glFiscalType2);

@@ -1,0 +1,116 @@
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import java.util.List;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+fixedAssetId = parameters.get("fixedAssetId");
+
+fixedAssetList = delegator.findByPrimaryKey("FixedAsset", UtilMisc.toMap("fixedAssetId", fixedAssetId));
+context.put("fixedAssetList",	fixedAssetList);
+
+fixedAssetTypeId = fixedAssetList.getString("fixedAssetTypeId");
+
+ TipoActivoFijo = delegator.findByPrimaryKey("FixedAssetType", UtilMisc.toMap("fixedAssetTypeId", fixedAssetTypeId));
+ context.put("TipoActivoFijo",TipoActivoFijo);
+ 
+  listMotivosAlta = delegator.findByCondition("MotivosControlPat", EntityCondition.makeCondition("tipoMovimiento",EntityOperator.EQUALS, "B"), null, null);
+ context.put("listMotivosAlta",listMotivosAlta);
+ 
+statusFixedAsset = fixedAssetList.getString("statusId");
+listStatus = delegator.findByPrimaryKey("Estatus", UtilMisc.toMap("statusId", statusFixedAsset));
+ context.put("listStatus",listStatus);
+ 
+ ubicacionRapida = fixedAssetList.getString("ubicacionRapidaId");
+ listUbicaciones="";
+ if(UtilValidate.isEmpty(ubicacionRapida)){
+ 	context.put("listUbicaciones",listUbicaciones);
+ }else{
+	 listUbicaciones = delegator.findByPrimaryKey("UbicacionRapida", UtilMisc.toMap("ubicacionRapidaId",ubicacionRapida));
+	 context.put("listUbicaciones",listUbicaciones);
+ }
+ 
+ area = fixedAssetList.getString("areaPartyId");
+ listArea ="";
+  if(UtilValidate.isEmpty(area)){
+  	context.put("listArea",listArea);
+  }else{
+  	listArea = UtilClassification.getListaCatalogos("NivelesParty", delegator, area,true);	
+ 	context.put("listArea",listArea);
+  }
+  
+  almacen = fixedAssetList.getString("facilityId");
+  listAlmacen ="";
+  if(UtilValidate.isEmpty(almacen)){
+  	context.put("listAlmacen",listAlmacen);
+  }else{
+  	listAlmacen = delegator.findByPrimaryKey("Facility", UtilMisc.toMap("facilityId",almacen));
+	 context.put("listAlmacen",listAlmacen);
+  }
+  
+  estadoF = fixedAssetList.getString("edoFisicoId");
+  listEstadoF ="";
+  if(UtilValidate.isEmpty(estadoF)){
+  	context.put("listEstadoF",listEstadoF);
+  }else{
+  	listEstadoF = delegator.findByPrimaryKey("EstadoFisicoActivo", UtilMisc.toMap("edoFisicoId",estadoF));
+	 context.put("listEstadoF",listEstadoF);
+  }
+  
+  unidad = fixedAssetList.getString("tipoUnidadVehiculoId");
+  listUnidadV ="";
+  if(UtilValidate.isEmpty(unidad)){
+  	context.put("listUnidadV",listUnidadV);
+  }else{
+  	listUnidadV = delegator.findByPrimaryKey("TipoUnidadVehiculo", UtilMisc.toMap("tipoUnidadVehiculoId",unidad));
+	 context.put("listUnidadV",listUnidadV);
+  }
+ 
+listAreas = UtilClassification.getListaCatalogos("NivelesParty", delegator, "",true);	
+ context.put("listAreas",listAreas);
+ 
+ listMonedas = delegator.findByAnd("Uom", UtilMisc.toMap("uomTypeId", "CURRENCY_MEASURE"));
+ context.put("listMonedas",listMonedas);
+
+
+listUom = delegator.findAll("UomAndType");
+ context.put("listUom",listUom);
+
+listFacility = delegator.findAll("Facility");
+ context.put("listFacility",listFacility);
+
+ listTipoActivoFijo = delegator.findAll("FixedAssetType");
+ context.put("listTipoActivoFijo",listTipoActivoFijo);
+
+listUbicacionRapida = delegator.findAll("UbicacionRapida");
+ context.put("listUbicacionRapida",listUbicacionRapida);
+ 
+ listAlmacenes = delegator.findAll("Facility");
+ context.put("listAlmacenes",listAlmacenes);
+
+ listEstadoFisico = delegator.findAll("EstadoFisicoActivo");
+ context.put("listEstadoFisico",listEstadoFisico);
+  
+listTipoUnidadVehiculo = delegator.findAll("TipoUnidadVehiculo");
+ context.put("listTipoUnidadVehiculo",listTipoUnidadVehiculo);
+ 
+   //Busca las polizas generadas
+condicionesPoliza = new ArrayList();
+condicionesPoliza.add(new EntityExpr("fixedAssetId", EntityOperator.EQUALS, fixedAssetId));
+shipmentPoliza = delegator.findByCondition("AcctgTrans",EntityCondition.makeCondition("fixedAssetId", EntityOperator.EQUALS, fixedAssetId),UtilMisc.toList("acctgTransId"),UtilMisc.toList("acctgTransId"));
+context.put("shipmentPoliza", shipmentPoliza);
+

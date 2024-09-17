@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+<!-- The Web Application -->
+<OpentapsWebApps applicationId="obras" shortName="Obras" sequenceNum="60" applicationName="Obras" description="Obras"
+             imageUrl="/opentaps_images/integratingweb/Obra.png" imageHoverUrl="/opentaps_images/integratingweb/ObraHover.png" linkUrl="/obras/control/main" />
+
+<!-- Tabs -->
+<OpentapsWebAppTab applicationId="obras"  sequenceNum="010" tabId="myHome" uiLabel="ObrasMain"
+                   linkUrl="myHomeMain" securityModule="OBRAS" securityAction="" handlerMethod=""/>
+                   
+<OpentapsWebAppTab applicationId="obras"  sequenceNum="020" tabId="obras" uiLabel="ObrasHome"
+                   linkUrl="emptyObrasScreen"  securityModule="OBRAS" securityAction="OBRAST_VIEW" handlerMethod=""/>   
+                                   
+<OpentapsWebAppTab applicationId="obras"  sequenceNum="030" tabId="seguimiento" uiLabel="ObrasSeguimiento"
+                   linkUrl="emptySeguimientoScreen"  securityModule="OBRAS" securityAction="SEGUIT_VIEW" handlerMethod=""/>
+                  
+<OpentapsWebAppTab applicationId="obras"  sequenceNum="040" tabId="reportesO" uiLabel="ObraInformes"
+                   linkUrl="emptyReportScreen"  securityModule="OBRAS" securityAction="REPORTET_VIEW" handlerMethod=""/>
+                   
+<OpentapsWebAppTab applicationId="obras"  sequenceNum="500" tabId="ofbiz" uiLabel="opentaps"
+                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>
+                   
+<!-- Obras group -->
+<OpentapsShortcutGroup applicationId="obras" tabId="obras" groupId="obrasGrupo" sequenceNum="010" uiLabel="ObrasObras"
+                       securityModule="OBRAS_OBRAST" securityAction="OBRAGRP_VIEW"/>
+<OpentapsShortcut shortcutId="crearObra" groupId="obrasGrupo" sequenceNum="010" uiLabel="CrearObra"
+                  linkUrl="crearObra" securityModule="OBRAS_OBRAST_OBRAGRP" securityAction="COBRAOBRAS_VIEW"/>
+<OpentapsShortcut shortcutId="buscarSolicitudes" groupId="obrasGrupo" sequenceNum="030" uiLabel="ObrasBuscarSolicitudes"
+                  linkUrl="buscarSolicitudes" securityModule="OBRAS_OBRAST_OBRAGRP" securityAction="BSOLICITOBRAS_VIEW"/>
+<OpentapsShortcut shortcutId="solicitudesPendientes" groupId="obrasGrupo" sequenceNum="040" uiLabel="ObrasSolicitudesPendientes"
+                  linkUrl="solicitudesPendientes" securityModule="OBRAS_OBRAST_OBRAGRP" securityAction="SOLPENDOBRAS_VIEW"/>
+<OpentapsShortcut shortcutId="buscarObra" groupId="obrasGrupo" sequenceNum="050" uiLabel="ObrasBuscarObra"
+                  linkUrl="buscarObra" securityModule="OBRAS_OBRAST_OBRAGRP" securityAction="BOBRAOBRAS_VIEW"/>
+<OpentapsShortcut shortcutId="inicioObra" groupId="obrasGrupo" sequenceNum="060" uiLabel="ObrasInicioObra"
+                  linkUrl="inicioObra" securityModule="OBRAS_OBRAST_OBRAGRP" securityAction="IOBRAOBRAS_VIEW"/>
+                  
+<!-- Seguimiento group -->
+<OpentapsShortcutGroup applicationId="obras" tabId="seguimiento" groupId="seguimientoGrupo" sequenceNum="020" uiLabel="ObrasSeguimiento"
+                       securityModule="OBRAS_SEGUIT" securityAction="SEGUIGRP_VIEW"/>
+<OpentapsShortcut shortcutId="seguimientoObra" groupId="seguimientoGrupo" sequenceNum="010" uiLabel="ObrasAvance"
+                  linkUrl="seguimientoObra" securityModule="OBRAS_SEGUIT_SEGUIGRP" securityAction="SEGUIMOBRAS_VIEW"/>
+<OpentapsShortcut shortcutId="buscaSeguimientoObra" groupId="seguimientoGrupo" sequenceNum="020" uiLabel="BuscarSeguimiento"
+                  linkUrl="buscaSeguimientoObra" securityModule="OBRAS_SEGUIT_SEGUIGRP" securityAction="BSEGUIMOBRAS_VIEW"/>
+                  
+<!-- Reportes group -->
+<OpentapsShortcutGroup applicationId="obras" tabId="reportesO" groupId="reportesGrupoO" sequenceNum="030" uiLabel="ObraInformes"
+                       securityModule="OBRAS_REPORTET" securityAction="INFORMESGRP_VIEW"/>
+<OpentapsShortcut shortcutId="obrasReportsMain" groupId="reportesGrupoO" sequenceNum="010" uiLabel="ObraInformes"
+                  linkUrl="obrasReports" securityModule="OBRAS_REPORTET_INFORMESGRP" securityAction="INFSOBRAS_VIEW" />
+
+</entity-engine-xml>

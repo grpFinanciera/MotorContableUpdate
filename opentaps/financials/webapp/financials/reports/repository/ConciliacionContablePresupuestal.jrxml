@@ -1,0 +1,3721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConciliacionContablePresupuestal" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="960"/>
+	<parameter name="ORGANIZACION" class="java.lang.String"/>
+	<parameter name="logoUrl" class="java.lang.String"/>
+	<parameter name="logoUrl2" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Esperanza\\Documents\\reportes jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cog11301" class="java.math.BigDecimal"/>
+	<parameter name="cog12101" class="java.math.BigDecimal"/>
+	<parameter name="cog13101" class="java.math.BigDecimal"/>
+	<parameter name="cog13102" class="java.math.BigDecimal"/>
+	<parameter name="cog13201" class="java.math.BigDecimal"/>
+	<parameter name="cog13202" class="java.math.BigDecimal"/>
+	<parameter name="cog13409" class="java.math.BigDecimal"/>
+	<parameter name="cog14103" class="java.math.BigDecimal"/>
+	<parameter name="cog14105" class="java.math.BigDecimal"/>
+	<parameter name="cog14202" class="java.math.BigDecimal"/>
+	<parameter name="cog14301" class="java.math.BigDecimal"/>
+	<parameter name="cog14401" class="java.math.BigDecimal"/>
+	<parameter name="cog14403" class="java.math.BigDecimal"/>
+	<parameter name="cog15101" class="java.math.BigDecimal"/>
+	<parameter name="cog15401" class="java.math.BigDecimal"/>
+	<parameter name="cog15402" class="java.math.BigDecimal"/>
+	<parameter name="cog15901" class="java.math.BigDecimal"/>
+	<parameter name="cog17102" class="java.math.BigDecimal"/>
+	<parameter name="cog21101" class="java.math.BigDecimal"/>
+	<parameter name="cog21401" class="java.math.BigDecimal"/>
+	<parameter name="cog21501" class="java.math.BigDecimal"/>
+	<parameter name="cog21502" class="java.math.BigDecimal"/>
+	<parameter name="cog22104" class="java.math.BigDecimal"/>
+	<parameter name="cog22301" class="java.math.BigDecimal"/>
+	<parameter name="cog24601" class="java.math.BigDecimal"/>
+	<parameter name="cog24801" class="java.math.BigDecimal"/>
+	<parameter name="cog24901" class="java.math.BigDecimal"/>
+	<parameter name="cog25301" class="java.math.BigDecimal"/>
+	<parameter name="cog26103" class="java.math.BigDecimal"/>
+	<parameter name="cog26104" class="java.math.BigDecimal"/>
+	<parameter name="cog27101" class="java.math.BigDecimal"/>
+	<parameter name="cog27301" class="java.math.BigDecimal"/>
+	<parameter name="cog29301" class="java.math.BigDecimal"/>
+	<parameter name="cog29401" class="java.math.BigDecimal"/>
+	<parameter name="cog29501" class="java.math.BigDecimal"/>
+	<parameter name="cog31101" class="java.math.BigDecimal"/>
+	<parameter name="cog31301" class="java.math.BigDecimal"/>
+	<parameter name="cog31401" class="java.math.BigDecimal"/>
+	<parameter name="cog31501" class="java.math.BigDecimal"/>
+	<parameter name="cog31701" class="java.math.BigDecimal"/>
+	<parameter name="cog31801" class="java.math.BigDecimal"/>
+	<parameter name="cog32301" class="java.math.BigDecimal"/>
+	<parameter name="cog32502" class="java.math.BigDecimal"/>
+	<parameter name="cog32701" class="java.math.BigDecimal"/>
+	<parameter name="cog33104" class="java.math.BigDecimal"/>
+	<parameter name="cog33301" class="java.math.BigDecimal"/>
+	<parameter name="cog33401" class="java.math.BigDecimal"/>
+	<parameter name="cog33501" class="java.math.BigDecimal"/>
+	<parameter name="cog33601" class="java.math.BigDecimal"/>
+	<parameter name="cog33602" class="java.math.BigDecimal"/>
+	<parameter name="cog33604" class="java.math.BigDecimal"/>
+	<parameter name="cog33605" class="java.math.BigDecimal"/>
+	<parameter name="cog33699" class="java.math.BigDecimal"/>
+	<parameter name="cog33801" class="java.math.BigDecimal"/>
+	<parameter name="cog33901" class="java.math.BigDecimal"/>
+	<parameter name="cog33903" class="java.math.BigDecimal"/>
+	<parameter name="cog34101" class="java.math.BigDecimal"/>
+	<parameter name="cog34501" class="java.math.BigDecimal"/>
+	<parameter name="cog34701" class="java.math.BigDecimal"/>
+	<parameter name="cog35101" class="java.math.BigDecimal"/>
+	<parameter name="cog35201" class="java.math.BigDecimal"/>
+	<parameter name="cog35301" class="java.math.BigDecimal"/>
+	<parameter name="cog35701" class="java.math.BigDecimal"/>
+	<parameter name="cog35801" class="java.math.BigDecimal"/>
+	<parameter name="cog37204" class="java.math.BigDecimal"/>
+	<parameter name="cog37206" class="java.math.BigDecimal"/>
+	<parameter name="cog37504" class="java.math.BigDecimal"/>
+	<parameter name="cog37602" class="java.math.BigDecimal"/>
+	<parameter name="cog37901" class="java.math.BigDecimal"/>
+	<parameter name="cog38301" class="java.math.BigDecimal"/>
+	<parameter name="cog38401" class="java.math.BigDecimal"/>
+	<parameter name="cog38501" class="java.math.BigDecimal"/>
+	<parameter name="cog39202" class="java.math.BigDecimal"/>
+	<parameter name="cog39801" class="java.math.BigDecimal"/>
+	<parameter name="cog43901" class="java.math.BigDecimal"/>
+	<parameter name="cog44102" class="java.math.BigDecimal"/>
+	<parameter name="cog51101" class="java.math.BigDecimal"/>
+	<parameter name="cog51501" class="java.math.BigDecimal"/>
+	<parameter name="cog51901" class="java.math.BigDecimal"/>
+	<parameter name="cog52101" class="java.math.BigDecimal"/>
+	<parameter name="cog56601" class="java.math.BigDecimal"/>
+	<parameter name="cog62201" class="java.math.BigDecimal"/>
+	<parameter name="cta511101" class="java.math.BigDecimal"/>
+	<parameter name="cta511201" class="java.math.BigDecimal"/>
+	<parameter name="cta511301" class="java.math.BigDecimal"/>
+	<parameter name="cta511302" class="java.math.BigDecimal"/>
+	<parameter name="cta511303" class="java.math.BigDecimal"/>
+	<parameter name="cta511304" class="java.math.BigDecimal"/>
+	<parameter name="cta511306" class="java.math.BigDecimal"/>
+	<parameter name="cta511401" class="java.math.BigDecimal"/>
+	<parameter name="cta511402" class="java.math.BigDecimal"/>
+	<parameter name="cta511403" class="java.math.BigDecimal"/>
+	<parameter name="cta511406" class="java.math.BigDecimal"/>
+	<parameter name="cta511501" class="java.math.BigDecimal"/>
+	<parameter name="cta511503" class="java.math.BigDecimal"/>
+	<parameter name="cta511504" class="java.math.BigDecimal"/>
+	<parameter name="cta511509" class="java.math.BigDecimal"/>
+	<parameter name="cta511701" class="java.math.BigDecimal"/>
+	<parameter name="cta512101" class="java.math.BigDecimal"/>
+	<parameter name="cta512104" class="java.math.BigDecimal"/>
+	<parameter name="cta512105" class="java.math.BigDecimal"/>
+	<parameter name="cta512106" class="java.math.BigDecimal"/>
+	<parameter name="cta512201" class="java.math.BigDecimal"/>
+	<parameter name="cta512401" class="java.math.BigDecimal"/>
+	<parameter name="cta512402" class="java.math.BigDecimal"/>
+	<parameter name="cta512403" class="java.math.BigDecimal"/>
+	<parameter name="cta512501" class="java.math.BigDecimal"/>
+	<parameter name="cta512603" class="java.math.BigDecimal"/>
+	<parameter name="cta512604" class="java.math.BigDecimal"/>
+	<parameter name="cta512701" class="java.math.BigDecimal"/>
+	<parameter name="cta512901" class="java.math.BigDecimal"/>
+	<parameter name="cta512902" class="java.math.BigDecimal"/>
+	<parameter name="cta512903" class="java.math.BigDecimal"/>
+	<parameter name="cta513101" class="java.math.BigDecimal"/>
+	<parameter name="cta513103" class="java.math.BigDecimal"/>
+	<parameter name="cta513104" class="java.math.BigDecimal"/>
+	<parameter name="cta513105" class="java.math.BigDecimal"/>
+	<parameter name="cta513107" class="java.math.BigDecimal"/>
+	<parameter name="cta513108" class="java.math.BigDecimal"/>
+	<parameter name="cta513203" class="java.math.BigDecimal"/>
+	<parameter name="cta513205" class="java.math.BigDecimal"/>
+	<parameter name="cta513207" class="java.math.BigDecimal"/>
+	<parameter name="cta513301" class="java.math.BigDecimal"/>
+	<parameter name="cta513302" class="java.math.BigDecimal"/>
+	<parameter name="cta513303" class="java.math.BigDecimal"/>
+	<parameter name="cta513304" class="java.math.BigDecimal"/>
+	<parameter name="cta513305" class="java.math.BigDecimal"/>
+	<parameter name="cta513306" class="java.math.BigDecimal"/>
+	<parameter name="cta513307" class="java.math.BigDecimal"/>
+	<parameter name="cta513308" class="java.math.BigDecimal"/>
+	<parameter name="cta513312" class="java.math.BigDecimal"/>
+	<parameter name="cta513309" class="java.math.BigDecimal"/>
+	<parameter name="cta513310" class="java.math.BigDecimal"/>
+	<parameter name="cta513311" class="java.math.BigDecimal"/>
+	<parameter name="cta513401" class="java.math.BigDecimal"/>
+	<parameter name="cta513405" class="java.math.BigDecimal"/>
+	<parameter name="cta513407" class="java.math.BigDecimal"/>
+	<parameter name="cta513501" class="java.math.BigDecimal"/>
+	<parameter name="cta513502" class="java.math.BigDecimal"/>
+	<parameter name="cta513503" class="java.math.BigDecimal"/>
+	<parameter name="cta513507" class="java.math.BigDecimal"/>
+	<parameter name="cta513508" class="java.math.BigDecimal"/>
+	<parameter name="cta513702" class="java.math.BigDecimal"/>
+	<parameter name="cta513703" class="java.math.BigDecimal"/>
+	<parameter name="cta513705" class="java.math.BigDecimal"/>
+	<parameter name="cta513706" class="java.math.BigDecimal"/>
+	<parameter name="cta513709" class="java.math.BigDecimal"/>
+	<parameter name="cta513803" class="java.math.BigDecimal"/>
+	<parameter name="cta513804" class="java.math.BigDecimal"/>
+	<parameter name="cta513805" class="java.math.BigDecimal"/>
+	<parameter name="cta513901" class="java.math.BigDecimal"/>
+	<parameter name="cta513902" class="java.math.BigDecimal"/>
+	<parameter name="cta523101" class="java.math.BigDecimal"/>
+	<parameter name="cta5241" class="java.math.BigDecimal"/>
+	<parameter name="cta124103" class="java.math.BigDecimal"/>
+	<parameter name="cta124101" class="java.math.BigDecimal"/>
+	<parameter name="cta124105" class="java.math.BigDecimal"/>
+	<parameter name="cta124107" class="java.math.BigDecimal"/>
+	<parameter name="cta124605" class="java.math.BigDecimal"/>
+	<parameter name="cta123501" class="java.math.BigDecimal"/>
+	<parameter name="TotalCOG" class="java.math.BigDecimal"/>
+	<parameter name="TotalCta" class="java.math.BigDecimal"/>
+	<field name="dummie" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="52">
+			<image>
+				<reportElement x="449" y="0" width="122" height="50">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl2} != null && !$P{logoUrl2}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl2})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="100" y="10" width="349" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ORGANIZACION}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="100" height="50">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl} != null && !$P{logoUrl}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="30" width="349" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conciliación Contable-Presupuestal]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="288" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="0" width="284" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTABILIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="71" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO COG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="20" width="156" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="227" y="20" width="61" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="20" width="151" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="20" width="66" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="505" y="20" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="659">
+			<staticText>
+				<reportElement x="0" y="0" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[11301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="13" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[12101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="71" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[13101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="44" width="71" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[13102]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="71" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[13201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="84" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[13202]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="71" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[13409]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="115" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14103]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="128" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14105]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="141" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14202]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="154" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="172" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="185" width="71" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[14403]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="203" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[15101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="216" width="71" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[15401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="243" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[15402]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="256" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[15901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="269" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[17102]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="282" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[21101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="295" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[21401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="313" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[21501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="326" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[21502]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="344" width="71" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[22104]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="362" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[22301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="375" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[24601]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="388" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[24801]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="401" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[24901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="419" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[25301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="432" width="71" height="38" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[26103]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="470" width="71" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[26104]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="497" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[27101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="510" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[27301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="523" width="71" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[29301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="0" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Sueldos base]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="13" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Honorarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="71" y="26" width="156" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Prima quinquenal por años de servicios efectivos prestados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="44" width="156" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Acreditación por años de servicio en la docencia y al personal administrativo de las instituciones de educación superior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="71" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Primas de vacaciones y dominical]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="84" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aguinaldo o gratificación de fin de año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="97" width="156" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Compensación por adquisición de material didáctico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="115" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al IMSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="128" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al seguro de cesantía en edad avanzada y vejez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="141" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al INFONAVIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="154" width="156" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al Sistema de Ahorro para el Retiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="172" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cuotas para el seguro de vida del personal civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="185" width="156" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cuota para el seguro de gastos médicos del personal civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="203" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cuotas para el fondo de ahorro del personal civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="216" width="156" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Prestaciones establecidas por condiciones generales de trabajo o contratos colectivos de trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="243" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Compensación garantizada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="256" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otras prestaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="269" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Estimulos al personal operativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="282" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales y útiles de oficina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="295" width="156" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales y útiles para el procesamiento en equipos y bienes informaticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="313" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material de apoyo informativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="326" width="156" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material para información en actividades de investigación científica y tecnológica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="344" width="156" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Productos alimenticios para el personal en las instalaciones de las dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="362" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Utensilios para el servicio de alimentación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="375" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material eléctrico y electrónico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="388" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales complementarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="401" width="156" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros materiales y artículos de construcción y reparación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="419" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Medicinas y productos farmacéuticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="432" width="156" height="38" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales destinados a servicios administrativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="470" width="156" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales asignados a servidores públicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="497" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Vestuarios y uniformes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="510" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Artículos deportivos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="523" width="156" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios menores de mobiliario y equipo de administración, educacional y recreativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="0" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.1.01
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="13" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.2.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="26" width="66" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.3.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="44" width="66" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.3.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="71" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.3.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="84" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.3.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="97" width="66" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.3.06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="115" width="66" height="26" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.4.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="141" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.4.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="154" width="66" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.4.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="172" width="66" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.4.06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="203" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.5.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="216" width="66" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.5.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="243" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.5.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="256" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.5.09]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="269" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.1.7.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="282" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.1.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="295" width="66" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.1.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="313" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.1.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="326" width="66" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.1.06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="344" width="66" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.2.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="375" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.4.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="388" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.4.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="401" width="66" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.4.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="419" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.5.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="432" width="66" height="38" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.6.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="470" width="66" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.6.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="497" width="66" height="26" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.7.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="523" width="66" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.9.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Sueldo base al personal permanente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="13" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Honorarios asimilables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="26" width="151" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Prima quinquenal por años de servicios efectivos prestados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="44" width="151" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Acreditación por años de servicios en la docencia y al personal administrativo de las instituciones de educación superior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="71" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Primas de vacaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="84" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gratificación de fin de año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="97" width="151" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Compensaciones por adquisición de material didáctico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="115" width="151" height="26" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al IMSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="141" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al INFONAVIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="154" width="151" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Aportaciones al sistema de ahorro para el retiro (SAR)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="172" width="151" height="31"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cuotas para el seguro de vida del personal civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="203" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cuotas para el fondo de ahorro del personal ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="216" width="151" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Prestaciones establecidas por condiciones generales de trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="243" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Compensación garantizada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="256" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otras prestaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="269" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Estímulos al personal operativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="282" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales y útiles de oficina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="295" width="151" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales y útiles para el procesamiento en equipos y bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="313" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material de apoyo informativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="326" width="151" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material para información en actividades de investigación científica y tecnológica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="344" width="151" height="31"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Productos alimenticios para el personal en las instalaciones de las dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="375" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Material eléctrico y electrónico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="388" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Materiales complementarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="401" width="151" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros materiales y artículos de construcción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="419" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Medicinas y productos farmacéuticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="432" width="151" height="38" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales destinados a servicios administrativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="470" width="151" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales destinados a servidores públicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="497" width="151" height="26" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Vestuario y uniformes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="523" width="151" height="27"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios menores de mobiliario y equipo de administración, educacional y recreativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="550" width="151" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios para equipo de cómputo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="550" width="66" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.9.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="550" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[29401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="550" width="156" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios para equipo de cómputo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="568" width="71" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[29501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="568" width="151" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios menores de equipo e instrumental médico y de laboratorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="568" width="156" height="18"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Refacciones y accesorios menores de equipo e instrumental médico y de laboratorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="568" width="66" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.2.9.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="586" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="586" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de energía eléctrica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="586" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de energía eléctrica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="586" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="599" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de agua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="599" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de agua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="599" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="599" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="612" width="156" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio telefónico convencional]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="612" width="71" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="612" width="66" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="612" width="151" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio telefónico convencional]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="625" width="156" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de telefonía celular]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="625" width="66" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="625" width="71" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="625" width="151" height="13"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de telefonía celular]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="0" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog11301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="13" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog12101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="26" width="61" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog13101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="44" width="61" height="27" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog13102}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="71" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog13201}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="84" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog13202}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="97" width="61" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog13409}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="115" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14103}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="128" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14105}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="141" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14202}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="154" width="61" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="172" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="185" width="61" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog14403}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="203" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog15101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="216" width="61" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog15401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="243" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog15402}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="256" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog15901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="269" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog17102}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="282" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog21101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="295" width="61" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog21401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="313" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog21501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="326" width="61" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog21502}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="344" width="61" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog22104}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="362" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog22301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="375" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog24601}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="388" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog24801}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="401" width="61" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog24901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="419" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog25301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="432" width="61" height="38" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog26103}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="470" width="61" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog26104}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="497" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog27101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="510" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog27301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="523" width="61" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog29301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="550" width="61" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog29401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="568" width="61" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog29501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="586" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="599" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="612" width="61" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="625" width="61" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="13" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511201}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="26" width="67" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="44" width="67" height="27" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511302}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="71" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511303}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="84" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511304}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="97" width="67" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511306}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="115" width="67" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="141" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511402}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="154" width="67" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511403}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="172" width="67" height="31"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511406}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="203" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="0" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="216" width="67" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511503}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="243" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511504}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="256" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511509}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="269" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta511701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="282" width="66" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="295" width="67" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512104}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="313" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512105}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="326" width="67" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512106}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="344" width="67" height="31"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512201}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="375" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="388" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512402}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="401" width="67" height="18" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512403}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="419" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="432" width="67" height="38" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512603}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="470" width="67" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512604}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="497" width="67" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="523" width="67" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="551" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512902}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="568" width="67" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta512903}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="586" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="599" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513103}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="612" width="67" height="13" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513104}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="625" width="67" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513105}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="752">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="72" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[32301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="85" width="71" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[32502]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="112" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[32701]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33104]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="138" width="71" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="156" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="169" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="182" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33601]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="195" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33602]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="208" width="71" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33604]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="235" width="71" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33605]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="262" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33699]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="275" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33801]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="288" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="301" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[33903]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="314" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[34101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="327" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[34501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="340" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[34701]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="353" width="71" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[35101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="371" width="71" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[35201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="389" width="71" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[35301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="407" width="71" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[35701]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="425" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[35801]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="438" width="71" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[37204]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="465" width="71" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[37206]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="492" width="71" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[37504]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="510" width="71" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[37602]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="537" width="71" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[37901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="555" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[38301]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="568" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[38401]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="581" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[38501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="594" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[39202]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="607" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[39801]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="620" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[43901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="633" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[44102]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="646" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[51101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="659" width="71" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[51501]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="672" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[51901]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="685" width="71" height="9" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[52101]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="695" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[56601]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="708" width="71" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[62201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="288" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="1" width="284" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTABILIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="21" width="156" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="21" width="151" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="505" y="21" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="227" y="21" width="61" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="21" width="71" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO COG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="21" width="66" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="72" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Arrendamiento de equipo y bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="85" width="156" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Arrendamiento de vehículos terrestres, aéreos, marítimos, lacustres y fluviales para servicios públicos y la operación de programas públicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="112" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Patentes, regalías y otros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="125" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otras asesorías para la operación de programas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="138" width="156" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de desarrollo de aplicaciones informáticas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="156" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios para capacitación a servidores públicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="169" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Estudios e investigaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="182" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios relacionados con traducciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="195" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros servicios comerciales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="208" width="156" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Impresión y elaboración de material informativo derivado de la operación y administración de las dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="235" width="156" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Información en medios masivos derivada de la operación y administración de dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="262" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Obsequios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="275" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de vigilancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="288" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Subcontratación de servicios con terceros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="301" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios integrales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="314" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios bancarios y financieros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="327" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Seguros de bienes patrimoniales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="340" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Fletes y maniobras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="353" width="156" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento y conservación de inmuebles para la prestación de servicios administrativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="371" width="156" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento y conservación de mobiliario y equipo de administración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="389" width="156" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento y conservación de bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="407" width="156" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento y conservación de maquinaria y equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="425" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de lavandería, limpieza e higiene]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="438" width="156" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Pasajes terrestres nacionales para servidores públicos de mando en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="465" width="156" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Pasajes terrestres internacionales para servidores públicos en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="492" width="156" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Viáticos nacionales para servidores públicos en el desempeño de funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="510" width="156" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Viáticos en el extranjero para servidores públicos en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="537" width="156" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos para operativos y trabajos de campo en áreas rurales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="555" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Congresos y convenciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="568" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Exposiciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="581" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos para alimentación de servidores públicos de mando]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="594" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros impuestos y derechos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="607" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Impuesto sobre nóminas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="620" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Subsidios para capacitación y becas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="633" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos por servicios de traslado de personas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="646" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mobiliario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="659" width="156" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="672" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Equipo de administración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="685" width="156" height="9" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Equipos y aparatos audiovisuales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="695" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Maquinaria y equipo eléctrico y electrónico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="708" width="156" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Obras de construcción para edificios no habitacionales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="72" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.2.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="85" width="66" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.2.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="112" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.2.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="125" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="138" width="66" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="156" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="169" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="182" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="195" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="208" width="66" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="235" width="66" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.08]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="262" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="275" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.09]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="288" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="301" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.3.11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="314" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.4.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="327" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.4.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="340" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.4.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="353" width="66" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.5.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="371" width="66" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.5.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="389" width="66" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.5.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="407" width="66" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.5.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="425" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.5.08]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="438" width="66" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.7.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="465" width="66" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.7.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="492" width="66" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.7.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="510" width="66" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.7.06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="537" width="66" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.7.09]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="555" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.8.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="568" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.8.04]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="581" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.8.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="594" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.9.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="607" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.9.02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="620" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.2.3.1.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="633" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.2.4.1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="646" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.4.1.03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="659" width="66" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.4.1.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="672" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.4.1.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="685" width="66" height="9" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.4.1.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="695" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.4.6.05]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="708" width="66" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[1.2.3.5.01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="72" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Arrendamiento de equipos y bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="85" width="151" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Arrendamiento de vehículos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="112" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Patentes, regalías y otros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="125" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otras asesorías para la operación de programas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="138" width="151" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de desarrollo de aplicaciones informáticas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="156" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios para capacitación a servidores públicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="169" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Estudios e investigaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="182" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios relacionados con traducciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="195" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros servicios comerciales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="208" width="151" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Impresión y elaboración de material informativo derivado de la operación y administración de las dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="235" width="151" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Información en medios masivos derivada de la operación y administración de las dependencias y entidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="262" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Obsequios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="275" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de vigilancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="288" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Subcontratación de servicios con terceros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="301" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios integrales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="314" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios bancarios y financieros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="327" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Seguro de bienes patrimoniales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="340" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Fletes y maniobras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="353" width="151" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento de conservación de inmuebles para la prestación de servicios administrativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="371" width="151" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento de conservación de mobiliario y equipo de administración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="389" width="151" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento de conservación de bienes informáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="407" width="151" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento y conservación de maquinaria y equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="425" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de lavandería, limpieza e higiene]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="438" width="151" height="26"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Pasajes terrestres nacionales para servidores públicos de mando en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="465" width="151" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Pasajes terrestres internacionales para servidores públicos de mando en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="492" width="151" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Viáticos nacionales para servidores públicos en el desempeño de funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="510" width="151" height="26" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Viáticos en el extranjero para servidores públicos de mando en el desempeño de comisiones y funciones oficiales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="537" width="151" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos para operativos y trabajos de campo en áreas rurales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="555" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Congresos y convenciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="568" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Exposiciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="581" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos para alimentación de servidores públicos de mando]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="594" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Otros impuestos y derechos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="607" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Impuestos sobre nóminas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="620" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Subsidios para capacitación y becas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="633" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Gastos por servicios de traslado de personas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="646" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Mobiliario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="659" width="151" height="12" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Bienes informáticos diversos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="672" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Equipo de administración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="685" width="151" height="9" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Equipos y aparatos audiovisuales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="695" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Maquinaria y equipo eléctrico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="708" width="151" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Construcciones en proceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="726" width="100" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="726" width="100" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="59" width="156" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio postal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="59" width="66" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.08]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="59" width="151" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio postal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="71" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31801]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="41" width="156" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicios de conducción de señales analógicas y digitales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="41" width="66" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[5.1.3.1.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="41" width="151" height="17" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Servicio de conducción de señales analógicas y digitales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="41" width="71" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[31701]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="41" width="61" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="59" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog31801}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="72" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog32301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="85" width="61" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog32502}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="112" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog32701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="125" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33104}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="138" width="61" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="156" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="169" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="182" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33601}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="195" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33602}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="208" width="61" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33604}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="235" width="61" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33605}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="262" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33699}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="275" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33801}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="288" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="301" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog33903}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="314" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog34101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="327" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog34501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="340" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog34701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="353" width="61" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog35101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="371" width="61" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog35201}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="389" width="61" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog35301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="407" width="61" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog35701}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="425" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog35801}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="438" width="61" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog37204}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="465" width="61" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog37206}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="492" width="61" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog37504}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="510" width="61" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog37602}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="537" width="61" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog37901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="555" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog38301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="568" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog38401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="581" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog38501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="594" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog39202}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="607" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog39801}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="620" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog43901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="633" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog44102}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="646" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog51101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="659" width="61" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog51501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="672" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog51901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="685" width="61" height="9" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog52101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="695" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog56601}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="227" y="708" width="61" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cog62201}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="41" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513107}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="59" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513108}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="72" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513203}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="504" y="85" width="67" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513205}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="112" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513207}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="125" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513301}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="138" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513302}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="156" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513303}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="169" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513304}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="182" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513305}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="195" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513306}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="208" width="67" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513307}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="235" width="67" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513308}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="262" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513312}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="275" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513309}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="288" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513310}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="301" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513311}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="314" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513401}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="327" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513405}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="340" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513407}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="353" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="371" width="67" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513502}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="389" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513503}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="407" width="67" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513507}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="425" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513508}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="438" width="67" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513702}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="465" width="67" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513703}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="492" width="67" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513705}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="510" width="67" height="26" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513706}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="537" width="67" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513709}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="555" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513803}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="568" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513804}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="581" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513805}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="594" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513901}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="607" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta513902}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="620" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta523101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="633" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta5241}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="646" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta124103}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="659" width="67" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta124101}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="672" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta124105}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="685" width="67" height="9" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta124107}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="695" width="67" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta124605}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement mode="Opaque" x="505" y="708" width="67" height="17" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{cta123501}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="227" y="725" width="61" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{TotalCOG}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="505" y="726" width="67" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{TotalCta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

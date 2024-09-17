@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+    <!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para modulo de Control Patrimonial</title>
+	<description>Define las entidades para Control Patrimonial</description>
+	<version>1.0</version>
+	
+	<view-entity entity-name="ListaActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta a Fixed asset utilizando los filtros de consulta">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset" />
+		<member-entity entity-alias="FAC" entity-name="FixedAssetPersonaAlmacen" />
+		<member-entity entity-alias="ORHE" entity-name="OrderHeader"/>
+		<member-entity entity-alias="PAGPR" entity-name="PartyGroup"><description>Proveedor</description></member-entity>
+		<member-entity entity-alias="PAGAR" entity-name="PartyGroup"><description>Área</description></member-entity>
+		<!-- Resguardante se busca en person y en party group-->
+		<member-entity entity-alias="PER" entity-name="Person"/>
+		<member-entity entity-alias="PAGPO" entity-name="PartyGroup" />
+		<member-entity entity-alias="UR" entity-name="UbicacionRapida"/>
+		<!-- Resguardante -->
+		
+		<alias name="fixedAssetId" entity-alias="FIX" />
+		<alias name="fixedAssetTypeId" entity-alias="FIX" />
+		<alias name="fixedAssetName" entity-alias="FIX" />
+		<alias name="dateAcquired" entity-alias="FIX" />
+		<alias name="purchaseCost" entity-alias="FIX" />
+		<alias name="areaPartyId" entity-alias="FIX" />
+		<alias name="organizationPartyId" entity-alias="FIX" />
+		<alias name="proveedor" entity-alias="FIX" />
+		<alias name="numeroFactura" entity-alias="FIX" />
+		<alias name="placa" entity-alias="FIX" />
+		<alias name="idActivoAnterior" entity-alias="FIX" />		
+		<alias name="modelo" entity-alias="FIX" />
+		<alias name="marca" entity-alias="FIX" />
+		<alias name="serialNumber" entity-alias="FIX" />
+		<alias name="acquireOrderId" entity-alias="FIX" />
+		<alias name="instanceOfProductId" entity-alias="FIX" />
+		<alias name="numeroPoliza" entity-alias="FIX" />
+		<alias name="edoFisicoId" entity-alias="FIX" />
+		<alias name="ubicacionRapidaId" entity-alias="FIX" />
+		<alias name="descripcion" entity-alias="UR" />
+		<alias name="moneda" entity-alias="FIX" />
+		<alias name="tipoUnidadVehiculoId" entity-alias="FIX" />
+		<alias name="tipoAdjudicacionId" entity-alias="FIX" />
+		<alias name="partyId" entity-alias="FIX" />
+		<alias name="statusId" entity-alias="FIX"/>
+		<alias field="tipoAdjudicacionId" name="AdjudicacionOH" entity-alias="ORHE" />
+		<alias name="partyIdPerson" field="partyId" entity-alias="FAC" />
+		<alias name="facilityId" entity-alias="FAC" />
+		<alias name="groupNamePr" entity-alias="PAGPR" field="groupName"/>
+		<alias name="partyIdGroupPr" entity-alias="PAGPR" field="partyId"/>
+		<alias name="groupNameAr" entity-alias="PAGAR" field="groupName"/>
+		<alias name="partyIdGroupAr" entity-alias="PAGAR" field="partyId"/>
+		<alias name="partyIdPers" entity-alias="PER" field="partyId"/>
+		<alias name="firstName" entity-alias="PER" />
+		<alias name="lastName" entity-alias="PER" />
+		<alias name="partyIdGroupPo" entity-alias="PAGPO" field="partyId"/>
+		<alias name="groupNamePo" entity-alias="PAGPO" field="groupName"/>
+		
+		<view-link entity-alias="FIX" rel-entity-alias="FAC">
+			<key-map field-name="facilityId"  />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="ORHE" rel-optional="true">
+			<key-map field-name="acquireOrderId"  rel-field-name="orderId"/>
+		</view-link>
+		<view-link rel-entity-alias="PAGPR" entity-alias="FIX" rel-optional="true">
+			<key-map field-name="proveedor" rel-field-name="partyId"/>
+		</view-link>	
+		<view-link rel-entity-alias="PAGAR" entity-alias="FIX" rel-optional="true">
+			<key-map field-name="areaPartyId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link rel-entity-alias="PER" entity-alias="FIX" rel-optional="true">
+			<key-map field-name="partyId"/>
+		</view-link>
+		<view-link rel-entity-alias="PAGPO" entity-alias="FIX" rel-optional="true">
+			<key-map field-name="partyId"/>
+		</view-link>
+		<view-link rel-entity-alias="UR" entity-alias="FIX" rel-optional="true">
+			<key-map field-name="ubicacionRapidaId"  />
+		</view-link>	
+	</view-entity>
+	
+	<view-entity entity-name="ListaArcticulosRecibidosPedido" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta a Fixed asset utilizando los filtros de consulta">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset" />
+		<member-entity entity-alias="TYP" entity-name="FixedAssetType" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<alias name="fixedAssetId" entity-alias="FIX" />		
+		<alias name="fixedAssetName" entity-alias="FIX" />
+		<alias name="fixedAssetTypeId" entity-alias="FIX" />
+		<alias name="dateAcquired" entity-alias="FIX" />
+		<alias name="purchaseCost" entity-alias="FIX" />		
+		<alias name="proveedor" entity-alias="FIX" />
+		<alias name="numeroFactura" entity-alias="FIX" />
+		<alias name="acquireOrderId" entity-alias="FIX" />
+		<alias name="shipmentId" entity-alias="FIX" />
+		<alias name="groupName" entity-alias="PAG" />		
+		<alias name="description" entity-alias="TYP" />						
+		<view-link entity-alias="FIX" rel-entity-alias="PAG">
+			<key-map field-name="proveedor" rel-field-name="partyId"  />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="TYP">
+			<key-map field-name="fixedAssetTypeId"  />
+		</view-link>		
+	</view-entity>
+	
+	
+	<view-entity entity-name="ListaActivoFijoSinResguardo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta a Fixed asset utilizando los filtros de consulta sin resguardante">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset" />
+		<member-entity entity-alias="FAC" entity-name="FixedAssetPersonaAlmacen" />
+		<alias name="fixedAssetId" entity-alias="FIX" />
+		<alias name="fixedAssetTypeId" entity-alias="FIX" />
+		<alias name="fixedAssetName" entity-alias="FIX" />
+		<alias name="dateAcquired" entity-alias="FIX" />
+		<alias name="purchaseCost" entity-alias="FIX" />
+		<alias name="areaPartyId" entity-alias="FIX" />
+		<alias name="organizationPartyId" entity-alias="FIX" />
+		<alias name="proveedor" entity-alias="FIX" />
+		<alias name="numeroFactura" entity-alias="FIX" />
+		<alias name="placa" entity-alias="FIX" />
+		<alias name="modelo" entity-alias="FIX" />
+		<alias name="idActivoAnterior" entity-alias="FIX" />		
+		<alias name="marca" entity-alias="FIX" />
+		<alias name="serialNumber" entity-alias="FIX" />		
+		<alias name="instanceOfProductId" entity-alias="FIX" />
+		<alias name="numeroPoliza" entity-alias="FIX" />
+		<alias name="edoFisicoId" entity-alias="FIX" />
+		<alias name="ubicacionRapidaId" entity-alias="FIX" />
+		<alias name="acquireOrderId" entity-alias="FIX" />
+		<alias name="moneda" entity-alias="FIX" />
+		<alias name="partyIdPerson" field="partyId" entity-alias="FAC" />
+		<alias name="facilityId" entity-alias="FAC" />		
+		<view-link entity-alias="FIX" rel-entity-alias="FAC">
+			<key-map field-name="facilityId"  />
+		</view-link>		
+	</view-entity>
+	
+	<view-entity entity-name="ListaAsignacionesActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta a Party Fixed Asset Assignment">
+		<member-entity entity-alias="FIX" entity-name="PartyFixedAssetAssignment" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="partyId" entity-alias="FIX" />
+		<alias name="fixedAssetId" entity-alias="FIX" />
+		<alias name="fromDate" entity-alias="FIX" />
+		<alias name="thruDate" entity-alias="FIX" />
+		<alias name="allocatedDate" entity-alias="FIX" />
+		<alias name="statusId" entity-alias="FIX" />
+		<alias name="comments" entity-alias="FIX" />
+		<alias name="firstName" entity-alias="PER" />
+		<alias name="lastName" entity-alias="PER" />		
+		<view-link entity-alias="FIX" rel-entity-alias="PER">
+			<key-map field-name="partyId" />
+		</view-link>		
+	</view-entity>  
+	
+	<entity entity-name="FixedAssetPersonaAlmacen" 
+    		package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para almacenar los permisos de un usuario sobre un almacen">
+    	<field name="partyId" type="id-ne"/>
+    	<field name="facilityId" type="id-ne"/>    	    	    
+    	<prim-key field="partyId"/>
+    	<prim-key field="facilityId"/>    	      	  	
+      	<relation type="one" fk-name="FK_DBO_PAL_PER" rel-entity-name="Person">
+        	<key-map field-name="partyId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_PAL_FAC" rel-entity-name="Facility">
+      		<key-map field-name="facilityId"/>
+      	</relation>
+    </entity>        
+    
+    <entity entity-name="FixedAssetPolizaSeguro" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para almacenar el historial de las actualizaciones de poliza de seguro">   
+        <field name="numPolizaNuevo" type="id-ne"/>
+        <field name="numPolizaAnt" type="id-ne"/>        
+        <field name="fechaDesdeNueva" type="date-time"/>
+        <field name="fechaHastaNueva" type="date-time"/>
+        <field name="fechaCambio" type="date-time"/>
+        <field name="comentario" type="comment"/>
+        <prim-key field="numPolizaNuevo"/>
+        <prim-key field="numPolizaAnt"/>        	
+    </entity>
+        
+    <view-entity entity-name="PermisoAlmacenPersonaActivo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta para obtener los permisos de los usuarios sobre los almacenes de Activo fijo">
+		<member-entity entity-alias="FIX" entity-name="FixedAssetPersonaAlmacen" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="FAC" entity-name="Facility" />
+		<alias name="partyId" entity-alias="FIX" />
+		<alias name="facilityId" entity-alias="FIX" />		
+		<alias name="firstName" entity-alias="PER" />
+		<alias name="lastName" entity-alias="PER" />
+		<alias name="facilityName" entity-alias="FAC" />		
+		<view-link entity-alias="FIX" rel-entity-alias="PER">
+			<key-map field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="FAC">
+			<key-map field-name="facilityId" />
+		</view-link>				
+	</view-entity>	 
+	
+	<entity entity-name="ResponsableActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para almacenar los permisos de un usuario sobre un almacen de control patrimonial.
+            Para gestionar el envio de notificaciones al usuario cuando algo haya entrado a este almacen">           
+        <field name="facilityId" type="id-ne"/>
+        <field name="partyId" type="id-ne"/>        
+        <prim-key field="facilityId"/>
+        <prim-key field="partyId"/>
+        <relation type="one" fk-name="FK_DBO_PER_NOT" rel-entity-name="Person">
+        	<key-map field-name="partyId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_PER_NOT_FAC" rel-entity-name="Facility">
+      		<key-map field-name="facilityId"/>
+      	</relation>        	
+    </entity>
+	
+	<entity entity-name="NotificacionActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para controlar las notificaciones a un encargado de un almacen de control patrimonial
+            cuando un pedido es recibido y este contiene articulos que se registran en control patrimonial">   
+        <field name="orderId" type="id-ne"/>
+        <field name="facilityId" type="id-ne"/>
+        <field name="shipmentId" type="id-ne"/>        
+        <field name="statusId" type="id-ne"/>               
+        <prim-key field="orderId"/>
+        <prim-key field="facilityId"/>
+        <prim-key field="shipmentId"/>        
+        <relation type="one" fk-name="NOTIFICACION_ORDEN" rel-entity-name="OrderHeader">
+        	<key-map field-name="orderId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_NOT_FAC" rel-entity-name="Facility">
+      		<key-map field-name="facilityId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_NOT_STA" rel-entity-name="StatusItem">
+      		<key-map field-name="statusId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_NOT_SHP" rel-entity-name="Shipment">
+      		<key-map field-name="shipmentId"/>
+      	</relation>        	
+      	
+    </entity>
+    
+    <view-entity entity-name="ResponsablesRecepcionActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta para obtener los responsables de las recepciones en el almacen de activo fijo">
+		<member-entity entity-alias="FIX" entity-name="ResponsableActivoFijo" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="FAC" entity-name="Facility" />
+		<alias name="partyId" entity-alias="FIX" />
+		<alias name="facilityId" entity-alias="FIX" />		
+		<alias name="firstName" entity-alias="PER" />
+		<alias name="lastName" entity-alias="PER" />
+		<alias name="facilityName" entity-alias="FAC" />		
+		<view-link entity-alias="FIX" rel-entity-alias="PER">
+			<key-map field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="FAC">
+			<key-map field-name="facilityId" />
+		</view-link>				
+	</view-entity>
+	
+	<view-entity entity-name="NotificacionPendienteRecepcionActivo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta para obtener las notificaciones pendientes de recepciones en el almacen de activo fijo">
+		<member-entity entity-alias="NOTI" entity-name="NotificacionActivoFijo" />
+		<member-entity entity-alias="PER" entity-name="ResponsableActivoFijo" />
+		<member-entity entity-alias="FAC" entity-name="Facility" />
+		<member-entity entity-alias="ORD" entity-name="OrderHeader" />
+		<member-entity entity-alias="STA" entity-name="StatusItem" />
+		<alias name="orderId" entity-alias="NOTI" />
+		<alias name="facilityId" entity-alias="NOTI" />		
+		<alias name="shipmentId" entity-alias="NOTI" />
+		<alias name="statusId" entity-alias="NOTI" />
+		<alias name="facilityName" entity-alias="FAC" />
+		<alias name="orderName" entity-alias="ORD" />
+		<alias name="orderDate" entity-alias="ORD" />
+		<alias name="description" entity-alias="STA" />
+		<alias name="partyId" entity-alias="PER" />		
+		<view-link entity-alias="NOTI" rel-entity-alias="PER">
+			<key-map field-name="facilityId" />
+		</view-link>
+		<view-link entity-alias="NOTI" rel-entity-alias="FAC">
+			<key-map field-name="facilityId" />
+		</view-link>
+		<view-link entity-alias="NOTI" rel-entity-alias="ORD">
+			<key-map field-name="orderId" />
+		</view-link>
+		<view-link entity-alias="NOTI" rel-entity-alias="STA">
+			<key-map field-name="statusId" />
+		</view-link>				
+	</view-entity>	
+	
+	<entity entity-name="HistorialBienesActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para ingresar el historial de bienes cargados al sistema en control patrimonial">   
+        <field name="fixedAssetId" type="id-ne"/>
+        <field name="idActivoAnterior" type="id-ne"/>
+        <field name="fechaAdquisicion" type="date-time"/>        
+        <field name="valorAdquisicion" type="fixed-point"/>
+        <field name="aniosVidaUtil" type="currency-amount"/>
+        <field name="fechaFinalVida" type="date-time"/>
+        <field name="depreciacionAcumulada" type="fixed-point"/>               
+        <prim-key field="fixedAssetId"/>               
+        <relation type="one" fk-name="FK_DBO_HIS_FXASS" rel-entity-name="FixedAsset">
+        	<key-map field-name="fixedAssetId"/>
+      	</relation>      	
+    </entity>
+    
+    <entity entity-name="DataImportHistorialBienes" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para importar el historial de bienes cargados al sistema en control patrimonial">   
+        <field name="fixedAssetId" type="id-ne"/>
+        <field name="idActivoAnterior" type="id-ne"/>
+        <field name="fechaAdquisicion" type="date-time"/>        
+        <field name="valorAdquisicion" type="fixed-point"/>
+        <field name="aniosVidaUtil" type="currency-amount"/>
+        <field name="fechaFinalVida" type="date-time"/>
+        <field name="depreciacionAcumulada" type="fixed-point"/>               
+        <field name="userLoginId" type="id-vlong-ne"></field> 	
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="fixedAssetId" />
+		<relation type="one" fk-name="FK_DBO_USRSESS" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+    </entity>
+    
+    <!-- Tabla de Tipo de Unidad (Vehículo) -->
+     <entity entity-name="TipoUnidadVehiculo"
+            package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla de Tipo de Unidad (Vehículo)">
+        <field name="tipoUnidadVehiculoId" type="id-ne"/>
+        <field name="descripcion" type="description"/>
+        <prim-key field="tipoUnidadVehiculoId"/>
+    </entity>
+    
+    <view-entity entity-name="ConsultarHistorialBienesActivo" package-name="com.absoluciones.controlPatrimonial"
+		title="Consulta para obtener el detalle del historial de bienes de control patrimonial">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset" />
+		<member-entity entity-alias="TYP" entity-name="FixedAssetType" />
+		<member-entity entity-alias="EDO" entity-name="EstadoFisicoActivo" />
+		<member-entity entity-alias="HIS" entity-name="HistorialBienesActivoFijo" />
+		<alias name="fixedAssetId" entity-alias="FIX" />
+		<alias name="idActivoAnterior" entity-alias="FIX" />		
+		<alias name="fixedAssetName" entity-alias="FIX" />
+		<alias name="description" entity-alias="TYP" />
+		<alias name="dateAcquired" entity-alias="FIX" />
+		<alias name="purchaseCost" entity-alias="FIX" />
+		<alias name="moneda" entity-alias="FIX" />
+		<alias name="descripcion" entity-alias="EDO" />
+		<alias name="aniosVidaUtil" entity-alias="HIS" />
+		<alias name="fechaFinalVida" entity-alias="HIS" />
+		<alias name="depreciacionAcumulada" entity-alias="HIS" />
+		<alias name="valorAdquisicion" entity-alias="HIS" />				
+		<view-link entity-alias="FIX" rel-entity-alias="TYP">
+			<key-map field-name="fixedAssetTypeId" />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="EDO">
+			<key-map field-name="edoFisicoId" />
+		</view-link>
+		<view-link entity-alias="FIX" rel-entity-alias="HIS">
+			<key-map field-name="fixedAssetId" />
+		</view-link>					
+	</view-entity>    
+    
+</entitymodel>

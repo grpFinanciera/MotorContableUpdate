@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidad Evento</title>
+	<description>Define la entidad para los eventos contables</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Jesus Rodrigo Ruiz Merlin</author>
+	<version>1.0</version>
+
+
+	<entity entity-name="EventoContable" package-name="org.opentaps.financials.motor" 
+		title="Entidad para los datos del eventos contables">
+		<field name="acctgTransTypeId" type="id-ne" />
+		<field name="predecesor" type="id"/>
+		<field name="tipoPolizaId" type="id-ne"/>
+		<field name="moduloId" type="id-ne"/>
+		<field name="descripcion" type="description" />
+		<field name="moduloDeshabilitadoId" type="id-ne"/>
+		<prim-key field="acctgTransTypeId" />
+		<relation type="one" fk-name="ACCTTEVENTO" rel-entity-name="AcctgTransType">
+			<key-map field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="TPCEVENTO" rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaId" />
+		</relation>		
+		<relation type="one" fk-name="EVENTO_MODULO" rel-entity-name="Modulo">
+			<key-map field-name="moduloId" />
+		</relation>			
+	</entity>
+	
+	<entity entity-name="SecuenciaPoliza" package-name="org.opentaps.financials.motor" 
+			title="Tabla auxiliar que lleva el conteo de las polizas generadas">
+		<field name="tipoPolizaId" type="id-ne"/>
+		<field name="anio" type="numeric"/>
+		<field name="mes" type="numeric"/>
+		<field name="secuencia" type="numeric"/>
+		 <prim-key field="tipoPolizaId"/>
+		 <prim-key field="anio"/>
+		 <prim-key field="mes"/>
+		<relation type="one" fk-name="TPOLIZA_SEUENCIA" rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaId" />
+		</relation>		
+	</entity>
+	
+	<entity entity-name="LineaContable" package-name="org.opentaps.financials.motor" 
+			title="Almacena las cuentas contables y el o los catálogos auxiliares">
+		<field name="acctgTransTypeId" type="id-ne" />
+		<field name="secuencia" type="numeric"/>
+		<field name="cuentaCargo" type="id-ne" />
+		<field name="cuentaAbono" type="id-ne" />
+		<field name="cuentaCancelar" type="id" />
+		<field name="excepcion" type="indicator"/>
+		<field name="catalogoCargo" type="id"/>
+		<field name="catalogoAbono" type="id"/>
+		<field name="descripcion" type="description" />
+		<field name="monto" type="currency-amount"/>
+		<prim-key field="acctgTransTypeId"/>
+		<prim-key field="secuencia"/>
+		<relation type="one" fk-name="ACCTT_CUENTA_CONT" rel-entity-name="AcctgTransType">
+			<key-map field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_GL_CARGO_CC" title="cargo"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaCargo" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="FK_GL_ABONO_CC" title="abono"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAbono" rel-field-name="glAccountId" />
+		</relation>						
+		<relation type="one" fk-name="FK_AUX_CARGO_CC" title="cargo"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoCargo" rel-field-name="tipoAuxiliarId" />
+		</relation>
+		<relation type="one" fk-name="FK_AUX_ABONO_CC" title="abono"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoAbono" rel-field-name="tipoAuxiliarId" />
+		</relation>				
+	</entity>
+	
+	<entity entity-name="LineaPresupuestal" package-name="org.opentaps.financials.motor" 
+			title="Almacena las cuentas presupuestales , el o los catálogos auxiliares y los momentos presupuestales">
+		<field name="acctgTransTypeId" type="id-ne" />
+		<field name="secuencia" type="numeric"/>
+		<field name="cuentaCargo" type="id-ne" />
+		<field name="cuentaAbono" type="id-ne" />
+		<field name="catalogoCargo" type="id"/>
+		<field name="catalogoAbono" type="id"/>
+		<field name="momentoCompara" type="id-ne"/>
+		<field name="momentoEjecutar1" type="id"/>
+		<field name="momentoEjecutar2" type="id"/>
+		<field name="comparacion" type="very-short" />
+		<field name="tipoMatrizId" type="id"/>
+		<field name="descripcion" type="description" />
+		<field name="monto" type="currency-amount"/>
+		<prim-key field="acctgTransTypeId"/>
+		<prim-key field="secuencia"/>
+		<relation type="one" fk-name="ACCTT_CUENTA_PRES" rel-entity-name="AcctgTransType">
+			<key-map field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_GL_CARGO_CP" title="cargo"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaCargo" rel-field-name="glAccountId" />
+		</relation>
+		<relation type="one" fk-name="FK_GL_ABONO_CP" title="abono"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAbono" rel-field-name="glAccountId" />
+		</relation>						
+		<relation type="one" fk-name="FK_AUX_CARGO_CP" title="cargo"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoCargo" rel-field-name="tipoAuxiliarId" />
+		</relation>
+		<relation type="one" fk-name="FK_AUX_ABONO_CP" title="abono"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoAbono" rel-field-name="tipoAuxiliarId" />
+		</relation>
+		<relation type="one" fk-name="FK_MCOMP_PRES" title="mcompara"
+			rel-entity-name="Momento">
+			<key-map field-name="momentoCompara" rel-field-name="momentoId" />
+		</relation>		
+		<relation type="one" fk-name="MEJECUTAR_EVENTO1" title="mejecutar1"
+			rel-entity-name="Momento">
+			<key-map field-name="momentoEjecutar1" rel-field-name="momentoId" />
+		</relation>
+		<relation type="one" fk-name="MEJECUTAR_EVENTO2" title="mejecutar2"
+			rel-entity-name="Momento">
+			<key-map field-name="momentoEjecutar2" rel-field-name="momentoId" />
+		</relation>
+		<relation type="one" fk-name="TIPO_MATRIZ_EVENTO"
+			rel-entity-name="TipoMatriz">
+			<key-map field-name="tipoMatrizId" />
+		</relation>		
+	</entity>
+	
+	<entity entity-name="TipoAuxiliar" package-name="org.opentaps.financials.motor"
+		title="Almacena el tipo de auxiliar y ayuda para mostrar un lookup">
+		<field name="tipoAuxiliarId" type="id-ne"/>
+		<field name="entidad" type="id"/>
+		<field name="tipoEntidad" type="id"/>
+		<field name="descripcion" type="description"/>
+		<field name="urlBusqueda" type="long-varchar"/>
+		<field name="nombreLooukup" type="long-varchar"/>
+		<field name="tipo" type="indicator"/>
+		<prim-key field="tipoAuxiliarId"/>
+	</entity>
+	
+	<entity entity-name="TipoMatriz" package-name="org.opentaps.financials.motor"
+		title="Tipo de Matriz de Conversión">
+		<field name="tipoMatrizId" type="id-ne"/>
+		<field name="descripcion" type="description"/>
+		<prim-key field="tipoMatrizId"/>
+	</entity>
+	
+	<view-entity entity-name="CveMontoMomentoCargoAbono" 
+    	package-name="org.opentaps.financials.motor" 
+    	title="Vista para obtener suma de las claves presupuestales por momento y tipo de movimiento (cargo, abono)">
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="MO" entity-name="Momento" />
+    	
+    	<alias name="momentoId" entity-alias="MO" group-by="true"/>
+    	<alias name="amount" entity-alias="ATE" function="sum"/>
+    	<alias name="debitCreditFlag" entity-alias="ATE" group-by="true"/>
+    	<alias name="clavePresupuestal" entity-alias="ATE" group-by="true"/>
+    	<alias name="fechaPresupuestal" entity-alias="ATE" group-by="true" />
+    	
+    	<!-- WHERE -->
+    	<alias name="acctgTransId" entity-alias="ATE" group-by="true"/>
+    	
+    	<view-link entity-alias="ATE" rel-entity-alias="MO">
+    		<key-map field-name="glAccountId" rel-field-name="cuentaAsociada"/>
+    	</view-link>
+    </view-entity>
+    
+	<view-entity entity-name="CveMontoMomento" 
+    	package-name="org.opentaps.financials.motor" 
+    	title="Vista que agrupa la clave presupuestal por momento y monto ">
+    	
+    	<member-entity entity-alias="CVEMMCA" entity-name="CveMontoMomentoCargoAbono" />
+    	
+    	<alias name="momentoId" entity-alias="CVEMMCA" group-by="true"/>
+    	<alias name="amount" entity-alias="CVEMMCA" group-by="true"/>
+    	<alias name="clavePresupuestal" entity-alias="CVEMMCA" group-by="true"/>
+    	<alias name="fechaPresupuestal" entity-alias="CVEMMCA" group-by="true"/>
+    	
+    	<!-- WHERE -->
+    	<alias name="acctgTransId" entity-alias="CVEMMCA" group-by="true"/>
+	</view-entity> 
+	
+	<view-entity entity-name="CveMontoPoliza" 
+    	package-name="org.opentaps.financials.motor" 
+    	title="Vista que agrupa la clave presupuestal por monto de una póliza">
+    	
+    	<member-entity entity-alias="CVEMM" entity-name="CveMontoMomento" />
+    	
+    	<alias name="amount" entity-alias="CVEMM" group-by="true"/>
+    	<alias name="clavePresupuestal" entity-alias="CVEMM" group-by="true"/>
+    	<alias name="fechaPresupuestal" entity-alias="CVEMM" group-by="true"/>
+    	
+    	<!-- WHERE -->
+    	<alias name="acctgTransId" entity-alias="CVEMM" group-by="true"/>
+	</view-entity> 
+	
+</entitymodel>

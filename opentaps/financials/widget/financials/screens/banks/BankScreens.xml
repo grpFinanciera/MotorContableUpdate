@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @author Ali Afzal Malik (ali@opensourcestrategies.com)
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="banks" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>                
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="gestionCuentasBancos">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="GestionCuentasBancos"/>  
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/gestionCuentasBancos.bsh"/>
+                <entity-condition entity-name="Sucursal" list="sucursales">                   					
+					 <order-by field-name="nombreSucursal"/>
+                </entity-condition>                
+            </actions>            
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_GESTIONBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://financials/webapp/financials/tesoreria/gestionCuentasBancos.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                      <!-- <platform-specific>
+                          <html><html-template location="component://financials/webapp/financials/tesoreria/gestionCuentasBancos.ftl"/></html>
+                      </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="traspasosBancosForm">
+        <section>
+            <actions>
+                <set field="traspasosBancosFormTarget" value="traspasosBancos"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/getCuentasPorBanco.bsh"/>
+                <entity-condition entity-name="CuentaBancaria" list="cuentas">
+					 <order-by field-name="nombreCuenta"/>
+                </entity-condition>
+            </actions>    
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="${uiLabelMap.TraspasoCuentasBancarias}">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/tesoreria/traspasosBancosForm.ftl"/></html>
+                                    </platform-specific>
+                                </frame-container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                        <!-- <frame-container title="${uiLabelMap.TraspasoCuentasBancarias}">
+                          <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/tesoreria/traspasosBancosForm.ftl"/></html>
+                          </platform-specific>
+                        </frame-container> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>            
+    
+    <screen name="consultaTraspasos">
+        <section>
+        	<actions>
+        		<set field="pageTitleLabel" value="ConsultaTraspasos"/>  
+                <java location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="buscarTraspasos"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_CTRASPASOSBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="${uiLabelMap.FinancialsTransaction}">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/tesoreria/buscaTraspasos.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                                <platform-specific>
+                                   <html><html-template location="component://financials/webapp/financials/tesoreria/listaTraspasos.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    	<!-- <frame-container title="${uiLabelMap.BuscarTraspasos}">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/tesoreria/buscaTraspasos.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/tesoreria/listaTraspasos.ftl"/></html>
+                        </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="consultaCuentas">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Buscar cuentas bancarias"/> 
+                <java location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="buscarCuentasBanco"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/getCuentasPorBanco.bsh"/>
+                <entity-condition entity-name="CuentaBancaria" list="cuentas">
+					 <order-by field-name="nombreCuenta"/>
+                </entity-condition>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_CCUENTASBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="${uiLabelMap.Banco}">
+                                    <platform-specific><html>
+                                            <html-template location="component://financials/webapp/financials/tesoreria/buscaCuentasBanco.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                                    <platform-specific>
+                                       <html><html-template location="component://financials/webapp/financials/tesoreria/listaCuentasBanco.ftl"/></html>
+                                    </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    	<!-- <frame-container title="${uiLabelMap.BuscarCuentasBanco}">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/tesoreria/buscaCuentasBanco.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/tesoreria/listaCuentasBanco.ftl"/></html>
+                        </platform-specific> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="traspasosPatrimoniales">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Traspasos patrimoniales"/>  
+                <set field="sectionHeaderUiLabel" value="Traspasos patrimoniales"/> 
+                <set field="traspasosPatrimoniales" value="traspasosPatrimoniales"/> 
+<!--                 <java location="com.opensourcestrategies.financials.tesoreria.TraspasoPatrimonial" invoke="crearTraspaso"/> -->
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/traspasoP.bsh"/>             
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSPBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="Traspasos">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/tesoreria/creaTraspasoP.ftl"/>
+                                    </html></platform-specific>
+                                </frame-container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                            
+<!--                        <frame-container title="Traspasos">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/tesoreria/creaTraspasoP.ftl"/>
+                            </html></platform-specific>
+                        </frame-container> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyBankScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Bancos"/>  
+                <set field="sectionHeaderUiLabel" value="Bancos"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://financials/webapp/financials/tesoreria/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="buscarCuentaEditar">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Buscar cuenta bancaria"/>  
+                <set field="sectionHeaderUiLabel" value="Buscar cuenta bancaria"/>  
+                <java location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="buscarCuentasBanco"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/getCuentasPorBanco.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://financials/webapp/financials/tesoreria/consultaCuentasEditar.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/tesoreria/listaCuentasEditar.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verEditarCuenta">
+        <section>
+        	<actions>
+                <set field="sectionHeaderUiLabel" value="Datos de cuenta bancaria"/>                 
+                <set field="pageTitleLabel" value="Editar cuenta bancaria"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/muestraEditarCuenta.bsh"/>
+                <entity-condition entity-name="Sucursal" list="sucursales">                   					
+					 <order-by field-name="nombreSucursal"/>
+                </entity-condition>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <!-- <html-template location="component://financials/webapp/financials/transactions/acctgTransOptions.ftl"/> -->
+                           </html></platform-specific>                   
+							 <!--<include-form name="viewAcctgTransPolizasLista" location="component://financials/widget/financials/forms/transactions/TransactionsForms.xml"/>-->
+                        </container>
+                       
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/tesoreria/editarCuentaBancaria.ftl"/></html>
+                        </platform-specific>                        
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="asignarCuentaBancariaUsuario">
+        <section>
+            <actions>
+                <set field="traspasosBancosFormTarget" value="traspasosBancos"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/asignarCuentaBancariaUsuario.bsh"/>
+                <entity-condition entity-name="CuentaBancaria" list="cuentas">
+					 <order-by field-name="nombreCuenta"/>
+                </entity-condition>
+            </actions>    
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="FINANCIALS_BANK_OPCIONESGRPBNK_TRASPASOSBNK" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <widgets>
+                                <frame-container title="${uiLabelMap.asignarCuentaBancariaUsuario}">
+                                    <platform-specific><html>
+                                        <html-template location="component://financials/webapp/financials/tesoreria/asignarCuentaBancariaUsuario.ftl"/></html>
+                                    </platform-specific>
+                                </frame-container>
+                            </widgets>
+                            <fail-widgets>
+                                <include-screen name="PermissionErrorScreen" location="component://financials/widget/financials/screens/common/CommonScreens.xml"/>
+                            </fail-widgets>
+                        </section>
+                        <!-- <frame-container title="${uiLabelMap.TraspasoCuentasBancarias}">
+                          <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/tesoreria/traspasosBancosForm.ftl"/></html>
+                          </platform-specific>
+                        </frame-container> -->
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

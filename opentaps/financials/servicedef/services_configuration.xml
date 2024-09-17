@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Accounting Services - Miscellaneous</description>
+    <vendor>Open Source Strategies, Inc.</vendor>
+    <version>1.0</version>
+        
+    <!-- these services are for GlAccountTypeDefault -->
+    <service name="createGlAccountTypeDefault" engine="simple" default-entity-name="GlAccountTypeDefault"
+            location="component://financials/script/com/opensourcestrategies/financials/configuration/ConfigurationServices.xml" invoke="createGlAccountTypeDefault">        
+        <description>Create an GlAccountTypeDefault</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="all" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="updateGlAccountTypeDefault" engine="simple" default-entity-name="GlAccountTypeDefault"
+            location="component://financials/script/com/opensourcestrategies/financials/configuration/ConfigurationServices.xml" invoke="updateGlAccountTypeDefault">        
+        <description>Update an existing GlAccountTypeDefault</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="all" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="financials.updatePaymentMethod" engine="simple" default-entity-name="PaymentMethod"
+            location="component://financials/script/com/opensourcestrategies/financials/configuration/ConfigurationServices.xml" invoke="updatePaymentMethod">        
+        <description>Update an existing Payment Method's</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <attribute type="String" mode="IN" name="glAccountId" optional="true"/>
+        <attribute type="String" mode="IN" name="expirePaymentMethod" optional="true"/><!--parameter passed to set thruDate field to expire PaymentMethod-->
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+    </service>
+    
+    <service name="removeGlAccountFromOrganization" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="removeGlAccountFromOrganization">
+        <description>Removes a GlAccount from an organization's chart of accounts by setting it to be expired.</description>
+        <attribute name="glAccountId" type="String" mode="IN"/>
+        <attribute name="organizationPartyId" type="String" mode="IN"/>
+    </service>
+    
+    <!-- <service name="addNewGlAccount" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="addNewGlAccount">
+        <description>Adds a new Gl Account and then associate it with the organizationPartyId in GlAccountOrganization.
+        Note that accountCode will be used to set both glAccountId and account code.  If the account code already exists,
+        it will return an error.</description>
+        <attribute name="accountCode" type="String" mode="IN" optional="false"/>
+        <attribute name="accountName" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="glAccountClassTypeKey" type="String" mode="IN" optional="false"/>
+        <attribute name="glResourceTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="parentGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="postedBalance" type="Double" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="updateExistingGlAccount" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateExistingGlAccount">
+        <description>Updates an exiting gl account. It delegates work to the ofbiz updateGlAccount service.</description>
+        <attribute name="glAccountId" type="String" mode="IN" optional="false"/>
+        <attribute name="glAccountClassTypeKey" type="String" mode="IN" optional="false"/>
+        <attribute name="parentGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="accountName" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+	</service>-->
+	
+	<service name="addNewGlAccount" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="addNewGlAccount">
+        <description>Adds a new Gl Account and then associate it with the organizationPartyId in GlAccountOrganization.
+        Note that accountCode will be used to set both glAccountId and account code.  If the account code already exists,
+        it will return an error.</description>
+        <attribute name="accountCode" type="String" mode="IN" optional="false"/>
+        <attribute name="accountName" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="glAccountClassTypeKey" type="String" mode="IN" optional="false"/>
+        <attribute name="glResourceTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="parentGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="postedBalance" type="Double" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoCuentaId" type="String" mode="IN" optional="true"/>
+        <attribute name="siglas" type="String" mode="IN" optional="true"/>
+        <attribute name="newAccount" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="cambiarEstructura" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="cambiarEstructura">
+        <description>Se cambia la estructura de la clave.</description>
+        <attribute name="glAccountId" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="newGlAccountId" type="String" mode="IN" optional="false"/>
+        <attribute name="cuentaPredecerora" type="String" mode="IN" optional="true"/>
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+    </service>
+    
+    <service name="updateExistingGlAccount" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateExistingGlAccount">
+        <description>Updates an exiting gl account. It delegates work to the ofbiz updateGlAccount service.</description>
+        <attribute name="glAccountId" type="String" mode="IN" optional="false"/>
+        <attribute name="glAccountClassTypeKey" type="String" mode="IN" optional="false"/>
+        <attribute name="parentGlAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="accountName" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="siglas" type="String" mode="IN" optional="true"/>
+	</service>
+
+    <service name="financials.createPaymentMethod" engine="simple" default-entity-name="PaymentMethod"
+            location="component://financials/script/com/opensourcestrategies/financials/configuration/ConfigurationServices.xml" invoke="createPaymentMethod">        
+        <description>Create new PaymentMethod</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="OUT" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+        
+    <service name="financials.updatePartyAcctgPreference" default-entity-name="PartyAcctgPreference" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updatePartyAcctgPreference" auth="true">
+        <description>Update PartyAcctgPreference for an organization</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+
+    <service name="addGlAccountToOrganization" default-entity-name="GlAccountOrganization" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="addGlAccountToOrganization" auth="true">
+        <description>Create or Update a GlAccount record</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+
+    <!-- <service name="createAccountingTag" default-entity-name="Enumeration" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="createAccountingTag" auth="true">
+        <description>Creates an accounting tag Enumeration record</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="enumTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="enumCode" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="updateAccountingTag" default-entity-name="Enumeration" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateAccountingTag" auth="true">
+        <description>Updates an accounting tag Enumeration record</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="enumCode" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+    </service>-->
+    
+    <service name="createAccountingTag" default-entity-name="Enumeration" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="createAccountingTag" auth="true">
+        <description>Creates an accounting tag Enumeration record</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <!-- <auto-attributes include="pk" mode="IN" optional="true"/>-->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="enumTypeId" type="String" mode="IN" optional="false" description="Clasificación"/>
+        <attribute name="enumCode" type="String" mode="IN" optional="false" description="Nombre"/>
+        <attribute name="description" type="String" mode="IN" optional="false" description="Descripción"/>
+        <attribute name="nivelId" type="String" mode="IN" optional="false" description="Nivel"/>
+        <attribute name="parentEnumId" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaIni" type="String" mode="IN" optional="false" description="Desde"/>
+        <attribute name="fechaFi" type="String" mode="IN" optional="false" description="Hasta"/>
+    </service>
+    
+    <service name="crearCuentaBanco" default-entity-name="CuentaBancaria" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="crearCuentaBanco" auth="true">
+        <description>Crear una cuenta de banco</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <!-- <auto-attributes include="pk" mode="IN" optional="true"/>-->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="bancoId" type="String" mode="IN" optional="false"/>
+        <attribute name="sucursalId" type="String" mode="IN" optional="false"/>        
+        <attribute name="nombreCuenta" type="String" mode="IN" optional="true"/>
+        <attribute name="numeroCuenta" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcionCuenta" type="String" mode="IN" optional="true"/>
+        <attribute name="montoCuenta" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="currency" type="String" mode="IN" optional="false"/>
+        <attribute name="periodo" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="tipoCuentaId" type="String" mode="IN" optional="true"/>
+        <attribute name="usoCuentaId" type="String" mode="IN" optional="true"/>
+            
+    </service>
+    
+    
+    <service name="traspasosBancos" default-entity-name="CuentaBancaria" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="traspasosBancos" auth="true">
+        <description>Crear traspasos entre cuentas bancarias y contables</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <!-- <auto-attributes include="pk" mode="IN" optional="true"/>-->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <implements service="lineasContables"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Nombre del evento"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/>
+        <attribute name="moneda" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false" />
+        <attribute name="acctgTransId" type="String" mode="OUT" optional="false"/>
+<!--         <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/> -->
+<!--         <attribute name="bancoIdDestino" type="String" mode="IN" optional="false"/> -->
+<!--         <attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/> -->
+<!--         <attribute name="cuentaDestino" type="String" mode="IN" optional="false"/>                 -->
+<!--         <attribute name="idTipoDoc" type="String" mode="IN" optional="false"/> --> 
+<!--         <attribute name="id_concepto_sub" type="String" mode="IN" optional="true"/> --> 
+<!--         <attribute name="amount" type="BigDecimal" mode="IN" optional="false"/> -->
+<!--         <attribute name="listaTrans" mode="OUT" type="java.util.List" optional="false"/>                             -->
+    </service>
+
+    <service name="traspasosPatrimonio" default-entity-name="CuentaBancaria" engine="java"
+            location="com.opensourcestrategies.financials.tesoreria.TraspasoPatrimonial" invoke="crearTraspaso" auth="true">
+        <description>Crear traspasos patrimoniales</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <!-- <auto-attributes include="pk" mode="IN" optional="true"/>-->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <implements service="lineasContables"/>
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Nombre del evento"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false" description="Descripción"/>
+        <attribute name="moneda" type="String" mode="IN" optional="true"/>
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false" description="Fecha contable" />
+        <attribute name="acctgTransId" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="updateAccountingTag" default-entity-name="Enumeration" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateAccountingTag" auth="true">
+        <description>Updates an accounting tag Enumeration record</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="enumCode" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+        <attribute name="niv" type="String" mode="IN" optional="false"/>
+        <attribute name="parentEnumId" type="String" mode="IN"  optional="true"/>
+        <attribute name="fechaIn" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaF" type="String" mode="IN"  optional="false"/>
+    </service>
+    
+    <service name="deleteAccountingTag" default-entity-name="Enumeration" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="deleteAccountingTag" auth="true">
+        <description>Deletes an accounting tag Enumeration record, this will only works if the tag is not in use in any other entity</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="updateAccountingTagUsage" default-entity-name="AcctgTagEnumType" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateAccountingTagUsage" auth="true">
+        <description>Updates an accounting tag usage record for an organization</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+
+    <service name="updateAccountingTagPostingCheck" default-entity-name="AcctgTagPostingCheck" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateAccountingTagPostingCheck" auth="true">
+        <description>Updates or creates the accounting tag posting check record for an organization</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- Servicios para la estructura de clasificaciones -->    
+     <service name="updateClassificationTag" default-entity-name="EstructuraClave" engine="java"
+            location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="updateClassificationTag" auth="true">
+        <description>Updates or creates the classification tag for an organization</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>        
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="customTimePeriodYear" type="String" mode="IN" optional="false"/>
+    </service>
+    
+     <!-- Servicio para el Traspaso Presupuestal JRRM -->
+    <service name="traspasos" default-entity-name="ControlPresupuestal" engine="java"
+            location="com.opensourcestrategies.financials.transactions.TransactionServices" invoke="traspasoMensual" auth="true" transaction-timeout="6000">
+        <description>Traspaso Mensual</description>
+        <required-permissions join-type="AND">
+            <check-permission permission="FINANCIALS" action="_CONFIG"/>
+        </required-permissions>
+        <!-- <auto-attributes include="pk" mode="IN" optional="true"/>-->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="mesId" type="String" mode="IN" optional="true"/>
+        <attribute name="enumCode" type="String" mode="IN" optional="true"/>       
+    </service>
+    
+    <!-- Servicio para crear un evento -->
+    <service name="crearEventos" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="crearEvento">
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="idTipoDoc" mode="IN" type="String" optional="true"/>
+        <attribute name="descripcionDoc" mode="IN" type="String" optional="true"/>
+        <attribute name="moduloId" mode="IN" type="String" optional="true" />
+        <attribute name="cuentaCargo" mode="IN" type="String" optional="true"/>
+        <attribute name="cuentaAbono" mode="IN" type="String" optional="true" />
+        <attribute name="cuentaCargoPatri" mode="IN" type="String" optional="true"/>
+        <attribute name="cuentaAbonoPatri" mode="IN" type="String" optional="true" />
+        <attribute name="tipoPolizaIdP" mode="IN" type="String" optional="true"/>
+        <attribute name="tipoPolizaIdC" mode="IN" type="String" optional="true"/>  
+        <attribute name="referenciaId" mode="IN" type="String" optional="true"/>
+        <attribute name="tipoMatrizId" mode="IN" type="String" optional="true"/>
+        <attribute name="auxiliarCargoId" mode="IN" type="String" optional="true"/>
+        <attribute name="auxiliarAbonoId" mode="IN" type="String" optional="true"/>
+        <attribute name="comparacionId" mode="IN" type="String" optional="true"/>
+        <attribute name="predecesorId" mode="IN" type="String" optional="true"/>
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+    	<attribute name="documento" mode="OUT" type="String" optional="false"/>
+    </service> 
+    
+    <!-- Servicio para afectacion compensada de egresos -->
+    <service name="ACompensadaE" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.transactions.AfectacionPresupuestal" invoke="creaAfectacion" transaction-timeout="1500" >
+        <implements service="clasificacionesPresup"/>
+        <implements service="afectacionClasificacionesPresup"/>
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="performFind" mode="IN" type="String" optional="true" />
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true"/>
+        <attribute name="description" mode="IN" type="String" optional="true" />
+        <attribute name="agrupadorP" mode="IN" type="String" optional="true" />
+        <attribute name="monto" type="java.math.BigDecimal" mode="IN" optional="true"/>
+        <attribute name="currency" mode="IN" type="String" optional="true" />
+        <attribute name="perdiodoIR" mode="IN" type="String" optional="true" />
+        <attribute name="perdiodoIA" mode="IN" type="String" optional="true" />
+        <attribute name="tipoClave" mode="IN" type="String" optional="true" />
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="true"/>
+        <attribute name="datos" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>	
+        <attribute name="listDetalle" mode="OUT" type="java.util.List" optional="true"/>  
+        <attribute name="acctgTransId" type="String" mode="OUT" optional="true"/>	
+    </service>    
+    
+    <service name="servicioPatrimonio" engine="java" location="com.opensourcestrategies.financials.transactions.CrearOperacionPatrimonial" invoke="creaPatrimonio">
+        <description>Creación de la Operación Patrimonial</description>
+        <implements service="lineasContables"/>
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="true"/>
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="false" description="Descripción"/>
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="currencyUomId" type="String" mode="IN" optional="false" description="Tipo de moneda" />
+        <attribute name="acctgTransTypeId" type="String" mode="IN" optional="false" description="Nombre del evento" />
+        <attribute name="acctgTransId" type="String" mode="OUT" optional="true" />  
+    </service>
+    
+    <service name="asignarCuentaBancaria" engine="java" location="com.opensourcestrategies.financials.tesoreria.TesoreriaServices" invoke="asignarCuentaBancaria" auth="true">
+        <description>Crear traspasos entre cuentas bancarias y contables</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false" description="Usuario"/>
+        <attribute name="cuenta" type="String" mode="IN" optional="false" description="Cuenta"/>                                    
+    </service>
+    
+    <!-- Servicio para agregar firmantes -->
+    <service name="AgregarFirmante" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.configuration.AgregarFirmantes" invoke="agregarFirmante">
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="firmanteId" mode="INOUT" type="String" optional="false"/>        
+        <attribute name="reporteId" mode="INOUT" type="String" optional="false"/>        
+    </service>
+    
+    <service name="actualizarMatriz" engine="java"
+            location="com.opensourcestrategies.financials.configuration.EditarMatriz" invoke="actualizarMatriz" transaction-timeout="6000">
+        <description>Servicio para actualizar los campos de una matriz</description>
+        <attribute name="tipoMatriz" type="String" mode="INOUT" optional="true"/>
+        <attribute name="matrizId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="nombreCog" type="String" mode="INOUT" optional="true"/>
+        <attribute name="nombreCri" type="String" mode="INOUT" optional="true"/>
+        <attribute name="cog" type="String" mode="INOUT" optional="true"/>
+        <attribute name="cri" type="String" mode="INOUT" optional="true"/>
+        <attribute name="tipoGasto" type="String" mode="INOUT" optional="true"/>
+        <attribute name="cargo" type="String" mode="INOUT" optional="true"/>
+        <attribute name="cargo" type="String" mode="INOUT" optional="true"/>                
+        <attribute name="matrizIdMap" type="Map" mode="IN" optional="true" string-map-prefix="matrizId_o_"/>
+        <attribute name="cogMap" type="Map" mode="IN" optional="false" string-map-prefix="cog_o_"/>
+        <attribute name="criMap" type="Map" mode="IN" optional="true" string-map-prefix="cri_o_"/>
+        <attribute name="tipoGastoMap" type="Map" mode="IN" optional="false" string-map-prefix="tipoGasto_o_"/>
+        <attribute name="caracteristicasMap" type="Map" mode="IN" optional="false" string-map-prefix="caracteristicas_o_"/>        
+        <attribute name="medioPagoMap" type="Map" mode="IN" optional="true" string-map-prefix="medioPago_o_"/>
+        <attribute name="cargoMap" type="Map" mode="IN" optional="true" string-map-prefix="cargo_o_"/>
+        <attribute name="abonoMap" type="Map" mode="IN" optional="true" string-map-prefix="abono_o_"/>
+        <attribute name="matrizIdOriginal" type="Map" mode="IN" optional="true" string-map-prefix="matrizIdOriginal_o_"/>
+        <attribute name="cogOriginal" type="Map" mode="IN" optional="false" string-map-prefix="cogOriginal_o_"/>
+        <attribute name="criOriginal" type="Map" mode="IN" optional="true" string-map-prefix="criOriginal_o_"/>
+        <attribute name="tipoGastoOriginal" type="Map" mode="IN" optional="false" string-map-prefix="tipoGastoOriginal_o_"/>
+        <attribute name="matrizIngresoId" type="Map" mode="IN" optional="false" string-map-prefix="matrizIngresoId_o_"/>
+        <attribute name="matrizEgresoId" type="Map" mode="IN" optional="false" string-map-prefix="matrizEgresoId_o_"/>
+    </service>
+	
+    <service name="crearNuevoAuxiliar" engine="java"
+        location="com.opensourcestrategies.financials.configuration.TipoAuxiliar" invoke="crearNuevoTipoAuxiliar" auth="true">
+        <description>Crear un nuevo tipo de auxiliar</description>
+        <attribute name="tipoAuxiliarId" type="String" mode="IN" optional="false" description="Identificador del tipo de auxiliar"/>
+        <attribute name="entidad" type="String" mode="IN" optional="false"/>        
+        <attribute name="descripcion" type="String" mode="IN" optional="false" description="Descripción"/>
+        <attribute name="tipoAuxiliar" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <!-- RUME -->
+    <service name="guardaTransSinEvento" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.transactions.TransaccionSinEvento" invoke="guardaTransSinEvento">
+        <attribute name="organizationPartyId" mode="IN" type="String" optional="true"/>
+        <attribute name="userLogin" mode="IN" type="org.ofbiz.entity.GenericValue" optional="true"/>
+        <attribute name="fechaContable" mode="IN" type="java.sql.Timestamp" optional="false" description="Fecha contable"/>
+        <attribute name="descripcion" mode="IN" type="String" optional="false" description="Descripción"/>
+        <attribute name="currency" mode="IN" type="String" optional="false" />
+        <attribute name="tipoPolizaId" mode="IN" type="String" optional="false" />
+        <attribute name="acctgTransId" mode="OUT" type="String" optional="true" />
+    </service>
+    
+    <service name="agregaEntryTransSinEvento" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.transactions.TransaccionSinEvento" invoke="agregaEntryTransSinEvento">
+    	<attribute name="acctgTransId" mode="INOUT" type="String" optional="true" />
+		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+		<attribute name="cuenta" mode="IN" type="String" optional="false" />
+		<attribute name="tipoAuxiliar" mode="IN" type="String" optional="true" />
+		<attribute name="auxiliar" mode="IN" type="String" optional="true" />
+		<attribute name="cuentaBancariaId" mode="IN" type="String" optional="true" />
+		<attribute name="isDebitCreditFlag" mode="IN" type="String" optional="false" />
+	</service>
+	
+	<service name="afectaTransSinEvento" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.transactions.TransaccionSinEvento" invoke="afectaTransSinEvento">
+    	<attribute name="acctgTransId" mode="INOUT" type="String" optional="true" />
+    	<attribute name="organizationPartyId" mode="IN" type="String" />
+	</service>	
+    
+    <service name="crearNuevaClavePres" engine="java"
+        location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="crearNuevaClavePres" auth="true">
+        <description>Crear una nueva clave presupuestal</description>
+        <implements service="clasificacionesPresup"/>
+        <attribute name="ingresoEgreso" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="desactivarClavePres" engine="java"
+        location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="desactivarClavePres" auth="true">
+        <description>Desactivar nueva clave presupuestal</description>
+        <attribute name="clavePresupuestal" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClave" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="actualizaSufPresupuestal" engine="java" export="true"
+    		location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="actualizaSufPresupuestal">
+        <attribute name="flag" mode="IN" type="String" optional="false" />
+    </service>
+    
+    <service name="agregarClaveTipoCambio" engine="java" 
+    		location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="agregarClaveTipoCambio">
+    	<implements service="clasificacionesPresup"/>	
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>	
+    </service>
+    
+    <service name="agregarClavePenalizacion" engine="java" 
+    		location="com.opensourcestrategies.financials.configuration.ConfigurationServices" invoke="agregarClavePenalizacion">
+    	<implements service="clasificacionesPresup"/>	
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>	
+    </service>
+    
+</services>

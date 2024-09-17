@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="order" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+	<screen name="crearRequisicion">
+        <section>
+            <actions>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/crearRequisicion.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/crearRequisicion.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verRequisicion">
+		<section>
+            <actions>
+                <set field="requisicionId"  value="${parameters.requisicionId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/requisicion/editarRequisicion.bsh"/>
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="obtenerDetalleRequisicion"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/verRequisicion.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <screen name="editarRequisicion">
+		<section>
+            <actions>
+                <set field="requisicionId"  value="${parameters.requisicionId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/order/crearRequisicion.bsh"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/requisicion/requisicion.bsh"/>
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="obtenerDetalleRequisicion"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/order/editarRequisicion.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Buscar Requisicion -->
+    <screen name="buscarRequisicion">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchBuscarRequisicion"/>  
+                <set field="sectionHeaderUiLabel" value="PurchBuscarRequisicion"/>  
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="buscaRequisicion"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/consultaRequisicion.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/order/listRequisicion.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Requisiciones Pendientes -->
+    <screen name="requisicionesPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchRequisicionesPendientes"/>  
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="requisicionesPendientes"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/order/listRequisicionesPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Productos Pendientes -->
+    <screen name="productosPentientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchProdsPendientesCompra"/>  
+                <set field="sectionHeaderUiLabel" value="Productos Pendientes de Compra"/>  
+                <java location="org.opentaps.purchasing.order.ConsultarRequisicion" invoke="productosPendites"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Productos">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/productosPendientes.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

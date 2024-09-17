@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Momento</title>
+    <description>Entidad para almacenar el catálogo de Momentos Contables</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+	<entity entity-name="Momento" package-name="org.opentaps.dataimport"
+		title="Almacena catalogo de momentos contables de Egresos e Ingresos">
+		<field name="momentoId" type="id" />
+		<field name="description" type="description" />
+		<field name="cuentaAsociada" type="id-ne"></field>
+		<prim-key field="momentoId" />
+		<relation type="one" fk-name="MGCAQ" title="mgcaq"
+			rel-entity-name="GlAccount">
+			<key-map field-name="cuentaAsociada" rel-field-name="glAccountId" />
+		</relation>
+	</entity>
+    
+</entitymodel>

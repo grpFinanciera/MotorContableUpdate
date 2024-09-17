@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+  <!-- ========================================================= -->
+  <!-- ======================== Defaults ======================= -->
+  <!-- ========================================================= -->
+    <title>Customer Data Import Entities</title>
+    <description>Defines intermediate entities for importing supplier data</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Si Chen (sichen@opensourcestrategies.com)</author>
+    <version>1.0</version>
+
+    <!-- ================================= -->
+    <!-- org.opentaps.dataimport.customers -->  
+    <!-- ================================= -->
+
+    <!-- for precise definitions of the field types see the file framework/entity/fieldtype/fieldtypeXXX.xml for your database XXX -->
+
+    <entity entity-name="DataImportSupplier"
+        package-name="org.opentaps.dataimport.suppliers"
+        title="Intermediate import entity for supplier data.">
+        <field name="renglon" type="numeric" />
+        <field name="supplierId" type="id-ne"/>
+        <field name="tipo" type="id-ne"/>
+        <field name="supplierName" type="name"/>
+        <field name="attnName" type="name"/>
+        <field name="address1" type="long-varchar"/>
+        <field name="address2" type="long-varchar"/>
+        <field name="city" type="name"></field>
+        <field name="stateProvinceGeoId" type="id">
+        	<description>Must match OFBiz Geo.geoId</description>
+        </field>        
+        <!--Empresa-->
+        <field name="regimenId" type="id-ne"/>
+        <field name="tamanioAuxiliarId" type="id-ne"/>
+        <field name="sectorEconomicoId" type="id-ne"/>
+        <field name="origenCapitalId" type="id-ne"/>
+		<field name="saldoInicial" type="currency-amount-precise"/>
+        <field name="rupc" type="short-varchar"/>
+		<field name="giroEmpresa" type="very-long"/>
+		<field name="nacionalExtranjero" type="short-varchar"/>
+		<field name="correoElectronico" type="short-varchar"/>
+		<field name="paginaWeb" type="short-varchar"/>
+		<field name="numActaConstitutiva" type="short-varchar"/>
+		<field name="nombreNotarioPublico" type="long-varchar"/>
+		<field name="numNotaria" type="short-varchar"/>
+		<field name="nombreApoderadoLegal" type="long-varchar"/>
+		<field name="tipoIdApoderadoLegal" type="short-varchar"/>
+		<field name="numIdApoderadoLegal" type="short-varchar"/>
+		<field name="numTestimonioApoderado" type="short-varchar"/>
+		<field name="nombreNotarioApoderado" type="long-varchar"/>
+		<field name="numNotariaApoderado" type="short-varchar"/>
+		<field name="curpApoderadoLegal" type="short-varchar"/>
+		<field name="nombreRepLegal" type="long-varchar"/>
+		<field name="tipoIdRepLegal" type="short-varchar"/>
+		<field name="numIdRepLegal" type="short-varchar"/>
+		<field name="numTestimonioRepLegal" type="short-varchar"/>
+		<field name="nombreNotarioRepLegal" type="long-varchar"/>
+		<field name="numNotariaRepLegal" type="short-varchar"/>
+		<field name="curpRepLegal" type="short-varchar"/>
+		<field name="nombreAdministrador" type="long-varchar"/>
+		<field name="tipoIdAdministrador" type="short-varchar"/>
+		<field name="numIdAdministrador" type="short-varchar"/>
+		<field name="numTestimonioAdministrador" type="short-varchar"/>
+		<field name="nombreNotarioAdministrador" type="long-varchar"/>
+		<field name="numNotariaAdministrador" type="short-varchar"/>
+		<field name="curpAdministrador" type="short-varchar"/>
+            
+        <field name="postalCode" type="short-varchar"/>
+        <field name="postalCodeExt" type="short-varchar"/>
+        <field name="stateProvinceGeoName" type="name"/>
+        <field name="countryGeoId" type="id">
+            <description>Must match OFBiz Geo.geoId</description>
+        </field>
+        <field name="primaryPhoneCountryCode" type="very-short"/>
+        <field name="primaryPhoneAreaCode" type="very-short"/>
+        <field name="primaryPhoneNumber" type="short-varchar"/>
+        <field name="primaryPhoneExtension" type="long-varchar"/>
+        <field name="secondaryPhoneCountryCode" type="very-short"/>
+        <field name="secondaryPhoneAreaCode" type="very-short"/>
+        <field name="secondaryPhoneNumber" type="short-varchar"/>
+        <field name="secondaryPhoneExtension" type="long-varchar"/>
+        <field name="faxCountryCode" type="very-short"/>
+        <field name="faxAreaCode" type="very-short"/>
+        <field name="faxNumber" type="short-varchar"/>
+        <field name="didCountryCode" type="very-short"/>
+        <field name="didAreaCode" type="very-short"/>
+        <field name="didNumber" type="short-varchar"/>
+        <field name="didExtension" type="long-varchar"/>
+        <field name="emailAddress" type="long-varchar"/>
+        <field name="webAddress" type="long-varchar"/>
+        <field name="note" type="very-long"/>
+        <field name="netPaymentDays" type="numeric"/>
+        <field name="isIncorporated" type="indicator"/>
+        <field name="federalTaxId" type="id"><description>Federal Tax ID in USA.</description></field>
+        <field name="requires1099" type="indicator"/>
+        <!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field>
+        <field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="processedTimestamp" type="date-time">
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+        <field name="primaryPartyId" type="id">
+            <description>Special field for system to record the primary party created against this customer record. 
+                Do not use for any other purpose.</description>
+        </field>
+        <prim-key field="supplierId"/>
+        <relation type="one" fk-name="USER_SESSION_USERS" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+    </entity>
+    
+    <entity entity-name="Regimen"
+        package-name="org.opentaps.dataimport.regimen"
+        title="Catalogo de regimen fiscal para los auxiliares">
+        <field name="regimenId" type="id-ne"/>
+        <field name="nombreRegimen" type="name"/>        
+        <prim-key field="regimenId"/>        
+    </entity>
+    
+    <entity entity-name="TamanioAuxiliar"
+        package-name="org.opentaps.dataimport.tamanioAuxiliar"
+        title="Catalogo de los tamaños de una empresa de proveedores y demas auxiliares">
+        <field name="tamanioAuxiliarId" type="id-ne"/>
+        <field name="nombreTamanioAuxiliar" type="name"/>        
+        <prim-key field="tamanioAuxiliarId"/>        
+    </entity>
+    
+    <entity entity-name="SectorEconomico"
+        package-name="org.opentaps.dataimport.sectorEconomico"
+        title="Catalogo de los sectores economicos de una empresa de proveedores y demas auxiliares">
+        <field name="sectorEconomicoId" type="id-ne"/>
+        <field name="nombreSectorEconomico" type="name"/>        
+        <prim-key field="sectorEconomicoId"/>        
+    </entity>
+    
+    <entity entity-name="OrigenCapital"
+        package-name="org.opentaps.dataimport.origenCapital"
+        title="Catalogo de origen de capital de una empresa de proveedores y demas auxiliares">
+        <field name="origenCapitalId" type="id-ne"/>
+        <field name="nombreOrigenCapital" type="name"/>        
+        <prim-key field="origenCapitalId"/>        
+    </entity>
+
+</entitymodel>

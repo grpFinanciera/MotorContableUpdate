@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+	<TipoTransporte tipoTransporteId="AEREO" descripcion="Aéreo (Avión)" />
+	<TipoTransporte tipoTransporteId="PUBLICO" descripcion="Publico (Pasajes)"/>
+	<TipoTransporte tipoTransporteId="PROPIO" descripcion="Propio (Vales para gasolina, casetas)" />
+	<TipoTransporte tipoTransporteId="INSTITUCIONAL" descripcion="Institucional (Vales para gasolina, casetas)"/>
+	
+	<!-- Estatus Viatico -->
+    <Estatus statusId="CREADA_V" descripcion="Creada" tipo="V"/>
+    <Estatus statusId="ENVIADA_V" descripcion="Enviada" tipo="V"/>
+    <Estatus statusId="APROBADA_V" descripcion="Aprobada" tipo="V"/>
+    <Estatus statusId="RECHAZADA_V" descripcion="Rechazada" tipo="V"/>
+    <Estatus statusId="COMENTADA_V" descripcion="Comentada" tipo="V"/>   
+    <Estatus statusId="CANCELADA_V" descripcion="Cancelada" tipo="V"/>
+    <Estatus statusId="COMPROMETIDA_V" descripcion="Comprometida" tipo="V"/>
+    <Estatus statusId="PAGADA_V" descripcion="Pagada" tipo="V"/>
+    <Estatus statusId="COMPROBADA_V" descripcion="Comprobada" tipo="V"/>
+    <Estatus statusId="VALIDADA_V" descripcion="Validada" tipo="V"/>
+    <Estatus statusId="FINALIZADA_V" descripcion="Finalizada" tipo="V"/>
+    	
+	<!-- Conceptos Viaticos -->
+    <ConceptoViatico conceptoViaticoId='HOSPEDAJE' descripcion="Hospedaje" diarioTransporteFlag="D"/>
+    <ConceptoViatico conceptoViaticoId='TRASLADO' descripcion="Traslado local" diarioTransporteFlag="D"/>
+    <ConceptoViatico conceptoViaticoId='ALIMENTOS' descripcion="Alimentos" diarioTransporteFlag="D"/>
+    <ConceptoViatico conceptoViaticoId='OTROS' descripcion="Otros" diarioTransporteFlag="D"/>
+    <ConceptoViatico conceptoViaticoId='TRANSPORTE' descripcion="Transporte" diarioTransporteFlag="T"/>
+    <ConceptoViatico conceptoViaticoId='TRABCAMPO' descripcion="Trabajos de Campo" diarioTransporteFlag="C"/>
+    
+    <!-- Cog Viatico -->
+    <CogViatico cogViaticoId='1' acctgTagEnumId='242' diarioTransporteFlag="T"/>
+    <CogViatico cogViaticoId='2' acctgTagEnumId='243' diarioTransporteFlag="T"/>
+    <CogViatico cogViaticoId='3' acctgTagEnumId='245' diarioTransporteFlag="D"/>
+    <CogViatico cogViaticoId='4' acctgTagEnumId='247' diarioTransporteFlag="D"/>
+	<CogViatico cogViaticoId='5' acctgTagEnumId='249' diarioTransporteFlag="C"/>
+    
+    <!-- Eventos -->
+<!--    	<AcctgTransType acctgTransTypeId="COM_VIATICO" description="Compromiso Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>
+	<AcctgTransType acctgTransTypeId="DEV_VIATICO" description="Devengo de Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="A"/>
+<AcctgTransType acctgTransTypeId="DEVO_VIATICO" description="Devolucion de Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>
+	<AcctgTransType acctgTransTypeId="EJE_VIATICO" description="Ejercido Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>
+	<AcctgTransType acctgTransTypeId="PAG_VIATICO" description="Pagado Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>
+	 
+	<Evento acctgTransTypeId="COM_VIATICO" cuentaCargo="8.2.1.2" cuentaAbono="8.2.1.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />
+	<Evento acctgTransTypeId="DEV_VIATICO"  cuentaCargo="8.2.1.3" cuentaAbono="8.2.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipotipoPolizaIdPres="CP_EGRESO" glFiscalTypeIdCont="FINANCIERA" tipoPolizaIdCont="DIARIO" referencia="M" tipoMatriz="A.1" />
+	 <Evento acctgTransTypeId="DEVO_VIATICO" cuentaCargo="8.2.1.1" cuentaAbono="8.2.1.2" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />
+	<Evento acctgTransTypeId="EJE_VIATICO" cuentaCargo="8.2.1.4.01" cuentaAbono="8.2.1.3" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />
+	<Evento acctgTransTypeId="PAG_VIATICO" cuentaCargo="8.2.1.4.02" cuentaAbono="8.2.1.4.01" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />
+	
+<TipoDocumento idTipoDoc="COM_VIATICO" descripcion="Compromiso Viatico" acctgTransTypeId="COM_VIATICO" mComparativo="DISPONIBLE" mEjecutar1="COMPROMETIDO" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" userLoginId="admin" />
+<TipoDocumento idTipoDoc="DEV_VIATICO" descripcion="Devengo de Viatico" acctgTransTypeId="DEV_VIATICO" mComparativo="COMPROMETIDO" mEjecutar1="DEVENGADO_E" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" userLoginId="admin" />
+<TipoDocumento idTipoDoc="DEVO_VIATICO" descripcion="Devolucion de Viatico" acctgTransTypeId="DEVO_VIATICO" mComparativo="COMPROMETIDO" mEjecutar1="DISPONIBLE" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" flagLiberacion="Y"  userLoginId="admin" /> 
+<TipoDocumento idTipoDoc="PAG_VIATICO" descripcion="Pagado Viatico" acctgTransTypeId="EJE_VIATICO" mComparativo="DEVENGADO_E" mEjecutar1="EJERCIDO" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" userLoginId="admin" />
+<TipoDocumento idTipoDoc="EJE_VIATICO" descripcion="Ejercido Viatico" acctgTransTypeId="PAG_VIATICO" mComparativo="EJERCIDO" mEjecutar1="PAGADO" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" userLoginId="admin" />    
+     -->
+     
+     <!-- Fuente de financiamiento Viatico -->
+    <FuenteFinanciamiento fuenteFinanciamientoId='ASIGNACION_ANUAL' descripcion="Asignación anual" />
+    <FuenteFinanciamiento fuenteFinanciamientoId='GESTION_INSTITUCION' descripcion="Gestión Institucional" />
+    
+    <!-- Configuracion de Viatico -->
+    <ConfiguracionViatico configViaticoId="DIAS_COMPROBACION" descripcion="Numero de dias para realizar la comprobacion de viaticos" valor="10"/>
+    <ConfiguracionViatico configViaticoId="SOLICITUDES_COMPROBACION" descripcion="Numero maximo de solicitudes son comprobar" valor="2"/>
+    
+    
+
+</entity-engine-xml>

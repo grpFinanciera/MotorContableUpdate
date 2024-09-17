@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="gwtScripts[]" value="purchasinggwt/org.opentaps.gwt.purchasing.purchasing" global="true"/>
+                <set field="sectionName" value="pedidos" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+	<screen name="creaPedidoInterno">
+        <section>
+            <actions>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/pedidosInternos/creaPedidoInterno.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/pedidosInternos/creaPedidoInterno.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verPedidoInterno">
+		<section>
+            <actions>
+                <set field="pedidoInternoId"  value="${parameters.pedidoInternoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://purchasing/webapp/purchasing/WEB-INF/actions/pedidosInternos/editarPedidoInterno.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://purchasing/webapp/purchasing/pedidosInternos/verPedidoInterno.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Buscar PedidoInterno -->
+    <screen name="buscaPedidoInterno">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Buscar requerimiento al almacén"/>  
+                <set field="sectionHeaderUiLabel" value="Buscar requerimiento al almacén"/>  
+                <java location="org.opentaps.purchasing.pedidosInternos.ConsultarPedidoInterno" invoke="buscaPedidoInterno"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/pedidosInternos/consultaPedidoInterno.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/pedidosInternos/listPedidoInterno.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Pedidos Internos Pendientes -->
+    <screen name="pedidosInternosPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Requerimientos al almacén pendientes"/>  
+                <java location="org.opentaps.purchasing.pedidosInternos.ConsultarPedidoInterno" invoke="pedidosInternosPendientes"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/pedidosInternos/listPedidosInternosPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyPedidoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PedidosInternos"/>  
+                <set field="sectionHeaderUiLabel" value="PedidosInternos"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://purchasing/webapp/purchasing/pedidosInternos/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+        
+</screens>

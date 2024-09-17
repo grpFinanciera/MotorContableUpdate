@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<!-- Configuración para  Viáticos -->
+	<EmplPositionType emplPositionTypeId="GRUPO_JERARQUICO" description="Grupo Jerárquico para Viáticos"/>
+	<EmplPosition emplPositionId="PERSONAL_OPERATIVO" statusId="EMPL_POS_ACTIVE" emplPositionTypeId="GRUPO_JERARQUICO" montoViatico="870" />
+	<EmplPosition emplPositionId="P_HASTA_L" statusId="EMPL_POS_ACTIVE" emplPositionTypeId="GRUPO_JERARQUICO" montoViatico="1250" />
+	<EmplPosition emplPositionId="K_HASTA_G" statusId="EMPL_POS_ACTIVE" emplPositionTypeId="GRUPO_JERARQUICO" montoViatico="1650" />
+	
+	<ZonaGeoAlta geoId="ACAPULCO" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	<ZonaGeoAlta geoId="ZIHUATANEJO" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	<ZonaGeoAlta geoId="CANCUN" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	<ZonaGeoAlta geoId="CIUDAD_VICTORIA" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	<ZonaGeoAlta geoId="CABOS_SAN_LUCAS" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	<ZonaGeoAlta geoId="CIUDAD_SALTILLO" emplPositionId="PERSONAL_OPERATIVO"  monto="980" />
+	
+	<ZonaGeoAlta geoId="ACAPULCO" emplPositionId="P_HASTA_L"  monto="1700" />
+	<ZonaGeoAlta geoId="ZIHUATANEJO" emplPositionId="P_HASTA_L"  monto="1700" />
+	<ZonaGeoAlta geoId="CANCUN" emplPositionId="P_HASTA_L"  monto="1700" />
+	<ZonaGeoAlta geoId="CIUDAD_VICTORIA" emplPositionId="P_HASTA_L"  monto="1700" />
+	<ZonaGeoAlta geoId="CABOS_SAN_LUCAS" emplPositionId="P_HASTA_L"  monto="1700" />
+	<ZonaGeoAlta geoId="CIUDAD_SALTILLO" emplPositionId="P_HASTA_L"  monto="1700" />
+		
+	<ZonaGeoAlta geoId="ACAPULCO" emplPositionId="K_HASTA_G"  monto="3240" />
+	<ZonaGeoAlta geoId="ZIHUATANEJO" emplPositionId="K_HASTA_G"  monto="3240" />
+	<ZonaGeoAlta geoId="CANCUN" emplPositionId="K_HASTA_G"  monto="3240" />
+	<ZonaGeoAlta geoId="CIUDAD_VICTORIA" emplPositionId="K_HASTA_G"  monto="3240" />
+	<ZonaGeoAlta geoId="CABOS_SAN_LUCAS" emplPositionId="K_HASTA_G"  monto="3240" />
+	<ZonaGeoAlta geoId="CIUDAD_SALTILLO" emplPositionId="K_HASTA_G"  monto="3240" />		
+	
+</entity-engine-xml>

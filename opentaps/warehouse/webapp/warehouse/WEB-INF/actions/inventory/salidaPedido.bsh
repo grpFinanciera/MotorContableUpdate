@@ -1,0 +1,74 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import java.util.HashSet;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
+import org.ofbiz.base.util.*;
+import org.ofbiz.service.ServiceUtil;
+import org.ofbiz.entity.condition.*;
+
+facilityId = parameters.get("facilityId");
+context.put("facilityId",facilityId);
+
+// get variance reasons
+orderByO= org.ofbiz.base.util.UtilMisc.toList("description");
+condicionO = UtilMisc.toList(
+	new EntityExpr("hidden", EntityOperator.EQUALS, "N"),
+	new EntityExpr("flag", EntityOperator.EQUALS, "P")
+);
+varianceReasons = delegator.findByCondition("VarianceReason", new EntityConditionList(condicionO, EntityOperator.AND) , UtilMisc.toList("varianceReasonId", "description"), orderByO);
+print("varianceReasons: " + varianceReasons);
+context.put("varianceReasons", varianceReasons);
+
+// get variance reasons
+orderByOB= org.ofbiz.base.util.UtilMisc.toList("description");
+condicionOB = UtilMisc.toList(
+	new EntityExpr("hidden", EntityOperator.EQUALS, "N"),
+	new EntityExpr("flag", EntityOperator.EQUALS, "N")
+);
+varianceReasonsB = delegator.findByCondition("VarianceReason", new EntityConditionList(condicionOB, EntityOperator.AND) , UtilMisc.toList("varianceReasonId", "description"), orderByOB);
+print("varianceReasonsB: " + varianceReasonsB);
+context.put("varianceReasonsB", varianceReasonsB);
+
+
+pedidoInternoId = parameters.get("pedidoInternoId");
+if(UtilValidate.isEmpty(pedidoInternoId)){
+	return;
+}
+PedidoInterno = delegator.findByPrimaryKey("PedidoInterno",UtilMisc.toMap("pedidoInternoId",pedidoInternoId));
+context.put("PedidoInterno",PedidoInterno);
+
+status = delegator.findByPrimaryKey("Estatus", UtilMisc.toMap("statusId", PedidoInterno.getString("statusId")));
+context.put("estatus",status);
+
+condicionPoliza = EntityCondition.makeCondition("pedidoInternoId",pedidoInternoId);
+listSelect = UtilMisc.toList("poliza","acctgTransId");
+PolizaPedido = delegator.findByCondition("PolizaPedido",condicionPoliza,listSelect,listSelect);
+context.put("PolizaPedido",PolizaPedido);
+print("PolizaPedido   BSH ?"+PolizaPedido);
+
+print("facilityId   BSH ?"+facilityId);
+
+//Busca los eventos del modulo
+moduloId = "INVENTARIO_SURTIR";
+listEventos = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", moduloId), UtilMisc.toList("descripcion"));
+print("Lista Eventos"+listEventos);
+context.put("listEventos", listEventos);
+
+

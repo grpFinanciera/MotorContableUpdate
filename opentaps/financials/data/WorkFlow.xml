@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+	<TipoWorkFlow tipoWorkFlowId="REQUISICION" tipo="R" descripcion="Requisición" url="/purchasing/control/verRequisicion?requisicionId="/>
+	<TipoWorkFlow tipoWorkFlowId="VIATICOS" tipo="V" descripcion="Viaticos" url="/viaticos/control/verViatico?viaticoId="/>
+	<TipoWorkFlow tipoWorkFlowId="VIATICOSVI" tipo="V" descripcion="Viaticos Vuelos/Internacionales" url="/viaticos/control/verViatico?viaticoId="/>
+	<TipoWorkFlow tipoWorkFlowId="VIATICOSGI" tipo="V" descripcion="Viaticos Gestion Institucional" url="/viaticos/control/verViatico?viaticoId="/>
+	<TipoWorkFlow tipoWorkFlowId="OBRAS" tipo="O" descripcion="Obras"/>
+	<TipoWorkFlow tipoWorkFlowId="ORDEN_PAGO_PATRI" tipo="D" descripcion="Orden de pago patrimonial"/>
+	<TipoWorkFlow tipoWorkFlowId="PEDIDO_INTERNO" tipo="P" descripcion="Pedido interno" url="/purchasing/control/verPedidoInterno?pedidoInternoId="/>
+	<TipoWorkFlow tipoWorkFlowId="TRANSFERENCIA" tipo="T" descripcion="Transferencia entre almacenes" url="/warehouse/control/verSolicitudTransferencia?solicitudTransferenciaId="/>
+	<TipoWorkFlow tipoWorkFlowId="GASTORESERVA" tipo="G" descripcion="Gasto a reserva de comprobar" url="/gastosReserva/control/verGastoReserva?gastosReservaId=" />
+	<TipoWorkFlow tipoWorkFlowId="PAGO_ANTICIPADO" tipo="A" descripcion="Pagos anticipados" url="/pagoAnticipado/control/verPagoAnticipado?orderId=" />
+	<TipoWorkFlow tipoWorkFlowId="INHABILITA_USUARIO" tipo="V" descripcion="Inhabilitacion de usuarios en viaticos" url="/viaticos/control/viaticosPendientesComprobar" />
+	<TipoWorkFlow tipoWorkFlowId="FIRMA_ELECTRONICA" tipo="F" descripcion="Firma electronica" url="/financials/control/FirmaPDF" />
+	
+</entity-engine-xml>
+ 

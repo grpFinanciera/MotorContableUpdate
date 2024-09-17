@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>ControlAuxiliar</title>
+    <description>Se almacenaran todas las claves presupuestales que se registren dentro del sistema</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+	
+	<entity entity-name="DataImportSaldoInicialAux" package-name="org.opentaps.dataimport"
+		title="Entidad para llevar el control de auxiliares">
+		<field name="renglon" type="numeric" />
+		<field name="idAuxiliar" type="id-ne" />
+		<field name="tipo" type="id-ne" />
+		<field name="organizationId" type="id-ne" />
+		<field name="auxiliarProducto" type="indicator" />	
+		<field name="monto" type="currency-amount" />
+		<field name="periodo" type="date-time" />
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne" /> 
+		<field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+		<prim-key field="idAuxiliar"/>
+		<prim-key field="tipo"/>
+		<prim-key field="organizationId"/>
+		<relation type="one" fk-name="FK_DBO_INI_AUX_USR" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>	
+	</entity>	
+	
+	<view-entity entity-name="DataImportSaldoInicialAuxiliarValida" package-name="com.absoluciones.importacion"
+		title="Vista que obitiene la información de los auxiliares para validarlos">
+		<member-entity entity-alias="DISIA" entity-name="DataImportSaldoInicialAux" />
+		<member-entity entity-alias="PAR" entity-name="Party" />
+		<member-entity entity-alias="PARORG" entity-name="Party" />
+		<member-entity entity-alias="PACCTG" entity-name="PartyAcctgPreference" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="CB" entity-name="CuentaBancaria" />
+		
+		<alias-all entity-alias="DISIA"/>
+		<alias name="partyId" entity-alias="PAR" />
+		<alias name="partyTypeId" entity-alias="PAR" />
+		<alias name="statusId" entity-alias="PAR" />
+		<alias name="partyIdOrg" field="partyId" entity-alias="PARORG" />
+		<alias name="partyIdCont" field="partyId" entity-alias="PACCTG" />
+		<alias name="productId" entity-alias="PRO" />
+		<alias name="productTypeId" entity-alias="PRO" />
+		<alias name="cuentaBancariaId" entity-alias="CB" />
+		<alias name="habilitada" entity-alias="CB" />
+		
+		<view-link entity-alias="DISIA" rel-entity-alias="PAR" rel-optional="true">
+			<key-map field-name="idAuxiliar" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="DISIA" rel-entity-alias="PARORG" rel-optional="true">
+			<key-map field-name="organizationId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="DISIA" rel-entity-alias="PACCTG" rel-optional="true">
+			<key-map field-name="organizationId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="DISIA" rel-entity-alias="PRO" rel-optional="true">
+			<key-map field-name="idAuxiliar" rel-field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="DISIA" rel-entity-alias="CB" rel-optional="true">
+			<key-map field-name="idAuxiliar" rel-field-name="cuentaBancariaId"/>
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="DataImportSaldoInicialAuxiliarSaldo" package-name="com.absoluciones.importacion"
+		title="Vista que obitiene la información de los auxiliares para validarlos">
+		<member-entity entity-alias="DISIA" entity-name="DataImportSaldoInicialAux" />
+		<member-entity entity-alias="SC" entity-name="SaldoCatalogo" />
+		
+		<alias-all entity-alias="DISIA"/>
+		
+		<alias name="periodoSaldo" field="periodo" entity-alias="SC" />
+		<alias name="secuenciaIdSaldo" field="secuenciaId" entity-alias="SC" />
+		<alias name="partyId" entity-alias="SC" />
+		<alias name="tipoId" entity-alias="SC" />
+		<alias name="catalogoId" entity-alias="SC" />
+		
+		<view-link entity-alias="DISIA" rel-entity-alias="SC" rel-optional="true">
+			<key-map field-name="idAuxiliar" rel-field-name="catalogoId"/>
+			<key-map field-name="tipo" rel-field-name="tipoId"/>
+			<key-map field-name="organizationId" rel-field-name="partyId"/>
+			<key-map field-name="periodo" rel-field-name="periodo"/>
+		</view-link>
+		
+		<relation rel-entity-name="SaldoCatalogo" type="one">
+			<key-map field-name="secuenciaIdSaldo" rel-field-name="secuenciaId"/>
+		</relation>
+		
+	</view-entity>
+		
+</entitymodel>

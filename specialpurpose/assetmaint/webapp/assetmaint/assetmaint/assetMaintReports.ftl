@@ -1,0 +1,10 @@
+<div class="tabletext" style="margin-bottom: 30px;">
+<#assign hostname = request.getServerName()/>
+<table style="width: 100%;">
+<tr>
+  <td style="vertical-align: top; width: 35%;">
+	
+  </td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Presupuesto Inicial</title>
+	<description>Define los datos necesarios para ingresar el presupuesto Inicial</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Castillo Nuñez Miguel</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+
+	<entity entity-name="DataImportPresupuestoInicia" package-name="org.opentaps.dataimport"
+		title="Entidad para definir el presupuesto inicial dentro del sistema.">
+		<field name="renglon" type="numeric" />
+		<field name="idPresInicial" type="id-ne"/>
+		<field name="clasificacion1" type="description"/>
+		<field name="clasificacion2" type="description"/>
+		<field name="clasificacion3" type="description"/>
+		<field name="clasificacion4" type="description"/>
+		<field name="clasificacion5" type="description"/>
+		<field name="clasificacion6" type="description"/>
+		<field name="clasificacion7" type="description"/>
+		<field name="clasificacion8" type="description"/>
+		<field name="clasificacion9" type="description"/>
+		<field name="clasificacion10" type="description"/>
+		<field name="clasificacion11" type="description"/>
+		<field name="clasificacion12" type="description"/>
+		<field name="clasificacion13" type="description"/>
+		<field name="clasificacion14" type="description"/>
+		<field name="clasificacion15" type="description"/>
+		<field name="clavePresupuestal" type="description"/>
+		<field name="enero" type="currency-amount-precise"/>
+		<field name="febrero" type="currency-amount-precise"/>
+		<field name="marzo" type="currency-amount-precise"/>
+		<field name="abril" type="currency-amount-precise"/>
+		<field name="mayo" type="currency-amount-precise"/>
+		<field name="junio" type="currency-amount-precise"/>
+		<field name="julio" type="currency-amount-precise"/>
+		<field name="agosto" type="currency-amount-precise"/>
+		<field name="septiembre" type="currency-amount-precise"/>
+		<field name="octubre" type="currency-amount-precise"/>
+		<field name="noviembre" type="currency-amount-precise"/>
+		<field name="diciembre" type="currency-amount-precise"/>
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"/> 
+		<field name="importStatusId" type="id-ne">
+			<description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description>
+		</field>
+		<field name="importError" type="very-long">
+			<description>Error report for failed imports.</description>
+		</field>
+		<field name="lastModifiedDate" type="date-time" />
+		<field name="processedTimestamp" type="date-time">
+			<description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+		</field>
+		<prim-key field="idPresInicial" />
+		<relation type="one" fk-name="FK_USR_PI" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+	</entity>
+	
+	<view-entity entity-name="DataImportPresupuestoInicialClave" package-name="org.opentaps.dataimport">
+		<member-entity entity-alias="DIP" entity-name="DataImportPresupuestoInicia"/>
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal"/>
+		
+		<alias name="renglon" entity-alias="DIP" group-by="true"/>
+		<alias name="idPresInicial" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion1" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion2" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion3" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion4" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion5" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion6" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion7" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion8" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion9" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion10" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion11" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion12" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion13" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion14" entity-alias="DIP" group-by="true"/>
+		<alias name="clasificacion15" entity-alias="DIP" group-by="true"/>
+		<alias name="clavePresupuestal" entity-alias="DIP" group-by="true"/>
+		<alias name="clavePresup" field="clavePresupuestal" entity-alias="CVE" group-by="true"/>
+		
+		<alias name="userLoginId" entity-alias="DIP" group-by="true"/>
+		<alias name="importStatusId" entity-alias="DIP" group-by="true"/>
+		
+		<view-link entity-alias="DIP" rel-entity-alias="CVE" rel-optional="true">
+			<key-map field-name="clavePresupuestal"/>
+		</view-link>
+	</view-entity>
+	
+</entitymodel>

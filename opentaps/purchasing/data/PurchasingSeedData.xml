@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+
+    <!-- Inventory event for Pending internal requirement -->
+    <InventoryEventPlannedType inventoryEventPlanTypeId="PEND_MANUF_O_RECP" description="Pending Manufacturing Order receipt" inOut="+"/>
+    <!-- More understandable descriptions -->
+    <RequirementType requirementTypeId="PRODUCT_REQUIREMENT" description="Purchasing Requirement"/>
+    <RequirementType requirementTypeId="INTERNAL_REQUIREMENT" description="Production Requirement"/>
+    <RequirementType requirementTypeId="PENDING_INTERNAL_REQ" description="Pending Internal Requirement" hasTable="N"/>
+    <!-- Add a status for requirements, when a transfer is created or when the production run is created or when a PO is created: the requirement status is set to CLOSED -->
+    <StatusItem statusId="REQ_CLOSED" statusTypeId="REQUIREMENT_STATUS" statusCode="CLOSED" sequenceId="03" description="Closed"/>
+    <StatusValidChange statusId="REQ_APPROVED" statusIdTo="REQ_CLOSED" transitionName="Close Requirement"/>
+
+    <!-- A new type for contracted manufacturing, which maps to PINV_MFG_CONTRACT in Financials -->
+    <OrderItemType orderItemTypeId="MFG_CONTRACT" parentTypeId="PURCHASE_SPECIFIC" hasTable="N" description="Outsourced Task"/>
+
+    <!-- Used to associate a Product -> WorkEffort (Routing Task) when the Product is used for purchase orders of that routing task -->
+    <WorkEffortGoodStandardType workEffortGoodStdTypeId="ROU_OUTSOURCE_PROD" description="Product for purchasing outsourced manufacturing task"/>
+
+    <WorkEffortGoodStandardType workEffortGoodStdTypeId="PRUN_OUTSRC_PURCH" description="Product needs to be purchased for outsourced production run task"/>
+
+    <ProductStore productStoreId="PURCHASING" storeName="Dummy store for purchasing application"
+        subtitle="This store is a hack.  Although purchase orders do not require a product store, the cart must have one"
+        prorateShipping="N"/>
+
+    <!-- A new type for Purchase Order Delivery Address -->
+<!--     <ContactMechPurposeType contactMechPurposeTypeId="PO_DELIV_ADDRESS" description="Purchase Order Delivery Address"/> -->
+<!--     <ContactMechTypePurpose contactMechPurposeTypeId="PO_DELIV_ADDRESS" contactMechTypeId="POSTAL_ADDRESS"/> -->
+    
+    <!-- Estatus Requisicion -->
+    <Estatus statusId="CREADA" descripcion="Creada" tipo="R"/>
+    <Estatus statusId="ENVIADA" descripcion="Enviada" tipo="R"/>
+    <Estatus statusId="APROBADA" descripcion="Aprobada" tipo="R"/>
+    <Estatus statusId="RECHAZADA_R" descripcion="Rechazada" tipo="R"/>
+    <Estatus statusId="COMENTADA" descripcion="Comentada" tipo="R"/>   
+    <Estatus statusId="CANCELADA" descripcion="Cancelada" tipo="R"/>
+    <Estatus statusId="TRASPASADO" descripcion="Traspasado" tipo="R"/>
+    <!-- Estatus Workflow -->
+    <Estatus statusId="PENDIENTE" descripcion="Pendiente por aprobar" tipo="W"/>
+    <Estatus statusId="AUTORIZADA" descripcion="Autorizada" tipo="W"/>
+    <Estatus statusId="RECHAZADA_W" descripcion="Rechazada" tipo="W"/>
+    <Estatus statusId="COMENTADA_W" descripcion="Comentada" tipo="W"/>
+    <Estatus statusId="CANCELADA_W" descripcion="Cancelada" tipo="W"/>
+    <!-- Estatus Pedido -->
+    <Estatus statusId="PENDIENTE_P" descripcion="Pendiente por comprar" tipo="P"/>
+    <Estatus statusId="AUTORIZADO_P" descripcion="Autorizado" tipo="P"/>
+    <Estatus statusId="POR_ORDENAR" descripcion="Por ordenar" tipo="P"/>
+    <Estatus statusId="CANCELADO" descripcion="Cancelado" tipo="P"/>
+    <Estatus statusId="ORDENADO" descripcion="Ordenado" tipo="P"/>
+    <!-- Estatus Solicitud (pedido interno) -->
+	<Estatus statusId="ATENDIDA" descripcion="Atendida" tipo="S"/>
+    <Estatus statusId="COMENTADA_PI" descripcion="Comentada" tipo="S"/>
+    <Estatus statusId="CREADA_PI" descripcion="Creada" tipo="S"/>
+    <Estatus statusId="ENVIADA_PI" descripcion="Enviada" tipo="S"/>
+    <Estatus statusId="RECHAZADA_PI" descripcion="Rechazada" tipo="S"/>
+    <Estatus statusId="SURTIDO" descripcion="Surtido" tipo="S"/>
+    <Estatus statusId="TRANSFERIDO_PI" descripcion="Transferido" tipo="S"/>
+    <!-- Estatus Obra -->
+    <Estatus statusId="CREADA_O" descripcion="Creada" tipo="O"/>
+    <Estatus statusId="ENVIADA_O" descripcion="Enviada" tipo="O"/>
+    <Estatus statusId="APROBADA_O" descripcion="Aprobada" tipo="O"/>
+    <Estatus statusId="RECHAZADA_O" descripcion="Rechazada" tipo="O"/>
+    <Estatus statusId="COMENTADA_O" descripcion="Comentada" tipo="O"/>   
+    <Estatus statusId="CANCELADA_O" descripcion="Cancelada" tipo="O"/>
+    <Estatus statusId="INICIADA_O" descripcion="Iniciada" tipo="O"/>
+    <Estatus statusId="EN_PROCESO_O" descripcion="En proceso" tipo="O"/>
+    <Estatus statusId="TERMINADA_O" descripcion="Terminada" tipo="O"/>
+    <!-- Estatus de anticipo de Obra -->
+    <Estatus statusId="ANTICIPO_PENDIENTE_O" descripcion="Anticipo pendiente de pago" tipo="O"/>
+    <Estatus statusId="ANTICIPO_PAGADO_O" descripcion="Anticipo pagado" tipo="O"/>
+    <Estatus statusId="SIN_ANTICIPO_O" descripcion="Sin anticipo" tipo="O"/>
+    <Estatus statusId="SIN_ANTICIPO_C" descripcion="Sin anticipo contrato" tipo="C"/>
+    <!-- Estatus de anticipo de Contrato de obra -->
+    <Estatus statusId="ANTICIPO_PENDIENTE_C" descripcion="Anticipo pendiente de pago" tipo="C"/>
+    <Estatus statusId="ANTICIPO_PAGADO_C" descripcion="Anticipo pagado" tipo="C"/>
+    <Estatus statusId="INICIADO_C" descripcion="Iniciado" tipo="C"/>
+    <Estatus statusId="EN_PROCESO_C" descripcion="En proceso" tipo="C"/>
+    <Estatus statusId="TERMINADO_C" descripcion="Terminado" tipo="C"/>
+    <!-- Estatus de orden de pago patrimonial -->
+    <Estatus statusId="ORDEN_PAGO_PENDIENTE" descripcion="Orden de pago pendiente" tipo="D"/>
+    <Estatus statusId="ORDEN_PAGO_PAGADA" descripcion="Orden de pago pagada" tipo="D"/>
+    <Estatus statusId="ORDEN_PAGO_PARCIAL" descripcion="Orden de pago pagada parcialmente" tipo="D"/>
+    <!-- Estatus de orden de cobro -->
+    <Estatus statusId="ORDEN_COBRO_PENDIENT" descripcion="Orden de cobro pendiente" tipo="B"/>
+    <Estatus statusId="ORDEN_COBRO_RECAUDAR" descripcion="Orden de cobro recaudada" tipo="B"/>
+    <Estatus statusId="ORDEN_COBRO_PARCIAL" descripcion="Orden de cobro recaudada parcialmente" tipo="B"/> 
+    <!-- Estatus de requerimientos de almacen -->
+
+	<!-- Deductiva -->
+    <TipoPenaDeductiva penaId="01" base="1%" calculo="0.01" penaDeductivaFlag="D" zonaEconomicaFlag="N"/> 
+    <TipoPenaDeductiva penaId="02" base="2%" calculo="0.02" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="03" base="3%" calculo="0.03" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="04" base="4%" calculo="0.04" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="05" base="5%" calculo="0.05" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="06" base="6%" calculo="0.06" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="07" base="7%" calculo="0.07" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="08" base="8%" calculo="0.08" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="09" base="9%" calculo="0.09" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="10" base="10%" calculo="0.1" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="11" base="SMDV Zona económica A ($70.10, 2015)" calculo="70.10" penaDeductivaFlag="D" zonaEconomicaFlag="Y"/>
+    <TipoPenaDeductiva penaId="12" base="SMDV Zona económica B ($66.45, 2015)" calculo="66.45" penaDeductivaFlag="D" zonaEconomicaFlag="Y"/>
+    <TipoPenaDeductiva penaId="13" base="1 al millar" calculo="0.001" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="14" base="2 al millar" calculo="0.002" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="15" base="3 al millar" calculo="0.003" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="16" base="4 al millar" calculo="0.004" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="17" base="5 al millar" calculo="0.005" penaDeductivaFlag="D" zonaEconomicaFlag="N"/>
+    
+    <!-- Pena Convencional -->
+    <TipoPenaDeductiva penaId="18" base="1%" calculo="0.01" penaDeductivaFlag="P" zonaEconomicaFlag="N"/> 
+    <TipoPenaDeductiva penaId="19" base="2%" calculo="0.02" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="20" base="3%" calculo="0.03" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="21" base="4%" calculo="0.04" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="22" base="5%" calculo="0.05" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="23" base="6%" calculo="0.06" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="24" base="7%" calculo="0.07" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="25" base="8%" calculo="0.08" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="26" base="9%" calculo="0.09" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="27" base="10%" calculo="0.1" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="28" base="1 al millar" calculo="0.001" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="29" base="2 al millar" calculo="0.002" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="30" base="3 al millar" calculo="0.003" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="31" base="4 al millar" calculo="0.004" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+    <TipoPenaDeductiva penaId="32" base="5 al millar" calculo="0.005" penaDeductivaFlag="P" zonaEconomicaFlag="N"/>
+      
+                 
+</entity-engine-xml>

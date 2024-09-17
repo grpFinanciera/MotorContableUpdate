@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Etiquetas de Forms -->
+	<!-- =========================== -->
+	<!-- == Etiquetas Activo Fijo == -->
+	<!-- =========================== -->
+    <property key="FormFieldTitle_ubicacionRapidaId">
+        <value xml:lang="en">Fast Location</value> 
+        <value xml:lang="es">Ubicación rápida</value>
+    </property>
+    <property key="FormFieldTitle_numeroPoliza">
+        <value xml:lang="en">Policy number</value> 
+        <value xml:lang="es">Número de póliza</value>
+    </property>
+    <property key="FormFieldTitle_moneda">
+        <value xml:lang="en">Currency</value> 
+        <value xml:lang="es">Moneda</value>
+    </property>
+    <property key="FormFieldTitle_fechaVencGarantia">
+        <value xml:lang="en">Guarantee Expiration Date</value> 
+        <value xml:lang="es">Fecha de vencimiento de garantía</value>
+    </property>    
+    <property key="FormFieldTitle_edoFisicoId">
+        <value xml:lang="en">Physical State</value> 
+        <value xml:lang="es">Estado físico</value>
+    </property>    
+    <property key="FormFieldTitle_numeroFactura">
+        <value xml:lang="en">Invoice Number</value> 
+        <value xml:lang="es">Número de factura</value>
+    </property>                    
+    <property key="FormFieldTitle_proveedor">
+        <value xml:lang="en">Supplier</value> 
+        <value xml:lang="es">Proveedor</value>
+    </property>
+    <property key="FormFieldTitle_areaPartyId">
+        <value xml:lang="en">Area</value> 
+        <value xml:lang="es">Área</value>
+    </property>
+    <property key="FormFieldTitle_fechaResguardo">
+        <value xml:lang="en">Date of Receipt</value> 
+        <value xml:lang="es">Fecha de resguardo</value>
+    </property>
+    <property key="FormFieldTitle_fechaIniPoliza">
+        <value xml:lang="en">Initial Date Policy</value> 
+        <value xml:lang="es">Fecha inicial de póliza</value>
+    </property>
+    <property key="FormFieldTitle_fechaFinPoliza">
+        <value xml:lang="en">Final Date Policy</value> 
+        <value xml:lang="es">Fecha final de póliza</value>
+    </property>            
+    <property key="FormFieldTitle_observaciones">
+        <value xml:lang="en">Observations</value> 
+        <value xml:lang="es">Observaciones</value>
+    </property>
+    <property key="FormFieldTitleTipoActivoFijo">
+        <value xml:lang="en">Fixed Asset Type</value> 
+        <value xml:lang="es">Tipo de activo fijo</value>
+    </property>    
+    <property key="FormFieldTitleMes">
+        <value xml:lang="en">Month</value> 
+        <value xml:lang="es">Mes</value>
+    </property>
+    <property key="FormFieldTitleCiclo">
+        <value xml:lang="en">Year</value> 
+        <value xml:lang="es">Ciclo</value>
+    </property>
+    <property key="FormFieldTitleTipoEvento">
+        <value xml:lang="en">Event Type</value> 
+        <value xml:lang="es">Tipo de evento</value>
+    </property>
+    <property key="FormFieldTitle_denominacionPartidaGen">
+        <value xml:lang="en">Denominación Partida Gen</value> 
+        <value xml:lang="es">Denominación Partida Gen</value>
+    </property>
+    <property key="FormFieldTitle_caracteristicas">
+        <value xml:lang="en">Características</value> 
+        <value xml:lang="es">Características</value>
+    </property>    
+        <property key="FormFieldTitle_aniosVidaUtil">
+        <value xml:lang="en">Años vida útil</value> 
+        <value xml:lang="es">Años vida útil</value>
+    </property> 
+     <property key="FormFieldTitle_idActivoAnterior">
+        <value xml:lang="en">Código activo anterior</value> 
+        <value xml:lang="es">Código activo anterior</value>
+    </property>  
+         <property key="FormFieldTitle_tipoTerreno">
+        <value xml:lang="en">Tipo terreno</value> 
+        <value xml:lang="es">Tipo terreno</value>
+    </property> 
+    
+    <property key="FormFieldTitle_tipoDocumentoLegalPropiedad">
+        <value xml:lang="en">Tipo documento Legal Propiedad </value> 
+        <value xml:lang="es">Tipo documento legal propiedad </value>
+    </property>    
+    
+    <property key="FormFieldTitle_tipoEmisorTituloPropiedad">
+        <value xml:lang="en">Tipo emisor titulo propiedad  </value> 
+        <value xml:lang="es">Tipo emisor título propiedad  </value>
+    </property>    
+      <property key="FormFieldTitle_valorContruccion">
+        <value xml:lang="en">Valor Contruccion </value> 
+        <value xml:lang="es">Valor contrucción </value>
+    </property>       
+    
+      <property key="FormFieldTitle_valorRazonable">
+        <value xml:lang="en">Valor Razonable  </value> 
+        <value xml:lang="es">Valor razonable  </value>
+    </property>   
+    
+    <property key="FormFieldTitle_fechaAvaluo">
+        <value xml:lang="en">Fecha Avaluo  </value> 
+        <value xml:lang="es">Fecha avaluo </value>
+    </property>  
+    
+    
+    <property key="FormFieldTitle_fechaTituloPropiedad">
+        <value xml:lang="en">Fecha Titulo Propiedad  </value> 
+        <value xml:lang="es">Fecha título propiedad </value>
+    </property>      
+    
+    <property key="FormFieldTitle_claveCatastral">
+        <value xml:lang="en">Clave catastral </value> 
+        <value xml:lang="es">Clave catastral </value>
+    </property>     
+    
+    <property key="FormFieldTitle_fechaInicioClaveCatastral">
+        <value xml:lang="en">Fecha inicio clave catastral  </value> 
+        <value xml:lang="es">Fecha inicio clave catastral  </value>
+    </property>      
+    
+    <property key="FormFieldTitle_fechaVencimientoClaveCatastral">
+        <value xml:lang="en">Fecha vencimiento clave catastral   </value> 
+        <value xml:lang="es">Fecha vencimiento clave catastral   </value>
+    </property>    
+    
+    <property key="FormFieldTitle_superficieTerreno">
+        <value xml:lang="en">Superficie terreno   </value> 
+        <value xml:lang="es">Superficie terreno   </value>
+    </property>     
+    
+    <property key="FormFieldTitle_superficieConstruccion">
+        <value xml:lang="en">Superficie construcción  </value> 
+        <value xml:lang="es">Superficie construcción   </value>
+    </property>     
+
+    <property key="FormFieldTitle_superficieDisponible">
+        <value xml:lang="en">Superficie disponible   </value> 
+        <value xml:lang="es">Superficie disponible   </value>
+    </property>     
+    
+    <property key="FormFieldTitle_folioRegistroPublicoDePropiedadComercio">
+        <value xml:lang="en">Folio registro público de propiedad comercio   </value> 
+        <value xml:lang="es">Folio registro público de propiedad comercio  </value>
+    </property>     
+
+    <property key="FormFieldTitle_fechaInscripcionRegistroPublicoDePropiedadComercio">
+        <value xml:lang="en">Fecha Inscripción registro público de propiedad comercio   </value> 
+        <value xml:lang="es">Fecha Inscripción registro público de propiedad comercio   </value>
+    </property> 
+
+    <property key="FormFieldTitle_ciudadInscripcionRegistroPublicoDePropiedadComercio">
+        <value xml:lang="en">Ciudad inscripción registro público de propiedad comercio   </value> 
+        <value xml:lang="es">Ciudad inscripción registro público de propiedad comercio   </value>
+    </property> 
+
+       <property key="FormFieldTitle_fechaIncorporacionInventario">
+        <value xml:lang="en">Fecha incorporación inventario   </value> 
+        <value xml:lang="es">Fecha incorporación inventario   </value>
+    </property> 
+
+
+    <property key="FormFieldTitleComentario">
+        <value xml:lang="en">Comment</value> 
+        <value xml:lang="es">Comentario</value>
+    </property>   
+    
+
+     
+    <property key="FixedAssetLevantamiento">
+        <value xml:lang="en">Rise of fixed assets</value> 
+        <value xml:lang="es">Levantamiento de activos fijos</value>
+    </property>
+    <property key="FixedAssetIniciarLevantamiento">
+        <value xml:lang="en">Comment</value> 
+        <value xml:lang="es">Iniciar levantamiento</value>
+    </property> 
+    <property key="FixedAssetUbicaActual">
+        <value xml:lang="en">Physical location</value> 
+        <value xml:lang="es">Ubicación física</value>
+    </property>
+    <property key="FixedAssetUbicaAnterior">
+        <value xml:lang="en">Location assigned</value> 
+        <value xml:lang="es">Ubicación asignada</value>
+    </property>  
+    <property key="FixedAsseLevantamientoNoEncontrado">
+        <value xml:lang="en">Assets not found</value> 
+        <value xml:lang="es">Activos no encontrados</value>
+    </property>                    
+            
+    <!-- Etiquetas generales -->
+    <property key="ActivoFijoActualizacionPoliza">
+    	<value xml:lang="en">Policy update</value>
+    	<value xml:lang="es">Actualización de póliza</value>
+    </property>
+    <property key="ActivoFijoDepreciacion">
+    	<value xml:lang="en">Fixed Asset Depreciation</value>
+    	<value xml:lang="es">Depreciación de activo fijo</value>
+    </property>
+    <property key="ActivoFijoLevantamiento">
+    	<value xml:lang="en">Rising asset</value>
+    	<value xml:lang="es">Levantamiento de activo fijo</value>
+    </property>     
+    <property key="ActualizaPolizaMssg">
+    	<value xml:lang="en">Policy number ${numeroAnt} was updated by the following: ${numeroNuevo}</value>
+    	<value xml:lang="es">Se actualizó el número de póliza ${numeroAnt} por el siguiente: ${numeroNuevo}</value>
+    </property>
+    <property key="TipoWorkFlow">
+    	<value xml:lang="en">WorkFlow Type</value>
+    	<value xml:lang="es">Tipo de solicitud</value>
+    </property>
+    <property key="TipoPoliza">
+    	<value xml:lang="en">Policy Type</value>
+    	<value xml:lang="es">Tipo de póliza</value>
+    </property>
+    <property key="TipoTransaccion">
+    	<value xml:lang="en">Transaction Type</value>
+    	<value xml:lang="es">Tipo de transacción</value>
+    </property>                           
+    
+    <property key="BuscarEvento">
+    	<value xml:lang="en">Find Event</value>
+    	<value xml:lang="es">Buscar Evento</value>
+    </property>
+    <property key="CrearEvento">
+    	<value xml:lang="en">Create Event</value>
+    	<value xml:lang="es">Crear Evento</value>
+    </property>
+    <property key="InfGeneral">
+    	<value xml:lang="en">General Information</value>
+    	<value xml:lang="es">Información General</value>
+    </property>
+    <property key="CuentasPresupuestales">
+    	<value xml:lang="en">Budget Accounts</value>
+    	<value xml:lang="es">Cuentas Presupuestales</value>
+    </property>
+	<property key="CuentasPatrimoniales">
+    	<value xml:lang="en">Equity Accounts</value>
+    	<value xml:lang="es">Cuentas Patrimoniales</value>
+    </property>    
+	<property key="CuentaCargo">
+    	<value xml:lang="en">Debit Account</value>
+    	<value xml:lang="es">Cuenta de Cargo</value>
+    </property>
+	<property key="CuentaAbono">
+    	<value xml:lang="en">Credit Accounts</value>
+    	<value xml:lang="es">Cuenta de Abono</value>
+    </property>
+	<property key="CatalogoCargo">
+    	<value xml:lang="en">Debit Catalog</value>
+    	<value xml:lang="es">Catálogo de Cargo</value>
+    </property>
+	<property key="CatalogoAbono">
+    	<value xml:lang="en">Credit Catalog</value>
+    	<value xml:lang="es">Catálogo de Abono</value>
+    </property>
+	<property key="Excepcion">
+    	<value xml:lang="en">Exception</value>
+    	<value xml:lang="es">Excepción a la Suma</value>
+    </property>
+	<property key="TransaccionesClave">
+    	<value xml:lang="en">Budget Entries</value>
+    	<value xml:lang="es">Transacciones por Clave Presupuestal</value>
+    </property> 
+	<property key="Concepto">
+    	<value xml:lang="en">Concept</value>
+    	<value xml:lang="es">Concepto</value>
+    </property>  
+	<property key="ImprimirPoliza">
+    	<value xml:lang="en">Print Policy</value>
+    	<value xml:lang="es">Imprimir Póliza</value>
+    </property>
+	<property key="FinancialsPoliza">
+    	<value xml:lang="en">Policy</value>
+    	<value xml:lang="es">Póliza</value>
+    </property>
+	<property key="FinancialsInfoClave">
+    	<value xml:lang="en">Budget Key Info</value>
+    	<value xml:lang="es">Información de Clave</value>
+    </property>   
+	<property key="FinancialsClavePresup">
+    	<value xml:lang="en">Budget Key</value>
+    	<value xml:lang="es">Clave Presupuestal</value>
+    </property>  
+	<property key="FinancialsClasificacion">
+    	<value xml:lang="en">Clasification</value>
+    	<value xml:lang="es">Clasificación</value>
+    </property>  
+	<property key="FinancialsEntidadContable">
+    	<value xml:lang="en">Accounting Entity</value>
+    	<value xml:lang="es">Entidad Contable</value>
+    </property>  
+	<property key="FinancialsTipoPoliza">
+    	<value xml:lang="en">Policy Type</value>
+    	<value xml:lang="es">Tipo de Póliza</value>
+    </property> 
+    <property key="FinancialsMovimiento">
+    	<value xml:lang="en">Motion</value>
+    	<value xml:lang="es">Movimiento</value>
+    </property> 
+	<property key="BuscarPolizas">
+    	<value xml:lang="en">Find Policy</value>
+    	<value xml:lang="es">Buscar Pólizas</value>
+    </property>  
+    <property key="VerPoliza">
+    	<value xml:lang="en">See Policy</value>
+    	<value xml:lang="es">Ver póliza</value>
+    </property>  
+    <property key="Reduccion">
+    	<value xml:lang="en">Reduction</value>
+    	<value xml:lang="es">Reducción</value>
+    </property>    
+    <property key="Ampliacion">
+    	<value xml:lang="en">Extension</value>
+    	<value xml:lang="es">Ampliación</value>
+    </property>    
+    <property key="CommonAnadir">
+    	<value xml:lang="en">Add</value>
+    	<value xml:lang="es">Añadir</value>
+    </property> 
+    <property key="Date">
+    	<value xml:lang="en">Date</value>
+    	<value xml:lang="es">Fecha</value>
+    </property> 
+    <property key="AmpliacionReduccion">
+    	<value xml:lang="en">Extension/Reduction</value>
+    	<value xml:lang="es">Ampliación/Reducción</value>
+    </property>  
+    <property key="ModificacionPresupuesto">
+    	<value xml:lang="en">Budget amendment</value>
+    	<value xml:lang="es">Modificación presupuestal</value>
+    </property> 
+    <property key="AfectacionPresupuestal">
+    	<value xml:lang="en">Budget involvement</value>
+    	<value xml:lang="es">Afectación presupuestal</value>
+    </property>
+    <property key="AfectacionPatrimonial">
+    	<value xml:lang="en">Asset allocation</value>
+    	<value xml:lang="es">Afectación patrimonial</value>
+    </property>  
+    <property key="NumeroAfectacion">
+    	<value xml:lang="en">Number allocation</value>
+    	<value xml:lang="es">Número de Afectacion</value>
+    </property>  
+    <property key="PaymentId">
+    	<value xml:lang="en">PaymentId</value>
+    	<value xml:lang="es">Tipo de pago</value>
+    </property>  
+	    <property key="PaymentMethodType">
+    	<value xml:lang="en">PaymentMethodType</value>
+    	<value xml:lang="es">Método de pago</value>
+    </property> 
+	    <property key="FinancialsPaymentNumRefer">
+    	<value xml:lang="en">FinancialsPaymentNumRefer</value>
+    	<value xml:lang="es">Número de referencia del pago</value>
+    </property>
+ 		    <property key="PurchBuscarAuxiliar">
+    	<value xml:lang="en">PurchBuscarAuxiliar</value>
+    	<value xml:lang="es">Buscar Auxiliar</value>
+    </property>
+	
+    <!-- Etiquetas para Impresion de Cheques -->
+    <property key="TitularFirma1">
+    	<value xml:lang="en">Signature holder 1</value>
+    	<value xml:lang="es">Titular de firma 1</value>
+    </property>        
+    <property key="PuestoTitularFirma1">
+    	<value xml:lang="en">Stall Holder Signature 1</value>
+    	<value xml:lang="es">Puesto de titular de firma 1</value>
+    </property>
+    <property key="TitularFirma2">
+    	<value xml:lang="en">Signature holder 2</value>
+    	<value xml:lang="es">Titular de firma 2</value>
+    </property>        
+    <property key="PuestoTitularFirma2">
+    	<value xml:lang="en">Stall Holder Signature 2</value>
+    	<value xml:lang="es">Puesto de titular de firma 2</value>
+    </property> 
+    <property key="FormuladoPor">
+    	<value xml:lang="en">Formulated by</value>
+    	<value xml:lang="es">Formulado por</value>
+    </property>
+    <property key="RevisadoPor">
+    	<value xml:lang="en">Reviewed by</value>
+    	<value xml:lang="es">Revisado por</value>
+    </property>  
+    <property key="AutorizadoPor">
+    	<value xml:lang="en">Authorized by</value>
+    	<value xml:lang="es">Autorizado por</value>
+    </property> 
+    <property key="AuxiliarPor">
+    	<value xml:lang="en">Auxiliar by</value>
+    	<value xml:lang="es">Auxiliar por</value>
+    </property> 
+    <property key="RecibidoPor">
+    	<value xml:lang="en">Received by</value>
+    	<value xml:lang="es">Recibido por</value>
+    </property> 
+    <property key="NumeroCheque">
+    	<value xml:lang="en">Check number</value>
+    	<value xml:lang="es">Número de cheque</value>
+    </property>
+    <property key="FinancialsCrearOrdenPago">
+    	<value xml:lang="en">Create Invoice</value>
+    	<value xml:lang="es">Crear orden de pago</value>
+    </property> 
+    <property key="FinancialsImprimeCheque">
+    	<value xml:lang="en">Print check</value>
+    	<value xml:lang="es">Imprime Cheque</value>
+    </property>      
+    <property key="FinancialsNombreCheque">
+    	<value xml:lang="en">Print check</value>
+    	<value xml:lang="es">Imprime Cheque</value>
+    </property> 
+    <property key="FinancialsNombreCheque">
+    	<value xml:lang="en">Print check</value>
+    	<value xml:lang="es">Imprime Cheque</value>
+    </property> 
+    <property key="FinancialsLugarCheque">
+    	<value xml:lang="en">Place</value>
+    	<value xml:lang="es">Lugar</value>
+    </property>
+    <property key="Beneficiario">
+    	<value xml:lang="en">Beneficiary</value>
+    	<value xml:lang="es">Beneficiario</value>
+    </property> 
+    <property key="FinancialsContabilidadElec">
+    	<value xml:lang="en">XML files</value>
+    	<value xml:lang="es">Archivos XML</value>
+    </property>  
+    <property key="FinancialsCatalogoCuentas">
+    	<value xml:lang="en">Chart of Accounts</value>
+    	<value xml:lang="es">Catálogo de cuentas</value>
+    </property>
+    <property key="FinancialsBalanzaComprobacion">
+    	<value xml:lang="en">Trial balance</value>
+    	<value xml:lang="es">Balanza de comprobación</value>
+    </property>
+	<!-- ===== Firma Electrónica ===== -->
+    <property key="FinancialsCertificado">
+    	<value xml:lang="en">Certificate (cer)</value>
+    	<value xml:lang="es">Certificado (cer)</value>
+    </property>
+    <property key="FinancialsClavePriv">
+    	<value xml:lang="en">Private key (cer)</value>
+    	<value xml:lang="es">Clave privada (key)</value>
+    </property>
+    <property key="FinancialsFirmar">
+    	<value xml:lang="en">Sign</value>
+    	<value xml:lang="es">Firmar</value>
+    </property>
+    <property key="FinancialsFirmantes">
+    	<value xml:lang="en">Report Signer (s)</value>
+    	<value xml:lang="es">Firmante(s) por reporte</value>
+    </property>
+    <property key="FinancialsConsultaMatriz">
+    	<value xml:lang="en">Consultar matriz de conversión</value>
+    </property>
+    <property key="FinancialsEditarMatriz">
+    	<value xml:lang="en">Editar matriz de conversión</value>
+    </property>
+    <property key="FinancialsReporteFirma">
+    	<value xml:lang="en">Report</value>
+    	<value xml:lang="es">Reporte</value>
+    </property>
+    <property key="ElegirFirmante">
+    	<value xml:lang="en">Choose signer</value>
+    	<value xml:lang="es">Elegir firmante</value>
+    </property>  
+    <property key="ReporteId">
+    	<value xml:lang="en">Report number</value>
+    	<value xml:lang="es">Número de reporte</value>
+    </property>
+    <property key="ReporteNombre">
+    	<value xml:lang="en">Report name</value>
+    	<value xml:lang="es">Nombre de reporte</value>
+    </property>
+    <property key="FirmanteId">
+    	<value xml:lang="en">Signer number</value>
+    	<value xml:lang="es">Número de firmante</value>
+    </property>
+    <property key="NombreFirmante">
+    	<value xml:lang="en">Signer name</value>
+    	<value xml:lang="es">Nombre de firmante</value>
+    </property>
+    <property key="ApellidosFirmante">
+    	<value xml:lang="en">Signer last name</value>
+    	<value xml:lang="es">Apellidos de firmante</value>
+    </property>
+    <property key="CommonReportsFirma">
+    	<value xml:lang="en">Signing report</value>
+    	<value xml:lang="es">Firmar reporte</value>
+    </property>
+    <property key="FinancialsReporteId">
+    	<value xml:lang="en">Report number</value>
+    	<value xml:lang="es">Número de reporte</value>
+    </property>
+    <property key="FinancialsWorkFlowId">
+    	<value xml:lang="en">Flow number</value>
+    	<value xml:lang="es">Número de flujo</value>
+    </property> 
+    <property key="FinancialsFechaEmision">
+    	<value xml:lang="en">Issuance date</value>
+    	<value xml:lang="es">Fecha de emisión</value>
+    </property>
+    <property key="DescEstatus">
+    	<value xml:lang="en">Estatus description</value>
+    	<value xml:lang="es">Descripción de estatus</value>
+    </property>
+    <property key="PdfOriginal">
+    	<value xml:lang="en">Original PDF</value>
+    	<value xml:lang="es">PDF original</value>
+    </property>
+    <property key="PdfFirmado">
+    	<value xml:lang="en">Signed PDF</value>
+    	<value xml:lang="es">PDF firmado</value>
+    </property>
+    <property key="ConsultaReportes">
+    	<value xml:lang="en">Find signed report</value>
+    	<value xml:lang="es">Consulta reporte firmado</value>
+    </property>
+    <property key="OpentapsReportesPendientesPorFirmarPendientes">
+    	<value xml:lang="en">Reports pending signing</value>
+    	<value xml:lang="es">Reportes pendientes por firmar</value>
+    </property>
+    <!-- ========== Etiquetas Reportes XML  ========= -->
+    <property key="ConfiguraReporteXML">
+    	<value xml:lang="en">Configure XML report</value>
+    	<value xml:lang="es">Configurar reporte XML</value>
+    </property>  
+    <property key="FinancialsReporte">
+    	<value xml:lang="en">Report</value>
+    	<value xml:lang="es">Reporte</value>
+    </property>
+    <property key="FinancialsReporteElemento">
+    	<value xml:lang="en">Report element</value>
+    	<value xml:lang="es">Elemento de reporte</value>
+    </property>  
+    <property key="FinancialsReporteFinanciero">
+    	<value xml:lang="en">Financial report</value>
+    	<value xml:lang="es">Reporte financiero</value>
+    </property>    
+    <property key="FinancialsReportePresupuestal">
+    	<value xml:lang="en">Budget report</value>
+    	<value xml:lang="es">Reporte presupuestal</value>
+    </property>
+    <property key="Cuenta">
+    	<value xml:lang="en">Account</value>
+    	<value xml:lang="es">Cuenta</value>
+    </property>
+    
+    <property key="Trans">
+    	<value xml:lang="en">Transaction</value>
+    	<value xml:lang="es">Transacción</value>
+    </property>
+    
+    <property key="lineaTrans">
+    	<value xml:lang="en">Transaction line</value>
+    	<value xml:lang="es">Línea transacción</value>
+    </property>
+         
+    <property key="lineasTrans">
+    	<value xml:lang="en">Transaction lines</value>
+    	<value xml:lang="es">Líneas transacción</value>
+    </property>
+    
+    <property key="flagDC">
+    	<value xml:lang="en">Movement</value>
+    	<value xml:lang="es">Movimiento</value>
+    </property>
+    
+    <property key="FinancialsTransSinEvento">
+    	<value xml:lang="es">Transacción sin evento</value>
+    </property>
+    
+    <property key="suficienciaPresupuestal">
+    	<value xml:lang="es">Suficiencia presupuestal</value>
+    </property>
+    <property key="AnadirArticulos">
+    	<value xml:lang="en">Add selected items</value>
+    	<value xml:lang="es">Añadir los artículos seleccionados</value>
+    </property>
+    <property key="Folio">
+    	<value xml:lang="en">Folio</value>
+    	<value xml:lang="es">Folio</value>
+    </property>
+    <property key="SupplierData">
+    	<value xml:lang="en">Supplier data</value>
+    	<value xml:lang="es">Datos del proveedor</value>
+    </property>
+    <property key="ProductDescription">
+    	<value xml:lang="en">Product description</value>
+    	<value xml:lang="es">Descripción del producto</value>
+    </property>
+    <property key="FechaImpresion">
+    	<value xml:lang="en">Product description</value>
+    	<value xml:lang="es">Fecha de impresión</value>
+    </property> 
+    <property key="ViaticoPolizaDevolucion">
+    	<value xml:lang="en">See return policy</value>
+    	<value xml:lang="es">Ver póliza de devolución</value>
+    </property>
+    <property key="ViaticoPolizaComprometida">
+    	<value xml:lang="en">See policy committed</value>
+    	<value xml:lang="es">Ver póliza comprometida</value>
+    </property> 
+    <property key="ViaticoPolizaComprobada">
+    	<value xml:lang="en">See checked policy</value>
+    	<value xml:lang="es">Ver póliza comprobada</value>
+    </property>  
+    <property key="PolizaAgrupada">
+    	<value xml:lang="en">See pooled policy</value>
+    	<value xml:lang="es">Ver póliza agrupada</value>
+    </property>
+    <property key="UnidadResponsable">
+    	<value xml:lang="en">Responsible unit</value>
+    	<value xml:lang="es">Unidad responsable</value>
+    </property>
+    <property key="TipoReporte">
+    	<value xml:lang="en">Report type</value>
+    	<value xml:lang="es">Tipo de reporte</value>
+    </property>
+     <property key="NombreCuenta">
+    	<value xml:lang="en">Account name</value>
+    	<value xml:lang="es">Nombre de cuenta</value>
+    </property>    
+	<property key="SARPTransferenciasPendientes">
+    	<value xml:lang="en">Pending transfers</value>
+    	<value xml:lang="es">Transferencias pendientes</value>
+    </property> 
+	<property key="Consecutivo">
+    	<value xml:lang="en">Consecutive</value>
+    	<value xml:lang="es">Consecutivo</value>
+    </property> 
+	<property key="ClaveSuperior">
+    	<value xml:lang="en">Top Key</value>
+    	<value xml:lang="es">Clave superior</value>
+    </property> 
+    <property key="isActive">
+    	<value xml:lang="en">Is Active?</value>
+    	<value xml:lang="es">Activa</value>
+    </property>
+    <property key="FinancialsFechaDesde">
+    	<value xml:lang="en">From date</value>
+    	<value xml:lang="es">Desde</value>
+    </property>
+    <property key="FinancialsFechaHasta">
+    	<value xml:lang="en">To date</value>
+    	<value xml:lang="es">Hasta</value>
+    </property>
+    <property key="FinancialsClavePresTipoCambio">    
+    	<value xml:lang="es">Clave Presupuestal de tipo de cambio</value>
+    </property>
+    <property key="OpentapsTipoDeCambioPendiente">
+    	<value xml:lang="en">Pending exchange rate</value>        	
+    	<value xml:lang="es">Capturar tipo de cambio diario</value>
+    </property>
+	<property key="SarpGastosPorAutorizar">
+		<value xml:lang="en">Expenses to reserve pending</value>
+		<value xml:lang="es">Gastos a reserva pendientes</value>
+	</property>
+	<property key="SarpPagosAnPorAutorizar">
+		<value xml:lang="en">Advance payments pending</value>
+		<value xml:lang="es">Pagos anticipados pendientes</value>
+	</property>
+</resource>

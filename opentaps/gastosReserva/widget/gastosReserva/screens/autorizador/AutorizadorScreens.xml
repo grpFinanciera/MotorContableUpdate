@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+            	<!-- <set field="requiredPermission" value="PRCH_VIATICOS"/> -->
+                <set field="sectionName" value="autorizador" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+     <screen name="emptyAutorizadorScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="GastosReservaAutorizador"/>  
+                <set field="sectionHeaderUiLabel" value="GastosReservaAutorizador"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="buscarGastoReservaAut">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="BuscarGastoReserva"/>  
+                <set field="sectionHeaderUiLabel" value="BuscarGastoReserva"/>  
+                <set field="requestGasto" value="verGastoReservaAut" />
+                <java location="com.absoluciones.gastosreserva.BusquedaGastosReserva" invoke="buscaGasto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/consultarGasto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/listaGasto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verGastoReservaAut">
+		<section>
+            <actions>
+                <set field="gastosReservaId"  value="${parameters.gastosReservaId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://gastosReserva/webapp/gastosReserva/WEB-INF/actions/solicitante/verGastoReserva.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/verGastoReserva.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <screen name="pendienteSolicitud">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Solicitudes Pendientes por Autorizar"/>
+                <set field="requestGasto" value="verGastoReservaAut" />
+                <set field="performFind" value="Y" />
+                <java location="com.absoluciones.gastosreserva.BusquedaGastosReserva" invoke="buscaGastoAutorizar"/>   
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://gastosReserva/webapp/gastosReserva/gastosReserva/listaGasto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

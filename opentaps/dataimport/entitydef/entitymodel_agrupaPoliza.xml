@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Control de creación de pólizas y agrupamiento de claves presupuestales</title>
+	<description>En estas entidades se define la generacion de la poliza y el agrupamiento que para las claves presupuestales</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<author>Omar Baños Magaña</author>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.dataimport -->
+	<!-- =========================== -->
+	<entity entity-name="PolizaAgrupa" package-name="org.opentaps.dataimport"
+		title="Entidad para llevar el control de las polizas">
+		<field name="idPolizaAgrupador" type="id-ne"></field>            
+	    <field name="partyId" type="id"></field>      
+	    <field name="statusId" type="id"></field>      
+	    <field name="fechaTransaccion" type="date-time"></field>
+	    <field name="fechaContable" type="date-time"></field>            
+	    <field name="idTipoDoc" type="id"/>
+	    <field name="transaccionRapida" type="indicator"/>
+	    <field name="bancoId" type="id"/>
+	    <field name="cuentaBancariaId" type="id"/>	    
+	    <field name="comentario" type="description"/>
+		<prim-key field="idPolizaAgrupador" />		
+	</entity>
+    
+    <view-entity entity-name="ImprimePolizaAgrupada" 
+    		package-name="mx.com.ab.contabilidad.entidades"
+    		title="Vista para el reporte de polizas agrupadas">
+    		
+    	<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+    	<member-entity entity-alias="GAC" entity-name="GlAccount"/>
+    	
+    	<alias entity-alias="ATR" name="acctgTransId"/>
+    	<alias entity-alias="ATR" name="postedDate" group-by="true"/>
+    	<alias entity-alias="GAC" name="glAccountId" group-by="true"/>
+    	<alias entity-alias="GAC" name="accountName" group-by="true"/>
+    	<alias entity-alias="ATE" name="debitCreditFlag" group-by="true"/>
+    	<alias entity-alias="ATE" name="amount" function="sum"/>
+    	<alias entity-alias="ATR" name="organizationPartyId"/>
+    	
+    	<view-link entity-alias="ATR" rel-entity-alias="ATE">
+        	<key-map field-name="acctgTransId"/>        
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="GAC">
+        	<key-map field-name="glAccountId"/>        
+      	</view-link>
+    	  	
+    </view-entity>
+    
+    <view-entity entity-name="ImprimePolizaNoAgrupada" 
+    		package-name="mx.com.ab.contabilidad.entidades"
+    		title="Vista para el reporte de polizas no agrupadas">
+    		
+    	<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+    	<member-entity entity-alias="GAC" entity-name="GlAccount"/>
+    	<member-entity entity-alias="CB" entity-name="CuentaBancaria"/>
+    	<member-entity entity-alias="PAG" entity-name="PartyGroup"/>
+    	<member-entity entity-alias="PE" entity-name="Person"/>
+    	
+    	<alias entity-alias="ATR" name="acctgTransId"/>
+    	<alias entity-alias="ATE" name="theirPartyId"/>
+    	<alias entity-alias="ATR" name="postedDate"/>
+    	<alias entity-alias="GAC" name="glAccountId"/>
+    	<alias entity-alias="GAC" name="accountName"/>
+    	<alias entity-alias="ATE" name="debitCreditFlag"/>
+    	<alias entity-alias="ATE" name="amount"/>
+    	<alias entity-alias="ATR" name="organizationPartyId"/>
+    	<alias entity-alias="CB" name="cuentaBancariaId"/>
+    	
+    	<view-link entity-alias="ATR" rel-entity-alias="ATE">
+        	<key-map field-name="acctgTransId"/>        
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="GAC">
+        	<key-map field-name="glAccountId"/>        
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="PAG" rel-optional="true" >
+      		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="PE" rel-optional="true">
+      		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      	</view-link>
+      	<view-link entity-alias="ATE" rel-entity-alias="CB" rel-optional="true">
+      		<key-map field-name="cuentaBancariaId"/>
+      	</view-link>
+      	<relation fk-name="ACCTE_CUENTA" rel-entity-name="CuentaBancaria" type="one" >
+      		<key-map field-name="cuentaBancariaId" />
+      	</relation>
+      	<relation fk-name="ACCTE_PARTYG" rel-entity-name="PartyGroup" type="one">
+      		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      	</relation>
+      	<relation fk-name="ACCTE_PERSON" rel-entity-name="Person" type="one">
+      		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      	</relation>
+    	  	
+    </view-entity>    
+    
+   	<view-entity entity-name="AcctgTransPolizaProductParty"
+            package-name="org.ab.accounting.ledger"
+            title="Vista para consultar el detalle de la poliza en acctgtrans y las claves presupuestales">            
+      <member-entity entity-alias="ACT" entity-name="AcctgTrans"/>
+      <member-entity entity-alias="PRO" entity-name="Product"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>            
+      <alias entity-alias="ACT" name="poliza"/>
+      <alias entity-alias="ACT" name="acctgTransId"/>
+      <alias entity-alias="ACT" name="postedAmount"/>
+      <alias entity-alias="ACT" name="tipoPolizaId"/>
+      <alias entity-alias="ACT" name="organizationPartyId"/>              
+      <alias entity-alias="PRO" name="productName"/>               
+      <alias entity-alias="PRO" name="description"/>      
+      <alias entity-alias="PAG" name="groupName"/>      
+      <view-link entity-alias="PRO" rel-entity-alias="ACT">
+        <key-map field-name="productId"/>        
+      </view-link>
+      <view-link entity-alias="ACT" rel-entity-alias="PAG">
+        <key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      </view-link>                                                                                                                         
+    </view-entity>
+    
+    
+    <view-entity entity-name="AcctgTransPolizaConProduct"
+            package-name="org.ab.accounting.ledger"
+            title="Vista para consultar el detalle de la poliza en acctgtrans y las claves presupuestales">            
+      <member-entity entity-alias="ACT" entity-name="AcctgTrans"/>
+      <member-entity entity-alias="PRO" entity-name="Product"/> 
+      <alias entity-alias="ACT" name="poliza"/>
+      <alias entity-alias="ACT" name="acctgTransId"/>
+      <alias entity-alias="ACT" name="postedAmount"/>
+      <alias entity-alias="ACT" name="tipoPolizaId"/>   
+      <alias entity-alias="ACT" name="organizationPartyId"/>     
+      <alias entity-alias="PRO" name="productName"/>               
+      <alias entity-alias="PRO" name="description"/>            
+      <view-link entity-alias="PRO" rel-entity-alias="ACT">
+        <key-map field-name="productId"/>        
+      </view-link>                                                                                                                              
+    </view-entity>
+    
+    <view-entity entity-name="AcctgTransPolizaConParty"
+            package-name="org.ab.accounting.ledger"
+            title="Vista para consultar el detalle de la poliza en acctgtrans y las claves presupuestales">            
+      <member-entity entity-alias="ACT" entity-name="AcctgTrans"/>
+      <member-entity entity-alias="PAG" entity-name="PartyGroup"/>            
+      <alias entity-alias="ACT" name="poliza"/>
+      <alias entity-alias="ACT" name="acctgTransId"/>
+      <alias entity-alias="ACT" name="postedAmount"/>
+      <alias entity-alias="ACT" name="tipoPolizaId"/>  
+      <alias entity-alias="ACT" name="organizationPartyId"/>                  
+      <alias entity-alias="PAG" name="groupName"/>            
+      <view-link entity-alias="ACT" rel-entity-alias="PAG">
+        <key-map field-name="theirPartyId" rel-field-name="partyId"/>
+      </view-link>                                                                                                                         
+    </view-entity>
+    
+    <view-entity entity-name="AcctgPolizas"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Permite la búsqueda de pólizas por agrupador presupuestal">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+       <member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+       <member-entity entity-alias="ECP" entity-name="Evento"/>
+       <member-entity entity-alias="TDC" entity-name="TipoDocumento"/>
+       <member-entity entity-alias="TPG" entity-name="PartyGroup"/>
+       <member-entity entity-alias="TP" entity-name="TipoPoliza"/>
+
+       <alias name="poliza" entity-alias="ATR" group-by="true"/>
+       <alias name="tipoPolizaId" entity-alias="ATR" group-by="true"/>
+       <alias name="amount" entity-alias="ATE" function="sum"/>       
+       <alias name="postedDate" entity-alias="ATR" group-by="true"/>              
+       <alias name="idTipoDoc" entity-alias="TDC" group-by="true"/>
+       <alias name="descripcion" entity-alias="TDC" group-by="true"/>
+       <alias name="organizationPartyId" entity-alias="ATE" group-by="true"/>
+       <alias name="debitCreditFlag" entity-alias="ATE" group-by="true"/>
+       <alias name="groupName" entity-alias="TPG" group-by="true"/>
+       <alias name="description" entity-alias="ATR" group-by="true"/>
+       <alias name="descriptionTipoP" field="description" entity-alias="TP" group-by="true"/>
+
+       <view-link entity-alias="ATR" rel-entity-alias="ATE">
+           <key-map field-name="acctgTransId"/>
+       </view-link>
+       <view-link entity-alias="ATR" rel-entity-alias="TDC" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>              
+       <view-link entity-alias="TDC" rel-entity-alias="ECP" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>  
+       <view-link entity-alias="ATR" rel-entity-alias="TPG" >
+           <key-map field-name="organizationPartyId" rel-field-name="partyId"/>
+       </view-link> 
+       <view-link entity-alias="ATR" rel-entity-alias="TP" >
+           <key-map field-name="tipoPolizaId"/>
+       </view-link>             
+    </view-entity>
+    
+     <view-entity entity-name="AcctgPolizasDetalleLista"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Arroja el detalle de las pólizas contables">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+       <member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+       <member-entity entity-alias="TDC" entity-name="TipoDocumento"/>
+       <member-entity entity-alias="ECP" entity-name="Evento"/>       
+       <member-entity entity-alias="PAG" entity-name="PartyGroup"/>                     
+
+	   
+	   <alias name="poliza" entity-alias="ATR" group-by="true"/>
+	   <alias name="postedDate" entity-alias="ATR" group-by="true"/>
+	   <alias name="tipoPolizaId" entity-alias="ATR" group-by="true"/>
+	   <alias name="description" entity-alias="ATR" group-by="true"/>
+	   <alias name="descripcion" entity-alias="TDC" group-by="true"/>	   
+	   <alias name="tipoPolizaIdCont" entity-alias="ECP" group-by="true"/>
+	   <alias name="tipoPolizaIdPres" entity-alias="ECP" group-by="true"/>	   
+	   <alias name="groupName" entity-alias="PAG" group-by="true"/>	 
+	   <alias name="amount" entity-alias="ATE" function="sum"/>
+	   <alias name="currencyUomId" entity-alias="ATE" group-by="true"/>	
+	   <alias name="debitCreditFlag" entity-alias="ATE" group-by="true"/>	
+	   <alias name="organizationPartyId" entity-alias="ATR" group-by="true"/>   	     
+       
+       <view-link entity-alias="ATR" rel-entity-alias="ATE">
+           <key-map field-name="acctgTransId"/>
+       </view-link>
+       <view-link entity-alias="ATR" rel-entity-alias="TDC" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>
+       <view-link entity-alias="TDC" rel-entity-alias="ECP" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>                                              
+       <view-link entity-alias="ATE" rel-entity-alias="PAG">
+           <key-map field-name="organizationPartyId" rel-field-name="partyId"/>
+       </view-link>
+    </view-entity>
+    
+    <view-entity entity-name="AcctgPolizasDetalleListado"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Arroja el detalle de las pólizas contables, a nivel transacción">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/> 
+       <member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+       <member-entity entity-alias="GLA" entity-name="GlAccount"/>       
+
+	   <alias name="glAccountId" entity-alias="ATE" group-by="true"/>
+	   <alias name="poliza" entity-alias="ATR" group-by="true"/>	 
+	   <alias name="tipoPolizaId" entity-alias="ATR" group-by="true"/>	  
+	   <alias name="accountName" entity-alias="GLA" group-by="true"/>	   
+	   <alias name="debitCreditFlag" entity-alias="ATE" group-by="true"/>	   
+	   <alias name="organizationPartyId" entity-alias="ATR" group-by="true"/>
+	   <alias name="currencyUomId" entity-alias="ATE" group-by="true"/> 
+	   <alias name="amount" entity-alias="ATE" function="sum"/>	     	   	   
+              
+       <view-link entity-alias="ATR" rel-entity-alias="ATE">
+           <key-map field-name="acctgTransId"/>
+       </view-link>
+       <view-link entity-alias="ATE" rel-entity-alias="GLA" rel-optional="true">
+           <key-map field-name="glAccountId"/>
+       </view-link>
+    </view-entity>
+    
+    <view-entity entity-name="AcctgPolizasClavesPresup"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Arroja el listado de Claves Presupuestales de la Póliza">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+                                   
+	   <alias name="poliza" entity-alias="ATR" group-by="true"/>	   
+	   <alias name="tipoPolizaId" entity-alias="ATR" group-by="true"/>	
+	   <alias name="organizationPartyId" entity-alias="ATR" group-by="true"/>  	   	                  
+    </view-entity>
+    
+    <view-entity entity-name="AcctgPolizasMontoOperacion"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Arroja el monto de operacion dado un agrupador de Poliza">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+       <member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>                           
+
+	   <alias name="poliza" entity-alias="ATR" group-by="true"/>
+	   <alias name="tipoPolizaId" entity-alias="ATR" group-by="true"/>
+	   <alias name="glAccountId" entity-alias="ATE" group-by="true"/>	   	 
+	   <alias name="amount" entity-alias="ATE" function="sum"/>
+	   <alias name="debitCreditFlag" entity-alias="ATE" group-by="true"/>
+	   <alias name="organizationPartyId" entity-alias="ATR" group-by="true"/>  	   	   	    
+       
+       <view-link entity-alias="ATR" rel-entity-alias="ATE">
+           <key-map field-name="acctgTransId"/>
+       </view-link>       
+    </view-entity>        
+    
+    <view-entity entity-name="AcctgPolizasDetalle"
+                 package-name="com.opensourcestrategies.financials.transactions"
+                 title="Arroja el detalle de las pólizas contables">
+       <member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+       <member-entity entity-alias="ECP" entity-name="Evento"/>
+       <member-entity entity-alias="TDC" entity-name="TipoDocumento"/>
+
+	   <alias name="acctgTransId" entity-alias="ATR"/>
+       <alias name="descripcion" entity-alias="TDC"/>
+       <alias name="tipoPolizaIdCont" entity-alias="ECP" group-by="true"/>
+
+       <view-link entity-alias="TDC" rel-entity-alias="ECP" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>
+       <view-link entity-alias="ATR" rel-entity-alias="TDC" >
+           <key-map field-name="acctgTransTypeId"/>
+       </view-link>                                       
+    </view-entity>
+    
+	<view-entity entity-name="BusquedaPoliza"
+			package-name="com.opensourcestrategies.financials.ledger"
+			title="Busqueda de Poliza y su descripcion">
+		<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+		<alias entity-alias="ATR" name="organizationPartyId" group-by="true"/>
+		<alias entity-alias="ATR" name="poliza" group-by="true"/>
+		<alias entity-alias="ATR" name="tipoPolizaId" group-by="true"/>
+		<alias entity-alias="ATR" name="description" group-by="true"/>
+		<view-link entity-alias="ATR" rel-entity-alias="ATE">
+        	<key-map field-name="acctgTransId"/>
+      	</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="AgrupadorClaves"
+			package-name="com.opensourcestrategies.financials.ledger"
+			title="Busqueda de Claves Presupuestales por Agrupador">
+		<member-entity entity-alias="ATR" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry"/>
+		<alias entity-alias="ATE" name="currencyUomId" group-by="true"/>
+		<alias entity-alias="ATR" name="poliza" group-by="true"/>
+		<alias entity-alias="ATR" name="postedAmount" group-by="true"/>
+		<alias entity-alias="ATR" name="productId" group-by="true"/>
+		<alias entity-alias="ATR" name="tipoPolizaId" group-by="true"/>
+		<view-link entity-alias="ATR" rel-entity-alias="ATE">
+        	<key-map field-name="acctgTransId"/>
+      	</view-link>
+	</view-entity>
+      
+</entitymodel>

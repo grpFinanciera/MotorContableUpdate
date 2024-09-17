@@ -1,0 +1,4 @@
+import org.ofbiz.base.util.*;
+
+Programa = delegator.findAll("ProgramaViatico", UtilMisc.toList("programaId"));
+context.put("Programa",Programa);

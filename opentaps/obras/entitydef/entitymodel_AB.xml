@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+    <!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para modulo de  Obras</title>
+	<description>Define las entidades para Obras</description>
+	<version>1.0</version>
+   
+   <entity entity-name="ExpedienteTecnicoObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica el catalogo de expedientes qeu debe contener la obra">
+		<field name="expedienteTecId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<field name="esDocContrato" type="indicator" />
+		<field name="esDocComplementario" type="indicator" />
+		<field name="esFiniquitoObra" type="indicator" />
+		<field name="esModifMonto" type="indicator" />
+		<field name="esModifPlazo" type="indicator" />
+		<prim-key field="expedienteTecId" />
+	</entity>
+	
+	<entity entity-name="OficioObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica los diferentes tipos de oficios que puede contener la obra">
+		<field name="oficioObraId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<prim-key field="oficioObraId" />
+	</entity>
+	
+	<entity entity-name="DetalleObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica el detalle de los diferentes tipos de oficios que existiran en la Obra">
+		<field name="detalleObraId" type="id-ne" />
+		<field name="obraId" type="id-ne" />
+		<field name="oficioObraId" type="id-ne" />
+		<field name="numOficio" type="description" />
+		<field name="fechaOficio" type="date-time" />
+		<prim-key field="detalleObraId" />
+	</entity>
+	
+	<entity entity-name="Obra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica los datos generales que conforman la Obra que se esta llevando a cabo dentro de la organizacion">
+		<!--  Datos para la creación de la Obra -->
+		<field name="obraId" type="id-ne" />
+		<field name="ubicacionFisica" type="id-ne"></field>
+		<field name="clavePresupuestal" type="description"/>
+		<field name="nombre" type="long-varchar" />
+		<field name="descripcion" type="description" />
+		<field name="justificacion" type="long-varchar" />
+		<field name="numAutCarteraInversion" type="long-varchar"/>
+		<field name="montoAutorizado" type="currency-amount"/>
+		<field name="fechaInicio" type="date-time" />
+		<field name="fechaFin" type="date-time" />
+		<field name="valorObra" type="fixed-point"/>
+		<field name="moneda" type="id"/>
+		<field name="statusId" type="id-ne" />		
+		<field name="productId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne" />
+		<!-- Datos de la autorizacion de la Obra -->
+		<field name="areaPartyId" type="id-ne"/>
+		<field name="personaSolicitanteId" type="id-ne"/>
+		<field name="fechaAutorizacion" type="date-time" />
+		<!--  Datos para el Inicio de la Obra -->				
+		<!-- <field name="retencionMillar" type="short-varchar"/>-->
+		<!-- <field name="retencionCMIC" type="short-varchar"/>-->
+		<!-- <field name="retencionNomina" type="short-varchar"/>-->		
+		<!--  Documentos Complementarios -->
+		<field name="numOficioAvisoInicio" type="long-varchar"/>
+		<field name="numOficioAvisoTerminacion" type="long-varchar"/>
+		<field name="numOficioIncrementoAnticipo" type="long-varchar"/>
+		<field name="numOficioPrecioUnitario" type="long-varchar"/>								
+		<!--  Datos de la Modificación a los precios de Ampliación -->
+		<field name="numOficioJustificacionTec" type="long-varchar"/>
+		<field name="numOficioAutorizacionSFP" type="long-varchar"/>
+		<field name="numOficioAutorizaContratant" type="long-varchar"/>
+		<field name="numOficioTarjetas" type="long-varchar"/>
+		<field name="numOficioConvenioModif" type="long-varchar"/>
+		<field name="numOficioPresupuesto" type="long-varchar"/>
+		<field name="numOficioFianzaCumplimiento" type="long-varchar"/>
+		<field name="numOficioFianzaAmpliacion" type="long-varchar"/>
+		<!--  Datos de la Modificación al Calendario del Plazo de Ejecución -->
+		<field name="numOficioJustificaciTecMpa" type="long-varchar"/>
+		<field name="numOficioAutorizacioSfpMpa" type="long-varchar"/>
+		<field name="numOficioDictamenContrate" type="long-varchar"/>
+		<field name="numOficioConvenio" type="long-varchar"/>
+		<field name="numOficioCalendarEjecucion" type="long-varchar"/>
+		<field name="numOficioModifFianzaCumpl" type="long-varchar"/>
+        <field name="acctgTagEnumId1" type="id-ne"/>
+        <field name="acctgTagEnumId2" type="id-ne"/>
+        <field name="acctgTagEnumId3" type="id-ne"/>
+        <field name="acctgTagEnumId4" type="id-ne"/>
+        <field name="acctgTagEnumId5" type="id-ne"/>
+        <field name="acctgTagEnumId6" type="id-ne"/>
+        <field name="acctgTagEnumId7" type="id-ne"/>
+        <field name="acctgTagEnumId8" type="id-ne"/>
+        <field name="acctgTagEnumId9" type="id-ne"/>
+        <field name="acctgTagEnumId10" type="id-ne"/>
+        <field name="acctgTagEnumId11" type="id-ne"/>
+        <field name="acctgTagEnumId12" type="id-ne"/>
+        <field name="acctgTagEnumId13" type="id-ne"/>
+        <field name="acctgTagEnumId14" type="id-ne"/>
+        <field name="acctgTagEnumId15" type="id-ne"/>
+        <field name="acctgTagEnumIdAdmin" type="id-ne"/>
+        <prim-key field="obraId" />
+		<relation type="one" fk-name="OBRA_UOMID" rel-entity-name="Uom">
+			<key-map field-name="moneda" rel-field-name="uomId" />
+		</relation>		        
+		<relation type="one" fk-name="FK_DBO_OBRA_ADMIN" title="admin" rel-entity-name="Party">
+        	<key-map field-name="acctgTagEnumIdAdmin" rel-field-name="partyId"/>       	        	
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_OBRA_ORG" title="organization" rel-entity-name="Party">
+        	<key-map field-name="organizationPartyId" rel-field-name="partyId"/>
+<!--         	<key-map field-name="proveedor" rel-field-name="partyId"/> -->        	        	
+      	</relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG1" title="tag1">
+            <key-map field-name="acctgTagEnumId1" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG2" title="tag2">
+            <key-map field-name="acctgTagEnumId2" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG3" title="tag3">
+            <key-map field-name="acctgTagEnumId3" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG4" title="tag4">
+            <key-map field-name="acctgTagEnumId4" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG5" title="tag5">
+            <key-map field-name="acctgTagEnumId5" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG6" title="tag6">
+            <key-map field-name="acctgTagEnumId6" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG7" title="tag7">
+            <key-map field-name="acctgTagEnumId7" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG8" title="tag8">
+            <key-map field-name="acctgTagEnumId8" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG9" title="tag9">
+            <key-map field-name="acctgTagEnumId9" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG10" title="tag10">
+            <key-map field-name="acctgTagEnumId10" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG11" title="tag11">
+            <key-map field-name="acctgTagEnumId11" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG12" title="tag12">
+            <key-map field-name="acctgTagEnumId12" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG13" title="tag13">
+            <key-map field-name="acctgTagEnumId13" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG14" title="tag14">
+            <key-map field-name="acctgTagEnumId14" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="OBRA_TAG15" title="tag15">
+            <key-map field-name="acctgTagEnumId15" rel-field-name="enumId"/>
+        </relation>        		
+		<relation type="one" fk-name="CONT_MECH_OBRA" rel-entity-name="ContactMech">
+        	<key-map field-name="ubicacionFisica" rel-field-name="contactMechId"/>
+     	</relation>
+     	<relation type="one" fk-name="CLAVE_OBRA" rel-entity-name="ClavePresupuestal">
+        	<key-map field-name="clavePresupuestal"/>
+     	</relation>     	
+     	<relation type="one" fk-name="STATUS_OBRA" rel-entity-name="Estatus">
+        	<key-map field-name="statusId"/>
+     	</relation>     	
+     	<relation type="one" fk-name="PRODUCTO_OBRA" rel-entity-name="Product">
+        	<key-map field-name="productId"/>
+     	</relation>     	        	      
+	</entity>
+	
+	<entity entity-name="ContratoObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica la relacion entre una obra y sus contratos">		
+		<field name="contratoId" type="id-ne" />
+		<field name="secuencia" type="numeric" />
+		<field name="valorContrato" type="currency-amount"/>
+		<field name="valorContratoConIva" type="currency-amount"/>
+		<field name="iva" type="short-varchar"/>
+		<field name="montoIva" type="currency-amount"/>
+		<field name="porcentajeAnticipo" type="short-varchar"/>
+		<field name="montoAnticipo" type="currency-amount"/>
+		<field name="porcentajeValorManoObra" type="short-varchar"/>
+		<field name="montoInsumoManoObra" type="currency-amount"/>				
+		<field name="numContrato" type="long-varchar"/>
+		<field name="descripcion" type="description"/>
+		<field name="numReciboAnticipo" type="long-varchar"/>
+		<field name="numGarantiaAnticipo" type="long-varchar"/>
+		<field name="numGarantiaCumplimiento" type="long-varchar"/>
+		<field name="contratistaId" type="id-ne"/>
+		<field name="productId" type="id-ne"/>
+		<field name="statusId" type="id-ne" />
+		<field name="statusAnticipoId" type="id-ne" />
+		<field name="obraId" type="id-ne" />
+		<field name="moneda" type="id-ne" />
+		<field name="fechaRealInicio" type="date-time" />
+		<field name="fechaRealFin" type="date-time" />
+		<prim-key field="contratoId" />
+		<relation type="one" fk-name="CONTRATISTA" rel-entity-name="Party">
+        	<key-map field-name="contratistaId" rel-field-name="partyId"/>
+     	</relation>
+     	<relation type="one" fk-name="STATUS_CONTRATO" rel-entity-name="Estatus">
+        	<key-map field-name="statusAnticipoId" rel-field-name="statusId"/>
+     	</relation>
+     	<relation type="one" fk-name="OBRA_CONTRATO" rel-entity-name="Obra">
+        	<key-map field-name="obraId"/>
+     	</relation>
+     	<relation type="one" fk-name="FK_DBO_PRD_CTO_OBR" rel-entity-name="Product">
+        	<key-map field-name="productId"/>
+     	</relation>     	
+	</entity>
+	
+	<entity entity-name="FiniquitoContrato"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica la relacion entre un contrato y el finiquito de la obra">		
+		<field name="finiquitoId" type="id-ne" />
+		<field name="contratoId" type="id-ne" />
+		<field name="obraId" type="id-ne" />
+		<field name="numOficioEntregaFisica" type="long-varchar"/>
+		<field name="numOficioEntregaRecepcion" type="long-varchar"/>
+		<field name="numOficioViciosOcultos" type="long-varchar"/>
+		<field name="numOficioFiniquitoContrato" type="long-varchar"/>
+		<field name="numOficioExtincionDerechos" type="long-varchar"/>
+		<field name="numOficioPlanosDefinitivos" type="long-varchar"/>
+		<field name="numOficioCatalogoConcepto" type="long-varchar"/>		
+		<prim-key field="finiquitoId" />
+		<relation type="one" fk-name="CONTRATO_FINIQUITO" rel-entity-name="ContratoObra">
+        	<key-map field-name="contratoId"/>
+     	</relation>
+     	<relation type="one" fk-name="OBRA_FINIQUITO" rel-entity-name="Obra">
+        	<key-map field-name="obraId"/>
+     	</relation>     	     
+	</entity>
+	
+	<entity entity-name="ContratoRetencion"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica la relacion entre un contrato de obra y las retenciones que contiene">		
+		<field name="contratoId" type="id-ne" />
+		<field name="retencionId" type="id-ne" />
+		<field name="tipoContrato" type="id-ne"/>			
+		<prim-key field="contratoId" />
+		<prim-key field="retencionId" />
+		<relation type="one" fk-name="FK_DBO_CTO_RET" rel-entity-name="ContratoObra">
+        	<key-map field-name="contratoId"/>
+     	</relation>     	
+     	<relation type="one" fk-name="FK_DBO_RET" rel-entity-name="Retencion">
+        	<key-map field-name="retencionId"/>
+     	</relation>     	     
+	</entity>
+	
+	<entity entity-name="ContratoPeriodo"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que almacena la relacion entre el contrato y sus periodos de avance">		
+		<field name="contratoPeriodoId" type="id-ne" />
+		<field name="secuencia" type="numeric" />
+		<field name="contratoId" type="id-ne" />
+		<field name="obraId" type="id-ne" />
+		<field name="mes" type="id-ne" />
+		<field name="ciclo" type="id-ne"/>
+		<field name="monto" type="fixed-point"></field>			
+		<prim-key field="contratoPeriodoId" />		
+		<relation type="one" fk-name="FK_DBO_CTO_PER" rel-entity-name="ContratoObra">
+        	<key-map field-name="contratoId"/>
+     	</relation>
+     	<relation type="one" fk-name="FK_DBO_OBRA" rel-entity-name="Obra">
+        	<key-map field-name="obraId"/>
+     	</relation>     	     	    
+	</entity>
+	
+	<entity entity-name="Retencion"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que almacena el catalogo de retenciones">		
+		<field name="retencionId" type="id-ne" />
+		<field name="nombreRetencion" type="id-long" />
+		<field name="descripcion" type="description"/>
+		<field name="porcentaje" type="fixed-point" />
+		<field name="auxiliar" type="id-ne" />			
+		<prim-key field="retencionId" />		     	    
+	</entity>
+	
+	<entity entity-name="SeguimientoObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica el detalle del seguimiento de la Obra, otorgando el porcentaje de termino de la Obra">
+		<field name="avanceId" type="id-ne" />
+		<field name="obraId" type="id-ne" />
+		<field name="contratoId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<field name="porcentajeAvance" type="currency-amount" />
+		<field name="montoAvance" type="currency-amount" />
+		<field name="montoIva" type="currency-amount" />
+		<field name="montoAvanceConIva" type="currency-amount"/> 
+		<field name="montoAmortizacion" type="currency-amount" />
+		<field name="montoAnticipo" type="currency-amount" />
+		<field name="pagoNeto" type="currency-amount" />
+		<field name="montoRestante" type="currency-amount" />
+		<field name="fechaAvance" type="date-time" />
+		<field name="agrupador" type="id-ne"/>
+		<field name="tipoPolizaId" type="id" />
+		<field name="acctgTransId" type="id-ne" />
+		<field name="fechaRealInicio" type="date-time" />
+		<field name="fechaRealFin" type="date-time" />
+		<field name="userLoginId" type="id-vlong-ne"></field>
+		<prim-key field="avanceId" />
+		<relation type="one" fk-name="FK_DBO_SEG_OBRA" rel-entity-name="Obra">
+        	<key-map field-name="obraId"/>
+     	</relation>
+     	<relation type="one" fk-name="TPCPRE" 
+			rel-entity-name="TipoPoliza">
+			<key-map field-name="tipoPolizaId"/>
+		</relation> 
+		<relation type="one" fk-name="FK_DBO_USR_OBRUSR" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_CTO_SEG" rel-entity-name="ContratoObra">
+        	<key-map field-name="contratoId"/>
+     	</relation>
+     	<relation type="one" fk-name="ACCTGSEGUIMIENTO" rel-entity-name="AcctgTrans">
+        	<key-map field-name="acctgTransId"/>
+     	</relation>
+	</entity>
+	
+	<entity entity-name="OrdenPagoObra"
+		package-name="com.absoluciones.obras" 
+		title="Entidad que indica el detalle el identificador de las ordenes de pago para la obra">
+		<field name="ordenPagoId" type="id-ne" />
+		<field name="avanceId" type="id-ne" />
+		<field name="monto" type="currency-amount"/>
+		<field name="invoiceId" type="id-ne"></field>
+		<prim-key field="ordenPagoId" />
+		<relation type="one" fk-name="AVANCE_SEGUIMIENTO" rel-entity-name="SeguimientoObra">
+        	<key-map field-name="avanceId"/>
+     	</relation>
+		<relation type="one" fk-name="INVPRE" 
+			rel-entity-name="Invoice">
+			<key-map field-name="invoiceId"/>
+		</relation> 
+	</entity>
+	
+	<entity entity-name="ObraContactMech"
+		package-name="com.absoluciones.obras.contact"
+		title="Mecanismo de la Contacto de la Obra">
+		<field name="obraId" type="id-ne"/>
+		<field name="contactMechId" type="id-ne"/>
+		<prim-key field="obraId"/>
+		<prim-key field="contactMechId"/>
+     	<relation type="one" fk-name="FK_DBO_OBR_CON_MEC" rel-entity-name="Obra">
+        	<key-map  field-name="obraId"/>
+     	</relation>		
+		<relation type="one" fk-name="OBRA_CMECH_CM" rel-entity-name="ContactMech">
+		  <key-map field-name="contactMechId"/>
+		</relation>     	
+	</entity>
+
+    <entity entity-name="ObraContactMechPurpose"
+            package-name="com.absoluciones.obras.contact"
+            never-cache="true"
+            title="Obras Mecanismo de contacto">
+		<field name="obraId" type="id-ne"></field>
+		<field name="contactMechPurposeTypeId" type="id-ne"></field>
+		<field name="contactMechId" type="id-ne"></field>
+		<prim-key field="obraId"/>
+		<prim-key field="contactMechPurposeTypeId"/>
+		<prim-key field="contactMechId"/>
+		<relation type="one" fk-name="FK_DBO_OBR_CON_PRP" rel-entity-name="Obra">
+		  	<key-map  field-name="obraId"/>
+		</relation>		      
+		<relation type="one" fk-name="OBRA_CMECH_PRP" rel-entity-name="ContactMech">
+		  <key-map field-name="contactMechId"/>
+		</relation>
+      <relation type="one" fk-name="OBRA_CMECH_CMPT" rel-entity-name="ContactMechPurposeType">
+        <key-map field-name="contactMechPurposeTypeId"/>
+      </relation>
+    </entity>
+	
+	<!-- Vista para encontrar solicitud -->
+	<view-entity entity-name="BuscarSolicitud"
+		package-name="com.absoluciones.obras"
+		title="Permite la búsqueda de solicitudes.">
+		<member-entity entity-alias="OBR" entity-name="Obra" />
+		<member-entity entity-alias="EST" entity-name="Estatus" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="obraId" entity-alias="OBR" group-by="true" />
+		<alias name="statusId" entity-alias="OBR" group-by="true" />
+		<alias name="descripcion" entity-alias="EST" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="OBR" group-by="true" />
+		<alias name="fechaAutorizacion" entity-alias="OBR" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="OBR" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<view-link entity-alias="OBR" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="OBR" rel-entity-alias="EST">
+			<key-map field-name="statusId"/>
+		</view-link>
+	</view-entity>		
+
+	<!-- Vista para consultar Contratos -->
+	<view-entity entity-name="BuscarContrato"
+		package-name="com.absoluciones.obras"
+		title="Permite la búsqueda de contratos de obra">
+		<member-entity entity-alias="CON" entity-name="ContratoObra" />
+		<member-entity entity-alias="PAR" entity-name="PartyGroup" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<alias name="obraId" entity-alias="CON" group-by="true" />
+		<alias name="secuencia" entity-alias="CON" group-by="true" />
+		<alias name="contratoId" entity-alias="CON" group-by="true" />
+		<alias name="numContrato" entity-alias="CON" group-by="true" />
+		<alias name="contratistaId" entity-alias="CON" group-by="true" />
+		<alias name="productId" entity-alias="CON" group-by="true" />
+		<alias name="statusId" entity-alias="CON" group-by="true" />
+		<alias name="descripcion" entity-alias="CON" group-by="true" />
+		<alias name="groupName" entity-alias="PAR" group-by="true" />
+		<alias name="internalName" entity-alias="PRO" group-by="true" />
+		<view-link entity-alias="PRO" rel-entity-alias="CON">
+			<key-map field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="PAR">
+			<key-map field-name="contratistaId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+	
+	<!-- Vista para mostrar las retenciones de un contrato de obra -->
+	<view-entity entity-name="BuscaRetencionesContrato"
+		package-name="com.absoluciones.obras"
+		title="Realiza consulta de retenciones de un contrato de obra">
+		<member-entity entity-alias="CRE" entity-name="ContratoRetencion" />
+		<member-entity entity-alias="PAR" entity-name="PartyGroup" />
+		<member-entity entity-alias="RET" entity-name="Retencion" />		
+		<alias name="contratoId" entity-alias="CRE" group-by="true" />
+		<alias name="retencionId" entity-alias="RET" group-by="true" />
+		<alias name="nombreRetencion" entity-alias="RET" group-by="true" />
+		<alias name="porcentaje" entity-alias="RET" group-by="true" />
+		<alias name="auxiliar" entity-alias="RET" group-by="true" />
+		<alias name="groupName" entity-alias="PAR" group-by="true" />
+		<view-link entity-alias="RET" rel-entity-alias="CRE">
+			<key-map field-name="retencionId"/>
+		</view-link>
+		<view-link entity-alias="RET" rel-entity-alias="PAR">
+			<key-map field-name="auxiliar" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>		
+	
+ 	<!-- Vista para mostrar al autorizador el resumen de las solicitudes -->
+	<view-entity entity-name="SolicitudesPendientesObra"
+		package-name="com.absoluciones.obras"
+		title="Permite la búsqueda de solicitudes pendientes.">
+		<member-entity entity-alias="OBR" entity-name="Obra" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<alias name="obraId" entity-alias="OBR" group-by="true" />
+		<alias name="descripcion" entity-alias="OBR" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="OBR" group-by="true" />
+		<alias name="areaPartyId" entity-alias="OBR" group-by="true" />
+		<alias name="descripcionWorkflow" field="descripcion"
+			entity-alias="TIP" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />	
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="groupName" entity-alias="PAG" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<view-link entity-alias="OBR" rel-entity-alias="CON">
+			<key-map field-name="obraId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="OBR" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="OBR" rel-entity-alias="PAG">
+			<key-map field-name="areaPartyId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+	
+	<!-- Vista para consultar Retenciones -->
+	<view-entity entity-name="BuscarRetencion"
+		package-name="com.absoluciones.obras"
+		title="Permite la búsqueda de retenciones del contrato">
+		<member-entity entity-alias="CON" entity-name="ContratoRetencion" />
+		<member-entity entity-alias="RET" entity-name="Retencion" />
+		<alias name="contratoId" entity-alias="CON" group-by="true" />
+		<alias name="retencionId" entity-alias="CON" group-by="true" />
+		<alias name="nombreRetencion" entity-alias="RET" group-by="true" />
+		<alias name="porcentaje" entity-alias="RET" group-by="true" />
+		<alias name="auxiliar" entity-alias="RET" group-by="true" />
+		<view-link entity-alias="CON" rel-entity-alias="RET">
+			<key-map field-name="retencionId" />
+		</view-link>
+	</view-entity>
+
+</entitymodel>

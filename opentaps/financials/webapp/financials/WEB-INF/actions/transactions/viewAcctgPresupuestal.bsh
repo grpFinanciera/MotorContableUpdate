@@ -1,0 +1,55 @@
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.opentaps.domain.ledger.AccountingTransactionCve;
+
+acctgTransId = UtilCommon.getParameter(context, "acctgTransId");
+if (acctgTransId == null) {
+	return;
+}
+
+acctgTrans = delegator.findByPrimaryKey("AcctgTrans",UtilMisc.toMap("acctgTransId",acctgTransId));
+context.put("acctgTrans",acctgTrans);
+
+userLoginId = session.getAttribute("userLogin").getString("userLoginId");
+// better to use sesison than parameters, in case somebody puts organizationPartyId into URL
+organizationPartyId = org.ofbiz.common.AB.UtilCommon.getOrganizationPartyId(userLoginId,delegator);
+
+context.put("organizationPartyId",organizationPartyId);
+
+// Get the base currency for the organization
+baseCurrencyUomId = UtilCommon.getOrgBaseCurrency(organizationPartyId, delegator);
+context.put("orgCurrencyUomId", baseCurrencyUomId);
+
+clavePresupuestal = UtilCommon.getParameter(context, "clavePresupuestal");
+if (clavePresupuestal == null) {
+	return;
+}
+
+listCondicion = UtilMisc.toList(EntityCondition.makeCondition("acctgTransId", EntityOperator.EQUALS, acctgTransId),
+								EntityCondition.makeCondition("clavePresupuestal", EntityOperator.EQUALS, clavePresupuestal));
+condiciones = EntityCondition.makeCondition(listCondicion,EntityOperator.AND);
+listEntries = delegator.findByCondition("AcctgTransEntryClavePresupuestal",condiciones,null,null);
+
+debitTotal = BigDecimal.ZERO;
+creditTotal = BigDecimal.ZERO;
+trialBalance = BigDecimal.ZERO;
+currencyUomId = "";
+for(GenericValue entry:listEntries){
+	String tipo = entry.getString("debitCreditFlag");
+	if(tipo.equals("C")){
+		creditTotal = creditTotal.add(entry.getBigDecimal("amount"));
+	} else {
+		debitTotal = debitTotal.add(entry.getBigDecimal("amount"));
+	}
+	currencyUomId = entry.getString("currencyUomId");
+}
+trialBalance = debitTotal.subtract(creditTotal);
+
+context.put("creditTotal",creditTotal);
+context.put("debitTotal",debitTotal);
+context.put("trialBalance",trialBalance);
+context.put("listEntries",listEntries);
+context.put("currencyUomId",currencyUomId);
+context.put("acctgTransEntries",listEntries);
+

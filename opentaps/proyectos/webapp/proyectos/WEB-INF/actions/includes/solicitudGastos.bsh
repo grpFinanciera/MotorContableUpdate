@@ -1,0 +1,63 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.base.util.UtilMisc;
+
+ oganizationPartyId = parameters.get("organizationPartyId");
+ context.put("oganizationPartyId", oganizationPartyId);
+
+orderBy = org.ofbiz.base.util.UtilMisc.toList("codigoProyecto");
+condicion = EntityCondition.makeCondition("statusId",EntityOperator.EQUALS, "VIGENTE");
+listProyectos = delegator.findByCondition("Proyecto", condicion , null, orderBy);
+context.put("listProyectos", listProyectos);
+
+eventosContables = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "GASTOS_SOL_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosContables", eventosContables);
+
+eventosComprueba = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "GASTOS_COM_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosComprueba", eventosComprueba);
+
+eventosDevo = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", "GASTOS_DEV_PROYECTO"), UtilMisc.toList("descripcion"));
+context.put("eventosDevo", eventosDevo);
+
+gastoProyectoId = parameters.get("gastoProyectoId");
+GastoProyecto = delegator.findByPrimaryKey("GastosXCompProyecto", UtilMisc.toMap("gastoProyectoId", gastoProyectoId));
+context.put("GastoProyecto",GastoProyecto);
+
+condiciones = EntityCondition.makeCondition("gastoProyectoId", EntityOperator.EQUALS, gastoProyectoId);
+listDetalleGasto = delegator.findByCondition("DetalleGastoProyecto",condiciones, null, UtilMisc.toList("detalleGId DESC"));
+Facturas = delegator.findByCondition("DetalleGastoProyecto",condiciones, null, UtilMisc.toList("detalleGId DESC"));
+context.put("FacturasProvName",Facturas);
+
+ObjetoGastoProyecto = delegator.findAll("ObjetoGastoProyecto", UtilMisc.toList("nombreObjetoGasto"));
+context.put("ObjetoGastoProyecto",ObjetoGastoProyecto);
+
+// obtener el catalogo de bancos
+orderByBan = org.ofbiz.base.util.UtilMisc.toList("nombreBanco");
+condicionBan = EntityCondition.makeCondition("partyId", EntityOperator.EQUALS, oganizationPartyId);
+bancos = delegator.findByCondition("BancosCuentasPorOrganizacion", condicionBan , UtilMisc.toList("bancoId", "nombreBanco"), orderByBan);
+context.put("bancos", bancos);
+
+orderTipoPagoBy = UtilMisc.toList("description");
+condicionTipoPago = EntityCondition.makeCondition("parentTypeId",EntityOperator.EQUALS,"DISBURSEMENT");
+tipoPago = delegator.findByCondition("PaymentType", condicionTipoPago , null, orderTipoPagoBy);
+print("tipoPago: " + tipoPago);
+context.put("tipoPago", tipoPago);

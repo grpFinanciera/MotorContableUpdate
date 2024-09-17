@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+        
+<!--     <screen name="viewActualizacionPoliza"> -->
+<!--         <section> -->
+<!--             <actions> -->
+<!--                 <set field="titleProperty" value="ActivoFijoActualizacionPoliza"/> -->
+<!--                 <set field="headerItem" value="ActivoFijoActualizacionPoliza"/> -->
+<!--                 <set field="tabButtonItem" value="ActivoFijoActualizacionPoliza"/> -->
+<!--             </actions> -->
+<!--             <widgets> -->
+<!--                 <decorator-screen name="CommonFixedAssetDecorator" location="${parameters.fixedAssetDecoratorLocation}"> -->
+<!--                     <decorator-section name="body"> -->
+<!--                         <section> -->
+<!--                             <condition> -->
+<!--                                 <if-service-permission service-name="fixedAssetPermissionCheck" main-action="UPDATE"/> -->
+<!--                             </condition> -->
+<!--                             <widgets> -->
+<!--                                 <container style="button-bar"><link target="ActivoFijoActualizacionPoliza" text="${uiLabelMap.ActivoFijoActualizacionPoliza}" style="buttontext"/></container> -->
+<!--                             </widgets> -->
+<!--                          </section> --> 
+<!--                         <platform-specific> -->
+<!--                         	<html><html-template location="component://accounting/webapp/accounting/fixedasset/ActualizaPoliza.ftl"/></html> -->
+<!--                         </platform-specific> -->
+<!--                     </decorator-section> -->
+<!--                 </decorator-screen> -->
+<!--             </widgets> -->
+<!--          </section> -->
+<!--     </screen> -->
+    
+    <screen name="viewActualizacionPoliza">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ActivoFijoActualizacionPoliza"/>
+                <set field="tabButtonItem" value="ActivoFijoActualizacionPoliza"/>
+                <set field="labelTitleProperty" value="ActivoFijoActualizacionPoliza"/>
+                <set field="fixedAssetId" from-field="parameters.fixedAssetId"/>
+                <set field="numeroPoliza" from-field="parameters.numeroPoliza"/>
+                <set field="fechaIniPoliza" from-field="parameters.fechaIniPoliza"/>
+                <set field="fechaFinPoliza" from-field="parameters.fechaFinPoliza"/>
+            </actions>
+            
+            <widgets>
+                <decorator-screen name="CommonFixedAssetDecorator" location="${parameters.fixedAssetDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet id="actualizarPolizaSeguro" title="${uiLabelMap.ActivoFijoActualizacionPoliza}" collapsible="true">
+                            <include-form name="ActualizarPolizaSeguro" location="component://accounting/widget/FixedAssetForms.xml"/>
+                        </screenlet>                        
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    
+<!--     <screen name="viewDepreciacionActivoFijo"> -->
+<!--         <section> -->
+<!--             <actions> -->
+<!--                 <set field="titleProperty" value="ActivoFijoDepreciacion"/> -->
+<!--                 <set field="headerItem" value="ActivoFijoDepreciacion"/> -->
+<!--                 <set field="tabButtonItem" value="ActivoFijoDepreciacion"/> -->
+<!--                 <set field="agrupador" from-field="parameters.agrupador"/> -->
+<!--                 <script location="component://accounting/webapp/accounting/WEB-INF/actions/fixedasset/Depreciacion.bsh"/>                         -->
+<!--             </actions> -->
+            
+            
+<!--             <widgets> -->
+<!--                 <decorator-screen name="CommonFixedAssetMaintDecorator" location="${parameters.fixedAssetMaintDecoratorLocation}"> -->
+<!--                     <decorator-section name="body"> -->
+<!-- 						<platform-specific> -->
+<!--                         	<html><html-template location="component://accounting/webapp/accounting/fixedasset/ActualizaPoliza.ftl"/></html> -->
+<!--                         </platform-specific> -->
+<!--                     </decorator-section> -->
+<!-- 				</decorator-screen>      -->
+<!--             </widgets>                         -->
+<!--          </section> -->
+<!--     </screen>         -->
+
+	<screen name="viewDepreciacionActivoFijo">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ActivoFijoDepreciacion"/>
+                <set field="headerItem" value="ActivoFijoDepreciacion"/>
+                <set field="tabButtonItem" value="ActivoFijoDepreciacion"/>
+                <set field="poliza" from-field="parameters.poliza"/>
+                <script location="component://accounting/webapp/accounting/WEB-INF/actions/fixedasset/Depreciacion.bsh"/>                        
+            </actions>
+            
+            
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">                                                
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">                            
+                            <decorator-section name="search-options">
+                                <platform-specific>
+                                   <html><html-template location="component://accounting/webapp/accounting/fixedasset/Depreciacion.ftl"/></html>
+                                </platform-specific>
+                            </decorator-section>                                                        
+                        </decorator-screen>                                                                                            
+                    
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="menu-bar">
+                                <section>
+                                    <condition>
+                                        <if-service-permission service-name="fixedAssetPermissionCheck" main-action="CREATE"/>
+                                    </condition>
+                                    <widgets>
+                                                                                
+                                    </widgets>
+                                </section>
+                            </decorator-section>
+                            <decorator-section name="search-options">
+                                <include-form name="buscarActivos" location="component://accounting/widget/FixedAssetForms.xml"/>
+                            </decorator-section>
+                            <decorator-section name="search-results">
+                                <include-screen name="FixedAssetSearchResults"/>
+                            </decorator-section>
+                        </decorator-screen>                                                                                                      
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>                        
+         </section>
+    </screen>
+    
+    <screen name="FixedAssetSearchResults">
+        <section>
+            <condition>
+                <if-service-permission service-name="fixedAssetPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <include-form name="ListaActivos" location="component://accounting/widget/FixedAssetForms.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

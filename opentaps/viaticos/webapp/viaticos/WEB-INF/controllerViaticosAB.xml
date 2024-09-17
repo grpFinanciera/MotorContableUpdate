@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+
+	<description>Archivo de configuracion Finanzas AB</description>
+	<owner>ABCSE</owner>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+	<request-map uri="verImprimirPoliza">
+		<description>Imprime una póliza en PDF</description>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verImprimirPoliza" />
+		<response name="error" type="view" value="viewAcctgTrans" />
+	</request-map>
+    
+	<request-map uri="imprimirPoliza">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.opensourcestrategies.financials.reports.Reportes"
+			invoke="reportePoliza" />
+		<response name="pdf" type="view" value="imprimirPolizaPDF" />
+		<response name="xls" type="view" value="imprimirPolizaXLS" />
+		<response name="error" type="request-redirect" value="verImprimirPoliza" />
+	</request-map>
+	
+	<request-map uri="imprimirViaticoPDF">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.viaticos.Reportes"
+			invoke="solicitudViaticos" />
+		<response name="success" type="view" value="imprimirViaticoPDF" />
+		<response name="error" type="request-redirect" value="buscarViaticoS" />
+	</request-map>
+	
+	<view-map name="verImprimirPoliza" type="screen"
+		page="component://viaticos/widget/viaticos/screens/viaticos/ViaticoScreens.xml#verImprimirPoliza" />
+		
+	<view-map name="imprimirPolizaPDF" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="imprimirPolizaXLS" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/vnd.ms-excel" encoding="none" />
+	
+	<view-map name="imprimirViaticoPDF" type="jasperreports"
+		page="component://viaticos/webapp/viaticos/reports/repository/SolicitudViaticos.jrxml"
+		content-type="application/pdf" encoding="UTF-8" />
+	
+</site-conf>

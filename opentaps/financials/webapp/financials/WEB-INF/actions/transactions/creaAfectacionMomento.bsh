@@ -1,0 +1,13 @@
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+condicionesPoliza = EntityCondition.makeCondition(UtilMisc.toList(
+                EntityCondition.makeCondition("tipoPolizaId",EntityOperator.LIKE,"INGRESO"),
+                EntityCondition.makeCondition("tipoPolizaId",EntityOperator.LIKE,"EGRESO")), EntityOperator.OR);
+                
+listTipoPoliza = delegator.findList("TipoPoliza", condicionesPoliza, null, null, null, false);
+context.put("listTipoPoliza", listTipoPoliza);

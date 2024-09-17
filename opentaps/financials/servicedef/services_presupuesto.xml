@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios de presupuesto</description>
+    <vendor>ABCSE</vendor>
+    <version>1.0</version>
+
+	<service name="creaEtiqueta" engine="java" 
+			location="com.opensourcestrategies.financials.configuration.ServiciosPresupuesto" 
+			invoke="creaEtiqueta" default-entity-name="Etiqueta">
+		<auto-attributes mode="IN" include="all" />
+		<attribute name="etiquetaId" mode="OUT" type="String" />
+		<override name="fromDate" mode="IN" optional="true"/>
+		<override name="thruDate" mode="IN" optional="true"/>
+	</service>
+
+	<service name="eliminarEtiqueta" engine="java" 
+			location="com.opensourcestrategies.financials.configuration.ServiciosPresupuesto" 
+			invoke="eliminarEtiqueta" default-entity-name="Etiqueta">
+		<auto-attributes mode="IN" include="pk" />
+	</service>
+	
+	<service name="guardarEtiquetaEnum" engine="java" 
+			location="com.opensourcestrategies.financials.configuration.ServiciosPresupuesto" 
+			invoke="guardarEtiquetaEnum" default-entity-name="EtiquetaEnumeration">
+		<auto-attributes mode="IN" include="pk" />
+	</service>
+
+
+</services>

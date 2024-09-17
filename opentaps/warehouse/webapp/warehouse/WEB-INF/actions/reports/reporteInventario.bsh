@@ -1,0 +1,4 @@
+
+
+productTypes = delegator.findAll("ProductType");
+context.put("productTypes", productTypes);

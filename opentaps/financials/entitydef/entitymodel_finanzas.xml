@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<title>Entity of an Open Source Strategies Financials component</title>
+    <description>None</description>
+    <copyright>ABCSE Consultoria.</copyright>
+    <author>None</author>
+    <version>1.0</version>
+    
+	<entity entity-name="TipoReporteXML" 
+            package-name="com.opensourcestrategies.financials.reports"
+            title="Tipo de Reporte XML">
+    	<description>Tipo de Reporte XML</description>
+    	<field name="tipoReporteId" type="id-ne"/>
+    	<field name="nombre" type="description"/>
+      	<prim-key field="tipoReporteId"/>
+    </entity>
+    
+	<entity entity-name="ElementoReporte" 
+            package-name="com.opensourcestrategies.financials.reports"
+            title="Guarda los nombres de los elementos del Reporte XML">
+    	<description>Elemento del Reporte XML</description>
+    	<field name="elementoReporteId" type="name"/>
+    	<field name="tipoReporteId" type="id-ne"/>
+    	<field name="glAccountId" type="id-ne"/>
+    	<field name="enumId" type="id-ne"/>
+      	<prim-key field="elementoReporteId"/>
+      	<prim-key field="tipoReporteId"/>
+        <relation type="one" rel-entity-name="TipoReporteXML" fk-name="ELEMENTO_TIPO_FK">
+            <key-map field-name="tipoReporteId"/>
+        </relation>
+        <relation type="one" rel-entity-name="GlAccount" fk-name="FK_DBO_ELE_GLACC">
+            <key-map field-name="glAccountId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_DBO_ELE_ENUM">
+            <key-map field-name="enumId"/>
+        </relation>               
+    </entity>
+    
+    <view-entity entity-name="SumaCuentasLM" 
+    	package-name="com.opensourcestrategies.financials.reports" 
+    	title="Suma de Cuenta LM">
+    	<description>Suma de Cuenta LM</description> 
+    	<member-entity entity-alias="GLA" entity-name="GlAccount" />
+    	<member-entity entity-alias="GLH" entity-name="GlAccountHistory" />
+    	<alias entity-alias="GLA" name="glAccountId" group-by="false"/>
+    	<alias entity-alias="GLH" name="organizationPartyId" group-by="false"/>
+    	<alias entity-alias="GLH" name="customTimePeriodId" group-by="false"/>
+    	<alias entity-alias="GLH" name="postedDebits" function="sum"/>
+    	<alias entity-alias="GLH" name="postedCredits" function="sum"/>
+    	<view-link rel-entity-alias="GLA" entity-alias="GLH" rel-optional="true" >
+    		<key-map field-name="glAccountId"/>
+    	</view-link>
+    	<relation type="one" fk-name="GL_ACCT_HTRY_FK" rel-entity-name="GlAccount">
+            <key-map field-name="glAccountId"/>
+        </relation>
+    </view-entity>
+    
+    <view-entity entity-name="VistaMatrizEgreso" 
+    	package-name="com.opensourcestrategies.financials.configuration" 
+    	title="Vista para exportar la matriz de conversion de egresos">
+    	<description>Vista para exportar la matriz de conversion de egresos</description> 
+    	<member-entity entity-alias="MAT" entity-name="MatrizEgreso" />
+    	<member-entity entity-alias="ENU" entity-name="Enumeration" />    	    	
+    	<alias entity-alias="MAT" name="matrizEgresoId"/>
+    	<alias entity-alias="MAT" name="matrizId"/>
+    	<alias entity-alias="MAT" name="cog"/>
+    	<alias entity-alias="MAT" name="nombreCog"/>
+    	<alias entity-alias="MAT" name="tipoGasto"/>
+    	<alias entity-alias="MAT" name="caracteristicas"/>
+    	<alias entity-alias="MAT" name="medioPago"/>
+    	<alias entity-alias="MAT" name="cargo"/>
+    	<alias entity-alias="MAT" name="abono"/>
+    	<alias entity-alias="ENU" name="sequenceId"/>
+    	<alias entity-alias="ENU" name="description" />
+    	<alias entity-alias="ENU" name="enumTypeId"/>
+    	<view-link entity-alias="MAT" rel-entity-alias="ENU" rel-optional="true">
+    		<key-map field-name="cog" rel-field-name="sequenceId"/>
+    	</view-link>    	
+    </view-entity>
+    
+    <view-entity entity-name="VistaMatrizIngreso" 
+    	package-name="com.opensourcestrategies.financials.configuration" 
+    	title="Vista para exportar la matriz de conversion de ingresos">
+    	<description>Vista para exportar la matriz de conversion de ingresos</description> 
+    	<member-entity entity-alias="MAT" entity-name="MatrizIngreso" />
+    	<member-entity entity-alias="ENU" entity-name="Enumeration" />
+    	<alias entity-alias="MAT" name="matrizIngresoId"/>    	    	
+    	<alias entity-alias="MAT" name="matrizId"/>
+    	<alias entity-alias="MAT" name="cri"/>
+    	<alias entity-alias="MAT" name="nombreCri"/>
+    	<alias entity-alias="MAT" name="caracteristicas"/>
+    	<alias entity-alias="MAT" name="medioPago"/>
+    	<alias entity-alias="MAT" name="cargo"/>
+    	<alias entity-alias="MAT" name="abono"/>
+    	<alias entity-alias="ENU" name="sequenceId"/>
+    	<alias entity-alias="ENU" name="description"/>
+    	<alias entity-alias="ENU" name="enumTypeId"/>
+    	<view-link entity-alias="MAT" rel-entity-alias="ENU" rel-optional="true">
+    		<key-map field-name="cri" rel-field-name="sequenceId"/>
+    	</view-link>    	
+    </view-entity>
+
+	<view-entity entity-name="SumaXMomento" package-name="com.opensourcestrategies.financials.reports">
+		<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+		<member-entity entity-alias="MO" entity-name="Momento" />
+		<member-entity entity-alias="GL" entity-name="GlAccount" />
+		
+		<alias entity-alias="MO"  name="momentoId" group-by="true"/>
+		<alias entity-alias="ATE"  name="amount"  function="sum"/>
+		<alias entity-alias="ATE"  name="debitCreditFlag" group-by="true"/>
+		<alias entity-alias="ATE"  name="glAccountId" group-by="true"/>
+		
+		<alias entity-alias="ATE" name="acctgTagEnumId1" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId2" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId3" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId4" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId5" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId6" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId7" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId8" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId9" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId10" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId11" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId12" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId13" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId14" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId15" group-by="false" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false"/>
+    	<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+     	<view-link entity-alias="ATE" rel-entity-alias="MO">
+    		<key-map field-name="glAccountId" rel-field-name="cuentaAsociada"/>
+    	</view-link>
+     	<view-link entity-alias="ATE" rel-entity-alias="GL" >
+    		<key-map field-name="glAccountId"/>
+    	</view-link>
+    	<relation type="one" fk-name="SUMA_MOMENTO_CUENTA" rel-entity-name="GlAccount" >
+    		<key-map field-name="glAccountId" />
+    	</relation>
+	</view-entity>
+	
+    <view-entity entity-name="AuxiliarPoliza" package-name="com.absoluciones.contabilidad"
+    		title="Busca los auxiliares de una poliza">
+    		
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="PAR" entity-name="Party" />
+    	<member-entity entity-alias="PAT" entity-name="PartyType" />
+    	<member-entity entity-alias="PER" entity-name="Person" />
+    	<member-entity entity-alias="PGR" entity-name="PartyGroup" />
+    	<member-entity entity-alias="PRO" entity-name="Product" />
+    	<member-entity entity-alias="PRT" entity-name="ProductType" />
+    	<member-entity entity-alias="CTA" entity-name="CuentaBancaria" />
+		
+		<!-- Party -->
+		<alias name="theirPartyId" entity-alias="ATE"/>
+		<alias name="partyId" entity-alias="PAR"/>
+		<alias name="firstName" entity-alias="PER"/>
+		<alias name="middleName" entity-alias="PER"/>
+		<alias name="lastName" entity-alias="PER"/>
+		<alias name="groupName" entity-alias="PGR"/>
+		<alias name="decripcionTipoParty" field="description" entity-alias="PAT"/>
+		
+		<!-- Product -->
+    	<alias name="productId" entity-alias="ATE"/>
+    	<alias name="productName" entity-alias="PRO"/>
+    	<alias name="decripcionTipoProducto" field="description" entity-alias="PRT"/>
+    	
+    	<!-- Cuenta Bancaria -->
+    	<alias name="cuentaBancariaId" entity-alias="ATE"/>
+    	<alias name="nombreCuenta" entity-alias="CTA"/>
+    	
+    	<!-- AcctgTransEntry -->
+    	<alias name="glAccountId" entity-alias="ATE"/>
+    	<alias name="debitCreditFlag" entity-alias="ATE"/>
+    	<alias name="amount" entity-alias="ATE"/>
+    	<alias name="currencyUomId" entity-alias="ATE"/>
+    	
+    	<alias name="acctgTransId" entity-alias="ATE"/>
+    	
+    	<view-link entity-alias="ATE" rel-entity-alias="PAR" rel-optional="true">
+    		<key-map field-name="theirPartyId" rel-field-name="partyId" />
+    	</view-link>
+		<view-link entity-alias="PAR" rel-entity-alias="PAT" rel-optional="true">
+    		<key-map field-name="partyTypeId"/>
+    	</view-link>
+    	<view-link entity-alias="ATE" rel-entity-alias="PER" rel-optional="true">
+    		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+    	</view-link>    	
+		<view-link entity-alias="ATE" rel-entity-alias="PGR" rel-optional="true">
+    		<key-map field-name="theirPartyId" rel-field-name="partyId"/>
+    	</view-link>
+    	<view-link entity-alias="ATE" rel-entity-alias="PRO" rel-optional="true">
+    		<key-map field-name="productId"/>
+    	</view-link>    	
+    	<view-link entity-alias="PRO" rel-entity-alias="PRT" rel-optional="true">
+    		<key-map field-name="productTypeId"/>
+    	</view-link>
+    	<view-link entity-alias="ATE" rel-entity-alias="CTA" rel-optional="true">
+    		<key-map field-name="cuentaBancariaId"/>
+    	</view-link>
+    	
+    </view-entity>
+    
+    <view-entity entity-name="LineaContableAuxiliar" 
+	    package-name="com.absoluciones.Finanzas" 
+	    title="Consulta los auxiliares de linea contable">
+	    <member-entity entity-alias="LC" entity-name="LineaContable" />
+	    <member-entity entity-alias="TACARGO" entity-name="TipoAuxiliar" />
+	    <member-entity entity-alias="TAABONO" entity-name="TipoAuxiliar" />
+	    
+	    <alias name="acctgTransTypeId" entity-alias="LC" />
+	    <alias name="secuencia" entity-alias="LC" />
+	    <alias name="cuentaCargo" entity-alias="LC" />
+	    <alias name="cuentaAbono" entity-alias="LC" />
+	    <alias name="catalogoCargo" entity-alias="LC" />
+	    <alias name="catalogoAbono" entity-alias="LC" />
+	    <alias name="descripcion" entity-alias="LC" />
+	    <alias name="tipoCargo" field="tipo" entity-alias="TACARGO" />
+	    <alias name="tipoAbono" field="tipo" entity-alias="TAABONO" />
+	    <alias name="entidadCargo" field="entidad" entity-alias="TACARGO" />
+	    <alias name="entidadAbono" field="entidad" entity-alias="TAABONO" />
+	    <alias name="tipoEntidadCargo" field="tipoEntidad" entity-alias="TACARGO" />
+	    <alias name="tipoEntidadAbono" field="tipoEntidad" entity-alias="TAABONO" />
+	    
+	    <view-link entity-alias="LC" rel-entity-alias="TACARGO" rel-optional="true">
+	    	<key-map field-name="catalogoCargo" rel-field-name="tipoAuxiliarId"/>
+	    </view-link>
+	    
+	    <view-link entity-alias="LC" rel-entity-alias="TAABONO" rel-optional="true">
+	    	<key-map field-name="catalogoAbono" rel-field-name="tipoAuxiliarId"/>
+	    </view-link>   
+	    
+    </view-entity>  
+    
+	<view-entity entity-name="LineaPresupuestalAuxiliar" 
+	    package-name="com.absoluciones.Finanzas" 
+	    title="Consulta los auxiliares de linea presupuestal">
+	    <member-entity entity-alias="LP" entity-name="LineaPresupuestal" />
+	    <member-entity entity-alias="TACARGO" entity-name="TipoAuxiliar" />
+	    <member-entity entity-alias="TAABONO" entity-name="TipoAuxiliar" />
+	    
+	    <alias name="acctgTransTypeId" entity-alias="LP" />
+	    <alias name="secuencia" entity-alias="LP" />
+	    <alias name="cuentaCargo" entity-alias="LP" />
+	    <alias name="cuentaAbono" entity-alias="LP" />
+	    <alias name="catalogoCargo" entity-alias="LP" />
+	    <alias name="catalogoAbono" entity-alias="LP" />
+	    <alias name="descripcion" entity-alias="LP" />
+	    <alias name="tipoCargo" field="tipo" entity-alias="TACARGO" />
+	    <alias name="tipoAbono" field="tipo" entity-alias="TAABONO" />
+	    <alias name="entidadCargo" field="entidad" entity-alias="TACARGO" />
+	    <alias name="entidadAbono" field="entidad" entity-alias="TAABONO" />
+	    <alias name="tipoEntidadCargo" field="tipoEntidad" entity-alias="TACARGO" />
+	    <alias name="tipoEntidadAbono" field="tipoEntidad" entity-alias="TAABONO" />
+	    
+	    <view-link entity-alias="LP" rel-entity-alias="TACARGO" rel-optional="true">
+	    	<key-map field-name="catalogoCargo" rel-field-name="tipoAuxiliarId"/>
+	    </view-link>
+	    
+	    <view-link entity-alias="LP" rel-entity-alias="TAABONO" rel-optional="true">
+	    	<key-map field-name="catalogoAbono" rel-field-name="tipoAuxiliarId"/>
+	    </view-link>	    
+	    
+    </view-entity> 
+    
+    <view-entity entity-name="SaldoCuentaBanco" package-name="com.absoluciones.Tesoreria">
+    	<member-entity entity-alias="SAL" entity-name="SaldoCatalogo"/>
+    	
+    	<!-- select -->
+    	<alias name="catalogoId" entity-alias="SAL" group-by="true" />
+    	<alias name="tipoId" entity-alias="SAL" group-by="true" />
+    	<alias name="tipo" entity-alias="SAL" group-by="true" />
+    	<alias name="monto" entity-alias="SAL" function="sum" />
+    	
+    	<!-- where -->
+    	<alias name="partyId" entity-alias="SAL" group-by="false" />
+    	<alias name="periodo" entity-alias="SAL" group-by="false" />
+    	
+    </view-entity>
+    
+	<view-entity entity-name="SumaXMomento" package-name="com.opensourcestrategies.financials.reports">
+		<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+		<member-entity entity-alias="MO" entity-name="Momento" />
+		<member-entity entity-alias="GL" entity-name="GlAccount" />
+		
+		<alias entity-alias="MO"  name="momentoId" group-by="true"/>
+		<alias entity-alias="ATE"  name="amount"  function="sum"/>
+		<alias entity-alias="ATE"  name="debitCreditFlag" group-by="true"/>
+		<alias entity-alias="ATE"  name="glAccountId" group-by="true"/>
+		
+		<alias entity-alias="ATE" name="acctgTagEnumId1" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId2" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId3" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId4" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId5" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId6" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId7" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId8" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId9" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId10" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId11" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId12" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId13" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId14" group-by="false" />
+    	<alias entity-alias="ATE" name="acctgTagEnumId15" group-by="false" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false"/>
+    	<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+     	<view-link entity-alias="ATE" rel-entity-alias="MO">
+    		<key-map field-name="glAccountId" rel-field-name="cuentaAsociada"/>
+    	</view-link>
+     	<view-link entity-alias="ATE" rel-entity-alias="GL" >
+    		<key-map field-name="glAccountId"/>
+    	</view-link>
+    	<relation type="one" fk-name="FK_DBO_SUM_MOM_CTA" rel-entity-name="GlAccount" >
+    		<key-map field-name="glAccountId" />
+    	</relation>
+	</view-entity>
+    
+     <view-entity entity-name="SumaClavesCtrlPresup" 
+    	package-name="com.opensourcestrategies.financials.reports" 
+    	title="Suma el monto de Claves en Control Presupuestal por Momento">
+    	<description>Suma el monto de Claves en Control Presupuestal por Momento</description> 
+    	<member-entity entity-alias="CTRL" entity-name="ControlPresupuestal" />
+    	<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+		<alias entity-alias="CTRL" name="momentoId" group-by="true"/>
+    	<alias entity-alias="CTRL" name="monto" function="sum"/>
+    	<alias entity-alias="CTRL" name="ciclo" group-by="false"/>
+    	<alias entity-alias="CTRL" name="mesId" group-by="false"/>
+		<alias entity-alias="CVE" name="clasificacion1" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion2" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion3" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion4" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion5" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion6" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion7" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion8" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion9" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion10" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion11" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion12" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion13" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion14" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion15" group-by="false" />   
+    	<view-link entity-alias="CTRL" rel-entity-alias="CVE">
+    		<key-map field-name="clavePresupuestal"/>
+    	</view-link> 	
+    </view-entity>       
+    
+	<view-entity entity-name="SumaPartidasClasificacionPresup" 
+    	package-name="com.opensourcestrategies.financials.reports" 
+    	title="Suma el monto de partidas de un clasificador presupuestal">
+		<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+		<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+		<member-entity entity-alias="CVE" entity-name="ClavePresupuestal" />
+		
+		<alias entity-alias="ATE" name="amount" function="sum"/>
+		<alias entity-alias="ATE" name="debitCreditFlag" group-by="false"/>
+		<alias entity-alias="CVE" name="tipo" group-by="false"/>
+		<alias entity-alias="AT" name="postedDate" group-by="false"/>
+		<alias entity-alias="CVE" name="clasificacion1" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion2" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion3" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion4" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion5" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion6" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion7" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion8" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion9" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion10" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion11" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion12" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion13" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion14" group-by="false" />
+    	<alias entity-alias="CVE" name="clasificacion15" group-by="false" /> 
+		
+		<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    	<view-link entity-alias="ATE" rel-entity-alias="CVE">
+    		<key-map field-name="clavePresupuestal"/>
+    	</view-link> 
+    </view-entity>
+    
+    <view-entity entity-name="CuentasAfectadasPeriodo" package-name="com.opensourcestrategies.financials.reports"
+    title="Obtiene las cuentas contables afectadas en un periodo ">
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+    	<alias entity-alias="ATE" name="glAccountId" group-by="true" />
+    	<alias entity-alias="ATE" name="organizationPartyId" group-by="true" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false" />
+		<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="SumaCuentasPeriodo" package-name="com.opensourcestrategies.financials.reports"
+    title="Obtiene las suma de las cuentas contables afectadas en un periodo ">
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+    	<alias entity-alias="ATE" name="amount" function="sum" />
+    	<alias entity-alias="ATE" name="glAccountId" group-by="false" />
+    	<alias entity-alias="ATE" name="organizationPartyId" group-by="false" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false" />
+		<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    </view-entity>
+    
+	<entity entity-name="ControlAuxiliar" package-name="com.absoluciones.contabilidad"
+		title="Entidad para llevar el control de auxiliares">
+		<field name="idSecuencia" type="id-ne"></field>
+		<field name="partyId" type="id-ne"></field>
+		<field name="auxiliarId" type="id-ne"></field>
+		<field name="auxiliarRoleTypeId" type="id-ne"></field>
+		<field name="flagCierre" type="indicator"></field>
+		<field name="tipo" type="indicator"></field>
+		<field name="monto" type="currency-amount"></field>
+		<prim-key field="idSecuencia"/>
+		<relation type="one" fk-name="ConAux" title="ConAux"
+			rel-entity-name="Party">
+			<key-map field-name="partyId" rel-field-name="partyId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="SaldoCatalogo" package-name="com.absoluciones.contabilidad"
+		title="Entidad para llevar el control de saldos en catalogos (Auxiliares,Productos,Bancos)">
+		<field name="secuenciaId" type="id-ne"></field>
+		<field name="catalogoId" type="id-ne"></field>
+		<field name="tipoId" type="id-ne"></field>
+		<field name="partyId" type="id-ne"></field>
+		<field name="tipo" type="indicator"></field>
+		<field name="monto" type="currency-amount" enable-audit-log="true"></field>
+		<field name="periodo" type="date-time" />
+		<prim-key field="secuenciaId"/>
+		<relation type="one" fk-name="FK_CON_AUX" title="ConAux" rel-entity-name="Party">
+			<key-map field-name="partyId" rel-field-name="partyId" />
+		</relation>
+		<index name="INDX_SALDO_CATALOG" unique="true">
+			<index-field name="secuenciaId"/>
+			<index-field name="partyId"/>
+		</index>
+	</entity>
+	
+    <entity entity-name="ClavePenaDeductiva" package-name="com.absoluciones.contabilidad"
+            title="Tabla para guardar la clave donde se generaran las penalizaciones">   
+        <field name="idClavePenalizacion" type="id-ne"/>
+        <field name="clavePresupuestal" type="description"/>
+        <field name="tipo" type="id-ne"/>  
+        <field name="organizationPartyId" type="id-ne" />
+        <field name="acctgTagEnumId1" type="description"/> 
+        <field name="acctgTagEnumId2" type="description"/>
+        <field name="acctgTagEnumId3" type="description"/>
+        <field name="acctgTagEnumId4" type="description"/>
+        <field name="acctgTagEnumId5" type="description"/>
+        <field name="acctgTagEnumId6" type="description"/>
+        <field name="acctgTagEnumId7" type="description"/>
+        <field name="acctgTagEnumId8" type="description"/>
+        <field name="acctgTagEnumId9" type="description"/>
+        <field name="acctgTagEnumId10" type="description"/>
+        <field name="acctgTagEnumId11" type="description"/>
+        <field name="acctgTagEnumId12" type="description"/>
+        <field name="acctgTagEnumId13" type="description"/>
+        <field name="acctgTagEnumId14" type="description"/>
+        <field name="acctgTagEnumId15" type="description"/>
+        <field name="acctgTagEnumIdAdmin" type="description"/>
+        <field name="flag" type="indicator"/>
+        <field name="fechaDesde" type="date-time"></field>
+        <field name="fechaHasta" type="date-time"></field>
+        <prim-key field="idClavePenalizacion"/>
+        <relation type="one" fk-name="FK_DBO_PENA_CVE" rel-entity-name="ClavePresupuestal">
+        	<key-map field-name="clavePresupuestal"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_DBO_PENA_PARTY" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+    </entity>
+    
+    <view-entity entity-name="ConciliacionCont" package-name="com.opensourcestrategies.financials.reports"
+    title="Obtiene la suma de las cuentas contables usadas en la conciliacion">
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+    	<alias entity-alias="ATE" name="amount" function="sum" />
+    	<alias entity-alias="ATE" name="glAccountId" group-by="true" />
+    	<alias entity-alias="ATE" name="debitCreditFlag" group-by="true" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false" />
+    	<alias entity-alias="AT" name="acctgTransTypeId" group-by="false" />
+		<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="ConciliacionPres" package-name="com.opensourcestrategies.financials.reports"
+    title="Obtiene la suma de las cuentas presupuestales usadas en la conciliacion">
+    	<member-entity entity-alias="ATE" entity-name="AcctgTransEntry" />
+    	<member-entity entity-alias="AT" entity-name="AcctgTrans" />
+    	<member-entity entity-alias="E" entity-name="Enumeration" />
+    	<alias entity-alias="ATE" name="amount" function="sum" />
+    	<alias entity-alias="E" name="sequenceId" group-by="true" />
+    	<alias entity-alias="ATE" name="debitCreditFlag" group-by="true" />
+    	<alias entity-alias="AT" name="postedDate" group-by="false" />
+    	<alias entity-alias="AT" name="acctgTransTypeId" group-by="false" />
+    	<alias entity-alias="ATE" name="glAccountId" group-by="false" />
+    	<alias entity-alias="E" name="enumTypeId" group-by="false" />
+		<view-link rel-entity-alias="AT" entity-alias="ATE" >
+    		<key-map field-name="acctgTransId"/>
+    	</view-link>
+    	<view-link rel-entity-alias="E" entity-alias="ATE" >
+    		<key-map field-name="acctgTagEnumId6" rel-field-name="enumId"/>
+    	</view-link>
+    </view-entity>
+    
+</entitymodel>

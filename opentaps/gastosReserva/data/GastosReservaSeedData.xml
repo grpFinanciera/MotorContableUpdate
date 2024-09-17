@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+	<Modulo moduloId="GASTOS_RESERVA" nombre="Gastos a reserva de comprobar" abreviatura="GRC" uso="Y" />
+	<TipoMatriz tipoMatrizId="A.3" descripcion="A.3 Devengada de gastos a reserva" />
+
+<!-- Estatus Viatico -->
+    <Estatus statusId="CREADA_GR" descripcion="Creada" tipo="G"/>
+    <Estatus statusId="ENVIADA_GR" descripcion="Enviada" tipo="G"/>
+    <Estatus statusId="APROBADA_GR" descripcion="Aprobada" tipo="G"/>
+    <Estatus statusId="CANCELADA_GR" descripcion="Cancelada" tipo="G"/>
+    <Estatus statusId="RECHAZADA_GR" descripcion="Rechazada" tipo="G"/>
+    <Estatus statusId="COMENTADA_GR" descripcion="Comentada" tipo="G"/>
+    <Estatus statusId="OTORGADA_GR" descripcion="Otorgada" tipo="G"/>
+    <Estatus statusId="DEVOLUCION100_GR" descripcion="Devolución al 100%" tipo="G"/>
+    <Estatus statusId="COMPROBADA_GR" descripcion="Comprobada" tipo="G"/>  
+    <Estatus statusId="VALIDADA_GR" descripcion="Validada" tipo="G"/>
+    <Estatus statusId="FINALIZADA_GR" descripcion="Finalizada" tipo="G"/> 
+    
+</entity-engine-xml>

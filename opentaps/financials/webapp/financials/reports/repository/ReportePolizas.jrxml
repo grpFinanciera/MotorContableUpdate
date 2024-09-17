@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Poliza" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="78"/>
+	<property name="ireport.y" value="176"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="true"/>
+	<style name="Zebra" mode="Transparent" lineSpacing="Single">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[Boolean.valueOf($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCCCCC" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="Poliza" class="java.lang.String"/>
+	<parameter name="Emisor" class="java.lang.String"/>
+	<parameter name="TipoPoliza" class="java.lang.String"/>
+	<parameter name="logoUrl" class="java.lang.String"/>
+	<parameter name="organizacion" class="java.lang.String"/>
+	<parameter name="logoUrl2" class="java.lang.String"/>
+	<parameter name="Concepto" class="java.lang.String"/>
+	<field name="Fecha" class="java.sql.Timestamp"/>
+	<field name="Cuenta" class="java.lang.String"/>
+	<field name="Auxiliar" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Cargos" class="java.math.BigDecimal"/>
+	<field name="Abonos" class="java.math.BigDecimal"/>
+	<field name="Poliza" class="java.lang.String"/>
+	<field name="Usuario" class="java.lang.String"/>
+	<variable name="sumaCargos" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Cargos}]]></variableExpression>
+	</variable>
+	<variable name="sumaAbonos" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Abonos}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<staticText>
+				<reportElement mode="Transparent" x="83" y="59" width="393" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(en pesos)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="39" width="393" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TipoPoliza}]]></textFieldExpression>
+			</textField>
+			<image isUsingCache="false" isLazy="true">
+				<reportElement x="0" y="0" width="83" height="79">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl} != null && !$P{logoUrl}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="11" width="393" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{organizacion}]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement x="476" y="11" width="96" height="68">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl2} != null && !$P{logoUrl2}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl2})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="55">
+			<staticText>
+				<reportElement x="0" y="10" width="83" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de póliza:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="27" width="83" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="10" width="489" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Poliza}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="27" width="489" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Concepto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="13" width="35" height="20" forecolor="#000000" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="35" y="13" width="48" height="20" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="83" y="13" width="161" height="20" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Auxiliar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="244" y="13" width="153" height="20" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="397" y="13" width="79" height="20" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="476" y="13" width="96" height="20" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abonos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="0" y="0" width="35" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="35" y="0" width="48" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="83" y="0" width="161" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Auxiliar}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="244" y="0" width="153" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="397" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Cargos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="476" y="0" width="96" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Abonos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="94">
+			<rectangle radius="10">
+				<reportElement mode="Transparent" x="0" y="1" width="572" height="92"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="83" y="11" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Emitido por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="11" width="87" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Autorizado por:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="217" y="51" width="124" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="397" y="11" width="175" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Revisado por:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="423" y="52" width="124" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="199" y="69" width="92" height="20"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="291" y="69" width="40" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy hh.mm.ss a">
+				<reportElement x="397" y="66" width="175" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="31" width="164" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Emisor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42">
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="0" width="66" height="28" forecolor="#000000" backcolor="#999999"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="397" y="0" width="79" height="28" backcolor="#999999"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sumaCargos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="476" y="0" width="96" height="28" backcolor="#999999"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sumaAbonos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

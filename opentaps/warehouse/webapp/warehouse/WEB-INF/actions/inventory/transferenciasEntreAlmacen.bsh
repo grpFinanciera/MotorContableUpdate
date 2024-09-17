@@ -1,0 +1,39 @@
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import javolution.util.FastList;
+import java.util.List;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+organizationPartyId = parameters.get("organizationPartyId");
+print("organizationPartyId: " + organizationPartyId);
+context.put("organizationPartyId",organizationPartyId);
+
+userLogin = request.getAttribute("userLogin");
+context.put("userLogin", userLogin);
+context.put("partyId", userLogin.get("partyId"));
+
+orderBy = UtilMisc.toList("facilityName");
+condicionList = UtilMisc.toList(new EntityExpr("partyId", EntityOperator.EQUALS, userLogin.get("partyId")), 
+											new EntityExpr("securityGroupId", EntityOperator.EQUALS, "WRHS_MANAGER"));
+condicion = new EntityConditionList(condicionList, EntityOperator.AND);
+
+listaAlmacenes = delegator.findByCondition("ConsultaAlmacenesPorPermisoUsuario", condicion, null, orderBy);
+print("listaAlmacenes: " + listaAlmacenes);
+context.put("listaAlmacenes",listaAlmacenes);
+
+

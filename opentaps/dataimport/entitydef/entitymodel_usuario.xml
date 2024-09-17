@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Usuario</title>
+    <description>Se almacenaran todos los usuarios que seran registrados en el sistema</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+	
+	<entity entity-name="DataImportUser" package-name="org.opentaps.dataimport"
+		title="Entidad para el registro de usuarios">
+		<field name="usuarioId" type="id-ne"></field>
+		<field name="usuarioLogId" type="id-ne"></field>
+      	<field name="currentPassword" type="short-varchar"></field>
+      	<field name="verifyCurrentPassword" type="short-varchar"></field>
+      	<field name="passwordHint" type="description"></field>
+      	<field name="firstName" type="name"></field>
+      	<field name="middleName" type="name"></field>
+      	<field name="lastName" type="name"></field>
+      	<field name="personalTitle" type="name"></field>
+      	<field name="gender" type="indicator"></field>
+      	<field name="birthDate" type="date-time"></field>
+      	<field name="maritalStatus" type="indicator"></field>
+     	<field name="socialSecurityNumber" type="long-varchar"></field>
+     	<field name="passportNumber" type="long-varchar"></field>
+      	<field name="passportExpireDate" type="date-time"></field>
+      	<field name="totalYearsWorkExperience" type="floating-point"></field>
+      	<field name="comments" type="comment"></field>
+      	<field name="employmentStatusEnumId" type="id"></field>
+      	<field name="residenceStatusEnumId" type="id"></field>
+      	<field name="occupation" type="name"></field>
+      	<field name="parentPartyId" type="id-ne" ></field>
+      	<field name="preferredCurrencyUomId" type="id-ne"></field>
+      	<field name="description" type="very-long"></field>
+      	<field name="statusId" type="id-ne"></field>
+      	<field name="areaId" type="id-ne"></field>
+      	<field name="partyId" type="id-ne"></field>
+      	<field name="infoString" type="long-varchar"></field>
+      	<field name="groupId" type="id-ne"></field>
+      	<field name="roleTypeId" type="id-ne"></field>
+      	<field name="emplPositionId" type="id-ne"/>
+		<field name="userLoginId" type="id-vlong-ne"></field>
+		<field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+		<prim-key field="usuarioId"/>
+		<relation type="one" fk-name="FK_DI_USR_IMP" rel-entity-name="UserLogin">
+			<key-map field-name="userLoginId"/>
+		</relation>
+	</entity>		
+</entitymodel>

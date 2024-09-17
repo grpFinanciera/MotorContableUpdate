@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bancomer 1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Lugar" class="java.lang.String"/>
+	<parameter name="Beneficiario" class="java.lang.String"/>
+	<parameter name="MontoTotal" class="java.lang.String"/>
+	<parameter name="MontoTotalTexto" class="java.lang.String"/>
+	<parameter name="Titular1" class="java.lang.String"/>
+	<parameter name="Titular2" class="java.lang.String"/>
+	<parameter name="FechaImpresion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<pageHeader>
+		<band height="185">
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="248" y="56" width="84" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{FechaImpresion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="81" width="284" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Beneficiario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="79" width="90" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{MontoTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="102" width="368" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{MontoTotalTexto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="143" width="165" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Titular1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="143" width="165" height="11"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Titular2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

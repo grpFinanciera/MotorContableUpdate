@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios recepción en almacen</description>
+    <vendor>ABSCE</vendor>
+    <version>1</version>
+
+    <service name="recibeProductosInventario" engine="java" auth="true"
+    		location="org.opentaps.warehouse.domain.inventory.ServiciosAlmacen" invoke="recibeProductosInventario">
+		<attribute name="listInventario" mode="IN" type="java.util.List" />
+		<attribute name="facilityId" mode="IN" type="String" />
+		<attribute name="currencyUomId" mode="IN" type="String" />
+		<attribute name="fechaContable" mode="IN" type="Timestamp" />
+    </service>
+    
+</services>

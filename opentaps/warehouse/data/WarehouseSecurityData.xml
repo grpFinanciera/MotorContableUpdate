@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+
+    <!-- This file defines the basic security permissions of the warehouse applications and can be used to set up separate permission roles
+    for inventory, shipping, and manufacturing.  Note that some permissions for backend OFBIZ services are granted here, but as long as the user
+    does not have OFBTOOLS_VIEW permission, he should not be able to login to OFBIZ and modify things -->
+
+    <SecurityPermission description="Admin permission for any operation in any facility" permissionId="WRHS_ADMIN"/>
+
+    <SecurityPermission description="Basic permission to use the Warehouse application" permissionId="WRHS_VIEW"/>
+
+    <SecurityPermission description="Basic permission to use the Inventory tab" permissionId="WRHS_INV_VIEW"/>
+    <SecurityPermission description="Permission to receive Purchase Orders" permissionId="WRHS_INV_RCPO"/>
+    <SecurityPermission description="Permission to modify physical inventory" permissionId="WRHS_INV_PHINV"/>
+    <SecurityPermission description="Permission to perform stock moves" permissionId="WRHS_INV_STKMV"/>
+    <SecurityPermission description="Permission to perform inventory transfers" permissionId="WRHS_INV_XFER"/>
+    <SecurityPermission description="Permission to override calculated unit cost of received inventory" permissionId="WRHS_INV_SETCOST"/>
+    <SecurityPermission description="Permission to view lot level screens" permissionId="WRHS_INV_LOT_VIEW"/>
+    <SecurityPermission description="Permission to create new lot" permissionId="WRHS_INV_LOT_CREATE"/>
+    <SecurityPermission description="Permission to update a lot" permissionId="WRHS_INV_LOT_UPDATE"/>
+
+    <SecurityPermission description="Basic permission to use the Shipment tab" permissionId="WRHS_SHIP_VIEW"/>
+    <SecurityPermission description="Permission to view picklists" permissionId="WRHS_SHIP_PICK_VIEW"/>
+    <SecurityPermission description="Permission to create picklists" permissionId="WRHS_SHIP_PICK_CREATE"/>
+    <SecurityPermission description="Permission to pack orders" permissionId="WRHS_SHIP_PACK"/>
+    <SecurityPermission description="Permission to schedule shipments and print labels" permissionId="WRHS_SHIP_SCHED"/>
+
+    <SecurityPermission description="Permission to view invoices of packed orders" permissionId="WRHS_INVOICE_VIEW"/>
+
+    <SecurityPermission description="Basic permission to use the Manufacturing tab" permissionId="WRHS_MFG_VIEW"/>
+    <SecurityPermission description="Permission to create and update production runs" permissionId="WRHS_MFG_CREATE"/>
+
+    <SecurityPermission description="Permission to use the config tab" permissionId="WRHS_CONFIG_VIEW"/>
+    <SecurityPermission description="Permission to create and configure a warehouse" permissionId="WRHS_CONFIG"/>
+    
+    <!-- Inventario -->
+    <SecurityPermission description="Ver la pestaña de Inventario en el módulo de Almacén" permissionId="WRHS_INVENT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Opciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar el Artículo del Inventario en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar el Artículo del Inventario en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Alta de Nuevo Artículo en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Alta de Nuevo Artículo en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Recibir Pedido o Contrato en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Recibir Pedido o Contrato en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Recepciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Recepciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Entrada de Artículos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Entrada de Artículos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Salida de Artículos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Salida de Artículos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Tranferencias entre almacenes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_TRANSENTREALMACEN_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Tranferencias entre almacenes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_TRANSENTREALMACEN_ADMIN"/>    
+    <SecurityPermission description="Ver el tab de Administración de Lotes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Administración de Lotes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta de Altas en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONALTINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta de Altas en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONALTINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta de Bajas en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONBAJINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta de Bajas en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONBAJINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Salida de Pedido Interno en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_SALIDAPIINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Salida de Pedido Interno en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_SALIDAPIINVENT_ADMIN"/>   
+    <SecurityPermission description="Ver el tab de Baja de Bienes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BAJABIENESINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Baja de Bienes en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_BAJABIENESINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Devoluciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_DEVOLUCIONESINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Devoluciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_DEVOLUCIONESINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consula devoluciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONSULDEVOLUINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta devoluciones en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONSULDEVOLUINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Máximos y mínimos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_MAXIMOSMINIMOSINVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Máximos y mínimos en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_MAXIMOSMINIMOSINVENT_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta de productos en mínimo en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONSUPRODENMININVENT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Consulta de productos en mínimo en la pestaña de Inventario" permissionId="WRHS_INVENT_OPCGRP_CONSUPRODENMININVENT_ADMIN"/>          
+    <!-- Configuración -->
+    <SecurityPermission description="Ver la pestaña de Configuración en el módulo de Almacén" permissionId="WRHS_CONFIGT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Opciones en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Ver Almacén en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_VALMACENCONF_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Ver Almacén en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_VALMACENCONF_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Ubicaciones en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_UBICACIONCONF_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Ubicaciones en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_UBICACIONCONF_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Miembros de Equipo en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_MEQUIPOCONF_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Miembros de Equipo en la pestaña de Configuración" permissionId="WRHS_CONFIGT_OPCGRP_MEQUIPOCONF_ADMIN"/>
+    <!-- Informes -->
+    <SecurityPermission description="Ver la pestaña de Informes en el módulo de Almacén" permissionId="WRHS_INFORT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_ADMIN"/>
+    <!-- Activo Fijo -->
+    <SecurityPermission description="Ver la pestaña de Activo Fijo en el módulo de Almacén" permissionId="WRHS_ACTFIJOT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Activo Fijo en la pestaña de Activo Fijo" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Levantamiento de Activo Fijo en la pestaña de Activo Fijo" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_LEVACTFIJO_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Levantamiento de Activo Fijo en la pestaña de Activo Fijo" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_LEVACTFIJO_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Reportes en la pestaña de Activo Fijo" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_ACTFIJOREPORTES_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Reportes en la pestaña de Activo Fijo" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_ACTFIJOREPORTES_ADMIN"/>
+    <!-- Transferencias -->
+    <SecurityPermission description="Ver la pestaña de transferencias de almacén" permissionId="WRHS_TRANSFERT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de transferencias en la pestaña de transferencias" permissionId="WRHS_TRANSFERGRP_TRANSFERGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de solicitud de transferencias entre almacenes en la pestaña de transferencias" permissionId="WRHS_TRANSFERT_CREAR_SOLICITUD_VIEW"/>
+    <SecurityPermission description="Ver el tab de buscar solicitud de transferencias entre almacenes en la pestaña de transferencias" permissionId="WRHS_TRANSFERT_BUSCAR_SOLICITUD_VIEW"/>
+    <SecurityPermission description="Ver el tab de solicitudes pendientes por transferir entre almacenes en la pestaña de transferencias" permissionId="WRHS_TRANSFERT_SOLICITUD_PENDIENTE_VIEW"/>
+
+    <!-- This permission group is for any user who can work with the warehouse application.  Use the party manager to associate it
+     with the userlogin of the warehouse.  Then configure the permission for each user at each warehouse in Warehouse > Configuration >> Team Member. -->
+    <SecurityGroup groupId="WRHS_USER" description="Usuario del módulo de Almacén. Configurar permisos específicos para cada almacén en Almacén > Configuración >> Miembros del Equipo."/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="WRHS_USER"/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="WRHS_VIEW"/>
+
+    <!-- these ofbiz permissions are needed so various services will run -->
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="MANUFACTURING_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="ACCTG_PREF_VIEW"/>
+
+    <!-- Needed to delete production run tasks -->
+    <SecurityGroupPermission groupId="WRHS_USER" permissionId="WORKEFFORTMGR_DELETE"/>
+
+    <!-- Warehouse admin can perform any action in any Warehouse -->
+    <SecurityGroup groupId="WRHS_ADMIN" description="Administrador del Almacén con permisos para realizar cualquier acción en cualquier almacén, incluyendo crear nuevos almacenes y asignar usuarios a los almacenes."/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="WRHS_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ORDERMGR_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="MANUFACTURING_ADMIN"/>
+
+    <!-- Give admin permission to define outsourced tasks, receive outsourced purchase orders and create purchase invoices for them. -->
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="CATALOG_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ACCTG_PREF_VIEW"/>
+
+    <!-- Permissions for manage work effort -->
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+
+    <SecurityGroupPermission groupId="WRHS_ADMIN" permissionId="ASSETMAINT_ADMIN"/>
+    
+    <!-- Warehouse manager can perform any action in the Warehouse -->
+    <SecurityGroup groupId="WRHS_MANAGER" description="Administrador del Almacén puede realizar cualquier acción en los almacenes en los que se encuentra asignado como Administrador."/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_RCPO"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_PHINV"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_STKMV"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_XFER"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_SETCOST"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_LOT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_LOT_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INV_LOT_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_SHIP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_SHIP_PICK_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_SHIP_PICK_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_SHIP_PACK"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_SHIP_SCHED"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVOICE_VIEW"/>
+<!--     <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_MFG_VIEW"/> -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_MFG_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIG"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIG_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_PREF_VIEW"/>
+
+    <!-- For now, grant admin access to OFBiz facility and manufacturing services -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="MANUFACTURING_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WORKEFFORTMGR_ADMIN"/>
+    
+    
+    <!-- Permissions required by the services called during order packing -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ORDERMGR_UPDATE"/>
+
+    <!-- Permissions required by the services called during the receive inventory process -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ORDERMGR_CREATE"/>
+
+    <!-- Permissions required by lookup screens -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ORDERMGR_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="CATALOG_VIEW"/>
+
+    <!-- Permissions for manage account atx -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="ACCTG_ATX_DELETE"/>
+    
+    <!-- Inventario -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_TRANSENTREALMACEN_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_TRANSENTREALMACEN_ADMIN"/>    
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_DEVOLUCIONESINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_DEVOLUCIONESINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_CONSULDEVOLUINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_CONSULDEVOLUINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_MAXIMOSMINIMOSINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_MAXIMOSMINIMOSINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_CONSUPRODENMININVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_CONSUPRODENMININVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INVENT_OPCGRP_FECHA_RECEPCION_VIEW"/>
+    
+    <!-- Configuración -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_VALMACENCONF_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_VALMACENCONF_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_UBICACIONCONF_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_UBICACIONCONF_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_MEQUIPOCONF_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_CONFIGT_OPCGRP_MEQUIPOCONF_ADMIN"/>
+    
+    <!-- Informes -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INFORT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INFORT_INFORGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_ADMIN"/>
+       
+    <!-- Activo Fijo -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_LEVACTFIJO_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_LEVACTFIJO_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_ACTFIJOREPORTES_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_ACTFIJOT_ACTFIJOGRP_ACTFIJOREPORTES_ADMIN"/>
+    
+    <!-- Transferencias -->
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_TRANSFERT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_TRANSFERGRP_TRANSFERGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_TRANSFERT_CREAR_SOLICITUD_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_TRANSFERT_BUSCAR_SOLICITUD_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_MANAGER" permissionId="WRHS_TRANSFERT_SOLICITUD_PENDIENTE_VIEW"/>
+    
+    
+    <!-- Pedidos Internos -->
+    <!-- <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_ADMIN"/>  -->
+    
+    <!-- Shipping only access permission -->
+    <SecurityGroup groupId="WRHS_SHIPPER" description="Permisos de Envíos para el módulo de Almacén."/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_SHIP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_SHIP_PICK_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_SHIP_PICK_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_SHIP_PACK"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_SHIP_SCHED"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="WRHS_INVOICE_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_SHIPPER" permissionId="ACCTG_PREF_VIEW"/>
+    
+    <SecurityGroup groupId="WRHS_ALMACENISTA" description="Almacenista."/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_RCPO"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_PHINV"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_STKMV"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_XFER"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_SETCOST"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_LOT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_LOT_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INV_LOT_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVOICE_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_MFG_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_PREF_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ORDERMGR_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ORDERMGR_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="CATALOG_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_CREATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_UPDATE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="ACCTG_ATX_DELETE"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ALTANARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_RPEDIDOINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BRECEPINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ALTAARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_BAJAARTINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WRHS_INVENT_OPCGRP_ADMINLOTESINVENT_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_VIEW"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="MANUFACTURING_ADMIN"/>
+    <SecurityGroupPermission groupId="WRHS_ALMACENISTA" permissionId="WORKEFFORTMGR_ADMIN"/>
+    
+    <SecurityGroup groupId="WRHS_REPORTES" description="Reportes del área de almacén."/>
+    <SecurityPermission description="Basic permission to use the Warehouse application" permissionId="WRHS_VIEW"/>
+    <SecurityPermission description="Ver la pestaña de Informes en el módulo de Almacén" permissionId="WRHS_INFORT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en la pestaña de Informes" permissionId="WRHS_INFORT_INFORGRP_INFTABINFOR_ADMIN"/>
+    
+    <!-- Warehouse team role and related security permissions.  Customize to say whatever you need -->
+    <FacilityTeamRoleSecurity securityGroupId="WRHS_MANAGER" roleDescription="Administrador del Almacén" sequenceNum="01"/>
+    <FacilityTeamRoleSecurity securityGroupId="WRHS_SHIPPER" roleDescription="Expedidor" sequenceNum="02"/>
+    <FacilityTeamRoleSecurity securityGroupId="WRHS_REPORTES" roleDescription="Analista" sequenceNum="03"/>
+    
+    <UserLoginSecurityGroup userLoginId="admin" groupId="WRHS_ADMIN" fromDate="2001-01-01 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="admin" groupId="WRHS_MANAGER" fromDate="2001-01-01 00:00:00"/>
+
+</entity-engine-xml>

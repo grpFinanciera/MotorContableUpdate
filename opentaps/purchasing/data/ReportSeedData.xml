@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<entity-engine-xml>
+
+    <ReportRegistry reportId="PUBACKORDPRODS" shortName="PurchOpenSalesOrderReportShort" description="PurchOpenSalesOrderReportDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/BackOrderedProducts.jrxml"/>
+    <ReportRegistry reportId="PUESTDELIVERYDATES" shortName="PurchEstDeliveryDatesReportShort" description="PurchEstDeliveryDatesReportDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/EstimatedDeliveryDates.jrxml"/>
+    <ReportRegistry reportId="PURCHBYSUPPLIER" shortName="PurchBySupplierReportShort" description="PurchBySupplierReportDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/PurchasesBySupplier.jrxml"/>
+    <ReportRegistry reportId="PURCHBYPRODUCT" shortName="PurchByProductReportShort" description="PurchByProductReportDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/PurchasesByProduct.jrxml"/>
+    <ReportRegistry reportId="SALESMINSTOCK" shortName="PurchSalesVSMinimumShort" description="PurchSalesVSMinimumDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/SalesMinimumStock.jrxml"/>
+    <ReportRegistry reportId="PMNTSUPPLIER" shortName="PurchPaymentsBySuppShort" description="PurchPaymentsBySuppDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/PaymentsBySupplier.jrxml"/>
+    <ReportRegistry reportId="SALESHIPDATE" shortName="PurchSalesShipByDateShort" description="PurchSalesShipByDateDesc" reportLocation="component://purchasing/webapp/purchasing/reports/repository/SalesShipmentsByDate.jrxml"/>
+    
+    <ReportGroup reportGroupId="PRCH_ORDER" showInSelect="Y" description="PurchOrderReports" application="purchasing" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="PRCH_ORDER" reportId="PUBACKORDPRODS" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="PRCH_ORDER" reportId="PUESTDELIVERYDATES" sequenceNum="2"/>
+    <ReportGroupMember reportGroupId="PRCH_ORDER" reportId="SALESMINSTOCK" sequenceNum="3"/>
+    <ReportGroupMember reportGroupId="PRCH_ORDER" reportId="SALESHIPDATE" sequenceNum="4"/>
+
+    <ReportGroup reportGroupId="PRCH_PURCHASING" showInSelect="Y" description="PurchPurchasingReports" application="purchasing" sequenceNum="2"/>
+    <ReportGroupMember reportGroupId="PRCH_PURCHASING" reportId="PURCHBYSUPPLIER" sequenceNum="1"/>
+    <ReportGroupMember reportGroupId="PRCH_PURCHASING" reportId="PURCHBYPRODUCT" sequenceNum="2"/>
+    <ReportGroupMember reportGroupId="PRCH_PURCHASING" reportId="PMNTSUPPLIER" sequenceNum="3"/>
+    
+    <ReportRegistry reportId="PRUCHORDER" shortName="Purchasing Order Report" description="Report show you the order detail." reportLocation="component://purchasing/webapp/purchasing/reports/repository/orderPDF/Order.jrxml"/>
+
+    <ReportGroup reportGroupId="PRCH_FORM" showInSelect="N" description="Order Reports" application="purchasing"/>
+    <ReportGroupMember reportGroupId="PRCH_FORM" reportId="PRUCHORDER"/>
+    
+    <ReportGroup reportGroupId="PRCH_ADQUISICIONES" showInSelect="N" description="%PurchAdquisiciones" application="purchasing" sequenceNum="3"/>
+
+</entity-engine-xml>

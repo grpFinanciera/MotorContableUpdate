@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.crypto.HashCrypt;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.condition.EntityExpr;
+import org.ofbiz.entity.condition.EntityOperator;
+import javax.servlet.ServletContext;
+import org.ofbiz.base.component.ComponentConfig;
+import org.ofbiz.base.util.UtilProperties;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+
+	application = parameters.get("componentName");
+	context.put("application", application);
+
+    userLogin = parameters.get("userLogin");
+    if (userLogin == null) {
+        return;
+    }
+    
+    // obtener el rol del party logeado
+    partyRole = delegator.findByPrimaryKey("PartyRole", UtilMisc.toMap("partyId", userLogin.get("partyId"), "roleTypeId", "TESORERO"));
+    if (partyRole == null) {
+    	return;
+    }
+    context.put("partyRole", partyRole);
+
+    // obtener el numero de pendientes en viaticos y obras
+	searchConditions = FastList.newInstance();
+    searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "ANTICIPO_PENDIENTE_C"));
+    searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "COMPROMETIDA_V"));
+    searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "VALIDADA_V"));
+    searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "ORDEN_PAGO_PENDIENTE"));
+	searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "APROBADA_GR"));
+	searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "VALIDADA_GR"));
+	searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "ENVIADO_PA"));
+	searchConditions.add(new EntityExpr("estatus", EntityOperator.EQUALS, "ORDER_CANCELLED"));
+    allConditions = new EntityConditionList(searchConditions, EntityOperator.OR);
+	contador = delegator.findCountByCondition("PendientesTesoreria", allConditions, null);
+	context.put("contador", contador);

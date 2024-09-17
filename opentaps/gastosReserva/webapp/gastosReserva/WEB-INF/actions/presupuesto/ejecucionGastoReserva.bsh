@@ -1,0 +1,17 @@
+import org.opentaps.common.util.UtilAccountingTags;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.UtilMisc;
+
+gastosReservaId = parameters.get("gastosReservaId");
+if(gastosReservaId == null){
+	return;	
+}
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+cicloId = UtilCommon.getCicloId(request);
+context.put("tagTypes", 
+	UtilAccountingTags.getClassificationTagsForOrganization(
+		organizationPartyId, cicloId, UtilAccountingTags.EGRESO_TAG, delegator));
+	
+listPresupuesto = delegator.findByAnd("DetalleGastoPresupuesto",UtilMisc.toMap("gastosReservaId",gastosReservaId));
+
+context.put("listPresupuesto",listPresupuesto);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+	<Modulo moduloId="CREA_PROYECTO" nombre="Creacion de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="CANCELA_PROYECTO" nombre="Finalizacion de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="DEVUELVE_PROYECTO" nombre="Reintegro de recursos de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="VIATICO_SOL_PROYECTO" nombre="Solicitud viatico de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="VIATICO_COM_PROYECTO" nombre="Comprobacion viatico de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="VIATICO_DEV_PROYECTO" nombre="Devolucion viatico de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="GASTOS_SOL_PROYECTO" nombre="Solicitud gasto por comprobar de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="GASTOS_COM_PROYECTO" nombre="Comprobacion gasto por comprobar de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="GASTOS_DEV_PROYECTO" nombre="Devolucion gasto por comprobar de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="SERV_PER_PROYECTO" nombre="Servicios personales de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="SP_PAGO_PROYECTO" nombre="Pago de Servicios Personales de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="SP_REEMB_PROYECTO" nombre="Reembolso de Servicios Personales de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="ADQ_SOL_PROYECTO" nombre="Solicitud de adquisiciones de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="ADQ_PAGO_PROYECTO" nombre="Pago de adquisiciones de proyecto" abreviatura="P" uso="Y" />
+	<Modulo moduloId="PREV_PAGO_PROYECTO" nombre="Ingresos por proyecto" abreviatura="P" uso="Y" />
+
+<!-- Estatus Viatico -->
+    <Estatus statusId="CREADO" descripcion="Creado" tipo="Y"/>
+    <Estatus statusId="VIGENTE" descripcion="Vigente" tipo="Y"/>
+    <Estatus statusId="FINALIZADO" descripcion="Finalizado" tipo="Y"/>
+    <Estatus statusId="CANCELADO" descripcion="Cancelado" tipo="Y"/>
+    
+</entity-engine-xml>

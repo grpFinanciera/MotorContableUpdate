@@ -1,0 +1,15 @@
+
+import org.ofbiz.base.util.*;
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+//Busca los eventos del modulo
+moduloId = "TRASPASO_BANCO";
+listEventos = delegator.findByAnd("EventoContable", UtilMisc.toMap("moduloId", moduloId), UtilMisc.toList("descripcion"));
+print("Lista Eventos "+listEventos);
+context.put("listEventos", listEventos);

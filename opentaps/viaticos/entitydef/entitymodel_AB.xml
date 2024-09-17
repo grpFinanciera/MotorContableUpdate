@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+    <!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para modulo de Viaticos</title>
+	<description>Define las entidades para viaticos</description>
+	<version>1.0</version>
+    
+    <entity entity-name="Viatico"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Solicitud de Viatico">
+		<field name="viaticoId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<field name="justificacion" type="very-long" />
+		<field name="tipoMoneda" type="id"/>
+		<field name="recurso" type="id"/>
+		<field name="montoDiario" type="currency-amount"/>
+		<field name="montoTrabCampo" type="currency-amount"/>
+		<field name="montoTransporte" type="currency-amount"/>
+		<field name="tipoTransporteId" type="id-ne"/>
+		<field name="fechaAutorizacion" type="date-time" />
+		<field name="fechaComprobacion" type="date-time" />
+		<field name="personaSolicitanteId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="areaPartyId" type="id-ne"/>
+		<field name="geoOrigenId" type="id-ne" />
+		<field name="geoDestinoId" type="id-ne" />	
+		<field name="fechaInicial" type="date-time"/>
+		<field name="fechaFinal" type="date-time"/>								
+		<field name="statusId" type="id-ne"/>
+		<field name="programa" type="id-ne"/>
+		<field name="programa2" type="id-ne"/>
+		<field name="informeActividades" type="very-long"/>
+		<field name="montoDiarioComprobado" type="currency-amount"/>
+		<field name="montoTransporteComprobado" type="currency-amount"/>
+		<field name="montoTrabCampoComprobado" type="currency-amount"/>		
+		<field name="observacionComprobante" type="description"/>
+		<field name="fuenteFinanciamientoId" type="id"/>
+		<field name="informeComision" type="very-long" />
+		<prim-key field="viaticoId"/>
+		<relation type="one" fk-name="VIATICO_MONEDA"
+			rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>				
+		<relation type="one" fk-name="VIATICO_TRANSPORTE"
+			rel-entity-name="TipoTransporte">
+			<key-map field-name="tipoTransporteId" rel-field-name="tipoTransporteId" />
+		</relation>			
+		<relation type="one" fk-name="VIATICO_PERSON_FK" title="Person"
+			rel-entity-name="Person">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="VIATICO_PARTY_FK" title="OrgParty"
+			rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="FK_VIAT_AREA_PTY" title="AreaParty"
+			rel-entity-name="Party">
+			<key-map field-name="areaPartyId" rel-field-name="partyId" />
+		</relation>		
+		<relation type="one" fk-name="FK_VIAT_GEO_ORGN" title="GeoOrigen"
+			rel-entity-name="Geo">
+			<key-map field-name="geoOrigenId" rel-field-name="geoId" />
+		</relation>		
+		<relation type="one" fk-name="FK_VIAT_GEO_DEST" title="GeoDestino"
+			rel-entity-name="Geo">
+			<key-map field-name="geoDestinoId" rel-field-name="geoId" />
+		</relation>
+		<relation type="one" fk-name="VIATICO_ESTATUS_FK" rel-entity-name="Estatus">
+			<key-map field-name="statusId" />
+		</relation>
+		<relation type="one" rel-entity-name="Enumeration" fk-name="VIATICO_PROG" title="viaticoPrograma">
+            <key-map field-name="programa" rel-field-name="enumId"/>
+        </relation>	
+        <relation type="one" rel-entity-name="ProgramaViatico" fk-name="VIATICO_PROG2" title="viaticoPrograma2">
+            <key-map field-name="programa2" rel-field-name="programaId"/>
+        </relation>
+        <relation type="one" fk-name="FK_DBO_VIATICOFF" rel-entity-name="FuenteFinanciamiento">
+			<key-map field-name="fuenteFinanciamientoId" />
+		</relation>					
+    </entity>
+    
+    <entity entity-name="TipoTransporte"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Tipo de transporte">
+		<field name="tipoTransporteId" type="id-ne"/>
+		<field name="descripcion" type="description"/>
+		<prim-key field="tipoTransporteId"/>
+    </entity>
+    
+    <entity entity-name="DetalleViatico"
+		package-name="org.opentaps.purchasing.viaticos" title="Entidad que informa el detalle del viatico">
+		<field name="detalleViaticoId" type="id-ne" />
+		<field name="viaticoId" type="id-ne" />
+		<field name="clavePresupuestal" type="description" />
+		<field name="monto" type="currency-precise" />
+		<field name="cantidad" type="numeric" />
+		<field name="acctgTagEnumId1" type="id-ne"/>
+        <field name="acctgTagEnumId2" type="id-ne"/>
+        <field name="acctgTagEnumId3" type="id-ne"/>
+        <field name="acctgTagEnumId4" type="id-ne"/>
+        <field name="acctgTagEnumId5" type="id-ne"/>
+        <field name="acctgTagEnumId6" type="id-ne"/>
+        <field name="acctgTagEnumId7" type="id-ne"/>
+        <field name="acctgTagEnumId8" type="id-ne"/>
+        <field name="acctgTagEnumId9" type="id-ne"/>
+        <field name="acctgTagEnumId10" type="id-ne"/>
+        <field name="acctgTagEnumId11" type="id-ne"/>
+        <field name="acctgTagEnumId12" type="id-ne"/>
+        <field name="acctgTagEnumId13" type="id-ne"/>
+        <field name="acctgTagEnumId14" type="id-ne"/>
+        <field name="acctgTagEnumId15" type="id-ne"/>
+        <field name="acctgTagEnumIdAdmin" type="id-ne"/>
+		<prim-key field="detalleViaticoId" />
+		<prim-key field="viaticoId" />
+		<relation type="one" fk-name="VIA_TAG_ADMIN" rel-entity-name="PartyGroup">
+			<key-map field-name="acctgTagEnumIdAdmin" rel-field-name="partyId" />
+		</relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG1" title="tag1">
+            <key-map field-name="acctgTagEnumId1" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG2" title="tag2">
+            <key-map field-name="acctgTagEnumId2" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG3" title="tag3">
+            <key-map field-name="acctgTagEnumId3" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG4" title="tag4">
+            <key-map field-name="acctgTagEnumId4" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG5" title="tag5">
+            <key-map field-name="acctgTagEnumId5" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG6" title="tag6">
+            <key-map field-name="acctgTagEnumId6" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG7" title="tag7">
+            <key-map field-name="acctgTagEnumId7" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG8" title="tag8">
+            <key-map field-name="acctgTagEnumId8" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG9" title="tag9">
+            <key-map field-name="acctgTagEnumId9" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG10" title="tag10">
+            <key-map field-name="acctgTagEnumId10" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG11" title="tag11">
+            <key-map field-name="acctgTagEnumId11" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG12" title="tag12">
+            <key-map field-name="acctgTagEnumId12" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG13" title="tag13">
+            <key-map field-name="acctgTagEnumId13" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG14" title="tag14">
+            <key-map field-name="acctgTagEnumId14" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="VIA_TAG15" title="tag15">
+            <key-map field-name="acctgTagEnumId15" rel-field-name="enumId"/>
+        </relation>
+		<relation type="one" fk-name="ID_VIATICO" rel-entity-name="Viatico">
+			<key-map field-name="viaticoId" />
+		</relation>
+	</entity>
+	
+	<entity entity-name="ConceptoViatico"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Concepto de viaticos">
+		<field name="conceptoViaticoId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<field name="diarioTransporteFlag" type="indicator"></field>
+		<prim-key field="conceptoViaticoId"/>					
+    </entity>
+	
+	<entity entity-name="ConceptoViaticoMonto"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Monto de cada Concepto de viaticos">
+        <field name="conceptoViaticoMontoId" type="id-ne" />
+		<field name="viaticoId" type="id-ne"></field>
+		<field name="fecha" type="date-time" />
+		<field name="referencia" type="id-ne"></field>
+		<field name="conceptoViaticoId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<field name="monto" type="currency-amount"/>
+		<prim-key field="conceptoViaticoMontoId"/>
+		<relation type="one" rel-entity-name="Viatico">
+			<key-map field-name="viaticoId"/>
+		</relation>				
+		<relation type="one" rel-entity-name="ConceptoViatico">
+			<key-map field-name="conceptoViaticoId" />
+		</relation>			
+    </entity>
+	
+	 	<!-- Vista para encontrar viatico -->
+	<view-entity entity-name="BuscarViatico"
+		package-name="org.opentaps.purchasing.viaticos"
+		title="Permite la búsqueda de viaticos.">
+		<member-entity entity-alias="V" entity-name="Viatico" />
+		<member-entity entity-alias="EST" entity-name="Estatus" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="viaticoId" entity-alias="V" group-by="true" />
+		<alias name="statusId" entity-alias="V" group-by="true" />
+		<alias name="descripcion" entity-alias="EST" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="V" group-by="true" />
+		<alias name="fechaAutorizacion" entity-alias="V" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="V" group-by="true" />
+		<alias name="createdStamp" entity-alias="V" group-by="true" />
+		<alias name="areaPartyId" entity-alias="V" group-by="true" />
+		<alias name="partyId" entity-alias="PER" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<view-link entity-alias="V" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="V" rel-entity-alias="EST">
+			<key-map field-name="statusId"/>
+		</view-link>
+	</view-entity>
+	
+	<!-- Vista para mostrar el saldo de los solicitantes -->
+	<view-entity entity-name="ConsultarSaldoViatico"
+		package-name="org.opentaps.purchasing.viaticos"
+		title="Permite la búsqueda de los saldos de los solicitantes.">
+		<member-entity entity-alias="CAT" entity-name="SaldoCatalogo" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="catalogoId" entity-alias="CAT" group-by="true" />
+		<alias name="periodo" entity-alias="CAT" group-by="true" />
+		<alias name="tipoId" entity-alias="CAT" group-by="true" />
+		<alias name="tipo" entity-alias="CAT" group-by="true" />
+		<alias name="monto" entity-alias="CAT" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<view-link entity-alias="CAT" rel-entity-alias="PER">
+			<key-map field-name="catalogoId" rel-field-name="partyId"/>
+		</view-link>		
+	</view-entity>
+	
+	
+ 	<!-- Vista para mostrar al autorizador el resumen de las solicitudes -->
+	<view-entity entity-name="ViaticosPendientes"
+		package-name="org.opentaps.purchasing.viaticos"
+		title="Permite la búsqueda de viaticos pendientes.">
+		<member-entity entity-alias="VIA" entity-name="Viatico" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<alias name="viaticoId" entity-alias="VIA" group-by="true" />
+		<alias name="descripcion" entity-alias="VIA" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="VIA" group-by="true" />
+		<alias name="areaPartyId" entity-alias="VIA" group-by="true" />
+		<alias name="descripcionWorkflow" field="descripcion"
+			entity-alias="TIP" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />	
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="groupName" entity-alias="PAG" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<alias name="statusVi" field="statusId"  entity-alias="VIA" group-by="true" />
+		<alias name="createdStamp" entity-alias="VIA" group-by="true" />
+		<view-link entity-alias="VIA" rel-entity-alias="CON">
+			<key-map field-name="viaticoId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="PAG">
+			<key-map field-name="areaPartyId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="ViaticoPoliza"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Polizas de Viatico">
+		<field name="viaticoId" type="id-ne"></field>
+		<field name="polizaComprometida" type="id-ne" />
+		<field name="acctTransPolizaComprometida" type="id-ne" />
+		<field name="polizaComprobada" type="id-ne" />
+		<field name="acctTransPolizaComprobada" type="id-ne" />
+		<field name="polizaDevolucion" type="id-ne" />
+		<field name="acctTransPolizaDevolucion" type="id-ne" />
+		<prim-key field="viaticoId"/>
+		<relation type="one" fk-name="FK_VIAT_POL"
+			rel-entity-name="Viatico">
+			<key-map field-name="viaticoId" />
+		</relation>						
+    </entity>
+    
+    <entity entity-name="CogViatico"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Relacion de Cog de viaticos">
+		<field name="cogViaticoId" type="id-ne"></field>
+		<field name="acctgTagEnumId" type="id-ne"></field>
+		<field name="diarioTransporteFlag" type="indicator"></field>
+		<prim-key field="cogViaticoId"/>					
+    </entity>
+    
+    <entity entity-name="HistoricoMontoViatico" package-name="org.opentaps.purchasing.viaticos"
+	title="Historico sobre el monto para viaticos de los Solicitantes">
+	<field name="historicoId" type="id-ne"></field>
+	<field name="solicitanteId" type="id-ne"></field>
+	<field name="movimiento" type="id-ne" />
+	<field name="monto" type="currency-amount" />
+	<field name="periodo" type="date-time" />
+	<prim-key field="historicoId" />
+	<relation type="one" fk-name="FK_HIST_PERS"
+		rel-entity-name="Person">
+		<key-map field-name="solicitanteId" rel-field-name="partyId" />
+	</relation>
+</entity>   
+
+    <entity entity-name="FuenteFinanciamiento"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Fuente de financiamiento viaticos">
+		<field name="fuenteFinanciamientoId" type="id-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<prim-key field="fuenteFinanciamientoId"/>					
+    </entity>
+    
+    
+    <!-- Vista para generar el reporte para solicitud de viaticos -->
+    <view-entity entity-name="RepSolicitudViaticos"
+		package-name="org.opentaps.purchasing.viaticos"
+		title="Usado para el reporte de solicitud de viaticos">
+		
+		<member-entity entity-alias="VIA" entity-name="Viatico" />
+		<member-entity entity-alias="P" entity-name="Person" />
+		<member-entity entity-alias="PG" entity-name="PartyGroup" />
+		<member-entity entity-alias="G" entity-name="Geo" />
+		<member-entity entity-alias="TT" entity-name="TipoTransporte" />
+		<member-entity entity-alias="E" entity-name="Enumeration" />
+		<member-entity entity-alias="CWF" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="COWF" entity-name="ComentarioWorkFlow" />
+		<member-entity entity-alias="P2" entity-name="Person" />
+		<member-entity entity-alias="PV" entity-name="ProgramaViatico" />
+		
+		<alias name="viaticoId" entity-alias="VIA" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="VIA" group-by="true" />
+		<alias name="descripcion" entity-alias="VIA" group-by="true" />
+		<alias name="justificacion" entity-alias="VIA" group-by="true" />
+		<alias name="montoDiario" entity-alias="VIA" group-by="true" />
+		<alias name="montoTransporte" entity-alias="VIA" group-by="true" />
+		<alias name="montoTrabCampo" entity-alias="VIA" group-by="true" />
+		<alias name="fechaAutorizacion" entity-alias="VIA" group-by="true" />
+		<alias name="fechaFinal" entity-alias="VIA" group-by="true" />
+		<alias name="fechaInicial" entity-alias="VIA" group-by="true" />
+		<alias name="areaPartyId" entity-alias="VIA" group-by="true" />
+		<alias name="recurso" entity-alias="VIA" group-by="true" />
+		<alias name="programa" entity-alias="VIA" group-by="true" />
+		<alias name="programa2" entity-alias="VIA" group-by="true" />
+		<alias name="informeActividades" entity-alias="VIA" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="VIA" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="VIA" group-by="true" />
+		<alias name="geoDestinoId" entity-alias="VIA" group-by="true" />
+		<alias name="partyId" entity-alias="P" group-by="true" />
+		<alias name="firstName" entity-alias="P" group-by="true" />
+		<alias name="lastName" entity-alias="P" group-by="true" />
+		<alias name="firmaId" entity-alias="P" group-by="true" />
+		<alias name="occupation" entity-alias="P" group-by="true" />
+		<alias name="partyGroupId" field="partyId" entity-alias="PG" group-by="true" />
+		<alias name="groupName" entity-alias="PG" group-by="true" />
+		<alias name="geoId" entity-alias="G" group-by="true" />
+		<alias name="geoName" entity-alias="G" group-by="true" />
+		<alias name="descripcionTransporte" field="descripcion" entity-alias="TT" group-by="true" />
+		<alias name="description" entity-alias="E" group-by="true" />
+		<alias name="workFlowId" entity-alias="CWF" group-by="true"/>
+		<alias name="tipoWorkFlowId" entity-alias="CWF" group-by="true"/>
+		<alias name="comentario" entity-alias="COWF" group-by="true" />
+		<alias name="firstName2" field="firstName" entity-alias="P2" group-by="true" />
+		<alias name="lastName2" field="lastName" entity-alias="P2" group-by="true" />
+		<alias name="nombrePrograma" entity-alias="PV" group-by="true" />
+		
+		<view-link entity-alias="VIA" rel-entity-alias="P" >
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="PG">
+			<key-map field-name="areaPartyId" rel-field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="G">
+			<key-map field-name="geoDestinoId" rel-field-name="geoId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="TT">
+			<key-map field-name="tipoTransporteId"/>
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="E" rel-optional="true">
+			<key-map field-name="programa" rel-field-name="enumId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="PV" rel-optional="true">
+			<key-map field-name="programa2" rel-field-name="programaId" />
+		</view-link>
+		<view-link entity-alias="VIA" rel-entity-alias="CWF" rel-optional="true">
+			<key-map field-name="viaticoId" rel-field-name="origenId" />
+		</view-link>
+		<view-link entity-alias="CWF" rel-entity-alias="COWF" rel-optional="true">
+			<key-map field-name="workFlowId"/>
+		</view-link>
+		<view-link entity-alias="COWF" rel-entity-alias="P2" rel-optional="true">
+			<key-map field-name="personaId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="ConfiguracionViatico"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Concepto de viaticos">
+		<field name="configViaticoId" type="id-long-ne"></field>
+		<field name="descripcion" type="description"></field>
+		<field name="valor" type="value"></field>
+		<prim-key field="configViaticoId"/>					
+    </entity>
+    
+    <entity entity-name="UsuarioInhViatico"
+            package-name="org.opentaps.purchasing.viaticos"
+            title="Concepto de viaticos">
+		<field name="personaSolicitanteId" type="id-ne"></field>
+		<field name="estatus" type="description"></field>
+		<prim-key field="personaSolicitanteId"/>
+		<relation type="one" fk-name="FK_INH_PERS" rel-entity-name="Person">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</relation>					
+    </entity>
+    
+    <entity entity-name="ProgramaViatico"
+			package-name="org.opentaps.purchasing.viaticos"
+			title="Creacion de nuevo programa para viaticos">
+		<field name="programaId" type="id-ne" />
+		<field name="nombrePrograma" type="name_long"/>
+		<field name="estatus" type="description"/>
+		<prim-key field="programaId"/>
+    </entity>
+    
+</entitymodel>

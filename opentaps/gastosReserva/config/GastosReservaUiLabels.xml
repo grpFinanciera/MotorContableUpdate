@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="GastosReservaApplication">
+        <value xml:lang="en">GastosReserva Application</value>
+        <value xml:lang="es">Gastos a reserva de comprobar</value>
+        <value xml:lang="zh">GastosReserva应用程序</value>
+    </property>
+    <property key="GastosReservaCompanyName">
+        <value xml:lang="en">ExpenseReserve</value>
+        <value xml:lang="es">GastosReserva</value>
+    </property>
+    <property key="GastosReservaComprobarButton">
+        <value xml:lang="en">Check</value>
+        <value xml:lang="es">Comprobar</value>
+    </property>
+    <property key="GastosReservaAddButton">
+        <value xml:lang="en">Add</value>
+        <value xml:lang="es">Añadir</value>
+    </property>
+    <property key="GastosReservaCompanySubtitle">
+        <value xml:lang="en">Part of the Open For Business Family of Open Source Software</value>
+        <value xml:lang="zh">开源软件OFBiz的组成部分</value>
+    </property>
+    <property key="GastosReservaViewPermissionError">
+        <value xml:lang="en">You are not allowed to view this page.</value>
+        <value xml:lang="es">No tienes permiso para ver esta página.</value>
+        <value xml:lang="zh">不允许你浏览这个页面。</value>
+    </property>
+
+
+   
+    <!-- Solicitante -->
+    <property key="GastosReservaSolicitante">
+        <value xml:lang="en">Petitioner</value>
+        <value xml:lang="es">Solicitante</value>
+    </property>
+    <!-- Crear Solicitud -->
+    <property key="GastosReservaCrearSolicitaud">
+        <value xml:lang="en">Create request</value>
+        <value xml:lang="es">Crear solicitud</value>
+    </property>
+    <property key="GastosReservaArea">
+        <value xml:lang="en">Area</value>
+        <value xml:lang="es">Área</value>
+    </property> 
+    <property key="GastosReservaSolicitante">
+        <value xml:lang="en">Applicant</value>
+        <value xml:lang="es">Solicitante</value>
+    </property> 
+    <property key="GastosReservaNumEmpl">
+        <value xml:lang="en">Employed number</value>
+        <value xml:lang="es">No. de empleado</value>
+    </property> 
+    <property key="GastosReservaConceptGasto">
+        <value xml:lang="en">Concept</value>
+        <value xml:lang="es">Concepto</value>
+    </property>
+    <property key="GastosReservaMotSalic">
+        <value xml:lang="en">Amount requested</value>
+        <value xml:lang="es">Monto solicitado</value>
+    </property>
+    <property key="GastosReservaProveedor">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="es">Proveedor</value>
+    </property>
+    <property key="GastosReservaMotObservaciones">
+        <value xml:lang="en">Observations</value>
+        <value xml:lang="es">Observaciones</value>
+    </property>
+    <property key="GastosReservaEstatus">
+        <value xml:lang="en">Status</value>
+        <value xml:lang="es">Estatus</value>
+    </property>      
+    <!-- Buscar Solicitud -->
+    <property key="GastosReservaBuscarSolicitaud">
+        <value xml:lang="en">Search request</value>
+        <value xml:lang="es">Buscar solicitud</value>
+    </property>
+    <property key="GastoReservadoId">
+        <value xml:lang="en">Application number</value>
+        <value xml:lang="es">Número de solicitud</value>
+    </property>
+    <!-- Comprobar Solicitud -->
+    <property key="GastosReservaComprobarSolicitaud">
+        <value xml:lang="en">Check request</value>
+        <value xml:lang="es">Comprobar solicitud</value>
+    </property> 
+    <property key="GastosReservaComprobarSolicitaud">
+        <value xml:lang="en">Check request</value>
+        <value xml:lang="es">Comprobar solicitud</value>
+    </property>
+    <property key="GastosReservaFactNote">
+        <value xml:lang="en">Invoice or Note</value>
+        <value xml:lang="es">Factura o nota</value>
+    </property>
+    <property key="GastosReservaTotal">
+        <value xml:lang="en">Total</value>
+        <value xml:lang="es">Total</value>
+    </property>
+    <property key="GastosReservaSubtotal">
+        <value xml:lang="en">Subtotal</value>
+        <value xml:lang="es">Subtotal</value>
+    </property>
+	<property key="GastosReservaIva">
+        <value xml:lang="en">IVA</value>
+        <value xml:lang="es">IVA</value>
+    </property>
+	<property key="GastosReservaConcepto">
+        <value xml:lang="en">Concept</value>
+        <value xml:lang="es">Concepto</value>
+    </property>
+    <property key="GastosReservaAddedConcept">
+        <value xml:lang="en">Added Concept</value>
+        <value xml:lang="es">Concepto Añadido</value>
+    </property>
+    <property key="GastosReservaFacturasAdd">
+        <value xml:lang="en">Added Invoices</value>
+        <value xml:lang="es">Facturas Añadidas</value>
+    </property>
+    
+    <!-- Autorizador -->
+    <property key="GastosReservaAutorizador">
+        <value xml:lang="en">Autorizer</value>
+        <value xml:lang="es">Autorizador</value>
+    </property>
+    <property key="GastosReservaBuscarSolicitaud">
+        <value xml:lang="en">Search request</value>
+        <value xml:lang="es">Buscar solicitud</value>
+    </property>
+    <property key="GastosReservaSolicitudPendienteAut">
+        <value xml:lang="en">Pending Applications by Authorize</value>
+        <value xml:lang="es">Solicitudes Pendientes por Autorizar</value>
+    </property>
+    
+    <!-- Presupuesto -->
+    <property key="GastosReservaPresupuesto">
+        <value xml:lang="en">Budget</value>
+        <value xml:lang="es">Presupuesto</value>
+    </property>
+    <property key="GastosReservaSolicitudPendienteComp">
+        <value xml:lang="en">Pending Applications by Check</value>
+        <value xml:lang="es">Solicitudes Pendientes por Comprobar</value>
+    </property>
+    <property key="GastosReservaPresupuestar">
+        <value xml:lang="en">Expenditure execution</value>
+        <value xml:lang="es">Ejecución del gasto</value>
+    </property>
+    <property key="GastosReservaDetallePresupuestoId">
+        <value xml:lang="en">Number of budget detail</value>
+        <value xml:lang="es">Número de detalle de presupuesto</value>
+    </property>
+    <property key="GastosReservaClavesAgregadas">
+        <value xml:lang="en">Keys added</value>
+        <value xml:lang="es">Claves Agregadas</value>
+    </property>
+    <property key="GastosReservaPolizaOtorga">
+        <value xml:lang="en">Granting policy</value>
+        <value xml:lang="es">Póliza de otorgamiento</value>
+    </property>
+    <property key="GastosReservaPolizaComprueba">
+        <value xml:lang="en">Verification Policy</value>
+        <value xml:lang="es">Póliza de comprobación</value>
+    </property>
+    <property key="GastosReservaPolizaDevolucion">
+        <value xml:lang="en">Return Policy</value>
+        <value xml:lang="es">Póliza de devolución</value>
+    </property>
+	<property key="GastosReservaAuxiliarContable">
+		<value xml:lang="en">Accounting assistant</value>
+		<value xml:lang="es">Auxiliar contable</value>
+	</property>
+	<property key="GastosReservaTipoSolicitud">
+		<value xml:lang="en">Type of request</value>
+		<value xml:lang="es">Tipo de solicitud</value>
+	</property>
+	<property key="GastosReservaMotComprobar">
+		<value xml:lang="en">Amount to check</value>
+		<value xml:lang="es">Monto a comprobar</value>
+	</property>
+</resource>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+
+	<description>Archivo de configuracion Finanzas AB</description>
+	<owner>ABCSE</owner>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+	<request-map uri="verImprimirPoliza">
+		<description>Imprime una póliza en PDF</description>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verImprimirPoliza" />
+		<response name="error" type="view" value="viewAcctgTrans" />
+	</request-map>
+    
+	<request-map uri="imprimirPoliza">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.opensourcestrategies.financials.reports.Reportes"
+			invoke="reportePoliza" />
+		<response name="pdf" type="view" value="imprimirPolizaPDF" />
+		<response name="xls" type="view" value="imprimirPolizaXLS" />
+		<response name="error" type="request-redirect" value="verImprimirPoliza" />
+	</request-map>
+	
+	<request-map uri="verReporteInventario">
+		<description>Imprime el reporte de los inventarios</description>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verReporteInventario" />
+		<response name="error" type="view" value="warehouseReports" />
+	</request-map>
+	
+	<request-map uri="reporteInventario">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.absoluciones.warehouse.reports.Reportes"
+			invoke="reporteAlmacen" />
+		<response name="pdf" type="view" value="reporteInventarioPDF" />
+		<response name="xls" type="view" value="reporteInventarioXLS" />
+		<response name="error" type="request-redirect" value="verReporteInventario" />
+	</request-map>
+	
+	<request-map uri="buscarPedidoInternoSurtir">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="buscarPedidoInternoSurtir"/>
+		<response name="error" type="view" value="buscarPedidoInternoSurtir"/>
+	</request-map>
+	
+	<request-map uri="imprimeSutirPedido">
+		<security https="true" auth="true" />
+		<event type="java" invoke="preparaReporteSurtirPedidoInterno"
+			path="org.opentaps.warehouse.inventory.PedidoInternoServices" />
+		<response name="success" type="view" value="imprimeSurtirPedidoPDF" />
+		<response name="error" type="view" value="salidaPedidosInternos" />
+	</request-map>
+	
+	<request-map uri="imprimeAltaInventario">
+		<security https="true" auth="true" />
+		<event type="java" invoke="preparaReporteAltaInventario"
+			path="org.opentaps.warehouse.inventory.InventoryServices" />
+		<response name="success" type="view" value="imprimeAltaInventarioPDF" />
+		<response name="error" type="view" value="consultaAltas" />
+	</request-map>
+	
+	<request-map uri="imprimeBajaInventario">
+		<security https="true" auth="true" />
+		<event type="java" invoke="preparaReporteBajaInventario"
+			path="org.opentaps.warehouse.inventory.InventoryServices" />
+		<response name="success" type="view" value="imprimeBajaInventarioPDF" />
+		<response name="error" type="view" value="consultaBajas" />
+	</request-map>	
+	
+	<request-map uri="emptyTransferenciasScreen">
+        <security https="true" auth="true" />		
+        <response name="success" type="view" value="emptyTransferenciasScreen" />
+        <response name="error" type="view" value="emptyTransferenciasScreen" />
+	</request-map>
+	
+	<request-map uri="transferenciasEntreAlmacen">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="transferenciasEntreAlmacen"/>
+    </request-map>
+    
+    <request-map uri="transferirArticulosAlmacen">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="transferirArticulosAlmacen"/>
+        <response name="success" type="view" value="transferenciasEntreAlmacen"/>        	
+        <response name="error" type="view" value="transferenciasEntreAlmacen"/>
+    </request-map>  
+    	
+    <request-map uri="solicitudTransferencia">
+    	<security https="true" auth="true" />
+    	<response name="success" type="view" value="solicitudTransferencia"/>    
+    	<response name="error" type="view" value="solicitudTransferencia"/>    
+    </request-map>
+    
+    <request-map uri="actualizaSolicitudTransferencia">
+    	<security https="true" auth="true"/>
+        <response name="success" type="request-redirect" value="verSolicitudTransferencia">
+        	<redirect-parameter name="solicitudTransferenciaId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitudTransferencia"/>
+    </request-map>
+    
+    <request-map uri="verSolicitudTransferencia">
+		<security https="true" auth="true" />
+    	<response name="success" type="view" value="verSolicitudTransferencia"/>    
+    	<response name="error" type="view" value="verSolicitudTransferencia"/>    
+    </request-map>
+    
+    <request-map uri="crearSolicitudTransferencia">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="crearSolicitudTransferencia"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="solicitudTransferencia"/>
+    </request-map>      
+    
+    <request-map uri="agregaItemProductoSolicitud">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="agregaItemProductoSolicitud"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="verSolicitudTransferencia"/>    	
+    </request-map>
+
+    <request-map uri="agregaRequisicionSolicitud">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="agregaRequisicionSolicitud"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="verSolicitudTransferencia"/>    	
+    </request-map>
+    
+    <request-map uri="agregaOrdenSolicitud">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="agregaOrdenSolicitud"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="verSolicitudTransferencia"/>    	
+    </request-map>
+    
+    <request-map uri="agregaPedidoInterno">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="agregaPedidoInterno"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="verSolicitudTransferencia"/>    	
+    </request-map>    
+    
+    <request-map uri="actualizaItemSolicitud">
+    	<security https="true" auth="true"/>
+		<event type="java" path="org.opentaps.warehouse.inventory.AjaxEvents"
+			invoke="actualizaItemSolicitud" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+    </request-map>
+
+    <request-map uri="eliminaItemSolicitud">
+    	<security https="true" auth="true"/>
+		<event type="java" path="org.opentaps.warehouse.inventory.AjaxEvents"
+			invoke="eliminaItemSolicitud" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="enviarSolicitudTransferencia">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="enviarSolicitudTransferencia"/>
+        <response name="success" type="view" value="verSolicitudTransferencia"/>        	
+        <response name="error" type="view" value="verSolicitudTransferencia"/>  
+	</request-map>
+	
+    <request-map uri="comentarSolicitudTransferencia">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="comentarSolicitudTransferencia"/>
+        <response name="success" type="request-redirect" value="verSolicitudTransferencia">
+        	<redirect-parameter name="solicitudTransferenciaId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitudTransferencia"/>
+    </request-map>
+    
+    <request-map uri="autorizarSolicitudTransferencia">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="autorizarSolicitudTransferencia"/>
+        <response name="success" type="request-redirect" value="verSolicitudTransferencia">
+        	<redirect-parameter name="solicitudTransferenciaId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitudTransferencia"/>
+    </request-map>
+    
+    <request-map uri="rechazarSolicitudTransferencia">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="rechazarSolicitudTransferencia"/>
+        <response name="success" type="request-redirect" value="verSolicitudTransferencia">
+        	<redirect-parameter name="solicitudTransferenciaId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitudTransferencia"/>
+    </request-map>
+    
+    <request-map uri="buscaSolicitudTransferencia">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscaSolicitudTransferencia" />
+    </request-map>
+    
+    <request-map uri="pendientesTransferir">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="pendientesTransferir" />
+    </request-map>
+    
+    <request-map uri="transferirSolicitud">
+		<security https="true" auth="true" />
+		<event type="service" invoke="transferirSolicitud" />
+		<response name="success" type="view" value="verSolicitudTransferencia" >
+			<redirect-parameter name="solicitudTransferenciaId"/>
+		</response>
+		<response name="error" type="view" value="verSolicitudTransferencia" />
+    </request-map>
+    
+	<request-map uri="actualizaFechaRecepcion">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="actualizaFechaRecepcion"/>
+	</request-map>
+    
+	<request-map uri="imprimirSolicitudTransferencia">
+		<security https="true" auth="true" />
+		<event type="java" path="com.absoluciones.warehouse.reports.Reportes" invoke="reporteSolicitudTransferencia" />
+		<response name="success" type="view" value="imprimirSolicitudTransferencia" />
+        <response name="error" type="none" />
+	</request-map>
+	
+	<view-map name="buscarPedidoInternoSurtir" type="screen"
+		page="component://warehouse/widget/warehouse/screens/pedidoInterno/PedidoInternoScreens.xml#buscarPedidoInternoSurtir" />
+		
+	<view-map name="imprimeSurtirPedidoPDF" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/SalidaPedidoInterno.jrxml" 
+		content-type="application/pdf" encoding="none" />
+		
+	<view-map name="imprimeAltaInventarioPDF" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/AltaAlmacen.jrxml" 
+		content-type="application/pdf" encoding="none" />
+		
+	<view-map name="imprimeBajaInventarioPDF" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/BajaAlmacen.jrxml" 
+		content-type="application/pdf" encoding="none" />							
+	
+	<view-map name="verImprimirPoliza" type="screen"
+		page="component://warehouse/widget/warehouse/screens/inventory/InventoryScreens.xml#verImprimirPoliza" />
+		
+	<view-map name="imprimirPolizaPDF" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="imprimirPolizaXLS" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/vnd.ms-excel" encoding="none" />
+		
+		<view-map name="verReporteInventario" type="screen"
+		page="component://warehouse/widget/warehouse/screens/inventory/InventoryScreens.xml#verReporteInventario" />
+		
+	<view-map name="reporteInventarioPDF" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/ReporteInventario.jrxml"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="reporteInventarioXLS" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/ReporteInventario.jrxml"
+		content-type="application/vnd.ms-excel" encoding="none" />
+		
+	<view-map name="transferenciasEntreAlmacen" type="screen" 
+		page="component://warehouse/widget/warehouse/screens/inventory/InventoryScreens.xml#transferenciasEntreAlmacen" />				
+
+	<view-map name="solicitudTransferencia" type="screen" 
+		page="component://warehouse/widget/warehouse/screens/transferencias/TransferenciasScreens.xml#solicitudTransferencia" />
+
+	<view-map name="verSolicitudTransferencia" type="screen" 
+		page="component://warehouse/widget/warehouse/screens/transferencias/TransferenciasScreens.xml#verSolicitudTransferencia" />		
+		
+	<view-map name="emptyTransferenciasScreen" type="screen"
+		page="component://warehouse/widget/warehouse/screens/transferencias/TransferenciasScreens.xml#emptyTransferenciasScreen" />
+
+	<view-map name="buscaSolicitudTransferencia" type="screen"
+		page="component://warehouse/widget/warehouse/screens/transferencias/TransferenciasScreens.xml#buscaSolicitudTransferencia" />
+		
+	<view-map name="pendientesTransferir" type="screen" 
+		page="component://warehouse/widget/warehouse/screens/transferencias/TransferenciasScreens.xml#pendientesTransferir" />
+		
+	<view-map name="imprimirSolicitudTransferencia" type="jasperreports"
+		page="component://warehouse/webapp/warehouse/reports/repository/SolicitudTransferencia.jrxml"
+		content-type="application/pdf" encoding="none" />
+		
+	<view-map name="actualizaFechaRecepcion" type="screen" 
+		page="component://warehouse/widget/warehouse/screens/inventory/InventoryScreens.xml#actualizaFechaRecepcion"/>
+			
+</site-conf>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+<!-- The Web Application -->
+<OpentapsWebApps applicationId="controlPatrimonial" shortName="Control Patrimonial" sequenceNum="30" applicationName="Control Patrimonial" description="Control Patrimonial (Activo Fijo)"
+             imageUrl="/opentaps_images/integratingweb/controlPatrimonial.png" imageHoverUrl="/opentaps_images/integratingweb/controlPatrimonialHover.png" linkUrl="/controlPatrimonial/control/main" />                 
+
+<!-- Tabs -->
+<OpentapsWebAppTab applicationId="controlPatrimonial" sequenceNum="010" tabId="myHome" uiLabel="ControlPatrimonialHome"
+                   linkUrl="myHomeMain"    securityModule="" securityAction=""
+                   handlerMethod="" handlerParameter=""/>
+                   
+<OpentapsWebAppTab applicationId="controlPatrimonial"  sequenceNum="020" tabId="control" uiLabel="ControlPatrimonialControl"
+                   linkUrl="emptyControlScreen"  securityModule="CONTROLPATRIMONIAL" securityAction="CONTROL_VIEW" handlerMethod=""/>   
+                                   
+<OpentapsWebAppTab applicationId="controlPatrimonial"  sequenceNum="030" tabId="levantamiento" uiLabel="ControlPatrimonialLevantamiento"
+                   linkUrl="emptyLevantamientoScreen"  securityModule="CONTROLPATRIMONIAL" securityAction="LEVANT_VIEW" handlerMethod=""/>
+                   
+<OpentapsWebAppTab applicationId="controlPatrimonial"  sequenceNum="040" tabId="reportes" uiLabel="ControlPatrimonialReportes"
+                   linkUrl="emptyReportScreen"  securityModule="CONTROLPATRIMONIAL" securityAction="REPORT_VIEW" handlerMethod=""/>                   
+                   
+<OpentapsWebAppTab applicationId="controlPatrimonial"  sequenceNum="500" tabId="ofbiz" uiLabel="opentaps"
+                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>                   
+
+<!-- Control -->
+<OpentapsShortcutGroup applicationId="controlPatrimonial" tabId="control" groupId="grupoControl" sequenceNum="010" uiLabel="ControlPatrimonialControl"
+                       securityModule="CONTROLPATRIMONIAL_CONTROL" securityAction="CONTRGRP_VIEW"/>
+	
+<OpentapsShortcut shortcutId="crearActivoFijo" groupId="grupoControl" sequenceNum="010" uiLabel="CrearActivoFijo"
+                  linkUrl="crearActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="CREAACTIVO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="consultaActivoFijo" groupId="grupoControl" sequenceNum="020" uiLabel="ConsultaActivoFijo"
+                  linkUrl="consultaActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="CONSUACTIVO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="resguardoActivoFijo" groupId="grupoControl" sequenceNum="030" uiLabel="ResguardoActivoFijo"
+                  linkUrl="resguardoActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="RESGUACTIVO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="polizaSeguroActivoFijo" groupId="grupoControl" sequenceNum="040" uiLabel="PolizaSeguroActivoFijo"
+                  linkUrl="polizaSeguroActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="POLISEGUACTIVO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="depreciacionActivoFijo" groupId="grupoControl" sequenceNum="050" uiLabel="DepreciacionActivoFijo"
+                  linkUrl="depreciacionActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="DEPRECIACTIVO_VIEW"/>
+
+<OpentapsShortcut shortcutId="consultaDepActivoFijo" groupId="grupoControl" sequenceNum="060" uiLabel="ConsultaDepreciacionActivoFijo"
+                  linkUrl="consultaDepActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="CONSULDEPCTIVO_VIEW"/>
+
+<OpentapsShortcut shortcutId="resguardoMasivoActivoFijo" groupId="grupoControl" sequenceNum="070" uiLabel="ResguardoMasivoActivoFijo"
+                  linkUrl="resguardoMasivoActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="RESGMASIACTIVO_VIEW"/>
+                  
+<OpentapsShortcut shortcutId="permisosAlmacenActivoFijo" groupId="grupoControl" sequenceNum="080" uiLabel="PermisosAlmacenActivoFijo"
+                  linkUrl="permisosAlmacenActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="PERMIALMACTIVO_VIEW"/>
+
+<OpentapsShortcut shortcutId="codigoBarrasActivoFijo" groupId="grupoControl" sequenceNum="090" uiLabel="CodigoBarrasActivoFijo"
+                  linkUrl="codigoBarrasActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="CODIBARRCTIVO_VIEW"/>
+                                                                                                                              
+<OpentapsShortcut shortcutId="responsableRecepcionActivoFijo" groupId="grupoControl" sequenceNum="100" uiLabel="ResponsableRecepcionActivoFijo"
+                  linkUrl="responsableRecepcionActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="RESPRECEPALMACTIVO_VIEW"/>                                                                                                                                                
+                                    
+<OpentapsShortcut shortcutId="historialBienesActivoFijo" groupId="grupoControl" sequenceNum="110" uiLabel="HistorialBienesActivoFijo"
+                  linkUrl="historialBienesActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="HISTORBIENACTIVO_VIEW"/>
+                                    
+<OpentapsShortcut shortcutId="historialBienesActivoFijo" groupId="grupoControl" sequenceNum="120" uiLabel="BajasActivoFijo"
+                  linkUrl="ConsultaBajasActivoFijo" securityModule="CONTROLPATRIMONIAL_CONTROL_CONTRGRP" securityAction="CONSULTABAJASACT_VIEW"/>
+	
+
+
+<!-- Levantamiento de inventario -->
+<OpentapsShortcutGroup applicationId="controlPatrimonial" tabId="levantamiento" groupId="grupoLevantamiento" sequenceNum="020" uiLabel="ControlPatrimonialLevantamiento"
+                       securityModule="CONTROLPATRIMONIAL_LEVANT" securityAction="LEVANTGRP_VIEW"/>
+<OpentapsShortcut shortcutId="activoFijoLevantamiento" groupId="grupoLevantamiento" sequenceNum="010" uiLabel="ActivoFijoLevantamiento"
+                  linkUrl="LevantamientoActivoFijo" securityModule="CONTROLPATRIMONIAL_LEVANT_LEVAGRP" securityAction="LEVANTAACTIVO_VIEW" />
+                  
+                       
+<!-- Reportes -->
+<OpentapsShortcutGroup applicationId="controlPatrimonial" tabId="reportes" groupId="grupoReportes" sequenceNum="030" uiLabel="ControlPatrimonialReportes"
+                       securityModule="CONTROLPATRIMONIAL_REPORT" securityAction="REPORTGRP_VIEW" />                   
+<OpentapsShortcut shortcutId="activoFijoReportes" groupId="grupoReportes" sequenceNum="010" uiLabel="CommonReports"
+                  linkUrl="activoFijoReports" securityModule="CONTROLPATRIMONIAL_REPORT_REPORTGRP" securityAction="REPORTEACTIVO_VIEW" />                   
+
+</entity-engine-xml>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entidades para WorkFlow</title>
+	<description>Define las entidades para work flow</description>
+	<copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+	<version>1.0</version>
+
+	<!-- =========================== -->
+	<!-- org.opentaps.financial -->
+	<!-- =========================== -->
+
+
+	<entity entity-name="TipoWorkFlow"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Entidad que informa el tipo del flujo de trabajo">
+		<field name="tipoWorkFlowId" type="id-ne" />
+		<field name="tipo" type="indicator" />
+		<field name="descripcion" type="description" />
+		<field name="url" type="description" />
+		<prim-key field="tipoWorkFlowId" />
+	</entity>
+
+	<entity entity-name="Estatus"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Entidad que informa el tipo estatus para viaticos, requisiciones y woek flow">
+		<field name="statusId" type="id-ne" />
+		<field name="descripcion" type="description" />
+		<field name="tipo" type="indicator" />
+		<prim-key field="statusId" />
+	</entity>
+
+	<entity entity-name="ControlWorkFlow"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Entidad que informa el control del flujo de trabajo">
+		<field name="workFlowId" type="id-ne" />
+		<field name="origenId" type="id-ne" />
+		<field name="tipoWorkFlowId" type="id-ne" />
+		<prim-key field="workFlowId" />
+		<relation type="one" fk-name="TIPO_WF" title="tipoworkflow"
+			rel-entity-name="TipoWorkFlow">
+			<key-map field-name="tipoWorkFlowId" rel-field-name="tipoWorkFlowId" />
+		</relation>
+        <index name="INDX_CTRL_WRK_FLW" unique="true">
+        	<index-field name="workFlowId"/>
+        	<index-field name="tipoWorkFlowId"/>
+        	<index-field name="origenId"/>
+       	</index>
+        <index name="INDX_CTRL_WRK_ORGN" unique="true">
+        	<index-field name="origenId"/>
+        	<index-field name="tipoWorkFlowId"/>
+       	</index>
+	</entity>
+
+	<entity entity-name="ComentarioWorkFlow"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Entidad que informa el control de comentarios del flujo de trabajo">
+		<field name="comentarioId" type="numeric" />
+		<field name="origenId" type="id-ne" />
+		<field name="workFlowId" type="id-ne" />
+		<field name="comentario" type="very-long" />
+		<field name="personaId" type="id-ne" />
+		<prim-key field="comentarioId" />
+		<relation type="one" fk-name="ID_CONTROL_WFCOM"
+			rel-entity-name="ControlWorkFlow">
+			<key-map field-name="workFlowId" rel-field-name="workFlowId" />
+		</relation>
+		<relation type="one" fk-name="ID_PERSONAD_DDCWF"
+			rel-entity-name="Person">
+			<key-map field-name="personaId" rel-field-name="partyId" />
+		</relation>
+	</entity>
+
+	<entity entity-name="StatusWorkFlow"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Entidad que informa el estatus del flujo de trabajo">
+		<field name="statusWorkFlowId" type="id-ne" />
+		<field name="workFlowId" type="id-ne" />
+		<field name="personParentId" type="id-ne" />
+		<field name="statusId" type="id-ne" />
+		<field name="nivelAutor" type="numeric" />
+		<field name="comentario" type="description" />
+		<prim-key field="statusWorkFlowId" />
+		<relation type="one" fk-name="ID_CONTROL_WF" title="idcontrol"
+			rel-entity-name="ControlWorkFlow">
+			<key-map field-name="workFlowId" rel-field-name="workFlowId" />
+		</relation>
+		<relation type="one" fk-name="ID_PERSON_P" title="idpersonparent"
+			rel-entity-name="Person">
+			<key-map field-name="personParentId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="ID_STA_WORK_FLOW"
+			rel-entity-name="Estatus">
+			<key-map field-name="statusId" rel-field-name="statusId" />
+		</relation>
+		<index name="INDX_STA_WRK_FLW">
+			<index-field name="workFlowId"/>
+			<index-field name="statusId"/>
+			<index-field name="personParentId"/>
+		</index>
+	</entity>
+
+	
+	<view-entity entity-name="BuscarUltimoAutorizador"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Permite la busqueda del ultimo autorizador">
+		<member-entity entity-alias="CWF" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="SWF" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+
+		<alias name="workFlowId" entity-alias="CWF" group-by="true"/>
+		<alias name="origenId" entity-alias="CWF" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CWF" group-by="true" />
+		<alias name="statusId" entity-alias="SWF" group-by="true" />
+		<alias name="personParentId" entity-alias="SWF" group-by="true"/>
+		<alias name="nivelAutor" entity-alias="SWF" function="max"/>
+		<alias name="partyId" entity-alias="PER" group-by="true"/>
+		<alias name="firstName" entity-alias="PER" group-by="true"/>
+		<alias name="lastName" entity-alias="PER" group-by="true"/>
+		<alias name="firmaId" entity-alias="PER" group-by="true"/>
+
+		<view-link entity-alias="CWF" rel-entity-alias="SWF">
+			<key-map field-name="workFlowId" />
+		</view-link>
+		<view-link entity-alias="SWF" rel-entity-alias="PER">
+			<key-map field-name="personParentId" rel-field-name="partyId" />
+		</view-link>
+		
+	</view-entity>
+
+	<entity entity-name="Autorizador"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Entidad que informa los autorizadores por cada area registrada">
+		<field name="areaId" type="id-ne" />
+		<field name="autorizadorId" type="id-ne" />
+		<field name="secuencia" type="numeric" />
+		<field name="organizationPartyId" type="id-ne" />
+		<field name="tipoWorkFlowId" type="id-ne" />
+		<field name="userLoginId" type="id-ne" />
+		<prim-key field="areaId" />
+		<prim-key field="autorizadorId" />
+		<prim-key field="organizationPartyId" />
+		<prim-key field="tipoWorkFlowId" />
+		<relation type="one" title="PERAUT" fk-name="FK_DBO_PER_AUT" rel-entity-name="Person">
+			<key-map field-name="autorizadorId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" title="PERUSR" fk-name="FK_DBO_PER_USR" rel-entity-name="Person">
+			<key-map field-name="userLoginId" rel-field-name="partyId" />
+		</relation>		
+		<relation type="one" title="PARARE" fk-name="FK_DBO_PAR_AR" rel-entity-name="Party">
+			<key-map field-name="areaId" rel-field-name="partyId" />
+		</relation>
+		
+		<relation type="one" title="PARORG" fk-name="FK_DBO_PAR_ORG" rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		
+		<relation type="one" fk-name="ID_WF_AUT" rel-entity-name="TipoWorkFlow">
+			<key-map field-name="tipoWorkFlowId" />
+		</relation>
+	</entity>
+
+	<!-- Vista para encontrar descripcion de party -->
+	<view-entity entity-name="BuscarNombreParty"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Vista para obtener el nombre del area">
+		<member-entity entity-alias="AUT" entity-name="Autorizador" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+
+		<alias name="areaId" entity-alias="AUT" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="AUT" group-by="true" />
+		<alias name="partyId" entity-alias="PAG" group-by="true" />
+		<alias name="groupNameLocal" entity-alias="PAG" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="AUT" group-by="true" />
+
+		<view-link entity-alias="AUT" rel-entity-alias="PAG">
+			<key-map field-name="areaId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+
+	<!-- Vista para encontrar los autorizadores -->
+	<view-entity entity-name="BuscarAutorizador"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Permite la búsqueda de autorizadores por area">
+		<member-entity entity-alias="AUT" entity-name="Autorizador" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+
+		<alias name="autorizadorId" entity-alias="AUT" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="AUT" group-by="true" />
+		<alias name="areaId" entity-alias="AUT" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="AUT" group-by="true" />
+		<alias name="secuencia" entity-alias="AUT" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="middleName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+
+		<view-link entity-alias="AUT" rel-entity-alias="PER">
+			<key-map field-name="autorizadorId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+
+	<!-- Vista para mostrar al autorizador el resumen de las solicitudes -->
+	<view-entity entity-name="SolicitudesPendientes"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Permite la búsqueda de requisiciones de acuerdo a parametros de entrada. CON PARAMETRO PRODUCT">
+		<member-entity entity-alias="REQ" entity-name="Requisicion" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TIP" entity-name="TipoWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<alias name="requisicionId" entity-alias="REQ" group-by="true" />
+		<alias name="descripcion" entity-alias="REQ" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="REQ" group-by="true" />
+		<alias name="montoTotal" entity-alias="REQ" group-by="true" />
+		<alias name="areaPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="descripcionWorkflow" field="descripcion"
+			entity-alias="TIP" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />	
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="groupName" entity-alias="PAG" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<view-link entity-alias="REQ" rel-entity-alias="CON">
+			<key-map field-name="requisicionId" rel-field-name="origenId"/>
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="TIP">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="PAG">
+			<key-map field-name="areaPartyId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+
+	<!-- Vista para encontrar los productos pendientes -->
+	<view-entity entity-name="BuscarProductosPendientes"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Permite la búsqueda de productos pendientes">
+		
+		<member-entity entity-alias="REQ" entity-name="Requisicion" />
+		<member-entity entity-alias="DTR" entity-name="DetalleRequisicion" />
+		<member-entity entity-alias="CLP" entity-name="ClavePresupuestal" />
+		<member-entity entity-alias="PAG" entity-name="PartyGroup" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<member-entity entity-alias="EST" entity-name="Estatus" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="CWF" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="TWF" entity-name="TipoWorkFlow" />
+		<member-entity entity-alias="CTP" entity-name="CustomTimePeriod" />
+		
+
+		<alias name="areaId" entity-alias="PRO" group-by="true" />
+		<alias name="productId" entity-alias="PRO" group-by="true" />
+		<alias name="productName" entity-alias="PRO" group-by="true" />
+		<alias name="requisicionId" entity-alias="REQ" group-by="true" />
+		<alias name="fechaContable" entity-alias="REQ" group-by="true" />
+		<alias name="descripcion" entity-alias="REQ" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="REQ" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="REQ" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="REQ" group-by="true" />
+		<alias name="partyId" entity-alias="PER" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CWF" group-by="true" />
+		<alias name="detalleRequisicionId" entity-alias="DTR" group-by="true" />
+		<alias name="descripcionDetalle" field="descripcion" entity-alias="DTR" group-by="true" />
+		<alias name="clavePresupuestal" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumIdAdmin" entity-alias="DTR" group-by="true" />
+		<alias name="monto" entity-alias="DTR" group-by="true" />
+		<alias name="cantidad" entity-alias="DTR" group-by="true" />
+		<alias name="estatusProducto" entity-alias="DTR" group-by="true" />
+		<alias name="customTimePeriodId" entity-alias="DTR" group-by="true" />
+		<alias name="fromDate" entity-alias="CTP" group-by="true" />
+		<alias name="acctgTagEnumId1" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId2" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId3" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId4" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId5" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId6" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId7" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId8" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId9" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId10" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId11" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId12" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId13" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId14" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId15" entity-alias="DTR" group-by="true" />
+		<alias name="fechaEntrega" entity-alias="DTR" group-by="true" />
+		<alias name="procedencia" entity-alias="DTR" group-by="true" />
+		<alias name="iva" entity-alias="DTR" group-by="true" />
+		<alias name="groupName" entity-alias="PAG" group-by="true" />
+		<alias name="clasificacion1" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion2" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion3" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion4" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion5" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion6" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion7" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion8" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion9" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion10" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion11" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion12" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion13" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion14" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion15" entity-alias="CLP" group-by="true" />
+		<alias name="createdStamp" entity-alias="REQ" group-by="true" />
+
+		<view-link entity-alias="REQ" rel-entity-alias="PER">
+			<key-map field-name="personaSolicitanteId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="PAG">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="CWF">
+			<key-map field-name="requisicionId" rel-field-name="origenId" />
+		</view-link>
+		<view-link entity-alias="REQ" rel-entity-alias="DTR">
+			<key-map field-name="requisicionId" />
+		</view-link>
+		<view-link entity-alias="DTR" rel-entity-alias="EST">
+			<key-map field-name="estatusProducto" rel-field-name="statusId" />
+		</view-link>
+		<view-link entity-alias="DTR" rel-entity-alias="PRO">
+			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="DTR" rel-entity-alias="CLP" rel-optional="true">
+			<key-map field-name="clavePresupuestal" />
+		</view-link>
+		<view-link entity-alias="CWF" rel-entity-alias="TWF" rel-optional="true">
+			<key-map field-name="tipoWorkFlowId" />
+		</view-link>
+		<view-link entity-alias="DTR" rel-entity-alias="CTP" rel-optional="true">
+			<key-map field-name="customTimePeriodId" />
+		</view-link>		
+	</view-entity>
+	
+	
+	<view-entity entity-name="ProductosDisponibles" package-name="com.opensourcestrategies.financials.workFlow" 
+        title="Busca el total de productos en el inventario">
+        <member-entity entity-alias="II" entity-name="InventoryItem" />
+        
+        <alias entity-alias="II" name="productId" group-by="true"/>
+        <alias entity-alias="II" name="availableToPromiseTotal" function="sum"/>
+        <alias entity-alias="II" name="quantityOnHandTotal" function="sum"/>
+        
+	</view-entity>
+	
+	<!-- Vista para obetenr los datos de la clave presupuestaria para la requisicones -->
+	<view-entity entity-name="BuscarClaveDetalleRequisicon"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Permite la búsqueda de la clave y los datos de la requisicion">
+		<member-entity entity-alias="REQ" entity-name="Requisicion" />
+		<member-entity entity-alias="DTR" entity-name="DetalleRequisicion" />
+		<member-entity entity-alias="PRO" entity-name="Product" />
+		<member-entity entity-alias="UOM" entity-name="Uom" />
+		<member-entity entity-alias="EST" entity-name="Estatus" />
+		<member-entity entity-alias="CLP" entity-name="ClavePresupuestal" />
+		<member-entity entity-alias="CTP" entity-name="CustomTimePeriod" />
+		<member-entity entity-alias="PD" entity-name="ProductosDisponibles" />
+
+		<alias name="areaId" entity-alias="PRO" group-by="true" />
+		<alias name="productId" entity-alias="PRO" group-by="true" />
+		<alias name="productName" entity-alias="PRO" group-by="true" />
+		<alias name="abbreviation" entity-alias="UOM" group-by="true" />
+		<alias name="requisicionId" entity-alias="REQ" group-by="true" />
+		<alias name="descripcion" entity-alias="REQ" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="REQ" group-by="true" />
+		<alias name="personaSolicitanteId" entity-alias="REQ" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="REQ" group-by="true" />				
+		<alias name="detalleRequisicionId" entity-alias="DTR" group-by="true" />
+		<alias name="descripcionDetalle" field="descripcion" entity-alias="DTR" group-by="true" />
+		<alias name="clavePresupuestal" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumIdAdmin" entity-alias="DTR" group-by="true" />
+		<alias name="monto" entity-alias="DTR" group-by="true" />
+		<alias name="cantidad" entity-alias="DTR" group-by="true" />
+		<alias name="fechaEntrega" entity-alias="DTR" group-by="true" />
+		<alias name="procedencia" entity-alias="DTR" group-by="true" />
+		<alias name="iva" entity-alias="DTR" group-by="true" />
+		<alias name="estatusProducto" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId1" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId2" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId3" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId4" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId5" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId6" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId7" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId8" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId9" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId10" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId11" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId12" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId13" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId14" entity-alias="DTR" group-by="true" />
+		<alias name="acctgTagEnumId15" entity-alias="DTR" group-by="true" />
+		<alias name="customTimePeriodId" entity-alias="DTR" group-by="true" />
+		<alias name="descripcionEstatus" field="descripcion" entity-alias="EST" group-by="true" />
+		<alias name="fromDate" entity-alias="CTP" group-by="true" />
+		<alias name="clasificacion1" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion2" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion3" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion4" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion5" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion6" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion7" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion8" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion9" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion10" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion11" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion12" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion13" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion14" entity-alias="CLP" group-by="true" />
+		<alias name="clasificacion15" entity-alias="CLP" group-by="true" />
+		<alias name="availableToPromiseTotal" entity-alias="PD" function="sum" />
+
+		<view-link entity-alias="DTR" rel-entity-alias="REQ">
+			<key-map field-name="requisicionId" />
+		</view-link>		
+		<view-link entity-alias="DTR" rel-entity-alias="PRO" rel-optional="true">
+			<key-map field-name="productId" />
+		</view-link>	
+		<view-link entity-alias="PRO" rel-entity-alias="PD" rel-optional="true">
+			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="PRO" rel-entity-alias="UOM" rel-optional="true">
+			<key-map field-name="quantityUomId" rel-field-name="uomId"/>
+		</view-link>	
+		<view-link entity-alias="DTR" rel-entity-alias="EST" rel-optional="true">
+			<key-map field-name="estatusProducto" rel-field-name="statusId" />
+		</view-link>						
+		<view-link entity-alias="DTR" rel-entity-alias="CLP" rel-optional="true">
+			<key-map field-name="clavePresupuestal" />
+		</view-link>
+		<view-link entity-alias="DTR" rel-entity-alias="CTP" rel-optional="true">
+			<key-map field-name="customTimePeriodId" />
+		</view-link>
+
+	</view-entity>
+
+	<!-- Vista para obtener los comentarios -->
+	<view-entity entity-name="ObtenerComentarios"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Permite la búsqueda de comentarios por requisicion">
+		<member-entity entity-alias="CWF" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="COM" entity-name="ComentarioWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+		<alias name="origenId" entity-alias="COM" group-by="true" />
+		<alias name="comentarioId" entity-alias="COM" group-by="true" />
+		<alias name="comentario" entity-alias="COM" group-by="true" />
+		<alias name="workFlowId" entity-alias="COM" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CWF" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+		<view-link entity-alias="COM" rel-entity-alias="PER">
+			<key-map field-name="personaId" rel-field-name="partyId" />
+		</view-link>
+		<view-link entity-alias="COM" rel-entity-alias="CWF">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+
+	<!-- Vista para obtener el autorizador con status activo -->
+	<view-entity entity-name="AutorizadoresActivos"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Permite la búsqueda de autorizadores que esten activos en la tabla Party">
+		<member-entity entity-alias="AUT" entity-name="Autorizador" />
+		<member-entity entity-alias="PAR" entity-name="Party" />
+		<alias name="autorizadorId" entity-alias="AUT" group-by="true" />
+		<alias name="secuencia" entity-alias="AUT" group-by="true" />
+		<alias name="organizationPartyId" entity-alias="AUT" group-by="true" />
+		<alias name="areaId" entity-alias="AUT" group-by="true" />
+		<alias name="statusId" entity-alias="PAR" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="AUT" group-by="true" />
+		<view-link entity-alias="AUT" rel-entity-alias="PAR">
+			<key-map field-name="autorizadorId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+
+
+	<!-- Vista para obtener el status del autorizacion del workflow -->
+	<view-entity entity-name="StatusAutorizacionWorkFlow"
+		package-name="com.opensourcestrategies.financials.workFlow"
+		title="Permite la búsqueda del status de la autorizacion del workflow por autorizador">
+		<member-entity entity-alias="CON" entity-name="ControlWorkFlow" />
+		<member-entity entity-alias="STA" entity-name="StatusWorkFlow" />
+		<alias name="origenId" entity-alias="CON" group-by="true" />
+		<alias name="tipoWorkFlowId" entity-alias="CON" group-by="true" />
+		<alias name="statusId" entity-alias="STA" group-by="true" />
+		<alias name="personParentId" entity-alias="STA" group-by="true" />
+		<view-link entity-alias="CON" rel-entity-alias="STA">
+			<key-map field-name="workFlowId" />
+		</view-link>
+	</view-entity>
+	
+	<!-- Vista para encontrar los autorizadores -->
+	<view-entity entity-name="AutorizadorAprobado"
+		package-name="com.opensourcestrategies.financials.workFlow" title="Muestra los autorizadores que aprobaron un origen">
+		<member-entity entity-alias="SWF" entity-name="StatusWorkFlow" />
+		<member-entity entity-alias="PER" entity-name="Person" />
+
+		<alias name="workFlowId" entity-alias="SWF" group-by="true" />
+		<alias name="statusId" entity-alias="SWF" group-by="true" />
+		<alias name="personParentId" entity-alias="SWF" group-by="true" />
+		<alias name="lastUpdatedStamp" entity-alias="SWF" group-by="true" />
+		<alias name="firstName" entity-alias="PER" group-by="true" />
+		<alias name="middleName" entity-alias="PER" group-by="true" />
+		<alias name="lastName" entity-alias="PER" group-by="true" />
+
+		<view-link entity-alias="SWF" rel-entity-alias="PER">
+			<key-map field-name="personParentId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+	
+</entitymodel>

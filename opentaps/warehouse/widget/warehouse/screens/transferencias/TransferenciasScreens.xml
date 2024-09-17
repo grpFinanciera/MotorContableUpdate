@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="transferencias" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+                <set field="organizationPartyId" from-field="parameters.organizationPartyId" global="true"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="emptyTransferenciasScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="AlmacenTransferencias"/>  
+                <set field="sectionHeaderUiLabel" value="AlmacenTransferencias"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://warehouse/webapp/warehouse/transferencias/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>    
+
+    <screen name="solicitudTransferencia">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="AlmacenCrearSolicitudTransferencia"/>  
+                <set field="sectionHeaderUiLabel" value="AlmacenTransferencias"/>
+                <script location="component://warehouse/webapp/warehouse/WEB-INF/actions/transferencias/solicitudTransferencia.bsh"/>  
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://warehouse/webapp/warehouse/transferencias/crearSolicitudTransferencia.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verSolicitudTransferencia">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="AlmacenSolicitudTransferencia"/>  
+                <set field="sectionHeaderUiLabel" value="AlmacenTransferencias"/>
+                <script location="component://warehouse/webapp/warehouse/WEB-INF/actions/transferencias/verSolicitudTransferencia.bsh"/>  
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://warehouse/webapp/warehouse/transferencias/verSolicitudTransferencia.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="buscaSolicitudTransferencia">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="AlmacenBuscarSolicitudTransfer"/>  
+                <set field="sectionHeaderUiLabel" value="AlmacenTransferencias"/>  
+                <java location="org.opentaps.warehouse.inventory.ConsultarTransferencia" invoke="buscaSolicitudTransferencia"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://warehouse/webapp/warehouse/transferencias/consultaTransferencia.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://warehouse/webapp/warehouse/transferencias/listTransferencia.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="pendientesTransferir">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="AlmacenPendientesTransferir"/>  
+                <set field="sectionHeaderUiLabel" value="AlmacenTransferencias"/>
+                <java location="org.opentaps.warehouse.inventory.ConsultarTransferencia" invoke="pendientesTransferir"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://warehouse/webapp/warehouse/transferencias/listSolicitudesPendientesTransferir.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios de Motor Contable</description>
+    <vendor>AB </vendor>
+    <version>1.0</version>
+    
+    <service name="creaLineaContable" default-entity-name="CuentaContable" engine="simple">
+    	<attribute name="descripcionPresup" type="Map" string-map-prefix="descripcionPresup" mode="IN" optional="false" description="Descripción"/>
+    	<attribute name="tipoMatriz" type="Map" string-map-prefix="tipoMatrizId" mode="IN" optional="true"/>
+        <attribute name="cuentaCargoPresup" type="Map" string-map-prefix="cuentaCargoPresup" mode="IN" optional="true"/>
+        <attribute name="cuentaAbonoPresup" type="Map" string-map-prefix="cuentaAbonoPresup" mode="IN" optional="true"/>
+        <attribute name="comparacion" type="Map" string-map-prefix="comparacion" mode="IN" optional="true"/>
+        <attribute name="catalogoCargoPresup" type="Map" string-map-prefix="catalogoCargoPresup" mode="IN" optional="true"/>
+        <attribute name="catalogoAbonoPresup" type="Map" string-map-prefix="catalogoAbonoPresup" mode="IN" optional="true"/>
+    </service>
+    <service name="creaLineaPresupuestal" default-entity-name="CuentaPresupuestal" engine="simple">
+    	<attribute name="descripcionPatri" type="Map" string-map-prefix="descripcionPatri" mode="IN" optional="false" description="Descripción"/>
+        <attribute name="cuentaCargoPatri" type="Map" string-map-prefix="cuentaCargoPatri" mode="IN" optional="true"/>
+        <attribute name="cuentaAbonoPatri" type="Map" string-map-prefix="cuentaAbonoPatri" mode="IN" optional="true"/>
+        <attribute name="catalogoCargoPatri" type="Map" string-map-prefix="catalogoCargoPatri" mode="IN" optional="true"/>
+        <attribute name="catalogoAbonoPatri" type="Map" string-map-prefix="catalogoAbonoPatri" mode="IN" optional="true"/>
+        <attribute name="excepcion" type="Map" string-map-prefix="excepcion" mode="IN" optional="true"/>
+    </service>    
+    
+    <service name="creaEvento" engine="java" default-entity-name="EventoContable" 
+    		location="org.opentaps.financials.motor.ControladorEvento" invoke="creaEvento">
+    	<implements service="creaLineaContable"/>
+    	<implements service="creaLineaPresupuestal"/>
+    	<attribute name="parentTypeId" type="String" mode="IN" optional="false" />
+    	<auto-attributes include="pk" mode="INOUT" optional="false"/>    		
+    	<auto-attributes include="nonpk" mode="IN" optional="true"/>
+    	<override name="acctgTransTypeId" optional="false" description="Identificador"/>
+    	<override name="tipoPolizaId" optional="false" description="Tipo de Póliza"/>
+    	<override name="moduloId" optional="false" description="Modulo"/>
+    	<override name="descripcion" optional="false" description="Descripción"/>
+    </service>
+	
+	<service name="editarRegistroEvento" engine="java" default-entity-name="EventoContable" 
+		location="org.opentaps.financials.motor.ControladorEvento" invoke="editarRegistroEvento">
+		<implements service="creaLineaContable"/>
+		<implements service="creaLineaPresupuestal"/>
+		<attribute name="parentTypeId" type="String" mode="IN" optional="false" />
+		<auto-attributes include="pk" mode="INOUT" optional="false"/>    		
+		<auto-attributes include="nonpk" mode="IN" optional="true"/>
+		<override name="acctgTransTypeId" optional="false" />
+		<override name="tipoPolizaId" optional="false" />
+		<override name="moduloId" optional="false" />
+		<override name="descripcion" optional="false" />
+	</service>
+	
+	<service name="editarRegistroEventoLineasCont" engine="java" default-entity-name="EventoContable" 
+		location="org.opentaps.financials.motor.ControladorEvento" invoke="editarRegistroEventoLineasCont">
+		<implements service="creaLineaContable"/>
+		<implements service="creaLineaPresupuestal"/>
+		<attribute name="parentTypeId" type="String" mode="IN" optional="false" />
+		<attribute name="secuenciaLineaCont" type="Map" string-map-prefix="secuenciaLineaCont" mode="IN" optional="false"/>
+		<auto-attributes include="pk" mode="INOUT" optional="false"/>    		
+		<auto-attributes include="nonpk" mode="IN" optional="true"/>
+		<override name="acctgTransTypeId" optional="false" />
+		<override name="tipoPolizaId" optional="false" />
+		<override name="moduloId" optional="false" />
+		<override name="descripcion" optional="false" />
+	</service>
+	
+	<service name="eliminarRegistroEvento" engine="java" default-entity-name="EventoContable" 
+		location="org.opentaps.financials.motor.ControladorEvento" invoke="eliminarRegistroEvento" >
+		<attribute name="acctgTransTypeId" mode="IN" type="String" optional="false" />
+	</service>
+	
+	<service name="desactivarEvento" engine="java" default-entity-name="EventoContable" 
+		location="org.opentaps.financials.motor.ControladorEvento" invoke="desactivarEvento" >
+		<attribute name="acctgTransTypeId" mode="IN" type="String" optional="false" />
+	</service>
+	
+    <service name="creaTransaccionMotor" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="creaTransaccion" transaction-timeout="28800">
+		<attribute name="fechaRegistro" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="eventoContableId" type="String" mode="IN" optional="false"/>
+        <attribute name="usuario" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationId" type="String" mode="IN" optional="false"/>
+        <attribute name="currency" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClaveId" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/>
+        <attribute name="lineasMotor" type="java.util.List" mode="IN" optional="false"/>
+        <attribute name="campo" type="String" mode="IN" optional="true"/>
+        <attribute name="valorCampo" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="true"/>
+        <attribute name="transaccion" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>	
+	</service>
+	
+	<service name="creaTransaccionMotorCierreCont" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="creaTransaccionCierreCont" transaction-timeout="28800">
+		<attribute name="lineasContables" mode="IN" type="javolution.util.FastList" optional="false"/>
+		<attribute name="transaccion" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>	
+	</service>
+	
+	<service name="agregaEventoTransaccion" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="agregaEventoTransaccion" transaction-timeout="28800">
+		<attribute name="eventoContableId" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoClaveId" type="String" mode="IN" optional="true"/>
+        <attribute name="lineasMotor" type="java.util.List" mode="IN" optional="false"/>
+        <attribute name="transaccion" type="org.ofbiz.entity.GenericValue" mode="INOUT" optional="true"/>	
+	</service>
+	
+	<service name="reversaTransaccionMotor" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="reversaTransaccion" transaction-timeout="28800">
+		<attribute name="acctgTransId" type="String" mode="INOUT" optional="false"/>	
+	</service>
+	
+	<service name="generaNumeroPoliza" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="generaNumeroPoliza">
+		<attribute name="eventoContableId" type="String" mode="IN" optional="false"/>
+		<attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>	
+		<attribute name="poliza" type="String" mode="OUT" optional="false"/>	
+	</service>
+	
+	<service name="validaSuficienciaPresupuestal" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="validaSuficienciaPresupuestal">
+		<attribute name="eventoContableId" type="String" mode="IN" optional="false"/>
+		<attribute name="clave" type="String" mode="IN" optional="false"/>
+		<attribute name="fecha" mode="IN" type="Timestamp" optional="false"/>	
+		<attribute name="monto" mode="IN" type="java.math.BigDecimal" optional="false"/>	
+	</service>
+	
+	<service name="existenciaClave" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="existenciaClave">
+		<attribute name="clavePresupuestal" type="String" mode="IN" optional="false"/>	
+		<attribute name="existencia" mode="OUT" type="String" optional="false"/>	
+	</service>
+	
+	<service name="getNaturalezaCuentas" engine="java" location="com.opensourcestrategies.financials.util.UtilMotorContable" invoke="getNaturalezaCuentas">
+		<attribute name="naturalezaCuentas" mode="OUT" type="Map" optional="false"/>	
+	</service>
+	
+	<service name="creaTransaccionSinEvento" engine="java" 
+		location="org.opentaps.financials.motor.MotorContable" invoke="creaTransaccionSinEvento"
+		transaction-timeout="28800">
+		<attribute name="fechaRegistro" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="fechaContable" mode="IN" type="Timestamp" optional="false"/>
+        <attribute name="usuario" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationId" type="String" mode="IN" optional="false"/>
+        <attribute name="currency" type="String" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="true"/>
+        <attribute name="entries" type="java.util.List" mode="IN" optional="false"/>
+        <attribute name="tipoPolizaId" type="String" mode="IN" optional="false"/>
+        <attribute name="transaccion" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>	
+	</service>		
+    
+</services>

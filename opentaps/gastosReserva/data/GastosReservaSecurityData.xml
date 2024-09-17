@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	 <!-- Solicitante -->
+    <SecurityPermission description="Ver operaciones del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_VIEW"/>
+    <SecurityPermission description="Crear registros del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_CREATE"/>
+    <SecurityPermission description="Actualizar registros del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_UPDATE"/>
+    <SecurityPermission description="Borrar registros del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_DELETE"/>
+    <SecurityPermission description="Todas las operaciones del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_ADMIN"/>
+    <SecurityPermission description="Ver el menu de solicitante del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_SOLIC_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu solicitantes del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_SOLIC_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Crear Solicitud del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_SOLIC_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Buscar Solicitud del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_SOLIC_BUSCA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Comprobar Solicitud del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_SOLIC_COMPRUEBA_GROUP_VIEW"/>   
+    <!-- Autorizador -->
+    <SecurityPermission description="Ver el menu de autorizador del módulo de Gastos a reserva de comprobar." permissionId="GASTOSRESERVA_AUTOR_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu Autorizador del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_AUTOR_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Buscar Solicitud del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_AUTOR_BUSCA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Solicitudes Pendeintes por Autorizar del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_AUTOR_SOLPENDAUT_GROUP_VIEW"/>
+    <!-- Presupuesto -->
+    <SecurityPermission description="Ver el menu de presupuesto del módulo de Gastos a reserva de comprobar." permissionId="GASTOSRESERVA_PRES_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu Presupuesto del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_PRES_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opción del menu Solicitudes Pendeintes por Comprobar del módulo de Gastos a reserva de comprobar" permissionId="GASTOSRESERVA_PRES_SOLPENDCOMP_GROUP_VIEW"/>
+    
+	<SecurityGroup groupId="GASTOSRESERVA_GRP" description="Administrador de Gastos a Reserva por Comprobar con permisos para todas las operaciones."/>
+	<UserLoginSecurityGroup userLoginId="admin" groupId="GASTOSRESERVA_GRP" fromDate="2001-01-01 00:00:00"/>	
+	
+	<!-- Solicitante -->
+	<SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_CREATE"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_UPDATE"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_DELETE"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_ADMIN"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_SOLIC_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_SOLIC_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_SOLIC_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_SOLIC_BUSCA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_SOLIC_COMPRUEBA_GROUP_VIEW"/>
+    <!-- Autorizador -->
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_AUTOR_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_AUTOR_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_AUTOR_BUSCA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_AUTOR_SOLPENDAUT_GROUP_VIEW"/>
+    <!-- Presupuesto -->
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_PRES_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_PRES_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="GASTOSRESERVA_GRP" permissionId="GASTOSRESERVA_PRES_SOLPENDCOMP_GROUP_VIEW"/>
+</entity-engine-xml>

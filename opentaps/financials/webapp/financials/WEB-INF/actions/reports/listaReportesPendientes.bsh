@@ -1,0 +1,22 @@
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.party.contact.ContactHelper;
+import org.opentaps.common.util.UtilClassification;
+import org.opentaps.base.entities.ReporteFirmantePartyGroup;
+
+userLogin = request.getAttribute("userLogin");
+//print("userLogin: " + userLogin.getString("userLoginId"));
+
+conditions = UtilMisc.toList(new EntityExpr("statusId", EntityOperator.EQUALS, "PENDIENTE_E"),
+							 new EntityExpr("firmanteId", EntityOperator.EQUALS, userLogin.getString("partyId")));
+							
+//print("conditions: " + conditions);							
+		
+listaReportes = delegator.findByCondition("ReportesPendientes", new EntityConditionList(conditions, EntityOperator.AND),
+UtilMisc.toList("workFlowId", "reporteId", "firmanteId", "reporteNombre", "fechaEmision", "descripcion"), null);
+
+context.put("listaReportes", listaReportes);
+
+//print("listaReportes: " + listaReportes); 
+ 

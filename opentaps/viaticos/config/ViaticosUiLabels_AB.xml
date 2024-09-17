@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <property key="ViaticosHome">
+    	<value xml:lang="en">Diem</value> 
+        <value xml:lang="es">Viáticos</value>
+    </property>
+    
+    <property key="ViaticoSolicitante"> 
+        <value xml:lang="es">Solicitante</value>
+    </property>
+    
+    <property key="ViaticoAutorizador">
+        <value xml:lang="es">Autorizador</value>
+    </property>
+    
+    <property key="ViaticoPresupuesto">
+        <value xml:lang="es">Presupuesto</value>
+    </property>
+    
+    <property key="ViaticoBuscarViatico">
+        <value xml:lang="es">Buscar solicitud</value>
+    </property>
+    
+    <property key="ViaticoDiemRequest">
+        <value xml:lang="es">Crear solicitud</value>
+    </property>
+    
+    <property key="ViaticoPendienteComprobar">
+        <value xml:lang="es">Viáticos pendientes de comprobar</value>
+    </property>
+    
+    <property key="ViaticoPendienteAutorizar">
+        <value xml:lang="es">Solicitudes pendientes de autorizar</value>
+    </property>
+    
+    <property key="ViaticoPendienteComprometer">
+        <value xml:lang="es">Viáticos pendientes de comprometer</value>
+    </property>
+    
+    <property key="ViaticoDescription">
+        <value xml:lang="es">Destino</value>
+    </property>
+    
+    <property key="ViaticoJustification">
+        <value xml:lang="es">Motivo</value>
+    </property>
+    
+    <property key="ViaticoCrearSaldo">
+        <value xml:lang="es">Asignar presupuesto</value>
+    </property>
+    
+    <property key="ViaticoConsultarSaldos">
+        <value xml:lang="es">Consultar presupuesto</value>
+    </property>
+    
+    <property key="ViaticoTraspasoSaldos">
+        <value xml:lang="es">Traspasos de presupuesto</value>
+    </property>
+    
+    <property key="ViaticoDeshabilitaUsuario">
+        <value xml:lang="es">Deshabilitar usuario</value>
+    </property>
+    
+    <property key="ViaticoArea">
+        <value xml:lang="es">Área</value>
+    </property>
+    
+    <property key="ViaticoPrograma">
+        <value xml:lang="es">Proyecto Base</value>
+    </property>
+    
+    <property key="ViaticoFuente">
+        <value xml:lang="es">Fuente de financiamiento</value>
+    </property>
+    
+    <property key="ViaticoRecurso">
+        <value xml:lang="es">Recursos</value>
+    </property>
+    
+    <property key="ViaticoElimiarItem"> 
+        <value xml:lang="es">Eliminar</value>
+    </property>
+    
+    <property key="Date"> 
+        <value xml:lang="es">Día</value>
+    </property>
+    
+    <property key="ConceptoViatico"> 
+        <value xml:lang="es">Concepto</value>
+    </property>
+    
+    <property key="ViaticoReferencia"> 
+        <value xml:lang="es">Referencia</value>
+    </property>
+    
+    <property key="ViaticoReferenciaFactura"> 
+        <value xml:lang="es">Referencia o Factura</value>
+    </property>
+    
+    <property key="ViaticoDescripcion"> 
+        <value xml:lang="es">Descripción</value>
+    </property>
+    
+    <property key="ViaticoObservaciones"> 
+        <value xml:lang="es">Observaciones</value>
+    </property>
+    
+    <property key="ViaticoAmount"> 
+        <value xml:lang="es">Monto</value>
+    </property>
+    
+    <property key="ViaticoComprobantes"> 
+        <value xml:lang="es">Comprobante</value>
+    </property>
+    
+    <property key="ViaticoConceptoAdded"> 
+        <value xml:lang="es">Comprobantes añadidos</value>
+    </property>
+    
+    <property key="CommonComprobar"> 
+        <value xml:lang="es">Comprobar</value>
+    </property>
+    
+    <property key="ViaticoSolicitud"> 
+        <value xml:lang="es">Solicitud de viáticos</value>
+    </property>
+    
+    <property key="ViaticoComprobanteGastos"> 
+        <value xml:lang="es">Comprobante de gastos de viaje</value>
+    </property>
+   
+   <property key="ViaticoDetalleGastosPorPersona"> 
+        <value xml:lang="es">Detalle de gastos de viaje por persona</value>
+    </property>  
+  
+   <property key="ViaticoGastosPorPersona"> 
+        <value xml:lang="es">Gastos de viaje por persona</value>
+    </property>    
+   
+   <property key="ViaticoTraspasosPorPersona"> 
+        <value xml:lang="es">Traspasos por persona</value>
+    </property>  
+   
+    <property key="ViaticoConsolidado"> 
+        <value xml:lang="es">Reporte de viáticos consolidado</value>
+    </property>    
+    
+    <property key="ViaticoSolicitudComprobacion"> 
+        <value xml:lang="es">Solicitudes de Viáticos y Comprobaciones Recibidas</value>
+    </property>          
+    
+    <property key="ViaticoId"> 
+        <value xml:lang="es">Número de solicitud</value>
+    </property>
+    
+    <property key="DailyAmount"> 
+        <value xml:lang="es">Monto total de viáticos</value>
+    </property>
+    
+    <property key="FieldAmount"> 
+        <value xml:lang="es">Monto total de trabajos de campo</value>
+    </property>
+    
+    <property key="PurchCatalogoId"> 
+        <value xml:lang="es">Identificador</value>
+    </property>
+    
+    <property key="ViaticoCompGastos"> 
+        <value xml:lang="es">Comprobante de gastos de viaje</value>
+    </property>
+    
+    <property key="VerSolicitudViatico"> 
+        <value xml:lang="es">Ver solicitud</value>
+    </property>
+    <property key="VerInformeActividades"> 
+        <value xml:lang="es">Ver informe de actividades</value>
+    </property>
+    <property key="InformeActividades"> 
+        <value xml:lang="es">Informe de actividades</value>
+    </property>
+    <property key="DevolucionTotal"> 
+        <value xml:lang="es">Devolver al 100%</value>
+    </property>
+        
+    <property key="FechaFinal"> 
+        <value xml:lang="es">Fecha final</value>
+    </property>
+    
+    <property key="DeshabilitarUsuario"> 
+        <value xml:lang="es">Deshabilitar Usuario</value>
+    </property>
+</resource>

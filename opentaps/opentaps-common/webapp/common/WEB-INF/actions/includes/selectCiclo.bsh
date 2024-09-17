@@ -1,0 +1,9 @@
+import org.ofbiz.base.util.UtilMisc;
+
+listCiclos = delegator.findByAnd("CustomTimePeriod",UtilMisc.toMap("periodTypeId","FISCAL_YEAR","isClosed","N"));
+
+context.put("listCiclos",listCiclos);
+
+listCiclosCerrados = delegator.findByAnd("CustomTimePeriod",UtilMisc.toMap("periodTypeId","FISCAL_YEAR","isClosed","Y"));
+
+context.put("listCiclosCerrados",listCiclosCerrados);

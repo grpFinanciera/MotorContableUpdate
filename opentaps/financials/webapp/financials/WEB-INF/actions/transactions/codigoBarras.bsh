@@ -1,0 +1,31 @@
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+import java.math.BigDecimal;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
+import org.ofbiz.base.util.Debug;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.service.ServiceUtil;
+import org.ofbiz.base.util.*;
+
+// Groups order items by product
+
+print("parameters: " + parameters);
+print("context: " + context);
+
+productId = parameters.get("productId");
+productName = parameters.get("productName");
+dateAcquired = parameters.get("dateAcquired");
+
+
+print("productId: " + productId);
+print("productName: " + productName);
+print("dateAcquired: " + dateAcquired);
+
+
+context.put("productId", productId);
+context.put("productName", productName);
+context.put("dateAcquired", dateAcquired);

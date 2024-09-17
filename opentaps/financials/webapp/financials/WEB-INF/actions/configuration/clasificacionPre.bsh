@@ -1,0 +1,74 @@
+
+import org.ofbiz.base.util.UtilDateTime;
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.EntityCondition;
+import org.ofbiz.entity.condition.EntityOperator;
+
+import org.opentaps.base.entities.ClasifPresupuestal;
+import org.opentaps.base.entities.EstructuraClave;
+import org.opentaps.base.entities.UsoClave;
+import org.opentaps.common.domain.organization.OrganizationRepository;
+import org.opentaps.common.util.UtilAccountingTags;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilDate;
+
+import org.ofbiz.base.util.*;
+
+customTimePeriodYear = parameters.get("customTimePeriodYear");
+if (customTimePeriodYear == null)
+{
+	customTimePeriodYear = context.get("customTimePeriodYear");
+	Debug.log("CHRV: [" + customTimePeriodYear + "]");
+}
+context.put("customTimePeriodYear", customTimePeriodYear);
+condicionesPeriodo = EntityCondition.makeCondition("customTimePeriodId", EntityOperator.EQUALS, customTimePeriodYear);
+customTimePeriod = delegator.findByCondition("CustomTimePeriod", condicionesPeriodo, null, null);
+fromDate = null;
+for(periodo : customTimePeriod)
+{
+	fromDate = periodo.getDate("fromDate");
+}
+
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+context.put("organizationPartyId", organizationPartyId);
+
+OrganizationRepository repository = new OrganizationRepository(delegator);
+
+// get all available usages
+usages = repository.findAll(UsoClave.class, UtilMisc.toList(UsoClave.Fields.acctgTagUsageTypeId.asc()));
+context.put("usages", usages);
+
+// Obtener todas las clasificaciones
+
+tagClassification = repository.findAll(ClasifPresupuestal.class, UtilMisc.toList(ClasifPresupuestal.Fields.clasificacionId.asc()));
+context.put("tagClassification", tagClassification);
+
+// get the used configurations for the organization
+// this builds a map associating the usage configuration for the current organization to each usage found,
+// note that a configuration might not exist yet, so it could be null
+usageConfigurations = new HashMap();
+
+
+if (fromDate == null)
+{
+	yearstart = UtilDateTime.getYearStart(UtilDateTime.nowTimestamp());
+	tempCal = UtilDateTime.toCalendar(yearstart);
+	ciclo = tempCal.get(Calendar.YEAR);
+}
+else
+{
+	cal = Calendar.getInstance();
+	cal.setTime(fromDate);
+	ciclo = cal.get(Calendar.YEAR);
+}
+context.put("ciclo", ciclo);
+
+for (UsoClave usage : usages) {
+
+    usageConfigurations.put(usage, repository.getFirst(repository.findList(EstructuraClave.class, repository.map(
+          EstructuraClave.Fields.organizationPartyId, organizationPartyId,
+        EstructuraClave.Fields.ciclo, ciclo,
+          EstructuraClave.Fields.acctgTagUsageTypeId, usage.getAcctgTagUsageTypeId()))));
+}
+
+context.put("usageConfigurations", usageConfigurations);

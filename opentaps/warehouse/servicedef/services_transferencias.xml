@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+        
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!-- This file may contain code which has been modified from that included with the Apache-licensed OFBiz product application -->
+<!-- This file has been modified by Open Source Strategies, Inc. -->
+        
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios Transferencias</description>
+    <version>1.0</version>
+    
+    <service name="crearSolicitudTransferencia" engine="java" default-entity-name="SolicitudTransferencia" 
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="crearSolicitudTransferencia">
+    	<auto-attributes mode="IN" include="nonpk"/>
+    	<attribute name="solicitudTransferenciaId" mode="OUT" type="String" />
+    	<override name="fechaAtendida" mode="IN" optional="true"/>
+    	<override name="fechaAutorizacion" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="agregaItemProductoSolicitud" engine="java" 
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="agregaItemProductoSolicitud">
+    	<attribute name="solicitudTransferenciaId" mode="IN" type="String" />
+    	<attribute name="cantidad" mode="IN" type="Long" />
+    	<attribute name="productId" mode="IN" type="String" />
+    </service>
+    
+    <service name="agregaRequisicionSolicitud" engine="java" 
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="agregaRequisicionSolicitud">
+    	<attribute name="solicitudTransferenciaId" mode="IN" type="String" />
+    	<attribute name="requisicionId" mode="IN" type="String" />
+    </service>
+    
+    <service name="agregaOrdenSolicitud" engine="java" 
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="agregaOrdenSolicitud">
+    	<attribute name="solicitudTransferenciaId" mode="IN" type="String" />
+    	<attribute name="orderId" mode="IN" type="String" />
+    </service>
+    
+    <service name="agregaPedidoInterno" engine="java" 
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="agregaPedidoInterno">
+    	<attribute name="solicitudTransferenciaId" mode="IN" type="String" />
+    	<attribute name="pedidoInternoId" mode="IN" type="String" />
+    </service>
+    
+    <service name="enviarSolicitudTransferencia" engine="java"
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="enviarSolicitudTransferencia">
+    	<attribute name="solicitudTransferenciaId" mode="INOUT" type="String" />
+    	<attribute name="urlHost" mode="IN" type="String" />
+    </service>
+    
+	<service name="comentarSolicitudTransferencia" engine="java"
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="comentarSolicitudTransferencia">
+    	<attribute name="solicitudTransferenciaId" mode="INOUT" type="String" />
+    	<attribute name="comentarioComentar" mode="IN" type="String" />
+    	<attribute name="rol" mode="IN" type="String" />
+    	<attribute name="urlHost" mode="IN" type="String" />
+    </service>
+    
+	<service name="rechazarSolicitudTransferencia" engine="java"
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="rechazarSolicitudTransferencia">
+    	<attribute name="solicitudTransferenciaId" mode="INOUT" type="String" />
+    	<attribute name="urlHost" mode="IN" type="String" />
+    </service>
+    
+	<service name="autorizarSolicitudTransferencia" engine="java"
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="autorizarSolicitudTransferencia">
+    	<attribute name="solicitudTransferenciaId" mode="INOUT" type="String" />
+    	<attribute name="urlHost" mode="IN" type="String" />
+    </service>
+    
+    <service name="transferirSolicitud" engine="java"
+    	location="org.opentaps.warehouse.inventory.TransferenciasServices" auth="true" invoke="transferirSolicitud">
+    	<attribute name="solicitudTransferenciaId" mode="INOUT" type="String" />
+    	<attribute name="mapaDetalleId" mode="IN" type="Map" string-map-prefix="detalleSolicitudTransferId"/>
+    	<attribute name="mapaCantidad" mode="IN" type="Map" string-map-prefix="cantidad" optional="true"/>
+    	<attribute name="mapaProductId" mode="IN" type="Map" string-map-prefix="productId" />
+    	<attribute name="mapaBandera" mode="IN" type="Map" string-map-prefix="_rowSubmit_o_" />
+	</service>
+    
+    
+</services>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Proyectos Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+    
+    <!-- Crear Proyecto -->
+	 <service name="guardaProyecto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="guardaProyecto">
+    	<attribute name="proyectoId" type="String" mode="OUT" optional="false" />
+    	<attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="nombreProyecto" type="String" mode="IN" optional="false"/>
+        <attribute name="codigoProyecto" type="String" mode="IN" optional="false"/>
+        <attribute name="objetivo" type="String" mode="IN" optional="false"/>
+        <!-- <attribute name="monto" type="BigDecimal" mode="IN" optional="false"/> -->
+        <attribute name="numConvenio" type="String" mode="IN" optional="true" />
+        <attribute name="nombreOrganismo" type="String" mode="IN" optional="false"/>
+        <attribute name="responsable" type="String" mode="IN" optional="false"/>
+        <attribute name="responsableT" type="String" mode="IN" optional="false"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+    	<attribute name="fromDate" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="thruDate" type="Timestamp" mode="IN" optional="false" />
+    	<attribute name="acctgTransTypeId" type="String" mode="IN" optional="false"/>   
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    	<attribute name="observaciones" type="String" mode="IN" optional="true"/>
+    	<attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+    	<attribute name="auxiliar" type="String" mode="IN" optional="false"/> 
+    	<attribute name="auxiliarProyecto" type="String" mode="IN" optional="false"/> 
+    	<attribute name="auxiliarCuentaCobrar" type="String" mode="IN" optional="false"/>
+    	<attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>   
+    	<attribute name="validacion" type="String" mode="IN" optional="false"/>
+    	<attribute name="productos" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaUsuariosProyecto" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosProyectos" invoke="agregaUsuariosProyecto">
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="nombre" type="String" mode="IN" optional="false"/>
+    		<attribute name="apellidos" type="String" mode="IN" optional="false"/>
+    		<attribute name="puesto" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaPresupuestoProyecto" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosProyectos" invoke="agregaPresupuestoProyecto">
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="mes" type="String" mode="IN" optional="false"/>
+    		<attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="fechaFin" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="cargarPaginaProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="cargarPaginaProyecto">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>
+    	<attribute name="nombreProyecto" type="String" mode="IN" optional="false"/>
+        <attribute name="areaId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>      
+    </service>   
+    
+    <service name="guardarProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="guardarProyecto">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>  
+    </service>
+    
+    <service name="actualizarProyecto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="actualizarProyecto">
+    	<attribute name="proyectoId" type="String" mode="INOUT" optional="false" />
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="productos" type="String" mode="IN" optional="false"/>
+    	<attribute name="validacion" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="cancelarProyecto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="cancelarProyecto">
+    	<attribute name="proyectoId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+    <service name="agregaPresupuestoModProyecto" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosProyectos" invoke="agregaPresupuestoModProyecto">
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="detallePresupuestoId" type="String" mode="IN" optional="true"/>
+    		<attribute name="etapa" type="String" mode="IN" optional="true"/>
+    		<attribute name="fechaInicio" type="Timestamp" mode="IN" optional="true"/>
+    		<attribute name="fechaFin" type="Timestamp" mode="IN" optional="true"/>
+    		<attribute name="tipoMovimiento" type="String" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="guardaModProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="guardaModProyecto">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/> 
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/> 
+    </service>
+    
+    <service name="concluirInteresComisionProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="concluirInteresComisionProyecto">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/> 
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false"/> 
+        <attribute name="detallePresupuestoId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMovimiento" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="cierreProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="cierreProyecto">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/> 
+        <attribute name="fechaCierre" type="Timestamp" mode="IN" optional="false"/> 
+        <attribute name="comentarioCierre" type="String" mode="IN" optional="true"/>
+        <attribute name="acctgTransTypeIdCierre" type="String" mode="IN" optional="false"/>         
+    </service>
+    
+     <service name="devoProyectos" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="devoProyectos">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>  
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="eventoPago" type="String" mode="IN" optional="false"/> 
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+    </service>
+    
+    <service name="registraViatico" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosViaticosProyectos" auth="true" invoke="registraViatico">
+    	<attribute name="viaticoProyectoId" type="String" mode="OUT" optional="false" />
+    	<attribute name="proyectoId" type="String" mode="IN" optional="false"/>
+        <attribute name="detalleParticipanteId" type="String" mode="IN" optional="false"/>
+        <attribute name="detallePresupuestoId" type="String" mode="IN" optional="false"/>
+        <attribute name="motivo" type="String" mode="IN" optional="false" />
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoTransporteId" type="String" mode="IN" optional="false"/>
+        <attribute name="montoDiario" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="montoTrabCampo" type="BigDecimal" mode="IN" optional="true"/>
+    	<attribute name="montoTransporte" type="BigDecimal" mode="IN" optional="false"/>
+    	<attribute name="geoOrigen" type="String" mode="IN" optional="false" />
+    	<attribute name="geoDestino" type="String" mode="IN" optional="false"/>   
+    	<attribute name="fechaInicio" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="fechaFin" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    	<attribute name="eventoSolicitud" type="String" mode="IN" optional="false"/> 
+    	<attribute name="auxiliar" type="String" mode="IN" optional="false"/> 
+    	<attribute name="tipoViatico" type="String" mode="IN" optional="false"/> 
+    	 <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaComprobanteViaticoProy" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosViaticosProyectos" invoke="agregaComprobanteViaticoProy">
+    		<attribute name="viaticoProyectoId" type="String" mode="INOUT" optional="false"/>
+			<attribute name="fecha" type="Timestamp" mode="IN" optional="false"/>
+			<attribute name="conceptoViatico" type="String" mode="IN" optional="false"/>
+			<attribute name="referencia" type="String" mode="IN" optional="false"/>
+			<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="gastoProyecto" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="generaPolizaComprobada" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosViaticosProyectos" invoke="generaPolizaComprobada">
+    		<attribute name="viaticoProyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="eventoComprueba" type="String" mode="IN" optional="false"/>   
+    		<attribute name="montoComprueba" type="BigDecimal" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="generaPolizaDevo" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosViaticosProyectos" invoke="generaPolizaDevo">
+    		<attribute name="viaticoProyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="eventoDevuelve" type="String" mode="IN" optional="false"/>   
+    </service>
+    
+    <service name="registraGasto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosGastosProyectos" auth="true" invoke="registraGasto">
+    	<attribute name="gastoProyectoId" type="String" mode="OUT" optional="false" />
+    	<attribute name="proyectoId" type="String" mode="IN" optional="false"/>
+        <attribute name="detalleParticipanteId" type="String" mode="IN" optional="false"/>
+        <attribute name="detallePresupuestoId" type="String" mode="IN" optional="false"/>
+        <attribute name="concepto" type="String" mode="IN" optional="false" />
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="fecha" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="proveedor" type="String" mode="IN" optional="true"/>
+        <attribute name="observaciones" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    	<attribute name="eventoSolicitud" type="String" mode="IN" optional="false"/>
+    	<attribute name="auxiliar" type="String" mode="IN" optional="false"/>  
+    	 <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="agregaDetalleGastosProyectos" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosGastosProyectos" invoke="agregaDetalleGastosProyectos">
+    		<attribute name="detalleGId" type="String" mode="OUT" optional="false"/>
+    		<attribute name="gastoProyectoId" type="String" mode="INOUT" optional="false"/>
+			<attribute name="facturaNota" type="String" mode="IN" optional="false"/>
+			<attribute name="proveedor" type="String" mode="IN" optional="false"/>
+			<attribute name="montoSubtotalFactura" type="String" mode="IN" optional="false"/>
+			<attribute name="iva" type="String" mode="IN" optional="false"/>
+    		<attribute name="montoTotalFactura" type="String" mode="IN" optional="false"/>
+    		<attribute name="gastoProyecto" type="String" mode="IN" optional="false"/>
+    </service>
+    
+     <service name="generaPolizaGastoComprobada" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosGastosProyectos" invoke="generaPolizaGastoComprobada">
+    		<attribute name="gastoProyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="eventoComprueba" type="String" mode="IN" optional="false"/>   
+    		<attribute name="montoComprueba" type="BigDecimal" mode="IN" optional="false"/>  
+    </service>
+    
+     <service name="generaPolizaGastoDevo" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosGastosProyectos" invoke="generaPolizaGastoDevo">
+    		<attribute name="gastoProyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="eventoDevuelve" type="String" mode="IN" optional="false"/>   
+    </service>
+    
+    <service name="registrarServiciosPersonales" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosServPersonales" auth="true" invoke="registrarServiciosPersonales">
+    	<attribute name="servicioPersonalId" type="String" mode="OUT" optional="false" />
+    	<attribute name="proyectoId" type="String" mode="IN" optional="false"/>
+        <attribute name="detalleParticipanteId" type="String" mode="IN" optional="false"/>
+        <attribute name="detallePresupuestoId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="tipoContratacion" type="String" mode="IN" optional="false" />
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="sueldo" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="iva" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="ivaR" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="isr" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="montoTotal" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="observaciones" type="String" mode="IN" optional="true"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    	<attribute name="eventoServiciosPersonales" type="String" mode="IN" optional="false"/> 
+    	<attribute name="auxiliar" type="String" mode="IN" optional="true"/> 
+    	<attribute name="gastoProyecto" type="String" mode="IN" optional="false"/>
+    	<attribute name="conceptoPoliza" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="registrarAdquisicion" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosAdqProyectos" auth="true" invoke="registrarAdquisicion">
+    	<attribute name="adqProyectoId" type="String" mode="OUT" optional="false" />
+    	<attribute name="proyectoId" type="String" mode="IN" optional="false"/>
+    	<attribute name="detallePresupuestoId" type="String" mode="IN" optional="false"/>
+    	<attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="descripcion" type="String" mode="IN" optional="false" />
+        <attribute name="justificacion" type="String" mode="IN" optional="false"/>
+        <attribute name="supplierPartyId" type="String" mode="IN" optional="false" />
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    	<attribute name="eventoAdq" type="String" mode="IN" optional="false"/> 
+    	<attribute name="gastoProyecto" type="String" mode="IN" optional="false"/>
+    </service>
+    
+     <service name="agregaProductoAdq" engine="java" auth="true"
+    		location="com.absoluciones.proyectos.ServiciosAdqProyectos" invoke="agregaProductoAdq">
+    		<attribute name="adqProyectoId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="productId" type="String" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    		<attribute name="fechaEntrega" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="procedencia" type="String" mode="IN" optional="false"/>
+    		<attribute name="iva" type="String" mode="IN" optional="true"/>
+    		<attribute name="cantidad" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="detalleParticipanteId" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="cargarPaginaAdqProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosAdqProyectos" auth="true" invoke="cargarPaginaAdqProyecto">
+        <attribute name="adqProyectoId" type="String" mode="INOUT" optional="false"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>  
+    </service> 
+    
+    <service name="guardarAdquisicion" engine="java" location="com.absoluciones.proyectos.ServiciosAdqProyectos" auth="true" invoke="guardarAdquisicion">
+        <attribute name="adqProyectoId" type="String" mode="INOUT" optional="false"/>  
+    </service>
+    
+    <service name="cancelarAdqProyecto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosAdqProyectos" auth="true" invoke="cancelarAdqProyecto">
+    	<attribute name="adqProyectoId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+    <service name="pagoAdquisicion" engine="java" location="com.absoluciones.proyectos.ServiciosAdqProyectos" auth="true" invoke="pagoAdquisicion">
+        <attribute name="adqProyectoId" type="String" mode="INOUT" optional="false"/>  
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="eventoPago" type="String" mode="IN" optional="false"/> 
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="cancelarServPerProyecto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosServPersonales" auth="true" invoke="cancelarServPerProyecto">
+    	<attribute name="servicioPersonalId" type="String" mode="INOUT" optional="false" />
+    </service>
+    
+    <service name="pagoServiciosPersonales" engine="java" location="com.absoluciones.proyectos.ServiciosServPersonales" auth="true" invoke="pagoServiciosPersonales">
+        <attribute name="servicioPersonalId" type="String" mode="INOUT" optional="false"/>  
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="eventoPago" type="String" mode="IN" optional="false"/> 
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="reembolsoServiciosPersonales" engine="java" location="com.absoluciones.proyectos.ServiciosServPersonales" auth="true" invoke="reembolsoServiciosPersonales">
+        <attribute name="servicioPersonalId" type="String" mode="INOUT" optional="false"/>  
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="eventoReembolso" type="String" mode="IN" optional="false"/> 
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="guardaObjetoGasto" engine="java" 
+	 		location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="guardaObjetoGasto">
+    	<attribute name="gastoProyId" type="String" mode="OUT" optional="false" />
+        <attribute name="nombreObjetoGasto" type="String" mode="IN" optional="false"/> 
+    </service>
+    
+    <service name="cargaDocumentosProyecto" engine="java" 
+			location="com.absoluciones.proyectos.ServiciosProyectos" invoke="cargaDocumentosProyecto" auth="true">
+		<attribute name="proyectoId" mode="IN" type="String" optional="false" />
+		<attribute name="tipoDocumento" mode="IN" type="String" optional="false"/>
+		<attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN"/>
+	    <attribute name="_uploadedFile_fileName" type="String" mode="IN"/>
+	    <attribute name="_uploadedFile_contentType" type="String" mode="IN"/>
+	    <attribute name="fileFormat" type="String" mode="IN" optional="true"/>
+	</service>
+    
+    <service name="cargarPaginaObjetoProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="cargarPaginaObjetoProyecto">
+             
+    </service>   
+    
+    <service name="cargarPaginaProyectoDocumentos" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="cargarPaginaProyectoDocumentos">
+         <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>    
+    </service>  
+    
+    <service name="pagoProvisionProyectos" engine="java" location="com.absoluciones.proyectos.ServiciosProyectos" auth="true" invoke="pagoProvisionProyectos">
+        <attribute name="proyectoId" type="String" mode="INOUT" optional="false"/>  
+        <attribute name="detallePresupuestoId" type="String" mode="IN" optional="false"/>
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="eventoPagoPrev" type="String" mode="IN" optional="false"/> 
+        <attribute name="paymentTypeId" type="String" mode="IN" optional="false"/> 
+        <attribute name="bancoIdOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="cuentaOrigen" type="String" mode="IN" optional="false"/>
+    	<attribute name="montoTotal" type="BigDecimal" mode="IN" optional="false"/>
+	</service>
+    <service name="devolverViaticoProyecto" engine="java" location="com.absoluciones.proyectos.ServiciosViaticosProyectos" auth="true" invoke="devolverViaticoProyecto">
+    	<attribute name="viaticoProyectoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	    
+    </service>
+    
+    <service name="devolverViaticoGasto" engine="java" location="com.absoluciones.proyectos.ServiciosGastosProyectos" auth="true" invoke="devolverViaticoGasto">
+    	<attribute name="gastoProyectoId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="true"/>    	    
+    </service>
+
+</services>

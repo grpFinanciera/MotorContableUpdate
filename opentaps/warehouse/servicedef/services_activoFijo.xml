@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicios Activo Fijo</description>
+    <vendor>ABSCE</vendor>
+    <version>1</version>
+    
+    <service name="agregaActivo" engine="java" auth="true" default-entity-name="LevantamientoActivo"
+    		location="org.opentaps.warehouse.inventory.ActivoFijoServices" invoke="agregaActivo" >
+    	<auto-attributes include="pk" mode="INOUT" optional="false"/>
+    </service>
+    
+</services>

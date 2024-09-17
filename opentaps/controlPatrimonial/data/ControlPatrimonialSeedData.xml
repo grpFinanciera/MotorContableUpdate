@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+		
+    <!-- Estatus Gastos Reserva -->
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="AUTOMOVIL" descripcion="Automóvil" />
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="CAMION" descripcion="Camión" />
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="MAQUINARIA" descripcion="Maquinaria" />
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="MOTOCICLETA" descripcion="Motocicleta" />
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="EMBARCACION" descripcion="Embarcación" />
+    <TipoUnidadVehiculo tipoUnidadVehiculoId="AERONAVE" descripcion="Aeronave" />
+
+    <!-- Eventos -->
+	<!--    	
+		<AcctgTransType acctgTransTypeId="COM_VIATICO" description="Compromiso Viatico" hasTable="N" parentTypeId="INTERNAL_ACCTG_TRANS" catalogoCargo="N" catalogoAbono="N"/>		 
+		<Evento acctgTransTypeId="COM_VIATICO" cuentaCargo="8.2.1.2" cuentaAbono="8.2.1.1" glFiscalTypeIdPres="PRESUPUESTAL" tipoPolizaIdPres="CP_EGRESO" referencia="N" />		
+		<TipoDocumento idTipoDoc="COM_VIATICO" descripcion="Compromiso Viatico" acctgTransTypeId="COM_VIATICO" mComparativo="DISPONIBLE" mEjecutar1="COMPROMETIDO" comparacion=">=" moduloId="VIATICOS" organizationPartyId="10000" userLoginId="admin" />
+	-->
+	
+	<MotivosControlPat idMotivo="DONACION_A" descripcion="Alta por Donacion" tipoMovimiento="A" />
+	<MotivosControlPat idMotivo="HALLAZGO" descripcion="Hallazgo" tipoMovimiento="A" />
+	<MotivosControlPat idMotivo="CAPITALIZACION" descripcion="Capitalizacion" tipoMovimiento="A" />
+	
+	<MotivosControlPat idMotivo="DONACION_B" descripcion="Baja por Donacion" tipoMovimiento="B" />
+	<MotivosControlPat idMotivo="OBSOLESCENCIA" descripcion="Obsolescencia" tipoMovimiento="B" />	
+	<MotivosControlPat idMotivo="EXTRAVIO" descripcion="Extravio" tipoMovimiento="B" />
+	<MotivosControlPat idMotivo="SINIESTRO" descripcion="Siniestro" tipoMovimiento="B" />
+	<MotivosControlPat idMotivo="ROBO" descripcion="Robo" tipoMovimiento="B" />
+	<MotivosControlPat idMotivo="DESECHO" descripcion="Desecho" tipoMovimiento="B" />
+	<MotivosControlPat idMotivo="TRANSFERENCIASAE" descripcion="Transferencia SAE" tipoMovimiento="B" />
+	
+	<MotivosActivoFijo idMotivosActivo="1" motivo="DONACION_A" tipoActivoFijo="TERRENO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="2" motivo="DONACION_A" tipoActivoFijo="EDIFICIO_NO_RESIDENC" evento="" />
+	<MotivosActivoFijo idMotivosActivo="3" motivo="DONACION_A" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="4" motivo="HALLAZGO" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="5" motivo="CAPITALIZACION" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="6" motivo="DONACION_A" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="7" motivo="HALLAZGO" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="8" motivo="CAPITALIZACION" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="9" motivo="DONACION_A" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="10" motivo="HALLAZGO" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="11" motivo="CAPITALIZACION" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="12" motivo="DONACION_A" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="13" motivo="HALLAZGO" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="14" motivo="CAPITALIZACION" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="15" motivo="DONACION_A" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="16" motivo="HALLAZGO" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="17" motivo="CAPITALIZACION" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="18" motivo="DONACION_A" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="19" motivo="HALLAZGO" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="20" motivo="CAPITALIZACION" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="21" motivo="DONACION_A" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="22" motivo="HALLAZGO" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="23" motivo="CAPITALIZACION" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="24" motivo="DONACION_A" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="25" motivo="HALLAZGO" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="26" motivo="CAPITALIZACION" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="27" motivo="DONACION_A" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="28" motivo="HALLAZGO" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="29" motivo="CAPITALIZACION" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="30" motivo="DONACION_A" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="31" motivo="HALLAZGO" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="32" motivo="CAPITALIZACION" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="33" motivo="DONACION_A" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="34" motivo="HALLAZGO" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="35" motivo="CAPITALIZACION" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	
+	<MotivosActivoFijo idMotivosActivo="36" motivo="DONACION_B" tipoActivoFijo="TERRENO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="37" motivo="TRANSFERENCIASAE" tipoActivoFijo="TERRENO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="38" motivo="DONACION_B" tipoActivoFijo="EDIFICIO_NO_RESIDENC" evento="" />
+	<MotivosActivoFijo idMotivosActivo="39" motivo="TRANSFERENCIASAE" tipoActivoFijo="EDIFICIO_NO_RESIDENC" evento="" />
+	<MotivosActivoFijo idMotivosActivo="40" motivo="DONACION_B" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="41" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="42" motivo="EXTRAVIO" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="43" motivo="SINIESTRO" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="44" motivo="ROBO" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="45" motivo="DESECHO" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="46" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPO_COMPUTO" evento="" />
+	<MotivosActivoFijo idMotivosActivo="47" motivo="DONACION_B" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="48" motivo="OBSOLESCENCIA" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="49" motivo="EXTRAVIO" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="50" motivo="SINIESTRO" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="51" motivo="ROBO" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="52" motivo="DESECHO" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="53" motivo="TRANSFERENCIASAE" tipoActivoFijo="MUEBLES_OFICINA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="54" motivo="DONACION_B" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="55" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="56" motivo="EXTRAVIO" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="57" motivo="SINIESTRO" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="58" motivo="ROBO" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="59" motivo="DESECHO" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="60" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPOS_ADMINISTRATI" evento="" />
+	<MotivosActivoFijo idMotivosActivo="61" motivo="DONACION_B" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="62" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="63" motivo="EXTRAVIO" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="64" motivo="SINIESTRO" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="65" motivo="ROBO" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="66" motivo="DESECHO" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="67" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPO_EDUCACIONAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="68" motivo="DONACION_B" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="69" motivo="OBSOLESCENCIA" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="70" motivo="EXTRAVIO" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="71" motivo="SINIESTRO" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="72" motivo="ROBO" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="73" motivo="DESECHO" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="74" motivo="TRANSFERENCIASAE" tipoActivoFijo="VEHICULOS_TERRESTRES" evento="" />
+	<MotivosActivoFijo idMotivosActivo="75" motivo="DONACION_B" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="76" motivo="OBSOLESCENCIA" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="77" motivo="EXTRAVIO" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="78" motivo="SINIESTRO" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="79" motivo="ROBO" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="80" motivo="DESECHO" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="81" motivo="TRANSFERENCIASAE" tipoActivoFijo="MAQUINARIA_HERRAMIEN" evento="" />
+	<MotivosActivoFijo idMotivosActivo="82" motivo="DONACION_B" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="83" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="84" motivo="EXTRAVIO" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="85" motivo="SINIESTRO" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="86" motivo="ROBO" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="87" motivo="DESECHO" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="88" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPO_INDUSTRIAL" evento="" />
+	<MotivosActivoFijo idMotivosActivo="89" motivo="DONACION_B" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="90" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="91" motivo="EXTRAVIO" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="92" motivo="SINIESTRO" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="93" motivo="ROBO" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="94" motivo="DESECHO" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="95" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPO_CONSTRUCCION" evento="" />
+	<MotivosActivoFijo idMotivosActivo="96" motivo="DONACION_B" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="97" motivo="OBSOLESCENCIA" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="98" motivo="EXTRAVIO" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="99" motivo="SINIESTRO" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="100" motivo="ROBO" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="101" motivo="DESECHO" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="102" motivo="TRANSFERENCIASAE" tipoActivoFijo="EQUIPO_TELECOMUNICA" evento="" />
+	<MotivosActivoFijo idMotivosActivo="103" motivo="DONACION_B" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="104" motivo="OBSOLESCENCIA" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="105" motivo="EXTRAVIO" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="106" motivo="SINIESTRO" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="107" motivo="ROBO" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="108" motivo="DESECHO" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="109" motivo="TRANSFERENCIASAE" tipoActivoFijo="MATER_ELECTRI_ELECTR" evento="" />
+	<MotivosActivoFijo idMotivosActivo="110" motivo="DONACION_B" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="111" motivo="OBSOLESCENCIA" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="112" motivo="EXTRAVIO" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="113" motivo="SINIESTRO" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="114" motivo="ROBO" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="115" motivo="DESECHO" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="116" motivo="TRANSFERENCIASAE" tipoActivoFijo="HERRAMIENTAS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="117" motivo="DONACION_B" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="118" motivo="OBSOLESCENCIA" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="119" motivo="EXTRAVIO" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="120" motivo="SINIESTRO" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="121" motivo="ROBO" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="122" motivo="DESECHO" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	<MotivosActivoFijo idMotivosActivo="123" motivo="TRANSFERENCIASAE" tipoActivoFijo="BIENES_ARTISTICOS" evento="" />
+	
+	
+
+</entity-engine-xml>

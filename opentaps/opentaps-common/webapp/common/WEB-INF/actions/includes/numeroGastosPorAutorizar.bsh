@@ -1,0 +1,26 @@
+import javolution.util.FastList;
+import org.ofbiz.entity.condition.*;
+
+
+application = parameters.get("componentName");
+context.put("application", application);
+
+userLogin = parameters.get("userLogin");
+if (userLogin == null) {
+	return;
+}
+//print("userLogin: " + userLogin);
+
+searchConditions = FastList.newInstance();
+searchConditions.add(new EntityExpr("personParentId", EntityOperator.EQUALS, userLogin.get("partyId")));
+searchConditions.add(new EntityExpr("statusId", EntityOperator.EQUALS, "PENDIENTE"));
+searchConditions.add(new EntityExpr("tipoWorkFlowId", EntityOperator.EQUALS, "GASTORESERVA"));
+
+//print("searchConditions GR: " + searchConditions);
+
+allConditions = new EntityConditionList(searchConditions, EntityOperator.AND);
+
+listStatusAutor = delegator.findByCondition("StatusAutorizacionWorkFlow",allConditions,null,null);
+contadorGPA = listStatusAutor.size();
+//print("contadorGPA: " + contadorGPA);
+context.put("contadorGPA", contadorGPA);

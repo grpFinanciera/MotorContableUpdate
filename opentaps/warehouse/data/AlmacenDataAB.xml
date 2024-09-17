@@ -1,0 +1,8 @@
+<entity-engine-xml>
+	<Estatus statusId="CREADA_ST" descripcion="Creada" tipo="T"  />
+	<Estatus statusId="ENVIADA_ST" descripcion="Enviada" tipo="T"  />
+	<Estatus statusId="RECHAZADA_ST" descripcion="Rechazada" tipo="T"  />
+	<Estatus statusId="TRANSFERIDA_ST" descripcion="Transferido" tipo="T" />
+	<Estatus statusId="COMENTADA_ST" descripcion="Comentada" tipo="T" />
+	<Estatus statusId="ATENDIDA_T" descripcion="Atendida" tipo="T" />
+</entity-engine-xml>

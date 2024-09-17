@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<!-- Principal -->
+    <SecurityPermission description="Ver operaciones del módulo de Proyectos" permissionId="PROYECTOS_VIEW"/>
+    <SecurityPermission description="Crear operaciones del módulo de Proyectos" permissionId="PROYECTOS_CREATE"/>
+    <SecurityPermission description="Actualizar registros del módulo de Proyectos" permissionId="PROYECTOS_UPDATE"/>
+    <SecurityPermission description="Borrar registros del módulo de Proyectos" permissionId="PROYECTOS_DELETE"/>
+    <SecurityPermission description="Todas las operaciones del módulo de Proyectos" permissionId="PROYECTOS_ADMIN"/>
+    <SecurityPermission description="Ver el menú principal de proyectos" permissionId="PROYECTOS_PRINCIPAL_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu principal del módulo de proyectos" permissionId="PROYECTOS_PRINC_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de crear proyectos del módulo de proyectos" permissionId="PROYECTOS_PRINC_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de consultar proyectos del módulo de proyectos" permissionId="PROYECTOS_PRINC_CONSULT_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de asignar usuarios a un proyecto del módulo de proyectos" permissionId="PROYECTOS_PRINC_ASIG_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de terminar un proyecto del módulo de proyectos" permissionId="PROYECTOS_PRINC_TERMINA_GROUP_VIEW"/>
+    
+    <!-- Viaticos -->
+    <SecurityPermission description="Ver el menú viaticos de proyectos" permissionId="PROYECTOS_VIATICOS_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu viaticos del módulo de proyectos" permissionId="PROYECTOS_VIAT_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de crear viaticos del módulo de proyectos" permissionId="PROYECTOS_VIAT_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de consultar viaticos del módulo de proyectos" permissionId="PROYECTOS_VIAT_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Gastos por comprobar -->
+    <SecurityPermission description="Ver el menú gastos por comprobar de proyectos" permissionId="PROYECTOS_GXC_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu gastos por comprobar del módulo de proyectos" permissionId="PROYECTOS_GXC_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de crear gastos por comprobar del módulo de proyectos" permissionId="PROYECTOS_GXC_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de consultar gastos por comprobar del módulo de proyectos" permissionId="PROYECTOS_GXC_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Adquisiciones -->
+    <SecurityPermission description="Ver el menú adquisiciones de proyectos" permissionId="PROYECTOS_ADQ_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu adquisiciones del módulo de proyectos" permissionId="PROYECTOS_ADQ_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de crear adquisiciones del módulo de proyectos" permissionId="PROYECTOS_ADQ_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de consultar adquisiciones del módulo de proyectos" permissionId="PROYECTOS_ADQ_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Servicios personales -->
+    <SecurityPermission description="Ver el menú servicios personales de proyectos" permissionId="PROYECTOS_SP_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu servicios personales del módulo de proyectos" permissionId="PROYECTOS_SP_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de crear servicios personales del módulo de proyectos" permissionId="PROYECTOS_SP_CREA_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de consultar servicios personales del módulo de proyectos" permissionId="PROYECTOS_SP_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Configuracion -->
+    <SecurityPermission description="Ver el menú configuracion de proyectos" permissionId="PROYECTOS_CONF_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu configuracion del módulo de proyectos" permissionId="PROYECTOS_CONF_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de configurar objeto de gasto del módulo de proyectos" permissionId="PROYECTOS_CONF_OG_GROUP_VIEW"/>
+    
+    <!-- Reportes -->
+    <SecurityPermission description="Ver el menú reportes de proyectos" permissionId="PROYECTOS_REPO_VIEW"/>
+    <SecurityPermission description="Ver el grupo de opciones del menu reportes del módulo de proyectos" permissionId="PROYECTOS_REPO_GROUP_VIEW"/>
+    <SecurityPermission description="Ver la opcion de reportes del módulo de proyectos" permissionId="PROYECTOS_VREPO_REPO_GROUP_VIEW"/>
+    
+    <SecurityGroup groupId="PROYECTOS_GRP" description="Administrador de proyectos con permisos para todas las operaciones"/>
+    <UserLoginSecurityGroup userLoginId="admin" groupId="PROYECTOS_GRP" fromDate="2001-01-01 00:00:00"/>
+    
+    <!-- Principal -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_CREATE"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_DELETE"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_UPDATE"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_ADMIN"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINCIPAL_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINC_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINC_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINC_CONSULT_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINC_ASIG_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_PRINC_TERMINA_GROUP_VIEW"/>
+    
+    <!-- Viaticos -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VIATICOS_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VIAT_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VIAT_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VIAT_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Gastos por comprobar -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_GXC_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_GXC_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_GXC_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_GXC_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Adquisiciones -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_ADQ_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_ADQ_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_ADQ_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_ADQ_CONSULT_GROUP_VIEW"/>
+    
+     <!-- Servicios Personales -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_SP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_SP_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_SP_CREA_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_SP_CONSULT_GROUP_VIEW"/>
+    
+    <!-- Configuracion -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_CONF_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_CONF_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_CONF_OG_GROUP_VIEW"/>
+    
+    <!-- Reportes -->
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_REPO_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_REPO_GROUP_VIEW"/>
+    <SecurityGroupPermission groupId="PROYECTOS_GRP" permissionId="PROYECTOS_VREPO_REPO_GROUP_VIEW"/>
+</entity-engine-xml>

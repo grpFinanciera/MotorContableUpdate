@@ -1,0 +1,33 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.opentaps.common.domain.organization.OrganizationRepository;
+import org.opentaps.common.util.UtilAccountingTags;
+import org.ofbiz.common.AB.*;
+import org.opentaps.base.entities.ClasifPresupuestal;
+import org.opentaps.base.entities.EstructuraClave;
+import org.opentaps.base.entities.UsoClave;
+import org.opentaps.base.entities.FixedAssetType;
+import org.opentaps.base.entities.Mes;
+import org.opentaps.base.entities.Enumeration;
+import org.opentaps.common.util.UtilDate;
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+import org.opentaps.common.util.UtilConfig;
+import org.opentaps.common.util.UtilCommon;
+import org.ofbiz.base.util.*;
+
+
+OrganizationRepository repository = new OrganizationRepository(delegator);
+
+tiposActivo = repository.findAll(FixedAssetType.class, UtilMisc.toList(FixedAssetType.Fields.fixedAssetTypeId.asc(), FixedAssetType.Fields.description.asc()));
+context.put("tiposActivo", tiposActivo);
+
+meses = repository.findAll(Mes.class, UtilMisc.toList(Mes.Fields.mesId.asc(), Mes.Fields.description.asc()));
+context.put("meses", meses);
+
+orderBy = org.ofbiz.base.util.UtilMisc.toList("enumCode");
+condicion = EntityCondition.makeCondition("enumTypeId",EntityOperator.EQUALS, "CL_CICLO");
+ciclos = delegator.findByCondition("Enumeration", condicion , UtilMisc.toList("enumCode"), orderBy);
+context.put("ciclos", ciclos);

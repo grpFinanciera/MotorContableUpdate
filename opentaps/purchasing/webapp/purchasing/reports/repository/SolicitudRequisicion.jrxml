@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SolicitudRequisicion" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="143"/>
+	<property name="ireport.y" value="192"/>
+	<style name="Zebra" mode="Transparent" lineSpacing="Single">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[Boolean.valueOf($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCCCCC" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="RequisicionId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[DECLARE
+			@numRequisicion VARCHAR(20),
+			@anio int,
+			@organizacion int,
+			@administrativa varchar(50),
+			@area varchar(20),
+			@workflowid varchar(20),
+			@cog varchar(50),
+		    @SECUENCIA int,
+		    @presupuesto varchar(50),
+		    @firmaPresupuesto varchar(50),
+		    @autorizador1 varchar(50),
+		    @firmaAutorizador1 varchar(50),
+		    @autorizador2 varchar(50),
+		    @firmaAutorizador2 varchar(50),
+			@SQLQuery nvarchar (1000);
+		set @numRequisicion = $P{RequisicionId};
+		set @anio = (select YEAR(FECHA_CONTABLE) FROM REQUISICION where REQUISICION_ID=@numRequisicion);
+		set @organizacion = (select ORGANIZATION_PARTY_ID FROM REQUISICION where REQUISICION_ID = @numRequisicion);
+		set @area = (select AREA_PARTY_ID FROM REQUISICION where REQUISICION_ID=@numRequisicion);
+		set @administrativa = dbo.FN_CLASIFICACION('CL_ADMINISTRATIVA', 'EGRESO',
+												@anio, @organizacion);
+		set @cog = dbo.FN_CLASIFICACION('CL_COG', 'EGRESO',
+												@anio, @organizacion);
+
+		SET @workflowid = (
+			SELECT CWF.WORK_FLOW_ID
+			FROM
+			CONTROL_WORK_FLOW CWF
+			WHERE CWF.TIPO_WORK_FLOW_ID = 'REQUISICION' AND CWF.ORIGEN_ID = @numRequisicion
+			)
+
+		SET @SECUENCIA = (
+			SELECT MAX(NIVEL_AUTOR) FROM
+			CONTROL_WORK_FLOW CWF
+			JOIN STATUS_WORK_FLOW SWF ON CWF.WORK_FLOW_ID = SWF.WORK_FLOW_ID
+			WHERE CWF.TIPO_WORK_FLOW_ID = 'REQUISICION' AND CWF.ORIGEN_ID = @numRequisicion
+			)
+
+		set @presupuesto = (
+			SELECT (P.FIRST_NAME +' '+ P.LAST_NAME) AS PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		set @firmaPresupuesto = (
+			SELECT P.FIRMA_ID AS FIRMA_PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		SET @SECUENCIA = @SECUENCIA - 1;
+
+		set @autorizador1 = (
+			SELECT (P.FIRST_NAME +' '+ P.LAST_NAME) AS PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		set @firmaAutorizador1 = (
+			SELECT P.FIRMA_ID AS FIRMA_PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		SET @SECUENCIA = @SECUENCIA - 1;
+
+		set @autorizador2 = (
+			SELECT (P.FIRST_NAME +' '+ P.LAST_NAME) AS PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		set @firmaAutorizador2 = (
+			SELECT P.FIRMA_ID AS FIRMA_PRESUPUESTO FROM STATUS_WORK_FLOW SWF
+			JOIN PERSON P ON SWF.PERSON_PARENT_ID = P.PARTY_ID
+			WHERE WORK_FLOW_ID = @workflowid AND NIVEL_AUTOR = @SECUENCIA
+			);
+
+		EXEC ('SELECT R.REQUISICION_ID,''' +@presupuesto+''' AS PRESUPUESTO, '''+@firmaPresupuesto+''' AS FIRMA_PRESUPUESTO,
+		''' +@autorizador1+''' AS AUTORIZADOR1, '''+@firmaAutorizador1+''' AS FIRMA_AUTORIZADOR1,
+		''' +@autorizador2+''' AS AUTORIZADOR2, '''+@firmaAutorizador2+''' AS FIRMA_AUTORIZADOR2,
+		R.PERSONA_SOLICITANTE_ID, (P.FIRST_NAME +'' ''+ P.LAST_NAME) AS SOLICITANTE,P.FIRMA_ID,
+		PG.GROUP_NAME AS AREA, POG.GROUP_NAME AS ORGANIZACION, POG.LOGO_IMAGE_URL, POG.LOGO_IMAGE_URL2, R.STATUS_ID, R.DESCRIPCION, R.JUSTIFICACION, R.FECHA_AUTORIZADA,
+		DR.DESCRIPCION AS DETALLE_DESCRIPCION, DR.PRODUCT_ID, DR.CANTIDAD, PO.QUANTITY_UOM_ID, R.MONTO_TOTAL, SUM(DR.MONTO) AS MONTO,
+		CP.'+ @administrativa+ ' as UNIDAD_ADMINISTRATIVA, CP.'+@cog+' AS COG
+		FROM REQUISICION R
+		LEFT JOIN PERSON P ON P.PARTY_ID = R.PERSONA_SOLICITANTE_ID
+		LEFT JOIN PARTY_GROUP PG ON PG.PARTY_ID = R.AREA_PARTY_ID
+		LEFT JOIN PARTY_GROUP POG ON POG.PARTY_ID = R.ORGANIZATION_PARTY_ID
+		LEFT JOIN DETALLE_REQUISICION DR ON DR.REQUISICION_ID = R.REQUISICION_ID
+		LEFT JOIN PRODUCT PO ON PO.PRODUCT_ID = DR.PRODUCT_ID
+		LEFT JOIN CLAVE_PRESUPUESTAL CP ON CP.CLAVE_PRESUPUESTAL = DR.CLAVE_PRESUPUESTAL
+		WHERE R.REQUISICION_ID='+ @numRequisicion+
+		'GROUP BY R.REQUISICION_ID,
+		R.PERSONA_SOLICITANTE_ID, P.FIRST_NAME, P.LAST_NAME,P.FIRMA_ID,
+		PG.GROUP_NAME, POG.GROUP_NAME, POG.LOGO_IMAGE_URL, POG.LOGO_IMAGE_URL2, R.STATUS_ID, R.DESCRIPCION, R.JUSTIFICACION, R.FECHA_AUTORIZADA,
+		DR.DESCRIPCION, DR.PRODUCT_ID, DR.CANTIDAD, PO.QUANTITY_UOM_ID, R.MONTO_TOTAL,
+		CP.'+ @administrativa+ ' , CP.'+@cog+'');]]>
+	</queryString>
+	<field name="REQUISICION_ID" class="java.lang.String"/>
+	<field name="PRESUPUESTO" class="java.lang.String"/>
+	<field name="FIRMA_PRESUPUESTO" class="java.lang.String"/>
+	<field name="AUTORIZADOR1" class="java.lang.String"/>
+	<field name="FIRMA_AUTORIZADOR1" class="java.lang.String"/>
+	<field name="AUTORIZADOR2" class="java.lang.String"/>
+	<field name="FIRMA_AUTORIZADOR2" class="java.lang.String"/>
+	<field name="PERSONA_SOLICITANTE_ID" class="java.lang.String"/>
+	<field name="SOLICITANTE" class="java.lang.String"/>
+	<field name="FIRMA_ID" class="java.lang.String"/>
+	<field name="AREA" class="java.lang.String"/>
+	<field name="ORGANIZACION" class="java.lang.String"/>
+	<field name="LOGO_IMAGE_URL" class="java.lang.String"/>
+	<field name="LOGO_IMAGE_URL2" class="java.lang.String"/>
+	<field name="STATUS_ID" class="java.lang.String"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="JUSTIFICACION" class="java.lang.String"/>
+	<field name="FECHA_AUTORIZADA" class="java.sql.Timestamp"/>
+	<field name="DETALLE_DESCRIPCION" class="java.lang.String"/>
+	<field name="PRODUCT_ID" class="java.lang.String"/>
+	<field name="CANTIDAD" class="java.math.BigDecimal"/>
+	<field name="QUANTITY_UOM_ID" class="java.lang.String"/>
+	<field name="MONTO_TOTAL" class="java.math.BigDecimal"/>
+	<field name="MONTO" class="java.math.BigDecimal"/>
+	<field name="UNIDAD_ADMINISTRATIVA" class="java.lang.String"/>
+	<field name="COG" class="java.lang.String"/>
+	<variable name="Total" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{CANTIDAD}.multiply( $F{MONTO} )]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<image>
+				<reportElement x="449" y="0" width="122" height="79">
+					<printWhenExpression><![CDATA[new Boolean($F{LOGO_IMAGE_URL2} != null && !$F{LOGO_IMAGE_URL2}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($F{LOGO_IMAGE_URL2})]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="100" height="79">
+					<printWhenExpression><![CDATA[new Boolean($F{LOGO_IMAGE_URL} != null && !$F{LOGO_IMAGE_URL}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($F{LOGO_IMAGE_URL})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="35" width="349" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requisición de compra]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="15" width="349" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ORGANIZACION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="157">
+			<staticText>
+				<reportElement x="0" y="21" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="41" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área solicitante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="61" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Justificación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="1" width="144" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="41" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de autorización:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="428" y="21" width="144" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REQUISICION_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="428" y="61" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{FECHA_AUTORIZADA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1" width="84" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. de Empleado:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="1" width="335" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_SOLICITANTE_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="21" width="335" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="41" width="335" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AREA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="61" width="335" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{STATUS_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="81" width="487" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="101" width="487" height="51"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{JUSTIFICACION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="42" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad Adva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="42" y="0" width="57" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="99" y="0" width="58" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUCOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="157" y="0" width="208" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción del bien o servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="365" y="0" width="43" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="408" y="0" width="51" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="0" width="44" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="503" y="0" width="69" height="33" backcolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28">
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="0" y="0" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UNIDAD_ADMINISTRATIVA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="42" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{COG}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="99" y="0" width="58" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRODUCT_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="157" y="0" width="208" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DETALLE_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="365" y="0" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="408" y="0" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{QUANTITY_UOM_ID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="459" y="0" width="44" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MONTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="503" y="0" width="68" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="90">
+			<staticText>
+				<reportElement x="0" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitó]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revisó]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autorizó]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autorización Presupuestaria]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="58" width="117" height="1"/>
+			</line>
+			<line>
+				<reportElement x="157" y="58" width="117" height="1"/>
+			</line>
+			<line>
+				<reportElement x="302" y="59" width="117" height="1"/>
+			</line>
+			<line>
+				<reportElement x="444" y="58" width="117" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="22" y="59" width="100" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="22" y="34" width="100" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="59" width="100" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRESUPUESTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="36" width="100" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_PRESUPUESTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="165" y="59" width="100" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AUTORIZADOR2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="165" y="36" width="100" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_AUTORIZADOR2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="60" width="100" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AUTORIZADOR1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="34" width="100" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIRMA_AUTORIZADOR1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42">
+			<staticText>
+				<reportElement x="459" y="0" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="503" y="0" width="68" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MONTO_TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

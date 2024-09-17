@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <property key="ObrasMain">
+        <value xml:lang="en">Main</value> 
+        <value xml:lang="es">Principal</value>
+    </property>
+    <property key="ObrasHome">
+        <value xml:lang="en">Construction</value> 
+        <value xml:lang="es">Obras</value>
+    </property>
+    <property key="ObrasSeguimiento">
+        <value xml:lang="en">Tracking</value> 
+        <value xml:lang="es">Seguimiento</value>
+    </property> 
+    <property key="CrearObra">
+        <value xml:lang="en">Create Construction</value> 
+        <value xml:lang="es">Crear obra</value>
+    </property>
+    <property key="ObrasObras">
+        <value xml:lang="en">Construction</value> 
+        <value xml:lang="es">Obras</value>
+    </property>
+    <property key="ObrasModificacionesObra">
+        <value xml:lang="en">Construction Modifications</value> 
+        <value xml:lang="es">Modificaciones de obra</value>
+    </property>
+    <property key="ObrasBuscarObra">
+        <value xml:lang="en">Search Construction</value> 
+        <value xml:lang="es">Buscar obra</value>
+    </property>
+    <property key="ObrasDatosContrato">
+        <value xml:lang="en">Contract Information</value> 
+        <value xml:lang="es">Datos de contrato</value>
+    </property>
+    <property key="ObrasSolicitud">        
+        <value xml:lang="es">Solicitud de obra</value>
+    </property>    
+    <property key="ObrasSolicitarAutorizacion">
+        <value xml:lang="en">Request Authorization</value> 
+        <value xml:lang="es">Solicitar autorización</value>
+    </property>
+    <property key="ObrasSolicitudesPendientes">
+        <value xml:lang="en">Pending Applications</value> 
+        <value xml:lang="es">Solicitudes pendientes</value>
+    </property>
+    <property key="ObrasFiniquitoObra">
+        <value xml:lang="en">Release form of the Work</value> 
+        <value xml:lang="es">Finiquito de la obra</value>
+    </property>
+    <property key="ObrasBuscarSolicitudes">
+        <value xml:lang="en">Search Requests</value> 
+        <value xml:lang="es">Buscar solicitudes</value>
+    </property>
+    <property key="ObrasnumOficioSolicitudJustificacionTecnica">
+        <value xml:lang="es">Oficio de solicitud y justificación técnica del contratista a dependencia ejecutora</value>
+    </property>
+    <property key="ObrasnumOficioAutorizacionSFP">
+        <value xml:lang="es">Autorización de la SFP para revisar y ajustar los indirectos y el financiamiento</value>
+    </property>
+    <property key="ObrasnumOficioAutorizacionContratante">
+        <value xml:lang="es">Autorización de la contratante</value>
+    </property>
+    <property key="ObrasnumOficioTarjetasDefinitivas">
+        <value xml:lang="es">Oficio de tarjetas de precios unitarios definitivo</value>
+    </property>
+    <property key="ObrasnumOficioConvenioModificatorio">
+        <value xml:lang="es">Convenio modificatorio</value>
+    </property>
+    <property key="ObrasnumOficioPresupuestoDefinitivo">
+        <value xml:lang="es">Oficio de entrega de presupuesto definitivo</value>
+    </property>
+    <property key="ObrasnumOficioModificadoFianzaCumplimiento">
+        <value xml:lang="es">Modificación de la fianza de cumplimiento</value>
+    </property>
+    <property key="ObrasnumOficioFianzaAmpliacion">
+        <value xml:lang="es">Fianza de la ampliación del anticipo</value>
+    </property>
+    <property key="ObrasnumOficioSolicitudJustificacionTecnicaMPA">
+        <value xml:lang="es">Oficio de solicitud y justificación técnica del contratista a dependencia ejecutora</value>
+    </property>
+    <property key="ObrasnumOficioAutorizacionSFPMPA">
+        <value xml:lang="es">Autorización de la SFP para revisar y ajustar los indirectos y el financiamiento</value>
+    </property>
+    <property key="ObrasnumOficioDictamenTecnicoContrate">
+        <value xml:lang="es">Dictamen técnico de la contratante</value>
+    </property>
+    <property key="ObrasnumOficioConvenio">
+        <value xml:lang="es">Convenio</value>
+    </property>
+    <property key="ObrasnumOficioCalendarioEjecucionDefinitivo">
+        <value xml:lang="es">Calendario de ejecución definitivo</value>
+    </property>
+    <property key="ObrasnumOficioModificacionFianzaCumplimiento">
+        <value xml:lang="es">Modificación de la fianza de cumplimiento</value>
+    </property>
+    <property key="ObrasModificacionPrecios">
+        <value xml:lang="es">Documentación presentada para la modificación de precios o ampliación de monto contratado</value>
+    </property>
+    <property key="ObrasModificacionCalendario">
+        <value xml:lang="es">Documentación presentada para la modificación de calendario o plazos de ejecución</value>
+    </property>
+    <property key="ObrasMontoAutorizado">
+        <value xml:lang="en">Authorized amount</value> 
+        <value xml:lang="es">Monto autorizado</value>
+    </property>
+    <property key="ObrasCarteraInversion">
+        <value xml:lang="en">Authorization Number Investment Portfolio</value> 
+        <value xml:lang="es">Número de autorización de cartera de inversión</value>
+    </property>
+    <property key="ObrasCarteraInversion">
+        <value xml:lang="en">Authorization Number Investment Portfolio</value> 
+        <value xml:lang="es">Número de autorización de cartera de inversión</value>
+    </property> 
+    <property key="VerObra">
+        <value xml:lang="en">Construction</value> 
+        <value xml:lang="es">Obra</value>
+    </property>
+    <property key="InfoObra">
+        <value xml:lang="en">Construction Info</value> 
+        <value xml:lang="es">Información de la obra</value>
+    </property>          
+    <property key="ObraCrearContacto">
+    	<value xml:lang="en">Create New Contact Construction Information</value> 
+        <value xml:lang="es">Crear nueva información de contacto para la obra</value>
+    </property>
+    <property key="ObraEditarContacto">
+    	<value xml:lang="en">Edit Contact Construction Information</value> 
+        <value xml:lang="es">Editar la información de contacto para la obra</value>
+    </property>
+    <property key="ObraPurposeTypeNoEnc">
+    	<value xml:lang="en">Purpose Type Not Found</value> 
+        <value xml:lang="es">Tipo de contacto no encontrado</value>
+    </property>    
+    <property key="ObraAddPurpose">
+    	<value xml:lang="en">Add Purpose</value> 
+        <value xml:lang="es">Agregar contacto</value>
+    </property><property key="ObraObraId">
+    	<value xml:lang="en">Construction Id</value> 
+        <value xml:lang="es">Número de obra</value>
+    </property>
+	<property key="ObraNumOficioNotificacionContratistaEntregaFisica">
+    	<value xml:lang="en">Numero de oficio de Notificacion del contratista para la entrega fisica de los trabajos</value> 
+        <value xml:lang="es">Número de oficio de notificación del contratista para la entrega física de los trabajos</value>
+    </property>
+    <property key="ObraNumOficioActaEntregaRecepcion">
+    	<value xml:lang="en">Numero de oficio de Acta de la Entrega - Recepcion Fisica de la Obra</value> 
+        <value xml:lang="es">Número de oficio de acta de la entrega - recepción física de la obra</value>
+    </property>
+    <property key="ObraNumOficioGarantiaViciosOcultos">
+    	<value xml:lang="en">Numero de oficio de Garantia para vicios ocultos</value> 
+        <value xml:lang="es">Número de oficio de garantía para vicios ocultos</value>
+    </property>
+    <property key="ObraNumOficioNotificacionContratanteFiniquitoContrato">
+    	<value xml:lang="en">Numero de oficio de Notificacion del contratante para el finiquito del contrato</value> 
+        <value xml:lang="es">Número de oficio de notificación del contratante para el finiquito del contrato</value>
+    </property>
+    <property key="ObraNumOficioActaAdministrativaExtincionDerechos">
+    	<value xml:lang="en">Numero de oficio de Acta administrativa de extincion de derechos y obligaciones derivados del contrato</value> 
+        <value xml:lang="es">Número de oficio de acta administrativa de extinción de derechos y obligaciones derivados del contrato</value>
+    </property>
+    <property key="ObraNumOficioPlanosDefinitivosActualizados">
+    	<value xml:lang="en">Numero de oficio de Planos definitivos actualizados</value> 
+        <value xml:lang="es">Número de oficio de planos definitivos actualizados</value>
+    </property>
+    <property key="ObraNumOficioCatalogoConceptoDefinitivo">
+    	<value xml:lang="en">Numero de oficio de Catalogo de conceptos definitivo</value> 
+        <value xml:lang="es">Número de oficio de catálogo de conceptos definitivo</value>
+    </property>
+    <property key="ObraActualizar">
+    	<value xml:lang="en">Update</value> 
+        <value xml:lang="es">Actualizar</value>
+    </property>
+    <property key="ObraStatus">
+    	<value xml:lang="en">Status</value> 
+        <value xml:lang="es">Estatus</value>
+    </property>
+    <property key="ObraNombre">
+    	<value xml:lang="en">Name</value> 
+        <value xml:lang="es">Nombre de la obra</value>
+    </property>
+    <property key="ObraDescripcion">
+    	<value xml:lang="en">Description</value> 
+        <value xml:lang="es">Descripción</value>
+    </property>        
+    <property key="ObraValorObra">
+    	<value xml:lang="en">Construction value</value> 
+        <value xml:lang="es">Valor de la obra</value>
+    </property>
+    <property key="ObraProductId">
+    	<value xml:lang="en">Product</value> 
+        <value xml:lang="es">Producto</value>
+    </property>
+    <property key="ObraNumContrato">
+    	<value xml:lang="en">Contract number</value> 
+        <value xml:lang="es">Número de contrato</value>
+    </property>
+    <property key="ObraNumReciboAnticipo">
+    	<value xml:lang="en">Advance Receipt Number for Start Works</value> 
+        <value xml:lang="es">Número de recibo de anticipo para inicio de obra</value>
+    </property>
+    <property key="ObraNumGarantiaAnticipo">
+    	<value xml:lang="en">Number of deposit guarantee</value> 
+        <value xml:lang="es">Número de garantía del anticipo</value>
+    </property>
+    <property key="ObraNumGarantiaCumplimiento">
+    	<value xml:lang="en">Number of Compliance Guarantee</value> 
+        <value xml:lang="es">Número de garantía de cumplimiento</value>
+    </property>
+    <property key="ObraProveedor">
+    	<value xml:lang="en">Supplier</value> 
+        <value xml:lang="es">Proveedor</value>
+    </property>   
+    <property key="ObrasInicioObra">
+        <value xml:lang="en">Start Construction</value> 
+        <value xml:lang="es">Iniciar obra</value>
+    </property> 	
+    <property key="ObraInformacionContacto">
+    	<value xml:lang="en">Contact Información</value> 
+        <value xml:lang="es">Información de contacto de obra</value>
+    </property>
+    <property key="ObraDireccion">
+    	<value xml:lang="en">Address construction</value> 
+        <value xml:lang="es">Dirección de la obra</value>
+    </property>
+    <property key="ObraSinDireccion">
+    	<value xml:lang="en">Without Address</value> 
+        <value xml:lang="es">Sin dirección</value>
+    </property>
+    <property key="ObraValorObraSinIva">
+    	<value xml:lang="en">Value of the work without Tax</value> 
+        <value xml:lang="es">Valor de la obra sin IVA</value>
+    </property>
+    <property key="ObraValorObraConIva">
+    	<value xml:lang="en">Value of the work with Tax</value> 
+        <value xml:lang="es">Valor de la obra con IVA</value>
+    </property>
+    <property key="ObraPorcentajeAnticipo">
+    	<value xml:lang="en">Percentage of advance work (%)</value> 
+        <value xml:lang="es">Porcentaje de anticipo de obra (%)</value>
+    </property>
+    <property key="ObraMontoAnticipo">
+    	<value xml:lang="en">Amount of advance work</value> 
+        <value xml:lang="es">Monto de anticipo de obra</value>
+    </property>
+    <property key="ObraRetencionMillarIVDGLE">
+    	<value xml:lang="en">Percentage of Retention to Millar I.V.D.G.L.E (%)</value> 
+        <value xml:lang="es">Porcentaje de retención al millar I.V.D.G.L.E (%)</value>
+    </property>
+    <property key="ObraAuxRetencionMillarIVDGLE">
+    	<value xml:lang="en">Retention Assistant to Millar I.V.D.G.L.E.</value> 
+        <value xml:lang="es">Auxiliar de retención al millar de I.V.D.G.L.E.</value>
+    </property>
+    <property key="ObraRetencionICIC">
+    	<value xml:lang="en">Percentage of Retention to Millar I.C.I.C (%)</value> 
+        <value xml:lang="es">Porcentaje de retención al millar de I.C.I.C (%)</value>
+    </property>
+    <property key="ObraAuxRetencionMillarICIC">
+    	<value xml:lang="en">Retention Assistant to Millar SI.C.I.C</value> 
+        <value xml:lang="es">Auxiliar de retención al millar de I.C.I.C</value>
+    </property>
+    <property key="ObraClavePresupuestal">    	 
+        <value xml:lang="es">Clave presupuestaria</value>
+    </property>
+    <property key="ObraUbicacionFisica">    	 
+        <value xml:lang="es">Ubicación de la obra</value>
+    </property>
+    <property key="ObraJustificacion">    	 
+        <value xml:lang="es">Justificación de obra</value>
+    </property>
+    <property key="ObraFechaInicio">    	 
+        <value xml:lang="es">Fecha de inicio de obra</value>
+    </property>
+    <property key="ObraFechaFin">    	 
+        <value xml:lang="es">Fecha de terminación de obra</value>
+    </property>
+    <property key="ObraMoneda">    	 
+        <value xml:lang="es">Moneda</value>
+    </property>       
+    <property key="ObrasSeguimiento">
+    	<value xml:lang="en">Construction monitoring</value> 
+        <value xml:lang="es">Seguimiento</value>
+    </property>
+    <property key="ObraEstatus">
+    	<value xml:lang="en">Status</value> 
+        <value xml:lang="es">Estatus</value>
+    </property>
+    <property key="Product">
+    	<value xml:lang="en">Product</value> 
+        <value xml:lang="es">Producto</value>
+    </property>
+    <property key="NuevaObra">
+    	<value xml:lang="en">New construction</value> 
+        <value xml:lang="es">Nueva obra</value>
+    </property>	
+	<property key="PurchSolicitud">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Solicitud de inicio de obra</value>
+    </property>
+	<property key="ObraFiltroSolicitud">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Buscar por</value>
+    </property> 
+	<property key="PurchSolicitudId">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Obra id</value>
+    </property>       	
+	<property key="PurchStatus">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Estatus de obra</value>
+    </property>       		
+	<property key="PurchFecha">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Fecha de autorización</value>
+    </property>       		
+	<property key="ObraPersonaSolicitanteId">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Identificador de solicitante</value>
+    </property>       	
+	<property key="ObraSolicitante">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Solicitante</value>
+    </property>
+	<property key="ObraIniciar">
+    	<value xml:lang="en"></value> 
+        <value xml:lang="es">Iniciar obra</value>
+    </property>
+	<property key="ProductOrganization">
+        <value xml:lang="de">Organisation</value>
+        <value xml:lang="en">Organization</value>
+        <value xml:lang="es">Organización</value>
+        <value xml:lang="fr">Organisation</value>
+        <value xml:lang="it">Organizzazione</value>
+        <value xml:lang="ro">Organizatie</value>
+        <value xml:lang="ru">Организация</value>
+        <value xml:lang="th">องค์กร</value>
+        <value xml:lang="zh">团体</value>
+    </property>
+    <property key="ObraContratista">
+    	<value xml:lang="en">Contractor</value> 
+        <value xml:lang="es">Contratista</value>
+    </property>
+    <property key="ObraAnio">
+    	<value xml:lang="en">Year</value> 
+        <value xml:lang="es">Año</value>
+    </property>	
+    <property key="ObraInformes">
+        <value xml:lang="en">Reports</value> 
+        <value xml:lang="es">Reportes</value>
+    </property>
+    <property key="MontoAvance">
+        <value xml:lang="en">Amount of advanced</value> 
+        <value xml:lang="es">Monto del avance</value>
+    </property>
+    <property key="ObrasInicioContrato">
+        <value xml:lang="en">Initiate agreement</value> 
+        <value xml:lang="es">Iniciar contrato</value>
+    </property>
+    <property key="ObraContratoId">
+        <value xml:lang="en">Agreement Id</value> 
+        <value xml:lang="es">Identificador del contrato</value>
+    </property>
+    <property key="ObraContratistaId">
+        <value xml:lang="en">Identificador del contratista</value> 
+        <value xml:lang="es">Identificador del contratista</value>
+    </property>
+    <property key="ObraContratista">
+        <value xml:lang="en">Contratista</value> 
+        <value xml:lang="es">Contratista</value>
+    </property>
+    <property key="ObraProductIdentificador">
+    	<value xml:lang="en">Product Id</value> 
+        <value xml:lang="es">Identificador del producto</value>
+    </property>
+    <property key="ObravalorContratoSinIva">
+    	<value xml:lang="en">Value of the agreement with Tax</value> 
+        <value xml:lang="es">Valor del contrato sin IVA</value>
+    </property>
+    <property key="ObravalorContratoConIva">
+    	<value xml:lang="en">Value of the agreement with Tax</value> 
+        <value xml:lang="es">Valor del contrato con IVA</value>
+    </property>
+    <property key="ObrasConsultarContrato">
+    	<value xml:lang="en">Consultar contrato</value> 
+        <value xml:lang="es">Consultar contrato</value>
+    </property>
+    <property key="ObraCrearContrato">
+    	<value xml:lang="en">Crear contrato</value> 
+        <value xml:lang="es">Crear contrato</value>
+    </property>
+    <property key="Anadir">
+    	<value xml:lang="en">Add</value> 
+        <value xml:lang="es">Añadir</value>
+    </property>
+    <property key="Eliminar">
+    	<value xml:lang="en">Delete</value> 
+        <value xml:lang="es">Eliminar</value>
+    </property>
+    <property key="AvanceId">
+    	<value xml:lang="en">Id</value> 
+        <value xml:lang="es">Identificador</value>
+    </property>
+    <property key="FechaAvance">
+    	<value xml:lang="en">Date</value> 
+        <value xml:lang="es">Fecha</value>
+    </property>
+    <property key="MontoRestante">
+    	<value xml:lang="en">Remaining amount</value> 
+        <value xml:lang="es">Monto restante</value>
+    </property>
+    <property key="MontoAPagar">    	
+        <value xml:lang="es">Monto a pagar</value>
+    </property>
+    <property key="PorcentajeAvance">
+    	<value xml:lang="en">% progress</value> 
+        <value xml:lang="es">% de avance</value>
+    </property>
+    <property key="FinalizarObra">
+        <value xml:lang="es">Finalizar obra</value>
+    </property>
+    <property key="ObraRetencionId">
+    	<value xml:lang="en">Id de Retención</value> 
+        <value xml:lang="es">Id de Retención</value>
+    </property>
+    <property key="ObraNombreRetencion">
+    	<value xml:lang="en">Retención</value> 
+        <value xml:lang="es">Retención</value>
+    </property>
+    <property key="ObraAuxiliar">
+    	<value xml:lang="en">Auxiliar</value> 
+        <value xml:lang="es">Auxiliar</value>
+    </property>
+    <property key="ObraGroupName">
+    	<value xml:lang="en">Nombre de Auxiliar</value> 
+        <value xml:lang="es">Nombre de auxiliar</value>
+    </property>
+    <property key="ObraPorcentaje">
+    	<value xml:lang="en">Porcentaje de Retención</value> 
+        <value xml:lang="es">Porcentaje de retención</value>
+    </property>
+    <property key="ObraMontoContratosFormalizados">
+    	<value xml:lang="en">Monto de Contratos Formalizados</value> 
+        <value xml:lang="es">Monto de Contratos formalizados</value>
+    </property>    
+    <property key="ObrasBuscaContrato">
+    	<value xml:lang="en">Buscar contrato</value> 
+        <value xml:lang="es">Buscar contrato</value>
+    </property>      
+    <property key="ObraSecuencia">
+    	<value xml:lang="en">Secuencia</value> 
+        <value xml:lang="es">Secuencia</value>
+    </property>
+    <property key="ObraPresupuestoMensual">
+    	<value xml:lang="en">Presupuesto mensual por mes sin IVA</value> 
+        <value xml:lang="es">Presupuesto mensual por mes sin IVA</value>
+    </property>
+    <property key="ObrasAvance">
+    	<value xml:lang="en">Avance</value> 
+        <value xml:lang="es">Avance</value>
+    </property>
+    <property key="ObrasInformacionObra">
+    	<value xml:lang="en">Informacion de la obra</value> 
+        <value xml:lang="es">Informacion de la obra</value>
+    </property>
+    <property key="ObrasInformacionSolicitudObra">
+    	<value xml:lang="en">Información de la solicitud de obra</value> 
+        <value xml:lang="es">Información de la solicitud de obra</value>
+    </property>
+    <property key="ObrasDocumentacionModificaiconObra">
+    	<value xml:lang="en">Documentación soporte de las Modificaicones de obra</value> 
+        <value xml:lang="es">Documentación soporte de las Modificaicones de obra</value>
+    </property>
+    <property key="BuscarSeguimiento">
+        <value xml:lang="en">Search</value> 
+        <value xml:lang="es">Buscar</value>
+    </property>
+    <property key="ObraFiniquitar">
+        <value xml:lang="en">Finalizar contrato</value> 
+        <value xml:lang="es">Finalizar contrato</value>
+    </property>
+    <property key="ObraMontoAnticipoConIva">
+        <value xml:lang="en">Monto de anticipo de obra con IVA</value> 
+        <value xml:lang="es">Monto de anticipo de obra con IVA</value>
+    </property>
+    <property key="OpentapsObrasPendientes">
+        <value xml:lang="en">Pending authorization</value> 
+        <value xml:lang="es">Obras pendientes de autorizar</value>
+    </property>
+    <property key="ObrasFechaRealInicio">
+        <value xml:lang="en">Real start date</value> 
+        <value xml:lang="es">Fecha real de inicio</value>
+    </property>
+    <property key="ObrasFechaRealFin">
+        <value xml:lang="en">Real end date</value> 
+        <value xml:lang="es">Fecha real de fin</value>
+    </property>
+                      
+</resource>

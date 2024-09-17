@@ -1,0 +1,38 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+//obtener modulos
+orderByModulo= org.ofbiz.base.util.UtilMisc.toList("nombre");
+condicionModulo = UtilMisc.toList(
+	new EntityExpr("uso", EntityOperator.EQUALS, "Y")
+);
+resultadoModulo = delegator.findByCondition("Modulo", new EntityConditionList(condicionModulo, EntityOperator.AND) , UtilMisc.toList("moduloId", "nombre"), orderByModulo);
+context.put("listModulos", resultadoModulo);
+
+// obtener tipo poliza
+tiposPoliza = delegator.findAll("TipoPoliza");
+context.put("listTipoPoliza", tiposPoliza);
+
+//obtenemos los catalogos auxiliares
+tiposAuxiliar = delegator.findAll("TipoAuxiliar");
+context.put("listTipoAuxiliar", tiposAuxiliar);
+
+//obtenemos los momentos contables
+listMomentos = delegator.findAll("Momento");
+context.put("listMomentos", listMomentos);
+
+//obtenemos los tipos de Matriz
+listTipoMatriz = delegator.findAll("TipoMatriz");
+context.put("listTipoMatriz",listTipoMatriz);
+
+//obtenemos los eventos (predecesores)
+listEventoContable = delegator.findAll("EventoContable");
+context.put("listEventoContable",listEventoContable);
+print("listEventoContable ---> "+listEventoContable);

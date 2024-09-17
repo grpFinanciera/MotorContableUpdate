@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Tipo de Poliza</title>
+    <description>Entidad para almacenar el catálogo de Tipo de Pólizas</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Castillo Nuñez Miguel</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+	<entity entity-name="TipoPoliza" package-name="org.opentaps.dataimport"
+		title="Almacena catalogo de tipo de polizas">
+		<field name="tipoPolizaId" type="id" />
+		<field name="description" type="description" />
+		<field name="tipo" type="description" />
+		<prim-key field="tipoPolizaId" />
+	</entity>
+    
+</entitymodel>

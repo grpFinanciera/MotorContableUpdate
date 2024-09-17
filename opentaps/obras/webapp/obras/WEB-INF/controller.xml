@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- * Copyright (c) Open Source Strategies, Inc. * * Opentaps is free software: 
+	you can redistribute it and/or modify it * under the terms of the GNU Affero 
+	General Public License as published * by the Free Software Foundation, either 
+	version 3 of the License, or * (at your option) any later version. * * Opentaps 
+	is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the * GNU Affero General Public License for more details. * 
+	* You should have received a copy of the GNU Affero General Public License 
+	* along with Opentaps. If not, see <http://www.gnu.org/licenses/>. * * @author 
+	Leon Torres (leon@opensourcestrategies.com) -->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+	<!-- Include requests for common opentaps features. -->
+	<include location="component://opentaps-common/webapp/common/WEB-INF/common-controller.xml" />
+	
+	<include location="component://obras/webapp/obras/WEB-INF/controllerObrasAB.xml"/>
+
+	<description>Obras Module Site Configuration File</description>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+
+	<!-- ================= -->
+	<!-- Security Mappings -->
+	<!-- ================= -->
+
+	<request-map uri="checkLogin" edit="false">
+		<description>Verify a user is logged in.</description>
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkLogin" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="login">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="login" />
+		<response name="success" type="request" value="setOrganization" />
+		<response name="requirePasswordChange" type="view"
+			value="requirePasswordChange" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="logout">
+		<security https="true" auth="true" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="logout" />
+		<response name="success" type="request" value="checkLogin" />
+		<response name="error" type="view" value="myHomeMain" />
+	</request-map>
+
+
+	<!-- ====================== -->
+	<!-- Basic Request Mappings -->
+	<!-- ====================== -->
+
+	<request-map uri="authview">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="error" />
+	</request-map>
+
+	<request-map uri="setSessionLocale">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.common.CommonEvents" invoke="setSessionLocale" />
+		<response name="success" type="request" value="myHomeMain" />
+		<response name="error" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="main">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<request-map uri="selectOrganizationForm">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="selectOrganizationForm" />
+	</request-map>
+	<request-map uri="setOrganization">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="setOrganization" />
+		<response name="selectOrganization" type="view"
+			value="selectOrganizationForm" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+
+	<!-- ================== -->
+	<!-- Main Request Maps -->
+	<!-- ================== -->
+
+	<!-- call this request when you have a donePage that you want to go to after 
+		finishing a service -->
+	<request-map uri="donePageRequestHelper">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="donePageRequestHelper" />
+		<response name="myProfile" type="view" value="myProfile" />
+		<!-- mostly for error redirects -->
+		<response name="myProfileEditContactMech" type="request"
+			value="myProfileEditContactMech" />
+		<!-- default -->
+		<response name="error" type="view" value="myHomeMain" />
+		<response name="" type="request" value="myHomeMain" />
+	</request-map>
+
+	<request-map uri="myHomeMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<!-- ===================== -->
+	<!-- == Obra Utiles Request ==-->
+	<!-- ===================== -->
+	<request-map uri="obtenHijosGeo">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="obtenHijosGeo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>	
+	
+	<request-map uri="obtenHijosTipoGeo">
+		<security https="true" auth="true"/>
+		<event type="java"
+			path="com.absoluciones.viaticos.AjaxEvents"
+			invoke="obtenHijosTipoGeo" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>	    
+	
+	<request-map uri="obtenCamposSeleccionar">
+		<security https="true" auth="true"/>
+		<event type="java" path="com.absoluciones.obras.util.AjaxEvents" invoke="obtenCamposSeleccionar"/>
+		<response name="success" type="none" />
+		<response name="error" type="none" />		
+	</request-map>
+	
+	<!-- ===================== -->
+	<!-- == Obra tab request ==-->
+	<!-- ===================== -->
+
+	<request-map uri="crearObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="crearObra"/>
+	</request-map>
+	<request-map uri="guardarObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="crearObra" />		
+		<response name="success" type="request-redirect" value="vistaObra">
+          <redirect-parameter name="obraId"/>
+		</response>
+		<response name="error" type="view" value="crearObra"/>
+	</request-map>
+	<request-map uri="iniciarObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="iniciarObra" />		
+		<response name="success" type="request-redirect" value="vistaInicioObra">
+          <redirect-parameter name="obraId"/>
+		</response>
+		<response name="error" type="view" value="vistaInicioObra"/>
+	</request-map>
+	<request-map uri="iniciarContratoObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="iniciarContratoObra" />		
+		<response name="success" type="request-redirect" value="vistaInicioContratoObra">
+          <redirect-parameter name="obraId"/>
+          <redirect-parameter name="contratoId"/>
+		</response>
+		<response name="error" type="view" value="crearContratoObra"/>
+	</request-map>
+	<request-map uri="vistaInicioContratoObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="vistaInicioContratoObra"/>
+	</request-map>			
+	<request-map uri="modificacionesObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="modificacionesObra"/>
+	</request-map>
+	<request-map uri="actualizarModificacionesObrasPrecio">
+		<description>Actualizar las Modificaciones de Precio de Obras</description>
+		<security https="true" auth="true" />
+		<event type="service" invoke="actualizarModificacionesObrasPrecio" />
+		<response name="success" type="request-redirect"
+			value="modificacionesObra" >
+			<redirect-parameter name="obraId" />			
+		</response>
+		<response name="error" type="view" value="modificacionesObra" />
+	</request-map>
+	<request-map uri="actualizarModificacionesObrasCalendario">
+		<description>Actualizar las Modificaciones de Calendario de Obras</description>
+		<security https="true" auth="true" />
+		<event type="service" invoke="actualizarModificacionesObrasCalendario" />
+		<response name="success" type="request-redirect"
+			value="modificacionesObra" >
+			<redirect-parameter name="obraId" />			
+		</response>
+		<response name="error" type="view" value="modificacionesObra" />
+	</request-map>
+	<request-map uri="buscarObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="buscarObra"/>
+	</request-map>
+	<request-map uri="buscarContrato">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="buscarContrato"/>
+	</request-map>	
+	<request-map uri="actualizaObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="actualizaObra" />
+		<response name="success" type="request-redirect" value="vistaObra"/>
+		<response name="error" type="view" value="vistaObra"/>
+	</request-map>
+	<request-map uri="vistaObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="vistaObra"/>
+	</request-map>
+	<request-map uri="vistaInicioObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="vistaInicioObra"/>
+	</request-map>
+	<request-map uri="verFiniquitoObra">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="verFiniquitoObra"/>
+    </request-map>
+    <request-map uri="guardarFiniquitoObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="finiquitoObra" />		
+		<response name="success" type="request-redirect" value="verFiniquitoObra">
+          <redirect-parameter name="obraId"/>
+		</response>
+		<response name="error" type="view" value="verFiniquitoObra"/>
+	</request-map>
+	<request-map uri="verEditarDireccion">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="verEditarDireccion"/>
+        <response name="error" type="view" value="verEditarDireccion"/>
+    </request-map>
+    <request-map uri="editarDireccion">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="guardaDireccion" />
+		<response name="success" type="request-redirect" value="vistaObra">
+          <redirect-parameter name="obraId"/>
+		</response>
+		<response name="error" type="view" value="verEditarDireccion"/>		
+    </request-map>
+	<request-map uri="verDatosContratoObra">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="verDatosContratoObra"/>
+    </request-map>
+    <request-map uri="guardarContratoObra">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="contratoObra" />		
+		<response name="success" type="request-redirect" value="verDatosContratoObra">
+          <redirect-parameter name="obraId"/>
+		</response>
+		<response name="error" type="view" value="verDatosContratoObra"/>
+	</request-map>
+		
+	<request-map uri="inicioObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="inicioObra"/>
+	</request-map>
+	<request-map uri="crearContratoObra">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="crearContratoObra"/>
+	</request-map>	
+	<request-map uri="buscarSolicitud">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarSolicitud" />
+	</request-map>
+<!--     <request-map uri="registrarObra">  -->
+<!--     	<event type="service" invoke="guardarObra"/> -->
+<!--         <response name="success" type="request-redirect" value="verObra"> -->
+<!--         	<redirect-parameter name="obraId"/> -->
+<!--         </response> -->
+<!--         <response name="error" type="view" value="crearObra"/> -->
+<!--     </request-map> -->
+<!--     <request-map uri="actualizaInfoObra"> -->
+<!-- 		<event type="service" invoke="actualizaInfoObra"/> -->
+<!-- 		<response name="success" type="request-redirect" value="verObra"> -->
+<!-- 			<redirect-parameter name="obraId"/> -->
+<!-- 		</response> -->
+<!-- 		<response name="error" type="view" value="verObra"> -->
+<!-- 			<redirect-parameter name="obraId"/> -->
+<!-- 		</response> -->
+<!--     </request-map> -->
+	<request-map uri="verSolicitud">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verSolicitud"/>
+    </request-map>
+    <request-map uri="actualizaSolicitud">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="request-redirect" value="verSolicitud">
+        	<redirect-parameter name="obraId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitud"/>
+    </request-map>
+    <request-map uri="enviarSolicitudObra">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="enviarSolicitudObra"/>
+        <response name="success" type="request-redirect" value="verSolicitud">
+        	<redirect-parameter name="obraId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitud"/>
+    </request-map>        
+    <request-map uri="buscarSolicitudes">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarSolicitudes" />
+	</request-map>
+    <request-map uri="solicitudesPendientes">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="solicitudesPendientes" />
+	</request-map>
+	<request-map uri="autorizarSolicitudObra">
+		<security https="true" auth="true"/>
+    	<event type="service" invoke="autorizarSolicitudObra"/>
+        <response name="success" type="request-redirect" value="verSolicitud">
+        	<redirect-parameter name="obraId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitud"/>
+    </request-map>
+    <request-map uri="rechazarSolicitudObra">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="rechazarSolicitudObra"/>
+        <response name="success" type="request-redirect" value="verSolicitud">
+        	<redirect-parameter name="obraId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitud"/>
+    </request-map>
+    <request-map uri="comentarSolicitudObra">
+    	<security https="true" auth="true"/>
+    	<event type="service" invoke="comentarSolicitudObra"/>
+        <response name="success" type="request-redirect" value="verSolicitud">
+        	<redirect-parameter name="obraId"/>
+        </response>
+        <response name="error" type="view" value="verSolicitud"/>
+    </request-map>	         
+    <request-map uri="finalizarObra">
+		<security https="true" auth="true" />
+		<event type="service" invoke="finalizarObra" />
+		<response name="success" type="view" value="vistaObra" />
+		<response name="error" type="view" value="vistaObra" />
+	</request-map>
+    
+    <!-- =================================== -->
+	<!--              Seguimiento            -->
+	<!-- =================================== -->
+
+	
+	<request-map uri="seguimientoObra">
+		<security https="true" auth="true" />
+		<event type="service" invoke="seguimientoObra" />
+		<response name="success" type="view" value="seguimientoObra">
+			<redirect-parameter name="tipoMoneda" />
+			<redirect-parameter name="seguimientoList" />
+		</response>
+		<response name="error" type="view" value="seguimientoObra" />
+	</request-map>
+	
+	<request-map uri="obtieneContratistas">
+		<security https="true" auth="true"/>
+	    <event type="java" 
+	    	path="com.absoluciones.obras.util.AjaxEvents" 
+	    	invoke="obtieneContratistas"/>
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="buscaSeguimientoObra">
+		<security https="true" auth="true" />
+		<event type="service" invoke="seguimientoObra" />
+		<response name="success" type="view" value="buscaSeguimientoObra">
+			<redirect-parameter name="tipoMoneda" />
+			<redirect-parameter name="seguimientoList" />
+		</response>
+		<response name="error" type="view" value="buscaSeguimientoObra" />
+	</request-map>
+	
+	<request-map uri="obtieneContratistasFin">
+		<security https="true" auth="true"/>
+	    <event type="java" 
+	    	path="com.absoluciones.obras.util.AjaxEvents" 
+	    	invoke="obtieneContratistasFin"/>
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<!-- =================================== -->
+	<!--        Reportes Request Maps        -->
+	<!-- =================================== -->
+	
+	<request-map uri="reportsMain">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="reportsMain"/>
+	</request-map>
+	<request-map uri="obrasReports">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="obrasReports" />
+	</request-map>
+	
+	<!-- =================================== -->
+	<!--          Empty Request Maps         -->
+	<!-- =================================== -->
+	
+	<request-map uri="emptyObrasScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyObrasScreen" />
+		<response name="error" type="view" value="emptyObrasScreen" />
+	</request-map>
+	<request-map uri="emptySeguimientoScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptySeguimientoScreen" />
+		<response name="error" type="view" value="emptySeguimientoScreen" />
+	</request-map>
+	<request-map uri="emptyReportScreen">
+		<security https="true" auth="true" />		
+		<response name="success" type="view" value="emptyReportScreen" />
+		<response name="error" type="view" value="emptyReportScreen" />
+	</request-map>
+	
+	<!-- =================================== -->
+	<!--          Poliza                     -->
+	<!-- =================================== -->
+	
+	<request-map uri="viewAcctgTrans">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viewAcctgTrans" />
+	</request-map>
+	<request-map uri="viewAcctgPresupuestal">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="viewAcctgPresupuestal" />
+	</request-map>
+	
+
+	<view-map name="error" page="/error/error.jsp" />
+	<view-map name="login" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#login" />
+	<view-map name="requirePasswordChange" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#requirePasswordChange" />
+	<view-map name="selectOrganizationForm" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganizationForm" />
+		
+	<!-- Main Screens for Each Section -->
+	<view-map name="myHomeMain" type="screen"
+		page="component://obras/widget/obras/screens/myhome/MyHomeScreens.xml#myHome" />
+	
+	<!-- obra principal -->
+	<view-map name="crearObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#crearObra" />
+	<view-map name="vistaObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#vistaObra" />
+	<view-map name="verEditarDireccion" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#editarDireccion" />
+	<view-map name="verFiniquitoObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verFiniquitoObra" />
+	<view-map name="verDatosContratoObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verDatosContratoObra" />	
+	<view-map name="buscarObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#buscarObra" />
+	<view-map name="buscarContrato" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#buscarContrato" />	
+	<view-map name="inicioObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#inicioObra" />
+	<view-map name="crearContratoObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#crearContratoObra" />	
+	<view-map name="verSolicitud" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verSolicitud"/>
+	<view-map name="buscarSolicitudes" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#buscarSolicitudes" />
+	<view-map name="solicitudesPendientes" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#solicitudesPendientes" />
+	<view-map name="vistaInicioObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#vistaInicioObra" />
+	<view-map name="vistaInicioContratoObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#vistaInicioContratoObra" />	
+	<view-map name="modificacionesObra" type="screen" page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#modificacionesObra" />
+	<view-map name="viewAcctgTransPolizasLista" type="screen" page="component://obras/widget/obras/screens/obras/SeguimientoScreens.xml#viewAcctgTransPolizasLista" />
+	<view-map name="viewGlFiscalType" type="screen" page="component://obras/widget/obras/screens/obras/SeguimientoScreens.xml#viewGlFiscalType" />
+	<view-map name="viewAcctPresupuestal" type="screen" page="component://obras/widget/obras/screens/obras/SeguimientoScreens.xml#viewAcctPresupuestal" />
+	<view-map name="viewAcctgTransEntry" type="screen" page="component://obras/widget/obras/screens/obras/SeguimientoScreens.xml#viewAcctgTransEntry" />
+	<view-map name="viewAcctgTrans" type="screen" page="component://obras/widget/obras/screens/obras/SeguimientoScreens.xml#viewAcctgTrans" />			
+	<!-- Obra Principal -->
+	<view-map name="emptyObrasScreen" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#emptyObrasScreen" />
+	<view-map name="crearObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#crearObra" />
+	<view-map name="vistaObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#vistaObra" />
+	<view-map name="verEditarDireccion" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#editarDireccion" />
+	<view-map name="verFiniquitoObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verFiniquitoObra" />
+	<view-map name="verDatosContratoObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verDatosContratoObra" />	
+	<view-map name="buscarObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#buscarObra" />
+	<view-map name="inicioObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#inicioObra" />	
+	<view-map name="verSolicitud" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#verSolicitud"/>
+	<view-map name="buscarSolicitudes" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#buscarSolicitudes" />
+	<view-map name="solicitudesPendientes" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#solicitudesPendientes" />
+	<view-map name="vistaInicioObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#vistaInicioObra" />
+	<view-map name="modificacionesObra" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#modificacionesObra" />
+	<view-map name="viewAcctgTransPolizasLista" type="screen"
+		page="component://obras/widget/obras/screens/obras/ObrasScreens.xml#viewAcctgTransPolizasLista" />	
+	<!-- Seguimiento de la Obra -->
+	<view-map name="emptySeguimientoScreen" type="screen"
+		page="component://obras/widget/obras/screens/seguimiento/SeguimientoScreens.xml#emptySeguimientoScreen" />
+	<view-map name="seguimientoObra" type="screen"
+		page="component://obras/widget/obras/screens/seguimiento/SeguimientoScreens.xml#seguimientoObra" />	
+	<view-map name="buscaSeguimientoObra" type="screen"
+		page="component://obras/widget/obras/screens/seguimiento/SeguimientoScreens.xml#buscaSeguimientoObra" />
+	
+	<!-- Reportes -->
+	<view-map name="reportsMain" type="screen"
+		page="component://obras/widget/obras/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="emptyReportScreen" type="screen"
+		page="component://obras/widget/obras/screens/reports/ReportsScreens.xml#emptyReportScreen" />
+	<view-map name="obrasReports" type="screen"
+		page="component://obras/widget/obras/screens/reports/ReportsScreens.xml#obrasReports" />
+		
+	<!-- Vistas de polizas -->	
+	<view-map name="viewAcctgPresupuestal" type="screen" page="component://obras/widget/obras/screens/seguimiento/SeguimientoScreens.xml#viewAcctgPresupuestal" />
+	<view-map name="viewAcctgTrans" type="screen" page="component://obras/widget/obras/screens/seguimiento/SeguimientoScreens.xml#viewAcctgTrans" />
+
+</site-conf>

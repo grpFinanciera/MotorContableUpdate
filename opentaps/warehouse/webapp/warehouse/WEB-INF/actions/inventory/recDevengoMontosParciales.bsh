@@ -1,0 +1,257 @@
+/*
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+import java.math.BigDecimal;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
+import org.ofbiz.base.util.Debug;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.service.ServiceUtil;
+import org.ofbiz.base.util.*;
+import org.opentaps.warehouse.inventory.UtilNumberToLetter;
+
+// Groups order items by product
+
+orderId = parameters.get("orderId");
+orderItems = context.get("orderItemList");
+
+context.put("orderId", orderId);
+
+if (orderItems == null) return;
+
+productDatas = FastMap.newInstance();
+
+orderItemIter = orderItems.iterator();
+while (orderItemIter.hasNext()) {
+    orderItem = orderItemIter.next();
+    product = orderItem.getRelatedOne("Product");
+    productId = product.getString("productId");
+
+    // get or create a new product line
+    data = productDatas.get(productId);
+    if (data == null) {
+        data = FastMap.newInstance();
+        data.put("productId", productId);
+        data.put("productInternalName", product.getString("internalName"));
+
+        // also get the UPCA
+        upca = delegator.findByPrimaryKeyCache("GoodIdentification", UtilMisc.toMap("productId", productId, "goodIdentificationTypeId", "UPCA"));
+        if (upca != null) data.put("upca", upca.get("idValue"));
+    }
+
+    totalReceived = 0.0;
+
+    // this large block is for getting the back orders fulfilled
+    fulfilledOrderDatas = data.get("fulfilledOrderDatas");
+    if (fulfilledOrderDatas == null) fulfilledOrderDatas = new TreeMap();
+    
+    
+    
+    data.put("quantityReceived", 1);
+
+    data.put("fulfilledOrderDatas", fulfilledOrderDatas);
+
+    productDatas.put(productId, data);
+}
+
+// we have to deconstruct the maps and tree maps into a flatter set of data
+rows = new ArrayList(productDatas.values()); // ArrayList for using sort_by in ftl
+for (iter = rows.iterator(); iter.hasNext(); ) {
+    row = iter.next();
+    fulfilledOrderDatas = row.remove("fulfilledOrderDatas");
+    if (fulfilledOrderDatas == null || fulfilledOrderDatas.size() == 0) continue;
+    row.put("fulfilledOrderDatas", fulfilledOrderDatas.values());
+}
+
+context.put("productDatas", rows);
+
+
+numeroFactura = parameters.get("numeroFactura");
+
+condiciones = new ArrayList();
+condiciones.add(new EntityExpr("orderId", EntityOperator.EQUALS, orderId));
+condiciones.add(new EntityExpr("numeroFactura", EntityOperator.EQUALS, numeroFactura));
+shipmentReceiptsDevMontos = delegator.findByCondition("ConstanciaRecepcionDevengoPorMontos", new EntityConditionList(condiciones, EntityOperator.AND), null, UtilMisc.toList("shipmentId"));
+
+montoFactura = BigDecimal.ZERO;
+proveedor = null;
+idAlmacenReceptor = null;
+almacenReceptor = null;
+shipments = shipmentReceiptsDevMontos.iterator();
+while (shipments.hasNext())
+{	shipment = shipments.next();
+	createdDate = shipment.getString("fechaContable");
+	if (createdDate == null)
+	{
+		createdDate = shipment.getString("createdDate");
+	}
+	fechaFactura = shipment.getString("fechaFactura");
+	proveedor = shipment.getString("proveedor");
+	idAlmacenReceptor= shipment.getString("facilityId");
+	almacenReceptor= shipment.getString("facilityName");
+	receptorShipment = shipment.getString("userPartyId");
+	shipment.getBigDecimal("unitPrice");
+	montoFactura = montoFactura.add(shipment.getBigDecimal("precioUnitario").multiply(new BigDecimal(shipment.get("cantidad"))));
+	requisicionId = shipment.get("requisicionId");
+	detalleRequisicionId = shipment.get("detalleRequisicionId");
+	if (requisicionId != null && detalleRequisicionId != null)
+	{
+		detalleRequisicion = delegator.findByPrimaryKey("DetalleRequisicion", UtilMisc.toMap("requisicionId", requisicionId, "detalleRequisicionId", detalleRequisicionId));
+		if (detalleRequisicion != null)
+		{
+			descripcionProducto = detalleRequisicion.get("descripcion");
+			if (descripcionProducto == null)
+			{
+				//shipment.put("productName", "");
+			}
+			else
+			{
+				shipment.put("productName", descripcionProducto);
+			}
+		}
+	}
+}
+if (proveedor == null)
+{
+	proveedor = "PROVEEDOR";
+}
+else
+{
+	partyGroup = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", proveedor));
+	if (partyGroup != null) 
+	{
+		proveedor = partyGroup.get("groupName");
+	}
+	else
+	{
+		proveedor = "PROVEEDOR";
+	}
+	
+}
+
+print("Almacen receptor -------- "+almacenReceptor);
+print("ID Almacen receptor -------- "+idAlmacenReceptor);
+
+if(idAlmacenReceptor == null){
+	idAlmacenReceptor = "ID ALMACEN RECEPTOR";
+}
+
+if(almacenReceptor == null){
+	almacenReceptor = "ALMAC&Eacute;N RECEPTOR";
+}
+
+
+receptor = "RECEPTOR";
+firma = "FIRMA";
+
+if (receptorShipment != null)
+{	partyReceptor = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", receptorShipment));
+	if (partyReceptor != null)
+	{	receptor = partyReceptor.get("firstName") + " " + partyReceptor.get("lastName");
+		firma = partyReceptor.get("firmaId");
+		if (receptor == null)
+		{
+			receptor = "RECEPTOR";
+		}
+		if (firma == null)
+		{
+			firma = "FIRMA";
+		}
+	}		
+}
+
+guion1 = createdDate.indexOf("-");
+guion2 = createdDate.lastIndexOf("-");
+createdDay = createdDate.substring(guion2 + 1, guion2 + 3);
+createdMonth = createdDate.substring(guion1 + 1, guion2);
+switch ( createdMonth )
+{
+      case "01":
+           cMonth = "Enero";
+           break;
+      case "02":
+           cMonth = "Febrero";
+           break;
+      case "03":
+           cMonth = "Marzo";
+           break;
+      case "04":
+           cMonth = "Abril";
+           break;
+      case "05":
+           cMonth = "Mayo";
+           break;
+      case "06":
+           cMonth = "Junio";
+           break;
+      case "07":
+           cMonth = "Julio";
+           break;
+      case "08":
+           cMonth = "Agosto";
+           break;
+      case "09":
+           cMonth = "Septiembre";
+           break;
+      case "10":
+           cMonth = "Octubre";
+           break;
+      case "11":
+           cMonth = "Noviembre";
+           break;
+      case "12":
+           cMonth = "Diciembre";
+           break;
+      default:
+           cMonth = "Mes";
+           break;
+}
+createdYear = createdDate.substring(0, guion1);
+createdDate = createdDate.substring(guion2 + 1, guion2 + 3) +
+        "/" + createdDate.substring(guion1 + 1, guion2) +
+        "/" + createdDate.substring(0, guion1);
+guion1 = fechaFactura.indexOf("-");
+guion2 = fechaFactura.lastIndexOf("-");
+fechaFactura = fechaFactura.substring(guion2 + 1, guion2 + 3) +
+        "/" + fechaFactura.substring(guion1 + 1, guion2) +
+        "/" + fechaFactura.substring(0, guion1);
+montoLetraFactura = UtilNumberToLetter.convertNumberToLetter(montoFactura.doubleValue());
+montoFactura = UtilFormatOut.formatPrice(montoFactura);
+Calendar calendar = Calendar.getInstance();
+calendar.setTimeInMillis(System.currentTimeMillis());
+currentYear = UtilFormatOut.formatPaddedNumber(calendar.get(Calendar.YEAR), 4);
+currentMonth = UtilFormatOut.formatPaddedNumber(calendar.get(Calendar.MONTH) + 1, 2);
+currentDay = UtilFormatOut.formatPaddedNumber(calendar.get(Calendar.DAY_OF_MONTH), 2);
+
+context.put("numeroFactura", numeroFactura);
+context.put("montoFactura", montoFactura);
+context.put("montoLetraFactura", montoLetraFactura);
+context.put("createdDate", createdDate);
+context.put("shipmentReceiptsDevMontos", shipmentReceiptsDevMontos);
+context.put("createdYear", createdYear);
+context.put("createdMonth", cMonth);
+context.put("createdDay", createdDay);
+context.put("proveedor", proveedor);
+context.put("idAlmacenReceptor", idAlmacenReceptor);
+context.put("almacenReceptor", almacenReceptor);
+context.put("fechaFactura", fechaFactura);
+context.put("receptor", receptor);
+context.put("firma", firma);

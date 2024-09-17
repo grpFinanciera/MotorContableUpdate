@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+
+	<description>Archivo de configuracion Finanzas AB</description>
+	<owner>ABCSE</owner>
+	<errorpage>/error/error.jsp</errorpage>
+
+	<!-- event handlers -->
+	<handler name="java" type="request"
+		class="org.ofbiz.webapp.event.JavaEventHandler" />
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+	<preprocessor>
+		<!-- Events to run on every request before security (chains exempt) -->
+<!-- 		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkExternalLoginKey" /> -->
+	</preprocessor>
+	<postprocessor>
+		<!-- Events to run on every request after all other processing (chains 
+			exempt) -->
+	</postprocessor>
+
+	<request-map uri="verImprimirPoliza">
+		<description>Imprime una póliza en PDF</description>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verImprimirPoliza" />
+		<response name="error" type="view" value="viewAcctgTrans" />
+	</request-map>
+	
+	<request-map uri="verPagoExterno">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verPagoExterno" />
+		<response name="error" type="view" value="verPagoExterno" />
+	</request-map>
+	
+	<request-map uri="EliminarRegistroEvento">
+		<security https="true" auth="true" />
+		<event type="service" invoke="eliminarRegistroEvento" />
+		<response name="success" type="view" value="buscarEventos" />
+		<response name="error" type="view" value="VerEvento" />
+	</request-map>
+	
+	<request-map uri="imprimirPoliza">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.opensourcestrategies.financials.reports.Reportes"
+			invoke="reportePoliza" />
+		<response name="pdf" type="view" value="imprimirPolizaPDF" />
+		<response name="xls" type="view" value="imprimirPolizaXLS" />
+		<response name="error" type="request-redirect" value="verImprimirPoliza" />
+	</request-map>
+	
+	<request-map uri="administracionEtiqueta">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="administracionEtiqueta" />
+		<response name="error" type="view" value="administracionEtiqueta" />
+	</request-map>
+	
+	<request-map uri="creaEtiqueta">
+		<security auth="true" https="true"/>
+		<event type="service" invoke="creaEtiqueta" />
+		<response name="success" type="view" value="administracionEtiqueta" />
+		<response name="error" type="view" value="administracionEtiqueta" />		
+	</request-map>
+	
+	<request-map uri="actualizaEtiqueta">
+		<security https="true" auth="true" />
+		<event type="java" path="com.opensourcestrategies.financials.ajax.AjaxEvents"
+			invoke="actualizaEtiqueta" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="asociarEtiqueta">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="asociarEtiqueta" />
+		<response name="error" type="view" value="asociarEtiqueta" />
+	</request-map>
+	
+	<request-map uri="guardarEtiquetaEnum">
+		<security auth="true" https="true"/>
+		<event type="service" invoke="guardarEtiquetaEnum" />
+		<response name="success" type="view" value="asociarEtiqueta" />
+		<response name="error" type="view" value="asociarEtiqueta" />	
+	</request-map>
+	
+	<request-map uri="eliminarEtiqueta">
+		<security https="true" auth="true" />
+		<event type="java" path="com.opensourcestrategies.financials.ajax.AjaxEvents"
+			invoke="eliminarEtiqueta" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="eliminarEtiquetaEnum">
+		<security https="true" auth="true" />
+		<event type="java" path="com.opensourcestrategies.financials.ajax.AjaxEvents"
+			invoke="eliminarEtiquetaEnum" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<!-- Reportes LDF -->
+	<request-map uri="reportesLDF">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="reportesLDF" />
+	</request-map>
+	
+	<!-- Conciliacion Contable-Presupuestal -->
+	<request-map uri="verReporteConciliacion">
+		<description>Imprime el reporte de la conciliacion Contable-Presupuestal</description>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="verReporteConciliacion" />
+		<response name="error" type="view" value="reports" />
+	</request-map>
+	
+	<request-map uri="reporteConciliacion">
+		<security https="true" auth="true" />
+		<event type="java"
+			path="com.opensourcestrategies.financials.reports.Reportes"
+			invoke="reporteConciliacion" />
+		<response name="pdf" type="view" value="reporteConciliacionPDF" />
+		<response name="xls" type="view" value="reporteConciliacionXLS" />
+		<response name="error" type="request-redirect" value="verReporteConciliacion" />
+	</request-map>
+	
+	<view-map name="error" page="/error/error.jsp" />
+	<view-map name="verImprimirPoliza" type="screen"
+		page="component://financials/widget/financials/screens/transactions/TransactionsScreens.xml#verImprimirPoliza" />
+		
+	<view-map name="imprimirPolizaPDF" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="imprimirPolizaXLS" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ReportePolizas.jrxml"
+		content-type="application/vnd.ms-excel" encoding="none" />
+	<view-map name="verPagoExterno" type="screen" 
+		page="component://financials/widget/financials/screens/tesoreria/TesoreriaScreens.xml#verPagoExterno" />
+	<view-map name="administracionEtiqueta" type="screen" 
+		page="component://financials/widget/financials/screens/configuration/ConfigurationScreens.xml#administracionEtiqueta" />
+	<view-map name="asociarEtiqueta" type="screen" 
+		page="component://financials/widget/financials/screens/configuration/ConfigurationScreens.xml#asociarEtiqueta" />
+		
+	<!-- Reportes LDF -->
+	<view-map name="reportesLDF" type="screen"
+		page="component://financials/widget/financials/screens/reports/ReportsScreens.xml#reportesLDF" />
+		
+	<view-map name="verReporteConciliacion" type="screen"
+		page="component://financials/widget/financials/screens/reports/ReportsScreens.xml#verReporteConciliacion" />
+		
+	<view-map name="reporteConciliacionPDF" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ConciliacionContablePresupuestal.jrxml"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="reporteConciliacionXLS" type="jasperreports"
+		page="component://financials/webapp/financials/reports/repository/ConciliacionContablePresupuestal.jrxml"
+		content-type="application/vnd.ms-excel" encoding="none" />
+	
+</site-conf>

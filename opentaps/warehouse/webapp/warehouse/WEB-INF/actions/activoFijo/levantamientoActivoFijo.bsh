@@ -1,0 +1,3 @@
+
+listUbicacion = delegator.findAll("UbicacionRapida");
+context.put("listUbicacion",listUbicacion);

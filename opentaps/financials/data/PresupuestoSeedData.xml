@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+	<Etiqueta etiquetaId="ETIQUETADO" descripcion="Recursos que provienen de transferencias federales etiquetadas" />
+	<Etiqueta etiquetaId="NO_ETIQUETADO" descripcion="Recursos que provienen de Ingresos de libre disposición y financiamientos" />
+</entity-engine-xml>

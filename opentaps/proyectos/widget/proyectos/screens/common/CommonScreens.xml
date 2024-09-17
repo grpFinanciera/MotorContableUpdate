@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-application-decorator">
+        <section>
+            <actions>
+                <property-map resource="proyectos" map-name="configProperties" global="true"/>
+
+                <set field="opentapsApplicationName" value="proyectos" global="true"/>
+                <set field="applicationSetupScreen" value="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganization"/>
+                <script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/main-decorator.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="component://opentaps-common/widget/screens/common/CommonScreens.xml">
+                	<decorator-section name="application-layout">
+                		<decorator-section-include name="section-layout"/>
+                	</decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="PermissionErrorScreen">
+        <section>
+            <widgets>
+                 <label style="h3">${uiLabelMap.ProyectosViewPermissionError}</label>
+            </widgets>
+        </section>
+    </screen>
+</screens>

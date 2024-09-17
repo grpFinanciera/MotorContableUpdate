@@ -1,0 +1,26 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+print("organizationPartyId   BSH ?"+organizationPartyId);
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("userLogin",userLogin);
+
+// obtener el catalogo de documentos
+orderBy = org.ofbiz.base.util.UtilMisc.toList("descripcion");
+condicionDoc = EntityCondition.makeCondition("moduloId",EntityOperator.LIKE,"CONTABILIDAD_E");
+resultadoDoc = delegator.findByCondition("TipoDocumento", condicionDoc , UtilMisc.toList("idTipoDoc", "descripcion"), orderBy);
+context.put("listDocumentos", resultadoDoc);
+
+// obtener el catalogo de monedas
+context.put("currencies", delegator.findByAndCache("Uom", UtilMisc.toMap("uomTypeId", "CURRENCY_MEASURE"), UtilMisc.toList("abbreviation")));

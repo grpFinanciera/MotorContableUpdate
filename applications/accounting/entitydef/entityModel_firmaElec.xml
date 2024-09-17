@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entidades o extensiones de entidades para firma electronica</title>
+    <description>Entidades o extensiones de entidades para el flujo de trabajo para la firma electronica avanzada</description>
+    <copyright></copyright>
+    <author>OBM</author>
+    <version>1.0</version>
+			
+	<entity entity-name="ReporteCatalogo"
+		package-name="org.ofbiz.accounting.reportes" title="Catálogo de reportes que necesitan firma electronica avanzada">
+		<field name="reporteId" type="id-ne"></field>
+		<field name="reporteNombre" type="description"></field>
+		<prim-key field="reporteId"/>
+	</entity>
+	
+	<entity entity-name="ReporteFirmante"
+		package-name="org.ofbiz.accounting.reportes" title="Catálogo de firmantes por cada reporte que necesita firma electronica avanzada">
+		<field name="reporteId" type="id-ne"></field>
+		<field name="firmanteId" type="id-ne"></field>
+		<field name="organizationPartyId" type="id-ne"></field>
+		<prim-key field="reporteId"/>
+		<prim-key field="firmanteId"/>
+		<relation type="one" fk-name="FK_REP_FIR" rel-entity-name="ReporteCatalogo">
+        	<key-map field-name="reporteId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_REP_FIR_PTY" title="Party" rel-entity-name="Party">
+        	<key-map field-name="firmanteId" rel-field-name="partyId"/>
+      	</relation>  
+      	<relation type="one" fk-name="FK_REP_FIR_ORG" title="PartyOrg" rel-entity-name="Party">
+        	<key-map field-name="organizationPartyId" rel-field-name="partyId"/>
+      	</relation>       	
+	</entity>
+	
+	<entity entity-name="ReporteWorkFlow"
+		package-name="org.ofbiz.accounting.reportes" title="Registro de los workflows iniciados para firmar un reporte">
+		<field name="workFlowId" type="id-ne"></field>
+		<field name="reporteId" type="id-ne"></field>
+		<field name="firmanteId" type="id-ne"></field>
+		<field name="firma" type="custom-vlong"></field>
+		<field name="statusId" type="id-ne"></field>
+		<prim-key field="workFlowId"/>
+		<prim-key field="reporteId"/>
+		<prim-key field="firmanteId"/>
+		<relation type="one" fk-name="FK_REP_WRK_FLW" rel-entity-name="ReporteCatalogo">
+        	<key-map field-name="reporteId"/>
+      	</relation>
+      	<relation type="one" fk-name="FK_REP_TIP_WRK_FLW" rel-entity-name="ReportePdfWorkFlow">
+        	<key-map field-name="workFlowId"/>
+      	</relation>
+      	<relation type="one" fk-name="REPORTE_ESTATUS" rel-entity-name="Estatus">
+        	<key-map field-name="statusId"/>
+      	</relation>
+      	<relation type="one" fk-name="REPORTE_PARTY" rel-entity-name="Party">
+        	<key-map field-name="firmanteId" rel-field-name="partyId"/>
+      	</relation>		
+	</entity>
+	
+	<entity entity-name="ReportePdfWorkFlow"
+		package-name="org.ofbiz.accounting.reportes" title="Registro de los archivos PDF por cada workflow iniciado">
+		<field name="reportePdfWorkFlowId" type="id-ne"></field>
+		<field name="workFlowId" type="id-ne"></field>
+		<field name="pdfOriginal" type="blob"></field>
+		<field name="pdfFirmado" type="blob"></field>
+		<field name="fechaEmision" type="date-time"></field>
+		<field name="statusId" type="id-ne"></field>
+		<prim-key field="reportePdfWorkFlowId"/>		
+	</entity>
+	
+	<view-entity entity-name="ReporteFirmantePerson"            
+            package-name="org.ofbiz.accounting.reportes"
+            title="Vista para obtener los nombres de los firmantes">
+      <member-entity entity-alias="FIR" entity-name="ReporteFirmante"/>
+      <member-entity entity-alias="PER" entity-name="Person"/>
+      <member-entity entity-alias="CAT" entity-name="ReporteCatalogo"/>
+      <alias entity-alias="FIR" name="reporteId"/>
+      <alias entity-alias="FIR" name="firmanteId"/>
+      <alias entity-alias="PER" name="partyId"/>
+      <alias entity-alias="PER" name="firstName"/>
+      <alias entity-alias="PER" name="lastName"/>
+      <alias entity-alias="CAT" name="reporteNombre"/>
+      <view-link entity-alias="CAT" rel-entity-alias="FIR">
+		  <key-map field-name="reporteId"/>
+	  </view-link>
+	  <view-link entity-alias="FIR" rel-entity-alias="PER" rel-optional="true">
+		  <key-map field-name="firmanteId" rel-field-name="partyId"/>
+	  </view-link>                            
+    </view-entity>
+    
+    <view-entity entity-name="ReportesPendientes"            
+            package-name="org.ofbiz.accounting.reportes"
+            title="Vista para obtener la lista de reportes pendientes por firmar">
+      <member-entity entity-alias="WOR" entity-name="ReporteWorkFlow"/>
+      <member-entity entity-alias="PDF" entity-name="ReportePdfWorkFlow"/>
+      <member-entity entity-alias="CAT" entity-name="ReporteCatalogo"/>
+      <member-entity entity-alias="EST" entity-name="Estatus"/>
+      <alias entity-alias="WOR" name="workFlowId"/>
+      <alias entity-alias="WOR" name="reporteId"/>
+      <alias entity-alias="WOR" name="firmanteId"/>
+      <alias entity-alias="WOR" name="statusId"/>
+      <alias entity-alias="CAT" name="reporteNombre"/>
+      <alias entity-alias="PDF" name="fechaEmision"/>      
+      <alias entity-alias="EST" name="descripcion"/>
+      <view-link entity-alias="WOR" rel-entity-alias="PDF">
+		  <key-map field-name="workFlowId"/>
+	  </view-link>
+	  <view-link entity-alias="WOR" rel-entity-alias="CAT">
+		  <key-map field-name="reporteId"/>
+	  </view-link>
+	  <view-link entity-alias="WOR" rel-entity-alias="EST">
+		  <key-map field-name="statusId"/>
+	  </view-link>	                             
+    </view-entity>
+    
+    <view-entity entity-name="ReportesListaDetalle"            
+            package-name="org.ofbiz.accounting.reportes"
+            title="Vista para obtener la lista de para visualizar en PDF">
+      <member-entity entity-alias="WOR" entity-name="ReporteWorkFlow"/>
+      <member-entity entity-alias="PDF" entity-name="ReportePdfWorkFlow"/>
+      <member-entity entity-alias="CAT" entity-name="ReporteCatalogo"/>
+      <member-entity entity-alias="EST" entity-name="Estatus"/>
+      <alias entity-alias="WOR" name="workFlowId" group-by="true"/>
+      <alias entity-alias="WOR" name="reporteId" group-by="true"/>
+      <alias entity-alias="PDF" name="statusId" group-by="true"/>
+      <alias entity-alias="CAT" name="reporteNombre" group-by="true"/>
+      <alias entity-alias="PDF" name="fechaEmision" group-by="true"/>
+      <alias entity-alias="EST" name="descripcion" group-by="true"/>
+      <view-link entity-alias="WOR" rel-entity-alias="PDF">
+		  <key-map field-name="workFlowId"/>
+	  </view-link>
+	  <view-link entity-alias="WOR" rel-entity-alias="CAT">
+		  <key-map field-name="reporteId"/>
+	  </view-link>
+	  <view-link entity-alias="PDF" rel-entity-alias="EST">
+		  <key-map field-name="statusId"/>
+	  </view-link>	                             
+    </view-entity>     
+        
+</entitymodel>

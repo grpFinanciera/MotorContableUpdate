@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://opentaps-common/webapp/common/WEB-INF/common-controller.xml" />
+
+    <description>GastosReserva Component Site Configuration File</description>
+    <owner></owner>
+    
+	<handler name="service" type="request"
+		class="org.ofbiz.webapp.event.ServiceEventHandler" />
+	<handler name="service-multi" type="request"
+		class="org.ofbiz.webapp.event.ServiceMultiEventHandler" />
+	<handler name="bsf" type="request"
+		class="org.ofbiz.webapp.event.BsfEventHandler" />
+
+	<!-- view handlers -->
+	<handler name="screen" type="view"
+		class="org.ofbiz.widget.screen.ScreenWidgetViewHandler" />
+	<handler name="screenfop" type="view"
+		class="org.ofbiz.widget.screen.ScreenFopViewHandler" />
+	<handler name="jasperreports" type="view"
+		class="org.opentaps.common.reporting.jasper.JasperReportsViewHandler" />
+
+   
+	<!-- ================= -->
+	<!-- Security Mappings -->
+	<!-- ================= -->
+
+	<request-map uri="checkLogin" edit="false">
+		<description>Verify a user is logged in.</description>
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="checkLogin" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="login">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="login" />
+		<response name="success" type="request" value="setOrganization" />
+		<response name="requirePasswordChange" type="view"
+			value="requirePasswordChange" />
+		<response name="error" type="view" value="login" />
+	</request-map>
+	<request-map uri="logout">
+		<security https="true" auth="true" />
+		<event type="java" path="org.ofbiz.webapp.control.LoginWorker"
+			invoke="logout" />
+		<response name="success" type="request" value="checkLogin" />
+		<response name="error" type="view" value="myHomeMain" />
+	</request-map>
+	
+	<!-- ====================== -->
+	<!-- Basic Request Mappings -->
+	<!-- ====================== -->
+
+	<request-map uri="authview">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+		<response name="error" type="view" value="error" />
+	</request-map>
+	<request-map uri="setSessionLocale">
+		<security https="true" auth="false" />
+		<event type="java" path="org.ofbiz.common.CommonEvents" invoke="setSessionLocale" />
+		<response name="success" type="request" value="myHomeMain" />
+		<response name="error" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="main">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	<request-map uri="selectOrganizationForm">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="selectOrganizationForm" />
+	</request-map>
+	<request-map uri="setOrganization">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="setOrganization" />
+		<response name="selectOrganization" type="view"
+			value="selectOrganizationForm" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+
+	<!-- ================== -->
+	<!-- Main Request Maps -->
+	<!-- ================== -->
+
+	<!-- call this request when you have a donePage that you want to go to after 
+		finishing a service -->
+	<request-map uri="donePageRequestHelper">
+		<security https="true" auth="true" />
+		<event type="java" path="org.opentaps.common.event.CommonEvents"
+			invoke="donePageRequestHelper" />
+		<response name="myProfile" type="view" value="myProfile" />
+		<!-- mostly for error redirects -->
+		<response name="myProfileEditContactMech" type="request"
+			value="myProfileEditContactMech" />
+		<!-- default -->
+		<response name="error" type="view" value="myHomeMain" />
+		<response name="" type="request" value="myHomeMain" />
+	</request-map>
+	<request-map uri="myHomeMain">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="myHomeMain" />
+	</request-map>
+	
+	
+	<!-- ============= -->
+	<!--  Solicitante  -->
+	<!-- ============= -->
+	<request-map uri="emptySolicitanteScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptySolicitanteScreen" />
+		<response name="error" type="view" value="emptySolicitanteScreen" />
+	</request-map>
+	
+	<!-- Crear Solicitante -->
+	<request-map uri="crearSolicitudScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="crearSolicitudScreen" />
+		<response name="error" type="view" value="crearSolicitudScreen" />
+	</request-map>
+	<request-map uri="registrarSolicitud"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="guardarSolicitudGastosReserva"/>
+	    <response name="success" type="request-redirect" value="verGastoReserva">
+	    	<redirect-parameter name="gastosReservaId"/>
+	        </response>
+	    <response name="error" type="view" value="crearSolicitudScreen"/>
+	</request-map>
+	<request-map uri="enviarGastoReserva">
+		<security https="true" auth="true" />
+    	<event type="service" invoke="enviarGastoReserva"/>
+        <response name="success" type="request-redirect" value="verGastoReserva">
+        	<redirect-parameter name="gastosReservaId"/>
+        </response>
+        <response name="error" type="view" value="verGastoReserva"/>
+    </request-map>
+    
+    <request-map uri="actualizarGastoReserva">
+    	<security https="true" auth="true" />
+    	<event type="service" invoke="actualizarGastoReserva"/>
+        <response name="success" type="request-redirect" value="verGastoReserva">
+        	<redirect-parameter name="gastosReservaId"/>
+        </response>
+        <response name="error" type="view" value="verGastoReserva"/>
+    </request-map>
+    
+    <!--Buscar Solicitud -->
+	<request-map uri="buscarGastoReserva">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarGastoReserva" />
+	</request-map>
+	<request-map uri="imprimirSolicitudPDF">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="imprimirSolicitudPDF" />
+		<response name="error" type="view" value="buscarGastoReserva" />
+	</request-map>
+	
+	<request-map uri="imprimirComprobantePDF">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="imprimirComprobantePDF" />
+		<response name="error" type="view" value="buscarGastoReserva" />
+	</request-map>
+    
+    <!-- Comprobar Solicitud -->
+	<request-map uri="comprobarSolicitudScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="comprobarSolicitudScreen" />
+		<response name="error" type="view" value="comprobarSolicitudScreen" />
+	</request-map>
+
+	<request-map uri="cancelarGastoReserva">
+		<security https="true" auth="true" />
+    	<event type="service" invoke="cancelarGastoReserva"/>
+        <response name="success" type="request-redirect" value="verGastoReserva">
+        	<redirect-parameter name="gastosReservaId"/>
+        </response>
+        <response name="error" type="view" value="verGastoReserva"/>
+    </request-map>	    
+	
+	<request-map uri="agregaDetalleGastos"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="agregaDetalleGastos"/>
+	    <response name="success" type="request-redirect" value="comprobarSolicitudScreen">
+	    	<redirect-parameter name="gastoReservaId"/>
+	    </response>
+	    <response name="error" type="view" value="comprobarSolicitudScreen"/>
+	</request-map>
+	
+	<request-map uri="eliminaFacturas">
+		<security https="true" auth="true" />
+		<event type="java" path="com.absoluciones.gastosreserva.AjaxEvents" invoke="eliminaFacturas" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<request-map uri="comprobarSolicitudGastosReserva"> 
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="comprobarSolicitudGastosReserva"/>
+	    <response name="success" type="request-redirect" value="comprobarSolicitudScreen">
+	    	<redirect-parameter name="gastoReservaId"/>
+	    </response>
+	    <response name="error" type="view" value="comprobarSolicitudScreen"/>
+	</request-map>  
+	
+	<request-map uri="verSolicitudesPendientesScreen"> 
+		<security https="true" auth="true"/>
+	    <response name="success" type="view" value="verSolicitudesPendientesScreen"/>
+	    <response name="error" type="view" value="verSolicitudesPendientesScreen"/>
+	</request-map>
+	
+	<request-map uri="verGastoReserva">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verGastoReserva"  save-last-view="true">
+		<redirect-parameter name="gastosReservaId"/>
+		</response>
+    </request-map>
+    
+	<request-map uri="devolucion100GastoReserva">
+		<security https="true" auth="true" />
+	   	<event type="service" invoke="devolucion100GastoReserva"/>
+	    <response name="success" type="request-redirect" value="comprobarSolicitudScreen">
+	    	<redirect-parameter name="gastoReservaId"/>
+	    </response>
+	    <response name="error" type="view" value="comprobarSolicitudScreen"/>
+	</request-map>
+	
+
+	
+	<!-- ============= -->
+	<!--  Autorizador  -->
+	<!-- ============= -->
+	<request-map uri="emptyAutorizadorScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyAutorizadorScreen" />
+		<response name="error" type="view" value="emptyAutorizadorScreen" />
+	</request-map>
+	
+
+	<request-map uri="buscarGastoReservaAut">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarGastoReservaAut" />
+	</request-map>
+	
+	<request-map uri="verGastoReservaAut">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="verGastoReservaAut"  save-last-view="true">
+		<redirect-parameter name="gastosReservaId"/>
+		</response>
+    </request-map>
+    
+    <request-map uri="pendienteSolicitud">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="pendienteSolicitud"  save-last-view="true">
+		<redirect-parameter name="gastosReservaId"/>
+		</response>
+    </request-map>
+	
+	<!-- Presupuesto -->
+
+
+	<!-- ============= -->
+	<!--  Presupuesto  -->
+	<!-- ============= -->
+	<request-map uri="emptyPresupuestoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="emptyPresupuestoScreen" />
+		<response name="error" type="view" value="emptyPresupuestoScreen" />
+	</request-map>
+	
+    <request-map uri="buscarSolicitudPresupuesto">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="buscarSolicitudPresupuesto" />
+		<response name="error" type="view" value="buscarSolicitudPresupuesto" />
+    </request-map>
+
+    <request-map uri="presupuestarSolicitudPresupuestoScreen">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="presupuestarSolicitudPresupuestoScreen" >
+			<redirect-parameter name="gastosReservaId"/>
+		</response>
+		<response name="error" type="view" value="presupuestarSolicitudPresupuestoScreen" />
+    </request-map>
+    
+    <request-map uri="agregaDetalleGastoPresupuesto">
+		<security https="true" auth="true" />
+		<event type="service" invoke="agregaDetalleGastoPresupuesto"/>
+		<response name="success" type="view" value="presupuestarSolicitudPresupuestoScreen" >
+			<redirect-parameter name="gastosReservaId"/>
+		</response>
+		<response name="error" type="view" value="presupuestarSolicitudPresupuestoScreen" />
+    </request-map>
+    
+	<request-map uri="presupuestarSolicitudGastosReserva">
+		<security https="true" auth="true" />
+		<event type="service" invoke="presupuestarSolicitudGastosReserva"/>
+		<response name="success" type="request-redirect" value="presupuestarSolicitudPresupuestoScreen" >
+			<redirect-parameter name="gastosReservaId"/>
+		</response>
+		<response name="error" type="view" value="presupuestarSolicitudPresupuestoScreen" />
+	</request-map>
+	
+	<request-map uri="eliminaDetallePresupuesto">
+		<security https="true" auth="true" />
+		<event type="java" path="com.absoluciones.gastosreserva.AjaxEvents" invoke="eliminaDetallePresupuesto" />
+		<response name="success" type="none" />
+		<response name="error" type="none" />
+	</request-map>
+	
+	<!-- ============= -->
+	<!--     Poliza    -->
+	<!-- ============= -->
+	
+	<request-map uri="viewAcctgTrans">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viewAcctgTrans" />
+	</request-map>
+	
+	
+	<request-map uri="viewAcctgPresupuestal">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="viewAcctgPresupuestal" />
+	</request-map>
+	
+	<request-map uri="viewAcctgTransEntry">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="viewAcctgTransEntry" />
+	</request-map>
+	
+	<request-map uri="AccountActivitiesDetail">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="AccountActivitiesDetail" />
+	</request-map>
+	
+	<!-- ============= -->
+	<!-- View Mappings -->
+	<!-- ============= -->
+
+	<view-map name="error" page="/error/error.jsp" />
+	<view-map name="login" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#login" />
+	<view-map name="requirePasswordChange" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#requirePasswordChange" />
+	<view-map name="selectOrganizationForm" type="screen"
+		page="component://opentaps-common/widget/screens/common/CommonScreens.xml#selectOrganizationForm" />
+		
+	<!-- main screens for each section -->
+	<view-map name="myHomeMain" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/myhome/MyHomeScreens.xml#myHome" />
+		
+
+	<!-- Solicitante -->
+	<view-map name="emptySolicitanteScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#emptySolicitanteScreen" />
+
+	<view-map name="buscarGastoReserva" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#buscarGastoReserva" />
+
+	<view-map name="crearSolicitudScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#crearSolicitudScreen" />
+	
+	<view-map name="imprimirComprobantePDF" type="jasperreports"
+		page="component://gastosReserva/webapp/gastosReserva/reports/repository/ComprobacionGastos.jrxml"
+		content-type="application/pdf" encoding="none" />
+		
+	<view-map name="buscarGastoReserva" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#buscarGastoReserva" />
+		
+	<view-map name="imprimirSolicitudPDF" type="jasperreports"
+		page="component://gastosReserva/webapp/gastosReserva/reports/repository/SolicitudGasto.jrxml"
+		content-type="application/pdf" encoding="none" />
+
+	<view-map name="comprobarSolicitudScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#comprobarSolicitudScreen" />
+			
+	<view-map name="verGastoReserva" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#verGastoReserva"/>
+		
+	<view-map name="verSolicitudesPendientesScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#verSolicitudesPendientesScreen" />
+		
+	<!-- Autorizador -->
+	<view-map name="emptyAutorizadorScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/autorizador/AutorizadorScreens.xml#emptyAutorizadorScreen" />
+		
+	<view-map name="buscarGastoReservaAut" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/autorizador/AutorizadorScreens.xml#buscarGastoReservaAut" />
+		
+	<view-map name="verGastoReservaAut" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/autorizador/AutorizadorScreens.xml#verGastoReservaAut"/>
+		
+	<view-map name="pendienteSolicitud" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/autorizador/AutorizadorScreens.xml#pendienteSolicitud"/>
+
+	<!-- Presupuesto -->
+	<view-map name="emptyPresupuestoScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/presupuesto/PresupuestoScreens.xml#emptyPresupuestoScreen" />
+		
+	<view-map name="buscarSolicitudPresupuesto" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/presupuesto/PresupuestoScreens.xml#buscarSolicitudPresupuesto" />
+		
+	<view-map name="presupuestarSolicitudPresupuestoScreen" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/presupuesto/PresupuestoScreens.xml#presupuestarSolicitudPresupuestoScreen" />
+		
+		
+	<!-- ============= -->
+	<!--     Poliza    -->
+	<!-- ============= -->
+	
+	<view-map name="viewAcctgTrans" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#viewAcctgTrans" />
+		
+	<view-map name="viewAcctgPresupuestal" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#viewAcctgPresupuestal" />
+		
+	<view-map name="viewAcctgTransEntry" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#viewAcctgTransEntry" />
+
+	<view-map name="AccountActivitiesDetail" type="screen"
+		page="component://gastosReserva/widget/gastosReserva/screens/solicitante/SolicitanteScreens.xml#AccountActivitiesDetail" />
+
+</site-conf>

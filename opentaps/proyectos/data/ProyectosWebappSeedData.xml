@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<OpentapsWebApps applicationId="proyectos" shortName="Proyectos" sequenceNum="70" 
+				applicationName="Proyectos" description="Proyectos"
+				imageUrl="/opentaps_images/homeapps/proyectos.png" imageHoverUrl="/opentaps_images/homeapps/proyectos_hover.png" 
+				linkUrl="/proyectos/control/main" />
+				
+	<!-- Principal -->
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="010" tabId="myHome" uiLabel="OpentapsMyHome"
+	                   linkUrl="myHomeMain" securityModule="" securityAction="" handlerMethod="" />   
+	<!-- Tabs -->
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="020" tabId="principal" uiLabel="Principal"
+	                   linkUrl="emptyPrincipalScreen" securityModule="PROYECTOS" securityAction="PRINCIPAL_VIEW" handlerMethod="" />
+	                   
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="030" tabId="viaticos" uiLabel="Viaticos"
+	                   linkUrl="emptyViaticosScreen" securityModule="PROYECTOS" securityAction="VIATICOS_VIEW" handlerMethod="" /> 
+	                   
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="040" tabId="gastosPorComp" uiLabel="GastosPorComp"
+	                   linkUrl="emptyGastosScreen" securityModule="PROYECTOS" securityAction="GXC_VIEW" handlerMethod="" /> 
+	                 
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="050" tabId="adquisiciones" uiLabel="Adquisiciones"
+	                   linkUrl="emptyAdquisicionesScreen" securityModule="PROYECTOS" securityAction="ADQ_VIEW" handlerMethod="" /> 
+	                   
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="055" tabId="serviciosPersonales" uiLabel="ServiciosPersonales"
+	                   linkUrl="emptyServiciosPersonalesScreen" securityModule="PROYECTOS" securityAction="SP_VIEW" handlerMethod="" /> 
+	                 
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="060" tabId="configuracion" uiLabel="Configuracion"
+	                   linkUrl="emptyConfiguracionScreen" securityModule="PROYECTOS" securityAction="CONF_VIEW" handlerMethod="" /> 
+	                 
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="070" tabId="reportes" uiLabel="Reportes"
+	                   linkUrl="emptyReportesScreen" securityModule="PROYECTOS" securityAction="REPO_VIEW" handlerMethod="" />
+	
+	<OpentapsWebAppTab applicationId="proyectos"  sequenceNum="080" tabId="ofbiz" uiLabel="opentaps"
+	                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>                   
+	
+	<!-- Alta -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="principal" groupId="proyectoAlta" sequenceNum="010"
+	                  securityModule="PROYECTOS" securityAction="PRINC_GROUP_VIEW"/>
+	                   
+	<OpentapsShortcut shortcutId="creaProyecto" groupId="proyectoAlta" sequenceNum="010" uiLabel="ProyectosCreacion"
+	                  linkUrl="altaProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="consultaProyecto" groupId="proyectoAlta" sequenceNum="020" uiLabel="ProyectosConsulta"
+	                  linkUrl="consultaProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CONSULT_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="usuariosProyecto" groupId="proyectoAlta" sequenceNum="030" uiLabel="ProyectosAsignaUsuarios"
+	                  linkUrl="usuariosProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+
+	<OpentapsShortcut shortcutId="modificaEtapasProyecto" groupId="proyectoAlta" sequenceNum="031" uiLabel="ProyectosModificaEtapas"
+	                  linkUrl="modificaEtapaProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="agregaEtapasProyecto" groupId="proyectoAlta" sequenceNum="032" uiLabel="ProyectosAgregaEtapas"
+	                  linkUrl="agregaEtapaProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+
+	<OpentapsShortcut shortcutId="previsionProyecto" groupId="proyectoAlta" sequenceNum="033" uiLabel="PrevisionProyectos"
+	                  linkUrl="previsionProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+
+	<OpentapsShortcut shortcutId="agregaInteresesComisiones" groupId="proyectoAlta" sequenceNum="032" uiLabel="ProyectosAgregaInteresesComisiones"
+	                  linkUrl="agregaInterComProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="terminaProyecto" groupId="proyectoAlta" sequenceNum="040" uiLabel="ProyectosTermina"
+	                  linkUrl="terminaProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_TERMINA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="devuelveProyecto" groupId="proyectoAlta" sequenceNum="045" uiLabel="ProyectosDevuelve"
+	                  linkUrl="devuelveProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_TERMINA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="cargaDocumentosProyecto" groupId="proyectoAlta" sequenceNum="045" uiLabel="ProyectosCargaDocumentos"
+	                  linkUrl="cargaDocumentosProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="descargaDocumentosProyecto" groupId="proyectoAlta" sequenceNum="045" uiLabel="ProyectosDescargaDocumentos"
+	                  linkUrl="descargaDocumentosProyectoScreen" securityModule="PROYECTOS" securityAction="PRINC_CREA_GROUP_VIEW"/>
+	
+	                  
+	<!-- Viaticos -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="viaticos" groupId="viaticos" sequenceNum="020"
+	                  securityModule="PROYECTOS" securityAction="VIAT_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="creaViatico" groupId="viaticos" sequenceNum="010" uiLabel="ViaticosCreacion"
+	                  linkUrl="crearViaticoScreen" securityModule="PROYECTOS" securityAction="VIAT_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="comprobarViatico" groupId="viaticos" sequenceNum="020" uiLabel="ViaticosComprobacion"
+	                  linkUrl="comprobarViaticoScreen" securityModule="PROYECTOS" securityAction="VIAT_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="devolverViatico" groupId="viaticos" sequenceNum="025" uiLabel="ViaticosDevolucion"
+	                  linkUrl="devolverViaticoScreen" securityModule="PROYECTOS" securityAction="VIAT_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="consultaViatico" groupId="viaticos" sequenceNum="030" uiLabel="ViaticosConsulta"
+	                  linkUrl="consultarViaticoScreen" securityModule="PROYECTOS" securityAction="VIAT_CONSULT_GROUP_VIEW"/>  
+	                  
+	<!-- Gastos por comprobar -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="gastosPorComp" groupId="gastosPorComp" sequenceNum="030"
+	                  securityModule="PROYECTOS" securityAction="GXC_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="creaGasto" groupId="gastosPorComp" sequenceNum="010" uiLabel="GastosCreacion"
+	                  linkUrl="crearGastoScreen" securityModule="PROYECTOS" securityAction="GXC_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="comprobarGasto" groupId="gastosPorComp" sequenceNum="020" uiLabel="GastosComprobacion"
+	                  linkUrl="comprobarGastoScreen" securityModule="PROYECTOS" securityAction="GXC_CREA_GROUP_VIEW"/>
+	                  
+	<OpentapsShortcut shortcutId="devolverGasto" groupId="gastosPorComp" sequenceNum="025" uiLabel="GastosDevolucion"
+	                  linkUrl="devolverGastoScreen" securityModule="PROYECTOS" securityAction="GXC_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="consultaGasto" groupId="gastosPorComp" sequenceNum="030" uiLabel="GastosConsulta"
+	                  linkUrl="consultarGastoScreen" securityModule="PROYECTOS" securityAction="GXC_CONSULT_GROUP_VIEW"/>
+	                  
+	<!-- Adquisiciones -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="adquisiciones" groupId="adquisiciones" sequenceNum="040"
+	                  securityModule="PROYECTOS" securityAction="ADQ_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="creaAdquisicion" groupId="adquisiciones" sequenceNum="010" uiLabel="AdquisicionesCreacion"
+	                  linkUrl="crearAdquisicionScreen" securityModule="PROYECTOS" securityAction="ADQ_CREA_GROUP_VIEW"/>
+	          
+	<OpentapsShortcut shortcutId="pagoAdquisicion" groupId="adquisiciones" sequenceNum="015" uiLabel="AdquisicionesPago"
+	                  linkUrl="pagoAdquisicionScreen" securityModule="PROYECTOS" securityAction="ADQ_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="consultaAdquisicion" groupId="adquisiciones" sequenceNum="020" uiLabel="AdquisicionesConsulta"
+	                  linkUrl="consultarAdquisicionScreen" securityModule="PROYECTOS" securityAction="ADQ_CONSULT_GROUP_VIEW"/>
+	                  
+	<!-- Servicios personales -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="serviciosPersonales" groupId="serviciosPersonales" sequenceNum="045"
+	                  securityModule="PROYECTOS" securityAction="SP_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="creaServicioPersonal" groupId="serviciosPersonales" sequenceNum="010" uiLabel="ServiciosPersonalesCreacion"
+	                  linkUrl="crearServiciosPersonalesScreen" securityModule="PROYECTOS" securityAction="SP_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="pagoServicioPersonal" groupId="serviciosPersonales" sequenceNum="015" uiLabel="ServiciosPersonalesPago"
+	                  linkUrl="pagoServicioPersonalScreen" securityModule="PROYECTOS" securityAction="SP_CREA_GROUP_VIEW"/>
+	                
+	<OpentapsShortcut shortcutId="reembolsoServicioPersonal" groupId="serviciosPersonales" sequenceNum="015" uiLabel="ServiciosPersonalesReembolso"
+	                  linkUrl="reembolsoServicioPersonalScreen" securityModule="PROYECTOS" securityAction="SP_CREA_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="consultaServicioPersonal" groupId="serviciosPersonales" sequenceNum="020" uiLabel="ServiciosPersonalesConsulta"
+	                  linkUrl="consultarServiciosPersonalesScreen" securityModule="PROYECTOS" securityAction="SP_CONSULT_GROUP_VIEW"/>
+	                  
+	<!-- Configuaracion -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="configuracion" groupId="configuracion" sequenceNum="050"
+	                  securityModule="PROYECTOS" securityAction="CONF_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="configObjetoGasto" groupId="configuracion" sequenceNum="010" uiLabel="ConfigObjetoGasto"
+	                  linkUrl="configuraObjetoGasto" securityModule="PROYECTOS" securityAction="CONF_GROUP_VIEW"/>
+	                  
+	<!-- Reportes -->                   
+	<OpentapsShortcutGroup applicationId="proyectos" tabId="reportes" groupId="reportes" sequenceNum="060"
+	                  securityModule="PROYECTOS" securityAction="REPO_GROUP_VIEW"/>
+	                 
+	<OpentapsShortcut shortcutId="reportes" groupId="reportes" sequenceNum="010" uiLabel="Reportes"
+	                  linkUrl="reportes" securityModule="PROYECTOS" securityAction="REPO_GROUP_VIEW"/>        
+	
+</entity-engine-xml>

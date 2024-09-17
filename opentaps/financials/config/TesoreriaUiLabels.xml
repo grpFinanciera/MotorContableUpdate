@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<property key="TesoreriaConceptoPago">
+        <value xml:lang="en">Payment concept</value>
+        <value xml:lang="es">Concepto de pago</value>
+    </property>
+	<property key="TesoreriaNumeroCheque">
+        <value xml:lang="en">Check number</value>
+        <value xml:lang="es">Número de cheque</value>
+    </property>
+	<property key="TesoreriaNombreExterno">
+        <value xml:lang="en">External recipient name</value>
+        <value xml:lang="es">Nombre de beneficiario externo</value>
+    </property>
+	<property key="TesoreriaPagoExternoId">
+        <value xml:lang="en">Number of external payment</value>
+        <value xml:lang="es">Número de pago externo</value>
+    </property>
+</resource>

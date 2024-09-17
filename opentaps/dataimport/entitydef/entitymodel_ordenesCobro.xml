@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Data Import de Ordenes de Cobro</title>
+    <description>Ingresa las ordenes de cobro con impacto contable y presupuestal</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>JSCF </author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport.accounting.ledger -->  
+    <!-- =========================== -->
+    
+    <entity entity-name="DataImportOrdenesCobro"
+        package-name="org.opentaps.dataimport"
+        title="Tabla de registros de ordenes de cobro">
+        <field name="invoiceId" type="id-ne"/>
+        <field name="partyId" type="id"/>
+        <field name="partyIdFrom" type="id"/>
+        <field name="idTipoDoc" type="id"/>
+        <field name="descriptionInvoice" type="description"/>
+        <field name="invoiceMessage" type="id"/>
+        <field name="invoiceDate" type="date-time"/>
+        <field name="dueDate" type="date-time"/>
+        <field name="invoiceItemSeqId" type="id-ne"/>
+        <field name="referenceNumber" type="short-varchar"/>
+        <field name="productId" type="id"/>
+        <field name="uomId" type="id"/>
+		<field name="quantity" type="fixed-point"/>
+		<field name="amount" type="currency-precise"/>
+		<field name="descriptionItem" type="description"/>
+		<field name="taxAuthPartyId" type="id"/>
+		<field name="taxAuthGeoId" type="id"/>
+		<field name="clasificacion1" type="id-ne"/>
+		<field name="clasificacion2" type="id-ne"/>
+		<field name="clasificacion3" type="id-ne"/>
+		<field name="clasificacion4" type="id-ne"/>
+		<field name="clasificacion5" type="id-ne"/>
+		<field name="clasificacion6" type="id-ne"/>
+		<field name="clasificacion7" type="id-ne"/>
+		<field name="clasificacion8" type="id-ne"/>
+		<field name="clasificacion9" type="id-ne"/>
+		<field name="clasificacion10" type="id-ne"/>
+		<field name="clasificacion11" type="id-ne"/>
+		<field name="clasificacion12" type="id-ne"/>
+		<field name="clasificacion13" type="id-ne"/>
+		<field name="clasificacion14" type="id-ne"/>
+		<field name="clasificacion15" type="id-ne"/>       
+		<!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field>         
+        <field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>        
+        <prim-key field="invoiceId"/>
+        <prim-key field="invoiceItemSeqId"/>
+		<relation type="one" fk-name="FK_DI_PTY_FRM_OC" title="From" rel-entity-name="Party">
+		   <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+		 </relation>
+		<relation type="one" fk-name="FK_DI_PTY_IMP_OC" title="PartyImp" rel-entity-name="Party">
+		  <key-map field-name="partyId"/>
+		</relation>		 
+		<relation type="one" fk-name="FK_DI_TIPO_DOC_OC" rel-entity-name="TipoDocumento">
+		  <key-map field-name="idTipoDoc"/>
+		</relation>
+		<relation type="one" fk-name="FK_DI_ITM_PROD_OC" rel-entity-name="Product">
+		  <key-map field-name="productId"/>
+		</relation>		
+		<relation type="one" fk-name="DATAIMP_ITM_UOM_CO" rel-entity-name="Uom">
+		  <key-map field-name="uomId"/>
+		</relation>		
+		<relation type="one" fk-name="FK_DI_ITM_TAXAU_OC" title="TaxAuthority" rel-entity-name="Party">
+		    <key-map field-name="taxAuthPartyId" rel-field-name="partyId"/>
+		</relation>	
+		<relation type="one" fk-name="FK_DI_ITM_TAXGO_OC" title="Tax" rel-entity-name="Geo">
+		    <key-map field-name="taxAuthGeoId" rel-field-name="geoId"/>
+		</relation>	
+		<relation type="one" fk-name="FK_DI_USR_OC" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>		 			   		 
+    </entity>
+    
+    
+</entitymodel>

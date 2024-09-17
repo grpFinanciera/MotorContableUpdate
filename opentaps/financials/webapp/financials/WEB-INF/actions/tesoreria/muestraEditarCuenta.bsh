@@ -1,0 +1,71 @@
+import org.ofbiz.base.util.UtilValidate;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.base.util.UtilMisc;
+import java.util.List;
+import org.ofbiz.base.util.*;
+import org.opentaps.common.util.UtilMessage;
+import org.opentaps.common.util.UtilCommon;
+import org.opentaps.common.util.UtilAccountingTags;
+import org.opentaps.domain.DomainsLoader;
+import org.opentaps.domain.ledger.AccountingTransaction;
+import org.opentaps.foundation.exception.FoundationException;
+import org.opentaps.foundation.repository.ofbiz.Repository;
+import org.opentaps.foundation.infrastructure.*;
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.model.ModelEntity;
+import org.ofbiz.entity.GenericValue;
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+import com.opensourcestrategies.financials.tesoreria.TesoreriaServices;
+
+dl = new DomainsLoader(new Infrastructure(dispatcher), new User(userLogin));
+ledgerDomain = dl.loadDomainsDirectory().getLedgerDomain();
+ledgerRepository = ledgerDomain.getLedgerRepository();
+ledgerSpecification = ledgerRepository.getSpecification();
+
+cuentaId = UtilCommon.getParameter(context, "cuentaId");
+print("cuentaId: " + cuentaId);
+context.put("cuentaId",cuentaId);
+
+bancoId = UtilCommon.getParameter(context, "bancoId");
+print("bancoId: " + bancoId);
+context.put("bancoId",bancoId);
+
+subConditions = UtilMisc.toList(
+		new EntityExpr("cuentaBancariaId", EntityOperator.EQUALS, cuentaId));
+		
+datosCuenta = delegator.findByCondition("CuentaBancaria", new EntityConditionList(subConditions, EntityOperator.AND) , null, null);
+print("Mike datosCuenta: " + datosCuenta);
+context.put("datosCuenta",datosCuenta);
+
+
+	print("bancoId: " + bancoId);
+	orderBy = org.ofbiz.base.util.UtilMisc.toList("numeroCuenta");
+	condicionDoc = EntityCondition.makeCondition("bancoId",EntityOperator.EQUALS,bancoId);
+	cuentas = delegator.findByCondition("CuentasBanco", condicionDoc , UtilMisc.toList("numeroCuenta", "nombreCuenta", "cuentaBancariaId", "bancoId", "habilitada", "tipoCuentaBancariaId", "usoCuentaBancariaId"), orderBy);
+	print("Cuentas: " + cuentas);
+	context.put("cuentas", cuentas);
+
+context.put("bancos", UtilAccountingTags.getBancosSucursales(delegator));
+
+listUsoCuenta = delegator.findAll("UsoCuentaBancaria");
+print("listUsoCuenta: " + listUsoCuenta);
+ context.put("listUsoCuenta",listUsoCuenta);
+
+listTipoCuenta = delegator.findAll("TipoCuentaBancaria");
+print("listTipoCuenta: " + listTipoCuenta);
+ context.put("listTipoCuenta",listTipoCuenta);
+
+try{
+
+	saldo = TesoreriaServices.obtenSaldoCuentaActual(ledgerRepository, cuentaId, UtilDateTime.nowTimestamp()); 
+	print("Mike saldo: " + saldo);
+	context.put("saldo", saldo);
+
+} catch (GeneralException e ) { 
+    print( "caught exception:) "+e );
+}

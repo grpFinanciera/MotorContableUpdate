@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    
+  <!-- ========================================================= -->
+  <!-- ======================== Defaults ======================= -->
+  <!-- ========================================================= -->
+    <title>Entity of an Open For Business Project Component</title>
+    <description>None</description>
+    <copyright>Copyright 2001-2009 The Apache Software Foundation</copyright>
+    <author>None</author>
+    <version>1.0</version>
+
+  <!-- ========================================================= -->
+  <!-- ======================== Data Model ===================== -->
+  <!-- The modules in this file are as follows: 
+                   -->
+  <!--  - org.ofbiz.common.datasource -->
+  <!--  - org.ofbiz.common.email -->
+  <!--  - org.ofbiz.common.enum -->
+  <!--  - org.ofbiz.common.geo -->
+  <!--  - org.ofbiz.common.keyword -->
+  <!--  - org.ofbiz.common.language -->
+  <!--  - org.ofbiz.common.method -->
+  <!--  - org.ofbiz.common.note -->
+  <!--  - org.ofbiz.common.period -->
+  <!--  - org.ofbiz.common.status -->
+  <!--  - org.ofbiz.common.uom -->
+  <!--  - org.ofbiz.common.theme -->
+  <!-- ========================================================= -->
+
+
+  <!-- ========================================================= -->
+  <!-- org.ofbiz.common.datasource -->
+  <!-- ========================================================= -->
+
+  
+	<extend-entity entity-name="Geo">
+		<field name="parentGeoId" type="id-ne"/>
+		<relation type="one" fk-name="GEO_PARENT_FK" rel-entity-name="Geo">
+			<key-map field-name="parentGeoId" rel-field-name="geoId"/>
+		</relation>		
+	 </extend-entity>
+	  
+</entitymodel>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Structure Import Entities</title>
+    <description>Define entidades y vistas utilizadas para Activo fijo</description>
+    <copyright>ABCSE</copyright>
+    <author>Omar Banos</author>
+    <version>1.0</version>
+    
+    <!-- =========================== -->
+    <!-- org.opentaps.dataimport -->  
+    <!-- =========================== -->
+    
+    <entity entity-name="DepreciacionPeriodo" package-name="org.opentaps.dataimport"
+            title="Tabla para almacenar los periodos que han sido depreciados">   
+        <field name="idDepreciacionPeriodo" type="id"/>
+        <field name="mes" type="id-ne"/>
+        <field name="ciclo" type="id-ne"/>
+		<field name="tipoActivoFijo" type="id-ne"/>
+        <field name="fechaDesde" type="date-time"/>
+        <field name="fechaHasta" type="date-time"/>
+        <prim-key field="idDepreciacionPeriodo"/>
+        <relation type="one" fk-name="ACTIVO_TIPO" title='activoTipo'
+			rel-entity-name="FixedAssetType">
+			<key-map field-name="tipoActivoFijo" rel-field-name="fixedAssetTypeId" />
+		</relation>		
+    </entity>
+    
+    <entity entity-name="DepreciacionResumen" package-name="org.opentaps.dataimport"
+            title="Tabla para almacenar los activos que hay han sido depreciados en cierto periodo">   
+        <field name="idDepreciacionResumen" type="id-ne"/>
+        <field name="fixedAssetId" type="id-ne"/>
+        <field name="mes" type="id-ne"/>
+        <field name="ciclo" type="id-ne"/>
+        <field name="monto" type="fixed-point"/>
+        <field name="porcentajeDepreciacion" type="fixed-point"></field>
+		<field name="tipoActivoFijo" type="id-ne"/>
+		<field name="poliza" type="id-ne"/>
+		<field name="tipoPolizaId" type="id-ne"/>
+		<field name="acctgTransId" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>        
+        <prim-key field="idDepreciacionResumen"/>
+        <relation type="one" fk-name="ACTIVO_ID" title='activoId'
+			rel-entity-name="FixedAsset">
+			<key-map field-name="fixedAssetId" rel-field-name="fixedAssetId" />
+		</relation>
+        <relation type="one" fk-name="ACTIVO_RESUM" title='activoResum'
+			rel-entity-name="FixedAssetType">
+			<key-map field-name="tipoActivoFijo" rel-field-name="fixedAssetTypeId" />
+		</relation>
+		<relation type="one" fk-name="ACTIVO_PARTY" title='activoParty'
+			rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>		
+    </entity>
+    
+    <view-entity entity-name="ItemsPorcentajeActivoFijo"
+			package-name="org.opentaps.dataimport"
+			title="Vista para obtener los activos a depreciar y su porcentaje de depreciacion">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset"/>
+		<member-entity entity-alias="FAT" entity-name="FixedAssetType"/>
+		<alias entity-alias="FIX" name="fixedAssetId"/>
+		<alias entity-alias="FIX" name="dateAcquired"/>
+		<alias entity-alias="FIX" name="expectedEndOfLife"/>
+		<alias entity-alias="FIX" name="actualEndOfLife"/>
+		<alias entity-alias="FIX" name="purchaseCost"/>
+		<alias entity-alias="FIX" name="fixedAssetTypeId"/>
+		<alias entity-alias="FIX" name="moneda"/>
+		<alias entity-alias="FIX" name="instanceOfProductId"/>
+		<alias entity-alias="FIX" name="statusId" />
+		<alias entity-alias="FAT" name="montoDepreciacion"/>
+		<alias entity-alias="FAT" name="aniosVidaUtil"/>
+		<view-link entity-alias="FIX" rel-entity-alias="FAT">
+        	<key-map field-name="fixedAssetTypeId"/>
+      	</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="ConsultaDepreciacionActivo"
+			package-name="org.opentaps.dataimport"
+			title="Vista para obtener los detalles de una consulta de depreciacion">
+		<member-entity entity-alias="FIX" entity-name="FixedAsset"/>
+		<member-entity entity-alias="FIT" entity-name="FixedAssetType"/>
+		<member-entity entity-alias="DEP" entity-name="DepreciacionResumen"/>
+		<member-entity entity-alias="ACT" entity-name="AcctgTrans"/>
+		<member-entity entity-alias="EVE" entity-name="EventoContable"/>
+		<alias entity-alias="DEP" name="fixedAssetId"/>		
+		<alias entity-alias="DEP" name="mes"/>
+		<alias entity-alias="DEP" name="ciclo"/>
+		<alias entity-alias="DEP" name="monto"/>
+		<alias entity-alias="DEP" name="porcentajeDepreciacion"/>
+		<alias entity-alias="DEP" name="tipoActivoFijo"/>
+		<alias entity-alias="DEP" name="poliza"/>
+		<alias entity-alias="DEP" name="acctgTransId"/>
+		<alias entity-alias="DEP" name="organizationPartyId"/>
+		<alias entity-alias="FIX" name="instanceOfProductId"/>
+		<alias entity-alias="FIX" name="fixedAssetName"/>
+		<alias entity-alias="FIX" name="purchaseCost"/>
+		<alias entity-alias="FIX" name="dateAcquired"/>
+		<alias entity-alias="FIX" name="moneda"/>
+		<alias entity-alias="FIT" name="montoDepreciacion"/>
+		<alias entity-alias="FIT" name="descTipoActivo" field="description"/>
+		<alias entity-alias="ACT" name="descPoliza" field="description"/>
+		<alias entity-alias="ACT" name="acctgTransTypeId"/>		
+		<alias entity-alias="EVE" name="descEvento" field="descripcion"/>
+		<view-link entity-alias="FIX" rel-entity-alias="DEP">
+        	<key-map field-name="fixedAssetId"/>
+      	</view-link>
+      	<view-link entity-alias="FIX" rel-entity-alias="FIT">
+        	<key-map field-name="fixedAssetTypeId"/>
+      	</view-link>
+      	<view-link entity-alias="DEP" rel-entity-alias="ACT">
+        	<key-map field-name="poliza"/>
+      	</view-link>
+      	<view-link entity-alias="ACT" rel-entity-alias="EVE">
+        	<key-map field-name="acctgTransTypeId"/>
+      	</view-link>
+	</view-entity>	
+	
+	
+	<entity entity-name="LevantamientoActivo" package-name="org.ofbiz.assetmaint"
+            title="Tabla para almacenar el levantamiento del activo fijo">   
+        <field name="fixedAssetId" type="id-ne"/>
+        <field name="ubicacionRapidaId" type="id-ne"/>
+        <prim-key field="fixedAssetId"/>
+        <prim-key field="ubicacionRapidaId"/>
+		<relation type="one" fk-name="LEV_ACTIVO_FIJO"
+			rel-entity-name="FixedAsset">
+			<key-map field-name="fixedAssetId"/>
+		</relation>	
+		<relation type="one" fk-name="FK_LEV_ACT_UBIC"
+			rel-entity-name="UbicacionRapida" >
+			<key-map field-name="ubicacionRapidaId"/>
+		</relation>
+    </entity>
+    
+    <view-entity entity-name="ListaLevantamiento" package-name="org.ofbiz.assetmaint">
+    	<member-entity entity-alias="LEV" entity-name="LevantamientoActivo"/>
+    	<member-entity entity-alias="UBI" entity-name="UbicacionRapida"/>
+    	<member-entity entity-alias="FIX" entity-name="FixedAsset"/>
+    	<member-entity entity-alias="UBII" entity-name="UbicacionRapida"/>
+    	<alias entity-alias="LEV" field="fixedAssetId" name="activoFijoId"/>
+    	<alias entity-alias="FIX" field="fixedAssetName" name="activoFijo" />
+    	<alias entity-alias="FIX" name="idActivoAnterior"/>
+    	<alias entity-alias="FIX" name="statusId" />
+    	<alias entity-alias="UBI" field="descripcion" name="ubicacionActual" />
+    	<alias entity-alias="UBII" field="descripcion" name="ubicacionAnterior" />
+    	<view-link entity-alias="LEV" rel-entity-alias="UBI">
+        	<key-map field-name="ubicacionRapidaId"/>
+      	</view-link>
+    	<view-link entity-alias="LEV" rel-entity-alias="FIX">
+        	<key-map field-name="fixedAssetId"/>
+      	</view-link>
+    	<view-link entity-alias="FIX" rel-entity-alias="UBII" >
+        	<key-map field-name="ubicacionRapidaId"/>
+      	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="ListaLevantamientoNoExiste" package-name="org.ofbiz.assetmaint">
+    	<member-entity entity-alias="FIX" entity-name="FixedAsset"/>
+    	<member-entity entity-alias="UBI" entity-name="UbicacionRapida"/>
+    	<member-entity entity-alias="LEV" entity-name="LevantamientoActivo"/>
+    	<alias entity-alias="FIX" field="fixedAssetId" name="activoFijoId"/>
+    	<alias entity-alias="FIX" field="fixedAssetName" name="activoFijo" />
+    	<alias entity-alias="FIX" name="idActivoAnterior"/>
+    	<alias entity-alias="FIX" name="statusId" />
+    	<alias entity-alias="UBI" field="descripcion" name="ubicacionActual" />
+    	<alias entity-alias="LEV" field="fixedAssetId" name="activoFijoIdLeva"/>
+    	<view-link entity-alias="FIX" rel-entity-alias="UBI">
+        	<key-map field-name="ubicacionRapidaId"/>
+      	</view-link>
+    	<view-link entity-alias="FIX" rel-entity-alias="LEV" rel-optional="true">
+        	<key-map field-name="fixedAssetId"/>
+      	</view-link>
+    </view-entity>      
+    
+    <entity entity-name="MotivosActivoFijo" package-name="com.absoluciones.controlPatrimonial"
+            title="Tabla para almacenar la relacion entre motivos y tipos de Activo Fijo">   
+        <field name="idMotivosActivo" type="id-ne"/>
+        <field name="motivo" type="id-ne"/>
+        <field name="tipoActivoFijo" type="id-ne"/>
+        <field name="evento" type="id"/>
+        <prim-key field="idMotivosActivo"/>
+        <relation type="one" fk-name="ACTIVO_MOT" title='Motivo'
+			rel-entity-name="MotivosControlPat">
+			<key-map field-name="motivo" rel-field-name="idMotivo" />
+		</relation>	
+        <relation type="one" fk-name="ACTIVO_MOT_TIPO" title='activoTipo'
+			rel-entity-name="FixedAssetType">
+			<key-map field-name="tipoActivoFijo" rel-field-name="fixedAssetTypeId" />
+		</relation>	
+		<relation type="one" fk-name="EVENTO_MOT" title='activoTipo'
+			rel-entity-name="AcctgTransType">
+			<key-map field-name="evento" rel-field-name="acctgTransTypeId" />
+		</relation>	
+    </entity>
+    
+    <entity entity-name="MotivosControlPat" package-name="com.absoluciones.controlPatrimonial"
+    	title="Tabla para almacenar los motivos para altas y bajas de control patrimonial">
+    	<field name="idMotivo" type="id-ne"/>
+    	<field name="descripcion" type="description"/>
+    	<field name="tipoMovimiento" type="id"/>
+    	<prim-key field="idMotivo"/>
+    </entity>
+    
+    
+</entitymodel>

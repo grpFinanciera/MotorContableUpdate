@@ -1,0 +1,4 @@
+
+
+listReportes = delegator.findAll("TipoReporteXML");
+context.put("listReportes",listReportes);

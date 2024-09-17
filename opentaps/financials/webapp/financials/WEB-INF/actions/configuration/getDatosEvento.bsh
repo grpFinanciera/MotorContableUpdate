@@ -1,0 +1,46 @@
+/*
+ * Busca los datos necesarios para ingresar una operacion diaria de ingresos
+ */
+
+import javolution.util.FastMap;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.util.EntityUtil;
+import javolution.util.FastList;
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("organizationPartyId",organizationPartyId);
+
+print("organizationPartyId   BSH ?"+organizationPartyId);
+
+organizationPartyId = parameters.get("organizationPartyId");
+context.put("userLogin",userLogin);
+
+//obtener modulos
+orderByModulo= org.ofbiz.base.util.UtilMisc.toList("nombre");
+condicionModulo = UtilMisc.toList(
+	new EntityExpr("uso", EntityOperator.EQUALS, "Y")
+);
+resultadoModulo = delegator.findByCondition("Modulo", new EntityConditionList(condicionModulo, EntityOperator.AND) , UtilMisc.toList("moduloId", "nombre"), orderByModulo);
+context.put("listModulos", resultadoModulo);
+
+// obtener tipo poliza presupuestal
+orderByTipoPolizaP = org.ofbiz.base.util.UtilMisc.toList("description");
+condicionTipoPolizaP = UtilMisc.toList(
+	new EntityExpr("tipo", EntityOperator.EQUALS, "Presupuestal")
+);
+resultadoTipoPolizaP = delegator.findByCondition("TipoPoliza", new EntityConditionList(condicionTipoPolizaP, EntityOperator.AND) , UtilMisc.toList("tipoPolizaId", "description"), orderByTipoPolizaP);
+context.put("listTipoPolizaP", resultadoTipoPolizaP);
+
+// obtener tipo poliza contable
+orderByTipoPolizaC = org.ofbiz.base.util.UtilMisc.toList("description");
+condicionTipoPolizaC = UtilMisc.toList(
+	new EntityExpr("tipo", EntityOperator.EQUALS, "Contable")
+);
+resultadoTipoPolizaC = delegator.findByCondition("TipoPoliza", new EntityConditionList(condicionTipoPolizaC, EntityOperator.AND) , UtilMisc.toList("tipoPolizaId", "description"), orderByTipoPolizaC);
+context.put("listTipoPolizaC", resultadoTipoPolizaC);
+
+// obtener tipo poliza contable
+obtenerDocumentos = delegator.findAll("TipoDocumento");
+context.put("listTipoDocumentos", obtenerDocumentos);
+

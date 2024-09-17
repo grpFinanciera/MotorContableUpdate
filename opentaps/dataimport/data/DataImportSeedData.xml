@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+    
+    <StatusType statusTypeId="DATAIMPORT" description="Data Import Status"/>
+    <StatusItem description="No Procesado" sequenceId="00" statusCode="NOT_PROCESSED" statusId="DATAIMP_NOT_PROC" statusTypeId="DATAIMPORT"/>
+    <StatusItem description="Importado" sequenceId="10" statusCode="IMPORTED" statusId="DATAIMP_IMPORTED" statusTypeId="DATAIMPORT"/>
+    <StatusItem description="Error al Importar" sequenceId="11" statusCode="FAILED" statusId="DATAIMP_FAILED" statusTypeId="DATAIMPORT"/>
+    
+    <OpentapsConfigurationType configTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Default parameters for data import services"/>
+    <OpentapsConfigurationType configTypeId="importCustomers::initialResponsiblePartyId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Identificador del particiapente del usuario responsable de los clientes" defaultValue="admin"/>
+    <OpentapsConfigurationType configTypeId="importCustomers::organizationPartyId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="El identificador de la organización" defaultValue="Company"/>
+    <OpentapsConfigurationType configTypeId="importCustomers::arGlAccountId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Cuentas por Cobrar basadas en el gráfico de cuentas de saldos de clientes" defaultValue="120000"/>
+    <OpentapsConfigurationType configTypeId="importCustomers::offsettingGlAccountId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Cuenta del LM para compensar las cuentas por cobrar para los saldos de los clientes" defaultValue="300000"/>
+    <OpentapsConfigurationType configTypeId="importSuppliers::organizationPartyId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Identificador de la organización" defaultValue="Company"/>
+    <!-- no default values for these -->
+    <OpentapsConfigurationType configTypeId="importProducts::goodIdentificationTypeId1" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Tipo de Identificador (SKU, UPC, ISBN, ASIN, etc.) para el primer producto especial"/>
+    <OpentapsConfigurationType configTypeId="importProducts::goodIdentificationTypeId2" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Tipo de Identificador (SKU, UPC, ISBN, ASIN, etc.) para el segundo producto especial"/>
+    <OpentapsConfigurationType configTypeId="importProductInventory::inventoryGlAccountId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Inventario del LM basado en los gráficos por defecto de los valores de los inventarios" />
+    <OpentapsConfigurationType configTypeId="importProductInventory::offsettingGlAccountId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Cuenta del LM para compensar la cuenta para los valores del inventario" />
+    <OpentapsConfigurationType configTypeId="importGlAccounts::organizationPartyId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="El identificador de la organización.  Dejar en blanco si no desea que las cuentas esten asociadas al Libro Mayor" defaultValue="Company"/>
+    <OpentapsConfigurationType configTypeId="importOrders::companyPartyId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="El identificador de su compañia (organización)" defaultValue="Company"/>
+    <OpentapsConfigurationType configTypeId="importOrders::calculateGrandTotal" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduzca TRUE para calcular los totales de pedidos basado en las importaciones o FALSE para utilizar los valores de la tabla puente DataImportOrderHeader." defaultValue="TRUE"/>
+    <OpentapsConfigurationType configTypeId="importOrders::importEmptyOrders" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduzca TRUE para importar los encabezados de la orden si ningun artículo o FALSE para omitirlos." defaultValue="TRUE"/>
+    <OpentapsConfigurationType configTypeId="importOrders::prodCatalogId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduza el identificador del catálogo de productos para asociar las órdenes de venta o dejar en blanco para saltar."/>
+    <OpentapsConfigurationType configTypeId="importOrders::productStoreId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduza el identificador de la tienda de productos para asociar las órdenes de venta o dejar en blanco para saltar."/>
+    <OpentapsConfigurationType configTypeId="importOrders::purchaseOrderShipToContactMechId" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduzca el identificador de contacto para establecer la dirección destino de envío."/>
+    <OpentapsConfigurationType configTypeId="importOrders::reserveInventory" parentConfigTypeId="DATAIMPORT_SERVICE_PARAM_DEFAULTS" description="Introduza TRUE para reservar el inventario para órdenes de venta abiertas o FALSE para omitilo." defaultValue="TRUE"/>
+
+</entity-engine-xml>

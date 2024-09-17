@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="control" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+                <set field="organizationPartyId" from-field="parameters.organizationPartyId" default-value="0"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>    	
+    
+    <screen name="emptyControlScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlPatrimonialControl"/>  
+                <set field="sectionHeaderUiLabel" value="ControlPatrimonialControl"/>
+                <set field="organizationPartyId" from-field="parameters.organizationPartyId" default-value="0"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="crearActivoFijo">
+        <section>
+            <actions>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/crearActivoFijo.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html>
+                      	<html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/crearActivoFijo.ftl"/>
+                      	</html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verActivoFijo">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlConsultaEdicionActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlConsultaEdicionActivoFijo"/>
+                <set field="fixedAssetId"  value="${parameters.fixedAssetId}"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/editarActivoFijo.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific>
+                      	<html>
+                      		<html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/verActivoFijo.ftl"/>
+                      	</html>
+                      </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <screen name="verBajaActivoFijo">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlConsultaEdicionActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlConsultaEdicionActivoFijo"/>
+                <set field="fixedAssetId"  value="${parameters.fixedAssetId}"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/editarBajaActivoFijo.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific>
+                      	<html>
+                      		<html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/verBajaActivoFijo.ftl"/>
+                      	</html>
+                      </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Consulta activo fijo -->
+    <screen name="consultaActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlConsultaActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlConsultaActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaActivoFijo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/consultaActivoFijo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listActivoFijo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Bajas activo -->
+    <screen name="ConsultaBajasActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlConsultaActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlConsultaActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaBajaActivoFijo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/consultaBajaActivoFijo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listBajasActivoFijo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="ProductBarCode.fo">
+        <section>
+            <actions>
+                <!-- base/top/specific map first, then more common map added for shared labels -->
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+
+                <set field="productId" from-field="parameters.productId"/>
+                <set field="productName" from-field="parameters.productName"/>
+                <set field="dateAcquired" from-field="parameters.dateAcquired"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/codigoBarras.bsh"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <xsl-fo><html-template location="component://product/webapp/catalog/product/ProductBarCode.fo.ftl"/></xsl-fo>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="PlanillaCodigoBarras.fo">
+        <section>
+            <actions>
+                <!-- base/top/specific map first, then more common map added for shared labels -->
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+
+                <set field="productId" from-field="parameters.productId"/>
+                <set field="productName" from-field="parameters.productName"/>
+                <set field="dateAcquired" from-field="parameters.dateAcquired"/>
+                <set field="idTamano" from-field="parameters.idTamano"/>
+                <set field="posicionImpresion" from-field="parameters.posicionImpresion"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/codigoBarrasActivoFijo.bsh"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <xsl-fo><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/PlanillaCodigoBarras.fo.ftl"/></xsl-fo>                    
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="depreciacionActivoFijo">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ActivoFijoDepreciacion"/>
+                <set field="headerItem" value="ActivoFijoDepreciacion"/>
+                <set field="tabButtonItem" value="ActivoFijoDepreciacion"/>
+                <set field="poliza" from-field="parameters.poliza"/>
+                <set field="organizationPartyId" from-field="parameters.organizationPartyId" default-value="0"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/depreciacion.bsh"/>                        
+            </actions>
+            
+            
+            <widgets>
+<!--                 <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}"> -->
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">  
+                    	<frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/depreciacion.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>                                                                                                                                                                 
+                                                                                                                                                 
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>                        
+         </section>
+    </screen>
+    
+    <!-- Consulta depreciacion de una categoria de activos -->
+    <screen name="consultaDepActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlConsultaDepActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlConsultaDepActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/depreciacion.bsh"/>
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaDepActivoFijo"/>                  
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/consultaDepActivoFijo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listDepActivoFijo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+        
+    <!-- Consulta un activo para ver su historial de resguardos -->
+    <screen name="resguardoActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlResguardoActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlResguardoActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaActivoFijo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/resguardoActivoFijo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listResguardoActivo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+        
+    <screen name="verResguardoActivoFijo">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlVerResguardoActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlVerResguardoActivoFijo"/>
+                <set field="fixedAssetId"  value="${parameters.fixedAssetId}"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/editarResguardoActivo.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific>
+                      	<html>
+                      		<html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/verResguardoActivoFijo.ftl"/>
+                      	</html>
+                      </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+        
+    <screen name="polizaSeguroActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlPolizaSeguroActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlPolizaSeguroActivoFijo"/>
+<!--            <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaPolizaSeguroActivo.bsh"/>   -->
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaPolizaSeguroActivo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="ControlHistorialPolizasSeguro">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/actualizarPolSeguro.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listHistorialPolSeguro.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="permisosAlmacenActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlPermisosAlmacenActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlPermisosAlmacenActivoFijo"/>
+           		<script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/asignarAlmacenUsuarioActivo.bsh"/>                  
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container>
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/asignarAlmacenUsuarioActivo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>                        
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>           
+
+    <screen name="resguardoMasivoActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ResguardoMasivoActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ResguardoMasivoActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaResguardoMasivo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/resguardoMasivoActivo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listResguardoMasivoActivo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+        
+    <!-- Consulta Codigo de Barras -->
+    <screen name="codigoBarrasActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlCodigoBarrasActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlCodigoBarrasActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaCodigoBarras"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/consultaCodigoBarras.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listCodigoBarras.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="responsableRecepcionActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlResponsableRecepcionAlmacenActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlResponsableRecepcionAlmacenActivoFijo"/>
+           		<script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/asignarResponRecepActivo.bsh"/>                  
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container>
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/asignarResponRecepActivo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>                        
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="recepcionesPendientes">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="Recepciones pendientes de pedido o contrato"/>  
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/recepcionPendientes.bsh"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listaRecepcionPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verRecepcionPendiente">
+		<section>
+            <actions>
+                <set field="shipmentId"  value="${parameters.shipmentId}"/>
+                <set field="orderId"  value="${parameters.orderId}"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/getRecepcionPendiente.bsh"/>
+            </actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/verRecepcionPendiente.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <!-- Historial de bienes de activo fijo -->
+    <screen name="historialBienesActivoFijo">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlHistorialBienesActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlHistorialBienesActivoFijo"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaActivoFijo.bsh"/>  
+                <java location="com.absoluciones.controlPatrimonial.ConsultarControlPatrimonial" invoke="consultaActivoFijo"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/historialBienesActivoFijo.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/listHistorialBienesActivo.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Ver historial de bienes de activo fijo -->
+    <screen name="verHistorialActivoFijo">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ControlVerHistorialActivoFijo"/>  
+                <set field="sectionHeaderUiLabel" value="ControlVerHistorialActivoFijo"/>
+                <set field="fixedAssetId"  value="${parameters.fixedAssetId}"/>
+                <script location="component://controlPatrimonial/webapp/controlPatrimonial/WEB-INF/actions/includes/consultaHistorialActivo.bsh"/>
+            </actions>		
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific>
+                      	<html>
+                      		<html-template location="component://controlPatrimonial/webapp/controlPatrimonial/controlPatrimonial/verHistorialActivoFijo.ftl"/>
+                      	</html>
+                      </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+</screens>

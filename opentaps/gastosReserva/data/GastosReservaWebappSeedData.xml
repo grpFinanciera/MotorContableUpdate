@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<OpentapsWebApps applicationId="gastosReserva" shortName="Gastos a Reserva de Comprobar" sequenceNum="50" 
+				applicationName="Gastos a Reserva de Comprobar" description="Gastos a Reserva de Comprobar"
+				imageUrl="/opentaps_images/homeapps/comprobacionGastos.png" imageHoverUrl="/opentaps_images/homeapps/comprobacionGastos_hover.png" 
+				linkUrl="/gastosReserva/control/main" />
+				
+	<!-- Principal -->
+	<OpentapsWebAppTab applicationId="gastosReserva"  sequenceNum="010" tabId="myHome" uiLabel="OpentapsMyHome"
+	                   linkUrl="myHomeMain" securityModule="" securityAction="" handlerMethod="" />   
+	<!-- Tabs -->
+	<OpentapsWebAppTab applicationId="gastosReserva"  sequenceNum="020" tabId="solicitante" uiLabel="GastosReservaSolicitante"
+	                   linkUrl="emptySolicitanteScreen" securityModule="GASTOSRESERVA" securityAction="SOLIC_VIEW" handlerMethod="" />
+	<OpentapsWebAppTab applicationId="gastosReserva"  sequenceNum="030" tabId="autorizador" uiLabel="GastosReservaAutorizador"
+	                   linkUrl="emptyAutorizadorScreen" securityModule="GASTOSRESERVA" securityAction="AUTOR_VIEW" handlerMethod="" />
+	<OpentapsWebAppTab applicationId="gastosReserva"  sequenceNum="040" tabId="presupuesto" uiLabel="GastosReservaPresupuesto"
+	                   linkUrl="emptyPresupuestoScreen" securityModule="GASTOSRESERVA" securityAction="PRES_VIEW" handlerMethod="" />
+	<OpentapsWebAppTab applicationId="gastosReserva"  sequenceNum="050" tabId="ofbiz" uiLabel="opentaps"
+	                   linkUrl="/sarp" isExternal="Y" securityModule="" securityAction="" handlerMethod=""/>  
+	
+	<!-- Solicitante -->                   
+	<OpentapsShortcutGroup applicationId="gastosReserva" tabId="solicitante" groupId="gastosReservaSolicitante" sequenceNum="010"
+	                  securityModule="GASTOSRESERVA" securityAction="SOLIC_GROUP_VIEW"/>
+	                   
+	<OpentapsShortcut shortcutId="creaSolicitud" groupId="gastosReservaSolicitante" sequenceNum="010" uiLabel="GastosReservaCrearSolicitaud"
+	                  linkUrl="crearSolicitudScreen" securityModule="GASTOSRESERVA" securityAction="SOLIC_CREA_GROUP_VIEW"/>
+	<OpentapsShortcut shortcutId="buscaSolicitud" groupId="gastosReservaSolicitante" sequenceNum="020" uiLabel="GastosReservaBuscarSolicitaud"
+	                  linkUrl="buscarGastoReserva" securityModule="GASTOSRESERVA" securityAction="SOLIC_BUSCA_GROUP_VIEW"/>
+	<OpentapsShortcut shortcutId="compruebaSolicitud" groupId="gastosReservaSolicitante" sequenceNum="030" uiLabel="GastosReservaComprobarSolicitaud"
+	                  linkUrl="verSolicitudesPendientesScreen" securityModule="GASTOSRESERVA" securityAction="SOLIC_COMPRUEBA_GROUP_VIEW"/>
+	                  
+	 <!-- Autorizador -->                   
+	<OpentapsShortcutGroup applicationId="gastosReserva" tabId="autorizador" groupId="gastosReservaAutorizador" sequenceNum="020"
+	                       securityModule="GASTOSRESERVA" securityAction="AUTOR_GROUP_VIEW"/>
+	                   
+	<OpentapsShortcut shortcutId="buscarGastoReservaAut" groupId="gastosReservaAutorizador" sequenceNum="010" uiLabel="GastosReservaBuscarSolicitaud"
+	                  linkUrl="buscarGastoReservaAut" securityModule="GASTOSRESERVA" securityAction="AUTOR_BUSCA_GROUP_VIEW"/>
+	<OpentapsShortcut shortcutId="pendienteSolicitud" groupId="gastosReservaAutorizador" sequenceNum="020" uiLabel="GastosReservaSolicitudPendienteAut"
+	                  linkUrl="pendienteSolicitud" securityModule="GASTOSRESERVA" securityAction="AUTOR_SOLPENDAUT_GROUP_VIEW"/>
+	                  
+	 
+	  <!-- Presupuesto -->                   
+	<OpentapsShortcutGroup applicationId="gastosReserva" tabId="presupuesto" groupId="gastosReservaPresupuesto" sequenceNum="030"
+	                       securityModule="GASTOSRESERVA" securityAction="PRES_GROUP_VIEW"/>
+	
+	<OpentapsShortcut shortcutId="comprobarSolicitud" groupId="gastosReservaPresupuesto" sequenceNum="010" uiLabel="GastosReservaSolicitudPendienteComp"
+	           		  linkUrl="buscarSolicitudPresupuesto" securityModule="GASTOSRESERVA" securityAction="PRES_SOLPENDCOMP_GROUP_VIEW"/>
+</entity-engine-xml>

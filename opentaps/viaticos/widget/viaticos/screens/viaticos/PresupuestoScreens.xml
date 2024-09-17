@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+            	<!-- <set field="requiredPermission" value="PRCH_VIATICOS"/> -->
+                <set field="sectionName" value="presupuesto" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+	<!-- Buscar Viatico -->
+    <screen name="buscarViaticoP">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoBuscarViatico"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoBuscarViatico"/>  
+                <java location="com.absoluciones.viaticos.ConsultarViatico" invoke="buscaViatico"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://viaticos/webapp/viaticos/viaticos/consultarViatico.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/listViaticos.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Viaticos Pendientes por Comprometer-->
+    <screen name="viaticosPendientesComprometer">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoPendienteComprometer"/>
+                <set field="sectionHeaderUiLabel" value="ViaticoPendienteComprometer"/>
+                <set field="estatus" value="APROBADA_V"/>  
+                <java location="com.absoluciones.viaticos.ConsultarViatico" invoke="viaticosPendientes"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/listViaticosPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Viaticos Pendientes por Comprobar-->
+    <screen name="viaticosPendientesComprobarP">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoPendienteComprobar"/>
+                <set field="sectionHeaderUiLabel" value="ViaticoPendienteComprobar"/>
+                <set field="estatus" value="COMPROBADA_V"/>  
+                <java location="com.absoluciones.viaticos.ConsultarViatico" invoke="viaticosPendientes"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/listViaticosPendientes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Crear Saldo de Viatico -->
+    <screen name="crearSaldoViatico">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoCrearSaldo"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoCrearSaldo"/>
+                <script location="component://viaticos/webapp/viaticos/WEB-INF/actions/viaticos/saldoViatico.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/crearSaldoViatico.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Traspaso Saldo de Viatico -->
+    <screen name="traspasoSaldoViatico">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoTraspasoSaldos"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoTraspasoSaldos"/>  
+                <script location="component://viaticos/webapp/viaticos/WEB-INF/actions/viaticos/saldoViatico.bsh"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/traspasoSaldoViatico.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Consulta Saldo Viaticos -->
+    <screen name="consultarSaldoViatico">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoConsultarSaldos"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoConsultarSaldos"/>  
+                <java location="com.absoluciones.viaticos.ConsultarViatico" invoke="consultarSaldoViatico"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://viaticos/webapp/viaticos/viaticos/consultarSaldoViatico.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/listConsultarSaldoViatico.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyPresupuestoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoPresupuesto"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoPresupuesto"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://viaticos/webapp/viaticos/viaticos/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="deshabilitaUsuarioViatico">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ViaticoTraspasoSaldos"/>  
+                <set field="sectionHeaderUiLabel" value="ViaticoDeshabilitaUsuario"/>  
+                <java location="com.absoluciones.viaticos.ConsultarViatico" invoke="consultarUsuarios"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://viaticos/webapp/viaticos/viaticos/listUsuarios.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

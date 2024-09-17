@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entidades para la Lista de Cuentas</title>
+    <description>Define las entidades que participan para la carga del Listado de Cuentas</description>
+    <copyright>Copyright (c) Open Source Strategies, Inc.</copyright>
+    <author>Jesus Rodrigo Ruiz Merlin</author>
+    <version>1.0</version>
+    
+    <!-- for precise definitions of the field types see the file framework/entity/fieldtype/fieldtypeXXX.xml for your database XXX -->
+
+    <entity entity-name="NivelContable"
+        package-name="org.opentaps.dataimport"
+        title="Entidad Nivel Contable.">
+        <field name="nivelId" type="id-ne"/>
+        <field name="nombre" type="name"/>
+        <field name="padreNivelId" type="id-ne"/>
+        <prim-key field="nivelId"/>
+		<relation type="one" fk-name="FK_NIV_CONT" title="PadreNivelContable" rel-entity-name="NivelContable">
+        <key-map field-name="padreNivelId" rel-field-name="nivelId"/>
+      </relation>
+    </entity>
+    
+    <entity entity-name="TipoCuenta"
+        package-name="org.opentaps.dataimport"
+        title="Entidad Tipo de Cuenta.">
+        <field name="tipoCuentaId" type="id-ne"/>         
+        <field name="nombre" type="name"/>
+        <prim-key field="tipoCuentaId"/>
+    </entity>
+        
+    <entity entity-name="DataImportGlAccount"
+        package-name="org.opentaps.dataimport.accounting.ledger"
+        title="Intermediate import entity (i.e., the bridge table) for General Ledger accountings data.">
+        <field name="glAccountId" type="id-ne"/>         
+        <field name="parentGlAccountId" type="id"/>   
+        <field name="classification" type="id"></field>        
+        <field name="accountName" type="description"/>
+        <field name="descripcionCorta" type="description"/>
+        <field name="siglas" type="id-ne"/>
+        <field name="tipoCuenta" type="long-varchar"/>
+        <field name="saldoinicial" type="currency-amount"/>
+        <!--  <field name="auxiliar" type="id-ne"/>-->   
+        <!--usuario-->
+        <field name="userLoginId" type="id-vlong-ne"></field> 
+        <field name="importStatusId" type="id-ne"><description>Status of record import.  Null is the same as DATAIMP_NOT_PROC.</description></field>
+        <field name="importError" type="very-long"><description>Error report for failed imports.</description></field>
+        <field name="lastModifiedDate" type="date-time" />
+        <field name="processedTimestamp" type="date-time" >
+            <description>Special field for system to record when entry was successfully imported.  
+                Do not use for any other purpose.</description>
+        </field>
+        <prim-key field="glAccountId"/>
+        <relation type="one" fk-name="USER_SESSION_USERL" rel-entity-name="UserLogin">
+        	<key-map field-name="userLoginId"/>
+      	</relation>
+    </entity>
+    
+    <view-entity entity-name="GlVigentes"
+            package-name="org.opentaps.dataimport.accounting.ledger"
+            title="Vista para consultar las cuentas vigentes">
+      <member-entity entity-alias="A" entity-name="GlAccount"/>
+      <member-entity entity-alias="B" entity-name="GlAccountOrganization"/>       
+      <alias entity-alias="A" name="glAccountId"/>
+      <alias entity-alias="A" name="parentGlAccountId"/>
+      <alias entity-alias="B" name="organizationPartyId"/>
+      <alias entity-alias="B" name="thruDate"/>                           
+      <view-link entity-alias="A" rel-entity-alias="B">
+        <key-map field-name="glAccountId"/>
+      </view-link>                       
+    </view-entity>
+    
+</entitymodel>

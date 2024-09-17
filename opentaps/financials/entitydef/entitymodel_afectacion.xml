@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ============= Entidades para Afectaciones =============== -->
+	<!-- ========================================================= -->
+	<title></title>
+	<description>Define las entidades para transacciones contables presupuestales independientes</description>
+	<copyright>AB</copyright>
+	<author>Salvador Cortes</author>
+	<version>1.0</version>
+
+	<entity entity-name="Afectacion" package-name="org.opentaps.financials.motor"
+		title="Entidad para llevar el control de las afectaciones">
+		<field name="afectacionId" type="id-ne" />            
+	    <field name="organizationPartyId" type="id" />      
+	    <field name="statusId" type="id-ne" />      
+	    <field name="fechaTransaccion" type="date-time" />
+	    <field name="fechaContable" type="date-time" />            
+	    <field name="acctgTransTypeId" type="id"/>
+	    <field name="bancoId" type="id"/> 
+	    <field name="cuentaBancariaId" type="id"/>	    
+	    <field name="comentario" type="description"/>
+	    <field name="currency" type="id" />
+	    <field name="tipoAfectacion" type="id"/>
+	    <field name="tipoMovimiento" type="id"/>
+		<prim-key field="afectacionId" />		
+		<relation type="one" fk-name="AFECTA_EVENTO" rel-entity-name="EventoContable">
+			<key-map field-name="acctgTransTypeId"/>
+		</relation>
+		<relation type="one" fk-name="AFECTA_BANCO" rel-entity-name="Banco">
+			<key-map field-name="bancoId"/>
+		</relation>
+		<relation type="one" fk-name="AFECTA_CUENTA" rel-entity-name="CuentaBancaria">
+			<key-map field-name="cuentaBancariaId"/>
+		</relation>
+        <relation type="one" fk-name="AFECTA_CURRENCY" rel-entity-name="Uom">
+            <key-map field-name="currency" rel-field-name="uomId"/>
+        </relation>
+	</entity>
+	
+	<entity entity-name="AfectacionDetalle" package-name="org.opentaps.financials.motor"
+		title="Entidad para llevar el control del detalle de las afectaciones">
+		<field name="afectacionId" type="id-ne" />
+     	<field name="afectacionSeqId" type="id-ne" />      
+	    <field name="statusId" type="id-ne" />
+	    <field name="clavePresupuestal" type="description" />  
+	    <field name="monto" type="currency-precise" />
+	    <field name="montoRestante" type="currency-precise" />
+		<prim-key field="afectacionId"/>
+        <prim-key field="afectacionSeqId"/>
+		<relation type="one" fk-name="AFECTA_DETALLE" rel-entity-name="Afectacion">
+        	<key-map field-name="afectacionId"/>
+      	</relation>
+		<relation type="one" fk-name="AFECTA_CLAVE" rel-entity-name="ClavePresupuestal">
+        	<key-map field-name="clavePresupuestal"/>
+      	</relation>
+	</entity>
+	
+	<extend-entity entity-name="AfectacionDetalle" >
+		<field name="acctgTagEnumId1" type="id-ne"/>
+		<field name="acctgTagEnumId2" type="id-ne"/>
+		<field name="acctgTagEnumId3" type="id-ne"/>
+		<field name="acctgTagEnumId4" type="id-ne"/>
+		<field name="acctgTagEnumId5" type="id-ne"/>
+		<field name="acctgTagEnumId6" type="id-ne"/>
+		<field name="acctgTagEnumId7" type="id-ne"/>
+		<field name="acctgTagEnumId8" type="id-ne"/>
+		<field name="acctgTagEnumId9" type="id-ne"/>
+		<field name="acctgTagEnumId10" type="id-ne"/>
+		<field name="acctgTagEnumId11" type="id-ne"/>
+		<field name="acctgTagEnumId12" type="id-ne"/>
+		<field name="acctgTagEnumId13" type="id-ne"/>
+		<field name="acctgTagEnumId14" type="id-ne"/>
+		<field name="acctgTagEnumId15" type="id-ne"/>
+		<field name="acctgTagEnumIdAdmin" type="id-ne"/>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM1" title="tag1">
+            <key-map field-name="acctgTagEnumId1" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM2" title="tag2">
+            <key-map field-name="acctgTagEnumId2" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM3" title="tag3">
+            <key-map field-name="acctgTagEnumId3" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM4" title="tag4">
+            <key-map field-name="acctgTagEnumId4" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM5" title="tag5">
+            <key-map field-name="acctgTagEnumId5" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM6" title="tag6">
+            <key-map field-name="acctgTagEnumId6" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM7" title="tag7">
+            <key-map field-name="acctgTagEnumId7" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM8" title="tag8">
+            <key-map field-name="acctgTagEnumId8" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM9" title="tag9">
+            <key-map field-name="acctgTagEnumId9" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM10" title="tag10">
+            <key-map field-name="acctgTagEnumId10" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM11" title="tag11">
+            <key-map field-name="acctgTagEnumId11" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM12" title="tag12">
+            <key-map field-name="acctgTagEnumId12" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM13" title="tag13">
+            <key-map field-name="acctgTagEnumId13" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM14" title="tag14">
+            <key-map field-name="acctgTagEnumId14" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Enumeration" fk-name="FK_AFE_DET_ENUM15" title="tag15">
+            <key-map field-name="acctgTagEnumId15" rel-field-name="enumId"/>
+        </relation>
+		<relation type="one" rel-entity-name="Party" fk-name="FK_AFE_DET_ADMIN" title="admin" >
+        	<key-map field-name="acctgTagEnumIdAdmin" rel-field-name="partyId"/>
+      	</relation>  				
+	</extend-entity>
+	
+	<entity entity-name="AfectacionDetalleLinea" package-name="org.opentaps.financials.motor"
+		title="Entidad para llevar el control de lineas contables del detalle de las afectaciones">
+		<field name="afectacionId" type="id-ne" />
+     	<field name="afectacionSeqId" type="id-ne" />
+     	<field name="secuencia" type="id-ne" />  
+     	<field name="tipoLinea" type="id-ne" />
+     	<field name="nombreTabla" type="id-ne" />
+     	<field name="descripcion" type="description" />
+		<field name="catalogoCargo" type="id"/>
+		<field name="catalogoAbono" type="id"/>
+		<field name="valorCargo" type="id" />
+		<field name="valorAbono" type="id" />
+		<field name="monto" type="currency-amount"/>
+		<prim-key field="afectacionId"/>
+        <prim-key field="afectacionSeqId"/>
+        <prim-key field="secuencia"/>
+        <prim-key field="tipoLinea"/>
+        <prim-key field="nombreTabla"/>
+		<relation type="one" fk-name="FK_AFEC_DET_LIN" rel-entity-name="Afectacion">
+        	<key-map field-name="afectacionId"/>
+      	</relation>       
+		<relation type="one" fk-name="AFECTA_CAT_CARGO" title="cargo"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoCargo" rel-field-name="tipoAuxiliarId" />
+		</relation>
+		<relation type="one" fk-name="AFECTA_CAT_ABONO" title="abono"
+			rel-entity-name="TipoAuxiliar">
+			<key-map field-name="catalogoAbono" rel-field-name="tipoAuxiliarId" />
+		</relation>				
+	</entity>		
+	
+	<entity entity-name="AfectacionDetallePoliza" package-name="org.opentaps.financials.motor"
+		title="Entidad para llevar el control de las polizas del detalle de las afectaciones">
+		<field name="afectacionId" type="id-ne" />
+     	<field name="afectacionSeqId" type="id-ne" />
+     	<field name="acctgTransId" type="id-ne" />  
+     	<field name="poliza" type="id" />  
+     	<field name="nombreTabla" type="id" />
+		<prim-key field="afectacionId"/>
+        <prim-key field="afectacionSeqId"/>
+        <prim-key field="acctgTransId"/>
+		<relation type="one" fk-name="FK_AFEC_DET_POL" rel-entity-name="Afectacion">
+        	<key-map field-name="afectacionId"/>
+      	</relation>
+		<relation type="one" fk-name="AFECTA_ACCTG_TRANS" rel-entity-name="AcctgTrans">
+        	<key-map field-name="acctgTransId"/>
+      	</relation>   	
+	</entity>	
+	
+	<!-- Entidades Consulta Momento -->
+	
+	<view-entity entity-name="BuscaAfectacion" package-name="org.opentaps.financials.motor"
+				title="Busca la Afectaciones Presupuestales">
+		<member-entity entity-alias="AFE" entity-name="Afectacion" />
+		<member-entity entity-alias="AFP" entity-name="AfectacionDetallePoliza" />
+		<member-entity entity-alias="EVC" entity-name="EventoContable" />
+		<member-entity entity-alias="ACT" entity-name="AcctgTrans" />
+		<alias entity-alias="AFE" name="afectacionId" group-by="true"/>
+		<alias entity-alias="ACT" name="transactionDate" group-by="true"/>
+		<alias entity-alias="ACT" name="postedDate" group-by="true"/>
+		<alias entity-alias="AFE" name="acctgTransTypeId" group-by="true"/>
+		<alias entity-alias="ACT" name="description" group-by="true"/>
+		<alias entity-alias="AFE" name="currency" group-by="true"/>
+		<alias entity-alias="AFE" name="statusId" group-by="true"/>
+		<alias entity-alias="AFP" name="poliza" group-by="true"/>
+		<alias entity-alias="EVC" name="predecesor" group-by="true"/>
+		<view-link entity-alias="AFE" rel-entity-alias="EVC">
+		  <key-map field-name="acctgTransTypeId"/>
+		</view-link>
+		<view-link entity-alias="AFE" rel-entity-alias="AFP">
+		  <key-map field-name="afectacionId"/>
+		</view-link>
+		<view-link entity-alias="AFP" rel-entity-alias="ACT">
+        	<key-map field-name="acctgTransId"/>
+     	 </view-link>
+		<relation type="one" fk-name="FK_BUS_AFE_EVE" rel-entity-name="EventoContable">
+		  <key-map field-name="acctgTransTypeId"/>
+		</relation>	 
+	</view-entity>
+	
+	<entity entity-name="MomentoAfecta" package-name="org.opentaps.financials.motor"
+			title="Entidad que registra el momento a afectar">
+		<field name="momentoAfectacionId" type="id-ne" />
+		<field name="afectacionId" type="id-ne" />
+		<field name="acctgTransTypeId" type="id"/>
+		<field name="statusId" type="id-ne" />
+		<prim-key field="momentoAfectacionId"/>
+		<relation type="one" fk-name="FK_MOM_AFEC" rel-entity-name="Afectacion">
+        	<key-map field-name="afectacionId"/>
+      	</relation>
+		<relation type="one" fk-name="FK_AFEC_EVE" rel-entity-name="EventoContable">
+			<key-map field-name="acctgTransTypeId"/>
+		</relation>
+	</entity>
+	
+	<view-entity entity-name="SumaDetalleAfectacion"
+			package-name="org.opentaps.financials.motor"
+			title="Suma los detalless de Afectacion">
+		<member-entity entity-alias="AFD" entity-name="AfectacionDetalle" />
+		<alias entity-alias="AFD" name="afectacionId" group-by="true"/>
+		<alias entity-alias="AFD" name="monto" function="sum" />
+	</view-entity>
+	
+	<view-entity entity-name="SumaLineasAfectacion"
+			package-name="org.opentaps.financials.motor"
+			title="Suma las lineas de Afectacion" >
+		<member-entity entity-alias="AFDL" entity-name="AfectacionDetalleLinea" />
+		<alias entity-alias="AFDL" name="afectacionId" group-by="true"/>
+		<alias entity-alias="AFDL" name="tipoLinea" group-by="true"/>
+		<alias entity-alias="AFDL" name="catalogoCargo" group-by="false"/>
+		<alias entity-alias="AFDL" name="catalogoAbono" group-by="false"/>
+		<alias entity-alias="AFDL" name="monto" function="sum" />
+	</view-entity>	
+	
+</entitymodel>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteInventario" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="423"/>
+	<property name="ireport.y" value="99"/>
+	<style name="Zebra" mode="Transparent" lineSpacing="Single">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[Boolean.valueOf($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCCCCC" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="logoUrl" class="java.lang.String"/>
+	<parameter name="logoUrl2" class="java.lang.String"/>
+	<parameter name="organizacion" class="java.lang.String"/>
+	<parameter name="TipoProducto" class="java.lang.String"/>
+	<parameter name="Fecha" class="java.sql.Timestamp"/>
+	<parameter name="Emisor" class="java.lang.String"/>
+	<field name="NombreAlmacen" class="java.lang.String"/>
+	<field name="CodigoAlmacen" class="java.lang.String"/>
+	<field name="CodigoProducto" class="java.lang.String"/>
+	<field name="CodigoLote" class="java.lang.String"/>
+	<field name="NombreInterno" class="java.lang.String"/>
+	<field name="UnidadMedida" class="java.lang.String"/>
+	<field name="CantidadDisponible" class="java.math.BigDecimal"/>
+	<field name="PrecioUnitario" class="java.math.BigDecimal"/>
+	<field name="CostoTotal" class="java.math.BigDecimal"/>
+	<field name="Familia" class="java.lang.String"/>
+	<variable name="TotalCantidad" class="java.math.BigDecimal" resetType="Group" resetGroup="Almacenes" calculation="Sum">
+		<variableExpression><![CDATA[$F{CantidadDisponible}]]></variableExpression>
+	</variable>
+	<variable name="TotalCosto" class="java.math.BigDecimal" resetType="Group" resetGroup="Almacenes" calculation="Sum">
+		<variableExpression><![CDATA[$F{CostoTotal}]]></variableExpression>
+	</variable>
+	<variable name="GranTotalCant" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{CantidadDisponible}]]></variableExpression>
+	</variable>
+	<variable name="GranTotalCosto" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{CostoTotal}]]></variableExpression>
+	</variable>
+	<group name="Almacenes">
+		<groupExpression><![CDATA[$F{NombreAlmacen}]]></groupExpression>
+		<groupHeader>
+			<band height="43">
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="1" width="107" height="20" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{NombreAlmacen}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="107" y="1" width="100" height="20" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CodigoAlmacen}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="21" width="83" height="22" forecolor="#000000" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Codigo deProducto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="83" y="21" width="38" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Codigo de Lote]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="121" y="21" width="149" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre Interno]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="270" y="21" width="27" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="4" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Unidad de Medida]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="297" y="21" width="64" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad Disponible]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="361" y="21" width="29" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Precio Unitario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="390" y="21" width="69" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CostoTotal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="459" y="21" width="113" height="22" backcolor="#999999"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="5" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Familia]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<staticText>
+					<reportElement mode="Transparent" x="239" y="0" width="58" height="20" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField pattern="#,##0" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="297" y="0" width="51" height="20" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TotalCantidad}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="381" y="0" width="90" height="20" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TotalCosto}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<image isLazy="true">
+				<reportElement x="0" y="0" width="83" height="79">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl} != null && !$P{logoUrl}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl})]]></imageExpression>
+			</image>
+			<image isLazy="true">
+				<reportElement x="476" y="11" width="96" height="68">
+					<printWhenExpression><![CDATA[new Boolean($P{logoUrl2} != null && !$P{logoUrl2}.equals( "" ))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.net.URL"><![CDATA[new URL($P{logoUrl2})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="11" width="393" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{organizacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="189" y="39" width="180" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TipoProducto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="252" y="59" width="109" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$P{Fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="230" y="59" width="22" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22"/>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="0" y="0" width="83" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CodigoProducto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="83" y="0" width="38" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CodigoLote}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="121" y="0" width="149" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NombreInterno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="270" y="0" width="27" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UnidadMedida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="Zebra" x="297" y="0" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CantidadDisponible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="361" y="0" width="29" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PrecioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="390" y="0" width="69" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CostoTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Zebra" x="471" y="0" width="101" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Familia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Zebra" x="459" y="0" width="12" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="39"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="101">
+			<rectangle radius="10">
+				<reportElement mode="Transparent" x="-1" y="1" width="573" height="99"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="9" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Emitido por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="9" width="88" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Autorizado por:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="213" y="49" width="124" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="420" y="9" width="78" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Revisado por:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="402" y="50" width="124" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="202" y="67" width="80" height="20"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="282" y="67" width="40" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy hh.mm.ss a">
+				<reportElement x="379" y="67" width="160" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="7" y="29" width="129" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Emisor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42">
+			<staticText>
+				<reportElement mode="Transparent" x="217" y="0" width="80" height="20" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gran total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="391" y="0" width="80" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{GranTotalCosto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="297" y="0" width="51" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{GranTotalCant}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

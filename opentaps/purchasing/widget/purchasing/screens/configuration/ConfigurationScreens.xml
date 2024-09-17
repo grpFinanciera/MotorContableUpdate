@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+            	<set field="requiredPermission" value="PRCH_CONFIG"/>
+                <set field="sectionName" value="configuration" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+	<!-- Administrar Autorizaciones -->
+    <screen name="createApprovers">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchAproveerAdmin"/>  
+                <set field="sectionHeaderUiLabel" value="PurchAproveerAdmin"/>  
+                <java location="org.opentaps.purchasing.order.AdministrarAutorizador" invoke="agregarArea"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/crearArea.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://purchasing/webapp/purchasing/order/listArea.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="addApprovers">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchAproveerAdmin"/>  
+                <set field="sectionHeaderUiLabel" value="PurchAproveerAdmin"/>  
+                <set field="areaId"  value="${parameters.areaId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <set field="tipoWorkFlowId"  value="${parameters.tipoWorkFlowId}"/>
+                <java location="org.opentaps.purchasing.order.AdministrarAutorizador" invoke="agregarAutorizador"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/addAuto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="emptyConfigurationScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="OpentapsConfiguration"/>  
+                <set field="sectionHeaderUiLabel" value="OpentapsConfiguration"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <section>
+                            <widgets>
+                                <platform-specific><html>
+                                    <html-template location="component://purchasing/webapp/purchasing/order/emptyScreen.ftl"/>
+                                </html></platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Cambio de fechas del pedido -->
+    <screen name="penaDeductiva">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchAproveerAdmin"/>  
+                <set field="sectionHeaderUiLabel" value="Penas convencionales y deductivas"/>  
+                <java location="org.opentaps.purchasing.order.AdministrarAutorizador" invoke="cambioPenaDeductiva"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Penas y deductivas">
+                            <platform-specific><html>
+                                <html-template location="component://purchasing/webapp/purchasing/order/editarPenasDeductivas.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

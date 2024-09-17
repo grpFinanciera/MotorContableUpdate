@@ -1,0 +1,101 @@
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+import java.math.BigDecimal;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
+import org.ofbiz.base.util.Debug;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.service.ServiceUtil;
+import org.ofbiz.base.util.*;
+import org.apache.commons.validator.GenericValidator;
+
+
+// Groups order items by product
+
+print("parameters: " + parameters);
+print("context: " + context);
+
+productId = parameters.get("productId");
+productName = parameters.get("productName");
+dateAcquired = parameters.get("dateAcquired");
+
+
+print("productId: " + productId);
+print("productName: " + productName);
+print("dateAcquired: " + dateAcquired);
+
+count = 1;
+productIdList = new ArrayList();
+productIdMap = new HashMap();
+listaSplit = productId.split("|");
+contenido = FastList.newInstance();
+productIdString = "";
+for (listaS : listaSplit) 
+{	if(!GenericValidator.isBlankOrNull(listaS))
+	{	if(!listaS.equals("|"))
+		{	productIdString = productIdString + listaS;			
+		}
+		else
+		{	productIdMap.put("idProduct", productIdString);			
+			productIdList.add(productIdMap);			
+			productIdMap = new HashMap();
+			productIdString = "";
+			count++;
+		}        	
+    }	
+}
+print("productIdList: " + productIdList);
+context.put("productIdList", productIdList); 
+
+
+
+
+count = 1;
+productNameList = new ArrayList();
+productNameMap = new HashMap();
+listaSplit = productName.split("|");
+contenido = FastList.newInstance();
+productNameString = "";
+for (listaS : listaSplit) 
+{	if(!GenericValidator.isBlankOrNull(listaS))
+	{	if(!listaS.equals("|"))
+		{	productNameString = productNameString + listaS;			
+		}
+		else
+		{	productNameMap.put("nombreProduct", productNameString);			
+			productNameList.add(productNameMap);			
+			productNameMap = new HashMap();
+			productNameString = "";
+			count++;
+		}        	
+    }	
+}
+print("productNameList: " + productNameList);
+context.put("productNameList", productNameList);
+
+
+count = 1;
+dateAcquiredList = new ArrayList();
+dateAcquiredMap = new HashMap();
+listaSplit = dateAcquired.split("|");
+contenido = FastList.newInstance();
+dateAcquiredString = "";
+for (listaS : listaSplit) 
+{	if(!GenericValidator.isBlankOrNull(listaS))
+	{	if(!listaS.equals("|"))
+		{	dateAcquiredString = dateAcquiredString + listaS;			
+		}
+		else
+		{	dateAcquiredMap.put("fechaAdqui", dateAcquiredString);			
+			dateAcquiredList.add(dateAcquiredMap);			
+			dateAcquiredMap = new HashMap();
+			dateAcquiredString = "";
+			count++;
+		}        	
+    }	
+}
+print("dateAcquiredList: " + dateAcquiredList);
+context.put("dateAcquiredList", dateAcquiredList);

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Servicos Requisicion</description>
+    <version>1.0</version>
+    
+    <service name="guardaRequisicion" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="guardaRequisicion">
+        <attribute name="fechaContable" type="Timestamp" mode="IN" optional="false"/>
+    	<attribute name="requisicionId" type="String" mode="IN" optional="true"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false" description="Descripción"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false" description="Justificación"/>
+        <attribute name="areaPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="almacenId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="requisicionId" type="String" mode="OUT" optional="false"/>        
+    </service>
+    
+    <service name="editarRequisicion" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="editarRequisicion">
+    	<attribute name="requisicionId" type="String" mode="IN" optional="false"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="requisicionId" type="String" mode="OUT" optional="false"/>        
+    </service>
+    
+    <service name="cargarPagina" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="cargarPagina">
+        <attribute name="requisicionId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    	<attribute name="justificacion" type="String" mode="IN" optional="false"/>
+        <attribute name="areaPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="almacenId" type="String" mode="IN" optional="true"/>
+        <attribute name="tipoMoneda" type="String" mode="IN" optional="false"/>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>        
+    </service>      
+    
+    <service name="agregaItemRequisicion" engine="java" auth="true"
+    		location="org.ofbiz.order.order.RequisicionServices" invoke="agregaItemRequisicion">
+    		<implements service="clasificacionesPresup"/>
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="requisicionId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="cantidad" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="productId" type="String" mode="IN" optional="false"/>
+    		<attribute name="monto" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    		<attribute name="customTimePeriodId" type="String" mode="IN" optional="false" description="Mes"/>
+    		<attribute name="cantidadMeses" type="BigDecimal" mode="IN" optional="false"/>
+    		<attribute name="fechaEntrega" type="Timestamp" mode="IN" optional="false"/>
+    		<attribute name="descripcion" type="String" mode="IN" optional="false"/>
+    		<attribute name="procedencia" type="String" mode="IN" optional="true"/>
+    		<attribute name="iva" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="enviarSolicitud" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="enviarSolicitud">
+    	<attribute name="requisicionId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="enviarSolicitudPagoA" engine="java" location="org.ofbiz.order.order.OrderServices" auth="true" invoke="enviarSolicitudPagoA">
+    	<attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="validaItemsRequisicion" engine="java" auth="true"
+    		location="org.ofbiz.order.order.RequisicionServices" invoke="validaItemsRequisicion">
+    		<attribute name="requisicionId" type="String" mode="INOUT" optional="false"/>    		
+    </service>
+    
+    <service name="cambiaStatusRequisicion" engine="java" auth="true"
+    		location="org.ofbiz.order.order.RequisicionServices" invoke="validaItemsRequisicion">
+    		<attribute name="requisicionId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="estatus" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="registroControlWorkflow" engine="java" auth="true"
+    		location="org.ofbiz.order.order.RequisicionServices" invoke="cambiaStatusRequisicion">    		
+    		<attribute name="requisicionId" type="String" mode="INOUT" optional="false"/>
+    		<attribute name="tipoWorkflow" type="String" mode="IN" optional="false"/>
+    		<attribute name="idWorkflow" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="registroEstatusWorkflow" engine="java" auth="true"
+    		location="org.ofbiz.order.order.RequisicionServices" invoke="cambiaStatusRequisicion">
+    		<attribute name="areaPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+    		<attribute name="idWorkflow" type="String" mode="IN" optional="false"/>
+    		<attribute name="estatus" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="autorizarSolicitud" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="autorizarSolicitud">
+    	<attribute name="requisicionId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAutorizado" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>        		        
+    </service>
+    
+    <service name="rechazarSolicitud" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="rechazarSolicitud">
+    	<attribute name="requisicionId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioRechazo" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="comentarSolicitud" engine="java" location="org.ofbiz.order.order.RequisicionServices" auth="true" invoke="comentarSolicitud">
+    	<attribute name="requisicionId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioComentar" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>       
+    
+    <service name="traspasoRequisicion" engine="java" location="org.ofbiz.order.order.RequisicionServices" invoke="traspasoRequisicion">
+        <description>Traspaso Mensual de Requisiciones</description>
+        <attribute name="mesId" type="String" mode="IN" optional="true"/>
+        <attribute name="ciclo" type="String" mode="IN" optional="true"/>       
+    </service> 
+    
+    <service name="traspasoMontoRestantePedido" engine="java" location="org.ofbiz.order.order.RequisicionServices" invoke="traspasoMontoRestantePedido">
+        <description>Traspaso Mensual del monto restante de un pedido</description>
+        <attribute name="mesId" type="String" mode="IN" optional="true"/>
+        <attribute name="ciclo" type="String" mode="IN" optional="true"/>       
+    </service> 
+    
+    <service name="autorizarSolicitudPagoAnti" engine="java" location="org.ofbiz.order.order.OrderServices" auth="true" invoke="autorizarSolicitud">
+    	<attribute name="orderId" type="String" mode="INOUT" optional="true"/>    
+    	<attribute name="comentarioAutorizado" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>        		        
+    </service>
+    
+    <service name="rechazarSolicitudPagoAnti" engine="java" location="org.ofbiz.order.order.OrderServices" auth="true" invoke="rechazarSolicitud">
+    	<attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioRechazo" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>
+    
+    <service name="comentarSolicitudPagoAnti" engine="java" location="org.ofbiz.order.order.OrderServices" auth="true" invoke="comentarSolicitud">
+    	<attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+    	<attribute name="comentarioComentar" type="String" mode="IN" optional="true"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>    	        
+    </service>  
+    
+    <service name="editarPagoAnticipado" engine="java" location="org.ofbiz.order.order.OrderServices" auth="true" invoke="editarPagoAnticipado">
+    	<attribute name="orderId" type="String" mode="IN" optional="false"/>
+    	<attribute name="urlHost" type="String" mode="IN" optional="false"/>
+    	<attribute name="pagoAnticipado" type="String" mode="IN" optional="false"/>
+    	<attribute name="proveedorPagoAnticipado" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="OUT" optional="false"/>        
+    </service>
+    
+</services>

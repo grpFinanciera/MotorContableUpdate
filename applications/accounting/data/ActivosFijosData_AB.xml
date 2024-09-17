@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<Estatus statusId="ACT_FIJO_ACTIVO" descripcion="Activo" tipo="A"  />
+	<Estatus statusId="ACT_FIJO_INACTIVO" descripcion="Inactivo" tipo="A"  />
+	<Estatus statusId="ACT_FIJO_COMODATO" descripcion="Entregado en Comodato" tipo="A"  />
+	<Estatus statusId="ACT_FIJO_R_COMODATO" descripcion="Recibido en Comodato" tipo="A"  />
+	<Estatus statusId="ACT_FIJO_REASIGNAR" descripcion="Para reasignar" tipo="A"  />
+	<Estatus statusId="ACT_FIJO_BAJA" descripcion="Baja" tipo="A"  />
+</entity-engine-xml>

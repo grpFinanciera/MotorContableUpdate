@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @author Ali Afzal Malik (ali@opensourcestrategies.com)
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+                <set field="sectionName" value="banks" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>                
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="pendientesTesoreria">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="FinancialsPendientesTesoreria"/>  
+                <java location="com.opensourcestrategies.financials.tesoreria.TesoreriaPendientes" invoke="pendientesTesoreria"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <platform-specific>
+                           <html><html-template location="component://financials/webapp/financials/tesoreria/listpendientesTesoreria.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verPendienteTesoreria">
+		<section>
+            <actions>
+                <set field="idPendienteTesoreria"  value="${parameters.idPendienteTesoreria}"/>
+                <set field="tipoPendienteTesoreria"  value="${parameters.tipoPendienteTesoreria}"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/tesoreria/getPendienteTesoreriaInfo.bsh"/>
+            </actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://financials/webapp/financials/tesoreria/verPendienteTesoreria.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    <screen name="verPagoExterno">
+		<section>
+            <actions>
+                <set field="pagoExternoId"  value="${parameters.pagoExternoId}"/>
+                <entity-one value-field="PagoExterno" entity-name="PagoExterno" >
+                	<field-map field-name="pagoExternoId" value="${parameters.pagoExternoId}"/>
+                </entity-one>
+                <get-related-one relation-name="AcctgTrans" to-value-field="AcctgTrans" value-field="PagoExterno"/>
+            </actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                      <platform-specific><html><html-template location="component://financials/webapp/financials/tesoreria/verPagoExterno.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    
+    
+</screens>

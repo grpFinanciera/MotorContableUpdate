@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--
+This is seed data for the Opentaps Home Page.
+Here we suppose that the applicationId defined for an application in the entity HomeWebApps
+is equal to the webapp name of the same application, defined in his own ofbiz-component.xml.
+
+More infos in opentaps/homeapps/webapp/WEB-INF/actions/getHomeApplications.bsh
+
+Logging in, applications will be displayed if-and-only-if the authenticated user has VIEW permissions to view them.
+
+@author: Michele Orru' (michele.orru@integratingweb.com)
+
+Note: each application defines it own seed data, only the external ones are defined here
+like the ofbiz Party, Catalog, Webtools, etc ...
+-->
+<!--
+La URL del applicationId "BusinessIntelligence" se debe modificar para apuntar al servidor donde se despliegue el Pentaho
+***o modificar para que obtenga la URL del host dinámicamente
+-->
+<entity-engine-xml>
+
+<OpentapsWebApps applicationId="party" shortName="Administración del Sistema" sequenceNum="80" applicationName="Grupos y Usuarios" description="Crear grupos, usuarios y permisos de seguridad"
+             imageUrl="/opentaps_images/integratingweb/party.png" imageHoverUrl="/opentaps_images/integratingweb/partyHover.png" linkUrl="/partymgr/control/main" lastUpdatedStamp="2009-07-18 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-18 16:41:58.415" createdStamp="2009-07-18 16:12:28.395" createdTxStamp="2009-07-18 16:12:28.395"/>
+
+<OpentapsWebApps applicationId="catalog" shortName="Catálogos Auxiliares" sequenceNum="100" applicationName="Catálogo de Productos" description="Administra tus productos, Catálogo y Tiendas"
+             imageUrl="/opentaps_images/integratingweb/catalog.png" imageHoverUrl="/opentaps_images/integratingweb/catalogHover.png" linkUrl="/catalog/control/main" lastUpdatedStamp="2009-07-18 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-18 16:41:58.415" createdStamp="2009-07-18 16:12:28.395" createdTxStamp="2009-07-18 16:12:28.395"/>
+
+<OpentapsWebApps applicationId="webtools" shortName="Herramientas Web" sequenceNum="110" applicationName="Herramientas Administrativas Web" description="Manejar el caché en memoria, tablas de la base de datos, servicios de ejección, programar trabajos"
+             imageUrl="/opentaps_images/homeapps/webtools.png" imageHoverUrl="/opentaps_images/homeapps/webtools_hover.png" linkUrl="/webtools/control/main" lastUpdatedStamp="2009-07-18 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-18 16:41:58.415" createdStamp="2009-07-18 16:12:28.395" createdTxStamp="2009-07-18 16:12:28.395"/>
+             
+<!-- <OpentapsWebApps applicationId="assetmaint" shortName="Control Patrimonial" sequenceNum="85" applicationName="Control Patrimonial" description="Control Patrimonial (Activo Fijo)" -->
+<!--              imageUrl="/opentaps_images/integratingweb/controlPatrimonial.png" imageHoverUrl="/opentaps_images/integratingweb/controlPatrimonialHover.png" linkUrl="/assetmaint/control/ListFixedAssets" lastUpdatedStamp="2014-08-01 16:41:58.415" -->
+<!--              lastUpdatedTxStamp="2014-08-01 16:41:58.415" createdStamp="2014-08-01 16:41:58.415" createdTxStamp="2014-08-01 16:41:58.415"/>              -->
+
+<OpentapsWebApps applicationId="documentation" shortName="Docs Wiki" sequenceNum="90" applicationName="Manuales en Línea" description="Referencias en línea para manuales de usuario , guías de referencia e información de desarrollo."
+             imageUrl="/opentaps_images/homeapps/docs.png" imageHoverUrl="/opentaps_images/homeapps/docs_hover.png" linkUrl="http://www.opentaps.org/docs/" lastUpdatedStamp="2009-07-18 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-18 16:41:58.415" createdStamp="2009-07-18 16:12:28.395" createdTxStamp="2009-07-18 16:12:28.395" hide="Y"/>
+
+<OpentapsWebApps applicationId="humanres" shortName="Recursos Humanos" sequenceNum="100" applicationName="Recursos Humanos" description="Aplicación de Recursos Humanos"
+    imageUrl="/opentaps_images/homeapps/humanres.png" imageHoverUrl="/opentaps_images/homeapps/humanres_hover.png" linkUrl="/humanres/control/main" hide="Y"/> 
+
+<OpentapsWebApps applicationId="ecommerce" shortName="eCommerce" sequenceNum="110" applicationName="Tienda en Línea" description="Tíenda en línea con soporte para mulitiples catálogos, categorías, preciado específico para el cliente, promociones, ventas cruzadas, ventas adicionales, pago con tarjetas de crédito, integración de tarifas de envío directo"
+             imageUrl="/opentaps_images/integratingweb/ecommerce.png" imageHoverUrl="/opentaps_images/integratingweb/ecommerceHover.png" linkUrl="/ecommerce/control/main" lastUpdatedStamp="2009-07-16 16:41:58.415"
+             lastUpdatedTxStamp="2009-07-16 16:41:58.415" createdStamp="2009-07-16 16:12:28.395" createdTxStamp="2009-07-16 16:12:28.395" hide="Y"/>
+
+</entity-engine-xml>

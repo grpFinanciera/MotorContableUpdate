@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<screen name="main-section-decorator">
+		<section>
+			<actions>
+				<set field="sectionName" value="principal" global="true"/>
+				<set field="sectionStyle" value="twoColumn"/>
+			</actions>
+			<widgets>
+				<include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+			</widgets>		
+		</section>
+	</screen>
+	
+	<screen name="emptyPrincipalScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="PrincipalProyecto"/>
+				<set field="sectionHeaderUiLabel" value="PrincipalProyecto"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/emptyScreen.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="altaProyectoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/creaProyecto.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/creaProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="agregaParticipantes">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/agregaParticipantes.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="agregaPresupuesto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/agregaPresupuesto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="modificaPresupuesto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/modificaPresupuesto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="verProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/verProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="editarProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/creaProyecto.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/editarProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<!-- Buscar Proyecto -->
+    <screen name="consultaProyectoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaProyecto"/>  
+                <set field="sectionHeaderUiLabel" value="ConsultaProyecto"/>  
+                <java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyecto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Buscar Proyecto -->
+    <screen name="previsionProyectoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaProyecto"/>  
+                <set field="sectionHeaderUiLabel" value="ConsultaProyecto"/>  
+                <java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaPrevisionProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaPrevisionProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listPrevisionProyecto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="verPrevision">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="PrevisionProyectos"/>
+				<set field="sectionHeaderUiLabel" value="PrevisionProyectos"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+                <script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/creaProyecto.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/verPrevisionProyectos.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+    
+    <screen name="modificaEtapaProyectoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaProyecto"/>  
+                <set field="sectionHeaderUiLabel" value="ConsultaProyecto"/>  
+                <java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaEtapaProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaEtapaProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listEtapaProyecto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="agregaEtapaProyectoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaProyecto"/>  
+                <set field="sectionHeaderUiLabel" value="ConsultaProyecto"/>  
+                <java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaEtapaModificaProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaEtapaModificaProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listEtapaModificaProyecto.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="agregaInterComProyectoScreen">
+        <section>
+            <actions>
+                <set field="pageTitleLabel" value="ConsultaProyecto"/>  
+                <set field="sectionHeaderUiLabel" value="ConsultaProyecto"/>  
+                <java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaProyectoIntCom"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyectoIntCom.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyectoIntCom.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="registraInteresComision">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/registraInteresComision.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+    
+    <screen name="modificaEtapaPresupuesto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/modificaEtapaPresupuesto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="usuariosProyectoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ProyectosAsignaUsuarios"/>
+				<set field="sectionHeaderUiLabel" value="ProyectosAsignaUsuarios"/>
+				<java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaUsuarioProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyectoUsuarios.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyectoUsuarios.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+		</section>
+	</screen>
+	
+	<screen name="terminaProyectoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ProyectosTermina"/>
+				<set field="sectionHeaderUiLabel" value="ProyectosTermina"/>
+				<java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaConcluyeProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyectoConcluye.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyectoConcluye.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+		</section>
+	</screen>
+	
+	<screen name="concluirProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/concluirProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="devuelveProyectoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="ProyectosTermina"/>
+				<set field="sectionHeaderUiLabel" value="ProyectosTermina"/>
+				<java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaDevuelveProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyectoDevuelve.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyectoDevuelve.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+		</section>
+	</screen>
+	
+	<screen name="devolverProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="AltaProyecto"/>
+				<set field="sectionHeaderUiLabel" value="AltaProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/devolverProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="cargaDocumentosProyectoScreen">
+		<section>
+            <actions>
+                <set field="pageTitleLabel" value="PurchDocumentosPendientes"/>  
+                <set field="sectionHeaderUiLabel" value="Documentos necesarios para el proyecto"/> 
+                <script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/cargaProyectos.bsh"/>         
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Documentos">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/cargardocumentosProyecto.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	
+	<screen name="descargaDocumentosProyectoScreen">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="DescargaDocumentosProyecto"/>
+				<set field="sectionHeaderUiLabel" value="DescargaDocumentosProyecto"/>
+				<java location="org.opentaps.proyectos.principal.ConsultarProyecto" invoke="buscaDescargaProyecto"/>                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                        <frame-container title="Filtros de búsqueda">
+                            <platform-specific><html>
+                                <html-template location="component://proyectos/webapp/proyectos/principal/consultaProyectoDescarga.ftl"/>
+                            </html></platform-specific>
+                        </frame-container>
+                        <platform-specific>
+                           <html><html-template location="component://proyectos/webapp/proyectos/principal/listProyectoDescarga.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+		</section>
+	</screen>
+	
+	<screen name="verDocumentosProyecto">
+		<section>
+			<actions>
+				<set field="pageTitleLabel" value="DescargaDocumentosProyecto"/>
+				<set field="sectionHeaderUiLabel" value="DescargaDocumentosProyecto"/>
+				<set field="proyectoId"  value="${parameters.proyectoId}"/>
+                <set field="organizationPartyId"  value="${parameters.organizationPartyId}"/>
+				<script location="component://proyectos/webapp/proyectos/WEB-INF/actions/includes/agregaParticipantes.bsh"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-section-decorator">
+					<decorator-section name="section-body">
+						<section>
+							<widgets>
+								<platform-specific><html>
+									<html-template location="component://proyectos/webapp/proyectos/principal/verDocumentosProyecto.ftl"/>
+								</html></platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+</screens>

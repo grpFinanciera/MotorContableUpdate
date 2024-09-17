@@ -1,0 +1,41 @@
+import org.opentaps.common.party.PartyHelper;
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+import org.ofbiz.base.util.UtilValidate;
+
+userLogin = request.getAttribute("userLogin");
+oganizationPartyId = parameters.get("organizationPartyId");
+partyId = userLogin.getString("partyId");
+Person = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", partyId));
+areaId = Person.getString("areaId");
+Area = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", areaId));
+groupName = Area.getString("groupName");
+nombreSolicitante = PartyHelper.getCrmsfaPartyName(Person);
+
+//Se consulta el evento de comprobacion para delimitar el ingreso del auxiliar al que se encuentra configurado en este evento
+tipoAuxiliarId = "";
+condicionEvento = EntityCondition.makeCondition("descripcion",EntityOperator.LIKE,"Comprobaci%n de gastos a reserva de comprobar");
+EventoComprobacion = EntityUtil.getFirst(delegator.findByCondition("EventoContable", condicionEvento , null, null));
+
+if(UtilValidate.isNotEmpty(EventoComprobacion)){
+	condicionesLinea = UtilMisc.toList(
+		EntityCondition.makeCondition("acctgTransTypeId", EntityOperator.EQUALS, EventoComprobacion.getString("acctgTransTypeId")),
+		EntityCondition.makeCondition("catalogoAbono", EntityOperator.NOT_EQUAL, null));
+	
+	condicionLinea = EntityCondition.makeCondition(condicionesLinea);
+	
+	listLineaPresupuestal = delegator.findByCondition("LineaPresupuestal", condicionLinea, null, null);
+	
+	if(UtilValidate.isNotEmpty(listLineaPresupuestal)){
+		tipoAuxiliarId = EntityUtil.getFirst(listLineaPresupuestal).getRelatedOne("abonoTipoAuxiliar").getString("tipoEntidad");
+	}
+}
+
+
+context.put("areaId", areaId);
+context.put("nomArea", groupName);
+context.put("nombreSolicitante", nombreSolicitante);
+context.put("solicitanteId", partyId);
+context.put("oganizationPartyId", oganizationPartyId);
+context.put("tipoAuxiliarId",tipoAuxiliarId);

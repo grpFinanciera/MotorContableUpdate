@@ -1,0 +1,8 @@
+import org.ofbiz.base.util.UtilMisc;
+
+
+facilityId = parameters.get("facilityId");
+Facility = delegator.findByPrimaryKey("Facility",UtilMisc.toMap("facilityId",facilityId));
+
+listAlmacenes = delegator.findByAnd("Facility",UtilMisc.toMap("facilityTypeId",Facility.getString("facilityTypeId")));
+context.put("listAlmacenes",listAlmacenes);

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="ProyectosApplication">
+        <value xml:lang="en">Proyectos Application</value>
+        <value xml:lang="zh">Proyectos应用程序</value>
+        <value xml:lang="es">Proyectos</value>
+    </property>
+    <property key="ProyectosCompanyName">
+        <value xml:lang="en">OFBiz: Proyectos</value>
+    </property>
+    <property key="ProyectosCompanySubtitle">
+        <value xml:lang="en">Part of the Open For Business Family of Open Source Software</value>
+        <value xml:lang="zh">开源软件OFBiz的组成部分</value>
+    </property>
+    <property key="ProyectosViewPermissionError">
+        <value xml:lang="en">You are not allowed to view this page.</value>
+        <value xml:lang="es">No tiene permiso de ver esta página</value>
+        <value xml:lang="zh">不允许你浏览这个页面。</value>
+    </property>
+    
+    <property key="ProyectosCreacion">
+        <value xml:lang="es">Creación de proyecto</value>
+    </property>
+    <property key="ProyectosConsulta">
+        <value xml:lang="es">Consulta de proyectos</value>
+    </property>
+    <property key="ProyectosAsignaUsuarios">
+        <value xml:lang="es">Asignar usuario(s) a proyecto</value>
+    </property>
+    <property key="DescargaDocumentosProyecto">
+        <value xml:lang="es">Descargar documentos de proyecto</value>
+    </property>
+    <property key="ProyectosModificaEtapas">
+        <value xml:lang="es">Modificar etapas del proyecto</value>
+    </property>
+    <property key="ProyectosAgregaEtapas">
+        <value xml:lang="es">Añadir etapas del proyecto</value>
+    </property>
+    <property key="PrevisionProyectos">
+        <value xml:lang="es">Ingresos por proyecto</value>
+    </property>
+    <property key="ProyectosAgregaInteresesComisiones">
+        <value xml:lang="es">Registro Intereses y Comisiones</value>
+    </property>
+    <property key="ProyectosTermina">
+        <value xml:lang="es">Concluir proyecto</value>
+    </property>
+    <property key="ProyectosDevuelve">
+        <value xml:lang="es">Devolver proyecto</value>
+    </property>
+    <property key="ProyectosCargaDocumentos">
+        <value xml:lang="es">Cargar documentos proyecto</value>
+    </property>
+    <property key="ProyectosDescargaDocumentos">
+        <value xml:lang="es">Descargar documentos proyecto</value>
+    </property>
+    <property key="GastosPorComp">
+        <value xml:lang="es">Gastos por comprobar</value>
+    </property>
+    <property key="ViaticosCreacion">
+        <value xml:lang="es">Registrar solicitud viaticos</value>
+    </property>
+    <property key="ViaticosComprobacion">
+        <value xml:lang="es">Registrar comprobación viaticos</value>
+    </property>
+    <property key="ViaticosDevolucion">
+        <value xml:lang="es">Registrar devolución viaticos</value>
+    </property>
+    <property key="ViaticosConsulta">
+        <value xml:lang="es">Consultar viaticos</value>
+    </property>
+    <property key="GastosCreacion">
+        <value xml:lang="es">Registrar gastos por comprobar</value>
+    </property>
+    <property key="GastosComprobacion">
+        <value xml:lang="es">Registrar comprobación del gasto</value>
+    </property>
+    <property key="GastosDevolucion">
+        <value xml:lang="es">Registrar devolución del gasto</value>
+    </property>
+    <property key="GastosConsulta">
+        <value xml:lang="es">Consultar gastos por comprobar</value>
+    </property>
+    <property key="AdquisicionesCreacion">
+        <value xml:lang="es">Registrar adquisiciones</value>
+    </property>
+    <property key="AdquisicionesPago">
+        <value xml:lang="es">Pago de adquisiciones</value>
+    </property>
+    <property key="AdquisicionesConsulta">
+        <value xml:lang="es">Consultar adquisiciones</value>
+    </property>
+    <property key="ServiciosPersonalesCreacion">
+        <value xml:lang="es">Registrar servicios personales</value>
+    </property>
+    <property key="ServiciosPersonalesPago">
+        <value xml:lang="es">Pago de servicios personales</value>
+    </property>
+    <property key="ServiciosPersonalesReembolso">
+        <value xml:lang="es">Reembolso de servicios personales</value>
+    </property>
+    <property key="ServiciosPersonalesConsulta">
+        <value xml:lang="es">Consultar servicios personales</value>
+    </property>
+    <property key="ConfigObjetoGasto">
+        <value xml:lang="es">Configurar objetos de gasto</value>
+    </property>
+    <property key="PrincipalProyecto">
+        <value xml:lang="es">Principal</value>
+    </property>
+    <property key="ServiciosPersonales">
+        <value xml:lang="es">Servicios personales</value>
+    </property>
+    <property key="AltaProyecto">
+        <value xml:lang="es">Alta nuevo proyecto</value>
+    </property>
+    <property key="ConsultaProyecto">
+        <value xml:lang="es">Consultar proyectos</value>
+    </property>
+    <property key="NombreProyecto">
+        <value xml:lang="es">Nombre del proyecto</value>
+    </property>
+    <property key="CodigoProyecto">
+        <value xml:lang="es">Código del proyecto</value>
+    </property>
+    <property key="FechaProyecto">
+        <value xml:lang="es">Fecha de inicio</value>
+    </property>
+    <property key="MontoProyecto">
+        <value xml:lang="es">Monto asignado al proyecto</value>
+    </property>
+    <property key="NumConvenio">
+        <value xml:lang="es">Número de convenio o contrato</value>
+    </property>
+    <property key="NombreOrganismo">
+        <value xml:lang="es">Nombre del organismo externo</value>
+    </property>
+    <property key="NombreResponsable">
+        <value xml:lang="es">Administrador/Responsable</value>
+    </property>
+    <property key="NombreResponsableTecnico">
+        <value xml:lang="es">Responsable Técnico</value>
+    </property>
+    <property key="UnidadResponsable">
+        <value xml:lang="es">Unidad Responsable</value>
+    </property>
+    
+    <!-- Labels reportes -->
+    
+    <property key="CompruebaGXCProyectos">
+        <value xml:lang="es">Informe de gastos por comprobar</value>
+    </property>
+    <property key="CompruebaViaticosProyectos">
+        <value xml:lang="es">Informe de actividades viaticos</value>
+    </property>
+    <property key="GastosCompProyectos">
+        <value xml:lang="es">Solicitud de Gastos por Comprobar</value>
+    </property>
+    <property key="ReporteDeViaticos">
+        <value xml:lang="es">Reporte de viáticos consolidado</value>
+    </property>
+    <property key="ReporteGastos">
+        <value xml:lang="es">Reporte de Ingresos y Gastos</value>
+    </property>
+    <property key="ReporteGastosDeViaje">
+        <value xml:lang="es">Reporte de gastos de viaje</value>
+    </property>
+    <property key="ReporteIngresosGastos">
+        <value xml:lang="es">Reporte de Ingresos y Gastos</value>
+    </property>
+    <property key="ReporteServiciosPersonales">
+        <value xml:lang="es">Reporte de Servicios Personales</value>
+    </property>
+    <property key="SolicitudCheque">
+        <value xml:lang="es">Solicitud de cheque</value>
+    </property>
+    <property key="ViaticosProyectos">
+        <value xml:lang="es">Solicitud de Recursos para Gastos de Viaje</value>
+    </property>
+</resource>

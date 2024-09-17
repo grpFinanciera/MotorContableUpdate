@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    <screen name="main-section-decorator">
+        <section>
+            <actions>
+<!--             	<set field="requiredPermission" value="FINANCIALS_TX"/> -->
+                <set field="sectionName" value="inventory" global="true"/>
+                <set field="sectionStyle" value="twoColumn"/>
+            </actions>
+            <widgets>
+                <include-screen name="main-section-template" location="component://opentaps-common/widget/screens/common/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewAcctgTrans">
+        <section>
+            <actions>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTrans.bsh"/>
+                <script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgTransPresupuestal.bsh"/>
+                <java location="com.opensourcestrategies.financials.transactions.BuscarPolizas" invoke="buscaDetalleEntries"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="50"/>
+                <set field="pageTitleLabel" value="FinancialAccountingPolicies"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-section-decorator">
+                    <decorator-section name="section-body">
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransPoliza.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                    	<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransClavesPresup.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesGroup.ftl"/>
+                           </html></platform-specific>
+                        </container>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesAuxiliares.ftl"/>
+                        </html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="viewAcctgPresupuestal">
+    	<section>	
+    		<actions>
+    			<script location="component://financials/webapp/financials/WEB-INF/actions/transactions/viewAcctgPresupuestal.bsh"/>
+    			<set field="pageTitleLabel" value="FinancialsInfoClave"/>
+    		</actions>
+    		<widgets>
+    			<decorator-screen name="main-section-decorator">
+    				<decorator-section name="section-body">
+    					<platform-specific>
+                    		<html>
+                    			<html-template location="component://financials/webapp/financials/transactions/acctgTransInfoClave.ftl"/>
+                    		</html>
+                    	</platform-specific>
+                        <platform-specific><html>
+                            <html-template location="component://financials/webapp/financials/transactions/acctgTransEntriesBalance.ftl"/>
+                        </html></platform-specific>
+                        <container style="screenlet">
+                           <platform-specific><html>
+                              <html-template location="component://financials/webapp/financials/transactions/acctgTransEntries.ftl"/>
+                           </html></platform-specific>
+                        </container>                    	
+    				</decorator-section>
+    			</decorator-screen>
+    		</widgets>
+    	</section>
+    </screen>
+    
+</screens>

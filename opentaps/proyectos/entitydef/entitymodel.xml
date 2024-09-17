@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of Proyectos Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <author>None</author>
+    <version></version>
+    
+    <entity entity-name="Proyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de nuevo proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="solicitanteId" type="id-ne" />
+		<field name="fecha" type="date"/>		
+		<field name="statusId" type="id"/>
+		<field name="nombreProyecto" type="name_long"/>
+		<field name="codigoProyecto" type="description"/>
+		<field name="objetivo" type="very-long"/>
+		<field name="monto" type="currency-amount-precise"/>
+		<field name="montoRestante" type="currency-amount-precise"/>
+		<field name="tipoMoneda" type="id"/>
+		<field name="auxiliar" type="id-ne"/>
+		<field name="auxiliarProyecto" type="id-ne"/>		
+		<field name="auxiliarCuentaCobrar" type="id-ne"/>
+		<field name="bancoIdOrigen" type="id-ne"/>
+		<field name="cuentaOrigen" type="id-ne"/>
+		<field name="convenioContrato" type="description"/>
+		<field name="organismoExterno" type="description"/>
+		<field name="responsable" type="description" />
+		<field name="responsableTecnico" type="description" />
+		<field name="areaId" type="id" />
+		<field name="fechaDesde" type="date"/>
+		<field name="fechaHasta" type="date"/>
+		<field name="acctgTransTypeId" type="id" />
+		<field name="acctgTransId" type="id"/>
+		<field name="acctgTransIdCierre" type="id"/>
+		<field name="acctgTransIdCierreBienes" type="id"/>
+		<field name="productos" type="very-long"/>
+		<field name="observacionesCreacion" type="description"/>
+		<field name="fechaCierre" type="date"/>
+		<field name="observacionesCierre" type="description"/>
+		<field name="validacion" type="indicator"/>
+		<prim-key field="proyectoId"/>
+		
+		<relation type="one" fk-name="FK_DBO_PROY_UOM" rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId"/>
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PROY_ORG" title="OrgParty"	rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>			
+		<relation type="one" fk-name="FK_DBO_PROY_PER" rel-entity-name="Person" title="PerPty">
+			<key-map field-name="solicitanteId" rel-field-name="partyId"/>
+		</relation>			
+		<relation type="one" fk-name="FK_DBO_PROY_AREA" rel-entity-name="PartyGroup" title="AreaPty">
+			<key-map field-name="areaId" rel-field-name="partyId"/>
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_PROY_POLO" rel-entity-name="AcctgTransType" title="Otorga">
+			<key-map field-name="acctgTransTypeId" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PROY_POLI" rel-entity-name="AcctgTrans" title="PolProy">
+			<key-map field-name="acctgTransId" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PROY_CIER" rel-entity-name="AcctgTrans" title="CierProy">
+			<key-map field-name="acctgTransIdCierre" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PROY_CIER_BIEN" rel-entity-name="AcctgTrans" title="CierProyBienes">
+			<key-map field-name="acctgTransIdCierreBienes" rel-field-name="acctgTransId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="ParticipantesProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de participantes de proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleParticipanteId" type="id-ne"/>
+		<field name="nombre" type="description" />
+		<field name="apellidos" type="description"/>	
+		<field name="puesto" type="description"/>
+		<field name="activo" type="indicator"/>
+		<prim-key field="proyectoId"/>
+		<prim-key field="detalleParticipanteId"/>
+		
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="DocumentosProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Guardado de documentos de proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleDocumentoId" type="id-ne" />
+		<field name="fileFormat" type="description"/>
+		<field name="nombre" type="description"/>
+		<field name="tipoDocumento" type="description" />
+		<field name="direccion" type="description" />
+		<prim-key field="proyectoId"/>
+		<prim-key field="detalleDocumentoId"/>
+		
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="PresupuestoProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de presupuesto de proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="mes" type="description" />
+		<field name="fechaInicial" type="date-time"/>
+		<field name="fechaFinal" type="date-time"/>		
+		<field name="monto" type="currency-amount-precise"/>
+		<prim-key field="proyectoId"/>
+		<prim-key field="detallePresupuestoId"/>
+		
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="ProvisionesProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Registro de las provisiones de proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleProvisionId" type="id-ne"/>
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="fechaContable" type="date-time"/>
+		<field name="bancoId" type="id-ne"/>
+		<field name="cuenta" type="id-ne"/>
+		<field name="monto" type="currency-amount-precise"/>
+		<field name="eventoProvision" type="id"/>
+		<field name="paymentTypeId" type="id-ne"/>
+		<field name="acctgTransIdProvision" type="id"/>
+		<prim-key field="proyectoId"/>
+		<prim-key field="detalleProvisionId"/>
+		
+		<relation type="one" fk-name="ID_PROYECTO_PROV" title="idproyectoProv"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="FK_EVE_PROV" rel-entity-name="AcctgTransType" title="EventoProvision">
+			<key-map field-name="eventoProvision" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="PAYMENT_PROV" rel-entity-name="PaymentType">
+        <key-map field-name="paymentTypeId"/>
+      	</relation>
+      	<relation type="one" fk-name="ID_PRESUPUESTO_PROV" title="idPresupuestoProv"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>		
+		<relation type="one" fk-name="FK_DBO_PRO_POLI" rel-entity-name="AcctgTrans" title="PolProProy">
+			<key-map field-name="acctgTransIdProvision" rel-field-name="acctgTransId" />
+		</relation>
+    </entity>
+    
+    <extend-entity entity-name="AcctgTrans">
+        <field name="proyectoId" type="id" />
+		<relation type="one" fk-name="FK_DBO_ACCTG_PROY" rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" />
+		</relation>
+	</extend-entity>
+	
+	<entity entity-name="ViaticosProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de viaticos de proyecto">
+		<field name="viaticoProyectoId" type="id-ne" />
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleParticipanteId" type="id-ne"/>
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="motivo" type="description" />
+		<field name="tipoMoneda" type="id"/>
+		<field name="tipoTransporteId" type="id"></field>
+		<field name="montoDiario" type="currency-amount"/>
+		<field name="montoTrabCampo" type="currency-amount"/>
+		<field name="montoTransporte" type="currency-amount"/>
+		<field name="geoOrigenId" type="id-ne" />
+		<field name="geoDestinoId" type="id-ne" />
+		<field name="fechaInicial" type="date-time"/>
+		<field name="fechaFinal" type="date-time"/>
+		<field name="acctgTransTypeId" type="id" />
+		<field name="acctgTransIdSolicitud" type="id"/>
+		<field name="acctgTransIdComprobacion" type="id"/>
+		<field name="acctgTransIdDevuelve" type="id"/>	
+		<field name="montoDiarioComprobado" type="currency-amount"/>
+		<field name="montoTransporteComprobado" type="currency-amount"/>
+		<field name="montoTrabCampoComprobado" type="currency-amount"/>
+		<field name="statusId" type="id"/>
+		<field name="auxEmpleado" type="id"/>
+		<field name="tipoViatico" type="description" />
+		<field name="paymentTypeId" type="id-ne"/>
+		<prim-key field="viaticoProyectoId"/>
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PARTICIPANTE_PROY" title="idParticipanteProy"
+			rel-entity-name="ParticipantesProyecto">
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PRESUPUESTO_PROY" title="idPresupuestoProy"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="PVIATICO_MONEDA"
+			rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>				
+		<relation type="one" fk-name="PVIATICO_TRANSPORTE"
+			rel-entity-name="TipoTransporte">
+			<key-map field-name="tipoTransporteId" rel-field-name="tipoTransporteId" />
+		</relation>		
+		<relation type="one" fk-name="FK_PVIA_GEO_ORGN" title="GeoOrigen"
+			rel-entity-name="Geo">
+			<key-map field-name="geoOrigenId" rel-field-name="geoId" />
+		</relation>		
+		<relation type="one" fk-name="FK_PVIA_GEO_DEST" title="GeoDestino"
+			rel-entity-name="Geo">
+			<key-map field-name="geoDestinoId" rel-field-name="geoId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_VIAT_POLO" rel-entity-name="AcctgTransType" title="Otorga">
+			<key-map field-name="acctgTransTypeId" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_VIA_POLI" rel-entity-name="AcctgTrans" title="PolViaProy">
+			<key-map field-name="acctgTransIdSolicitud" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_VIA_CIER" rel-entity-name="AcctgTrans" title="CompViaProy">
+			<key-map field-name="acctgTransIdComprobacion" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="PAYMENT_VIA" rel-entity-name="PaymentType">
+        <key-map field-name="paymentTypeId"/>
+      </relation>
+    </entity>
+    
+    <entity entity-name="ConceptoViaticoMontoProy"
+            package-name="com.absoluciones.proyectos"
+            title="Monto de cada Concepto de viaticos">
+        <field name="conceptoViaticoMontoProyId" type="id-ne" />
+		<field name="viaticoProyectoId" type="id-ne"/>
+		<field name="fecha" type="date-time" />
+		<field name="referencia" type="id-ne"/>
+		<field name="conceptoViaticoId" type="id-ne"/>
+		<field name="descripcion" type="description"/>
+		<field name="gastoProyId" type="id-ne"/>
+		<field name="monto" type="currency-amount"/>
+		<prim-key field="conceptoViaticoMontoProyId"/>
+		<relation type="one" rel-entity-name="ViaticosProyecto">
+			<key-map field-name="viaticoProyectoId"/>
+		</relation>				
+		<relation type="one" rel-entity-name="ConceptoViatico">
+			<key-map field-name="conceptoViaticoId" />
+		</relation>	
+		<relation type="one" rel-entity-name="ObjetoGastoProyecto">
+			<key-map field-name="gastoProyId" />
+		</relation>			
+    </entity>
+    
+    <entity entity-name="GastosXCompProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de gastos por comprobar de proyecto">
+		<field name="gastoProyectoId" type="id-ne" />
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleParticipanteId" type="id-ne"/>
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="concepto" type="description" />
+		<field name="tipoMoneda" type="id"/>
+		<field name="fecha" type="date-time"/>
+		<field name="monto" type="currency-amount"/>
+		<field name="proveedor" type="description"/>
+		<field name="observaciones" type="description"/>
+		<field name="acctgTransTypeId" type="id" />
+		<field name="acctgTransIdSolicitud" type="id"/>
+		<field name="acctgTransIdComprobacion" type="id"/>
+		<field name="acctgTransIdDevuelve" type="id"/>
+		<field name="montoComprobado" type="currency-amount"/>	
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="statusId" type="id"/>
+		<field name="auxEmpleado" type="id"/>
+		<field name="paymentTypeId" type="id-ne"/>
+		<prim-key field="gastoProyectoId"/>
+		<relation type="one" fk-name="ID_PROYECTO_GASTO" title="idproyectoGasto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PARTICIPANTE_PROY_GASTO" title="idParticipanteProyGasto"
+			rel-entity-name="ParticipantesProyecto">
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PRESUPUESTO_PROY_GASTO" title="idPresupuestoProyGasto"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PGXC_ORG" title="OrgGXCParty"	rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="PGASTO_MONEDA"
+			rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GAST_POLO" rel-entity-name="AcctgTransType" title="OtorgaGasto">
+			<key-map field-name="acctgTransTypeId" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GXC_POLI" rel-entity-name="AcctgTrans" title="PolGXCProy">
+			<key-map field-name="acctgTransIdSolicitud" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_GXC_CIER" rel-entity-name="AcctgTrans" title="CompGXCProy">
+			<key-map field-name="acctgTransIdComprobacion" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="PAYMENT_GXC" rel-entity-name="PaymentType">
+        <key-map field-name="paymentTypeId"/>
+      </relation>
+    </entity>
+    
+    <entity entity-name="DetalleGastoProyecto"
+        package-name="com.absoluciones.proyectos"
+        title="Detalle del gasto">
+		<field name="detalleGId" type="id-ne"></field>
+		<field name="gastoProyectoId" type="id-ne"/>
+		<field name="facturaNota" type="id-ne" />
+		<field name="montoSubtotalFactura" type="currency-amount-precise"/>
+		<field name="iva" type="currency-amount-precise"/>
+		<field name="montoTotalFactura" type="currency-amount-precise"/>
+		<field name="proveedor" type="description"/>
+		<field name="gastoProyId" type="id-ne"/>
+		<prim-key field="detalleGId"/>
+		<prim-key field="gastoProyectoId"/>
+		<relation type="one" fk-name="FK_DBO_GAST_RESRV" rel-entity-name="GastosXCompProyecto">
+			<key-map field-name="gastoProyectoId" rel-field-name="gastoProyectoId"/>
+		</relation>	
+		<relation type="one" rel-entity-name="ObjetoGastoProyecto">
+			<key-map field-name="gastoProyId" />
+		</relation>				
+    </entity>
+    
+    <!-- Vista para encontrar viatico -->
+	<view-entity entity-name="BuscarViaticoProyectos"
+		package-name="com.absoluciones.proyectos"
+		title="Permite la búsqueda de viaticos.">
+		<member-entity entity-alias="V" entity-name="ViaticosProyecto" />
+		<member-entity entity-alias="PER" entity-name="ParticipantesProyecto" />
+		<member-entity entity-alias="P" entity-name="Proyecto" />
+		<alias name="viaticoProyectoId" entity-alias="V" group-by="true" />
+		<alias name="proyectoId" entity-alias="V" group-by="true" />
+		<alias name="statusId" entity-alias="V" group-by="true" />
+		<alias name="createdStamp" entity-alias="V" group-by="true" />
+		<alias name="fechaInicial" entity-alias="V" group-by="true" />
+		<alias name="motivo" entity-alias="V" group-by="true" />
+		<alias name="apellidos" entity-alias="PER" group-by="true" />
+		<alias name="nombre" entity-alias="PER" group-by="true" />
+		<alias name="responsable" entity-alias="P" group-by="true" />
+		<alias name="responsableTecnico" entity-alias="P" group-by="true" />		
+		<view-link entity-alias="V" rel-entity-alias="PER">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+		</view-link>
+		<view-link entity-alias="V" rel-entity-alias="P">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="BuscarGastoProyectos"
+		package-name="com.absoluciones.proyectos"
+		title="Permite la búsqueda de gastos por comprobar">
+		<member-entity entity-alias="GXC" entity-name="GastosXCompProyecto" />
+		<member-entity entity-alias="PER" entity-name="ParticipantesProyecto" />
+		<member-entity entity-alias="P" entity-name="Proyecto" />
+		<alias name="gastoProyectoId" entity-alias="GXC" group-by="true" />
+		<alias name="proyectoId" entity-alias="GXC" group-by="true" />
+		<alias name="statusId" entity-alias="GXC" group-by="true" />
+		<alias name="createdStamp" entity-alias="GXC" group-by="true" />
+		<alias name="fecha" entity-alias="GXC" group-by="true" />
+		<alias name="concepto" entity-alias="GXC" group-by="true" />
+		<alias name="apellidos" entity-alias="PER" group-by="true" />
+		<alias name="nombre" entity-alias="PER" group-by="true" />
+		<alias name="responsable" entity-alias="P" group-by="true" />
+		<alias name="responsableTecnico" entity-alias="P" group-by="true" />		
+		<view-link entity-alias="GXC" rel-entity-alias="PER">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+		</view-link>
+		<view-link entity-alias="GXC" rel-entity-alias="P">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="ServiciosPersonalesProy"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de servicios personales de proyecto">
+		<field name="servicioPersonalId" type="id-ne" />
+		<field name="proyectoId" type="id-ne" />
+		<field name="detalleParticipanteId" type="id-ne"/>		
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="fechaContable" type="date-time"/>
+		<field name="tipoContratacion" type="description" />
+		<field name="tipoMoneda" type="id"/>
+		<field name="sueldo" type="currency-amount"/>
+		<field name="iva" type="currency-amount"/>
+		<field name="ivaR" type="currency-amount"/>
+		<field name="isr" type="currency-amount"/>
+		<field name="montoTotal" type="currency-amount"/>
+		<field name="auxiliar" type="id-ne"/>
+		<field name="auxiliarCancelaPasivo" type="id-ne"/>
+		<field name="observaciones" type="description"/>
+		<field name="eventoServiciosPersonales" type="id" />
+		<field name="acctgTransIdServPer" type="id"/>
+		<field name="acctgTransIdPago" type="id"/>
+		<field name="fechaContablePago" type="date-time"/>
+		<field name="eventoServPerPago" type="id" />
+		<field name="paymentTypeId" type="id-ne"/>
+		<field name="acctgTransIdReembolso" type="id"/>
+		<field name="fechaContableReembolso" type="date-time"/>
+		<field name="eventoServPerReembolso" type="id" />
+		<field name="paymentTypeIdReembolso" type="id-ne"/>
+		<field name="organizationPartyId" type="id-ne"/>
+		<field name="statusId" type="id"/>
+		<field name="gastoProyId" type="id-ne"/>
+		<field name="conceptoPoliza" type="description" />
+		<prim-key field="servicioPersonalId"/>
+		<relation type="one" fk-name="ID_SERVICIO_PER" title="idServicioPer"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PARTICIPANTE_PROY_SP" title="idParticipanteProyGasto"
+			rel-entity-name="ParticipantesProyecto">
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PRESUPUESTO_PROY_SP" title="idPresupuestoProySP"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PSP_ORG" title="OrgSPParty"	rel-entity-name="Party">
+			<key-map field-name="organizationPartyId" rel-field-name="partyId" />
+		</relation>
+		<relation type="one" fk-name="PSERVPER_MONEDA"
+			rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_SP_POLO" rel-entity-name="AcctgTransType" title="OtorgaServPer">
+			<key-map field-name="eventoServiciosPersonales" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_SP_POLI" rel-entity-name="AcctgTrans" title="PolSPProy">
+			<key-map field-name="acctgTransIdServPer" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" rel-entity-name="ObjetoGastoProyecto">
+			<key-map field-name="gastoProyId" />
+		</relation>
+    </entity>
+    
+    <view-entity entity-name="BuscarServiciosPersonales"
+		package-name="com.absoluciones.proyectos"
+		title="Permite la búsqueda de gastos por comprobar">
+		<member-entity entity-alias="SPP" entity-name="ServiciosPersonalesProy" />
+		<member-entity entity-alias="PER" entity-name="ParticipantesProyecto" />
+		<member-entity entity-alias="P" entity-name="Proyecto" />
+		<alias name="servicioPersonalId" entity-alias="SPP" group-by="true" />
+		<alias name="observaciones" entity-alias="SPP" group-by="true" />
+		<alias name="tipoMoneda" entity-alias="SPP" group-by="true" />
+		<alias name="montoTotal" entity-alias="SPP" group-by="true" />
+		<alias name="sueldo" entity-alias="SPP" group-by="true" />
+		<alias name="proyectoId" entity-alias="SPP" group-by="true" />
+		<alias name="statusId" entity-alias="SPP" group-by="true" />
+		<alias name="createdStamp" entity-alias="SPP" group-by="true" />
+		<alias name="fechaContable" entity-alias="SPP" group-by="true" />
+		<alias name="apellidos" entity-alias="PER" group-by="true" />
+		<alias name="nombre" entity-alias="PER" group-by="true" />
+		<alias name="responsable" entity-alias="P" group-by="true" />
+		<alias name="responsableTecnico" entity-alias="P" group-by="true" />	
+		<alias name="tipoContratacion" entity-alias="SPP" group-by="true" />	
+		<view-link entity-alias="SPP" rel-entity-alias="PER">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+			<key-map field-name="detalleParticipanteId" rel-field-name="detalleParticipanteId" />
+		</view-link>
+		<view-link entity-alias="SPP" rel-entity-alias="P">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</view-link>
+	</view-entity>
+	
+	
+	<entity entity-name="AdquisicionesProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de adquisiciones de proyecto">
+		<field name="adqProyectoId" type="id-ne" />
+		<field name="proyectoId" type="id-ne" />		
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="fechaContable" type="date-time"/>
+		<field name="descripcion" type="description" />
+		<field name="tipoMoneda" type="id"/>
+		<field name="justificacion" type="description" />
+		<field name="montoTotal" type="currency-amount"/>
+		<field name="supplierPartyId" type="id-ne" />
+		<field name="eventoAdq" type="id" />
+		<field name="acctgTransIdSolicitud" type="id"/>
+		<field name="acctgTransIdPago" type="id"/>
+		<field name="fechaContablePago" type="date-time"/>
+		<field name="eventoAdqPago" type="id" />
+		<field name="paymentTypeId" type="id-ne"/>
+		<field name="statusId" type="id"/>
+		<field name="auxiliar" type="id-ne"/>
+		<field name="gastoProyId" type="id-ne"/>
+		<prim-key field="adqProyectoId"/>
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="ID_PRESUPUESTO_PROY_ADQ" title="idPresupuestoProyAdq"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="PADQ_MONEDA"
+			rel-entity-name="Uom">
+			<key-map field-name="tipoMoneda" rel-field-name="uomId" />
+		</relation>	
+		<relation type="one" fk-name="FK_DBO_ADQ_POLO" rel-entity-name="AcctgTransType" title="Solicita">
+			<key-map field-name="eventoAdq" rel-field-name="acctgTransTypeId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_ADQ_POLI" rel-entity-name="AcctgTrans" title="PolAdqProy">
+			<key-map field-name="acctgTransIdSolicitud" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_ADQ_CIER" rel-entity-name="AcctgTrans" title="PagoAdqProy">
+			<key-map field-name="acctgTransIdPago" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="ADQ_ITSG_SPRTY" title="Proveedor" rel-entity-name="Party">
+        <key-map field-name="supplierPartyId" rel-field-name="partyId"/>
+      </relation>
+      <relation type="one" fk-name="PAYMENT_ADQ" rel-entity-name="PaymentType">
+        <key-map field-name="paymentTypeId"/>
+      </relation>
+      <relation type="one" rel-entity-name="ObjetoGastoProyecto">
+			<key-map field-name="gastoProyId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="ProductosAdqProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de productos de adquisiciones de proyecto">
+		<field name="adqProyectoId" type="id-ne" />
+		<field name="detalleProductoId" type="id-ne"/>
+		<field name="productId" type="id-ne" />
+		<field name="monto" type="currency-amount"/>
+		<field name="cantidad" type="numeric"/>
+		<field name="descripcion" type="description"/>	
+		<field name="fechaEntrega" type="date-time"/>	
+		<field name="procedencia" type="description"/>
+		<field name="detalleParticipanteId" type="id"/>
+		<field name="iva" type="indicator"/>
+		<prim-key field="adqProyectoId"/>
+		<prim-key field="detalleProductoId"/>
+		
+		<relation type="one" fk-name="ID_ADQ_PROYECTO" title="idAdqProyecto"
+			rel-entity-name="AdquisicionesProyecto">
+			<key-map field-name="adqProyectoId" rel-field-name="adqProyectoId" />
+		</relation>	
+		<relation type="one" fk-name="ID_PRODUCTD" rel-entity-name="Product">
+			<key-map field-name="productId" />
+		</relation>
+    </entity>
+    
+    <view-entity entity-name="BuscarAdquisiciones"
+		package-name="com.absoluciones.proyectos"
+		title="Permite la búsqueda de adquisiciones para proyectos">
+		<member-entity entity-alias="AP" entity-name="AdquisicionesProyecto" />
+		<member-entity entity-alias="P" entity-name="Proyecto" />
+		<alias name="adqProyectoId" entity-alias="AP" group-by="true" />
+		<alias name="proyectoId" entity-alias="AP" group-by="true" />
+		<alias name="statusId" entity-alias="AP" group-by="true" />
+		<alias name="montoTotal" entity-alias="AP" group-by="true" />
+		<alias name="createdStamp" entity-alias="AP" group-by="true" />
+		<alias name="fechaContable" entity-alias="AP" group-by="true" />
+		<alias name="responsable" entity-alias="P" group-by="true" />
+		<alias name="responsableTecnico" entity-alias="P" group-by="true" />
+		<view-link entity-alias="AP" rel-entity-alias="P">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</view-link>
+	</view-entity>
+	
+	<entity entity-name="ObjetoGastoProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de nuevo tipo de gasto para proyecto">
+		<field name="gastoProyId" type="id-ne" />
+		<field name="nombreObjetoGasto" type="name_long"/>
+		<prim-key field="gastoProyId"/>
+    </entity>
+    
+    <entity entity-name="ModificacionPresupuestoProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Modificacion del presupuesto del proyecto">
+		<field name="proyectoId" type="id-ne" />
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="modDetallePresupuestoId" type="id-ne"/>
+		<field name="mes" type="description" />
+		<field name="fechaInicial" type="date-time"/>
+		<field name="fechaFinal" type="date-time"/>
+		<field name="status" type="description" />	
+		<field name="tipoMovimiento" type="description" />	
+		<field name="monto" type="currency-amount-precise"/>
+		<prim-key field="proyectoId"/>
+		<prim-key field="modDetallePresupuestoId"/>
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+    </entity>
+    
+    <entity entity-name="InteresComisionProyecto"
+			package-name="com.absoluciones.proyectos"
+			title="Creacion de comisiones e intereses de proyecto">
+		<field name="intComId" type="id-ne"/>
+		<field name="proyectoId" type="id-ne" />
+		<field name="detallePresupuestoId" type="id-ne"/>
+		<field name="tipoMovimiento" type="description" />
+		<field name="fechaContable" type="date-time"/>
+		<field name="monto" type="currency-amount-precise"/>
+		<field name="acctgTransId" type="id"/>
+		<prim-key field="IntComId"/>
+		<prim-key field="proyectoId"/>
+		
+		<relation type="one" fk-name="ID_PROYECTO" title="idproyecto"
+			rel-entity-name="Proyecto">
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+		<relation type="one" fk-name="FK_DBO_PROY_INTCOM" rel-entity-name="AcctgTrans" title="PolIntComProy">
+			<key-map field-name="acctgTransId" rel-field-name="acctgTransId" />
+		</relation>
+		<relation type="one" fk-name="ID_PRESINTCOM_PROY" title="idPresIntComProy"
+			rel-entity-name="PresupuestoProyecto">
+			<key-map field-name="detallePresupuestoId" rel-field-name="detallePresupuestoId" />
+			<key-map field-name="proyectoId" rel-field-name="proyectoId" />
+		</relation>
+    </entity>
+    
+    <!-- Vista para encontrar bienes muebles del proyecto -->
+	<view-entity entity-name="BuscarBienesMueblesProyectos"
+		package-name="com.absoluciones.proyectos"
+		title="Permite la búsqueda de bienes muebles de proyecto">
+		<member-entity entity-alias="PAP" entity-name="ProductosAdqProyecto" />
+		<member-entity entity-alias="P" entity-name="Product" />
+		<member-entity entity-alias="AP" entity-name="AdquisicionesProyecto" />
+		<alias name="proyectoId" entity-alias="AP" group-by="true" />
+		<alias name="adqProyectoId" entity-alias="PAP" group-by="true" />
+		<alias name="productId" entity-alias="PAP" group-by="true" />
+		<alias name="productTypeId" entity-alias="P" group-by="true" />
+		<alias name="cantidad" entity-alias="PAP" group-by="true" />
+		<alias name="monto" entity-alias="PAP" group-by="true" />
+		<alias name="statusId" entity-alias="AP" group-by="true" />	
+		<view-link entity-alias="PAP" rel-entity-alias="P">
+			<key-map field-name="productId" rel-field-name="productId" />
+		</view-link>
+		<view-link entity-alias="PAP" rel-entity-alias="AP">
+			<key-map field-name="adqProyectoId" rel-field-name="adqProyectoId" />
+		</view-link>
+	</view-entity>
+
+</entitymodel>

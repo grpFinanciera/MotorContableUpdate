@@ -1,0 +1,32 @@
+import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.party.party.PartyHelper;
+import org.opentaps.common.util.UtilConfig;
+import org.ofbiz.base.util.UtilValidate;
+import org.opentaps.common.util.UtilCommon;
+
+userLogin = request.getAttribute("userLogin");
+
+// get the organization party ID
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+organizationParty = session.getAttribute("organizationParty");
+if (UtilValidate.isNotEmpty(organizationParty)) {
+	context.put("applicationSetupOrganization", organizationParty);
+}
+context.put("organizationPartyId", organizationPartyId);
+parameters.put("organizationPartyId", organizationPartyId);
+
+// add financials security TODO move the rest of the parameters.hasXXXSecurity over to this class
+security = request.getAttribute("security");
+userLogin = request.getAttribute("userLogin");
+
+if (security == null || userLogin == null) return;
+
+// also put the name of the organization in the context
+context.put("organizationName", PartyHelper.getPartyName(delegator, organizationPartyId, false));
+parameters.put("organizationName", PartyHelper.getPartyName(delegator, organizationPartyId, false));
+
+// set currency for all reports
+// Get the base currency for the organization
+baseCurrencyUomId = UtilCommon.getOrgBaseCurrency(organizationPartyId, delegator);
+context.put("orgCurrencyUomId", baseCurrencyUomId);
+parameters.put("orgCurrencyUomId", baseCurrencyUomId);

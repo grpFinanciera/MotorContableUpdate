@@ -1,0 +1,154 @@
+/* 
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
+import org.ofbiz.base.util.*;
+import org.ofbiz.entity.condition.*;
+import org.ofbiz.entity.util.EntityUtil;
+
+import org.opentaps.common.util.UtilCommon;
+
+organizationPartyId = UtilCommon.getOrganizationPartyId(request);
+context.put("organizationPartyId", organizationPartyId);
+
+// obtener el catalogo de bancos
+orderByBan = org.ofbiz.base.util.UtilMisc.toList("nombreBanco");
+condicionBan = EntityCondition.makeCondition("partyId", EntityOperator.EQUALS, organizationPartyId);
+bancos = delegator.findByCondition("BancosCuentasPorOrganizacion", condicionBan , UtilMisc.toList("bancoId", "nombreBanco"), orderByBan);
+context.put("bancos", bancos);
+
+idPendienteTesoreria = parameters.get("idPendienteTesoreria");
+tipoPendienteTesoreria = parameters.get("tipoPendienteTesoreria");
+
+// obtener el registro del pendiente de tesoreria
+pendienteTesoreria = delegator.findByPrimaryKey("PendientesTesoreria", 
+	UtilMisc.toMap("idPendienteTesoreria", idPendienteTesoreria, "tipo", tipoPendienteTesoreria));
+
+if (pendienteTesoreria == null)
+{
+	return;
+}
+
+estatus = pendienteTesoreria.get("estatus");
+if (estatus.equals("COMPROMETIDA_V"))
+{
+	viatico = delegator.findByPrimaryKey("Viatico", UtilMisc.toMap("viaticoId", pendienteTesoreria.get("idPendienteTesoreria")));
+	fechaViatico = viatico.getString("fechaInicial");
+	guion1 = fechaViatico.indexOf("-");
+	guion2 = fechaViatico.lastIndexOf("-");
+	fechaViatico = fechaViatico.substring(guion2 + 1, guion2 + 3) +
+        	 "/" + fechaViatico.substring(guion1 + 1, guion2) +
+        	 "/" + fechaViatico.substring(0, guion1);
+	context.put("fechaViatico", fechaViatico);
+}
+
+auxiliar = pendienteTesoreria.get("auxiliar");
+if (tipoPendienteTesoreria.equalsIgnoreCase("OBRAS"))
+{
+	partyGroup = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", auxiliar));
+	auxNombre = (String) partyGroup.get("groupName");
+	context.put("auxNombre", auxNombre);
+}
+else if (tipoPendienteTesoreria.equalsIgnoreCase("VIATICOS") || tipoPendienteTesoreria.equalsIgnoreCase("VIATICOS_D"))
+{
+	person = delegator.findByPrimaryKey("Person", UtilMisc.toMap("partyId", auxiliar));
+	auxNombre = (String) person.get("firstName") + " " + (String) person.get("lastName");
+	context.put("auxNombre", auxNombre);
+}
+else
+{	//partyGroup = delegator.findByPrimaryKey("PartyGroup", UtilMisc.toMap("partyId", auxiliar));
+	//auxNombre = (String) partyGroup.get("groupName");
+	
+}
+
+
+
+// obtener el catalogo de documentos
+orderBy = org.ofbiz.base.util.UtilMisc.toList("descripcion");
+condicionDoc = EntityCondition.makeCondition("moduloId",EntityOperator.LIKE,"TESORERIA_PENDIENTES");
+resultadoDoc = delegator.findByCondition("EventoContable", condicionDoc , 
+	UtilMisc.toList("acctgTransTypeId", "descripcion"), orderBy);
+context.put("documentos", resultadoDoc);
+
+context.put("pendienteTesoreria", pendienteTesoreria);
+
+acctgTransTypeId = pendienteTesoreria.get("acctgTransTypeId");
+if (acctgTransTypeId != null)
+{	acctgTransTypeIdName = delegator.findByPrimaryKey("EventoContable", 
+	UtilMisc.toMap("acctgTransTypeId", acctgTransTypeId));
+	context.put("acctgTransTypeIdName", acctgTransTypeIdName);
+}
+
+
+orderByLineaContable = org.ofbiz.base.util.UtilMisc.toList("secuenciaLineaContable");
+condicionLineaContable = EntityCondition.makeCondition("idPendienteTesoreria",EntityOperator.EQUALS, idPendienteTesoreria);
+resultadoLineaContable = delegator.findByCondition("PendientesTesoreriaItem", condicionLineaContable, null, orderByLineaContable);
+context.put("resultadoLineaContable", resultadoLineaContable);
+
+
+sumaCargo = BigDecimal.ZERO;
+sumaAbono = BigDecimal.ZERO;
+sumaTotal = BigDecimal.ZERO;
+        
+condicionSumaBancosCargoList = UtilMisc.toList(new EntityExpr("idPendienteTesoreria", EntityOperator.EQUALS, idPendienteTesoreria), 											 
+											 new EntityExpr("idCatalogoCargo", EntityOperator.EQUALS, "BANCO"),
+											 new EntityExpr("tipo", EntityOperator.EQUALS, tipoPendienteTesoreria));
+condicionSumaBancosCargo = new EntityConditionList(condicionSumaBancosCargoList, EntityOperator.AND);
+
+sumaBancosCargo = delegator.findByCondition("PendientesTesoreriaItem", condicionSumaBancosCargo, UtilMisc.toList("monto"), null);    
+        
+if(!sumaBancosCargo.isEmpty()) 
+{   context.put("sumaBancosCargo", sumaBancosCargo);
+	suma = sumaBancosCargo.iterator();
+    while( suma.hasNext() ) {
+        sumaItem = suma.next() ;        
+        sumaCargo = sumaCargo.add(sumaItem.getBigDecimal("monto"));
+    }
+}
+
+condicionSumaBancosAbonoList = UtilMisc.toList(new EntityExpr("idPendienteTesoreria", EntityOperator.EQUALS, idPendienteTesoreria), 
+											 new EntityExpr("idCatalogoAbono", EntityOperator.EQUALS, "BANCO"),
+											 new EntityExpr("tipo", EntityOperator.EQUALS, tipoPendienteTesoreria));
+condicionSumaBancosAbono = new EntityConditionList(condicionSumaBancosAbonoList, EntityOperator.AND);
+sumaBancosAbono = delegator.findByCondition("PendientesTesoreriaItem", condicionSumaBancosAbono, UtilMisc.toList("monto"), null);    
+        
+if(!sumaBancosAbono.isEmpty()) 
+{   context.put("sumaBancosAbono", sumaBancosAbono);
+	suma = sumaBancosAbono.iterator();
+    while( suma.hasNext() ) {
+        sumaItem = suma.next() ;        
+        sumaAbono = sumaAbono.add(sumaItem.getBigDecimal("monto"));                
+    }
+}
+
+context.put("sumaCargo", sumaCargo);
+context.put("sumaAbono", sumaAbono);
+
+if(sumaBancosCargo.isEmpty() && sumaBancosAbono.isEmpty()){
+	sumaTotal = pendienteTesoreria.getBigDecimal("monto");
+} else {
+	sumaTotal = sumaCargo.add(sumaAbono);
+}
+	
+print("sumaTotal: "+ sumaTotal);
+context.put("sumaTotal", sumaTotal);
+
+
+listPaymentType = delegator.findAll("PaymentType");
+context.put("listPaymentType",listPaymentType);

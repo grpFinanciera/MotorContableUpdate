@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ * 
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<entity-engine-xml>
+    
+    <SecurityPermission description="Basic permission to use the Purchasing application" permissionId="PRCH_VIEW"/>
+
+    <SecurityPermission description="Basic permission to use the Supplier tab" permissionId="PRCH_SPLR_VIEW"/>
+    <SecurityPermission description="Permission to create suppliers" permissionId="PRCH_SPLR_CREATE"/>
+    <SecurityPermission description="Permission to modify suppliers" permissionId="PRCH_SPLR_UPDATE"/>
+
+    <SecurityPermission description="Basic permission to view the Manufacturing" permissionId="PRCH_MFG_VIEW"/>
+    <SecurityPermission description="Basic permission to create and update Manufacturing" permissionId="PRCH_MFG_ADMIN"/>
+
+    <SecurityPermission description="Basic permission to use the Planning tab" permissionId="PRCH_PLAN_VIEW"/>
+    <SecurityPermission description="Permission to approve requirements" permissionId="PRCH_PLAN_APRV"/>
+
+    <SecurityPermission description="Basic permission to use the Purchase Order tab" permissionId="PRCH_PO_VIEW"/>
+    <SecurityPermission description="Permission to create Purchase Orders" permissionId="PRCH_PO_CREATE"/>
+
+    <SecurityPermission description="Permission to configure backup warehouses." permissionId="PRCH_WRHS_CONFIG"/>
+    
+    <SecurityPermission description="View operations in the  [Reports] tab and all of the reports inside it." permissionId="PRCH_RPT_VIEW"/>
+    
+    <SecurityPermission description="Configuration permission" permissionId="PRCH_CONFIG_VIEW"/>
+    
+    <!-- Permisos Custom -->
+    <SecurityPermission description="Basic permission to admin the Purchasing application" permissionId="PRCH_ADMIN"/>
+    <!-- Proveedor -->
+    <SecurityPermission description="Ver la pestaña de Proveedor" permissionId="PRCH_SUPPLIER_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Proveedor" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_VIEW"/>
+    <SecurityPermission description="Ver el tab de Buscar Proveedores en Proveedor" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_BPROVSUPP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Proveedores en Proveedor" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_BPROVSUPP_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Proveedor en Proveedor" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_CPROVSUPP_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Proveedor en Proveedor" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_CPROVSUPP_ADMIN"/>
+    <!-- Pedidos o Contratos -->
+    <SecurityPermission description="Ver la pestaña de Pedidos o Contratos" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityPermission description="Ver el tab de Crear Requisición en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Requisición en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Requisición en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Requisición en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Productos Pendientes de Compra en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_PPENDCOMPORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Productos Pendientes de Compra en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_PPENDCOMPORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Pedidos o Contratos no cerrados en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_POCNOCERRORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Pedidos o Contratos no cerrados en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_POCNOCERRORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Pedidos o Contratos en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_BPEDOCONTORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Pedidos o Contratos en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_BPEDOCONTORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Crear Pedido o Contrato en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_CPEDOCONTORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Pedido o Contrato en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_CPEDOCONTORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Pedido o Contrato de Resúmen en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_PEDOCONTRESORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Pedido o Contrato de Resúmen en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_PEDOCONTRESORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Fecha de Entrega Estimada en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_FECHENTRESTORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Fecha de Entrega Estimada en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_FECHENTRESTORD_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Requisiciones Pendientes en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Requisiciones Pendientes en Pedidos o Contratos" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_ADMIN"/>
+    <SecurityPermission description="Administrar el tab de Consulta Penalización en Contratos o pedidos" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPENALIZA_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Consulta Penalización en Contratos o pedidos" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPENALIZA_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Pagos Anticipados pendientes en Contratos o pedidos" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPAGOANTI_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Pagos Anticipados pendientes en Contratos o pedidos" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPAGOANTI_VIEW"/>
+    <!-- Pedidos Internos -->
+    <SecurityPermission description="Ver la pestaña de Pedidos Internos" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Pedidos Internos en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityPermission description="Ver el tab de Crear Pedido Interno en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Crear Pedido Interno en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Buscar Pedido Interno en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Buscar Pedido Interno en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Pedidos Internos Pendientes en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Pedidos Internos Pendientes en Pedidos Internos" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_ADMIN"/>
+    <!-- Informes -->
+    <SecurityPermission description="Ver la pestaña de Informes" permissionId="PRCH_REPORT_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Informes en Informes" permissionId="PRCH_REPORT_INFGRPRPT_VIEW"/>
+    <SecurityPermission description="Ver el tab de Informes en Informes" permissionId="PRCH_REPORT_INFGRPRPT_INFORMESRPT_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Informes en Informes" permissionId="PRCH_REPORT_INFGRPRPT_INFORMESRPT_ADMIN"/>
+    <!-- Configuración -->
+    <SecurityPermission description="Ver la pestaña de Configuración" permissionId="PRCH_CONFIG_VIEW"/>
+    <SecurityPermission description="Ver el grupo de Opciones en Configuración" permissionId="PRCH_CONFIG_OPCGRPCNFG_VIEW"/>
+    <SecurityPermission description="Ver el tab de Administración de Autorizadores en Configuración" permissionId="PRCH_CONFIG_OPCGRPCNFG_ADMINAUTORCNFG_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Administración de Autorizadores en Configuración" permissionId="PRCH_CONFIG_OPCGRPCNFG_ADMINAUTORCNFG_ADMIN"/>
+    <SecurityPermission description="Ver el tab de Aplicación de Penas y Deductivas en Configuración" permissionId="PRCH_CONFIG_OPCGRPCNFG_PENADEDUCTIVA_VIEW"/>
+    <SecurityPermission description="Administrar el tab de Aplicación de Penas y Deductivas en Configuración" permissionId="PRCH_CONFIG_OPCGRPCNFG_PENADEDUCTIVA_ADMIN"/>
+
+    <!-- Purchasing manager can perform any action in the Purchasing -->
+    <SecurityGroup groupId="PRCH_MANAGER" description="Administrador de Adquisiciones con permisos para realizar cualquier acción en el módulo de Adquisiciones."/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SPLR_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SPLR_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SPLR_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_MFG_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_MFG_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PLAN_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PLAN_APRV"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_WRHS_CONFIG"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_RPT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_VIEW"/>
+
+    <!-- For now, grant admin access to OFBiz catalog, manufacturing, order, accounting services -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="FACILITY_ADMIN"/>    <!-- required for inventory transfers in mrp -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="MANUFACTURING_ADMIN"/> <!-- for mrp -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="ACCOUNTING_ADMIN"/>
+
+    <!-- Purchasing manager can invoice supplies. -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="FINANCIALS_AP_INUPDT"/>
+    
+    <!-- permission for approve purchasing order. -->
+    <SecurityPermission description="Basic permission to approve purchase orders" permissionId="PRCH_ORD_APPRV"/>
+
+    <!-- Purchasing manager can approve purchase order in the Purchasing -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORD_APPRV"/>
+    
+    <!-- Purchasing manager can manage work effort in the Purchasing -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="WORKEFFORTMGR_ROLE_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="WORKEFFORTMGR_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="WORKEFFORTMGR_ROLE_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="WORKEFFORTMGR_ROLE_DELETE"/>
+    
+    <!-- Purchasing manager can manage asset in the Purchasing -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="ASSETMAINT_ADMIN"/>
+    
+    <!-- Permisos Custom -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ADMIN"/>
+    <!-- Proveedor -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_BPROVSUPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_BPROVSUPP_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_CPROVSUPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_CPROVSUPP_ADMIN"/>
+    <!-- Pedidos o Contratos -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_PPENDCOMPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_DOCPENDIENTES_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CAMBIOFECHAPEDIDO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_PPENDCOMPORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_POCNOCERRORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_POCNOCERRORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_BPEDOCONTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_BPEDOCONTORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CPEDOCONTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CPEDOCONTORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_PEDOCONTRESORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_PEDOCONTRESORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_FECHENTRESTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_FECHENTRESTORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPENALIZA_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPENALIZA_ADMIN"/>
+    <!-- Pedidos Internos -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_PIPENDIENTEPI_ADMIN"/>
+    <!-- Informes -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_REPORT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_REPORT_INFGRPRPT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_REPORT_INFGRPRPT_INFORMESRPT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_REPORT_INFGRPRPT_INFORMESRPT_ADMIN"/>
+    <!-- Configuración -->
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_OPCGRPCNFG_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_OPCGRPCNFG_ADMINAUTORCNFG_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_OPCGRPCNFG_ADMINAUTORCNFG_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_OPCGRPCNFG_PENADEDUCTIVA_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_MANAGER" permissionId="PRCH_CONFIG_OPCGRPCNFG_PENADEDUCTIVA_ADMIN"/>
+    
+    <!-- PRCH_CLERK is a group which have create/update/view supplier and create/view/admin order rights -->
+    <SecurityGroup groupId="PRCH_CLERK" description="Empleado de Adquisiciones con permisos para crear órdenes de compra."/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_SPLR_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_SPLR_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_SPLR_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_STS_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_GRP_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_REL_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_REL_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_ROLE_DELETE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_PCM_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_PCM_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_PCM_DELETE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_CME_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_CME_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_CME_DELETE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_SRC_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_CLERK" permissionId="PARTYMGR_NOTE"/>
+    
+    
+    <SecurityGroup groupId="PRCH_SOLICITANTE" description="Grupo de Seguridad para el Solicitante en Adquisiciones."/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_SOLICITANTE" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    
+    <SecurityGroup groupId="PRCH_AUTORIZADOR" description="Grupo de Seguridad para el Autorizador en Adquisiciones."/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_AUTORIZADOR" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_VIEW"/>
+    
+    <SecurityGroup groupId="PRCH_COMPRADOR" description="Grupo de Seguridad para el Comprador en Adquisiciones."/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SPLR_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SPLR_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SPLR_UPDATE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SUPPLIER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_BPROVSUPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_SUPPLIER_OPCGRPSUPP_CPROVSUPP_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORD_APPRV"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_PPENDCOMPORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_DOCPENDIENTES_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_CAMBIOFECHAPEDIDO_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_POCNOCERRORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_BPEDOCONTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_CPEDOCONTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_PEDOCONTRESORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_FECHENTRESTORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_REQUIPENDORD_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_ORDER_OPCGRPORD_CONSULTARPENALIZA_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_RPT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_REPORT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_REPORT_INFGRPRPT_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PRCH_REPORT_INFGRPRPT_INFORMESRPT_VIEW"/>
+    
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_FACTURASGRPCPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_FACTURASGRPCPP_BORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_FACTURASGRPCPP_CORDSPAGOCPP_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_INVIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_INCRTE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_INUPDT"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_PVIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_PCRTE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_PUPDT"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_AP_PAPPL"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="FINANCIALS_REVERSE"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PAY_INFO_CREATE"/> <!-- required to create payments in OFBIZ -->
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PAY_INFO_UPDATE"/> <!-- required to update payments in OFBIZ -->    
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="WORKEFFORTMGR_ROLE_ADMIN"/>
+    <SecurityGroupPermission groupId="PRCH_COMPRADOR" permissionId="ASSETMAINT_UPDATE"/>
+	
+	<!-- Generico -->
+    <SecurityGroup groupId="GENERICO" description="Grupo de Seguridad Genérico"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PO_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PO_CREATE"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_ORDER_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_ORDER_OPCGRPORD_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_ORDER_OPCGRPORD_CREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_ORDER_OPCGRPORD_BREQUIORD_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PINTERNO_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_CREARPI_VIEW"/>
+    <SecurityGroupPermission groupId="GENERICO" permissionId="PRCH_PINTERNO_PINTERNOGRPPI_BUSCARPI_VIEW"/>
+    
+    <UserLoginSecurityGroup userLoginId="admin" groupId="PRCH_MANAGER" fromDate="2001-01-01 00:00:00"/>
+    
+</entity-engine-xml>

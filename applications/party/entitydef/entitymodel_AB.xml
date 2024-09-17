@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+  <!-- ========================================================= -->
+  <!-- ======================== Defaults ======================= -->
+  <!-- ========================================================= -->
+    <title></title>
+    <description>None</description>
+    <copyright>Copyright 2001-2009 The Apache Software Foundation</copyright>
+    <author>None</author>
+    <version>1.0</version>
+    
+    <extend-entity entity-name="PostalAddress">
+		<field name="municipalityGeoId" type="id"></field>
+		<field name="bancoId" type="id-ne"></field>
+		<field name="numeroCuenta" type="id-ne"></field>
+		<field name="clabeInterbancaria" type="id-ne"></field>
+		<relation type="one" fk-name="POST_ADDR_MUNGEO" title="Municipality" rel-entity-name="Geo">
+		  <key-map field-name="municipalityGeoId" rel-field-name="geoId"/>
+		</relation>
+		<relation type="one" fk-name="POST_ADDR_BANCO" title="Banco" rel-entity-name="Banco">
+		  <key-map field-name="bancoId"/>
+		</relation>    	
+    </extend-entity>
+    
+    <extend-entity entity-name="Party">
+    	<field name="saldoInicial" type="currency-amount-precise" />
+    </extend-entity>
+    
+    
+</entitymodel>
