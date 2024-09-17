@@ -208,7 +208,7 @@ public class HibernateCfgGeneratorContainer implements Container {
             // NOTICE: proper doctype is required else hibernate would return "Document is invalid: no grammar found".
             Transformer trans = TransformerFactory.newInstance().newTransformer();
             trans.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//Hibernate/Hibernate Configuration DTD 3.0//EN");
-            trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd");
+            trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd");
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
 
             // write the resulting configuration file
